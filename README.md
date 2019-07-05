@@ -19,3 +19,6 @@ Alternatively, "make start" daemonizes the server, so it can be stopped via "mak
 
 Also, when running on linux, there exists a bash-script, which can start the server for you.
 It can be accessed via "bash startServer.sh"
+
+# Useful links
+JAVA API for BigChainDB: https://github.com/bigchaindb/java-bigchaindb-driver 
