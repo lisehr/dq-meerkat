@@ -20,5 +20,30 @@ Alternatively, "make start" daemonizes the server, so it can be stopped via "mak
 Also, when running on linux, there exists a bash-script, which can start the server for you.
 It can be accessed via "bash startServer.sh"
 
+# Hashing Algorithms
+Used in BigChainDB:
+- Standard Hash: SHA3-256
+- Keypair Hash: Ed25519 (Encoded via Base58, war)
+
+# Alternative Approaches to Blockchain Technology
+Since BigChainDB has serious flaws concerning supporting java, other approaches were needed. Some of those are:
+	- Fluree (flur.ee)
+	- GraphChain (makolab.com/en/innovation/graphchain)
+	- Graphen Protocol (no Implementation available at the moment, only the whitepaper)
+	- Taking a conventional Database and adding the blockchain aspect to it.
+
+# FlureeDB
+Fluree (https://flur.ee) is a semantic graph database with an approach towards immutability and is free to use. It is based on Java
+and does not need any more prequesites than running on Java 8.
+The server can be accessed via localhost:8080, if not specified otherwise.
+A very detailed documentation for accessing and managing the database can be found via the Docs tab (link also in Section "Useful Links")
+
+# GraphChain
+RDF Database, Blockchain features
+More Research on it needed!
+
 # Useful links
-JAVA API for BigChainDB: https://github.com/bigchaindb/java-bigchaindb-driver 
+JAVA API for BigChainDB: https://github.com/bigchaindb/java-bigchaindb-driver
+Fluree Docs: https://docs.flur.ee/docs 
+
+
