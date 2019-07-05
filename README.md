@@ -15,4 +15,7 @@ The server is then running via "http://localhost:9984". If the server throws Exc
 with the following instructions:
 	- make clean
 	- make run
-Alternatively, "make start" daemonizes the server, so it can be stopped via "make stop"
+Alternatively, "make start" daemonizes the server, so it can be stopped via "make stop".
+
+Also, when running on linux, there exists a bash-script, which can start the server for you.
+It can be accessed via "bash startServer.sh"
