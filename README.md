@@ -23,14 +23,14 @@ It can be accessed via "bash startServer.sh"
 # Hashing Algorithms
 Used in BigChainDB:
 - Standard Hash: SHA3-256
-- Keypair Hash: Ed25519 (Encoded via Base58, war)
+- Keypair Hash: Ed25519 (Encoded via Base58)
 
 # Alternative Approaches to Blockchain Technology
 Since BigChainDB has serious flaws concerning supporting java, other approaches were needed. Some of those are:
 	- Fluree (flur.ee)
 	- GraphChain (makolab.com/en/innovation/graphchain)
 	- Graphen Protocol (no Implementation available at the moment, only the whitepaper)
-	- Taking a conventional Database and adding the blockchain aspect to it.
+	- Taking a conventional Database and adding the blockchain aspect to it (Neo4j, GraphDB, CovenantSQL)
 
 # FlureeDB
 Fluree (https://flur.ee) is a semantic graph database with an approach towards immutability and is free to use. It is based on Java
@@ -42,8 +42,25 @@ A very detailed documentation for accessing and managing the database can be fou
 RDF Database, Blockchain features
 More Research on it needed!
 
+# GraphDB
+RDF Database, Java support, no Blockchain included!
+
+# CovenantSQL
+https://covenantsql.io/
+
+# Neo4j
+https://neo4j.com/
+
+# ChainSQL
+http://chainsql.net/
+Warning: everything is in Chinese
+
 # Useful links
 JAVA API for BigChainDB: https://github.com/bigchaindb/java-bigchaindb-driver
 Fluree Docs: https://docs.flur.ee/docs 
+GraphDB Quick Start Guide: http://graphdb.ontotext.com/documentation/free/quick-start-guide.html
+Creating Blockchain in Java from Scratch: https://medium.com/programmers-blockchain/create-simple-blockchain-java-tutorial-from-scratch-6eeed3cb03fa
 
+# Competitors
+GraphPath: https://www.graphpath.ai/
 
