@@ -1,41 +1,35 @@
 package dqm.jku.trustkg.blockchain;
 
-import java.util.Date;
-
 import dqm.jku.trustkg.util.HashingUtils;
 
 //adapted from Tutorial from CryptoKass
 
-public class SimpleBlock {
-  public String hash;
-  public String previousHash;
+public class SimpleBlock extends Block {
   private String data; // our data will be a simple message.
-  private long timeStamp; // as number of milliseconds since 1/1/1970.
-  private int nonce;
 
   // Block Constructor.
   public SimpleBlock(String data, String previousHash) {
+    super(previousHash);
     this.data = data;
-    this.previousHash = previousHash;
-    this.timeStamp = new Date().getTime();
 
-    this.hash = calculateHash(); // Making sure we do this after we set the other values.
+    this.calculateHash(); // Making sure we do this after we set the other values.
   }
 
   // Calculate new hash based on blocks contents
-  public String calculateHash() {
-    String calculatedhash = HashingUtils
-        .applySha256(previousHash + Long.toString(timeStamp) + Integer.toString(nonce) + data);
-    return calculatedhash;
+  @Override
+  public String getHashValue() {
+    return HashingUtils
+        .applySha256(getPreviousHash() + Long.toString(getTimeStamp()) + Integer.toString(getNonce()) + data);
   }
 
   // Increases nonce value until hash target is reached.
+  @Override
   public void mineBlock(int difficulty) {
     String target = HashingUtils.getDificultyString(difficulty); // Create a string with difficulty * "0"
-    while (!hash.substring(0, difficulty).equals(target)) {
-      nonce++;
-      hash = calculateHash();
+    while (!getHash().substring(0, difficulty).equals(target)) {
+      incrementNonce();
+      calculateHash();
     }
-    System.out.println("Block Mined!!! : " + hash);
+    System.out.println("Block Mined: " + getHash());
   }
 }

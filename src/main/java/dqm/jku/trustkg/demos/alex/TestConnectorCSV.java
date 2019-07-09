@@ -20,10 +20,10 @@ public class TestConnectorCSV {
     try {
       ds = conn.loadSchema();
       for (Concept c : ds.getConcepts()) {
-        System.out.println(c.toString());
+        System.out.println(c.getURI());
 
         for (Attribute a : c.getAttributes()) {
-          System.out.println(a.getDataType().toString() + "\t" + a.toString());
+          System.out.println(a.getDataType().toString() + "\t" + a.getURI());
         }
         System.out.println();
       }

@@ -1,8 +1,9 @@
 package dqm.jku.trustkg.graphdb;
 
 import com.ontotext.trree.config.OWLIMSailSchema;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
-import org.eclipse.rdf4j.common.io.FileUtil;
 import org.eclipse.rdf4j.model.Literal;
 import org.eclipse.rdf4j.model.Resource;
 import org.eclipse.rdf4j.model.IRI;
@@ -139,16 +140,15 @@ public class EmbeddedGraphDB implements Closeable {
      * @throws RepositoryConfigException
      * @throws RDFHandlerException
      */
-    @SuppressWarnings("deprecation")
     public static RepositoryConnection openConnectionToTemporaryRepository(String ruleset) throws IOException, RepositoryException,
             RDFParseException, RepositoryConfigException, RDFHandlerException {
         // Temporary directory where repository data will be stored.
         // The directory will be deleted when the program terminates.
-        File baseDir = FileUtil.createTempDir("graphdb-examples");
-        baseDir.deleteOnExit();
+        Path baseDir = Files.createTempDirectory("graphdb-examples");
+        baseDir.toFile().deleteOnExit();
 
         // Create an instance of EmbeddedGraphDB and a single repository in it.
-        final EmbeddedGraphDB embeddedGraphDB = new EmbeddedGraphDB(baseDir.getAbsolutePath());
+        final EmbeddedGraphDB embeddedGraphDB = new EmbeddedGraphDB(baseDir.toAbsolutePath().toString());
         embeddedGraphDB.createRepository("tmp-repo", null, Collections.singletonMap("ruleset", ruleset));
 
         // Get the newly created repository and open a connection to it.
