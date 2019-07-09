@@ -46,7 +46,12 @@ public class BigchainDBJavaDriverUsageExample {
         System.out.println(Base58.encode(keys.getPrivate().getEncoded()));
         
         // create New asset
-        Map<String, String> assetData = new TreeMap<String, String>() {{
+        Map<String, String> assetData = new TreeMap<String, String>() {/**
+           * 
+           */
+          private static final long serialVersionUID = 1L;
+
+        {
             put("name", "James Bond");
             put("age", "doesn't matter");
             put("purpose", "saving the world");

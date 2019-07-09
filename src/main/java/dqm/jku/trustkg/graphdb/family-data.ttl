@@ -1,0 +1,10 @@
+@prefix data: <http://examples.ontotext.com/family/data#> .
+@prefix family: <http://examples.ontotext.com/family#> .
+
+data:John a family:Person ;
+    family:hasChild data:Mary .
+
+data:Mary a family:Person ;
+    family:hasChild data:Kate .
+
+data:Charles family:hasParent data:John .

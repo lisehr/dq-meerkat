@@ -1,2 +1,3 @@
 /target/
 /src/main/java/dqm/jku/trustkg/resources/*
+/Neo4j/*
