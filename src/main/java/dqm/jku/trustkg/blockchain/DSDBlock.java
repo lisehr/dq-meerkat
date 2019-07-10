@@ -3,25 +3,26 @@ package dqm.jku.trustkg.blockchain;
 import dqm.jku.trustkg.dsd.elements.DSDElement;
 import dqm.jku.trustkg.util.HashingUtils;
 
+/**
+ * 
+ * @author optimusseptim
+ *
+ */
 public class DSDBlock extends Block {
-  private DSDElement data;
+  private final DSDElement data;
 
-  public DSDBlock(String previousHash) {
+  public DSDBlock(String previousHash, DSDElement data) {
     super(previousHash);
+    if (data == null) throw new IllegalArgumentException("Data cannot be null!");
+    this.data = data;
+  }
+
+  public DSDElement getData() {
+    return data;
   }
 
   @Override
-  public String getHashValue() {
+  public String acquireHashValue() {
     return HashingUtils.applySha256(getPreviousHash() + Long.toString(getTimeStamp()) + data.getURI() + Integer.toString(getNonce()));
   }
-
-  @Override
-  public void mineBlock(int difficulty) {
-     String diffStr = HashingUtils.getDificultyString(difficulty);
-     while(!getHash().substring(0, difficulty).equals(diffStr)) {
-       incrementNonce();
-       
-     }
-  }
-
 }
