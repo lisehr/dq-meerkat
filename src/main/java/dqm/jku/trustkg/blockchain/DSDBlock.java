@@ -15,6 +15,7 @@ public class DSDBlock extends Block {
     super(previousHash);
     if (data == null) throw new IllegalArgumentException("Data cannot be null!");
     this.data = data;
+    this.calculateHash();
   }
 
   public DSDElement getData() {

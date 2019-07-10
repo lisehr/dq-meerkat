@@ -45,6 +45,15 @@ public class BlockChain {
     block.mineBlock(difficulty);
     return blockChain.add(block);
   }
+  
+  /**
+   * Gets the last calculated hash for adding a new block for instance
+   * @return String with the last hash, "0", if no block is in the chain
+   */
+  public String getPreviousHash() {
+    if (chainSize() == 0) return "0";
+    else return accessBlock(chainSize() - 1).getHash();
+  }
 
   /**
    * Gets the size of the blockchain
