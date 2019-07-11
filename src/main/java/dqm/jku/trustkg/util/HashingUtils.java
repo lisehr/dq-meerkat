@@ -46,7 +46,7 @@ public class HashingUtils {
    * @param difficulty the length of the difficulty string
    * @return the difficulty string, consisting of '0's
    */
-  public static String getDificultyString(int difficulty) {
+  public static String getDifficultyString(int difficulty) {
     return new String(new char[difficulty]).replace('\0', '0');
   }
 }

@@ -73,7 +73,7 @@ public abstract class Block {
    * @param difficulty the length of the mining difficulty string
    */
   public void mineBlock(int difficulty) {
-    String diffStr = HashingUtils.getDificultyString(difficulty);
+    String diffStr = HashingUtils.getDifficultyString(difficulty);
     while (!getHash().substring(0, difficulty).equals(diffStr)) {
       this.nonce++;
       calculateHash();

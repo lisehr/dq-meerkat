@@ -55,11 +55,21 @@ https://neo4j.com/
 http://chainsql.net/
 Warning: everything is in Chinese
 
+# Methods for persisting data
+Our approach is to store needed data in three different databases, mainly taylormade for each usecase:
+- Knowledge Graph: GraphDB
+- Blockchain: still undecided, but something slim like SQLlite
+- Timeseries for measurements: InfluxDB
+
+
 # Useful links
 JAVA API for BigChainDB: https://github.com/bigchaindb/java-bigchaindb-driver
 Fluree Docs: https://docs.flur.ee/docs 
 GraphDB Quick Start Guide: http://graphdb.ontotext.com/documentation/free/quick-start-guide.html
 Creating Blockchain in Java from Scratch: https://medium.com/programmers-blockchain/create-simple-blockchain-java-tutorial-from-scratch-6eeed3cb03fa
+InfluxDB: https://docs.influxdata.com/influxdb/v1.7/
+InfluxDB-Java: https://github.com/influxdata/influxdb-java
+InfluxDB: https://www.baeldung.com/java-influxdb
 
 # Competitors
 GraphPath: https://www.graphpath.ai/

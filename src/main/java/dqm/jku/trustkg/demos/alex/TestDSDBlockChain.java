@@ -55,7 +55,7 @@ public class TestDSDBlockChain {
     }
     long eTime = System.currentTimeMillis();
     long result = eTime - sTime;
-    System.out.println(String.format("Test ended with testsize of %d blocks and a time of %ld", elements.size(), result));
+    System.out.println(String.format("Test ended with testsize of %d blocks and a time of %d ms", elements.size(), result));
     System.out.println();
     return result;
   }
