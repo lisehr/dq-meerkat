@@ -24,6 +24,7 @@ import dqm.jku.trustkg.dsd.elements.Datasource;
 import dqm.jku.trustkg.dsd.elements.ForeignKey;
 import dqm.jku.trustkg.dsd.elements.InheritanceAssociation;
 import dqm.jku.trustkg.dsd.records.Record;
+import dqm.jku.trustkg.dsd.records.RecordSet;
 import dqm.jku.trustkg.util.AttributeSet;
 import dqm.jku.trustkg.util.DataTypeConverter;
 
@@ -173,7 +174,6 @@ public class ConnectorMySQL extends DSInstanceConnector {
 		return ds;
 	}
 
-	@SuppressWarnings("static-access")
 	private void setAssociationDirections(Datasource ds) {
 		List<Concept> inhConcepts = DSDElement.getAllConcepts().stream().filter(x -> inheritanceAssociations.containsKey(x.getLabel())).collect(Collectors.toList());
 		inhConcepts.forEach(x -> ((InheritanceAssociation) x).setParent(ds.getConcept(inheritanceAssociations.get(x.getLabel()))));
@@ -316,5 +316,15 @@ public class ConnectorMySQL extends DSInstanceConnector {
 	public void defineReferenceAssociation(String assocName) {
 		referenceAssociation.add(assocName);
 	}
+
+  @Override
+  public RecordSet getRecordSet(Concept concept) throws IOException {
+    Iterator<Record> rIt = getRecords(concept);
+    RecordSet rs = new RecordSet();
+    while (rIt.hasNext()) {
+      rs.addRecord(rIt.next());
+    }
+    return rs;
+  }
 
 }

@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.Concept;
 import dqm.jku.trustkg.util.AttributeSet;
+import dqm.jku.trustkg.util.DataTypeConverter;
 
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -20,6 +21,10 @@ public class Record implements Comparable<Record> {
 		values = new TreeMap<Attribute, Object>();
 	}
 
+  public void addValueFromCSV(Attribute attribute, String string) {
+    addValue(attribute, DataTypeConverter.getDataValueFromCSV(attribute, string));
+  }
+	
 	public void addValue(Attribute attribute, Object o) {
 		if (!attribute.getDataType().isInstance(o) && !(attribute.isNullable() && o == null))
 			throw new IllegalArgumentException("Attribute Type " + attribute.getDataType() + " does not allow Value " + o);
@@ -122,5 +127,4 @@ public class Record implements Comparable<Record> {
 	public AttributeSet getFields() {
 		return new AttributeSet(values.keySet());
 	}
-
 }

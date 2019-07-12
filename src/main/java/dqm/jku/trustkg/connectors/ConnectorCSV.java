@@ -17,7 +17,9 @@ import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.Concept;
 import dqm.jku.trustkg.dsd.elements.Datasource;
 import dqm.jku.trustkg.dsd.records.Record;
+import dqm.jku.trustkg.dsd.records.RecordSet;
 import dqm.jku.trustkg.util.AttributeSet;
+import dqm.jku.trustkg.util.DataTypeConverter;
 
 /**
  * Connector for CSV files
@@ -60,6 +62,7 @@ public class ConnectorCSV extends DSInstanceConnector {
 			List<Attribute> attributes = concept.getSortedAttributes();
 			boolean closed = false;
 			boolean init = true;
+			boolean first = true;
 			BufferedReader reader = new BufferedReader(new FileReader(file));
 			String line = null;
 
@@ -96,14 +99,28 @@ public class ConnectorCSV extends DSInstanceConnector {
 						e.printStackTrace();
 					}
 				String[] values = removeQuotes ? line.replace("\"", "").split(seperator) : line.split(seperator);
+				if (first) {
+	        for (int j = 0; j < Math.min(values.length, attributes.size()); j++)
+	          DataTypeConverter.getDataTypeFromCSVRecord(attributes.get(j), values[j]);
+	        first = false;
+				}
 				Record r = new Record(concept);
 				for (int j = 0; j < Math.min(values.length, attributes.size()); j++)
-					r.addValue(attributes.get(j), values[j]);
+					r.addValueFromCSV(attributes.get(j), values[j]);
 				line = null;
 				return r;
 			}
 
 		};
+	}
+	
+	public RecordSet getRecordSet(final Concept concept) throws IOException {
+	  Iterator<Record> rIt = getRecords(concept);
+	  RecordSet rs = new RecordSet();
+	  while (rIt.hasNext()) {
+	    rs.addRecord(rIt.next());
+	  }
+	  return rs;
 	}
 
 	@Override

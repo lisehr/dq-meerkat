@@ -5,10 +5,13 @@ import java.util.Iterator;
 
 import dqm.jku.trustkg.dsd.elements.Concept;
 import dqm.jku.trustkg.dsd.records.Record;
+import dqm.jku.trustkg.dsd.records.RecordSet;
 
 public abstract class DSInstanceConnector extends DSConnector {
 
 	public abstract Iterator<Record> getRecords(Concept concept) throws IOException;
+	
+	public abstract RecordSet getRecordSet(Concept concept) throws IOException;
 
 	public abstract void findFunctionalDependencies(Concept concept) throws IOException;
 

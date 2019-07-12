@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
+import dqm.jku.trustkg.dsd.records.RecordSet;
+import dqm.jku.trustkg.quality.DataProfile;
+
 public abstract class DSDElement implements Serializable, Comparable<DSDElement> {
 
 	private static final long serialVersionUID = 1L;
@@ -16,12 +19,26 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
 
 	protected String label;
 	protected String labelOriginal;
+	
+	private DataProfile dataProfile;
 
 	public DSDElement(String label) {
 		this.label = label.toLowerCase();
 		this.labelOriginal = label;
 	}
+	
+	public DataProfile getProfile() {
+	  return dataProfile;
+	}
+	
+	public void annotateProfile(RecordSet rs) {
+	  dataProfile = new DataProfile(rs, this);
+	}
 
+	public void printAnnotatedProfile() {
+	  System.out.println("Annotated Data Profile for DSDElement: " + label);
+	}
+	
 	public String getLabel() {
 		return label;
 	}
