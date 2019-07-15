@@ -1,0 +1,114 @@
+Changes on the Scheme:
+http://example.com/test/test
+String	http://example.com/test/test/region
+Annotated Data Profile for DSDElement: region
+Data Profile:
+Minimum	String	4
+Maximum	String	33
+Average	String	15
+Median	String	18
+
+String	http://example.com/test/test/country
+Annotated Data Profile for DSDElement: country
+Data Profile:
+Minimum	String	4
+Maximum	String	32
+Average	String	8
+Median	String	7
+
+String	http://example.com/test/test/item type
+Annotated Data Profile for DSDElement: item type
+Data Profile:
+Minimum	String	4
+Maximum	String	15
+Average	String	8
+Median	String	9
+
+String	http://example.com/test/test/sales channel
+Annotated Data Profile for DSDElement: sales channel
+Data Profile:
+Minimum	String	6
+Maximum	String	7
+Average	String	6
+Median	String	6
+
+String	http://example.com/test/test/order priority
+Annotated Data Profile for DSDElement: order priority
+Data Profile:
+Minimum	String	1
+Maximum	String	1
+Average	String	1
+Median	String	1
+
+String	http://example.com/test/test/order date
+Annotated Data Profile for DSDElement: order date
+Data Profile:
+Minimum	String	8
+Maximum	String	10
+Average	String	8
+Median	String	9
+
+Long	http://example.com/test/test/order id
+Annotated Data Profile for DSDElement: order id
+Data Profile:
+Minimum	Long	100001180
+Maximum	Long	999999892
+Average	Long	550109120
+Median	Long	549858701
+
+String	http://example.com/test/test/ship date
+Annotated Data Profile for DSDElement: ship date
+Data Profile:
+Minimum	String	8
+Maximum	String	10
+Average	String	8
+Median	String	9
+
+Long	http://example.com/test/test/units sold
+Annotated Data Profile for DSDElement: units sold
+Data Profile:
+Minimum	Long	1
+Maximum	Long	10000
+Average	Long	4999
+Median	Long	4998
+
+Double	http://example.com/test/test/unit price
+Annotated Data Profile for DSDElement: unit price
+Data Profile:
+Minimum	Double	9.33
+Maximum	Double	668.27
+Average	Double	266.0717644902254
+Median	Double	154.06
+
+Double	http://example.com/test/test/unit cost
+Annotated Data Profile for DSDElement: unit cost
+Data Profile:
+Minimum	Double	6.92
+Maximum	Double	524.96
+Average	Double	187.57071998171864
+Median	Double	97.44
+
+Double	http://example.com/test/test/total revenue
+Annotated Data Profile for DSDElement: total revenue
+Data Profile:
+Minimum	Double	9.33
+Maximum	Double	6682700.0
+Average	Double	1329825.4610006749
+Median	Double	785507.03
+
+Double	http://example.com/test/test/total cost
+Annotated Data Profile for DSDElement: total cost
+Data Profile:
+Minimum	Double	6.92
+Maximum	Double	5249600.0
+Average	Double	937466.026761095
+Median	Double	467532.58
+
+Double	http://example.com/test/test/total profit
+Annotated Data Profile for DSDElement: total profit
+Data Profile:
+Minimum	Double	2.41
+Maximum	Double	1738700.0
+Average	Double	392359.4342395897
+Median	Double	281409.54
+

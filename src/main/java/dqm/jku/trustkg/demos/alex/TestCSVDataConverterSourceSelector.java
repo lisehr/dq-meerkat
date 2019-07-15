@@ -17,16 +17,17 @@ import dqm.jku.trustkg.dsd.elements.Datasource;
 import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordSet;
 
-public class TestCSVDataConverterSimpleSource {
+public class TestCSVDataConverterSourceSelector {
   private static final String prefix = "src/main/java/dqm/jku/trustkg/resources/";
   
   public static void main(String args[]) throws IOException {
+    // walk resources package to make a selection on which csv file should be used for the demo
     Stream<Path> paths = Files.walk(Paths.get(prefix));
     List<Path> files = paths.collect(Collectors.toList());
     paths.close();
     
     DSInstanceConnector conn = new ConnectorCSV(
-        files.get(1).toString(), ",", "\n",
+        files.get(16).toString(), ",", "\n",
         "Test", true);
     
     Datasource ds;

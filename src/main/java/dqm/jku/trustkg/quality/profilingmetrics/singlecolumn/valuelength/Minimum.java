@@ -23,20 +23,31 @@ public class Minimum extends ProfileMetric {
     this.setValueClass(a.getDataType());
   }
 
+  /**
+   * Creates a basic instance used as a reference (in this case the maximum value)
+   * @param a the attribute used for determine the class
+   * @return the reference value
+   */
   private Object getBasicInstance(Attribute a) {
-    if (a.getDataType().equals(Integer.class)) return Integer.valueOf(Integer.MAX_VALUE);
-    else if (a.getDataType().equals(Long.class)) return Long.valueOf(Long.MAX_VALUE);
+    if (a.getDataType().equals(Long.class)) return Long.valueOf(Long.MAX_VALUE);
     else if (a.getDataType().equals(Double.class)) return Double.valueOf(Double.MAX_VALUE);
     else
-      return String.valueOf("");
+      return Integer.MAX_VALUE;
   }
-
+  
+  /**
+   * Checks the minimum value of two objects
+   * @param a the attribute to be checked
+   * @param current the current minimum value
+   * @param toComp the new value to compare
+   * @return the new minimum value
+   */
   private Object getMinimum(Attribute a, Object current, Object toComp) {
-    if (a.getDataType().equals(Integer.class)) return Integer.min((int) current, ((Number) toComp).intValue());
-    else if (a.getDataType().equals(Long.class)) return Long.min((long) current, ((Number) toComp).longValue());
+    if (toComp == null) return current;
+    if (a.getDataType().equals(Long.class)) return Long.min((long) current, ((Number) toComp).longValue());
     else if (a.getDataType().equals(Double.class)) return Double.min((double) current, ((Number) toComp).doubleValue());
     else
-      return (String) current;
+      return Integer.min((int) current, ((String) toComp).length());
   }
 
 }

@@ -24,27 +24,44 @@ public class Average extends ProfileMetric {
     this.setValueClass(a.getDataType());
   }
 
-  private Object performAveraging(Attribute a, Object val, int size) {
-    if (a.getDataType().equals(Integer.class)) return (int) val / size;
-    else if (a.getDataType().equals(Long.class)) return (long) val / size;
-    else if (a.getDataType().equals(Double.class)) return (double) val / size;
-    return val;
+  /**
+   * Method for getting the average value of the objects
+   * @param a the attibute for getting the class
+   * @param sum the sum of values 
+   * @param size the amount of records inspected
+   * @return the average value
+   */
+  private Object performAveraging(Attribute a, Object sum, int size) {
+    if (a.getDataType().equals(Long.class)) return (long) sum / size;
+    else if (a.getDataType().equals(Double.class)) return (double) sum / size;
+    return (int) sum / size;
   }
 
+  /**
+   * Creates a basic instance used as a reference (in this case zero as a number)
+   * @param a the attribute used for determine the class
+   * @return the reference value
+   */
   private Object getBasicInstance(Attribute a) {
-    if (a.getDataType().equals(Integer.class)) return Integer.valueOf(0);
-    else if (a.getDataType().equals(Long.class)) return Long.valueOf(0);
+    if (a.getDataType().equals(Long.class)) return Long.valueOf(0);
     else if (a.getDataType().equals(Double.class)) return Double.valueOf(0);
     else
-      return String.valueOf("");
+      return Integer.valueOf(0);
   }
 
-  private Object addValue(Attribute a, Object current, Object toComp) {
-    if (a.getDataType().equals(Integer.class)) return (int) current + ((Number) toComp).intValue();
-    else if (a.getDataType().equals(Long.class)) return (long) current + ((Number) toComp).longValue();
-    else if (a.getDataType().equals(Double.class)) return (double) current + ((Number) toComp).doubleValue();
+  /**
+   * Adds a value to the sum of values
+   * @param a the attribute for class checking
+   * @param current the current sum of values
+   * @param toAdd the value to be added
+   * @return the new sum of values
+   */
+  private Object addValue(Attribute a, Object current, Object toAdd) {
+    if (toAdd == null) return current;
+    if (a.getDataType().equals(Long.class)) return (long) current + ((Number) toAdd).longValue();
+    else if (a.getDataType().equals(Double.class)) return (double) current + ((Number) toAdd).doubleValue();
     else
-      return (String) current;
+      return (int) current + ((String) toAdd).length();
   }
 
 }

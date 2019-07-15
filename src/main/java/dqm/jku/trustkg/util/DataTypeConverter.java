@@ -379,32 +379,30 @@ public class DataTypeConverter {
 	
 	/**
 	 * Get a data type from a csv record. It uses TryParsers for recognizing the data type.
-	 * 
+	 * Integer was scrapped because in big numbers (e.g. order ids) an overflow can happen
 	 * Opportunity for future research on creating CSV data type parsers!
 	 * 
 	 * @param a the corresponding attribute
 	 * @param val the String, from which the data type should be recognized
 	 */
 	public static void getDataTypeFromCSVRecord(Attribute a, String val) {
-	  if (val == null || StringUtils.isBlank(val) || val.isEmpty()) throw new IllegalArgumentException("Cannot work with invalid String!");
-
-	  a.setNumeric(true);
-	  if (TryParsers.tryParseInt(val)) a.setDataType(Integer.class);
-	  else if (TryParsers.tryParseLong(val)) a.setDataType(Long.class);
+	  if (val == null) throw new IllegalArgumentException("Cannot work with invalid String!");
+	  if (StringUtils.isBlank(val) || val.isEmpty()) return;
+	  if (TryParsers.tryParseLong(val)) a.setDataType(Long.class);
 	  else if (TryParsers.tryParseDouble(val)) a.setDataType(Double.class);
-	  else a.setNumeric(false);
 	}
 	
 	/**
 	 * Get a value from the string read in a csv record. If a new Value is assignable to the saved class,
-	 * but the parser creates an error, e.g. if a double value is found, when parsing an integer, the data type is refined to its 
-	 * new hierarchical point.
+	 * but the parser creates an error, e.g. if a double value is found, when parsing an long, the data type is refined to its 
+	 * next hierarchical class.
 	 * @param a the corresponding attribute to the value
 	 * @param val the value in String-form
 	 * @return the Object parsed from the String
 	 */
 	public static Object getDataValueFromCSV(Attribute a, String val) {
 	  Class<?> clazz = a.getDataType();
+	  if (StringUtils.isBlank(val) || val.isEmpty()) return null;
 	  try {
 	    if (Integer.class.isAssignableFrom(clazz)) return Integer.parseInt(val);
 	    else if (Long.class.isAssignableFrom(clazz)) return Long.parseLong(val);
@@ -420,7 +418,7 @@ public class DataTypeConverter {
 	 * Method for refining a data type when hitting a change in the record set.
 	 * @param a the attribute to be refined
 	 * @param val the string causing the refine
-	 * @return a value parsed with hte
+	 * @return a value parsed with the refined type
 	 */
   private static Object refineDataType(Attribute a, String val) {
     getDataTypeFromCSVRecord(a, val);

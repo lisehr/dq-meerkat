@@ -20,8 +20,10 @@ public class Median extends ProfileMetric {
   public void calculation(RecordSet rs, Attribute a) {
     List<Number> list = new ArrayList<Number>();
     for (Record r : rs) {
-      Number field = (Number) r.getField(a);
-      list.add(field);
+      Number field = null;
+      if (a.getDataType().equals(String.class) && r.getField(a) != null) field = ((String) r.getField(a)).length();
+      else field = (Number) r.getField(a);
+      if (field != null) list.add(field);
     }
     list.sort(new NumberComparator());
     Object val = getMedian(a, list, rs.size());
@@ -29,6 +31,13 @@ public class Median extends ProfileMetric {
     this.setValueClass(a.getDataType());
   }
 
+  /**
+   * Method for getting the median of a list of data
+   * @param a the attribute used for getting the average result (if amount of records is even)
+   * @param list the list of data (sorted in ascending order)
+   * @param size the size of records
+   * @return the median of the list
+   */
   private Object getMedian(Attribute a, List<Number> list, int size) {
     boolean isEven = false;
     if (list.size() < size) return null;
@@ -39,9 +48,15 @@ public class Median extends ProfileMetric {
     return val;
   }
 
+  /**
+   * Method for averaging the result, used if the number of measured records is even
+   * @param a the attribute used for determining the class
+   * @param val the median value if the amount of records is odd
+   * @param next the follow up value
+   * @return the weighted median
+   */
   private Number averageResult(Attribute a, Number val, Number next) {
-    if (a.getDataType().equals(Integer.class)) return ((val.intValue() + val.intValue())/2);
-    else if (a.getDataType().equals(Long.class)) return((val.longValue() + val.longValue())/2);
+    if (a.getDataType().equals(Long.class)) return((val.longValue() + val.longValue())/2);
     else if (a.getDataType().equals(Double.class)) return ((val.doubleValue() + val.doubleValue())/2);
     return val;
   }
