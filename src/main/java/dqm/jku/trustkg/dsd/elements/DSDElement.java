@@ -21,10 +21,16 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
 	protected String labelOriginal;
 	
 	private DataProfile dataProfile;
+	private boolean isNumeric = false;
 
 	public DSDElement(String label) {
 		this.label = label.toLowerCase();
 		this.labelOriginal = label;
+	}
+	
+	public void setNumeric(boolean isNumeric) {
+	  this.isNumeric = isNumeric;
+	  if (dataProfile != null) this.dataProfile.updateNumeric(isNumeric);
 	}
 	
 	public DataProfile getProfile() {
@@ -32,7 +38,7 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
 	}
 	
 	public void annotateProfile(RecordSet rs) {
-	  dataProfile = new DataProfile(rs, this);
+	  dataProfile = new DataProfile(rs, this, isNumeric);
 	}
 
 	public void printAnnotatedProfile() {

@@ -21,7 +21,7 @@ public class Attribute extends DSDElement {
 	public String getURI() {
 		return concept.getURI() + "/" + label;
 	}
-
+	
 	public boolean isNullable() {
 		return nullable;
 	}

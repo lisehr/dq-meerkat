@@ -1,7 +1,13 @@
 package dqm.jku.trustkg.demos.alex;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import dqm.jku.trustkg.connectors.ConnectorCSV;
 import dqm.jku.trustkg.connectors.DSInstanceConnector;
@@ -12,9 +18,15 @@ import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordSet;
 
 public class TestCSVDataConverterSimpleSource {
-  public static void main(String args[]) {
+  private static final String prefix = "src/main/java/dqm/jku/trustkg/resources/";
+  
+  public static void main(String args[]) throws IOException {
+    Stream<Path> paths = Files.walk(Paths.get(prefix));
+    List<Path> files = paths.collect(Collectors.toList());
+    paths.close();
+    
     DSInstanceConnector conn = new ConnectorCSV(
-        "src/main/java/dqm/jku/trustkg/resources/test.csv", ",", "\n",
+        files.get(1).toString(), ",", "\n",
         "Test", true);
     
     Datasource ds;

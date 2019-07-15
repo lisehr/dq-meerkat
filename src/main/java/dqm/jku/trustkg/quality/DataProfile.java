@@ -11,8 +11,10 @@ import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.valuelength.*;
 
 public class DataProfile {
   private Map<String, ProfileMetric> metrics = new HashMap<>();
+  private boolean isNumeric;
 
-  public DataProfile(RecordSet rs, DSDElement d) {
+  public DataProfile(RecordSet rs, DSDElement d, boolean isNumeric) {
+    this.isNumeric = isNumeric;
     createStandardProfile();
     calculateInitialProfile(rs, d);
   }
@@ -24,14 +26,17 @@ public class DataProfile {
   }
 
   private void createStandardProfile() {
-    ProfileMetric min = new Minimum();
-    metrics.put(min.getLabel(), min);
-    ProfileMetric max = new Maximum();
-    metrics.put(max.getLabel(), max);
-    ProfileMetric avg = new Average();
-    metrics.put(avg.getLabel(), avg);
-    ProfileMetric med = new Median();
-    metrics.put(med.getLabel(), med);
+    if (isNumeric) {
+      ProfileMetric min = new Minimum();
+      metrics.put(min.getLabel(), min);
+      ProfileMetric max = new Maximum();
+      metrics.put(max.getLabel(), max);
+      ProfileMetric avg = new Average();
+      metrics.put(avg.getLabel(), avg);
+      ProfileMetric med = new Median();
+      metrics.put(med.getLabel(), med);
+    }
+    
   }
 
   public void printProfile() {
@@ -40,6 +45,10 @@ public class DataProfile {
       System.out.println(p.toString());
     }
     System.out.println();
+  }
+
+  public void updateNumeric(boolean isNumeric) {
+    this.isNumeric = isNumeric;
   }
 
 }

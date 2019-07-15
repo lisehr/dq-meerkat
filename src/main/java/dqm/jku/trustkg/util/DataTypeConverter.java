@@ -388,9 +388,11 @@ public class DataTypeConverter {
 	public static void getDataTypeFromCSVRecord(Attribute a, String val) {
 	  if (val == null || StringUtils.isBlank(val) || val.isEmpty()) throw new IllegalArgumentException("Cannot work with invalid String!");
 
+	  a.setNumeric(true);
 	  if (TryParsers.tryParseInt(val)) a.setDataType(Integer.class);
 	  else if (TryParsers.tryParseLong(val)) a.setDataType(Long.class);
 	  else if (TryParsers.tryParseDouble(val)) a.setDataType(Double.class);
+	  else a.setNumeric(false);
 	}
 	
 	/**
