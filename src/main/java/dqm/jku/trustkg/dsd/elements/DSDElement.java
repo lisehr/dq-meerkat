@@ -37,6 +37,7 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
 
 	public void printAnnotatedProfile() {
 	  System.out.println("Annotated Data Profile for DSDElement: " + label);
+	  dataProfile.printProfile();
 	}
 	
 	public String getLabel() {

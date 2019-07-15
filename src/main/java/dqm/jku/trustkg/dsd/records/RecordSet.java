@@ -11,6 +11,10 @@ public class RecordSet implements Iterable<Record> {
 	public void addRecord(Record r) {
 		records.add(r);
 	}
+	
+	public int size () {
+	  return records.size();
+	}
 
 	@Override
 	public Iterator<Record> iterator() {

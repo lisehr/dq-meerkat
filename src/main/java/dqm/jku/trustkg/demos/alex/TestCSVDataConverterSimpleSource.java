@@ -24,7 +24,7 @@ public class TestCSVDataConverterSimpleSource {
         System.out.println(c.getURI());
 
         for (Attribute a : c.getAttributes()) {
-          System.out.println(a.getDataType().toString() + "\t" + a.getURI());
+          System.out.println(a.getDataType().getSimpleName() + "\t" + a.getURI());
         }
         System.out.println();
       }
@@ -46,7 +46,8 @@ public class TestCSVDataConverterSimpleSource {
         for (Attribute a : c.getAttributes()) {
           a.annotateProfile(rs);        
           
-          System.out.println(a.getDataType().toString() + "\t" + a.getURI());
+          System.out.println(a.getDataType().getSimpleName() + "\t" + a.getURI());
+          a.printAnnotatedProfile();
         }
         System.out.println();
       }

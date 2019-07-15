@@ -39,7 +39,7 @@ public abstract class ProfileMetric {
   public abstract void calculation(RecordSet rs, Attribute a);
   
   public String toString() {
-    return String.format("%s\t%s\t%s", label, valClass.toString(), value.toString());
+    return String.format("%s\t%s\t%s", label, valClass.getSimpleName(), value.toString());
   }
 
   @Override
