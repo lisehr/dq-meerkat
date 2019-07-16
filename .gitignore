@@ -3,3 +3,4 @@
 /Neo4j/*
 /.settings/*
 .classpath
+/target/
