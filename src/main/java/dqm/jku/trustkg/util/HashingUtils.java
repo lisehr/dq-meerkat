@@ -4,11 +4,10 @@ import java.security.MessageDigest;
 
 import com.google.gson.GsonBuilder;
 
-//taken from tutorial from cryptokass
-
 public class HashingUtils {
   /**
-   * Applies Sha256 to a string and returns the result. 
+   * Applies Sha256 to a string and returns the result.
+   * 
    * @param input the String to be hashed
    * @return hash value
    */
@@ -34,6 +33,7 @@ public class HashingUtils {
 
   /**
    * Short hand helper to turn Object into a json string
+   * 
    * @param o a object to reformat to json
    * @return Json representation of the object
    */
@@ -42,7 +42,9 @@ public class HashingUtils {
   }
 
   /**
-   * Returns difficulty string target, to compare to hash. eg difficulty of 5 will return "00000"
+   * Returns difficulty string target, to compare to hash. eg difficulty of 5 will
+   * return "00000"
+   * 
    * @param difficulty the length of the difficulty string
    * @return the difficulty string, consisting of '0's
    */

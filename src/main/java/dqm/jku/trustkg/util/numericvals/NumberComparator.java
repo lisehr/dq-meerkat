@@ -3,11 +3,13 @@ package dqm.jku.trustkg.util.numericvals;
 import java.util.Comparator;
 
 /**
- * A comparator specifically built for comparing numbers when calculating data profiling metrics
+ * A comparator specifically built for comparing numbers when calculating data
+ * profiling metrics
+ * 
  * @author optimusseptim
  *
  */
-public class NumberComparator implements Comparator<Number>{
+public class NumberComparator implements Comparator<Number> {
 
   @Override
   public int compare(Number a, Number b) {

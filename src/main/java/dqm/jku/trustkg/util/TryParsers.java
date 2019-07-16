@@ -1,9 +1,10 @@
 package dqm.jku.trustkg.util;
 
 public class TryParsers {
-  
+
   /**
    * Tries if parsing an integer is possible
+   * 
    * @param s the string to be parsed
    * @return true, if integer, false otherwise
    */
@@ -15,9 +16,10 @@ public class TryParsers {
       return false;
     }
   }
-  
+
   /**
    * Tries if parsing a long is possible
+   * 
    * @param s the string to be parsed
    * @return true, if long, false otherwise
    */
@@ -29,9 +31,10 @@ public class TryParsers {
       return false;
     }
   }
-  
+
   /**
    * Tries if parsing a double is possible
+   * 
    * @param s the string to be parsed
    * @return true, if double, false otherwise
    */
