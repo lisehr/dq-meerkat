@@ -6,23 +6,21 @@ import java.util.List;
 import java.util.Map;
 
 import dqm.jku.trustkg.dsd.elements.Attribute;
-import dqm.jku.trustkg.dsd.elements.DSDElement;
 import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordSet;
+import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
 import dqm.jku.trustkg.util.numericvals.ValueDistributionUtils;
 
 public class Histogram extends ProfileMetric{
   private static final String name = "Histogram";
-  private int n;
   private Number min;
   private Number max;
-  private int k;
   private Number classrange;
 
-  public Histogram(DSDElement refElem) {
-    super(name, refElem);
+  public Histogram(DataProfile d) {
+    super(name, d);
   }
 
   @Override
@@ -53,12 +51,11 @@ public class Histogram extends ProfileMetric{
    */
   private void processList(List<Number> list, Map<Integer, Integer> vals) {
     list.sort(new NumberComparator());
-    n = list.size();
     if (min == null) min = list.get(0).doubleValue();
     else min = Math.min(min.doubleValue(), list.get(0).doubleValue());
-    if (max == null) max = list.get(n - 1).doubleValue();
-    else max = Math.max(max.doubleValue(), list.get(n - 1).doubleValue());
-    k = ValueDistributionUtils.calculateNumberClasses(n);
+    if (max == null) max = list.get(super.getRefProf().getRecordsProcessed() - 1).doubleValue();
+    else max = Math.max(max.doubleValue(), list.get(super.getRefProf().getRecordsProcessed() - 1).doubleValue());
+    int k = ValueDistributionUtils.calculateNumberClasses(super.getRefProf().getRecordsProcessed());
     classrange = (max.doubleValue() - min.doubleValue()) / k;
     int classVals[];
     if (vals == null) classVals = new int[k];
@@ -93,6 +90,7 @@ public class Histogram extends ProfileMetric{
   @SuppressWarnings("unchecked")
   private int[] constructArray() {
     if (super.getValue() == null) throw new IllegalStateException("Map has to exist here!");
+    int k = ValueDistributionUtils.calculateNumberClasses(super.getRefProf().getRecordsProcessed());
     int classes[] = new int[k];
     int j = 0;
     for (Integer i : ((Map<Integer, Integer>)super.getValue()).values()) {
@@ -106,6 +104,7 @@ public class Histogram extends ProfileMetric{
   @Override
   protected String getValueString() {
     StringBuilder sb = new StringBuilder().append("Number of classes: ");
+    int k = ValueDistributionUtils.calculateNumberClasses(super.getRefProf().getRecordsProcessed());
     sb.append(k);
     sb.append(", ClassRange: ");
     sb.append(classrange);
@@ -116,6 +115,48 @@ public class Histogram extends ProfileMetric{
     }
     sb.deleteCharAt(sb.length() - 1);
     return sb.toString();
+  }
+
+  /**
+   * @return the min
+   */
+  public Number getMin() {
+    return min;
+  }
+
+  /**
+   * @param min the min to set
+   */
+  public void setMin(Number min) {
+    this.min = min;
+  }
+
+  /**
+   * @return the max
+   */
+  public Number getMax() {
+    return max;
+  }
+
+  /**
+   * @param max the max to set
+   */
+  public void setMax(Number max) {
+    this.max = max;
+  }
+
+  /**
+   * @return the classrange
+   */
+  public Number getClassrange() {
+    return classrange;
+  }
+
+  /**
+   * @param classrange the classrange to set
+   */
+  public void setClassrange(Number classrange) {
+    this.classrange = classrange;
   }
 
 

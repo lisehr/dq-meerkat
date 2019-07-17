@@ -5,14 +5,15 @@ import java.util.List;
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordSet;
+import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
 
 public class Maximum extends ProfileMetric {
   private static final String name = "Maximum";
 
-  public Maximum(Attribute a) {
-    super(name, a);
+  public Maximum(DataProfile d) {
+    super(name, d);
   }
 
   @Override

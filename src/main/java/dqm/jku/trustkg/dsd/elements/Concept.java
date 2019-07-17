@@ -8,31 +8,73 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.cyberborean.rdfbeans.annotations.RDF;
+import org.cyberborean.rdfbeans.annotations.RDFBean;
+import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
+
 import dqm.jku.trustkg.util.AttributeSet;
 
+@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
+@RDFBean("foaf:Concept")
 public class Concept extends DSDElement {
 
   private static final long serialVersionUID = 1L;
-  private final Datasource datasource;
-  private HashSet<Attribute> attributes = new HashSet<Attribute>();
-  private HashSet<Attribute> primaryKey = new HashSet<Attribute>();
-  private List<FunctionalDependency> functionalDependencies = new ArrayList<FunctionalDependency>();
-  protected Set<ForeignKey> foreignKeys = new HashSet<ForeignKey>();
-
-  public Concept(String label, Datasource datasource) {
-    super(label);
+  private Datasource datasource;
+  /**
+   * @param datasource the datasource to set
+   */
+  public void setDatasource(Datasource datasource) {
     this.datasource = datasource;
   }
 
-  @Override
-  public String getURI() {
-    return datasource.getURI() + "/" + label;
+  /**
+   * @param attributes the attributes to set
+   */
+  public void setAttributes(AttributeSet attributes) {
+    this.attributes = (HashSet<Attribute>) attributes.stream().collect(Collectors.toSet());
   }
 
+  /**
+   * @param primaryKey the primaryKey to set
+   */
+  public void setPrimaryKeys(AttributeSet primaryKey) {
+    this.primaryKeys = (HashSet<Attribute>) primaryKey.stream().collect(Collectors.toSet());
+  }
+
+  /**
+   * @param functionalDependencies the functionalDependencies to set
+   */
+  public void setFunctionalDependencies(List<FunctionalDependency> functionalDependencies) {
+    this.functionalDependencies = functionalDependencies;
+  }
+
+  /**
+   * @param foreignKeys the foreignKeys to set
+   */
+  public void setForeignKeys(Set<ForeignKey> foreignKeys) {
+    this.foreignKeys = foreignKeys;
+  }
+
+  private HashSet<Attribute> attributes = new HashSet<Attribute>();
+  private HashSet<Attribute> primaryKeys = new HashSet<Attribute>();
+  private List<FunctionalDependency> functionalDependencies = new ArrayList<FunctionalDependency>();
+  protected Set<ForeignKey> foreignKeys = new HashSet<ForeignKey>();
+
+  public Concept() {
+    super();
+  }
+  
+  public Concept(String label, Datasource datasource) {
+    super(label, datasource.getURI() + "/" + label);
+    this.datasource = datasource;
+  }
+
+  @RDF("foaf:hasDatasource")
   public Datasource getDatasource() {
     return datasource;
   }
 
+  @RDF("foaf:hasAttributeSet")
   public AttributeSet getAttributes() {
     return new AttributeSet(attributes);
   }
@@ -49,13 +91,14 @@ public class Concept extends DSDElement {
     return this.getAttribute(attribute) != null;
   }
 
-  public AttributeSet getPrimaryKey() {
-    return new AttributeSet(primaryKey);
+  @RDF("foaf:hasPK")
+  public AttributeSet getPrimaryKeys() {
+    return new AttributeSet(primaryKeys);
   }
 
   public void addPrimaryKeyAttribute(Attribute primaryKey) {
     if (attributes.contains(primaryKey)) {
-      this.primaryKey.add(primaryKey);
+      this.primaryKeys.add(primaryKey);
     } else {
       throw new IllegalArgumentException("Primary key is not contained in attributes list of concept.");
     }
@@ -79,6 +122,7 @@ public class Concept extends DSDElement {
     return list;
   }
 
+  @RDF("foaf:hasFD")
   public List<FunctionalDependency> getFunctionalDependencies() {
     return Collections.unmodifiableList(functionalDependencies);
   }
@@ -114,6 +158,7 @@ public class Concept extends DSDElement {
     return res;
   }
 
+  @RDF("foaf:hasFK")
   public Set<ForeignKey> getForeignKeys() {
     return Collections.unmodifiableSet(foreignKeys);
   }

@@ -137,7 +137,7 @@ public class ConnectorMySQL extends DSInstanceConnector {
 
 	@Override
 	public void findFunctionalDependencies(Concept concept) throws IOException {
-		AttributeSet primarKey = concept.getPrimaryKey();
+		AttributeSet primarKey = concept.getPrimaryKeys();
 		Set<AttributeSet> lefts = new HashSet<AttributeSet>();
 
 		for (Attribute a : concept.getAttributes()) {

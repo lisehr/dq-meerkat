@@ -28,7 +28,7 @@ public class TestCSVDataConverterSourceSelector {
     paths.close();
     
     DSInstanceConnector conn = new ConnectorCSV(
-        files.get(2).toString(), ",", "\n",
+        files.get(1).toString(), ",", "\n",
         "Test", true);
     
     Datasource ds;

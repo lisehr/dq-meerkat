@@ -9,6 +9,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import org.cyberborean.rdfbeans.annotations.RDF;
+import org.cyberborean.rdfbeans.annotations.RDFBean;
+import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
+
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.records.Record;
 
@@ -16,6 +20,10 @@ import dqm.jku.trustkg.dsd.records.Record;
  * @author Bernhard
  *
  */
+@RDFNamespaces({ 
+  "foaf = http://xmlns.com/foaf/0.1/",
+})
+@RDFBean("foaf:AttributeSet")
 public class AttributeSet implements Iterable<Attribute> {
 
 	private List<Attribute> attributes = new ArrayList<Attribute>();
@@ -186,5 +194,15 @@ public class AttributeSet implements Iterable<Attribute> {
 	public Attribute first() {
 		return attributes.get(0);
 	}
+	
+	@RDF("foaf:hasAttribute")
+	public List<Attribute> getAttributes(){
+	  return attributes;
+	}
+	
+	 public void setAttributes(List<Attribute> list){
+	    this.attributes = list;
+	  }
+
 
 }

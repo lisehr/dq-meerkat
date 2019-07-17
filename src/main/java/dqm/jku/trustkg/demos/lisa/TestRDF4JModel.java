@@ -50,7 +50,6 @@ public class TestRDF4JModel {
 			System.out.println();
 
 			Model m = builder.build();
-
 			// the size of contexts indicates how many graphs are stored in this model
 			// System.out.println(m.contexts().size());
 
@@ -59,10 +58,10 @@ public class TestRDF4JModel {
 				Rio.write(m.filter(null, null, null, context), System.out, RDFFormat.TURTLE);
 			}
 
-			EmbeddedGraphDB db = new dqm.jku.trustkg.graphdb.EmbeddedGraphDB("//home//lisa//graphdb_test");
+			EmbeddedGraphDB db = new dqm.jku.trustkg.graphdb.EmbeddedGraphDB("test");
 
 			// activate for first time creation
-			//db.createRepository("test");
+			db.createRepository("test");
 			Repository testRep = db.getRepository("test");
 			RepositoryConnection repConn = testRep.getConnection();
 			

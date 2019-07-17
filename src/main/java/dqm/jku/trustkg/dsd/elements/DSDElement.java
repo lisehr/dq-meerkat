@@ -5,134 +5,163 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+
+import org.cyberborean.rdfbeans.annotations.*;
 
 import dqm.jku.trustkg.dsd.records.RecordSet;
 import dqm.jku.trustkg.quality.DataProfile;
 
+@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
+@RDFBean("foaf:DSDElement")
 public abstract class DSDElement implements Serializable, Comparable<DSDElement> {
 
-	private static final long serialVersionUID = 1L;
-	private static HashMap<String, DSDElement> cache = new HashMap<String, DSDElement>();
+  private static final long serialVersionUID = 1L;
+  private static HashMap<String, DSDElement> cache = new HashMap<String, DSDElement>();
+  
+  private String uri;
 
-	public abstract String getURI();
+  @RDFSubject
+  public String getURI() {
+    return uri;
+  }
+  
+  public void setURI(String uri) {
+    this.uri = uri;
+  }
 
-	protected String label;
-	protected String labelOriginal;
-	
-	private DataProfile dataProfile;
+  protected String label;
+  protected String labelOriginal;
 
-	public DSDElement(String label) {
-		this.label = label.toLowerCase();
-		this.labelOriginal = label;
-	}
-	
-	public DataProfile getProfile() {
-	  return dataProfile;
-	}
-	
-	public void annotateProfile(RecordSet rs) {
-	  dataProfile = new DataProfile(rs, this);
-	}
+  private DataProfile dataProfile;
 
-	public void printAnnotatedProfile() {
-	  System.out.println("Annotated Data Profile for DSDElement: " + label);
-	  dataProfile.printProfile();
-	}
-	
-	public String getLabel() {
-		return label;
-	}
-	
-	/** The original label is currently only used for calculating the readability dimension **/
-	public String getLabelOriginal() {
-		return labelOriginal;
-	}
+  public DSDElement() {
 
-	@Override
-	public String toString() {
-		return getURI();
-	}
+  }
 
-	@Override
-	public int compareTo(DSDElement other) {
-		return getURI().compareTo(other.getURI());
-	}
+  public DSDElement(String label) {
+    this.label = label.toLowerCase();
+    this.labelOriginal = label;
+  }
+  
+  public DSDElement(String label, String uri){
+    this.label = label.toLowerCase();
+    this.labelOriginal = label;
+    this.uri = uri;
+  }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((getURI() == null) ? 0 : getURI().hashCode());
-		return result;
-	}
+  @RDF("foaf:dataProfile")
+  public DataProfile getProfile() {
+    return dataProfile;
+  }
+  
+  public void setProfile(DataProfile dataProfile) {
+    this.dataProfile = dataProfile;
+  }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		DSDElement other = (DSDElement) obj;
-		String uri = getURI();
-		String otherUri = other.getURI();
-		if (uri == null) {
-			if (otherUri != null)
-				return false;
-		} else if (!uri.equals(otherUri))
-			return false;
-		return true;
-	}
+  public void annotateProfile(RecordSet rs) {
+    dataProfile = new DataProfile(rs, this);
+  }
 
-	public static List<Datasource> getAllDatasources() {
-		List<Datasource> list = new ArrayList<Datasource>();
-		for (DSDElement e : cache.values()) {
-			if (e instanceof Datasource) {
-				list.add((Datasource) e);
-			}
-		}
-		return list;
-	}
+  public void printAnnotatedProfile() {
+    System.out.println("Annotated Data Profile for DSDElement: " + label);
+    dataProfile.printProfile();
+  }
 
-	public static Optional<Datasource> getDatasource(String label) {
-		return getAllDatasources().stream().filter(x -> x.label.equalsIgnoreCase(label)).findFirst();
-	}
+  @RDF("foaf:label")
+  public String getLabel() {
+    return label;
+  }
 
-	public static List<Concept> getAllConcepts() {
-		List<Concept> list = new ArrayList<Concept>();
-		for (DSDElement e : cache.values()) {
-			if (e instanceof Concept) {
-				list.add((Concept) e);
-			}
-		}
-		return list;
-	}
+  public void setLabel(String label) {
+    this.label = label;
+  }
 
-	public static DSDElement get(String uri) {
-		return cache.get(uri);
-	}
+  /**
+   * The original label is currently only used for calculating the readability
+   * dimension
+   **/
+  public String getLabelOriginal() {
+    return labelOriginal;
+  }
 
-	@SuppressWarnings("unchecked")
-	public static <T extends DSDElement> T get(T elem) {
-		String uri = elem.getURI();
-		if (!cache.containsKey(uri)) {
-			cache.put(uri, elem);
-		}
-		return (T) cache.get(uri);
-	}
+  @Override
+  public String toString() {
+    return getURI();
+  }
 
-	public static Collection<DSDElement> getCache() {
-		return cache.values();
-	}
+  @Override
+  public int compareTo(DSDElement other) {
+    return getURI().compareTo(other.getURI());
+  }
 
-	public static void replace(DSDElement elem) {
-		String uri = elem.getURI();
-		if (cache.containsKey(uri)) {
-			cache.remove(uri);
-		}
-		cache.put(uri, elem);
-	}
+  @Override
+  public int hashCode() {
+    return Objects.hash(label, getURI());
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) return true;
+    if (obj == null) return false;
+    if (getClass() != obj.getClass()) return false;
+    DSDElement other = (DSDElement) obj;
+    String uri = getURI();
+    String otherUri = other.getURI();
+    if (uri == null) {
+      if (otherUri != null) return false;
+    } else if (!uri.equals(otherUri)) return false;
+    return true;
+  }
+
+  public static List<Datasource> getAllDatasources() {
+    List<Datasource> list = new ArrayList<Datasource>();
+    for (DSDElement e : cache.values()) {
+      if (e instanceof Datasource) {
+        list.add((Datasource) e);
+      }
+    }
+    return list;
+  }
+
+  public static Optional<Datasource> getDatasource(String label) {
+    return getAllDatasources().stream().filter(x -> x.label.equalsIgnoreCase(label)).findFirst();
+  }
+
+  public static List<Concept> getAllConcepts() {
+    List<Concept> list = new ArrayList<Concept>();
+    for (DSDElement e : cache.values()) {
+      if (e instanceof Concept) {
+        list.add((Concept) e);
+      }
+    }
+    return list;
+  }
+
+  public static DSDElement get(String uri) {
+    return cache.get(uri);
+  }
+
+  @SuppressWarnings("unchecked")
+  public static <T extends DSDElement> T get(T elem) {
+    String uri = elem.getURI();
+    if (!cache.containsKey(uri)) {
+      cache.put(uri, elem);
+    }
+    return (T) cache.get(uri);
+  }
+
+  public static Collection<DSDElement> getCache() {
+    return cache.values();
+  }
+
+  public static void replace(DSDElement elem) {
+    String uri = elem.getURI();
+    if (cache.containsKey(uri)) {
+      cache.remove(uri);
+    }
+    cache.put(uri, elem);
+  }
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordSet;
+import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
 
@@ -13,8 +14,8 @@ public class Median extends ProfileMetric {
   private static final String name = "Median";
   private List<Number> values = new ArrayList<Number>();
 
-  public Median(Attribute a) {
-    super(name, a);
+  public Median(DataProfile d) {
+    super(name, d);
   }
 
   @Override

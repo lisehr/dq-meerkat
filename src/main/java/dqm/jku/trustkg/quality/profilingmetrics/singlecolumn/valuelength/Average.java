@@ -5,15 +5,15 @@ import java.util.List;
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordSet;
+import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
 
 public class Average extends ProfileMetric {
   private static final String name = "Average";
-  private int avgAmount;
 
-  public Average(Attribute a) {
-    super(name, a);
+  public Average(DataProfile d) {
+    super(name, d);
   }
 
   @Override
@@ -25,7 +25,7 @@ public class Average extends ProfileMetric {
       Object field = r.getField((Attribute) super.getRefElem());
       val = addValue(val, field);
     }
-    val = performAveraging(val, rs.size());
+    val = performAveraging(val);
     this.setValue(val);
     this.setValueClass(((Attribute) super.getRefElem()).getDataType());
   }
@@ -33,15 +33,13 @@ public class Average extends ProfileMetric {
   /**
    * Method for getting the average value of the objects
    * @param sum the sum of values 
-   * @param size the amount of records inspected
    * @return the average value
    */
-  private Object performAveraging(Object sum, int size) {
-    avgAmount = size;
+  private Object performAveraging(Object sum) {
     Attribute a = (Attribute) super.getRefElem();
-    if (a.getDataType().equals(Long.class)) return (long) sum / size;
-    else if (a.getDataType().equals(Double.class)) return (double) sum / size;
-    return (int) sum / size;
+    if (a.getDataType().equals(Long.class)) return (long) sum / super.getRefProf().getRecordsProcessed();
+    else if (a.getDataType().equals(Double.class)) return (double) sum / super.getRefProf().getRecordsProcessed();
+    return (int) sum / super.getRefProf().getRecordsProcessed();
   }
 
   /**
@@ -82,10 +80,10 @@ public class Average extends ProfileMetric {
    */
   private Object getOriginalSum() {
     Attribute a = (Attribute) super.getRefElem();
-    if (a.getDataType().equals(Long.class)) return ((Number) super.getValue()).longValue() * avgAmount;
-    else if (a.getDataType().equals(Double.class)) return ((Number) super.getValue()).doubleValue() * avgAmount;
+    if (a.getDataType().equals(Long.class)) return ((Number) super.getValue()).longValue() * super.getRefProf().getRecordsProcessed();
+    else if (a.getDataType().equals(Double.class)) return ((Number) super.getValue()).doubleValue() * super.getRefProf().getRecordsProcessed();
     else
-      return ((int) super.getValue()) * avgAmount;
+      return ((int) super.getValue()) * super.getRefProf().getRecordsProcessed();
   }
   
   @Override
@@ -99,7 +97,7 @@ public class Average extends ProfileMetric {
     for (Number n : list) {
       sum = addValue(sum, n);
     }
-    sum = performAveraging(sum, list.size());
+    sum = performAveraging(sum);
     this.setValue(sum);
     this.setValueClass(a.getDataType());
   }

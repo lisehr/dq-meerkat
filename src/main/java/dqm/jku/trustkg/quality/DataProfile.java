@@ -5,6 +5,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.cyberborean.rdfbeans.annotations.RDF;
+import org.cyberborean.rdfbeans.annotations.RDFBean;
+import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
+import org.cyberborean.rdfbeans.annotations.RDFSubject;
+
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.DSDElement;
 import dqm.jku.trustkg.dsd.records.Record;
@@ -14,13 +19,18 @@ import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.valuelength.*;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.distribution.*;
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
 
+@RDFNamespaces({ 
+  "foaf = http://xmlns.com/foaf/0.1/",
+})
+@RDFBean("foaf:DataProfile")
 public class DataProfile {
   private Set<ProfileMetric> metrics = new HashSet<>();
   private DSDElement elem;
+  private int recordsProcessed;
 
   public DataProfile(RecordSet rs, DSDElement d) {
     this.elem = d;
-    createStandardProfile(d);
+    createStandardProfile();
     calculateInitialProfile(rs);
   }
 
@@ -33,7 +43,13 @@ public class DataProfile {
    *           single column metrics)
    */
   private void calculateInitialProfile(RecordSet rs) {
+    recordsProcessed = rs.size();
     if (elem instanceof Attribute) calculateSingleColumn(rs);
+  }
+  
+  @RDFSubject
+  public String getURI() {
+    return elem.getURI() + "/profile";
   }
 
   private void calculateSingleColumn(RecordSet rs) {
@@ -60,17 +76,17 @@ public class DataProfile {
   /**
    * creates a standard data profile on which calculations can be made
    */
-  private void createStandardProfile(DSDElement d) {
-    if (d instanceof Attribute) {
-      ProfileMetric min = new Minimum((Attribute) d);
+  private void createStandardProfile() {
+    if (elem instanceof Attribute) {
+      ProfileMetric min = new Minimum(this);
       metrics.add(min);
-      ProfileMetric max = new Maximum((Attribute) d);
+      ProfileMetric max = new Maximum(this);
       metrics.add(max);
-      ProfileMetric avg = new Average((Attribute) d);
+      ProfileMetric avg = new Average(this);
       metrics.add(avg);
-      ProfileMetric med = new Median((Attribute) d);
+      ProfileMetric med = new Median(this);
       metrics.add(med);
-      ProfileMetric hist = new Histogram((Attribute) d);
+      ProfileMetric hist = new Histogram(this);
       metrics.add(hist);
     }
   }
@@ -86,5 +102,33 @@ public class DataProfile {
     }
     System.out.println();
   }
+  
+  /**
+   * Method for getting the set of metrics
+   * @return set of metrics
+   */
+  @RDF("foaf:includes")
+  public Set<ProfileMetric> getMetrics(){
+    return metrics;
+  }
+  
+  /**
+   * Gets the reference dsd element, used for calculation
+   * 
+   * @return the reference element
+   */
+  public DSDElement getRefElem() {
+    return elem;
+  }
+
+  @RDF("foaf:recordsProcessed")
+  public int getRecordsProcessed() {
+    return recordsProcessed;
+  }
+
+  public void setRecordsProcessed(int recordsProcessed) {
+    this.recordsProcessed = recordsProcessed;
+  }
+
 
 }

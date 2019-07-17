@@ -3,19 +3,27 @@ package dqm.jku.trustkg.quality.profilingmetrics;
 import java.util.List;
 import java.util.Objects;
 
+import org.cyberborean.rdfbeans.annotations.RDF;
+import org.cyberborean.rdfbeans.annotations.RDFBean;
+import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
+
 import dqm.jku.trustkg.dsd.elements.DSDElement;
 import dqm.jku.trustkg.dsd.records.RecordSet;
-
+import dqm.jku.trustkg.quality.DataProfile;
+@RDFNamespaces({ 
+  "foaf = http://xmlns.com/foaf/0.1/",
+})
+@RDFBean("foaf:ProfileMetric")
 public abstract class ProfileMetric {
   private String label; // the naming of the metric
   private Class<?> valClass; // the class of the value
   private Object value; // the value itself
-  private DSDElement refElem; // reference element for calculations
+  private DataProfile refProf; // reference profile for calculations
 
-  public ProfileMetric(String label, DSDElement refElem) {
-    if (label == null) throw new IllegalArgumentException("Label cannot be null!");
+  public ProfileMetric(String label, DataProfile refProf) {
+    if (label == null || refProf == null) throw new IllegalArgumentException("Parameters cannot be null!");
     this.label = label;
-    this.refElem = refElem;
+    this.refProf = refProf;
     value = null;
   }
 
@@ -24,6 +32,7 @@ public abstract class ProfileMetric {
    * 
    * @return label of metric
    */
+  @RDF("foaf:label")
   public String getLabel() {
     return label;
   }
@@ -33,6 +42,7 @@ public abstract class ProfileMetric {
    * 
    * @return value of metric
    */
+  @RDF("foaf:value")
   public Object getValue() {
     return value;
   }
@@ -42,6 +52,7 @@ public abstract class ProfileMetric {
    * 
    * @return class of value
    */
+  @RDF("foaf:valueClass")
   public Class<?> getValueClass() {
     return valClass;
   }
@@ -65,12 +76,21 @@ public abstract class ProfileMetric {
   }
 
   /**
+   * Gets the reference DataProfile
+   * 
+   * @return the reference profile
+   */
+  public DataProfile getRefProf() {
+    return refProf;
+  }
+  
+  /**
    * Gets the reference dsd element, used for calculation
    * 
    * @return the reference element
    */
-  protected DSDElement getRefElem() {
-    return refElem;
+  public DSDElement getRefElem() {
+    return refProf.getRefElem();
   }
 
   /**
