@@ -1,6 +1,8 @@
 package dqm.jku.trustkg.demos.lisa;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import dqm.jku.trustkg.connectors.ConnectorCSV;
 import dqm.jku.trustkg.connectors.DSInstanceConnector;
@@ -8,6 +10,7 @@ import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.Concept;
 import dqm.jku.trustkg.dsd.elements.Datasource;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
+import org.eclipse.rdf4j.model.util.RDFCollections;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.repository.Repository;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
@@ -62,7 +65,17 @@ public class TestRDF4JModel {
 			Repository testRep = db.getRepository("test");
 			RepositoryConnection repConn = testRep.getConnection();
 			
+			ArrayList<Integer> a = new ArrayList<Integer>();
+			a.add(1);
+			a.add(2);
+			a.add(3);
 			repConn.add(m);
+			//sRDFCollections.asRDF(a, null, m, );
+			
+			// testing the Rio writing function
+			//FileOutputStream out = new FileOutputStream("//home//lisa//graphdb_test//file.ttl");
+			//Rio.write(m, out, RDFFormat.TURTLE);
+			// out.close();
 
 			try (RepositoryResult<Statement> result = repConn.getStatements(null, null, null);) {
 				while (result.hasNext()) {
