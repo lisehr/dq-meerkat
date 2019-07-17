@@ -1,10 +1,9 @@
 package dqm.jku.trustkg.quality;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-
+import java.util.Set;
 
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.DSDElement;
@@ -16,7 +15,7 @@ import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.distribution.*;
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
 
 public class DataProfile {
-  private Map<String, ProfileMetric> metrics = new HashMap<>();
+  private Set<ProfileMetric> metrics = new HashSet<>();
   private DSDElement elem;
 
   public DataProfile(RecordSet rs, DSDElement d) {
@@ -39,7 +38,7 @@ public class DataProfile {
 
   private void calculateSingleColumn(RecordSet rs) {
     List<Number> l = createValueList(rs);
-    for (ProfileMetric p : metrics.values()) {
+    for (ProfileMetric p : metrics) {
       p.calculationNumeric(l, p.getValue());
     }
     
@@ -64,15 +63,15 @@ public class DataProfile {
   private void createStandardProfile(DSDElement d) {
     if (d instanceof Attribute) {
       ProfileMetric min = new Minimum((Attribute) d);
-      metrics.put(min.getLabel(), min);
+      metrics.add(min);
       ProfileMetric max = new Maximum((Attribute) d);
-      metrics.put(max.getLabel(), max);
+      metrics.add(max);
       ProfileMetric avg = new Average((Attribute) d);
-      metrics.put(avg.getLabel(), avg);
+      metrics.add(avg);
       ProfileMetric med = new Median((Attribute) d);
-      metrics.put(med.getLabel(), med);
+      metrics.add(med);
       ProfileMetric hist = new Histogram((Attribute) d);
-      metrics.put(hist.getLabel(), hist);
+      metrics.add(hist);
     }
   }
 
@@ -81,8 +80,8 @@ public class DataProfile {
    */
   public void printProfile() {
     System.out.println("Data Profile:");
-    if (metrics.values().stream().anyMatch(p -> p.getValueClass().equals(String.class))) System.out.println("Strings use String length for value length metrics!");
-    for (ProfileMetric p : metrics.values()) {
+    if (metrics.stream().anyMatch(p -> p.getValueClass().equals(String.class))) System.out.println("Strings use String length for value length metrics!");
+    for (ProfileMetric p : metrics) {
       System.out.println(p.toString());
     }
     System.out.println();

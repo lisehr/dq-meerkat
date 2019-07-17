@@ -14,32 +14,42 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	    <maven.compiler.source>1.8</maven.compiler.source>
-	    <maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 
 	<dependencies>
-
+		<dependency>
+			<groupId>org.cyberborean</groupId>
+			<artifactId>rdfbeans</artifactId>
+			<version>2.2</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.ontotext.graphdb/graphdb-free-runtime -->
 		<dependency>
-		    <groupId>com.ontotext.graphdb</groupId>
-		    <artifactId>graphdb-free-runtime</artifactId>
-		    <version>8.10.1</version>
+			<groupId>com.ontotext.graphdb</groupId>
+			<artifactId>graphdb-free-runtime</artifactId>
+			<version>8.10.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.streampipes/streampipes-empire-pinto -->
+		<dependency>
+			<groupId>org.streampipes</groupId>
+			<artifactId>streampipes-empire-pinto</artifactId>
+			<version>1.9.9</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.influxdb</groupId>
-		    <artifactId>influxdb-java</artifactId>
-	  		  <version>2.15</version>
-		</dependency>				
+			<groupId>org.influxdb</groupId>
+			<artifactId>influxdb-java</artifactId>
+			<version>2.15</version>
+		</dependency>
 		<dependency>
 			<groupId>org.neo4j.driver</groupId>
 			<artifactId>neo4j-java-driver</artifactId>
-			<version>1.7.2</version>			
+			<version>1.7.2</version>
 		</dependency>
 		<dependency>
-		    <groupId>com.bigchaindb</groupId>
-		    <artifactId>bigchaindb-driver</artifactId>
-		    <version>1.0</version>
+			<groupId>com.bigchaindb</groupId>
+			<artifactId>bigchaindb-driver</artifactId>
+			<version>1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.github.jsonld-java</groupId>
