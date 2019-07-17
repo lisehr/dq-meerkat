@@ -5,24 +5,24 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 public class RecordSet implements Iterable<Record> {
-	
-	private SortedSet<Record> records = new TreeSet<Record>();
-	
-	public void addRecord(Record r) {
-		records.add(r);
-	}
-	
-	public int size () {
-	  return records.size();
-	}
 
-	@Override
-	public Iterator<Record> iterator() {
-		return records.iterator();
-	}
-	
-	public boolean contains(Record r) {
-		return records.contains(r);
-	}
+  private SortedSet<Record> records = new TreeSet<Record>();
+
+  public void addRecord(Record r) {
+    records.add(r);
+  }
+
+  public int size() {
+    return records.size();
+  }
+
+  @Override
+  public Iterator<Record> iterator() {
+    return records.iterator();
+  }
+
+  public boolean contains(Record r) {
+    return records.contains(r);
+  }
 
 }

@@ -1,0 +1,153 @@
+http://example.com/test/test
+String	http://example.com/test/test/region
+String	http://example.com/test/test/country
+String	http://example.com/test/test/item type
+String	http://example.com/test/test/sales channel
+String	http://example.com/test/test/order priority
+String	http://example.com/test/test/order date
+String	http://example.com/test/test/order id
+String	http://example.com/test/test/ship date
+String	http://example.com/test/test/units sold
+String	http://example.com/test/test/unit price
+String	http://example.com/test/test/unit cost
+String	http://example.com/test/test/total revenue
+String	http://example.com/test/test/total cost
+String	http://example.com/test/test/total profit
+
+Changes on the Scheme:
+http://example.com/test/test
+String	http://example.com/test/test/region
+Annotated Data Profile for DSDElement: region
+Data Profile:
+Strings use String length for value length metrics!
+Minimum		4
+Maximum		33
+Histogram	Number of classes: 22, ClassRange: 1.3181818181818181, Values: 203107-360805-0-0-0-0-30106-0-0-0-361406-0-112589-0-0-0-0-0-172938-0-0-150445
+Average		15
+Median		18
+
+String	http://example.com/test/test/country
+Annotated Data Profile for DSDElement: country
+Data Profile:
+Strings use String length for value length metrics!
+Minimum		4
+Maximum		32
+Histogram	Number of classes: 22, ClassRange: 1.2727272727272727, Values: 233209-225739-263243-240832-127439-90564-45207-37582-7457-14955-7464-15058-14905-15002-15087-14976-0-0-0-0-7578-15099
+Average		8
+Median		7
+
+String	http://example.com/test/test/item type
+Annotated Data Profile for DSDElement: item type
+Data Profile:
+Strings use String length for value length metrics!
+Minimum		4
+Maximum		15
+Histogram	Number of classes: 22, ClassRange: 0.5, Values: 116002-0-0-0-348149-0-115762-0-0-0-463897-0-115732-0-0-0-0-0-116048-0-0-115806
+Average		8
+Median		9
+
+String	http://example.com/test/test/sales channel
+Annotated Data Profile for DSDElement: sales channel
+Data Profile:
+Strings use String length for value length metrics!
+Minimum		6
+Maximum		7
+Histogram	Number of classes: 22, ClassRange: 0.045454545454545456, Values: 695770-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-695626
+Average		6
+Median		6
+
+String	http://example.com/test/test/order priority
+Annotated Data Profile for DSDElement: order priority
+Data Profile:
+Strings use String length for value length metrics!
+Minimum		1
+Maximum		1
+Histogram	Number of classes: 22, ClassRange: 0.0, Values: 0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-1391396
+Average		1
+Median		1
+
+String	http://example.com/test/test/order date
+Annotated Data Profile for DSDElement: order date
+Data Profile:
+Strings use String length for value length metrics!
+Minimum		8
+Maximum		10
+Histogram	Number of classes: 22, ClassRange: 0.09090909090909091, Values: 316261-0-0-0-0-0-0-0-0-0-0-845660-0-0-0-0-0-0-0-0-0-229475
+Average		8
+Median		9
+
+Long	http://example.com/test/test/order id
+Annotated Data Profile for DSDElement: order id
+Data Profile:
+Minimum		100001180
+Maximum		999999892
+Histogram	Number of classes: 22, ClassRange: 4.090903236363637E7, Values: 63270-63063-63005-63433-63508-63566-63542-62895-63110-63181-63345-63169-62852-62952-62890-63097-63475-63528-63406-63189-63283-63637
+Average		550109120
+Median		549858701
+
+String	http://example.com/test/test/ship date
+Annotated Data Profile for DSDElement: ship date
+Data Profile:
+Strings use String length for value length metrics!
+Minimum		8
+Maximum		10
+Histogram	Number of classes: 22, ClassRange: 0.09090909090909091, Values: 316345-0-0-0-0-0-0-0-0-0-0-846445-0-0-0-0-0-0-0-0-0-228606
+Average		8
+Median		9
+
+Long	http://example.com/test/test/units sold
+Annotated Data Profile for DSDElement: units sold
+Data Profile:
+Minimum		1
+Maximum		10000
+Histogram	Number of classes: 22, ClassRange: 454.5, Values: 63345-63220-63106-63357-63316-62903-63418-63308-63132-63250-63701-63093-63348-63092-63229-63330-63310-63296-63357-63291-63019-62975
+Average		4999
+Median		4998
+
+Double	http://example.com/test/test/unit price
+Annotated Data Profile for DSDElement: unit price
+Data Profile:
+Minimum		9.33
+Maximum		668.27
+Histogram	Number of classes: 22, ClassRange: 29.95181818181818, Values: 116254-115984-116048-115762-231729-0-115898-0-116064-0-0-0-0-116002-115988-0-0-0-0-0-0-231667
+Average		266.0717644911497
+Median		154.06
+
+Double	http://example.com/test/test/unit cost
+Annotated Data Profile for DSDElement: unit cost
+Data Profile:
+Minimum		6.92
+Maximum		524.96
+Histogram	Number of classes: 22, ClassRange: 23.54727272727273, Values: 116254-231746-116048-231729-115898-0-116064-0-0-0-115988-0-0-0-0-116002-0-0-0-0-0-231667
+Average		187.57071998167413
+Median		97.44
+
+Double	http://example.com/test/test/total revenue
+Annotated Data Profile for DSDElement: total revenue
+Data Profile:
+Minimum		9.33
+Maximum		6682700.0
+Histogram	Number of classes: 22, ClassRange: 303758.6668181818, Values: 369714-220834-166039-123225-103832-59961-54470-40998-32611-27102-27131-26949-27074-26125-13852-10614-10631-10755-10552-10667-10593-7667
+Average		1329825.46100071
+Median		785507.03
+
+Double	http://example.com/test/test/total cost
+Annotated Data Profile for DSDElement: total cost
+Data Profile:
+Minimum		6.92
+Maximum		5249600.0
+Histogram	Number of classes: 22, ClassRange: 238617.86727272728, Values: 457829-244994-147210-122947-69852-46380-40614-29024-28714-29020-28832-18717-18392-18478-18221-12989-10704-10714-10779-10666-10763-5557
+Average		937466.0267610914
+Median		467532.58
+
+Double	http://example.com/test/test/total profit
+Annotated Data Profile for DSDElement: total profit
+Data Profile:
+Minimum		2.41
+Maximum		1738700.0
+Histogram	Number of classes: 22, ClassRange: 79031.70863636363, Values: 308745-191630-134152-104305-97271-97660-97284-68431-50451-41724-38135-29550-19181-18088-17989-17829-10826-10638-10810-10816-10637-5244
+Average		392359.4342395964
+Median		281409.54
+
+
+

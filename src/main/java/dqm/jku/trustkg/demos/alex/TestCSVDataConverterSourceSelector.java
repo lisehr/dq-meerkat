@@ -18,16 +18,17 @@ import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordSet;
 
 public class TestCSVDataConverterSourceSelector {
-  private static final String prefix = "src/main/java/dqm/jku/trustkg/resources/";
+  private static final String PREFIX = "src/main/java/dqm/jku/trustkg/resources/";
+  private static final boolean DEBUG = false;
   
   public static void main(String args[]) throws IOException {
     // walk resources package to make a selection on which csv file should be used for the demo
-    Stream<Path> paths = Files.walk(Paths.get(prefix));
+    Stream<Path> paths = Files.walk(Paths.get(PREFIX));
     List<Path> files = paths.collect(Collectors.toList());
     paths.close();
     
     DSInstanceConnector conn = new ConnectorCSV(
-        files.get(16).toString(), ",", "\n",
+        files.get(2).toString(), ",", "\n",
         "Test", true);
     
     Datasource ds;
@@ -42,14 +43,17 @@ public class TestCSVDataConverterSourceSelector {
         System.out.println();
       }
       
-      for (Concept c : ds.getConcepts()) {
-        Iterator<Record> rIt = conn.getRecords(c);
-        while (rIt.hasNext()) {
-          Record next = rIt.next();
-          System.out.println(next.toString());
-        }        
-        System.out.println();
+      if (DEBUG) {
+        for (Concept c : ds.getConcepts()) {
+          Iterator<Record> rIt = conn.getRecords(c);
+          while (rIt.hasNext()) {
+            Record next = rIt.next();
+            System.out.println(next.toString());
+          }
+          System.out.println();
+        }
       }
+
       
       System.out.println("Changes on the Scheme:");
 
