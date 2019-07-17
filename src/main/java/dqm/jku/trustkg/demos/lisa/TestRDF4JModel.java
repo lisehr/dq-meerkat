@@ -3,6 +3,7 @@ package dqm.jku.trustkg.demos.lisa;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Set;
 
 import dqm.jku.trustkg.connectors.ConnectorCSV;
 import dqm.jku.trustkg.connectors.DSInstanceConnector;
@@ -65,12 +66,13 @@ public class TestRDF4JModel {
 			Repository testRep = db.getRepository("test");
 			RepositoryConnection repConn = testRep.getConnection();
 			
+			// transforming a Java iterable collection to RDF
 			ArrayList<Integer> a = new ArrayList<Integer>();
 			a.add(1);
 			a.add(2);
 			a.add(3);
 			repConn.add(m);
-			//sRDFCollections.asRDF(a, null, m, );
+			Model m2 = RDFCollections.asRDF(a, null, m);
 			
 			// testing the Rio writing function
 			//FileOutputStream out = new FileOutputStream("//home//lisa//graphdb_test//file.ttl");
