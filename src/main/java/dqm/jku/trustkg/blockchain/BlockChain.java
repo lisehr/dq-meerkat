@@ -1,10 +1,19 @@
 package dqm.jku.trustkg.blockchain;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
+import org.cyberborean.rdfbeans.annotations.RDF;
+import org.cyberborean.rdfbeans.annotations.RDFBean;
+import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
+
+@RDFNamespaces({ 
+  "foaf = http://xmlns.com/foaf/0.1/",
+})
+@RDFBean("foaf:BlockChain")
 public class BlockChain {
-  public final ArrayList<Block> blockChain = new ArrayList<>();
-  public final int difficulty;
+  private ArrayList<Block> blockChain = new ArrayList<>();
+  private int difficulty;
   private static final int HASH_LEN = 64; // standard length for a 256 bit SHA-256 hash
   private static final int STD_DIFFICULTY = 5; // standard difficulty for a block according to tutorial by cryptokass
   
@@ -21,6 +30,7 @@ public class BlockChain {
    * Get the difficulty value of the Chain
    * @return difficulty
    */
+  @RDF("foaf:difficulty")
   public int getDifficulty() {
     return difficulty;
   }
@@ -94,4 +104,38 @@ public class BlockChain {
     }
     return true;
   }
+
+  /**
+   * @return the blockChain
+   */
+  @RDF("foaf:hasBlock")
+  public ArrayList<Block> getBlockChain() {
+    return blockChain;
+  }
+
+  /**
+   * @param blockChain the blockChain to set
+   */
+  public void setBlockChain(ArrayList<Block> blockChain) {
+    this.blockChain.clear();
+    this.blockChain.addAll(blockChain);
+  }
+
+  /**
+   * @param difficulty the difficulty to set
+   */
+  public void setDifficulty(int difficulty) {
+    this.difficulty = difficulty;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) return true;
+    if (obj == null) return false;
+    if (!(obj instanceof BlockChain)) return false;
+    BlockChain other = (BlockChain) obj;
+    return Objects.equals(blockChain, other.blockChain) && difficulty == other.difficulty;
+  }
+  
+  
 }

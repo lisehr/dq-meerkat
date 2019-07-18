@@ -10,6 +10,9 @@ import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 
+import dqm.jku.trustkg.blockchain.BlockChain;
+import dqm.jku.trustkg.blockchain.DSDBlock;
+
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:Datasource")
 public class Datasource extends DSDElement {
@@ -115,6 +118,21 @@ public class Datasource extends DSDElement {
 
   public int getNumberOfConceptsAndAssociations() {
     return concepts.size() + associations.size();
+  }
+  
+  public void fillBlockChain(BlockChain bc) {
+    if (bc == null) throw new IllegalArgumentException("Blockchain has to exist!");
+    bc.addBlock(new DSDBlock(bc.getPreviousHash(), this));
+    for (Concept c : concepts) {
+      c.fillBlockChain(bc);
+    }
+    for (Association a : associations) {
+      bc.addBlock(new DSDBlock(bc.getPreviousHash(), a));
+    }
+    for (Constraint c : constraints) {
+      bc.addBlock(new DSDBlock(bc.getPreviousHash(), c));
+    }
+
   }
 
 }

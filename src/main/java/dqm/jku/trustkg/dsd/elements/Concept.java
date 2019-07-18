@@ -12,6 +12,8 @@ import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 
+import dqm.jku.trustkg.blockchain.BlockChain;
+import dqm.jku.trustkg.blockchain.DSDBlock;
 import dqm.jku.trustkg.util.AttributeSet;
 
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
@@ -20,6 +22,21 @@ public class Concept extends DSDElement {
 
   private static final long serialVersionUID = 1L;
   private Datasource datasource;
+  private HashSet<Attribute> attributes = new HashSet<Attribute>();
+  private HashSet<Attribute> primaryKeys = new HashSet<Attribute>();
+  private List<FunctionalDependency> functionalDependencies = new ArrayList<FunctionalDependency>();
+  protected Set<ForeignKey> foreignKeys = new HashSet<ForeignKey>();
+
+  public Concept() {
+    super();
+  }
+  
+  public Concept(String label, Datasource datasource) {
+    super(label, datasource.getURI() + "/" + label);
+    this.datasource = datasource;
+  }
+
+  
   /**
    * @param datasource the datasource to set
    */
@@ -53,20 +70,6 @@ public class Concept extends DSDElement {
    */
   public void setForeignKeys(Set<ForeignKey> foreignKeys) {
     this.foreignKeys = foreignKeys;
-  }
-
-  private HashSet<Attribute> attributes = new HashSet<Attribute>();
-  private HashSet<Attribute> primaryKeys = new HashSet<Attribute>();
-  private List<FunctionalDependency> functionalDependencies = new ArrayList<FunctionalDependency>();
-  protected Set<ForeignKey> foreignKeys = new HashSet<ForeignKey>();
-
-  public Concept() {
-    super();
-  }
-  
-  public Concept(String label, Datasource datasource) {
-    super(label, datasource.getURI() + "/" + label);
-    this.datasource = datasource;
   }
 
   @RDF("foaf:hasDatasource")
@@ -176,6 +179,13 @@ public class Concept extends DSDElement {
       foreignKeys.add(foreignKey);
     } else {
       throw new IllegalArgumentException("Foreignkey is not connected to this Concept.");
+    }
+  }
+
+  public void fillBlockChain(BlockChain bc) {
+    bc.addBlock(new DSDBlock(bc.getPreviousHash(), this));
+    for (Attribute a : attributes) {
+      bc.addBlock(new DSDBlock(bc.getPreviousHash(), a));
     }
   }
 

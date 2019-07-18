@@ -120,6 +120,7 @@ public abstract class ProfileMetric {
    * 
    * @return the reference profile
    */
+  @RDF("foaf:refProf")
   public DataProfile getRefProf() {
     return refProf;
   }
