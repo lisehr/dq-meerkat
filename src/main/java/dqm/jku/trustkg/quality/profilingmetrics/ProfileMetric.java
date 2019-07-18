@@ -20,6 +20,10 @@ public abstract class ProfileMetric {
   private Object value; // the value itself
   private DataProfile refProf; // reference profile for calculations
 
+  public ProfileMetric() {
+    
+  }
+    
   public ProfileMetric(String label, DataProfile refProf) {
     if (label == null || refProf == null) throw new IllegalArgumentException("Parameters cannot be null!");
     this.label = label;
@@ -35,6 +39,22 @@ public abstract class ProfileMetric {
   @RDF("foaf:label")
   public String getLabel() {
     return label;
+  }
+  
+
+  /**
+   * @param label the label to set
+   */
+  public void setLabel(String label) {
+    this.label = label;
+  }
+  
+
+  /**
+   * @param refProf the refProf to set
+   */
+  public void setRefProf(DataProfile refProf) {
+    this.refProf = refProf;
   }
 
   /**
@@ -52,7 +72,6 @@ public abstract class ProfileMetric {
    * 
    * @return class of value
    */
-  @RDF("foaf:valueClass")
   public Class<?> getValueClass() {
     return valClass;
   }
@@ -65,13 +84,34 @@ public abstract class ProfileMetric {
   protected void setValueClass(Class<?> cls) {
     this.valClass = cls;
   }
+  
+  /**
+   * Gets a String representation of the value class, used for rdf transformation
+   * @return string of value class
+   */
+  @RDF("foaf:valueClass")
+  public String getValueClassString() {
+    return this.valClass.getName();
+  }
+
+  /**
+   * Sets the value Class via the class string, passed as parameter
+   * @param valClass the string representation of the class 
+   */
+  public void setValueClassString(String valClass) {
+    try {
+      this.valClass = Class.forName(valClass);
+    } catch (ClassNotFoundException e) {
+      System.err.println("Class not found!");
+    }
+  }
 
   /**
    * Sets the value of the metric
    * 
    * @param value the new value to be set
    */
-  protected void setValue(Object value) {
+  public void setValue(Object value) {
     this.value = value;
   }
 
@@ -90,7 +130,7 @@ public abstract class ProfileMetric {
    * @return the reference element
    */
   public DSDElement getRefElem() {
-    return refProf.getRefElem();
+    return refProf.getElem();
   }
 
   /**

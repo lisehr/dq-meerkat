@@ -27,9 +27,15 @@ public class DataProfile {
   private Set<ProfileMetric> metrics = new HashSet<>();
   private DSDElement elem;
   private int recordsProcessed;
+  private String uri;
 
+  public DataProfile() {
+    
+  }
+  
   public DataProfile(RecordSet rs, DSDElement d) {
     this.elem = d;
+    this.uri = elem.getURI() + "/profile";
     createStandardProfile();
     calculateInitialProfile(rs);
   }
@@ -49,7 +55,11 @@ public class DataProfile {
   
   @RDFSubject
   public String getURI() {
-    return elem.getURI() + "/profile";
+    return uri;
+  }
+  
+  public void setURI(String uri) {
+    this.uri = uri;
   }
 
   private void calculateSingleColumn(RecordSet rs) {
@@ -112,12 +122,36 @@ public class DataProfile {
     return metrics;
   }
   
+  
+  
+  /**
+   * @param metrics the metrics to set
+   */
+  public void setMetrics(Set<ProfileMetric> metrics) {
+    this.metrics = metrics;
+  }
+
+  /**
+   * @param elem the elem to set
+   */
+  public void setElem(DSDElement elem) {
+    this.elem = elem;
+  }
+
+  /**
+   * @param uri the uri to set
+   */
+  public void setUri(String uri) {
+    this.uri = uri;
+  }
+
   /**
    * Gets the reference dsd element, used for calculation
    * 
    * @return the reference element
    */
-  public DSDElement getRefElem() {
+  @RDF("foaf:annotatedTo")
+  public DSDElement getElem() {
     return elem;
   }
 

@@ -1,9 +1,11 @@
 package dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.distribution;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import org.cyberborean.rdfbeans.annotations.RDF;
+import org.cyberborean.rdfbeans.annotations.RDFBean;
+import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.records.Record;
@@ -13,12 +15,20 @@ import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
 import dqm.jku.trustkg.util.numericvals.ValueDistributionUtils;
 
+@RDFNamespaces({ 
+  "foaf = http://xmlns.com/foaf/0.1/",
+})
+@RDFBean("foaf:Histogram")
 public class Histogram extends ProfileMetric{
   private static final String name = "Histogram";
   private Number min;
   private Number max;
   private Number classrange;
 
+  public Histogram() {
+    
+  }
+  
   public Histogram(DataProfile d) {
     super(name, d);
   }
@@ -49,7 +59,7 @@ public class Histogram extends ProfileMetric{
    * Helping method for creating histogram from a list
    * @param list the list to be processed
    */
-  private void processList(List<Number> list, Map<Integer, Integer> vals) {
+  private void processList(List<Number> list, SerializableMap vals) {
     list.sort(new NumberComparator());
     if (min == null) min = list.get(0).doubleValue();
     else min = Math.min(min.doubleValue(), list.get(0).doubleValue());
@@ -64,12 +74,11 @@ public class Histogram extends ProfileMetric{
       if (n.doubleValue() == max.doubleValue()) classVals[k - 1]++;
       else classVals[(int) Math.floor((n.doubleValue() - min.doubleValue()) / classrange.doubleValue())]++;
     }
-    Map<Integer, Integer> classes = new HashMap<>();
+    SerializableMap classes = new SerializableMap();
     for (int i = 0; i < k; i++) classes.put(i, classVals[i]);
     this.setValue(classes);
   }
   
-  @SuppressWarnings("unchecked")
   @Override
   public void update(RecordSet rs) {
     Attribute a = (Attribute) super.getRefElem();
@@ -80,27 +89,25 @@ public class Histogram extends ProfileMetric{
       else field = (Number) r.getField(a);
       if (field != null) list.add(field);
     }
-    processList(list, (Map<Integer, Integer>) super.getValue());
+    processList(list, (SerializableMap) super.getValue());
   }
   
   /**
    * Generates an array to handle the Map easier
    * @return frequency array
    */
-  @SuppressWarnings("unchecked")
   private int[] constructArray() {
     if (super.getValue() == null) throw new IllegalStateException("Map has to exist here!");
     int k = ValueDistributionUtils.calculateNumberClasses(super.getRefProf().getRecordsProcessed());
     int classes[] = new int[k];
     int j = 0;
-    for (Integer i : ((Map<Integer, Integer>)super.getValue()).values()) {
+    for (Integer i : ((SerializableMap)super.getValue()).values()) {
       classes[j] = i;
       j++;
     }
     return classes;
   }
 
-  @SuppressWarnings("unchecked")
   @Override
   protected String getValueString() {
     StringBuilder sb = new StringBuilder().append("Number of classes: ");
@@ -109,7 +116,7 @@ public class Histogram extends ProfileMetric{
     sb.append(", ClassRange: ");
     sb.append(classrange);
     sb.append(", Values: ");
-    for (Integer i : ((Map<Integer, Integer>)super.getValue()).values()) {
+    for (Integer i : ((SerializableMap)super.getValue()).values()) {
       sb.append(i);
       sb.append("-");
     }
@@ -120,6 +127,7 @@ public class Histogram extends ProfileMetric{
   /**
    * @return the min
    */
+  @RDF("foaf:min")
   public Number getMin() {
     return min;
   }
@@ -134,6 +142,7 @@ public class Histogram extends ProfileMetric{
   /**
    * @return the max
    */
+  @RDF("foaf:max")
   public Number getMax() {
     return max;
   }
@@ -148,6 +157,7 @@ public class Histogram extends ProfileMetric{
   /**
    * @return the classrange
    */
+  @RDF("foaf:classrange")
   public Number getClassrange() {
     return classrange;
   }

@@ -3,6 +3,9 @@ package dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.valuelength;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.cyberborean.rdfbeans.annotations.RDFBean;
+import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
+
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordSet;
@@ -10,10 +13,19 @@ import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
 
+@RDFNamespaces({ 
+  "foaf = http://xmlns.com/foaf/0.1/",
+})
+@RDFBean("foaf:Median")
 public class Median extends ProfileMetric {
   private static final String name = "Median";
-  private List<Number> values = new ArrayList<Number>();
+  
+  //TODO: Update median via histogram
 
+  public Median() {
+    
+  }
+  
   public Median(DataProfile d) {
     super(name, d);
   }
@@ -21,9 +33,7 @@ public class Median extends ProfileMetric {
   @Override
   public void calculation(RecordSet rs, Object oldVal) {
     Attribute a = (Attribute) super.getRefElem();
-    // TODO: unsure how median via old value can be calculated, is storing the list a optimal way of doing so???
     List<Number> list = new ArrayList<Number>();
-    if (oldVal != null) list.addAll(values);
     for (Record r : rs) {
       Number field = null;
       if (a.getDataType().equals(String.class) && r.getField(a) != null) field = ((String) r.getField(a)).length();
@@ -31,9 +41,7 @@ public class Median extends ProfileMetric {
       if (field != null) list.add(field);
     }
     list.sort(new NumberComparator());
-    Object val = getMedian(list, rs.size() + values.size());
-    values.clear();
-    values.addAll(list);
+    Object val = getMedian(list, rs.size());
     this.setValue(val);
     this.setValueClass(a.getDataType());
   }
@@ -80,9 +88,7 @@ public class Median extends ProfileMetric {
     if (list == null || list.isEmpty()) return;
     list.sort(new NumberComparator());
     Attribute a = (Attribute) super.getRefElem();
-    Object val = getMedian(list, list.size() + values.size());
-    values.clear();
-    values.addAll(list);
+    Object val = getMedian(list, list.size());
     this.setValue(val);
     this.setValueClass(a.getDataType());
   }

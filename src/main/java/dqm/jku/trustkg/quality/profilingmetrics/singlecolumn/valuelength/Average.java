@@ -2,6 +2,9 @@ package dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.valuelength;
 
 import java.util.List;
 
+import org.cyberborean.rdfbeans.annotations.RDFBean;
+import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
+
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordSet;
@@ -9,9 +12,17 @@ import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
 
+@RDFNamespaces({ 
+  "foaf = http://xmlns.com/foaf/0.1/",
+})
+@RDFBean("foaf:Average")
 public class Average extends ProfileMetric {
   private static final String name = "Average";
 
+  public Average() {
+    
+  }
+  
   public Average(DataProfile d) {
     super(name, d);
   }

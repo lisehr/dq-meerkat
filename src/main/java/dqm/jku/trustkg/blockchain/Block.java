@@ -12,8 +12,8 @@ import dqm.jku.trustkg.util.HashingUtils;
  */
 public abstract class Block {
   private String hash;
-  private final String previousHash;
-  private final long timeStamp;
+  public final String previousHash;
+  public final long timeStamp;
   private int nonce;
 
   public Block(String previousHash) {

@@ -9,7 +9,7 @@ import dqm.jku.trustkg.util.HashingUtils;
  *
  */
 public class DSDBlock extends Block {
-  private final DSDElement data;
+  public final DSDElement data;
 
   public DSDBlock(String previousHash, DSDElement data) {
     super(previousHash);

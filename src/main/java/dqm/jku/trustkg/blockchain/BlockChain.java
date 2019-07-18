@@ -3,8 +3,8 @@ package dqm.jku.trustkg.blockchain;
 import java.util.ArrayList;
 
 public class BlockChain {
-  private final ArrayList<Block> blockChain = new ArrayList<>();
-  private final int difficulty;
+  public final ArrayList<Block> blockChain = new ArrayList<>();
+  public final int difficulty;
   private static final int HASH_LEN = 64; // standard length for a 256 bit SHA-256 hash
   private static final int STD_DIFFICULTY = 5; // standard difficulty for a block according to tutorial by cryptokass
   
