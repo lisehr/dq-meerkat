@@ -65,4 +65,15 @@
 			<version>2.8.5</version>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>${basedir}/src/main/java/dqm/jku/trustkg/graphdb</directory>
+				<includes>
+					<include>**/*</include>
+				</includes>
+			</resource>
+		</resources>
+	</build>
 </project>

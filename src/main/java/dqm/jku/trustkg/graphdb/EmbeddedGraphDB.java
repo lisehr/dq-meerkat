@@ -88,7 +88,7 @@ public class EmbeddedGraphDB implements Closeable {
 
         TreeModel graph = new TreeModel();
 
-        InputStream config = EmbeddedGraphDB.class.getResourceAsStream("repo-defaults.ttl");
+        InputStream config = EmbeddedGraphDB.class.getResourceAsStream("/repo-defaults.ttl");
         RDFParser rdfParser = Rio.createParser(RDFFormat.TURTLE);
         rdfParser.setRDFHandler(new StatementCollector(graph));
         rdfParser.parse(config, RepositoryConfigSchema.NAMESPACE);

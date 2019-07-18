@@ -28,6 +28,7 @@ public class TestRDFBeansDemo {
   private static final String PREFIX = "src/main/java/dqm/jku/trustkg/resources/";
 //  private static final boolean DEBUG = false;
   
+  @SuppressWarnings("deprecation")
   public static void main(String args[]) throws Exception {
     // walk resources package to make a selection on which csv file should be used for the demo
     Stream<Path> paths = Files.walk(Paths.get(PREFIX));
@@ -35,7 +36,7 @@ public class TestRDFBeansDemo {
     paths.close();
     
     DSInstanceConnector conn = new ConnectorCSV(
-        files.get(2).toString(), ",", "\n",
+        files.get(1).toString(), ",", "\n",
         "Test", true);
 
     
