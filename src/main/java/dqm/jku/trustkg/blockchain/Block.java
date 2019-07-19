@@ -5,6 +5,7 @@ import java.util.Date;
 import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
+import org.cyberborean.rdfbeans.annotations.RDFSubject;
 
 import dqm.jku.trustkg.util.HashingUtils;
 
@@ -16,22 +17,39 @@ import dqm.jku.trustkg.util.HashingUtils;
  * @author optimusseptim
  *
  */
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
+@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", "block = http://example.com/structures/block/" })
 @RDFBean("foaf:Block")
-public abstract class Block {
+public abstract class Block implements Comparable<Block> {
   private String hash;
   private String previousHash;
   private long timeStamp;
   private int nonce;
+  private String id;
 
   public Block() {
-    
+
   }
-  
+
   public Block(String previousHash) {
     if (previousHash == null) throw new IllegalArgumentException("Previous hash value must be existing!");
     this.previousHash = previousHash;
+    this.id = previousHash;
     this.timeStamp = new Date().getTime();
+  }
+
+  /**
+   * @return the id
+   */
+  @RDFSubject(prefix = "block:")
+  public String getId() {
+    return id;
+  }
+
+  /**
+   * @param id the id to set
+   */
+  public void setId(String id) {
+    this.id = id;
   }
 
   /**
@@ -133,4 +151,12 @@ public abstract class Block {
 
   protected abstract String getName();
 
+  @Override
+  public int compareTo(Block other) {
+    if (this.timeStamp < other.timeStamp) return -1;
+    if (this.timeStamp > other.timeStamp) return 1;
+    return 0;
+    
+  }
+  
 }

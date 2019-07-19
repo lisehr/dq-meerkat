@@ -37,7 +37,7 @@ public class TestRDFBeansDemo {
     List<Path> files = paths.collect(Collectors.toList());
     paths.close();
 
-    DSInstanceConnector conn = new ConnectorCSV(files.get(17).toString(), ",", "\n", "Test", true);
+    DSInstanceConnector conn = new ConnectorCSV(files.get(2).toString(), ",", "\n", "Test", true);
 
     File dataDir = new File("./testrepo");
     SailRepository repo = new SailRepository(new NativeStore(dataDir));
@@ -70,7 +70,7 @@ public class TestRDFBeansDemo {
       iter.close();
 
       // Testing blockchain aspect
-      BlockChain bc = new BlockChain();
+      BlockChain bc = new BlockChain(5, "test");
       ds.fillBlockChain(bc);
       System.out.println(bc.isChainValid());
 

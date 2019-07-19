@@ -21,7 +21,7 @@ public class TestDSDBlockChain {
     DSInstanceConnector conn = new ConnectorCSV("src/main/java/dqm/jku/trustkg/resources/Telematic Device Report - Device Voltage.csv", ",", "\n", "Device Voltage", true);
 
     BlockChain bC1 = new BlockChain();
-    BlockChain bC2 = new BlockChain(difficultySetting); // testing with difficulty higher by one
+    BlockChain bC2 = new BlockChain(difficultySetting, "test"); // testing with difficulty higher by one
 
     try {
       Datasource ds = conn.loadSchema();
