@@ -32,7 +32,7 @@ public class InfluxDBWithSourceSelector {
     List<Path> files = paths.collect(Collectors.toList());
     paths.close();
 
-    DSInstanceConnector conn = new ConnectorCSV(files.get(17).toString(), ",", "\n", "Test", true);
+    DSInstanceConnector conn = new ConnectorCSV(files.get(1).toString(), ",", "\n", "Test", true);
 
     Datasource ds;
     try {

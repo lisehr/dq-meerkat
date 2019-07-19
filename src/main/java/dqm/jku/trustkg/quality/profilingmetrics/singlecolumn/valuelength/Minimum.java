@@ -65,7 +65,7 @@ public class Minimum extends ProfileMetric {
     Attribute a = (Attribute) super.getRefElem();
     if (a.getDataType().equals(Long.class)) return Long.min(((Number)current).longValue(), ((Number) toComp).longValue());
     else if (a.getDataType().equals(Double.class)) return Double.min(((Number)current).doubleValue(), ((Number) toComp).doubleValue());
-    else return Integer.min(((Number)current).intValue(), ((String) toComp).length());
+    else return Integer.min(((Number)current).intValue(), ((Number)toComp).intValue());
   }
 
   @Override

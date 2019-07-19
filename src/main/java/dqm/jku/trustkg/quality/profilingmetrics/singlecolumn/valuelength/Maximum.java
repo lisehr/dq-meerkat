@@ -65,7 +65,7 @@ public class Maximum extends ProfileMetric {
     Attribute a = (Attribute) super.getRefElem();
     if (a.getDataType().equals(Long.class)) return Long.max((long) current, ((Number) toComp).longValue());
     else if (a.getDataType().equals(Double.class)) return Double.max((double) current, ((Number) toComp).doubleValue());
-    else return Integer.max((int) current, ((String) toComp).length());
+    else return Integer.max((int) current, ((Number)toComp).intValue());
   }
 
   @Override

@@ -176,6 +176,7 @@ public class DataProfile {
   private void addMeasuringValue(ProfileMetric p, Builder measure) {
     if (p.getValueClass().equals(Long.class)) measure.addField(p.getLabel(), (long)p.getValue());
     else if (p.getValueClass().equals(Double.class)) measure.addField(p.getLabel(), (double)p.getValue());
+    else measure.addField(p.getLabel(), (int)p.getValue());
   }
 
 }

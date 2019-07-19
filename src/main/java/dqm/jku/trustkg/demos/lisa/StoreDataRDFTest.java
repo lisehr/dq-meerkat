@@ -67,8 +67,8 @@ public class StoreDataRDFTest {
 			EmbeddedGraphDB db = new dqm.jku.trustkg.graphdb.EmbeddedGraphDB("test2");
 
 			// activate for first time creation
-			db.createRepository("test2");
-			db.createRepository("test3");
+			//db.createRepository("test2");
+			//db.createRepository("test3");
 			
 			// two separate repositories for the data and the blockchain
 			Repository testRep = db.getRepository("test2");

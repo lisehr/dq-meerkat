@@ -19,6 +19,11 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.appnexus.grafana-client</groupId>
+			<artifactId>grafana-api-java-client</artifactId>
+			<version>1.0.5</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.ontotext.graphdb/graphdb-free-runtime -->
 		<dependency>
 			<groupId>com.ontotext.graphdb</groupId>
