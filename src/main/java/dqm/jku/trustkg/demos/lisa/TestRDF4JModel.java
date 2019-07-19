@@ -3,7 +3,6 @@ package dqm.jku.trustkg.demos.lisa;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Set;
 
 import dqm.jku.trustkg.connectors.ConnectorCSV;
 import dqm.jku.trustkg.connectors.DSInstanceConnector;
@@ -24,6 +23,7 @@ import org.eclipse.rdf4j.model.Statement;
 
 import dqm.jku.trustkg.graphdb.*;
 
+@SuppressWarnings("unused")
 public class TestRDF4JModel {
 	public static void main(String args[]) {
 		// Create Connection to CSV Connector
