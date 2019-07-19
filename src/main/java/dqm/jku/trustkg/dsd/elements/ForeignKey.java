@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dqm.jku.trustkg.dsd.records.Record;
+import dqm.jku.trustkg.influxdb.InfluxDBConnection;
 
 public class ForeignKey extends Constraint {
 
@@ -78,5 +79,10 @@ public class ForeignKey extends Constraint {
 	public void setUpdateRule(ForeignKeyRule updateRule) {
 		this.updateRule = updateRule;
 	}
+
+  @Override
+  public void addMeasurementToInflux(InfluxDBConnection connection) {
+    super.storeProfile(connection);
+  }
 
 }

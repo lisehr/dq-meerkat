@@ -12,6 +12,7 @@ import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 
 import dqm.jku.trustkg.blockchain.BlockChain;
 import dqm.jku.trustkg.blockchain.DSDBlock;
+import dqm.jku.trustkg.influxdb.InfluxDBConnection;
 
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:Datasource")
@@ -134,5 +135,19 @@ public class Datasource extends DSDElement {
     }
 
   }
+  
+  public void addMeasurementToInflux(InfluxDBConnection connection) {
+    super.storeProfile(connection);
+    for (Concept c : concepts) {
+      c.addMeasurementToInflux(connection);
+    }
+    for (Association a : associations) {
+      a.addMeasurementToInflux(connection);
+    }
+    for (Constraint c : constraints) {
+      c.addMeasurementToInflux(connection);
+    }
+  }
+
 
 }

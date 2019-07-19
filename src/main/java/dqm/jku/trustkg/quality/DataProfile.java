@@ -9,6 +9,8 @@ import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 import org.cyberborean.rdfbeans.annotations.RDFSubject;
+import org.influxdb.dto.Point;
+import org.influxdb.dto.Point.Builder;
 
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.DSDElement;
@@ -164,5 +166,16 @@ public class DataProfile {
     this.recordsProcessed = recordsProcessed;
   }
 
+  public Point createMeasuringPoint(Builder measure) {
+    for (ProfileMetric p : metrics) {
+      if (!p.getLabel().equals("Histogram")) addMeasuringValue(p, measure);
+    }
+    return measure.build();
+  }
+
+  private void addMeasuringValue(ProfileMetric p, Builder measure) {
+    if (p.getValueClass().equals(Long.class)) measure.addField(p.getLabel(), (long)p.getValue());
+    else if (p.getValueClass().equals(Double.class)) measure.addField(p.getLabel(), (double)p.getValue());
+  }
 
 }

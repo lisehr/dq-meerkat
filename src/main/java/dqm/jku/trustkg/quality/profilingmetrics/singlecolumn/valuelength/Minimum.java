@@ -63,9 +63,9 @@ public class Minimum extends ProfileMetric {
   private Object getMinimum(Object current, Object toComp) {
     if (toComp == null) return current;
     Attribute a = (Attribute) super.getRefElem();
-    if (a.getDataType().equals(Long.class)) return Long.min((long) current, ((Number) toComp).longValue());
-    else if (a.getDataType().equals(Double.class)) return Double.min((double) current, ((Number) toComp).doubleValue());
-    else return Integer.min((int) current, ((String) toComp).length());
+    if (a.getDataType().equals(Long.class)) return Long.min(((Number)current).longValue(), ((Number) toComp).longValue());
+    else if (a.getDataType().equals(Double.class)) return Double.min(((Number)current).doubleValue(), ((Number) toComp).doubleValue());
+    else return Integer.min(((Number)current).intValue(), ((String) toComp).length());
   }
 
   @Override
@@ -79,7 +79,7 @@ public class Minimum extends ProfileMetric {
     list.sort(new NumberComparator());
     Attribute a = (Attribute) super.getRefElem();
     Object val = null;
-    if (oldVal == null) val = list.get(0);
+    if (oldVal == null) val = getMinimum(list.get(0), getBasicInstance());
     else val = getMinimum(list.get(0), oldVal);
     this.setValue(val);
     this.setValueClass(a.getDataType());

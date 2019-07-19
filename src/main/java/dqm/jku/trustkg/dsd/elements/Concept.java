@@ -14,6 +14,7 @@ import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 
 import dqm.jku.trustkg.blockchain.BlockChain;
 import dqm.jku.trustkg.blockchain.DSDBlock;
+import dqm.jku.trustkg.influxdb.InfluxDBConnection;
 import dqm.jku.trustkg.util.AttributeSet;
 
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
@@ -30,13 +31,12 @@ public class Concept extends DSDElement {
   public Concept() {
     super();
   }
-  
+
   public Concept(String label, Datasource datasource) {
     super(label, datasource.getURI() + "/" + label);
     this.datasource = datasource;
   }
 
-  
   /**
    * @param datasource the datasource to set
    */
@@ -187,6 +187,17 @@ public class Concept extends DSDElement {
     for (Attribute a : attributes) {
       bc.addBlock(new DSDBlock(bc.getPreviousHash(), a));
     }
+  }
+
+  @Override
+  public void addMeasurementToInflux(InfluxDBConnection connection) {
+    super.storeProfile(connection);
+    for (Attribute a : attributes)
+      a.addMeasurementToInflux(connection);
+    for (FunctionalDependency fd : functionalDependencies)
+      fd.addMeasurementToInflux(connection);
+    for (ForeignKey fk : foreignKeys)
+      fk.addMeasurementToInflux(connection);
   }
 
 }

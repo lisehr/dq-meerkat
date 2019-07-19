@@ -79,7 +79,7 @@ public class Maximum extends ProfileMetric {
     list.sort(new NumberComparator());
     Attribute a = (Attribute) super.getRefElem();
     Object val = null;
-    if (oldVal == null) val = list.get(list.size() - 1);
+    if (oldVal == null) val = getMaximum(list.get(list.size() - 1), getBasicInstance());
     else val = getMaximum(list.get(list.size() - 1), oldVal);
     this.setValue(val);
     this.setValueClass(a.getDataType());

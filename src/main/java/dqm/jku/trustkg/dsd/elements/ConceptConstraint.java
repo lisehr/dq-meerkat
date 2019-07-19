@@ -3,6 +3,7 @@ package dqm.jku.trustkg.dsd.elements;
 import java.util.HashSet;
 
 import dqm.jku.trustkg.dsd.records.Record;
+import dqm.jku.trustkg.influxdb.InfluxDBConnection;
 import dqm.jku.trustkg.quality.DataQualityStore;
 import dqm.jku.trustkg.util.Constants;
 import dqm.jku.trustkg.util.validators.Validator;
@@ -44,5 +45,10 @@ public class ConceptConstraint extends Constraint {
 	public Validator getValidator() {
 		return validator;
 	}
+
+  @Override
+  public void addMeasurementToInflux(InfluxDBConnection connection) {
+    super.storeProfile(connection);
+  }
 
 }

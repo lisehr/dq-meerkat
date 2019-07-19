@@ -7,10 +7,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 import org.cyberborean.rdfbeans.annotations.*;
+import org.influxdb.dto.Point;
+import org.influxdb.dto.Point.Builder;
 
 import dqm.jku.trustkg.dsd.records.RecordSet;
+import dqm.jku.trustkg.influxdb.InfluxDBConnection;
 import dqm.jku.trustkg.quality.DataProfile;
 
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
@@ -19,14 +23,14 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
 
   private static final long serialVersionUID = 1L;
   private static HashMap<String, DSDElement> cache = new HashMap<String, DSDElement>();
-  
+
   private String uri;
 
   @RDFSubject
   public String getURI() {
     return uri;
   }
-  
+
   public void setURI(String uri) {
     this.uri = uri;
   }
@@ -44,8 +48,8 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
     this.label = label.toLowerCase();
     this.labelOriginal = label;
   }
-  
-  public DSDElement(String label, String uri){
+
+  public DSDElement(String label, String uri) {
     this.label = label.toLowerCase();
     this.labelOriginal = label;
     this.uri = uri;
@@ -55,7 +59,7 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
   public DataProfile getProfile() {
     return dataProfile;
   }
-  
+
   public void setProfile(DataProfile dataProfile) {
     this.dataProfile = dataProfile;
   }
@@ -162,6 +166,14 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
       cache.remove(uri);
     }
     cache.put(uri, elem);
+  }
+
+  public abstract void addMeasurementToInflux(InfluxDBConnection connection);
+
+  public void storeProfile(InfluxDBConnection connection) {
+    if (this.dataProfile == null) return;
+    Builder measure = Point.measurement(getURI()).time(System.currentTimeMillis(), TimeUnit.MILLISECONDS);
+    connection.write(this.dataProfile.createMeasuringPoint(measure));
   }
 
 }
