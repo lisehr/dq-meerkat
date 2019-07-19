@@ -79,6 +79,7 @@ public class StoreDataRDFTest {
 			RDFBeanManager manager = new RDFBeanManager(repConn);
 			RDFBeanManager bcmanager = new RDFBeanManager(bcConn);
 
+			// annotating the data quality profile
 			for (Concept c : ds.getConcepts()) {
 				System.out.println(c.getURI());
 				RecordSet rs = conn.getRecordSet(c);
@@ -98,16 +99,17 @@ public class StoreDataRDFTest {
 			System.out.println(bc.isChainValid());
 
 			bcmanager.add(bc);
-
+			
+			// proof that the data + blockchain have been stored in the database
 			try (RepositoryResult<Statement> result = repConn.getStatements(null, null, null);
 					RepositoryResult<Statement> bcResult = bcConn.getStatements(null, null, null);) {
 				while (result.hasNext()) {
 					Statement st = result.next();
-					System.out.println("db contains: " + st);
+					System.out.println("db contains data: " + st);
 				}
 				while (bcResult.hasNext()) {
 					Statement st = bcResult.next();
-					System.out.println("db contains: " + st);
+					System.out.println("db contains blockchain data: " + st);
 				}
 			}
 
