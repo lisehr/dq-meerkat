@@ -21,9 +21,7 @@ import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.valuelength.*;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.distribution.*;
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
 
-@RDFNamespaces({ 
-  "foaf = http://xmlns.com/foaf/0.1/",
-})
+@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:DataProfile")
 public class DataProfile {
   private Set<ProfileMetric> metrics = new HashSet<>();
@@ -32,9 +30,9 @@ public class DataProfile {
   private String uri;
 
   public DataProfile() {
-    
+
   }
-  
+
   public DataProfile(RecordSet rs, DSDElement d) {
     this.elem = d;
     this.uri = elem.getURI() + "/profile";
@@ -54,24 +52,45 @@ public class DataProfile {
     recordsProcessed = rs.size();
     if (elem instanceof Attribute) calculateSingleColumn(rs);
   }
-  
+
+  /**
+   * Gets the URI
+   * 
+   * @return uri
+   */
   @RDFSubject
   public String getURI() {
     return uri;
   }
-  
+
+  /**
+   * Sets the URI (security threat but used by rdfbeans)
+   * 
+   * @param uri
+   */
   public void setURI(String uri) {
     this.uri = uri;
   }
 
+  /**
+   * Helper method for calculating the single column values for the profile
+   * 
+   * @param rs the recordset for measuring
+   */
   private void calculateSingleColumn(RecordSet rs) {
     List<Number> l = createValueList(rs);
     for (ProfileMetric p : metrics) {
       p.calculationNumeric(l, p.getValue());
     }
-    
+
   }
 
+  /**
+   * Helper method for creating a list of numeric values
+   * 
+   * @param rs the record set for measuring
+   * @return list of numeric values of the records
+   */
   private List<Number> createValueList(RecordSet rs) {
     List<Number> list = new ArrayList<Number>();
     Attribute a = (Attribute) elem;
@@ -114,19 +133,20 @@ public class DataProfile {
     }
     System.out.println();
   }
-  
+
   /**
    * Method for getting the set of metrics
+   * 
    * @return set of metrics
    */
   @RDF("foaf:includes")
-  public Set<ProfileMetric> getMetrics(){
+  public Set<ProfileMetric> getMetrics() {
     return metrics;
   }
-  
-  
-  
+
   /**
+   * Sets the metrics (security threat but used by rdfbeans)
+   * 
    * @param metrics the metrics to set
    */
   public void setMetrics(Set<ProfileMetric> metrics) {
@@ -134,17 +154,12 @@ public class DataProfile {
   }
 
   /**
+   * Sets the dsd element (security threat but used by rdfbeans)
+   * 
    * @param elem the elem to set
    */
   public void setElem(DSDElement elem) {
     this.elem = elem;
-  }
-
-  /**
-   * @param uri the uri to set
-   */
-  public void setUri(String uri) {
-    this.uri = uri;
   }
 
   /**
@@ -157,11 +172,21 @@ public class DataProfile {
     return elem;
   }
 
+  /**
+   * Gets the number of records processed
+   * 
+   * @return number of records processed
+   */
   @RDF("foaf:recordsProcessed")
   public int getRecordsProcessed() {
     return recordsProcessed;
   }
 
+  /**
+   * Sets the number of records processed (security threat but used by rdfbeans)
+   * 
+   * @return number of records processed
+   */
   public void setRecordsProcessed(int recordsProcessed) {
     this.recordsProcessed = recordsProcessed;
   }
@@ -174,9 +199,9 @@ public class DataProfile {
   }
 
   private void addMeasuringValue(ProfileMetric p, Builder measure) {
-    if (p.getValueClass().equals(Long.class)) measure.addField(p.getLabel(), (long)p.getValue());
-    else if (p.getValueClass().equals(Double.class)) measure.addField(p.getLabel(), (double)p.getValue());
-    else measure.addField(p.getLabel(), (int)p.getValue());
+    if (p.getValueClass().equals(Long.class)) measure.addField(p.getLabel(), (long) p.getValue());
+    else if (p.getValueClass().equals(Double.class)) measure.addField(p.getLabel(), (double) p.getValue());
+    else measure.addField(p.getLabel(), (int) p.getValue());
   }
 
 }

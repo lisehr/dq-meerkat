@@ -19,7 +19,7 @@ public class BlockChain extends Chain {
   public BlockChain() {
     super();
   }
-  
+
   public BlockChain(String id) {
     super(id);
   }
@@ -27,7 +27,6 @@ public class BlockChain extends Chain {
   public BlockChain(int difficulty, String id) {
     super(difficulty, id);
   }
-
 
   /**
    * Access a specific block element of the chain
@@ -110,6 +109,8 @@ public class BlockChain extends Chain {
   }
 
   /**
+   * Gets the blockchain
+   * 
    * @return the blockChain
    */
   @RDF("foaf:hasBlock")
@@ -118,6 +119,8 @@ public class BlockChain extends Chain {
   }
 
   /**
+   * Sets the blockchain (security threat but needed by rdfbeans)
+   * 
    * @param blockChain the blockChain to set
    */
   public void setBlockChain(SortedSet<Block> blockChain) {

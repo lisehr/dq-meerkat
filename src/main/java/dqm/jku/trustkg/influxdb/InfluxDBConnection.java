@@ -18,7 +18,7 @@ public class InfluxDBConnection {
   private InfluxDB instance;
   private String dbName;
   private String retentionPolicyName;
-  
+
   public InfluxDBConnection() {
     instance = InfluxDBFactory.connect(URL, USER, PW);
     this.dbName = DEF_DB;
@@ -27,6 +27,8 @@ public class InfluxDBConnection {
   }
 
   /**
+   * Gets the db name
+   * 
    * @return the dbName
    */
   public String getDbName() {
@@ -34,18 +36,28 @@ public class InfluxDBConnection {
   }
 
   /**
+   * Gets the name of the retention policy
+   * 
    * @return the retentionPolicyName
    */
   public String getRetentionPolicyName() {
     return retentionPolicyName;
   }
 
+  /**
+   * Helper method for creating the database
+   */
   private void createDB() {
     if (isInitialized()) return;
     instance.query(new Query("CREATE DATABASE " + dbName));
     instance.query(new Query("CREATE RETENTION POLICY " + retentionPolicyName + " ON " + dbName + " DURATION 30h REPLICATION 2 SHARD DURATION 30m DEFAULT"));
   }
-  
+
+  /**
+   * Check if the database is initialized
+   * 
+   * @return true if so, false otherwise
+   */
   public boolean isInitialized() {
     QueryResult dbs = instance.query(new Query("SHOW DATABASES"));
     for (Result r : dbs.getResults()) {
@@ -55,24 +67,46 @@ public class InfluxDBConnection {
     }
     return false;
   }
-  
+
+  /**
+   * Writes a measuring point into the db
+   * 
+   * @param value the point to be written
+   */
   public void write(Point value) {
     this.instance.write(dbName, retentionPolicyName, value);
   }
-  
+
+  /**
+   * Executes a query to the database
+   * 
+   * @param query the query to be executed
+   * @return query result of the query
+   */
   public QueryResult query(Query query) {
     return this.instance.query(query);
   }
 
+  /**
+   * Method for closing the database instance
+   */
   public void close() {
-    this.instance.close();    
+    this.instance.close();
   }
-  
+
+  /**
+   * Method for deleting the database
+   */
   public void deleteDB() {
     instance.query(new Query("DROP RETENTION POLICY " + getRetentionPolicyName() + " ON " + getDbName()));
     instance.query(new Query("DROP DATABASE " + getDbName()));
   }
-  
+
+  /**
+   * Method for printing a query result
+   * 
+   * @param qr the query result to be printed
+   */
   public void printQuery(QueryResult qr) {
     for (Result r : qr.getResults()) {
       if (r.getSeries() == null) return;
@@ -81,6 +115,5 @@ public class InfluxDBConnection {
       }
     }
   }
-
 
 }

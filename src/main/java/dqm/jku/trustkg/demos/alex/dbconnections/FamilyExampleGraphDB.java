@@ -68,8 +68,8 @@ public class FamilyExampleGraphDB {
     // A simple query that will return the family relations for the provided person
     // parameter
     TupleQueryResult result = QueryUtil
-        .evaluateSelectQuery(connection, "PREFIX family: <http://examples.ontotext.com/family#>" + "SELECT ?p1 ?r ?p2 WHERE {" + "?p1 ?r ?p2 ." + "?r rdfs:subPropertyOf family:hasRelative ."
-            + "FILTER(?r != family:hasRelative)" + "}", new SimpleBinding("p1", uriForPerson(person)));
+        .evaluateSelectQuery(connection, "PREFIX family: <http://examples.ontotext.com/family#>" + "SELECT ?p1 ?r ?p2 WHERE {" + "?p1 ?r ?p2 ." + "?r rdfs:subPropertyOf family:hasRelative ." + "FILTER(?r != family:hasRelative)" + "}",
+            new SimpleBinding("p1", uriForPerson(person)));
 
     while (result.hasNext()) {
       BindingSet bindingSet = result.next();

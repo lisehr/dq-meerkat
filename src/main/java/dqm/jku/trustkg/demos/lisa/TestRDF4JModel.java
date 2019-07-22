@@ -25,72 +25,69 @@ import dqm.jku.trustkg.graphdb.*;
 
 @SuppressWarnings("unused")
 public class TestRDF4JModel {
-	public static void main(String args[]) {
-		// Create Connection to CSV Connector
-		DSInstanceConnector conn = new ConnectorCSV(
-				"src/main/java/dqm/jku/trustkg/resources/Telematic Device Report - Device Voltage.csv", ",", "\n",
-				"Device Voltage", true);
+  public static void main(String args[]) {
+    // Create Connection to CSV Connector
+    DSInstanceConnector conn = new ConnectorCSV("src/main/java/dqm/jku/trustkg/resources/Telematic Device Report - Device Voltage.csv", ",", "\n", "Device Voltage", true);
 
-		// Create Schema from it
-		Datasource ds;
-		try {
-			ds = conn.loadSchema();
+    // Create Schema from it
+    Datasource ds;
+    try {
+      ds = conn.loadSchema();
 
-			ModelBuilder builder = new ModelBuilder();
-			builder.setNamespace("ex", "http://example.com/");
+      ModelBuilder builder = new ModelBuilder();
+      builder.setNamespace("ex", "http://example.com/");
 
-			for (Concept c : ds.getConcepts()) {
-				for (Attribute a : c.getAttributes()) {
-					builder.namedGraph("ex:testGraph").subject("ex:" + c.toString()).add(RDF.TYPE,
-							"ex:" + a.toString());
-				}
+      for (Concept c : ds.getConcepts()) {
+        for (Attribute a : c.getAttributes()) {
+          builder.namedGraph("ex:testGraph").subject("ex:" + c.toString()).add(RDF.TYPE, "ex:" + a.toString());
+        }
 
-			}
-			
-			System.out.println();
+      }
 
-			Model m = builder.build();
-			// the size of contexts indicates how many graphs are stored in this model
-			// System.out.println(m.contexts().size());
+      System.out.println();
 
-			for (Resource context : m.contexts()) {
-				System.out.println("Graph " + context + " contains: ");
-				Rio.write(m.filter(null, null, null, context), System.out, RDFFormat.TURTLE);
-			}
+      Model m = builder.build();
+      // the size of contexts indicates how many graphs are stored in this model
+      // System.out.println(m.contexts().size());
 
-			EmbeddedGraphDB db = new dqm.jku.trustkg.graphdb.EmbeddedGraphDB("test");
+      for (Resource context : m.contexts()) {
+        System.out.println("Graph " + context + " contains: ");
+        Rio.write(m.filter(null, null, null, context), System.out, RDFFormat.TURTLE);
+      }
 
-			// activate for first time creation
-			db.createRepository("test");
-			Repository testRep = db.getRepository("test");
-			RepositoryConnection repConn = testRep.getConnection();
-			
-			// transforming a Java iterable collection to RDF
-			ArrayList<Integer> a = new ArrayList<Integer>();
-			a.add(1);
-			a.add(2);
-			a.add(3);
-			repConn.add(m);
-			Model m2 = RDFCollections.asRDF(a, null, m);
-			
-			// testing the Rio writing function
-			//FileOutputStream out = new FileOutputStream("//home//lisa//graphdb_test//file.ttl");
-			//Rio.write(m, out, RDFFormat.TURTLE);
-			// out.close();
+      EmbeddedGraphDB db = new dqm.jku.trustkg.graphdb.EmbeddedGraphDB("test");
 
-			try (RepositoryResult<Statement> result = repConn.getStatements(null, null, null);) {
-				while (result.hasNext()) {
-					Statement st = result.next();
-					System.out.println("db contains: " + st);
-				}
-			}
-			finally {
-				db.close();
-			}
+      // activate for first time creation
+      db.createRepository("test");
+      Repository testRep = db.getRepository("test");
+      RepositoryConnection repConn = testRep.getConnection();
 
-		} catch (IOException e) {
-			System.err.println("Could not load Schema!");
-		}
+      // transforming a Java iterable collection to RDF
+      ArrayList<Integer> a = new ArrayList<Integer>();
+      a.add(1);
+      a.add(2);
+      a.add(3);
+      repConn.add(m);
+      Model m2 = RDFCollections.asRDF(a, null, m);
 
-	}
+      // testing the Rio writing function
+      // FileOutputStream out = new
+      // FileOutputStream("//home//lisa//graphdb_test//file.ttl");
+      // Rio.write(m, out, RDFFormat.TURTLE);
+      // out.close();
+
+      try (RepositoryResult<Statement> result = repConn.getStatements(null, null, null);) {
+        while (result.hasNext()) {
+          Statement st = result.next();
+          System.out.println("db contains: " + st);
+        }
+      } finally {
+        db.close();
+      }
+
+    } catch (IOException e) {
+      System.err.println("Could not load Schema!");
+    }
+
+  }
 }

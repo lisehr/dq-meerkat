@@ -15,20 +15,18 @@ import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
 import dqm.jku.trustkg.util.numericvals.ValueDistributionUtils;
 
-@RDFNamespaces({ 
-  "foaf = http://xmlns.com/foaf/0.1/",
-})
+@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:Histogram")
-public class Histogram extends ProfileMetric{
+public class Histogram extends ProfileMetric {
   private static final String name = "Histogram";
   private Number min;
   private Number max;
   private Number classrange;
 
   public Histogram() {
-    
+
   }
-  
+
   public Histogram(DataProfile d) {
     super(name, d);
   }
@@ -57,6 +55,7 @@ public class Histogram extends ProfileMetric{
 
   /**
    * Helping method for creating histogram from a list
+   * 
    * @param list the list to be processed
    */
   private void processList(List<Number> list, SerializableMap vals) {
@@ -75,10 +74,11 @@ public class Histogram extends ProfileMetric{
       else classVals[(int) Math.floor((n.doubleValue() - min.doubleValue()) / classrange.doubleValue())]++;
     }
     SerializableMap classes = new SerializableMap();
-    for (int i = 0; i < k; i++) classes.put(i, classVals[i]);
+    for (int i = 0; i < k; i++)
+      classes.put(i, classVals[i]);
     this.setValue(classes);
   }
-  
+
   @Override
   public void update(RecordSet rs) {
     Attribute a = (Attribute) super.getRefElem();
@@ -91,9 +91,10 @@ public class Histogram extends ProfileMetric{
     }
     processList(list, (SerializableMap) super.getValue());
   }
-  
+
   /**
    * Generates an array to handle the Map easier
+   * 
    * @return frequency array
    */
   private int[] constructArray() {
@@ -101,7 +102,7 @@ public class Histogram extends ProfileMetric{
     int k = ValueDistributionUtils.calculateNumberClasses(super.getRefProf().getRecordsProcessed());
     int classes[] = new int[k];
     int j = 0;
-    for (Integer i : ((SerializableMap)super.getValue()).values()) {
+    for (Integer i : ((SerializableMap) super.getValue()).values()) {
       classes[j] = i;
       j++;
     }
@@ -116,7 +117,7 @@ public class Histogram extends ProfileMetric{
     sb.append(", ClassRange: ");
     sb.append(classrange);
     sb.append(", Values: ");
-    for (Integer i : ((SerializableMap)super.getValue()).values()) {
+    for (Integer i : ((SerializableMap) super.getValue()).values()) {
       sb.append(i);
       sb.append("-");
     }
@@ -125,6 +126,8 @@ public class Histogram extends ProfileMetric{
   }
 
   /**
+   * Gets the minimum
+   * 
    * @return the min
    */
   @RDF("foaf:min")
@@ -133,6 +136,8 @@ public class Histogram extends ProfileMetric{
   }
 
   /**
+   * Sets the minimum (security threat but needed by rdfbeans)
+   * 
    * @param min the min to set
    */
   public void setMin(Number min) {
@@ -140,6 +145,8 @@ public class Histogram extends ProfileMetric{
   }
 
   /**
+   * Gets the maximum
+   * 
    * @return the max
    */
   @RDF("foaf:max")
@@ -148,6 +155,8 @@ public class Histogram extends ProfileMetric{
   }
 
   /**
+   * Sets the maximum (security threat but needed by rdfbeans)
+   * 
    * @param max the max to set
    */
   public void setMax(Number max) {
@@ -155,6 +164,8 @@ public class Histogram extends ProfileMetric{
   }
 
   /**
+   * Gets the classrange
+   * 
    * @return the classrange
    */
   @RDF("foaf:classrange")
@@ -163,11 +174,12 @@ public class Histogram extends ProfileMetric{
   }
 
   /**
+   * Sets the classrange (security threat but needed by rdfbeans)
+   * 
    * @param classrange the classrange to set
    */
   public void setClassrange(Number classrange) {
     this.classrange = classrange;
   }
-
 
 }

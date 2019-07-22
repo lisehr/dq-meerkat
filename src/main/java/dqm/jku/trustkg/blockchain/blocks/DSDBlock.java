@@ -13,29 +13,36 @@ import dqm.jku.trustkg.util.HashingUtils;
  * @author optimusseptim
  *
  */
-@RDFNamespaces({ 
-  "foaf = http://xmlns.com/foaf/0.1/",
-})
+@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:DSDBlock")
 public class DSDBlock extends Block {
   private DSDElement data;
-  
+
   public DSDBlock() {
     super();
   }
-  
+
   public DSDBlock(String previousHash, DSDElement data) {
     super(previousHash, data);
     this.data = data;
     this.calculateHash();
   }
-  
- 
+
+  /**
+   * Gets the data stored in the block
+   * 
+   * @return the dsd element stored in the block
+   */
   @RDF("foaf:hasDSDElement")
   public DSDElement getData() {
     return data;
   }
-  
+
+  /**
+   * Sets the data stored in the block (security threat but needed for rdfbeans)
+   * 
+   * @param data the data to be set
+   */
   public void setData(DSDElement data) {
     this.data = data;
   }

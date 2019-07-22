@@ -8,27 +8,29 @@ import org.cyberborean.rdfbeans.annotations.RDFSubject;
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", "bc = http://example.com/structures/blockchain/" })
 @RDFBean("foaf:Chain")
 public abstract class Chain {
-  private int difficulty;
+  private int difficulty; // difficulty value (amount of zeroes in front of the hash)
   private static final int HASH_LEN = 64; // standard length for a 256 bit SHA-256 hash
   private static final int STD_DIFFICULTY = 5; // standard difficulty for a block according to tutorial by cryptokass
-  private String id;
+  private String id; // the id of the chain
 
   public Chain() {
     this.difficulty = STD_DIFFICULTY;
   }
-  
+
   public Chain(String id) {
     this.difficulty = STD_DIFFICULTY;
     this.id = id;
   }
-  
+
   public Chain(int difficulty, String id) {
     if (difficulty < 1 || difficulty > HASH_LEN) throw new IllegalArgumentException("Difficulty is too small or too big!");
     this.difficulty = difficulty;
     this.id = id;
   }
-  
+
   /**
+   * Gets the id of the chain
+   * 
    * @return the id
    */
   @RDFSubject(prefix = "bc:")
@@ -37,6 +39,8 @@ public abstract class Chain {
   }
 
   /**
+   * Sets the id (security threat but needed by rdfbeans)
+   * 
    * @param id the id to set
    */
   public void setId(String id) {
@@ -53,8 +57,9 @@ public abstract class Chain {
     return difficulty;
   }
 
-
   /**
+   * Sets the difficulty value (security threat but needed by rdfbeans)
+   * 
    * @param difficulty the difficulty to set
    */
   public void setDifficulty(int difficulty) {

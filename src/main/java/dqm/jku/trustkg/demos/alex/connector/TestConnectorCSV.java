@@ -11,9 +11,7 @@ import dqm.jku.trustkg.dsd.elements.Datasource;
 public class TestConnectorCSV {
   public static void main(String args[]) {
     // Create Connection to CSV Connector
-    DSInstanceConnector conn = new ConnectorCSV(
-        "src/main/java/dqm/jku/trustkg/resources/Telematic Device Report - Device Voltage.csv", ",", "\n",
-        "Device Voltage", true);
+    DSInstanceConnector conn = new ConnectorCSV("src/main/java/dqm/jku/trustkg/resources/Telematic Device Report - Device Voltage.csv", ",", "\n", "Device Voltage", true);
 
     // Create Schema from it
     Datasource ds;

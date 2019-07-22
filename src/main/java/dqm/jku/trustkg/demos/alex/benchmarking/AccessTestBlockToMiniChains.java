@@ -76,8 +76,8 @@ public class AccessTestBlockToMiniChains {
     System.out.println("-----------------------------------------------------------------------");
     List<Float> percentages = new ArrayList<Float>();
     for (int i = 0; i < TESTRUNS; i++) {
-      long time1 = measureCreatingTime(test1, TESTRUNS);
-      long time2 = measureCreatingTimeMC(test2, elements.get(TESTRUNS), 0);
+      long time1 = measureAccessTime(test1, TESTRUNS);
+      long time2 = measureAccessTimeMC(test2, elements.get(TESTRUNS), 0);
       long result = time2 - time1;
       percentages.add(determineResult(result, time1, time2));
     }
@@ -107,8 +107,8 @@ public class AccessTestBlockToMiniChains {
     System.out.println("-----------------------------------------------------------------------");
     percentages = new ArrayList<Float>();
     for (int i = 0; i < TESTRUNS; i++) {
-      long time1 = measureCreatingTime(test1, TESTRUNS * SETSOFELEMS);
-      long time2 = measureCreatingTimeMC(test2, elements.get(TESTRUNS), 2);
+      long time1 = measureAccessTime(test1, TESTRUNS * SETSOFELEMS);
+      long time2 = measureAccessTimeMC(test2, elements.get(TESTRUNS), 2);
       long result = time2 - time1;
       percentages.add(determineResult(result, time1, time2));
     }
@@ -124,10 +124,21 @@ public class AccessTestBlockToMiniChains {
     }
   }
 
+  /**
+   * Helper method for creating a blank line
+   */
   private static void blankline() {
     System.out.println();
   }
 
+  /**
+   * Creates result of measurement via three parameters
+   * 
+   * @param result the difference between the two systems
+   * @param time1  the time of the old system
+   * @param time2  the time of the new system
+   * @return speedup in per cent
+   */
   private static float determineResult(long result, long time1, long time2) {
     blankline();
     if (result < 0) System.out.println(String.format("Mesuring with MiniBlockChain was faster by %d ns than measuring with BlockChain.", Math.abs(result)));
@@ -138,7 +149,15 @@ public class AccessTestBlockToMiniChains {
     return percent;
   }
 
-  private static long measureCreatingTimeMC(MiniBlockChain mbC, DSDElement elem, int index) {
+  /**
+   * Makes a measurement for accesstime with a miniBlockchain
+   * 
+   * @param mbC   the mini blockchain to be tested
+   * @param elem  the element to be accessed
+   * @param index the index in the minichain
+   * @return accesstime
+   */
+  private static long measureAccessTimeMC(MiniBlockChain mbC, DSDElement elem, int index) {
     blankline();
     System.out.println("Starting with MiniBlockChain access test");
     long sTime = System.nanoTime();
@@ -151,7 +170,14 @@ public class AccessTestBlockToMiniChains {
     return result;
   }
 
-  private static long measureCreatingTime(BlockChain bC, int index) {
+  /**
+   * Makes a measurement for accesstime of a blockchain
+   * 
+   * @param bC    the blockchain to be tested
+   * @param index the index in the chain
+   * @return accesstime
+   */
+  private static long measureAccessTime(BlockChain bC, int index) {
     blankline();
     System.out.println("Starting with BlockChain access test");
     long sTime = System.nanoTime();

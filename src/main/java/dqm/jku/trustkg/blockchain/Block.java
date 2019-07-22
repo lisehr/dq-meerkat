@@ -19,11 +19,11 @@ import dqm.jku.trustkg.util.HashingUtils;
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", "block = http://example.com/structures/block/" })
 @RDFBean("foaf:Block")
 public abstract class Block implements Comparable<Block> {
-  private String hash;
-  private String previousHash;
-  private long timeStamp;
-  private int nonce;
-  private String id;
+  private String hash; // hash of the current block
+  private String previousHash; // hash of the previous block
+  private long timeStamp; // the timestamp in milliseconds
+  private int nonce; // the nonce value (mining steps)
+  private String id; // the id of the block
 
   public Block() {
 
@@ -44,6 +44,8 @@ public abstract class Block implements Comparable<Block> {
   }
 
   /**
+   * Gets the id
+   * 
    * @return the id
    */
   @RDFSubject(prefix = "block:")
@@ -52,6 +54,8 @@ public abstract class Block implements Comparable<Block> {
   }
 
   /**
+   * Sets the id (security threat but needed by rdfbeans)
+   * 
    * @param id the id to set
    */
   public void setId(String id) {
@@ -69,6 +73,8 @@ public abstract class Block implements Comparable<Block> {
   }
 
   /**
+   * Sets the hash value (security threat but needed by rdfbeans)
+   * 
    * @param hash the hash to set
    */
   public void setHash(String hash) {
@@ -93,6 +99,8 @@ public abstract class Block implements Comparable<Block> {
   }
 
   /**
+   * Sets the previous hash value (security threat but needed by rdfbeans)
+   * 
    * @param previousHash the previousHash to set
    */
   public void setPreviousHash(String previousHash) {
@@ -110,6 +118,8 @@ public abstract class Block implements Comparable<Block> {
   }
 
   /**
+   * Sets the timestamp (security threat but needed by rdfbeans)
+   * 
    * @param timeStamp the timeStamp to set
    */
   public void setTimeStamp(long timeStamp) {
@@ -127,6 +137,8 @@ public abstract class Block implements Comparable<Block> {
   }
 
   /**
+   * Sets the nonce (security threat but needed by rdfbeans)
+   * 
    * @param nonce the nonce to set
    */
   public void setNonce(int nonce) {
@@ -162,7 +174,7 @@ public abstract class Block implements Comparable<Block> {
     if (this.timeStamp < other.timeStamp) return -1;
     if (this.timeStamp > other.timeStamp) return 1;
     return 0;
-    
+
   }
-  
+
 }

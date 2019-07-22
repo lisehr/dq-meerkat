@@ -99,10 +99,21 @@ public class ComparisonBlockToMiniChain {
     }
   }
 
+  /**
+   * Helper method for creating a blank line
+   */
   private static void blankline() {
     System.out.println();
   }
 
+  /**
+   * Creates result of measurement via three parameters
+   * 
+   * @param result the difference between the two systems
+   * @param time1  the time of the old system
+   * @param time2  the time of the new system
+   * @return speedup in per cent
+   */
   private static float determineResult(long result, long time1, long time2) {
     blankline();
     if (result < 0) System.out.println(String.format("Mesuring with MiniBlockChain was faster by %d ms than measuring with BlockChain.", Math.abs(result)));
@@ -113,6 +124,13 @@ public class ComparisonBlockToMiniChain {
     return percent;
   }
 
+  /**
+   * Makes a measurement for creation with a miniBlockchain
+   * 
+   * @param mbC      the mini blockchain to be tested
+   * @param elements the elements to be added
+   * @return creation time
+   */
   private static long measureCreatingTimeMC(MiniBlockChain mbC, ArrayList<DSDElement> elements) {
     blankline();
     System.out.println("Starting with MiniBlockChain creation test");
@@ -128,6 +146,13 @@ public class ComparisonBlockToMiniChain {
     return result;
   }
 
+  /**
+   * Makes a measurement for creation with a Blockchain
+   * 
+   * @param bC       the blockchain to be tested
+   * @param elements the elements to be added
+   * @return creation time
+   */
   private static long measureCreatingTime(BlockChain bC, ArrayList<DSDElement> elements) {
     System.out.println();
     System.out.println("Starting with BlockChain creation test");

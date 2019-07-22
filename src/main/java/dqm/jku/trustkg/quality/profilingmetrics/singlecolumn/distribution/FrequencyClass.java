@@ -11,15 +11,17 @@ public class FrequencyClass implements Comparable<FrequencyClass> {
   private int frequency;
 
   public FrequencyClass() {
-    
+
   }
-  
+
   public FrequencyClass(int key, int value) {
     this.classNo = key;
     this.frequency = value;
   }
 
   /**
+   * Gets the classnumber
+   * 
    * @return the classNo
    */
   @RDF("foaf:classNo")
@@ -28,6 +30,8 @@ public class FrequencyClass implements Comparable<FrequencyClass> {
   }
 
   /**
+   * Sets the classnumber (security threat but needed for rdfbeans)
+   * 
    * @param classNo the classNo to set
    */
   public void setClassNo(int classNo) {
@@ -35,6 +39,8 @@ public class FrequencyClass implements Comparable<FrequencyClass> {
   }
 
   /**
+   * Gets the frequency
+   * 
    * @return the frequency
    */
   @RDF("foaf:frequency")
@@ -43,12 +49,17 @@ public class FrequencyClass implements Comparable<FrequencyClass> {
   }
 
   /**
+   * Sets the frequency (security threat but needed by rdfbeans)
+   * 
    * @param frequency the frequency to set
    */
   public void setFrequency(int frequency) {
     this.frequency = frequency;
   }
 
+  /**
+   * Increments the frequency
+   */
   public void incrementFrequency() {
     frequency++;
   }

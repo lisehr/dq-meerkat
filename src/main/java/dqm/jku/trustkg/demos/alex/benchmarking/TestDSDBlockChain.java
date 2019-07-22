@@ -34,21 +34,28 @@ public class TestDSDBlockChain {
       }
       long time1 = measureCreatingTime(bC1, elements);
       long time2 = measureCreatingTime(bC2, elements);
-      
+
       long result = time2 - time1;
       if (result < 0) System.out.println(String.format("Mesuring with difficulty %d was faster by %d ms than measuring with standard difficulty", difficultySetting, Math.abs(result)));
       else if (result > 0) System.out.println(String.format("Mesuring with standard difficulty was faster by %d ms than measuring with difficulty %d", Math.abs(result), difficultySetting));
       else if (result == 0) System.out.println("Both methods are equally fast!");
-      
+
     } catch (IOException e) {
       System.err.println("Could not load schema!");
     }
 
   }
 
+  /**
+   * Makes a measurement for creation with a Blockchain
+   * 
+   * @param bC       the blockchain to be tested
+   * @param elements the elements to be added
+   * @return creation time
+   */
   private static long measureCreatingTime(BlockChain bC, ArrayList<DSDElement> elements) {
     System.out.println("Starting with Blockchain creation test");
-    long sTime = System.currentTimeMillis();    
+    long sTime = System.currentTimeMillis();
     for (DSDElement e : elements) {
       bC.addBlock(new DSDBlock(bC.getPreviousHash(), e));
       System.out.println("Added block with element: " + e.getURI());

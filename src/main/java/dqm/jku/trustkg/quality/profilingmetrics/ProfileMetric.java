@@ -10,9 +10,8 @@ import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 import dqm.jku.trustkg.dsd.elements.DSDElement;
 import dqm.jku.trustkg.dsd.records.RecordSet;
 import dqm.jku.trustkg.quality.DataProfile;
-@RDFNamespaces({ 
-  "foaf = http://xmlns.com/foaf/0.1/",
-})
+
+@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:ProfileMetric")
 public abstract class ProfileMetric {
   private String label; // the naming of the metric
@@ -21,9 +20,9 @@ public abstract class ProfileMetric {
   private DataProfile refProf; // reference profile for calculations
 
   public ProfileMetric() {
-    
+
   }
-    
+
   public ProfileMetric(String label, DataProfile refProf) {
     if (label == null || refProf == null) throw new IllegalArgumentException("Parameters cannot be null!");
     this.label = label;
@@ -40,17 +39,19 @@ public abstract class ProfileMetric {
   public String getLabel() {
     return label;
   }
-  
 
   /**
+   * Sets the label (security threat but needed by rdfbeans)
+   * 
    * @param label the label to set
    */
   public void setLabel(String label) {
     this.label = label;
   }
-  
 
   /**
+   * Sets the reference profile (security threat but needed by rdfbeans)
+   * 
    * @param refProf the refProf to set
    */
   public void setRefProf(DataProfile refProf) {
@@ -84,9 +85,10 @@ public abstract class ProfileMetric {
   protected void setValueClass(Class<?> cls) {
     this.valClass = cls;
   }
-  
+
   /**
    * Gets a String representation of the value class, used for rdf transformation
+   * 
    * @return string of value class
    */
   @RDF("foaf:valueClass")
@@ -96,7 +98,8 @@ public abstract class ProfileMetric {
 
   /**
    * Sets the value Class via the class string, passed as parameter
-   * @param valClass the string representation of the class 
+   * 
+   * @param valClass the string representation of the class
    */
   public void setValueClassString(String valClass) {
     try {
@@ -124,7 +127,7 @@ public abstract class ProfileMetric {
   public DataProfile getRefProf() {
     return refProf;
   }
-  
+
   /**
    * Gets the reference dsd element, used for calculation
    * 
@@ -141,34 +144,34 @@ public abstract class ProfileMetric {
    * @param rs     the recordset used for calculation
    */
   public abstract void calculation(RecordSet rs, Object oldVal);
-  
+
   /**
    * Method for calculating the profile metric, overridden by each metric
    * 
    * @param oldVal a oldValue to be updated, null for initial calculation
-   * @param list     a sorted list, containing all values
+   * @param list   a sorted list, containing all values
    */
   public abstract void calculationNumeric(List<Number> list, Object oldVal);
-  
+
   /**
    * Method for updating the metric value, overriden by each metric
+   * 
    * @param rs the recordset used for updating
    */
   public abstract void update(RecordSet rs);
-  
+
   /**
    * Returns a string representation of the metic value
+   * 
    * @return string repr of value
    */
   protected abstract String getValueString();
-
 
   @Override
   public String toString() {
     if (value == null) return String.format("%s\tnull", label);
     else return String.format("%s\t%s", label, getValueString());
   }
-
 
   @Override
   public int hashCode() {

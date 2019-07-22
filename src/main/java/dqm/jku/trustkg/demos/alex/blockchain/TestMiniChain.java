@@ -12,13 +12,13 @@ import dqm.jku.trustkg.dsd.elements.DSDElement;
 import dqm.jku.trustkg.dsd.elements.Datasource;
 
 public class TestMiniChain {
-  
-  public static void main (String args[]) throws IOException {
+
+  public static void main(String args[]) throws IOException {
     // Create Connection to CSV Connector
     DSInstanceConnector conn = new ConnectorCSV("src/main/java/dqm/jku/trustkg/resources/Telematic Device Report - Device Voltage.csv", ",", "\n", "Device Voltage", true);
 
     MiniBlockChain mbc = new MiniBlockChain();
-    
+
     Datasource ds = conn.loadSchema();
     ArrayList<DSDElement> elements = new ArrayList<>();
     for (Concept c : ds.getConcepts()) {

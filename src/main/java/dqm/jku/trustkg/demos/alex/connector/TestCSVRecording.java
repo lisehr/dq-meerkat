@@ -11,10 +11,8 @@ import dqm.jku.trustkg.dsd.records.Record;
 
 public class TestCSVRecording {
   public static void main(String args[]) {
- // Create Connection to CSV Connector
-    DSInstanceConnector conn = new ConnectorCSV(
-        "src/main/java/dqm/jku/trustkg/resources/Telematic Device Report - Device Voltage.csv", ",", "\n",
-        "Device Voltage", true);
+    // Create Connection to CSV Connector
+    DSInstanceConnector conn = new ConnectorCSV("src/main/java/dqm/jku/trustkg/resources/Telematic Device Report - Device Voltage.csv", ",", "\n", "Device Voltage", true);
     try {
       Datasource ds = conn.loadSchema();
       for (Concept c : ds.getConcepts()) {
@@ -22,13 +20,12 @@ public class TestCSVRecording {
         while (rIt.hasNext()) {
           Record next = rIt.next();
           System.out.println(next.toString());
-        }        
+        }
       }
 
     } catch (IOException e) {
-      
+
     }
   }
-  
 
 }
