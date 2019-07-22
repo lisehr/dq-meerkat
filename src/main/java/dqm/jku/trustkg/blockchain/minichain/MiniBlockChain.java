@@ -21,7 +21,7 @@ public class MiniBlockChain {
   public MiniBlockChain() {
 
   }
-  
+
   public MiniBlockChain(String id) {
     this.id = id;
   }
@@ -29,7 +29,7 @@ public class MiniBlockChain {
   /**
    * @return the id
    */
-  @RDFSubject(prefix="mbc:")
+  @RDFSubject(prefix = "mbc:")
   public String getId() {
     return id;
   }
@@ -81,21 +81,21 @@ public class MiniBlockChain {
     return target.isChainValid();
   }
 
-  public boolean addBlock(Block block) {
+  public boolean addBlock(Block block, String uri) {
     if (block == null) return false;
-    MiniChain target = getMiniChain(block.getId());
+    MiniChain target = getMiniChain(uri);
     if (target == null) {
-      addMiniChain(block);
+      addMiniChain(block, uri);
       return true;
     } else return target.addBlock(block);
   }
-  
+
   public boolean addDSDElement(DSDElement e) {
-    return this.addBlock(new DSDBlock(findPreviousHash(e), e));
+    return this.addBlock(new DSDBlock(findPreviousHash(e), e), e.getURI());
   }
 
-  private void addMiniChain(Block block) {
-    MiniChain target = new MiniChain(block.getId());
+  private void addMiniChain(Block block, String uri) {
+    MiniChain target = new MiniChain(uri);
     target.addBlock(block);
     minichains.add(target);
   }

@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import dqm.jku.trustkg.blockchain.Block;
 import dqm.jku.trustkg.blockchain.blocks.DSDBlock;
 import dqm.jku.trustkg.blockchain.minichain.MiniBlockChain;
 import dqm.jku.trustkg.blockchain.standardchain.BlockChain;
@@ -22,7 +23,7 @@ import dqm.jku.trustkg.dsd.elements.Concept;
 import dqm.jku.trustkg.dsd.elements.DSDElement;
 import dqm.jku.trustkg.dsd.elements.Datasource;
 
-public class ComparisonBlockToMiniChain {
+public class AccessTestBlockToMiniChains {
   private static final String PREFIX = "src/main/java/dqm/jku/trustkg/resources/";
   private static final boolean DEBUG = true;
   private static final int TESTRUNS = 10;
@@ -41,7 +42,7 @@ public class ComparisonBlockToMiniChain {
       System.out.println("Connection established!");
       System.out.println("Start testing...");
       System.out.println("Printing results to file!");
-      System.setOut(new PrintStream("./resultfiles/ComparisonBlockToMiniChain_" + System.currentTimeMillis() + ".txt"));
+      System.setOut(new PrintStream("./resultfiles/AccessTestBlockToMiniChain_" + System.currentTimeMillis() + ".txt"));
     }
 
     Datasource ds = conn.loadSchema();
@@ -52,16 +53,31 @@ public class ComparisonBlockToMiniChain {
         elements.add(a);
       }
     }
+
     System.out.println("Tests for different Blockchain structures with a test size of " + elements.size() + " elements");
-    System.out.println("Test 1: creating initial chain without changes");
+    System.out.println("Filling Blockchains...");
+    BlockChain test1 = new BlockChain();
+    MiniBlockChain test2 = new MiniBlockChain("test");
+    System.out.println("Blockchain:");
+    for (DSDElement e : elements) {
+      test1.addBlock(new DSDBlock(test1.getPreviousHash(), e));
+      System.out.println("Added block with element: " + e.getURI());
+    }
+    blankline();
+    System.out.println("MiniBlockchain:");
+    for (DSDElement e : elements) {
+      test2.addDSDElement(e);
+      System.out.println("Added block with element: " + e.getURI());
+    }
+
+    blankline();
+    System.out.println("Test 1: reading from initial chain without changes");
     System.out.println(TESTRUNS + " test runs...");
     System.out.println("-----------------------------------------------------------------------");
     List<Float> percentages = new ArrayList<Float>();
     for (int i = 0; i < TESTRUNS; i++) {
-      BlockChain test1 = new BlockChain();
-      MiniBlockChain test2 = new MiniBlockChain("test");
-      long time1 = measureCreatingTime(test1, elements);
-      long time2 = measureCreatingTimeMC(test2, elements);
+      long time1 = measureCreatingTime(test1, TESTRUNS);
+      long time2 = measureCreatingTimeMC(test2, elements.get(TESTRUNS), 0);
       long result = time2 - time1;
       percentages.add(determineResult(result, time1, time2));
     }
@@ -72,18 +88,27 @@ public class ComparisonBlockToMiniChain {
     blankline();
     System.out.println("=================================================================================");
     blankline();
-    System.out.println("Test 2: creating chain with changes");
+    System.out.println("Filling Blockchains...");
+    System.out.println("Blockchain:");
+    for (int i = 0; i < SETSOFELEMS; i++) {
+      for (DSDElement e : elements) {
+        test1.addBlock(new DSDBlock(test1.getPreviousHash(), e));
+        System.out.println("Added block with element: " + e.getURI());
+      }
+      blankline();
+      System.out.println("MiniBlockchain:");
+      for (DSDElement e : elements) {
+        test2.addDSDElement(e);
+        System.out.println("Added block with element: " + e.getURI());
+      }
+    }
+    System.out.println("Test 2: reading chain with changes");
     System.out.println(TESTRUNS + " test runs... | " + SETSOFELEMS + " sets of elements to be added");
     System.out.println("-----------------------------------------------------------------------");
+    percentages = new ArrayList<Float>();
     for (int i = 0; i < TESTRUNS; i++) {
-      BlockChain test1 = new BlockChain();
-      MiniBlockChain test2 = new MiniBlockChain("test");
-      long time1 = 0;
-      long time2 = 0;
-      for (int j = 0; j < SETSOFELEMS; j++) {
-        time1 += measureCreatingTime(test1, elements);
-        time2 += measureCreatingTimeMC(test2, elements);
-      }
+      long time1 = measureCreatingTime(test1, TESTRUNS * SETSOFELEMS);
+      long time2 = measureCreatingTimeMC(test2, elements.get(TESTRUNS), 2);
       long result = time2 - time1;
       percentages.add(determineResult(result, time1, time2));
     }
@@ -105,41 +130,37 @@ public class ComparisonBlockToMiniChain {
 
   private static float determineResult(long result, long time1, long time2) {
     blankline();
-    if (result < 0) System.out.println(String.format("Mesuring with MiniBlockChain was faster by %d ms than measuring with BlockChain.", Math.abs(result)));
-    else if (result > 0) System.out.println(String.format("Mesuring with BlockChain was faster by %d ms than measuring with MiniBlockChain.", Math.abs(result)));
+    if (result < 0) System.out.println(String.format("Mesuring with MiniBlockChain was faster by %d ns than measuring with BlockChain.", Math.abs(result)));
+    else if (result > 0) System.out.println(String.format("Mesuring with BlockChain was faster by %d ns than measuring with MiniBlockChain.", Math.abs(result)));
     else if (result == 0) System.out.println("Both methods are equally fast!");
     float percent = 100.0f - ((time2 * 100.0f) / time1);
     System.out.println(String.format("The faster method resulted in a performance growth by %.2f %%", percent));
     return percent;
   }
 
-  private static long measureCreatingTimeMC(MiniBlockChain mbC, ArrayList<DSDElement> elements) {
+  private static long measureCreatingTimeMC(MiniBlockChain mbC, DSDElement elem, int index) {
     blankline();
-    System.out.println("Starting with MiniBlockChain creation test");
-    long sTime = System.currentTimeMillis();
-    for (DSDElement e : elements) {
-      mbC.addDSDElement(e);
-      System.out.println("Added block with element: " + e.getURI());
-    }
-    long eTime = System.currentTimeMillis();
+    System.out.println("Starting with MiniBlockChain access test");
+    long sTime = System.nanoTime();
+    Block target = mbC.accessElementOfMiniChain(elem.getURI(), index);
+    if (elem.getURI().equals(target.getId())) System.out.println("Block " + target.getId() + " found!");
+    long eTime = System.nanoTime();
     long result = eTime - sTime;
-    System.out.println(String.format("Test ended with testsize of %d blocks and a time of %d ms", elements.size(), result));
+    System.out.println(String.format("Test ended with a time of %d ns", result));
     blankline();
     return result;
   }
 
-  private static long measureCreatingTime(BlockChain bC, ArrayList<DSDElement> elements) {
-    System.out.println();
-    System.out.println("Starting with BlockChain creation test");
-    long sTime = System.currentTimeMillis();
-    for (DSDElement e : elements) {
-      bC.addBlock(new DSDBlock(bC.getPreviousHash(), e));
-      System.out.println("Added block with element: " + e.getURI());
-    }
-    long eTime = System.currentTimeMillis();
+  private static long measureCreatingTime(BlockChain bC, int index) {
+    blankline();
+    System.out.println("Starting with BlockChain access test");
+    long sTime = System.nanoTime();
+    Block target = bC.accessBlock(index);
+    System.out.println("Block " + target.getId() + " found!");
+    long eTime = System.nanoTime();
     long result = eTime - sTime;
-    System.out.println(String.format("Test ended with testsize of %d blocks and a time of %d ms", elements.size(), result));
-    System.out.println();
+    System.out.println(String.format("Test ended with a time of %d ns", result));
+    blankline();
     return result;
   }
 }

@@ -12,7 +12,7 @@ import dqm.jku.trustkg.blockchain.standardchain.BlockChain;
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", "bc = http://example.com/structures/blockchain/" })
 @RDFBean("foaf:MiniChain")
 public class MiniChain extends BlockChain implements Comparable<MiniChain> {
-  private String blockId;
+  private String blockId = "";
   private boolean isEmpty = true;
 
   
@@ -22,11 +22,11 @@ public class MiniChain extends BlockChain implements Comparable<MiniChain> {
   
   public MiniChain(String id) {
     super(id);
+    this.blockId = id;
   }
   
   public MiniChain(int difficulty, String id) {
     super(difficulty, id);
-    this.blockId = "";
   }
 
   /**
@@ -68,8 +68,7 @@ public class MiniChain extends BlockChain implements Comparable<MiniChain> {
     if (block == null) return false;
     if (isEmpty) {
       isEmpty = false;
-      this.blockId = block.getId();
-      
+      if (blockId.equals("")) this.blockId = block.getId();      
     }
     return super.addBlock(block);
   }

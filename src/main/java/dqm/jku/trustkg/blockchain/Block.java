@@ -1,7 +1,5 @@
 package dqm.jku.trustkg.blockchain;
 
-import java.util.Date;
-
 import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
@@ -35,14 +33,14 @@ public abstract class Block implements Comparable<Block> {
     if (previousHash == null) throw new IllegalArgumentException("Previous hash value must be existing!");
     this.previousHash = previousHash;
     this.id = previousHash;
-    this.timeStamp = new Date().getTime();
+    this.timeStamp = System.currentTimeMillis();
   }
 
   public Block(String previousHash, DSDElement data) {
     if (previousHash == null || data == null) throw new IllegalArgumentException("Previous hash value must be existing!");
     this.previousHash = previousHash;
     this.id = data.getURI() + "/" + previousHash;
-    this.timeStamp = new Date().getTime();
+    this.timeStamp = System.currentTimeMillis();
   }
 
   /**

@@ -3,7 +3,6 @@ package dqm.jku.trustkg.demos.alex.blockchain;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import dqm.jku.trustkg.blockchain.blocks.DSDBlock;
 import dqm.jku.trustkg.blockchain.minichain.MiniBlockChain;
 import dqm.jku.trustkg.connectors.ConnectorCSV;
 import dqm.jku.trustkg.connectors.DSInstanceConnector;
@@ -30,7 +29,7 @@ public class TestMiniChain {
     }
 
     for (DSDElement e : elements) {
-      mbc.addBlock(new DSDBlock(mbc.findPreviousHash(e), e));
+      mbc.addDSDElement(e);
     }
     System.out.println("Hook for setting breakpoint!");
   }
