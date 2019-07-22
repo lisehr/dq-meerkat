@@ -1,0 +1,2794 @@
+Tests for different Blockchain structures with a test size of 15 elements
+Test 1: creating initial chain without changes
+10 test runs...
+-----------------------------------------------------------------------
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 36599 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 23421 ms
+
+
+Mesuring with MiniBlockChain was faster by 13178 ms than measuring with BlockChain.
+The faster method resulted in a performance growth by 36,01 %
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 31842 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 26750 ms
+
+
+Mesuring with MiniBlockChain was faster by 5092 ms than measuring with BlockChain.
+The faster method resulted in a performance growth by 15,99 %
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 24824 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 38194 ms
+
+
+Mesuring with BlockChain was faster by 13370 ms than measuring with MiniBlockChain.
+The faster method resulted in a performance growth by -53,86 %
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 25273 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 20528 ms
+
+
+Mesuring with MiniBlockChain was faster by 4745 ms than measuring with BlockChain.
+The faster method resulted in a performance growth by 18,77 %
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 54581 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 29795 ms
+
+
+Mesuring with MiniBlockChain was faster by 24786 ms than measuring with BlockChain.
+The faster method resulted in a performance growth by 45,41 %
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 24920 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 32653 ms
+
+
+Mesuring with BlockChain was faster by 7733 ms than measuring with MiniBlockChain.
+The faster method resulted in a performance growth by -31,03 %
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 26947 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 24298 ms
+
+
+Mesuring with MiniBlockChain was faster by 2649 ms than measuring with BlockChain.
+The faster method resulted in a performance growth by 9,83 %
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 45674 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 23787 ms
+
+
+Mesuring with MiniBlockChain was faster by 21887 ms than measuring with BlockChain.
+The faster method resulted in a performance growth by 47,92 %
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 43118 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 24871 ms
+
+
+Mesuring with MiniBlockChain was faster by 18247 ms than measuring with BlockChain.
+The faster method resulted in a performance growth by 42,32 %
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 28258 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 38241 ms
+
+
+Mesuring with BlockChain was faster by 9983 ms than measuring with MiniBlockChain.
+The faster method resulted in a performance growth by -35,33 %
+
+MiniBlockChains were faster with an average performance growth of 9,60 %
+
+=================================================================================
+
+Test 2: creating chain with changes
+10 test runs... | 3 sets of elements to be added
+-----------------------------------------------------------------------
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 26393 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 27062 ms
+
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 33708 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 39445 ms
+
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 26705 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 21210 ms
+
+
+Mesuring with BlockChain was faster by 911 ms than measuring with MiniBlockChain.
+The faster method resulted in a performance growth by -1,05 %
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 27351 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 29199 ms
+
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 31004 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 27363 ms
+
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 27368 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 25502 ms
+
+
+Mesuring with MiniBlockChain was faster by 3659 ms than measuring with BlockChain.
+The faster method resulted in a performance growth by 4,27 %
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 29248 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 19640 ms
+
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 30865 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 27802 ms
+
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 32998 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 27695 ms
+
+
+Mesuring with MiniBlockChain was faster by 17974 ms than measuring with BlockChain.
+The faster method resulted in a performance growth by 19,30 %
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 31410 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 26005 ms
+
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 22252 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 39444 ms
+
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 25545 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 34297 ms
+
+
+Mesuring with BlockChain was faster by 20539 ms than measuring with MiniBlockChain.
+The faster method resulted in a performance growth by -25,93 %
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 26165 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 31245 ms
+
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 21163 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 32992 ms
+
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 23948 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 21574 ms
+
+
+Mesuring with BlockChain was faster by 14535 ms than measuring with MiniBlockChain.
+The faster method resulted in a performance growth by -20,39 %
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 44230 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 24853 ms
+
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 22622 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 27687 ms
+
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 28082 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 23529 ms
+
+
+Mesuring with MiniBlockChain was faster by 18865 ms than measuring with BlockChain.
+The faster method resulted in a performance growth by 19,87 %
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 30447 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 25498 ms
+
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 16726 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 20886 ms
+
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 26124 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 23957 ms
+
+
+Mesuring with MiniBlockChain was faster by 2956 ms than measuring with BlockChain.
+The faster method resulted in a performance growth by 4,03 %
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 37985 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 20354 ms
+
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 40501 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 18388 ms
+
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 31663 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 19460 ms
+
+
+Mesuring with MiniBlockChain was faster by 51947 ms than measuring with BlockChain.
+The faster method resulted in a performance growth by 47,16 %
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 34211 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 17759 ms
+
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 36893 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 31191 ms
+
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 26178 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 42015 ms
+
+
+Mesuring with MiniBlockChain was faster by 6317 ms than measuring with BlockChain.
+The faster method resulted in a performance growth by 6,49 %
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 26419 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 17481 ms
+
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 45789 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 51423 ms
+
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 18466 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
+Block http://example.com/Test/Test/Country mined!
+Added block with element: http://example.com/Test/Test/Country
+Block http://example.com/Test/Test/Item Type mined!
+Added block with element: http://example.com/Test/Test/Item Type
+Block http://example.com/Test/Test/Sales Channel mined!
+Added block with element: http://example.com/Test/Test/Sales Channel
+Block http://example.com/Test/Test/Order Priority mined!
+Added block with element: http://example.com/Test/Test/Order Priority
+Block http://example.com/Test/Test/Order Date mined!
+Added block with element: http://example.com/Test/Test/Order Date
+Block http://example.com/Test/Test/Order ID mined!
+Added block with element: http://example.com/Test/Test/Order ID
+Block http://example.com/Test/Test/Ship Date mined!
+Added block with element: http://example.com/Test/Test/Ship Date
+Block http://example.com/Test/Test/Units Sold mined!
+Added block with element: http://example.com/Test/Test/Units Sold
+Block http://example.com/Test/Test/Unit Price mined!
+Added block with element: http://example.com/Test/Test/Unit Price
+Block http://example.com/Test/Test/Unit Cost mined!
+Added block with element: http://example.com/Test/Test/Unit Cost
+Block http://example.com/Test/Test/Total Revenue mined!
+Added block with element: http://example.com/Test/Test/Total Revenue
+Block http://example.com/Test/Test/Total Cost mined!
+Added block with element: http://example.com/Test/Test/Total Cost
+Block http://example.com/Test/Test/Total Profit mined!
+Added block with element: http://example.com/Test/Test/Total Profit
+Test ended with testsize of 15 blocks and a time of 22137 ms
+
+
+Mesuring with BlockChain was faster by 367 ms than measuring with MiniBlockChain.
+The faster method resulted in a performance growth by -0,40 %
+
+MiniBlockChains were faster with an average performance growth of 14,94 %

@@ -1,4 +1,4 @@
-package dqm.jku.trustkg.blockchain;
+package dqm.jku.trustkg.blockchain.standardchain;
 
 import java.util.Objects;
 import java.util.SortedSet;
@@ -7,51 +7,27 @@ import java.util.TreeSet;
 import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
-import org.cyberborean.rdfbeans.annotations.RDFSubject;
+
+import dqm.jku.trustkg.blockchain.Block;
+import dqm.jku.trustkg.blockchain.Chain;
 
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", "bc = http://example.com/structures/blockchain/" })
 @RDFBean("foaf:BlockChain")
-public class BlockChain {
+public class BlockChain extends Chain {
   private SortedSet<Block> blockChain = new TreeSet<>();
-  private int difficulty;
-  private static final int HASH_LEN = 64; // standard length for a 256 bit SHA-256 hash
-  private static final int STD_DIFFICULTY = 5; // standard difficulty for a block according to tutorial by cryptokass
-  private String id;
 
   public BlockChain() {
-    this.difficulty = STD_DIFFICULTY;
+    super();
+  }
+  
+  public BlockChain(String id) {
+    super(id);
   }
 
   public BlockChain(int difficulty, String id) {
-    if (difficulty < 1 || difficulty > HASH_LEN) throw new IllegalArgumentException("Difficulty is too small or too big!");
-    this.difficulty = difficulty;
-    this.id = id;
+    super(difficulty, id);
   }
 
-  /**
-   * @return the id
-   */
-  @RDFSubject(prefix = "bc:")
-  public String getId() {
-    return id;
-  }
-
-  /**
-   * @param id the id to set
-   */
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  /**
-   * Get the difficulty value of the Chain
-   * 
-   * @return difficulty
-   */
-  @RDF("foaf:difficulty")
-  public int getDifficulty() {
-    return difficulty;
-  }
 
   /**
    * Access a specific block element of the chain
@@ -77,7 +53,7 @@ public class BlockChain {
    */
   public boolean addBlock(Block block) {
     if (block == null) return false;
-    block.mineBlock(difficulty);
+    block.mineBlock(getDifficulty());
     return blockChain.add(block);
   }
 
@@ -108,7 +84,7 @@ public class BlockChain {
   public Boolean isChainValid() {
     Block currentBlock;
     Block previousBlock;
-    String hashTarget = new String(new char[this.difficulty]).replace('\0', '0');
+    String hashTarget = new String(new char[super.getDifficulty()]).replace('\0', '0');
 
     // loop through blockchain to check hashes:
     for (int i = 1; i < chainSize(); i++) {
@@ -125,7 +101,7 @@ public class BlockChain {
         return false;
       }
       // check if hash is solved
-      if (!currentBlock.getHash().substring(0, this.difficulty).equals(hashTarget)) {
+      if (!currentBlock.getHash().substring(0, this.getDifficulty()).equals(hashTarget)) {
         System.out.println("This block hasn't been mined");
         return false;
       }
@@ -148,20 +124,13 @@ public class BlockChain {
     this.blockChain = blockChain;
   }
 
-  /**
-   * @param difficulty the difficulty to set
-   */
-  public void setDifficulty(int difficulty) {
-    this.difficulty = difficulty;
-  }
-
   @Override
   public boolean equals(Object obj) {
     if (this == obj) return true;
     if (obj == null) return false;
     if (!(obj instanceof BlockChain)) return false;
     BlockChain other = (BlockChain) obj;
-    return Objects.equals(blockChain, other.blockChain) && difficulty == other.difficulty;
+    return Objects.equals(blockChain, other.blockChain) && this.getDifficulty() == other.getDifficulty();
   }
 
 }

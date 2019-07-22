@@ -1,10 +1,10 @@
-package dqm.jku.trustkg.demos.alex;
+package dqm.jku.trustkg.demos.alex.benchmarking;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import dqm.jku.trustkg.blockchain.BlockChain;
-import dqm.jku.trustkg.blockchain.DSDBlock;
+import dqm.jku.trustkg.blockchain.blocks.DSDBlock;
+import dqm.jku.trustkg.blockchain.standardchain.BlockChain;
 import dqm.jku.trustkg.connectors.ConnectorCSV;
 import dqm.jku.trustkg.connectors.DSInstanceConnector;
 import dqm.jku.trustkg.dsd.elements.Attribute;

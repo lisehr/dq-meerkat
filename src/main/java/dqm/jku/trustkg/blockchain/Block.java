@@ -7,6 +7,7 @@ import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 import org.cyberborean.rdfbeans.annotations.RDFSubject;
 
+import dqm.jku.trustkg.dsd.elements.DSDElement;
 import dqm.jku.trustkg.util.HashingUtils;
 
 /**
@@ -34,6 +35,13 @@ public abstract class Block implements Comparable<Block> {
     if (previousHash == null) throw new IllegalArgumentException("Previous hash value must be existing!");
     this.previousHash = previousHash;
     this.id = previousHash;
+    this.timeStamp = new Date().getTime();
+  }
+
+  public Block(String previousHash, DSDElement data) {
+    if (previousHash == null || data == null) throw new IllegalArgumentException("Previous hash value must be existing!");
+    this.previousHash = previousHash;
+    this.id = data.getURI() + "/" + previousHash;
     this.timeStamp = new Date().getTime();
   }
 

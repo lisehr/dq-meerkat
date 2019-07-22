@@ -1,4 +1,4 @@
-package dqm.jku.trustkg.demos.alex;
+package dqm.jku.trustkg.demos.alex.connector;
 
 import java.io.IOException;
 import java.util.Iterator;

@@ -1,9 +1,10 @@
-package dqm.jku.trustkg.blockchain;
+package dqm.jku.trustkg.blockchain.blocks;
 
 import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 
+import dqm.jku.trustkg.blockchain.Block;
 import dqm.jku.trustkg.dsd.elements.DSDElement;
 import dqm.jku.trustkg.util.HashingUtils;
 
@@ -22,14 +23,14 @@ public class DSDBlock extends Block {
   public DSDBlock() {
     super();
   }
-
+  
   public DSDBlock(String previousHash, DSDElement data) {
-    super(previousHash);
-    if (data == null) throw new IllegalArgumentException("Data cannot be null!");
+    super(previousHash, data);
     this.data = data;
     this.calculateHash();
   }
-
+  
+ 
   @RDF("foaf:hasDSDElement")
   public DSDElement getData() {
     return data;

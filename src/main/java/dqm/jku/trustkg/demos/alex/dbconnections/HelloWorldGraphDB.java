@@ -1,4 +1,4 @@
-package dqm.jku.trustkg.demos.alex;
+package dqm.jku.trustkg.demos.alex.dbconnections;
 
 import org.eclipse.rdf4j.model.Value;
 import org.eclipse.rdf4j.query.Binding;

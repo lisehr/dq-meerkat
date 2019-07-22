@@ -1,7 +1,7 @@
-package dqm.jku.trustkg.demos.alex;
+package dqm.jku.trustkg.demos.alex.blockchain;
 
-import dqm.jku.trustkg.blockchain.BlockChain;
-import dqm.jku.trustkg.blockchain.SimpleBlock;
+import dqm.jku.trustkg.blockchain.blocks.SimpleBlock;
+import dqm.jku.trustkg.blockchain.standardchain.BlockChain;
 import dqm.jku.trustkg.util.HashingUtils;
 
 // adapted from Tutorial from CryptoKass

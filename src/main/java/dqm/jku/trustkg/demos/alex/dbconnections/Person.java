@@ -1,4 +1,4 @@
-package dqm.jku.trustkg.demos.alex;
+package dqm.jku.trustkg.demos.alex.dbconnections;
 import java.net.URI;
 import java.util.Collection;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package dqm.jku.trustkg.demos.alex;
+package dqm.jku.trustkg.demos.alex.dbconnections;
 
 import java.io.IOException;
 import java.nio.file.Files;

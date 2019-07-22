@@ -12,8 +12,8 @@ import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 
-import dqm.jku.trustkg.blockchain.BlockChain;
-import dqm.jku.trustkg.blockchain.DSDBlock;
+import dqm.jku.trustkg.blockchain.blocks.DSDBlock;
+import dqm.jku.trustkg.blockchain.standardchain.BlockChain;
 import dqm.jku.trustkg.influxdb.InfluxDBConnection;
 import dqm.jku.trustkg.util.AttributeSet;
 

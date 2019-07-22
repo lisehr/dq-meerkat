@@ -1,4 +1,4 @@
-package dqm.jku.trustkg.demos.alex;
+package dqm.jku.trustkg.demos.alex.rdf;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,7 +17,7 @@ import org.eclipse.rdf4j.repository.RepositoryException;
 import org.eclipse.rdf4j.repository.sail.SailRepository;
 import org.eclipse.rdf4j.sail.nativerdf.NativeStore;
 
-import dqm.jku.trustkg.blockchain.BlockChain;
+import dqm.jku.trustkg.blockchain.standardchain.BlockChain;
 import dqm.jku.trustkg.connectors.ConnectorCSV;
 import dqm.jku.trustkg.connectors.DSInstanceConnector;
 import dqm.jku.trustkg.dsd.elements.Attribute;
@@ -37,7 +37,7 @@ public class TestRDFBeansDemo {
     List<Path> files = paths.collect(Collectors.toList());
     paths.close();
 
-    DSInstanceConnector conn = new ConnectorCSV(files.get(2).toString(), ",", "\n", "Test", true);
+    DSInstanceConnector conn = new ConnectorCSV(files.get(1).toString(), ",", "\n", "Test", true);
 
     File dataDir = new File("./testrepo");
     SailRepository repo = new SailRepository(new NativeStore(dataDir));
