@@ -1,8 +1,11 @@
 # Block DaQ
 A Blockchain-based Knowledge Graph with methods for annotating data profiles to created schemes from CSV-Files.
 
+## Disclaimer
+The provided frameworks and Bash-script are created via Linux Mint 19 (Tara) so it might not be working for every system.
+
 # Blockchain aspect
-To generate temper-free persistance of stored data a blockchain is used. Creating blockchains in Java is a very difficult task since Reflections exist (more in section Persistance),
+To generate temper-free persistance of stored data a blockchain is used. Creating blockchains in Java is a difficult task since Reflections exist (more in section Persistance),
 so a pseudo-temper-free (therefore only temper-evident) chain is the nearest result is what can be achieved.
 
 ## Hashing Algorithms
@@ -15,7 +18,7 @@ Minichains are a further approach to improve performance of blockchains. Since D
 As shown in the tests in the package *demos.alex.benchmarking*, these chains are slightly better in adding and creating (about 9-15%) and significantly better for accessing data (about 75%).
 Each chain contains a blockchain for the element, adapted with an identifier for the minichain and flags used for merging and deletion control.
 
-# Persistance
+# Persistence
 To persist changes in the chain and also generate a graph out of it, multiple storing methods are used. These are:
 - GraphDB (for storing the RDF based graphs)
 - InfluxDB to store records and the values from the data profiles
@@ -39,14 +42,25 @@ well, which is one of the main reasons why it was chosen instead of the other tw
 - @RDF (used above the getters of all other fields to mark them for transformation)
 
 ### Security threats with Reflections
+However, this method of implementing a mapper to and from RDF comes with a serious limitation in terms of security. The main aspect which can be labeled as a security threat in Java (and in other programming languages
+like C# or Python) is Reflection and adaptions from this concept. Reflections allow developers to create and modify objects by only knowing the class itself. The aspects of a class (like its fields and methods) as a whole can 
+be adapted without respecting any security structure like private or final fields, since they can be shut down programatically with simple method calls.
 
 ## InfluxDB
+To prepare the data profiles for visualization, a storage method for the metrics has to be used. A common approach for continous monitoring are time-series databases like InfluxDB, which is a popular choice for storing
+such values. This database explicitly provides Java API for using it inside a program.
 
+Anyways the database has to be running outside of the program, otherwise nothing will be stored. As of now, no embedded mode (like Derby or GraphDB supports) is planned. For this usage case, a Bash-script called *startInflux.sh* is 
+provided as well as a script for opening the InfluxDB-Console (for easy querying the data) with *startInfluxConsole.sh*.
 
 # Visualization
+To visualize the data stored in the InfluxDB instance, a method for easily process it is prefered. A tool, which supports our needs and can directly take the data from Influx is Grafana.
 
 ## Grafana
+Grafana (https://grafana.com/) is a dashboard for visualization, which can be used in a browser after it is booted on the console. For that specific reason a Bash-script called *startGrafana.sh* is provided for starting the program up and 
+automatically opens a browser window of the preferred browser with the URL of the dashboard, which is http://localhost:3000 in the default setting.
 
+The Java API was not working by the time of the creation of the project so it is neglected and replaced by the browser version.
 
 # Useful links
 ## API
@@ -56,69 +70,7 @@ well, which is one of the main reasons why it was chosen instead of the other tw
 * InfluxDB: https://docs.influxdata.com/influxdb/v1.7/
 * InfluxDB-Java: https://github.com/influxdata/influxdb-java
 * InfluxDB: https://www.baeldung.com/java-influxdb
+* Grafana Docs: https://grafana.com/docs/
 ## Blockchains
 * Creating Blockchain in Java from Scratch: https://medium.com/programmers-blockchain/create-simple-blockchain-java-tutorial-from-scratch-6eeed3cb03fa
 * Tutorial Code for Blockchains in Java: https://github.com/CryptoKass/NoobChain-Tutorial-Part-1/tree/master/src/noobchain
-
-# Competitors
-GraphPath: https://www.graphpath.ai/
-
-# Alternative Approaches to Blockchain Technology (not used anymore in this project)
-
-## BigChainDB
-A local instance of bigchaindb is found at the folder BigChainDBServer. To manually install it, the following steps are required:
-	- extract zip-folder
-	- install make, docker and docker-compose
-	- When running on linux, please make sure to follow these steps:
-		- install docker.io
-		- run docker in super user mode (sudo)
-	- make sure that docker is running by checking the hello-world example "docker run hello-world"
-	- open terminal window in the extracted folder and type "make run"
-
-The server is then running via "http://localhost:9984". If the server throws Exceptions like (IOException: Unexpected End of Stream), then try to reconfigure the server
-with the following instructions:
-	- make clean
-	- make run
-Alternatively, "make start" daemonizes the server, so it can be stopped via "make stop".
-
-Also, when running on linux, there exists a bash-script, which can start the server for you.
-It can be accessed via "bash startServer.sh"
-
-## Other Approaches to Blockchain Technology
-Since BigChainDB has serious flaws concerning supporting java, other approaches were needed. Some of those are:
-- Fluree (flur.ee)
-- GraphChain (makolab.com/en/innovation/graphchain)
-- Graphen Protocol (no Implementation available at the moment, only the whitepaper)
-- Taking a conventional Database and adding the blockchain aspect to it (Neo4j, GraphDB, CovenantSQL)
-
-### FlureeDB
-Fluree (https://flur.ee) is a semantic graph database with an approach towards immutability and is free to use. It is based on Java
-and does not need any more prequesites than running on Java 8.
-The server can be accessed via localhost:8080, if not specified otherwise.
-A very detailed documentation for accessing and managing the database can be found via the Docs tab (link also in Section "Useful Links")
-
-### GraphChain
-RDF Database, Blockchain features
-More Research on it needed!
-
-### GraphDB
-RDF Database, Java support, no Blockchain included!
-
-### CovenantSQL
-https://covenantsql.io/
-
-### Neo4j
-https://neo4j.com/
-
-### ChainSQL
-http://chainsql.net/
-Warning: everything is in Chinese
-
-# Methods for persisting data
-Our approach is to store needed data in three different databases, mainly taylormade for each usecase:
-- Knowledge Graph: GraphDB
-- Blockchain: still undecided, but something slim like SQLlite
-- Timeseries for measurements: InfluxDB
-
-
-
