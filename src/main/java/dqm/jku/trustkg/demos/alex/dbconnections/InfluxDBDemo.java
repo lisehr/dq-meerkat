@@ -19,6 +19,7 @@ public class InfluxDBDemo {
 
     Query query = new Query("SELECT idle FROM cpu", influxDB.getDbName());
     influxDB.printQuery(influxDB.query(query));
+    influxDB.deleteDB();
     influxDB.close();
   }
 }

@@ -4,38 +4,26 @@ import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import dqm.jku.trustkg.blockchain.blocks.DSDBlock;
 import dqm.jku.trustkg.blockchain.minichain.MiniBlockChain;
 import dqm.jku.trustkg.blockchain.standardchain.BlockChain;
-import dqm.jku.trustkg.connectors.ConnectorCSV;
 import dqm.jku.trustkg.connectors.DSInstanceConnector;
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.Concept;
 import dqm.jku.trustkg.dsd.elements.DSDElement;
 import dqm.jku.trustkg.dsd.elements.Datasource;
+import dqm.jku.trustkg.util.FileSelectionUtil;
 
 public class ComparisonBlockToMiniChain {
-  private static final String PREFIX = "src/main/java/dqm/jku/trustkg/resources/";
   private static final boolean DEBUG = true;
   private static final int TESTRUNS = 10;
   private static final int SETSOFELEMS = 3;
 
   public static void main(String args[]) throws IOException {
-    // walk resources package to make a selection on which csv file should be used
-    // for the demo
-    Stream<Path> paths = Files.walk(Paths.get(PREFIX));
-    List<Path> files = paths.collect(Collectors.toList());
-    paths.close();
-
-    DSInstanceConnector conn = new ConnectorCSV(files.get(1).toString(), ",", "\n", "Test", true);
+    DSInstanceConnector conn = FileSelectionUtil.connectToCSV(1);
 
     if (DEBUG) {
       System.out.println("Connection established!");

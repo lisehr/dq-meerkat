@@ -80,7 +80,7 @@ public class MiniChain extends BlockChain implements Comparable<MiniChain> {
 
   @Override
   public boolean addBlock(Block block) {
-    if (block == null) return false;
+    if (block == null || isDeleted || isMerged) return false;
     if (isEmpty) {
       isEmpty = false;
       if (chainId.equals("")) this.chainId = block.getId();

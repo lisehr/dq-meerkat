@@ -67,6 +67,10 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
   public void annotateProfile(RecordSet rs) {
     dataProfile = new DataProfile(rs, this);
   }
+  
+  public DataProfile createDataProfile(RecordSet rs) {
+    return new DataProfile(rs, this);
+  }
 
   public void printAnnotatedProfile() {
     System.out.println("Annotated Data Profile for DSDElement: " + label);
