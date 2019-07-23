@@ -14,6 +14,8 @@ import dqm.jku.trustkg.blockchain.standardchain.BlockChain;
 public class MiniChain extends BlockChain implements Comparable<MiniChain> {
   private String chainId = ""; // the id of the minichain
   private boolean isEmpty = true; // flag if the chain is empty yet
+  private boolean isMerged = false; // flag to check if the chain is merged
+  private boolean isDeleted = false; // flag to check if the element of the chain is deleted
 
   public MiniChain() {
     super();
@@ -98,5 +100,55 @@ public class MiniChain extends BlockChain implements Comparable<MiniChain> {
   @Override
   public int compareTo(MiniChain other) {
     return this.getId().compareTo(other.getId());
+  }
+  
+  /**
+   * Flags the chain as deleted, so additions cannot be made anymore
+   */
+  public void delete() {
+    if (isDeleted) return;
+    this.isDeleted = true;
+  }
+  
+  /**
+   * Flags the chain as merged, so additions cannot be made anymore
+   */
+  public void merge() {    
+    if (isMerged) return;
+    this.isMerged = true;
+  }
+
+  /**
+   * Gets the deleted flag
+   * @return deleted flag
+   */
+  @RDF
+  public boolean isDeleted() {
+    return isDeleted;
+  }
+
+  /**
+   * Sets the deleted flag (security threat but needed by rdfbeans)
+   * @param isDeleted the status of the flag to be set
+   */
+  public void setDeleted(boolean isDeleted) {
+    this.isDeleted = isDeleted;
+  }
+
+  /**
+   * Gets the merged flag
+   * @return merged flag
+   */
+  @RDF
+  public boolean isMerged() {
+    return isMerged;
+  }
+
+  /**
+   * Sets the merged flag (security threat but needed by rdfbeans)
+   * @param isMerged the status of the flag to be set
+   */
+  public void setMerged(boolean isMerged) {
+    this.isMerged = isMerged;
   }
 }

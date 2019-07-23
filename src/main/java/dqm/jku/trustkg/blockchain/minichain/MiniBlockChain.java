@@ -164,5 +164,26 @@ public class MiniBlockChain {
       if (m.getChainId().equals(e.getURI())) return m.getPreviousHash();
     return "0";
   }
+  
+  /**
+   * Flags a specific minichain as deleted, does nothing if no minichain is found 
+   * @param chainId the id of the minichain
+   */
+  public void deleteChain(String chainId) {
+    MiniChain mc = this.getMiniChain(chainId);
+    if (mc == null) return;
+    mc.delete();
+  }
+
+  /**
+   * Flags a specific minichain as merged, does nothing if no minichain is found 
+   * @param chainId the id of the minichain
+   */
+  public void mergeChain(String chainId) {
+    MiniChain mc = this.getMiniChain(chainId);
+    if (mc == null) return;
+    mc.merge();
+  }
+
 
 }

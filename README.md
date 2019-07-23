@@ -26,6 +26,7 @@ To persist changes in the chain and also generate a graph out of it, multiple st
 ## GraphDB
 GraphDB by ontotext is a software which can be downloaded and installed in its standalone form from http://graphdb.ontotext.com/. This method of storing knowledge graphs was mainly chosen because it supports rdf stores
 and is usable via Java in an embedded mode. To store concrete Java objects in GraphDB, they have to be mapped to RDF format. Since Java does not naturally support such a mapping toolbox, an external library has to be chosen.
+An aspect, which cannot be forgotten is the connection between Java and GraphDB. The embedded version mainly uses RDF4j as API. 
 
 ## Mapping Java objects to RDF
 Three choices for mapping libraries were possible, namely:
@@ -64,13 +65,14 @@ The Java API was not working by the time of the creation of the project so it is
 
 # Useful links
 ## API
-* JAVA API for BigChainDB: https://github.com/bigchaindb/java-bigchaindb-driver
-* Fluree Docs: https://docs.flur.ee/docs 
 * GraphDB Quick Start Guide: http://graphdb.ontotext.com/documentation/free/quick-start-guide.html
 * InfluxDB: https://docs.influxdata.com/influxdb/v1.7/
 * InfluxDB-Java: https://github.com/influxdata/influxdb-java
 * InfluxDB: https://www.baeldung.com/java-influxdb
 * Grafana Docs: https://grafana.com/docs/
+* RDFBeans: https://rdfbeans.github.io/ 
+* RDF4j: https://rdf4j.eclipse.org/
+* Quaiie (usage of connectors): http://dqm.faw.jku.at/
 ## Blockchains
 * Creating Blockchain in Java from Scratch: https://medium.com/programmers-blockchain/create-simple-blockchain-java-tutorial-from-scratch-6eeed3cb03fa
 * Tutorial Code for Blockchains in Java: https://github.com/CryptoKass/NoobChain-Tutorial-Part-1/tree/master/src/noobchain
