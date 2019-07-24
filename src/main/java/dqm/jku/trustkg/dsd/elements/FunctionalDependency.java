@@ -55,7 +55,7 @@ public class FunctionalDependency extends DSDElement {
   }
 
   @Override
-  public void addMeasurementToInflux(InfluxDBConnection connection) {
+  public void addProfileToInflux(InfluxDBConnection connection) {
     super.storeProfile(connection);
   }
 

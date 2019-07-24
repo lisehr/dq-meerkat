@@ -4,7 +4,6 @@ import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 
-
 import dqm.jku.trustkg.influxdb.InfluxDBConnection;
 
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
@@ -120,8 +119,7 @@ public class Attribute extends DSDElement {
   }
 
   @Override
-  public void addMeasurementToInflux(InfluxDBConnection connection) {
+  public void addProfileToInflux(InfluxDBConnection connection) {
     super.storeProfile(connection);
   }
-
 }

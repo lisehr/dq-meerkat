@@ -62,8 +62,8 @@ public class Histogram extends ProfileMetric {
     list.sort(new NumberComparator());
     if (min == null) min = list.get(0).doubleValue();
     else min = Math.min(min.doubleValue(), list.get(0).doubleValue());
-    if (max == null) max = list.get(super.getRefProf().getRecordsProcessed() - 1).doubleValue();
-    else max = Math.max(max.doubleValue(), list.get(super.getRefProf().getRecordsProcessed() - 1).doubleValue());
+    if (max == null) max = list.get(list.size() - 1).doubleValue();
+    else max = Math.max(max.doubleValue(), list.get(list.size() - 1).doubleValue());
     int k = ValueDistributionUtils.calculateNumberClasses(super.getRefProf().getRecordsProcessed());
     classrange = (max.doubleValue() - min.doubleValue()) / k;
     int classVals[];

@@ -26,6 +26,18 @@ public class FileSelectionUtil {
 
   }
   
+  public static ConnectorCSV connectToCSV(int index, String name) throws IOException {
+    // walk resources package to make a selection on which csv file should be used for the demo
+    Stream<Path> paths = Files.walk(Paths.get(PREFIX));
+    List<Path> files = paths.collect(Collectors.toList());
+    paths.close();
+    
+    return new ConnectorCSV(
+        files.get(index).toString(), ",", "\n",
+        name, true);
+
+  }
+  
   public static ConnectorPartialCSV connectToCSVPartial(int index, int offset, int noRecords) throws IOException {
     // walk resources package to make a selection on which csv file should be used for the demo
     Stream<Path> paths = Files.walk(Paths.get(PREFIX));
@@ -37,5 +49,18 @@ public class FileSelectionUtil {
         "Test", true, offset, noRecords);
 
   }
+  
+  public static ConnectorPartialCSV connectToCSVPartial(int index, int offset, int noRecords, String name) throws IOException {
+    // walk resources package to make a selection on which csv file should be used for the demo
+    Stream<Path> paths = Files.walk(Paths.get(PREFIX));
+    List<Path> files = paths.collect(Collectors.toList());
+    paths.close();
+    
+    return new ConnectorPartialCSV(
+        files.get(index).toString(), ",", "\n",
+        name, true, offset, noRecords);
+
+  }
+
 
 }

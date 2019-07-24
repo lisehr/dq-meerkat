@@ -6,14 +6,18 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
+import org.influxdb.dto.Point;
+import org.influxdb.dto.Point.Builder;
 
 import dqm.jku.trustkg.blockchain.blocks.DSDBlock;
 import dqm.jku.trustkg.blockchain.standardchain.BlockChain;
+import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.influxdb.InfluxDBConnection;
 import dqm.jku.trustkg.util.AttributeSet;
 
@@ -190,14 +194,33 @@ public class Concept extends DSDElement {
   }
 
   @Override
-  public void addMeasurementToInflux(InfluxDBConnection connection) {
+  public void addProfileToInflux(InfluxDBConnection connection) {
     super.storeProfile(connection);
     for (Attribute a : attributes)
-      a.addMeasurementToInflux(connection);
+      a.addProfileToInflux(connection);
     for (FunctionalDependency fd : functionalDependencies)
-      fd.addMeasurementToInflux(connection);
+      fd.addProfileToInflux(connection);
     for (ForeignKey fk : foreignKeys)
-      fk.addMeasurementToInflux(connection);
+      fk.addProfileToInflux(connection);
+  }
+
+  /**
+   * creates a point of measurements, which can be used for storing in influxDB
+   * 
+   * @param record the record to be stored
+   * @return a measurement point or null if the record is null
+   */
+  public Point createMeasurement(Record record) {
+    if (record == null) return null;
+    Builder measure = Point.measurement(getLabel()).time(System.currentTimeMillis(), TimeUnit.MILLISECONDS);
+    for (Attribute a : record.getFields()) {
+      if (record.getField(a) != null) {
+        if (a.getDataType().equals(Long.class)) measure.addField(a.getLabel(), (long) record.getField(a));
+        else if (a.getDataType().equals(Double.class)) measure.addField(a.getLabel(), (double) record.getField(a));
+        else measure.addField(a.getLabel(), (int) ((String) record.getField(a)).length());
+      }
+    }
+    return measure.build();
   }
 
 }

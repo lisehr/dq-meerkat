@@ -47,7 +47,7 @@ public class ConceptConstraint extends Constraint {
 	}
 
   @Override
-  public void addMeasurementToInflux(InfluxDBConnection connection) {
+  public void addProfileToInflux(InfluxDBConnection connection) {
     super.storeProfile(connection);
   }
 

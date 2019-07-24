@@ -8,6 +8,9 @@ import org.influxdb.dto.QueryResult;
 import org.influxdb.dto.QueryResult.Result;
 import org.influxdb.dto.QueryResult.Series;
 
+import dqm.jku.trustkg.dsd.records.Record;
+import dqm.jku.trustkg.quality.DataProfile;
+
 public class InfluxDBConnection {
   private static final String URL = "http://localhost:8086";
   private static final String USER = "root";
@@ -129,6 +132,20 @@ public class InfluxDBConnection {
         System.out.println(s.toString());
       }
     }
+  }
+  
+  /**
+   * Stores the content of one record into influxDB. Stores nothing if null
+   * @param record the record to be stored
+   */
+  public void storeRecord(Record record) {
+    if (record == null) return;
+    write(record.assignedFrom.createMeasurement(record));
+  }
+  
+  public void storeProfile(DataProfile profile) {
+    if (profile == null || profile.getElem() == null) return;
+    profile.getElem().addProfileToInflux(this);
   }
 
 }

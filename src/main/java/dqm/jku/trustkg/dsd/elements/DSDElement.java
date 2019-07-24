@@ -172,7 +172,7 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
     cache.put(uri, elem);
   }
 
-  public abstract void addMeasurementToInflux(InfluxDBConnection connection);
+  public abstract void addProfileToInflux(InfluxDBConnection connection);
 
   public void storeProfile(InfluxDBConnection connection) {
     if (this.dataProfile == null) return;

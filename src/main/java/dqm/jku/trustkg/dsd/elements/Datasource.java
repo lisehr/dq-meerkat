@@ -136,16 +136,16 @@ public class Datasource extends DSDElement {
 
   }
   
-  public void addMeasurementToInflux(InfluxDBConnection connection) {
+  public void addProfileToInflux(InfluxDBConnection connection) {
     super.storeProfile(connection);
     for (Concept c : concepts) {
-      c.addMeasurementToInflux(connection);
+      c.addProfileToInflux(connection);
     }
     for (Association a : associations) {
-      a.addMeasurementToInflux(connection);
+      a.addProfileToInflux(connection);
     }
     for (Constraint c : constraints) {
-      c.addMeasurementToInflux(connection);
+      c.addProfileToInflux(connection);
     }
   }
 

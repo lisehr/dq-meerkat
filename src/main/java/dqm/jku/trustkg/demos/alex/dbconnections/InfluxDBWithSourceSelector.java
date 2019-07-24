@@ -56,7 +56,7 @@ public class InfluxDBWithSourceSelector {
         System.out.println();
       }
 
-      ds.addMeasurementToInflux(influxDB);
+      ds.addProfileToInflux(influxDB);
       if (DEBUG) influxDB.deleteDB();
       influxDB.close();
     } catch (Exception e) {
