@@ -27,7 +27,7 @@ import dqm.jku.trustkg.util.FileSelectionUtil;
  */
 public class DemoStreamingData {
   private static final int FILEINDEX = 17;
-  private static final boolean DEBUG = true;
+  private static final boolean DEBUG = false;
 
   public static void main(String args[]) throws IOException, InterruptedException {
     InfluxDBConnection influx = new InfluxDBConnection();
@@ -57,6 +57,9 @@ public class DemoStreamingData {
     while (!fileFinished) {
       createTimeout(i);
       fileFinished = addMeasurement(influx, testCon, itR);
+      // adds one measurement to the profile (static, but periodic), so limits can be
+      // displayed
+      ds.addProfileToInflux(influx);
       i++;
     }
 
@@ -71,9 +74,9 @@ public class DemoStreamingData {
    * @throws InterruptedException
    */
   private static void createTimeout(int i) throws InterruptedException {
-    int rand = (int) (Math.random() * 50 + 1);
-    if (rand <= i % 50) TimeUnit.SECONDS.sleep(i % 50);
-    else TimeUnit.SECONDS.sleep(1);
+    int rand = (int) (Math.random() * 15 + 1);
+    if (rand <= i % 15) TimeUnit.SECONDS.sleep(i % 15);
+    else TimeUnit.MILLISECONDS.sleep(500);
   }
 
   /**

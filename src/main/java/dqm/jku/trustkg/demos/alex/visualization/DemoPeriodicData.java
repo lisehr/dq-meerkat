@@ -1,6 +1,7 @@
 package dqm.jku.trustkg.demos.alex.visualization;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import dqm.jku.trustkg.connectors.ConnectorCSV;
 import dqm.jku.trustkg.dsd.elements.Attribute;
@@ -25,7 +26,7 @@ import dqm.jku.trustkg.util.FileSelectionUtil;
 public class DemoPeriodicData {
   private static final int FILEINDEX = 21;
   private static final boolean DEBUG = false;
-  private static final int AMOUNT = 500;
+  private static final int AMOUNT = 10;
   private static final String NAME = "supplychain";
 
   public static void main(String args[]) throws IOException, InterruptedException {
@@ -44,7 +45,7 @@ public class DemoPeriodicData {
     Datasource ds = conn.loadSchema();
     for (Concept c : ds.getConcepts()) {
       testCon = c;
-      RecordSet rs = conn.getRecordSet(c);
+      RecordSet rs = conn.getPartialRecordSet(c, 0, AMOUNT);
       for (Attribute a : c.getSortedAttributes()) {
         a.annotateProfile(rs);
         a.printAnnotatedProfile();
@@ -55,11 +56,12 @@ public class DemoPeriodicData {
     ds.addProfileToInflux(influx);
 
     for (offset = AMOUNT + 1; offset < noRecs; offset += AMOUNT) {
-      conn = FileSelectionUtil.connectToCSVPartial(FILEINDEX, offset, AMOUNT, NAME);
-      RecordSet rs = conn.getRecordSet(testCon);
+      conn = FileSelectionUtil.connectToCSV(FILEINDEX, NAME);
+      TimeUnit.MILLISECONDS.sleep(2500);
+      RecordSet rs = conn.getPartialRecordSet(testCon, offset, AMOUNT);
       for (Attribute a : testCon.getSortedAttributes()) {
         DataProfile dp = a.createDataProfile(rs);
-        dp.printProfile();
+        //dp.printProfile();
         influx.storeProfile(dp);
       }
     }
