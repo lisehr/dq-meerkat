@@ -20,6 +20,7 @@ import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordSet;
 import dqm.jku.trustkg.util.AttributeSet;
 import dqm.jku.trustkg.util.DataTypeConverter;
+import dqm.jku.trustkg.util.Miscellaneous.DBType;
 
 /**
  * Connector for CSV files
@@ -139,7 +140,7 @@ public class ConnectorCSV extends DSInstanceConnector {
 
   @Override
   public Datasource loadSchema() throws IOException {
-    Datasource ds = DSDFactory.makeDatasource(label);
+    Datasource ds = DSDFactory.makeDatasource(label, DBType.CSV);
     BufferedReader reader = new BufferedReader(new FileReader(file));
     String[] attNames = reader.readLine().split(seperator);
     Concept c = DSDFactory.makeConcept(label, ds);

@@ -13,14 +13,18 @@ import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 import dqm.jku.trustkg.blockchain.blocks.DSDBlock;
 import dqm.jku.trustkg.blockchain.standardchain.BlockChain;
 import dqm.jku.trustkg.influxdb.InfluxDBConnection;
+import dqm.jku.trustkg.util.Miscellaneous.DBType;
+
+
 
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:Datasource")
 public class Datasource extends DSDElement {
-
+  
   private static final long serialVersionUID = 1L;
   private static final String prefix = "http://example.com/";
-
+  
+  private DBType dbtype;
   private Set<Concept> concepts = new TreeSet<Concept>();
   private Set<Association> associations = new TreeSet<Association>();
   private Set<Constraint> constraints = new TreeSet<Constraint>();
@@ -30,7 +34,13 @@ public class Datasource extends DSDElement {
   }
   
   public Datasource(String label) {
+	super(label, prefix + label);
+	this.dbtype = DBType.UNDEFINED;
+  }
+  
+  public Datasource(String label, DBType dbtype) {
     super(label, prefix + label);
+    this.dbtype = dbtype;
   }
 
   @RDF("foaf:concept")
@@ -149,5 +159,7 @@ public class Datasource extends DSDElement {
     }
   }
 
-
+  public DBType getDBType() {
+	return dbtype;
+  }
 }

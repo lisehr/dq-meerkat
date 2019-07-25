@@ -27,6 +27,7 @@ import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordSet;
 import dqm.jku.trustkg.util.AttributeSet;
 import dqm.jku.trustkg.util.DataTypeConverter;
+import dqm.jku.trustkg.util.Miscellaneous.DBType;
 
 /**
  * Connector for relational MySQL DBs
@@ -151,7 +152,7 @@ public class ConnectorMySQL extends DSInstanceConnector {
 
 	@Override
 	public Datasource loadSchema() throws IOException {
-		Datasource ds = DSDFactory.makeDatasource(DBName);
+		Datasource ds = DSDFactory.makeDatasource(DBName, DBType.MYSQL);
 
 		try {
 			PreparedStatement getConcepts = connection.prepareStatement(sql_get_tables);

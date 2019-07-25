@@ -12,12 +12,13 @@ import dqm.jku.trustkg.dsd.elements.InheritanceAssociation;
 import dqm.jku.trustkg.dsd.elements.ReferenceAssociation;
 import dqm.jku.trustkg.dsd.integrated.IntegratedConcept;
 import dqm.jku.trustkg.dsd.integrated.IntegratedDatasource;
+import dqm.jku.trustkg.util.Miscellaneous.DBType;
 import dqm.jku.trustkg.util.validators.Validator;
 
 public class DSDFactory {
 
-	public static Datasource makeDatasource(String label) {
-		return DSDElement.get(new Datasource(label));
+	public static Datasource makeDatasource(String label, DBType dbtype) {
+		return DSDElement.get(new Datasource(label, dbtype));
 	}
 
 	public static Concept makeConcept(String label, Datasource datasource) {

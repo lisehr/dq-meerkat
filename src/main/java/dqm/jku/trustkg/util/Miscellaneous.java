@@ -3,6 +3,8 @@ package dqm.jku.trustkg.util;
 import java.util.concurrent.TimeUnit;
 
 public class Miscellaneous {
+	
+	public enum DBType { UNDEFINED, CSV, MYSQL, ORACLE, CASSANDRA }
 
 	public static String getTimeStatistics(long from) {
 		long to = System.nanoTime();
