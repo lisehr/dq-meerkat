@@ -1,12 +1,12 @@
 package dqm.jku.trustkg.dsd.records;
 
+import java.util.HashSet;
 import java.util.Iterator;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.Set;
 
 public class RecordSet implements Iterable<Record> {
 
-  private SortedSet<Record> records = new TreeSet<Record>();
+  private Set<Record> records = new HashSet<Record>();
 
   public void addRecord(Record r) {
     records.add(r);

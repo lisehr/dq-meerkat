@@ -60,6 +60,7 @@ public class DemoStreamingData {
       // adds one measurement to the profile (static, but periodic), so limits can be
       // displayed
       ds.addProfileToInflux(influx);
+      System.out.println("Record " + i + " stored!");
       i++;
     }
 
