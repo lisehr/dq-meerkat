@@ -327,4 +327,21 @@ public class ConnectorMySQL extends DSInstanceConnector {
     return rs;
   }
 
+  public RecordSet getPartialRecordSet(final Concept concept, int offset, int noRecs) throws IOException {
+	    Iterator<Record> rIt = getRecords(concept);
+	    RecordSet rs = new RecordSet();
+	    int i = 0;
+	    while (rIt.hasNext() && i < offset) {
+	      rIt.next();
+	      i++;
+	    }
+	    i = 0;
+	    while (rIt.hasNext() && i < noRecs) {
+	      rs.addRecord(rIt.next());
+	      i++;
+	    }
+	    return rs;
+
+	  }
+
 }
