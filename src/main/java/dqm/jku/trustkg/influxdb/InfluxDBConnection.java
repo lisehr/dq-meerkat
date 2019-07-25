@@ -145,7 +145,7 @@ public class InfluxDBConnection {
   
   public void storeProfile(DataProfile profile) {
     if (profile == null || profile.getElem() == null) return;
-    profile.getElem().addProfileToInflux(this);
+    profile.getElem().storeProfile(this, profile);
   }
 
 }

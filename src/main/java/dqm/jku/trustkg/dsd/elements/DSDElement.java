@@ -180,5 +180,13 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
     Builder measure = Point.measurement(getURI()).time(System.currentTimeMillis(), TimeUnit.MILLISECONDS);
     connection.write(this.dataProfile.createMeasuringPoint(measure));
   }
+  
+  public void storeProfile(InfluxDBConnection connection, DataProfile profile) {
+    if (profile == null) return;
+    if (profile.getMetrics().stream().allMatch(m -> (m.getValue() == null))) return;
+    Builder measure = Point.measurement(getURI()).time(System.currentTimeMillis(), TimeUnit.MILLISECONDS);
+    connection.write(profile.createMeasuringPoint(measure));
+  }
+
 
 }
