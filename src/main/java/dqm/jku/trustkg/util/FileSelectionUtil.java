@@ -34,7 +34,7 @@ public class FileSelectionUtil {
     
     return new ConnectorCSV(
         files.get(index).toString(), ",", "\n",
-        name, true);
+        name, false);
 
   }
   

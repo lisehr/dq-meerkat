@@ -75,19 +75,24 @@ public class Minimum extends ProfileMetric {
 
   @Override
   public void calculationNumeric(List<Number> list, Object oldVal) {
-    if (list == null || list.isEmpty()) return;
-    list.sort(new NumberComparator());
+    if (list == null || list.isEmpty()) {
+      if (oldVal != null) return;
+      else this.setValue(null);
+    } else {
+      list.sort(new NumberComparator());
+      Object val = null;
+      if (oldVal == null) val = getMinimum(list.get(0), getBasicInstance());
+      else val = getMinimum(list.get(0), oldVal);
+      this.setValue(val);
+    }
     Attribute a = (Attribute) super.getRefElem();
-    Object val = null;
-    if (oldVal == null) val = getMinimum(list.get(0), getBasicInstance());
-    else val = getMinimum(list.get(0), oldVal);
-    this.setValue(val);
     this.setValueClass(a.getDataType());
   }
 
   @Override
   protected String getValueString() {
-    return "\t" + super.getValue().toString();
+    if (super.getValue() == null) return "\tnull";
+    else return "\t" + super.getValue().toString();
   }
 
 }

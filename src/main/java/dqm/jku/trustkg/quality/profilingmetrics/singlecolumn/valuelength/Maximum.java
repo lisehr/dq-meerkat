@@ -12,17 +12,15 @@ import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
 
-@RDFNamespaces({ 
-  "foaf = http://xmlns.com/foaf/0.1/",
-})
+@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:Maximum")
 public class Maximum extends ProfileMetric {
   private static final String name = "Maximum";
 
   public Maximum() {
-    
+
   }
-  
+
   public Maximum(DataProfile d) {
     super(name, d);
   }
@@ -65,7 +63,7 @@ public class Maximum extends ProfileMetric {
     Attribute a = (Attribute) super.getRefElem();
     if (a.getDataType().equals(Long.class)) return Long.max((long) current, ((Number) toComp).longValue());
     else if (a.getDataType().equals(Double.class)) return Double.max((double) current, ((Number) toComp).doubleValue());
-    else return Integer.max((int) current, ((Number)toComp).intValue());
+    else return Integer.max((int) current, ((Number) toComp).intValue());
   }
 
   @Override
@@ -75,20 +73,24 @@ public class Maximum extends ProfileMetric {
 
   @Override
   public void calculationNumeric(List<Number> list, Object oldVal) {
-    if (list == null || list.isEmpty()) return;
-    list.sort(new NumberComparator());
+    if (list == null || list.isEmpty()) {
+      if (oldVal != null) return;
+      else this.setValue(null);
+    } else {
+      list.sort(new NumberComparator());
+      Object val = null;
+      if (oldVal == null) val = getMaximum(list.get(list.size() - 1), getBasicInstance());
+      else val = getMaximum(list.get(list.size() - 1), oldVal);
+      this.setValue(val);
+    }
     Attribute a = (Attribute) super.getRefElem();
-    Object val = null;
-    if (oldVal == null) val = getMaximum(list.get(list.size() - 1), getBasicInstance());
-    else val = getMaximum(list.get(list.size() - 1), oldVal);
-    this.setValue(val);
     this.setValueClass(a.getDataType());
   }
-  
+
   @Override
   protected String getValueString() {
-    return "\t" + super.getValue().toString();
+    if (super.getValue() == null) return "\tnull";
+    else return "\t" + super.getValue().toString();
   }
-
 
 }

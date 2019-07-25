@@ -24,9 +24,9 @@ import dqm.jku.trustkg.util.FileSelectionUtil;
  *
  */
 public class DemoPeriodicData {
-  private static final int FILEINDEX = 21;
+  private static final int FILEINDEX = 4;
   private static final boolean DEBUG = false;
-  private static final int AMOUNT = 10;
+  private static final int AMOUNT = 100;
   private static final String NAME = "supplychain";
 
   public static void main(String args[]) throws IOException, InterruptedException {
@@ -56,7 +56,6 @@ public class DemoPeriodicData {
     ds.addProfileToInflux(influx);
 
     for (offset = AMOUNT + 1; offset < noRecs; offset += AMOUNT) {
-      conn = FileSelectionUtil.connectToCSV(FILEINDEX, NAME);
       TimeUnit.MILLISECONDS.sleep(2500);
       RecordSet rs = conn.getPartialRecordSet(testCon, offset, AMOUNT);
       for (Attribute a : testCon.getSortedAttributes()) {

@@ -47,9 +47,11 @@ public class Histogram extends ProfileMetric {
 
   @Override
   public void calculationNumeric(List<Number> list, Object oldVal) {
-    if (list == null || list.isEmpty()) return;
+    if (list == null || list.isEmpty()) {
+      if (oldVal != null) return;
+      else this.setValue(null);
+    } else processList(list, null);
     Attribute a = (Attribute) super.getRefElem();
-    processList(list, null);
     this.setValueClass(a.getDataType());
   }
 
@@ -111,6 +113,7 @@ public class Histogram extends ProfileMetric {
 
   @Override
   protected String getValueString() {
+    if (super.getValue() == null) return "\tnull";
     StringBuilder sb = new StringBuilder().append("Number of classes: ");
     int k = ValueDistributionUtils.calculateNumberClasses(super.getRefProf().getRecordsProcessed());
     sb.append(k);

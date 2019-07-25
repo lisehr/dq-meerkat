@@ -99,23 +99,29 @@ public class Average extends ProfileMetric {
   
   @Override
   public void calculationNumeric(List<Number> list, Object oldVal) {
-    if (list == null || list.isEmpty()) return;
-    list.sort(new NumberComparator());
-    Attribute a = (Attribute) super.getRefElem();
-    Object sum = null;
-    if (oldVal == null) sum = getBasicInstance();
-    else sum = getOriginalSum();
-    for (Number n : list) {
-      sum = addValue(sum, n);
+    if (list == null || list.isEmpty()) {
+      if (oldVal != null) return;
+      else this.setValue(null);
+    } else {
+      list.sort(new NumberComparator());
+      Object sum = null;
+      if (oldVal == null) sum = getBasicInstance();
+      else sum = getOriginalSum();
+      for (Number n : list) {
+        sum = addValue(sum, n);
+      }
+      sum = performAveraging(sum);
+      this.setValue(sum);
+
     }
-    sum = performAveraging(sum);
-    this.setValue(sum);
+    Attribute a = (Attribute) super.getRefElem();
     this.setValueClass(a.getDataType());
   }
   
   @Override
   protected String getValueString() {
-    return "\t" + super.getValue().toString();
+    if (super.getValue() == null) return "\tnull";
+    else return "\t" + super.getValue().toString();
   }
 
 
