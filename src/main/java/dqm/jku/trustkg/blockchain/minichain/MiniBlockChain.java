@@ -5,6 +5,7 @@ import java.util.TreeSet;
 
 import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
+import org.cyberborean.rdfbeans.annotations.RDFContainer;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 import org.cyberborean.rdfbeans.annotations.RDFSubject;
 
@@ -51,6 +52,7 @@ public class MiniBlockChain {
    * @return the minichains
    */
   @RDF("foaf:hasMinichain")
+  @RDFContainer
   public SortedSet<MiniChain> getMinichains() {
     return minichains;
   }

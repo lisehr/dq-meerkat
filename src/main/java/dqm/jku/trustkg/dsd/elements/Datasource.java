@@ -8,6 +8,7 @@ import java.util.function.Predicate;
 
 import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
+import org.cyberborean.rdfbeans.annotations.RDFContainer;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 
 import dqm.jku.trustkg.blockchain.blocks.DSDBlock;
@@ -44,6 +45,7 @@ public class Datasource extends DSDElement {
   }
 
   @RDF("foaf:concept")
+  @RDFContainer
   public Set<Concept> getConcepts() {
     return Collections.unmodifiableSet(concepts);
   }

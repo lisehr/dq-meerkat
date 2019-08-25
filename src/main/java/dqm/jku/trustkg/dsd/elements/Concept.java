@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
+import org.cyberborean.rdfbeans.annotations.RDFContainer;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 import org.influxdb.dto.Point;
 import org.influxdb.dto.Point.Builder;
@@ -130,6 +131,7 @@ public class Concept extends DSDElement {
   }
 
   @RDF("foaf:hasFD")
+  @RDFContainer
   public List<FunctionalDependency> getFunctionalDependencies() {
     return Collections.unmodifiableList(functionalDependencies);
   }
@@ -166,6 +168,7 @@ public class Concept extends DSDElement {
   }
 
   @RDF("foaf:hasFK")
+  @RDFContainer
   public Set<ForeignKey> getForeignKeys() {
     return Collections.unmodifiableSet(foreignKeys);
   }
