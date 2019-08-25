@@ -106,7 +106,7 @@ public class MiniChain extends BlockChain implements Comparable<MiniChain> {
    * Flags the chain as deleted, so additions cannot be made anymore
    */
   public void delete() {
-    if (isDeleted) return;
+    if (isMerged || isDeleted) return;
     this.isDeleted = true;
   }
   
@@ -114,7 +114,7 @@ public class MiniChain extends BlockChain implements Comparable<MiniChain> {
    * Flags the chain as merged, so additions cannot be made anymore
    */
   public void merge() {    
-    if (isMerged) return;
+    if (isMerged || isDeleted) return;
     this.isMerged = true;
   }
 
