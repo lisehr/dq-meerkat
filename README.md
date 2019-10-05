@@ -1,5 +1,5 @@
-# Block DaQ
-A Blockchain-based Knowledge Graph with methods for annotating data profiles to created schemes from CSV-Files.
+# Block-DaQ
+A Blockchain-based Knowledge Graph for Data Quality Measurement using Reference Data Profiles
 
 ## Disclaimer
 The provided frameworks and Bash-script are created via Linux Mint 19 (Tara) so it might not be working for every system.
