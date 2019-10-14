@@ -64,11 +64,11 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
     this.dataProfile = dataProfile;
   }
 
-  public void annotateProfile(RecordSet rs) {
+  public void annotateProfile(RecordSet rs) throws NoSuchMethodException {
     dataProfile = new DataProfile(rs, this);
   }
   
-  public DataProfile createDataProfile(RecordSet rs) {
+  public DataProfile createDataProfile(RecordSet rs) throws NoSuchMethodException {
     return new DataProfile(rs, this);
   }
 

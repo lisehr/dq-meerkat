@@ -14,7 +14,7 @@ import dqm.jku.trustkg.util.FileSelectionUtil;
 public class TestCSVDataConverterSourceSelector {
   private static final boolean DEBUG = false;
   
-  public static void main(String args[]) throws IOException {
+  public static void main(String args[]) throws IOException, NoSuchMethodException {
     DSInstanceConnector conn = FileSelectionUtil.connectToCSV(1);
     
     Datasource ds;

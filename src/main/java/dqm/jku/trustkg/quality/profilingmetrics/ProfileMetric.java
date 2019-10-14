@@ -13,7 +13,7 @@ import dqm.jku.trustkg.quality.DataProfile;
 
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:ProfileMetric")
-public abstract class ProfileMetric {
+public abstract class ProfileMetric implements Comparable<ProfileMetric>{
   private String label; // the naming of the metric
   private Class<?> valClass; // the class of the value
   private Object value; // the value itself
@@ -150,8 +150,9 @@ public abstract class ProfileMetric {
    * 
    * @param oldVal a oldValue to be updated, null for initial calculation
    * @param list   a sorted list, containing all values
+   * @throws NoSuchMethodException in cases like null values, since here records are not allowed for processing
    */
-  public abstract void calculationNumeric(List<Number> list, Object oldVal);
+  public abstract void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException;
 
   /**
    * Method for updating the metric value, overriden by each metric
@@ -161,16 +162,27 @@ public abstract class ProfileMetric {
   public abstract void update(RecordSet rs);
 
   /**
-   * Returns a string representation of the metic value
+   * Returns a string representation of the metric value
    * 
    * @return string repr of value
    */
   protected abstract String getValueString();
+  
+  /**
+   * Method for creating a simple string representation of the metric value
+   * 
+   * @return string repr of value
+   */
+  protected String getSimpleValueString() {
+    if (getValue() == null) return "\tnull";
+    else return "\t" + getValue().toString();
+  }
 
   @Override
   public String toString() {
     if (value == null) return String.format("%s\tnull", label);
-    else return String.format("%s\t%s", label, getValueString());
+    else if (label.length() < 10) return String.format("%s\t%s", label, getValueString());
+    else return String.format("%s%s", label, getValueString());
   }
 
   @Override
@@ -185,6 +197,10 @@ public abstract class ProfileMetric {
     if (!(obj instanceof ProfileMetric)) return false;
     ProfileMetric other = (ProfileMetric) obj;
     return Objects.equals(label, other.label) && Objects.equals(valClass, other.valClass) && Objects.equals(value, other.value);
+  }
+  
+  public int compareTo(ProfileMetric other) {
+    return this.label.compareTo(other.label);
   }
 
 }

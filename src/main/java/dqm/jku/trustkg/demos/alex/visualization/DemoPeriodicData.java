@@ -29,7 +29,7 @@ public class DemoPeriodicData {
   private static final int AMOUNT = 100;
   private static final String NAME = "supplychain";
 
-  public static void main(String args[]) throws IOException, InterruptedException {
+  public static void main(String args[]) throws IOException, InterruptedException, NoSuchMethodException {
     InfluxDBConnection influx = new InfluxDBConnection();
     int noRecs = 0;
     int offset = 0;

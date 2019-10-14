@@ -120,8 +120,7 @@ public class Average extends ProfileMetric {
   
   @Override
   protected String getValueString() {
-    if (super.getValue() == null) return "\tnull";
-    else return "\t" + super.getValue().toString();
+    return super.getSimpleValueString();
   }
 
 

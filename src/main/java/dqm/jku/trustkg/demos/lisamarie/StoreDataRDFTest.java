@@ -31,7 +31,7 @@ import dqm.jku.trustkg.graphdb.*;
 
 @SuppressWarnings("unused")
 public class StoreDataRDFTest {
-  public static void main(String args[]) {
+  public static void main(String args[]) throws NoSuchMethodException {
     // Create Connection to CSV Connector
     DSInstanceConnector conn = new ConnectorCSV("src/main/java/dqm/jku/trustkg/resources/Telematic Device Report - Device Voltage.csv", ",", "\n", "Device Voltage", true);
 

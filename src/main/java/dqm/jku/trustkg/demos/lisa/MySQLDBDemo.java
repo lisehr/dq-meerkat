@@ -14,7 +14,7 @@ public class MySQLDBDemo {
 	private static final int FILEINDEX = 21;
 	private static final String NAME = "northwind";
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, NoSuchMethodException {
 		InfluxDBConnection influx = new InfluxDBConnection();
 		int noRecs = 0;
 	    int offset = 0;

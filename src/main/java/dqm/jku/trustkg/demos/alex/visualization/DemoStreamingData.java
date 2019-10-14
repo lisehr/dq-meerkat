@@ -29,7 +29,7 @@ public class DemoStreamingData {
   private static final int FILEINDEX = 17;
   private static final boolean DEBUG = false;
 
-  public static void main(String args[]) throws IOException, InterruptedException {
+  public static void main(String args[]) throws IOException, InterruptedException, NoSuchMethodException {
     InfluxDBConnection influx = new InfluxDBConnection();
     ConnectorCSV conn = FileSelectionUtil.connectToCSV(FILEINDEX);
 

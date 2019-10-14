@@ -1,9 +1,10 @@
 package dqm.jku.trustkg.quality;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
@@ -19,13 +20,16 @@ import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordSet;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.valuelength.*;
+import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Cardinality;
+import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.NullValues;
+import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Uniqueness;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.distribution.*;
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
 
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:DataProfile")
 public class DataProfile {
-  private Set<ProfileMetric> metrics = new HashSet<>();
+  private SortedSet<ProfileMetric> metrics = new TreeSet<>();
   private DSDElement elem;
   private int recordsProcessed;
   private String uri;
@@ -34,7 +38,7 @@ public class DataProfile {
 
   }
 
-  public DataProfile(RecordSet rs, DSDElement d) {
+  public DataProfile(RecordSet rs, DSDElement d) throws NoSuchMethodException {
     this.elem = d;
     this.uri = elem.getURI() + "/profile";
     createStandardProfile();
@@ -48,8 +52,9 @@ public class DataProfile {
    * @param rs the set of records used for calculation
    * @param d  the dsd element to be annotated (currently only Attribute for
    *           single column metrics)
+   * @throws NoSuchMethodException 
    */
-  private void calculateInitialProfile(RecordSet rs) {
+  private void calculateInitialProfile(RecordSet rs) throws NoSuchMethodException {
     recordsProcessed = rs.size();
     if (elem instanceof Attribute) calculateSingleColumn(rs);
   }
@@ -77,11 +82,13 @@ public class DataProfile {
    * Helper method for calculating the single column values for the profile
    * 
    * @param rs the recordset for measuring
+   * @throws NoSuchMethodException 
    */
-  private void calculateSingleColumn(RecordSet rs) {
+  private void calculateSingleColumn(RecordSet rs) throws NoSuchMethodException {
     List<Number> l = createValueList(rs);
     for (ProfileMetric p : metrics) {
-      p.calculationNumeric(l, p.getValue());
+      if (p.getLabel().equals("Null Values")) p.calculation(rs, p.getValue());
+      else p.calculationNumeric(l, p.getValue());
     }
 
   }
@@ -118,9 +125,16 @@ public class DataProfile {
       metrics.add(avg);
       ProfileMetric med = new Median(this);
       metrics.add(med);
+      ProfileMetric card = new Cardinality(this);
+      metrics.add(card);
+      ProfileMetric uniq = new Uniqueness(this);
+      metrics.add(uniq);
+      ProfileMetric nullVal = new NullValues(this);
+      metrics.add(nullVal);
       ProfileMetric hist = new Histogram(this);
       metrics.add(hist);
     }
+
   }
 
   /**
@@ -151,8 +165,20 @@ public class DataProfile {
    * 
    * @param metrics the metrics to set
    */
-  public void setMetrics(Set<ProfileMetric> metrics) {
+  public void setMetrics(SortedSet<ProfileMetric> metrics) {
     this.metrics = metrics;
+  }
+  
+  /**
+   * Method for getting a specific ProfileMetric with its corresponding label.
+   * @param label the label to compare with the profile metrics
+   * @return ProfileMetric if found, null otherwise
+   */
+  public ProfileMetric getMetric(String label) {
+    for (ProfileMetric m : metrics) {
+      if (m.getLabel().equals(label)) return m;
+    }
+    return null;
   }
 
   /**
