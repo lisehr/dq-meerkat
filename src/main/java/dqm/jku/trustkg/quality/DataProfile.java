@@ -24,6 +24,7 @@ import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Cardina
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.NullValues;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Uniqueness;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.distribution.*;
+import dqm.jku.trustkg.util.Miscellaneous.DBType;
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
 
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
@@ -104,9 +105,23 @@ public class DataProfile {
     Attribute a = (Attribute) elem;
     for (Record r : rs) {
       Number field = null;
+      Class<?> clazz = a.getDataType();
       if (a.getDataType().equals(String.class) && r.getField(a) != null) field = ((String) r.getField(a)).length();
-      else field = (Number) r.getField(a);
-      if (field != null) list.add(field);
+      else if(a.getConcept().getDatasource().getDBType().equals(DBType.CSV)) {
+    	  field = (Number) r.getField(a);
+    	  if(DEBUG) System.out.println("=============");
+      } else if(a.getConcept().getDatasource().getDBType().equals(DBType.MYSQL)) {
+    	  if(a.getDataType().isAssignableFrom(Number.class)) {
+    		  field = (Number) r.getField(a);
+    	  } else {
+    		  if(DEBUG) System.out.println("Field: " + field.toString());
+        	  if(DEBUG) System.out.println("xxx");
+    	  }
+    	  
+      } 
+      if (field != null) {
+    	  list.add(field);
+      }
     }
     list.sort(new NumberComparator());
     return list;
