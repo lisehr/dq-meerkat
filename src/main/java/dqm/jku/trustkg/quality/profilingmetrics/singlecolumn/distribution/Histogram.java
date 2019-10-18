@@ -66,7 +66,7 @@ public class Histogram extends ProfileMetric {
     else min = Math.min(min.doubleValue(), list.get(0).doubleValue());
     if (max == null) max = list.get(list.size() - 1).doubleValue();
     else max = Math.max(max.doubleValue(), list.get(list.size() - 1).doubleValue());
-    int k = ValueDistributionUtils.calculateNumberClasses(super.getRefProf().getRecordsProcessed());
+    int k = ValueDistributionUtils.calculateNumberClasses((int)super.getRefProf().getMetric("Size").getValue());
     classrange = (max.doubleValue() - min.doubleValue()) / k;
     int classVals[];
     if (vals == null) classVals = new int[k];
@@ -101,7 +101,7 @@ public class Histogram extends ProfileMetric {
    */
   private int[] constructArray() {
     if (super.getValue() == null) throw new IllegalStateException("Map has to exist here!");
-    int k = ValueDistributionUtils.calculateNumberClasses(super.getRefProf().getRecordsProcessed());
+    int k = ValueDistributionUtils.calculateNumberClasses((int) super.getRefProf().getMetric("Size").getValue());
     int classes[] = new int[k];
     int j = 0;
     for (Integer i : ((SerializableMap) super.getValue()).values()) {
@@ -114,8 +114,8 @@ public class Histogram extends ProfileMetric {
   @Override
   protected String getValueString() {
     if (super.getValue() == null) return "\tnull";
-    StringBuilder sb = new StringBuilder().append("Number of classes: ");
-    int k = ValueDistributionUtils.calculateNumberClasses(super.getRefProf().getRecordsProcessed());
+    StringBuilder sb = new StringBuilder().append("\tNumber of classes: ");
+    int k = ValueDistributionUtils.calculateNumberClasses((int)super.getRefProf().getMetric("Size").getValue());
     sb.append(k);
     sb.append(", ClassRange: ");
     sb.append(classrange);

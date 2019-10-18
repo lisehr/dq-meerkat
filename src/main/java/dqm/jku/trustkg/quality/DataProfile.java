@@ -2,7 +2,6 @@ package dqm.jku.trustkg.quality;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -21,7 +20,9 @@ import dqm.jku.trustkg.dsd.records.RecordSet;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.valuelength.*;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Cardinality;
+import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.KeyCandidate;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.NullValues;
+import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Size;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Uniqueness;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.distribution.*;
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
@@ -29,11 +30,11 @@ import dqm.jku.trustkg.util.numericvals.NumberComparator;
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:DataProfile")
 public class DataProfile {
-  private SortedSet<ProfileMetric> metrics = new TreeSet<>();
+  private List<ProfileMetric> metrics = new ArrayList<>();
   private DSDElement elem;
-  private int recordsProcessed;
   private String uri;
 
+  //TODO: patterns, user-generated and generic => occurencecheck in style of Null-Value principle (Boolean expressions?)
   public DataProfile() {
 
   }
@@ -55,7 +56,6 @@ public class DataProfile {
    * @throws NoSuchMethodException 
    */
   private void calculateInitialProfile(RecordSet rs) throws NoSuchMethodException {
-    recordsProcessed = rs.size();
     if (elem instanceof Attribute) calculateSingleColumn(rs);
   }
 
@@ -117,6 +117,8 @@ public class DataProfile {
    */
   private void createStandardProfile() {
     if (elem instanceof Attribute) {
+      ProfileMetric size = new Size(this);
+      metrics.add(size);
       ProfileMetric min = new Minimum(this);
       metrics.add(min);
       ProfileMetric max = new Maximum(this);
@@ -133,6 +135,12 @@ public class DataProfile {
       metrics.add(nullVal);
       ProfileMetric hist = new Histogram(this);
       metrics.add(hist);
+      ProfileMetric digits = new Digits(this);
+      metrics.add(digits);
+      ProfileMetric isCK = new KeyCandidate(this);
+      metrics.add(isCK);
+      ProfileMetric decimals = new Decimals(this);
+      metrics.add(decimals);
     }
 
   }
@@ -143,7 +151,9 @@ public class DataProfile {
   public void printProfile() {
     System.out.println("Data Profile:");
     if (metrics.stream().anyMatch(p -> p.getValueClass().equals(String.class))) System.out.println("Strings use String length for value length metrics!");
-    for (ProfileMetric p : metrics) {
+    SortedSet<ProfileMetric> metricSorted = new TreeSet<>();
+    metricSorted.addAll(metrics);
+    for (ProfileMetric p : metricSorted) {
       System.out.println(p.toString());
     }
     System.out.println();
@@ -156,7 +166,7 @@ public class DataProfile {
    */
   @RDF("foaf:includes")
   @RDFContainer
-  public Set<ProfileMetric> getMetrics() {
+  public List<ProfileMetric> getMetrics() {
     return metrics;
   }
 
@@ -165,7 +175,7 @@ public class DataProfile {
    * 
    * @param metrics the metrics to set
    */
-  public void setMetrics(SortedSet<ProfileMetric> metrics) {
+  public void setMetrics(List<ProfileMetric> metrics) {
     this.metrics = metrics;
   }
   
@@ -200,27 +210,10 @@ public class DataProfile {
     return elem;
   }
 
-  /**
-   * Gets the number of records processed
-   * 
-   * @return number of records processed
-   */
-  @RDF("foaf:recordsProcessed")
-  public int getRecordsProcessed() {
-    return recordsProcessed;
-  }
-
-  /**
-   * Sets the number of records processed (security threat but used by rdfbeans)
-   * 
-   * @return number of records processed
-   */
-  public void setRecordsProcessed(int recordsProcessed) {
-    this.recordsProcessed = recordsProcessed;
-  }
-
   public Point createMeasuringPoint(Builder measure) {
-    for (ProfileMetric p : metrics) {
+    SortedSet<ProfileMetric> metricSorted = new TreeSet<>();
+    metricSorted.addAll(metrics);
+    for (ProfileMetric p : metricSorted) {
       if (!p.getLabel().equals("Histogram")) addMeasuringValue(p, measure);
     }
     return measure.build();

@@ -48,9 +48,9 @@ public class Average extends ProfileMetric {
    */
   private Object performAveraging(Object sum) {
     Attribute a = (Attribute) super.getRefElem();
-    if (a.getDataType().equals(Long.class)) return (long) sum / super.getRefProf().getRecordsProcessed();
-    else if (a.getDataType().equals(Double.class)) return (double) sum / super.getRefProf().getRecordsProcessed();
-    return (int) sum / super.getRefProf().getRecordsProcessed();
+    if (a.getDataType().equals(Long.class)) return (long) sum / (int) super.getRefProf().getMetric("Size").getValue();
+    else if (a.getDataType().equals(Double.class)) return (double) sum / (int)super.getRefProf().getMetric("Size").getValue();
+    return (int) sum / (int)super.getRefProf().getMetric("Size").getValue();
   }
 
   /**
@@ -91,10 +91,10 @@ public class Average extends ProfileMetric {
    */
   private Object getOriginalSum() {
     Attribute a = (Attribute) super.getRefElem();
-    if (a.getDataType().equals(Long.class)) return ((Number) super.getValue()).longValue() * super.getRefProf().getRecordsProcessed();
-    else if (a.getDataType().equals(Double.class)) return ((Number) super.getValue()).doubleValue() * super.getRefProf().getRecordsProcessed();
+    if (a.getDataType().equals(Long.class)) return ((Number) super.getValue()).longValue() * (int) super.getRefProf().getMetric("Size").getValue();
+    else if (a.getDataType().equals(Double.class)) return ((Number) super.getValue()).doubleValue() * (int)super.getRefProf().getMetric("Size").getValue();
     else
-      return ((int) super.getValue()) * super.getRefProf().getRecordsProcessed();
+      return ((int) super.getValue()) * (int)super.getRefProf().getMetric("Size").getValue();
   }
   
   @Override

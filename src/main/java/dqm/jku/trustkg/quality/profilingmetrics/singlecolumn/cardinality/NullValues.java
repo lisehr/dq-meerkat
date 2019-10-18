@@ -44,7 +44,7 @@ public class NullValues extends ProfileMetric {
   @Override
   protected String getValueString() {
     if (getValue() == null) return "\tnull";
-    else return "\t" + getValue().toString() + " (" + ((long)getValue() / super.getRefProf().getRecordsProcessed()) + "%)";
+    else return "\t" + getValue().toString() + " (" + ((long)getValue() / (int)super.getRefProf().getMetric("Size").getValue()) + "%)";
   }
 
 }
