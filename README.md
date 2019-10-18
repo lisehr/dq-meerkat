@@ -1,11 +1,42 @@
 # Block-DaQ
 A Blockchain-based Knowledge Graph for Data Quality Measurement using Reference Data Profiles
 
+BlocK-DaQ is a research project initiated by Johannes Kepler University (<a href="https://www.jku.at/en/institute-for-application-oriented-knowledge-processing" target="_blank">JKU</a>) Linz and Software Competence Center Hagenberg (<a href="https://scch.at/en/news" target="_blank">SCCH</a>). The implementation provides a novel view on automated and continuous data quality measurement (CDQM), which is based on the initial creation of <i>reference data profiles</i>. 
+
 ## Disclaimer
-The provided frameworks and Bash-script are created via Linux Mint 19 (Tara) so it might not be working for every system.
+The provided frameworks and Bash-script are tested for Linux Mint 19 (Tara) and Windows 10 64bit. 
+
+## Getting Started
+BlocK-DaQ is a Java maven project and in order to build the sources you need the following requirements:
+<ol>
+  <li>Java JDK 1.8 or higher</li>
+  <li>Maven 3.1.0</li>
+  <li>GIT</li>
+</ol>
+
+Afterwards, in order to execute the program, you need to start influxDB and Grafana.
+
+### InfluxDB
+A common choice for storing CDQM results are time-series DBs like InfluxDB, which provides a Java API. Since the Java API was not working by the time of the creation of the project, we replaced it by the browser version. BlocK-DaQ does not offer an embedded mode (like Derby or GraphDB), but runs InfluxDB outside the Java runtime to persist CDQM results over time. 
+
+Run on Linux: <br/>
+```startInflux.sh``` (for starting InfluxDB server)<br/>
+```startInfluxConsole.sh``` (for querying InfluxDB using the console)
+
+Run on Windows: <br/>
+```InfluxDB\influxdb-1.7.7-1_windows\influxd.exe```
+
+### Grafana
+<a href="https://grafana.com" target="_blank">Grafana</a> is a browser-based dashboard for visualization. After the start, a browser window is opened with the dashboard URL (http://localhost:3000 by default).
+
+Run on Linux:<br/>
+```startGrafana.sh```
+
+Run on Windows: <br/>
+```Grafana\grafana-6.2.5_windows\bin\grafana-server.exe```
 
 # Blockchain aspect
-To generate temper-free persistance of stored data a blockchain is used. Creating blockchains in Java is a difficult task since Reflections exist (more in section Persistance),
+To generate tamper-free persistance of stored data a blockchain is used. Creating blockchains in Java is a difficult task since Reflections exist (more in section Persistance),
 so a pseudo-temper-free (therefore only temper-evident) chain is the nearest result is what can be achieved.
 
 ## Hashing Algorithms
@@ -13,8 +44,8 @@ Used in BigChainDB and generally a widespread approach:
 - Standard Hash: SHA3-256
 - Keypair Hash: Ed25519 (Encoded via Base58)
 
-## ?Mini?chains
-Minichains are a further approach to improve performance of blockchains. Since DSDElements are seperated objects, they can be seperated into several miniature versions of blockchains, one for each DSDElement.
+## Microchains
+Microchains are a further approach to improve performance of blockchains. Since DSDElements are seperated objects, they can be seperated into several miniature versions of blockchains, one for each DSDElement.
 As shown in the tests in the package *demos.alex.benchmarking*, these chains are slightly better in adding and creating (about 9-15%) and significantly better for accessing data (about 75%).
 Each chain contains a blockchain for the element, adapted with an identifier for the minichain and flags used for merging and deletion control.
 
@@ -35,33 +66,11 @@ Three choices for mapping libraries were possible, namely:
 - RDFBeans (annotation-based mapping from Java to RDF)
 
 ### RDFBeans
-RDFBeans (https://rdfbeans.github.io/) is a library, which allows a developer to annotate java classes and fields to generate RDF triples from them. It also supports mapping back from RDF to Java objects as
-well, which is one of the main reasons why it was chosen instead of the other two libraries. There are mainly four annotations used in this project:
+RDFBeans (https://rdfbeans.github.io/) is a library, which allows a developer to annotate java classes and fields to generate RDF triples from them. It also supports mapping back from RDF to Java objects as well, which is one of the main reasons why it was chosen instead of the other two libraries. There are mainly four annotations used in this project:
 - @RDFNamespaces (used above the class to define namespaces)
 - @RDFBean (signalizes that the class is transformable into a RDF format)
 - @RDFSubject (used above the getter of the id of this object to easily retrieve it)
 - @RDF (used above the getters of all other fields to mark them for transformation)
-
-### Security threats with Reflections
-However, this method of implementing a mapper to and from RDF comes with a serious limitation in terms of security. The main aspect which can be labeled as a security threat in Java (and in other programming languages
-like C# or Python) is Reflection and adaptions from this concept. Reflections allow developers to create and modify objects by only knowing the class itself. The aspects of a class (like its fields and methods) as a whole can 
-be adapted without respecting any security structure like private or final fields, since they can be shut down programatically with simple method calls.
-
-## InfluxDB
-To prepare the data profiles for visualization, a storage method for the metrics has to be used. A common approach for continous monitoring are time-series databases like InfluxDB, which is a popular choice for storing
-such values. This database explicitly provides Java API for using it inside a program.
-
-Anyways the database has to be running outside of the program, otherwise nothing will be stored. As of now, no embedded mode (like Derby or GraphDB supports) is planned. For this usage case, a Bash-script called *startInflux.sh* is 
-provided as well as a script for opening the InfluxDB-Console (for easy querying the data) with *startInfluxConsole.sh*.
-
-# Visualization
-To visualize the data stored in the InfluxDB instance, a method for easily process it is prefered. A tool, which supports our needs and can directly take the data from Influx is Grafana.
-
-## Grafana
-Grafana (https://grafana.com/) is a dashboard for visualization, which can be used in a browser after it is booted on the console. For that specific reason a Bash-script called *startGrafana.sh* is provided for starting the program up and 
-automatically opens a browser window of the preferred browser with the URL of the dashboard, which is http://localhost:3000 in the default setting.
-
-The Java API was not working by the time of the creation of the project so it is neglected and replaced by the browser version.
 
 # Useful links
 ## API
