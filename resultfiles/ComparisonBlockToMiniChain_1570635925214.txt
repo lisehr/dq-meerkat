@@ -1,0 +1,10 @@
+Tests for different Blockchain structures with a test size of 15 elements
+Test 1: creating initial chain without changes
+10 test runs...
+-----------------------------------------------------------------------
+
+Starting with BlockChain creation test
+Block http://example.com/Test/Test mined!
+Added block with element: http://example.com/Test/Test
+Block http://example.com/Test/Test/Region mined!
+Added block with element: http://example.com/Test/Test/Region
