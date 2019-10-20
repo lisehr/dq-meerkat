@@ -20,7 +20,7 @@ public class Uniqueness extends ProfileMetric{
   @Override
   public void calculation(RecordSet rs, Object oldVal) {
     long cardinality = (long)(super.getRefProf().getMetric("Cardinality").getValue());
-    int numRecs = super.getRefProf().getRecordsProcessed();
+    int numRecs = (int) super.getRefProf().getMetric("Size").getValue();
     double result = cardinality * 100.0 / numRecs;
     this.setValue(result);
     this.setValueClass(Double.class);

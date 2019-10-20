@@ -181,7 +181,7 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric>{
   @Override
   public String toString() {
     if (value == null) return String.format("%s\tnull", label);
-    else if (label.length() < 10) return String.format("%s\t%s", label, getValueString());
+    else if (label.length() < 8) return String.format("%s\t%s", label, getValueString());
     else return String.format("%s%s", label, getValueString());
   }
 
