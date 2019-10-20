@@ -31,7 +31,8 @@ import dqm.jku.trustkg.util.numericvals.NumberComparator;
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:DataProfile")
 public class DataProfile {
-  private List<ProfileMetric> metrics = new ArrayList<>();
+  private static boolean DEBUG = true;
+  private SortedSet<ProfileMetric> metrics = new TreeSet<>();
   private DSDElement elem;
   private String uri;
 
