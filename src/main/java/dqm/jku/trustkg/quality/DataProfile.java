@@ -32,7 +32,7 @@ import dqm.jku.trustkg.util.numericvals.NumberComparator;
 @RDFBean("foaf:DataProfile")
 public class DataProfile {
   private static boolean DEBUG = true;
-  private SortedSet<ProfileMetric> metrics = new TreeSet<>();
+  private List<ProfileMetric> metrics = new ArrayList<>();
   private DSDElement elem;
   private String uri;
 
