@@ -14,8 +14,8 @@ import dqm.jku.trustkg.influxdb.InfluxDBConnection;
 import dqm.jku.trustkg.util.FileSelectionUtil;
 
 /**
- * Idea: This demo should update the data profile after every recieved record.
- * Since these records from Tributech are all recieved by the time of the
+ * Idea: This demo should update the data profile after every received record.
+ * Since these records from Tributech are all received by the time of the
  * implementation, we use a fixed scheduling rate to submit new jobs (i.e. every
  * 20 seconds).
  * 
