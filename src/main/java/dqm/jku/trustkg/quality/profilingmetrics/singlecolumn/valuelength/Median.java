@@ -8,7 +8,7 @@ import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.records.Record;
-import dqm.jku.trustkg.dsd.records.RecordSet;
+import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
@@ -31,7 +31,7 @@ public class Median extends ProfileMetric {
   }
 
   @Override
-  public void calculation(RecordSet rs, Object oldVal) {
+  public void calculation(RecordList rs, Object oldVal) {
     Attribute a = (Attribute) super.getRefElem();
     List<Number> list = new ArrayList<Number>();
     for (Record r : rs) {
@@ -81,7 +81,7 @@ public class Median extends ProfileMetric {
   }
 
   @Override
-  public void update(RecordSet rs) {
+  public void update(RecordList rs) {
     calculation(rs, super.getValue());
   }
   

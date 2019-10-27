@@ -7,7 +7,7 @@ import dqm.jku.trustkg.connectors.ConnectorCSV;
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.Concept;
 import dqm.jku.trustkg.dsd.elements.Datasource;
-import dqm.jku.trustkg.dsd.records.RecordSet;
+import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.influxdb.InfluxDBConnection;
 import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.util.FileSelectionUtil;
@@ -45,7 +45,7 @@ public class DemoPeriodicData {
     Datasource ds = conn.loadSchema();
     for (Concept c : ds.getConcepts()) {
       testCon = c;
-      RecordSet rs = conn.getPartialRecordSet(c, 0, AMOUNT);
+      RecordList rs = conn.getPartialRecordSet(c, 0, AMOUNT);
       for (Attribute a : c.getSortedAttributes()) {
         a.annotateProfile(rs);
         a.printAnnotatedProfile();
@@ -57,7 +57,7 @@ public class DemoPeriodicData {
 
     for (offset = AMOUNT + 1; offset < noRecs; offset += AMOUNT) {
       TimeUnit.MILLISECONDS.sleep(2500);
-      RecordSet rs = conn.getPartialRecordSet(testCon, offset, AMOUNT);
+      RecordList rs = conn.getPartialRecordSet(testCon, offset, AMOUNT);
       for (Attribute a : testCon.getSortedAttributes()) {
         DataProfile dp = a.createDataProfile(rs);
         //dp.printProfile();

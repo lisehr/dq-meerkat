@@ -13,7 +13,7 @@ import org.cyberborean.rdfbeans.annotations.*;
 import org.influxdb.dto.Point;
 import org.influxdb.dto.Point.Builder;
 
-import dqm.jku.trustkg.dsd.records.RecordSet;
+import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.influxdb.InfluxDBConnection;
 import dqm.jku.trustkg.quality.DataProfile;
 
@@ -64,17 +64,21 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
     this.dataProfile = dataProfile;
   }
 
-  public void annotateProfile(RecordSet rs) throws NoSuchMethodException {
+  public void annotateProfile(RecordList rs) throws NoSuchMethodException {
     dataProfile = new DataProfile(rs, this);
   }
   
-  public DataProfile createDataProfile(RecordSet rs) throws NoSuchMethodException {
+  public DataProfile createDataProfile(RecordList rs) throws NoSuchMethodException {
     return new DataProfile(rs, this);
   }
 
   public void printAnnotatedProfile() {
-    System.out.println("Annotated Data Profile for DSDElement: " + label);
-    dataProfile.printProfile();
+    if(dataProfile != null) {
+    	System.out.println("Annotated data profile for DSDElement: " + label);
+    	dataProfile.printProfile();
+    } else {
+    	System.out.println("No data profile annotated for DSDElement: " + label);
+    }
   }
 
   @RDF("foaf:label")

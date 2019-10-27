@@ -3,7 +3,7 @@ package dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.valuelength;
 import java.util.List;
 
 import dqm.jku.trustkg.dsd.elements.Attribute;
-import dqm.jku.trustkg.dsd.records.RecordSet;
+import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 import dqm.jku.trustkg.util.numericvals.NumberValueUtils;
@@ -21,7 +21,7 @@ public class Digits extends ProfileMetric {
 
 
   @Override
-  public void calculation(RecordSet rs, Object oldVal) {
+  public void calculation(RecordList rs, Object oldVal) {
     Attribute a = (Attribute) super.getRefElem();
     super.setValueClass(Integer.class);
 
@@ -43,7 +43,7 @@ public class Digits extends ProfileMetric {
   }
 
   @Override
-  public void update(RecordSet rs) {
+  public void update(RecordList rs) {
     calculation(rs, null);
   }
 

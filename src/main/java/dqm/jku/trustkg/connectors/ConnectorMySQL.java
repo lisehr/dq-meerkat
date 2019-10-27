@@ -24,7 +24,7 @@ import dqm.jku.trustkg.dsd.elements.Datasource;
 import dqm.jku.trustkg.dsd.elements.ForeignKey;
 import dqm.jku.trustkg.dsd.elements.InheritanceAssociation;
 import dqm.jku.trustkg.dsd.records.Record;
-import dqm.jku.trustkg.dsd.records.RecordSet;
+import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.util.AttributeSet;
 import dqm.jku.trustkg.util.DataTypeConverter;
 import dqm.jku.trustkg.util.Miscellaneous.DBType;
@@ -319,18 +319,18 @@ public class ConnectorMySQL extends DSInstanceConnector {
 	}
 
   @Override
-  public RecordSet getRecordSet(Concept concept) throws IOException {
+  public RecordList getRecordSet(Concept concept) throws IOException {
     Iterator<Record> rIt = getRecords(concept);
-    RecordSet rs = new RecordSet();
+    RecordList rs = new RecordList();
     while (rIt.hasNext()) {
       rs.addRecord(rIt.next());
     }
     return rs;
   }
 
-  public RecordSet getPartialRecordSet(final Concept concept, int offset, int noRecs) throws IOException {
+  public RecordList getPartialRecordSet(final Concept concept, int offset, int noRecs) throws IOException {
 	    Iterator<Record> rIt = getRecords(concept);
-	    RecordSet rs = new RecordSet();
+	    RecordList rs = new RecordList();
 	    int i = 0;
 	    while (rIt.hasNext() && i < offset) {
 	      rIt.next();

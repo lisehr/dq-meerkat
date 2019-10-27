@@ -2,7 +2,7 @@ package dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality;
 
 import java.util.List;
 
-import dqm.jku.trustkg.dsd.records.RecordSet;
+import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 
@@ -18,7 +18,7 @@ public class Uniqueness extends ProfileMetric{
   }
 
   @Override
-  public void calculation(RecordSet rs, Object oldVal) {
+  public void calculation(RecordList rs, Object oldVal) {
     long cardinality = (long)(super.getRefProf().getMetric("Cardinality").getValue());
     int numRecs = (int) super.getRefProf().getMetric("Size").getValue();
     double result = cardinality * 100.0 / numRecs;
@@ -32,7 +32,7 @@ public class Uniqueness extends ProfileMetric{
   }
 
   @Override
-  public void update(RecordSet rs) {
+  public void update(RecordList rs) {
     calculation(rs, super.getValueClass());
   }
 

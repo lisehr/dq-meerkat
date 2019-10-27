@@ -4,7 +4,7 @@ import java.util.List;
 
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.records.Record;
-import dqm.jku.trustkg.dsd.records.RecordSet;
+import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 
@@ -20,7 +20,7 @@ public class NullValues extends ProfileMetric {
   }
 
   @Override
-  public void calculation(RecordSet rs, Object oldVal) {
+  public void calculation(RecordList rs, Object oldVal) {
     Attribute a = (Attribute) super.getRefElem();
     long nullVals = 0;
     for (Record r : rs) {
@@ -37,7 +37,7 @@ public class NullValues extends ProfileMetric {
   }
 
   @Override
-  public void update(RecordSet rs) {
+  public void update(RecordList rs) {
     calculation(rs, super.getValue());
   }
 

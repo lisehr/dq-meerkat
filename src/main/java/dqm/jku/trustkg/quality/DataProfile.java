@@ -16,7 +16,7 @@ import org.influxdb.dto.Point.Builder;
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.DSDElement;
 import dqm.jku.trustkg.dsd.records.Record;
-import dqm.jku.trustkg.dsd.records.RecordSet;
+import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.valuelength.*;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Cardinality;
@@ -31,7 +31,6 @@ import dqm.jku.trustkg.util.numericvals.NumberComparator;
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:DataProfile")
 public class DataProfile {
-  private static boolean DEBUG = true;
   private List<ProfileMetric> metrics = new ArrayList<>();
   private DSDElement elem;
   private String uri;
@@ -41,7 +40,7 @@ public class DataProfile {
 
   }
 
-  public DataProfile(RecordSet rs, DSDElement d) throws NoSuchMethodException {
+  public DataProfile(RecordList rs, DSDElement d) throws NoSuchMethodException {
     this.elem = d;
     this.uri = elem.getURI() + "/profile";
     createReferenceDataProfile();
@@ -57,7 +56,7 @@ public class DataProfile {
    *           single column metrics)
    * @throws NoSuchMethodException 
    */
-  private void calculateReferenceDataProfile(RecordSet rs) throws NoSuchMethodException {
+  private void calculateReferenceDataProfile(RecordList rs) throws NoSuchMethodException {
     if (elem instanceof Attribute) calculateSingleColumn(rs);
   }
 
@@ -86,7 +85,7 @@ public class DataProfile {
    * @param rs the recordset for measuring
    * @throws NoSuchMethodException 
    */
-  private void calculateSingleColumn(RecordSet rs) throws NoSuchMethodException {
+  private void calculateSingleColumn(RecordList rs) throws NoSuchMethodException {
     List<Number> l = createValueList(rs);
     for (ProfileMetric p : metrics) {
       if (p.getLabel().equals("Null Values")) p.calculation(rs, p.getValue());
@@ -101,7 +100,7 @@ public class DataProfile {
    * @param rs the record set for measuring
    * @return list of numeric values of the records
    */
-  private List<Number> createValueList(RecordSet rs) {
+  private List<Number> createValueList(RecordList rs) {
     List<Number> list = new ArrayList<Number>();
     Attribute a = (Attribute) elem;
     for (Record r : rs) {
@@ -120,6 +119,7 @@ public class DataProfile {
       }
     }
     list.sort(new NumberComparator());
+    list.size();
     return list;
   }
 

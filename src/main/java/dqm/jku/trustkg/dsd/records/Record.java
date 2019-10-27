@@ -20,10 +20,10 @@ public class Record implements Comparable<Record> {
 		this.assignedFrom = assignedFrom;
 		values = new TreeMap<Attribute, Object>();
 	}
-
-  public void addValueFromCSV(Attribute attribute, String string) {
-    addValue(attribute, DataTypeConverter.getDataValueFromCSV(attribute, string));
-  }
+	
+	public void addValueFromCSV(Attribute attribute, String string) {
+		addValue(attribute, DataTypeConverter.getDataValueFromCSV(attribute, string));
+	}
 	
 	public void addValue(Attribute attribute, Object o) {
 		if (!attribute.getDataType().isInstance(o) && !(attribute.isNullable() && o == null))

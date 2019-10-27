@@ -9,7 +9,7 @@ import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.Concept;
 import dqm.jku.trustkg.dsd.elements.Datasource;
 import dqm.jku.trustkg.dsd.records.Record;
-import dqm.jku.trustkg.dsd.records.RecordSet;
+import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.influxdb.InfluxDBConnection;
 import dqm.jku.trustkg.util.FileSelectionUtil;
 
@@ -42,7 +42,7 @@ public class DemoStreamingData {
 
     Datasource ds = conn.loadSchema();
     for (Concept c : ds.getConcepts()) {
-      RecordSet rs = conn.getPartialRecordSet(c, 0, 5000);
+      RecordList rs = conn.getPartialRecordSet(c, 0, 5000);
       for (Attribute a : c.getSortedAttributes()) {
         a.annotateProfile(rs);
       }
@@ -50,7 +50,7 @@ public class DemoStreamingData {
     }
 
     ds.addProfileToInflux(influx);
-    RecordSet rs = conn.getPartialRecordSet(testCon, 5001, Integer.MAX_VALUE);
+    RecordList rs = conn.getPartialRecordSet(testCon, 5001, Integer.MAX_VALUE);
     boolean fileFinished = false;
     int i = 0;
     Iterator<Record> itR = rs.iterator();

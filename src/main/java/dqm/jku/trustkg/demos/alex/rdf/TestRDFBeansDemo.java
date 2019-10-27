@@ -16,7 +16,7 @@ import dqm.jku.trustkg.connectors.DSInstanceConnector;
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.Concept;
 import dqm.jku.trustkg.dsd.elements.Datasource;
-import dqm.jku.trustkg.dsd.records.RecordSet;
+import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.util.FileSelectionUtil;
 
 public class TestRDFBeansDemo {
@@ -37,7 +37,7 @@ public class TestRDFBeansDemo {
       ds = conn.loadSchema();
       for (Concept c : ds.getConcepts()) {
         System.out.println(c.getURI());
-        RecordSet rs = conn.getRecordSet(c);
+        RecordList rs = conn.getRecordSet(c);
         for (Attribute a : c.getAttributes()) {
           a.annotateProfile(rs);
 

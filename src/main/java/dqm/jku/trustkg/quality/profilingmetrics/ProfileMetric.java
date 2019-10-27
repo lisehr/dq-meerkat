@@ -8,7 +8,7 @@ import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 
 import dqm.jku.trustkg.dsd.elements.DSDElement;
-import dqm.jku.trustkg.dsd.records.RecordSet;
+import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
 
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
@@ -143,7 +143,7 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric>{
    * @param oldVal a oldValue to be updated, null for initial calculation
    * @param rs     the recordset used for calculation
    */
-  public abstract void calculation(RecordSet rs, Object oldVal);
+  public abstract void calculation(RecordList rs, Object oldVal);
 
   /**
    * Method for calculating the profile metric, overridden by each metric
@@ -159,7 +159,7 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric>{
    * 
    * @param rs the recordset used for updating
    */
-  public abstract void update(RecordSet rs);
+  public abstract void update(RecordList rs);
 
   /**
    * Returns a string representation of the metric value

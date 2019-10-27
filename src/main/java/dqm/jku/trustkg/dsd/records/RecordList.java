@@ -1,12 +1,14 @@
 package dqm.jku.trustkg.dsd.records;
 
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Set;
+import java.util.List;
 
-public class RecordSet implements Iterable<Record> {
+import org.apache.commons.collections.list.TreeList;
 
-  private Set<Record> records = new HashSet<Record>();
+public class RecordList implements Iterable<Record> {
+
+  @SuppressWarnings("unchecked")
+  private List<Record> records = new TreeList();
 
   public void addRecord(Record r) {
     records.add(r);
@@ -24,5 +26,4 @@ public class RecordSet implements Iterable<Record> {
   public boolean contains(Record r) {
     return records.contains(r);
   }
-
 }
