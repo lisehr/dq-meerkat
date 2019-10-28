@@ -2,6 +2,7 @@ package dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.valuelength;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
@@ -19,7 +20,11 @@ public class PatternCounter {
   }
   
   public PatternCounter(String regex) {
-    pattern = Pattern.compile(regex);
+    try {
+      pattern = Pattern.compile(regex);
+    } catch (PatternSyntaxException e) {
+      pattern = null;
+    }
   }
   
   @RDF("foaf:pattern")
@@ -41,6 +46,7 @@ public class PatternCounter {
   }
 
   public void checkPattern(String toCheck) {
+    if (pattern == null) return;
     Matcher m = pattern.matcher(toCheck);
     if (m.matches()) cnt++;
   }

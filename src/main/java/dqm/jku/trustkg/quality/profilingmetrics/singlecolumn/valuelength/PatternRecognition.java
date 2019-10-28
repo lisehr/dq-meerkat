@@ -44,8 +44,7 @@ public class PatternRecognition extends ProfileMetric {
     PatternCounterList patterns = new PatternCounterList();
     try {
       List<String> regs = FileSelectionUtil.readAllPatternsOfFile(1);
-      for (String s : regs)
-        patterns.addPattern(s);
+      for (String s : regs) patterns.addPattern(s);
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -58,8 +57,7 @@ public class PatternRecognition extends ProfileMetric {
     PatternCounterList patterns = null;
     if (oldVal == null) patterns = initPatterns();
     else patterns = (PatternCounterList) oldVal;
-    for (Number n : list)
-      patterns.checkPatterns(n.toString());
+    for (Number n : list) patterns.checkPatterns(n.toString());
     this.setValue(patterns);
   }
 
