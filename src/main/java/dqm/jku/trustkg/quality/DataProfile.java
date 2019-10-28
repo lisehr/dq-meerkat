@@ -38,7 +38,6 @@ public class DataProfile {
   private DSDElement elem;
   private String uri;
 
-  //TODO: patterns, user-generated and generic => occurencecheck in style of Null-Value principle (Boolean expressions?)
   public DataProfile() {
 
   }
@@ -158,6 +157,9 @@ public class DataProfile {
     	      metrics.add(isCK);
     	      ProfileMetric decimals = new Decimals(this);
     	      metrics.add(decimals);
+    	      // ------ Still untested, comment out if not working (!)-----
+    	      ProfileMetric patterns = new PatternRecognition(this);
+    	      metrics.add(patterns);
     	} else {
     		System.err.println("Attribute '" + a.getLabel() + "' has data type '" + a.getDataTypeString() + "', which is currently not handled. ");
     	}

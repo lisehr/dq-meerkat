@@ -18,7 +18,8 @@ public enum MetricTitle {
   dig("Digits"),
   max("Maximum"),
   med("Median"),
-  min("Minimum");
+  min("Minimum"),
+  pattern("Pattern Recognition");
   
   private String label;
 

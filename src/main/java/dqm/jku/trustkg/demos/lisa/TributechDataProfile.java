@@ -43,7 +43,7 @@ public class TributechDataProfile {
 	private static void loadDataSets(int[] ind) throws IOException {
 		for(int i : ind) {		
 			String fname = FILENAMES[i];
-			String fpath = "src/main/java/dqm/jku/trustkg/resources/Telematic Device Report - " + fname + ".csv";
+			String fpath = "src/main/java/dqm/jku/trustkg/resources/csv/Telematic Device Report - " + fname + ".csv";
 			ConnectorCSV conn = new ConnectorCSV(fpath, ",", "\n", fname, true);
 			Datasource ds = conn.loadSchema();
 			dss.put(ds, conn);
