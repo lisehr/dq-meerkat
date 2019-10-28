@@ -1,25 +1,30 @@
-package dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality;
+package dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.dependency;
 
 import java.util.List;
+
+import org.cyberborean.rdfbeans.annotations.RDFBean;
+import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 
-public class KeyCandidate extends ProfileMetric {
-  private static final String name = "isCandidateKey";
-  
+import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
+
+@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
+@RDFBean("foaf:KeyCandidate")
+public class KeyCandidate extends ProfileMetric {  
   public KeyCandidate() {
     
   }
   
   public KeyCandidate(DataProfile d) {
-    super(name, d);
+    super(keyCand, d);
   }
 
   @Override
   public void calculation(RecordList rs, Object oldVal) {
-    super.setValue(((long) super.getRefProf().getMetric("Cardinality").getValue()) == 1); 
+    super.setValue(((long) super.getRefProf().getMetric(card).getValue()) == (int) super.getRefProf().getMetric(size).getValue()); 
     super.setValueClass(Boolean.class);
   }
 

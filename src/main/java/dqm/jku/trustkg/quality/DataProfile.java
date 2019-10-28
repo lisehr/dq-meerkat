@@ -17,16 +17,19 @@ import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.DSDElement;
 import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordList;
+import dqm.jku.trustkg.quality.profilingmetrics.MetricTitle;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.valuelength.*;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Cardinality;
-import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.KeyCandidate;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.NullValues;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Size;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Uniqueness;
+import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.dependency.KeyCandidate;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.distribution.*;
 import dqm.jku.trustkg.util.Miscellaneous.DBType;
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
+
+import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
 
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:DataProfile")
@@ -88,7 +91,7 @@ public class DataProfile {
   private void calculateSingleColumn(RecordList rs) throws NoSuchMethodException {
     List<Number> l = createValueList(rs);
     for (ProfileMetric p : metrics) {
-      if (p.getLabel().equals("Null Values")) p.calculation(rs, p.getValue());
+      if (p.getTitle().equals(nullVal)) p.calculation(rs, p.getValue());
       else p.calculationNumeric(l, p.getValue());
     }
 
@@ -200,9 +203,9 @@ public class DataProfile {
    * @param label the label to compare with the profile metrics
    * @return ProfileMetric if found, null otherwise
    */
-  public ProfileMetric getMetric(String label) {
+  public ProfileMetric getMetric(MetricTitle title) {
     for (ProfileMetric m : metrics) {
-      if (m.getLabel().equals(label)) return m;
+      if (m.getTitle().equals(title)) return m;
     }
     return null;
   }
@@ -230,7 +233,7 @@ public class DataProfile {
     SortedSet<ProfileMetric> metricSorted = new TreeSet<>();
     metricSorted.addAll(metrics);
     for (ProfileMetric p : metricSorted) {
-      if (!p.getLabel().equals("Histogram")) addMeasuringValue(p, measure);
+      if (!p.getTitle().equals(hist)) addMeasuringValue(p, measure);
     }
     return measure.build();
   }

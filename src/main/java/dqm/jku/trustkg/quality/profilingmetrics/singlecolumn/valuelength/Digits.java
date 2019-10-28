@@ -2,21 +2,26 @@ package dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.valuelength;
 
 import java.util.List;
 
+import org.cyberborean.rdfbeans.annotations.RDFBean;
+import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
+
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 import dqm.jku.trustkg.util.numericvals.NumberValueUtils;
 
-public class Digits extends ProfileMetric {
-  private static final String name = "Digits";
+import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
 
+@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
+@RDFBean("foaf:Digits")
+public class Digits extends ProfileMetric {
   public Digits() {
     
   }
   
   public Digits(DataProfile d) {
-    super(name, d);
+    super(dig, d);
   }
 
 
@@ -29,10 +34,10 @@ public class Digits extends ProfileMetric {
       super.setValue(0);
       return;
     }
-    Number max = (Number) super.getRefProf().getMetric("Maximum").getValue();
-    Number min = (Number) super.getRefProf().getMetric("Minimum").getValue();
-    int maxDigs = NumberValueUtils.countDigits(max);
-    int minDigs = NumberValueUtils.countDigits(min);
+    Number maxNum = (Number) super.getRefProf().getMetric(max).getValue();
+    Number minNum = (Number) super.getRefProf().getMetric(min).getValue();
+    int maxDigs = NumberValueUtils.countDigits(maxNum);
+    int minDigs = NumberValueUtils.countDigits(minNum);
     if (maxDigs > minDigs) super.setValue(maxDigs);
     else super.setValue(minDigs);
   }

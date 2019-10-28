@@ -2,21 +2,26 @@ package dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality;
 
 import java.util.List;
 
+import org.cyberborean.rdfbeans.annotations.RDFBean;
+import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
+
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 
-public class NullValues extends ProfileMetric {
-  private static final String name = "Null Values";
-  
+import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
+
+@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
+@RDFBean("foaf:NullValues")
+public class NullValues extends ProfileMetric {  
   public NullValues() {
     
   }
   
   public NullValues(DataProfile d) {
-    super(name, d);
+    super(nullVal, d);
   }
 
   @Override
@@ -44,7 +49,7 @@ public class NullValues extends ProfileMetric {
   @Override
   protected String getValueString() {
     if (getValue() == null) return "\tnull";
-    int denominator = (int)super.getRefProf().getMetric("Size").getValue();
+    int denominator = (int)super.getRefProf().getMetric(size).getValue();
     if (denominator == 0) return "\tnull";
     return "\t" + getValue().toString() + " (" + ((long)getValue() / denominator) + "%)";
   }

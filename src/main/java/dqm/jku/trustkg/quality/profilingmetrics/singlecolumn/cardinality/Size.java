@@ -2,19 +2,24 @@ package dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality;
 
 import java.util.List;
 
+import org.cyberborean.rdfbeans.annotations.RDFBean;
+import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
+
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 
-public class Size extends ProfileMetric {
-  private static final String name = "Size";
+import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
 
+@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
+@RDFBean("foaf:Size")
+public class Size extends ProfileMetric {
   public Size() {
     
   }
   
   public Size(DataProfile d) {
-    super(name, d);
+    super(size, d);
   }
 
 

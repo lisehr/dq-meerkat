@@ -2,25 +2,30 @@ package dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality;
 
 import java.util.List;
 
+import org.cyberborean.rdfbeans.annotations.RDFBean;
+import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
+
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 
+import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
+
+@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
+@RDFBean("foaf:Uniqueness")
 public class Uniqueness extends ProfileMetric{
-  private static final String name = "Uniqueness";
-  
   public Uniqueness() {
     
   }
   
   public Uniqueness(DataProfile d) {
-    super(name, d);
+    super(unique, d);
   }
 
   @Override
   public void calculation(RecordList rs, Object oldVal) {
-    long cardinality = (long)(super.getRefProf().getMetric("Cardinality").getValue());
-    int numRecs = (int) super.getRefProf().getMetric("Size").getValue();
+    long cardinality = (long)(super.getRefProf().getMetric(card).getValue());
+    int numRecs = (int) super.getRefProf().getMetric(size).getValue();
     double result = cardinality * 100.0 / numRecs;
     this.setValue(result);
     this.setValueClass(Double.class);

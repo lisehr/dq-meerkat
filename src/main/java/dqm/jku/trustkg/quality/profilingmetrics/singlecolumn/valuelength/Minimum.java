@@ -12,19 +12,17 @@ import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
 
-@RDFNamespaces({ 
-  "foaf = http://xmlns.com/foaf/0.1/",
-})
+import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
+
+@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:Minimum")
 public class Minimum extends ProfileMetric {
-  private static final String name = "Minimum";
-
   public Minimum() {
-    
+
   }
-  
+
   public Minimum(DataProfile d) {
-    super(name, d);
+    super(min, d);
   }
 
   @Override
@@ -63,9 +61,9 @@ public class Minimum extends ProfileMetric {
   private Object getMinimum(Object current, Object toComp) {
     if (toComp == null) return current;
     Attribute a = (Attribute) super.getRefElem();
-    if (a.getDataType().equals(Long.class)) return Long.min(((Number)current).longValue(), ((Number) toComp).longValue());
-    else if (a.getDataType().equals(Double.class)) return Double.min(((Number)current).doubleValue(), ((Number) toComp).doubleValue());
-    else return Integer.min(((Number)current).intValue(), ((Number)toComp).intValue());
+    if (a.getDataType().equals(Long.class)) return Long.min(((Number) current).longValue(), ((Number) toComp).longValue());
+    else if (a.getDataType().equals(Double.class)) return Double.min(((Number) current).doubleValue(), ((Number) toComp).doubleValue());
+    else return Integer.min(((Number) current).intValue(), ((Number) toComp).intValue());
   }
 
   @Override

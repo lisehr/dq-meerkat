@@ -12,19 +12,17 @@ import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
 
-@RDFNamespaces({ 
-  "foaf = http://xmlns.com/foaf/0.1/",
-})
+import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
+
+@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:Average")
 public class Average extends ProfileMetric {
-  private static final String name = "Average";
-
   public Average() {
-    
+
   }
-  
+
   public Average(DataProfile d) {
-    super(name, d);
+    super(avg, d);
   }
 
   @Override
@@ -43,37 +41,39 @@ public class Average extends ProfileMetric {
 
   /**
    * Method for getting the average value of the objects
-   * @param sum the sum of values 
+   * 
+   * @param sum the sum of values
    * @return the average value
    */
   private Object performAveraging(Object sum) {
     Attribute a = (Attribute) super.getRefElem();
-    if (a.getDataType().equals(Long.class)) return (long) sum / (int) super.getRefProf().getMetric("Size").getValue();
-    else if (a.getDataType().equals(Double.class)) return (double) sum / (int)super.getRefProf().getMetric("Size").getValue();
-    return (int) sum / (int)super.getRefProf().getMetric("Size").getValue();
+    if (a.getDataType().equals(Long.class)) return (long) sum / (int) super.getRefProf().getMetric(size).getValue();
+    else if (a.getDataType().equals(Double.class)) return (double) sum / (int) super.getRefProf().getMetric(size).getValue();
+    return (int) sum / (int) super.getRefProf().getMetric(size).getValue();
   }
 
   /**
    * Creates a basic instance used as a reference (in this case zero as a number)
+   * 
    * @return the reference value
    */
   private Object getBasicInstance() {
     Attribute a = (Attribute) super.getRefElem();
     if (a.getDataType().equals(Long.class)) return Long.valueOf(0);
     else if (a.getDataType().equals(Double.class)) return Double.valueOf(0);
-    else
-      return Integer.valueOf(0);
+    else return Integer.valueOf(0);
   }
 
   /**
    * Adds a value to the sum of values
+   * 
    * @param current the current sum of values
-   * @param toAdd the value to be added
+   * @param toAdd   the value to be added
    * @return the new sum of values
    */
   private Object addValue(Object current, Object toAdd) {
     if (toAdd == null) return current;
-    Attribute a = (Attribute) super.getRefElem();    
+    Attribute a = (Attribute) super.getRefElem();
     if (a.getDataType().equals(Long.class)) return (long) current + ((Number) toAdd).longValue();
     else if (a.getDataType().equals(Double.class)) return (double) current + ((Number) toAdd).doubleValue();
     else if (toAdd.getClass().equals(String.class)) return (int) current + ((String) toAdd).length();
@@ -87,16 +87,16 @@ public class Average extends ProfileMetric {
 
   /**
    * Restores the original sum of the averaging value
+   * 
    * @return the sum before weighting with the amount of values
    */
   private Object getOriginalSum() {
     Attribute a = (Attribute) super.getRefElem();
-    if (a.getDataType().equals(Long.class)) return ((Number) super.getValue()).longValue() * (int) super.getRefProf().getMetric("Size").getValue();
-    else if (a.getDataType().equals(Double.class)) return ((Number) super.getValue()).doubleValue() * (int)super.getRefProf().getMetric("Size").getValue();
-    else
-      return ((int) super.getValue()) * (int)super.getRefProf().getMetric("Size").getValue();
+    if (a.getDataType().equals(Long.class)) return ((Number) super.getValue()).longValue() * (int) super.getRefProf().getMetric(size).getValue();
+    else if (a.getDataType().equals(Double.class)) return ((Number) super.getValue()).doubleValue() * (int) super.getRefProf().getMetric(size).getValue();
+    else return ((int) super.getValue()) * (int) super.getRefProf().getMetric(size).getValue();
   }
-  
+
   @Override
   public void calculationNumeric(List<Number> list, Object oldVal) {
     if (list == null || list.isEmpty()) {
@@ -117,11 +117,10 @@ public class Average extends ProfileMetric {
     Attribute a = (Attribute) super.getRefElem();
     this.setValueClass(a.getDataType());
   }
-  
+
   @Override
   protected String getValueString() {
     return super.getSimpleValueString();
   }
-
 
 }

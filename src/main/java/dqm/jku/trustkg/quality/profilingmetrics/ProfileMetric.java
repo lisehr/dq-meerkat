@@ -14,7 +14,7 @@ import dqm.jku.trustkg.quality.DataProfile;
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:ProfileMetric")
 public abstract class ProfileMetric implements Comparable<ProfileMetric>{
-  private String label; // the naming of the metric
+  private MetricTitle title; // the naming of the metric
   private Class<?> valClass; // the class of the value
   private Object value; // the value itself
   private DataProfile refProf; // reference profile for calculations
@@ -23,30 +23,38 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric>{
 
   }
 
-  public ProfileMetric(String label, DataProfile refProf) {
-    if (label == null || refProf == null) throw new IllegalArgumentException("Parameters cannot be null!");
-    this.label = label;
+  public ProfileMetric(MetricTitle title, DataProfile refProf) {
+    if (title == null || refProf == null) throw new IllegalArgumentException("Parameters cannot be null!");
+    this.title = title;
     this.refProf = refProf;
     value = null;
   }
 
   /**
-   * Gets the label
+   * Gets the title
    * 
-   * @return label of metric
+   * @return title of metric
    */
   @RDF("foaf:label")
+  public MetricTitle getTitle() {
+    return title;
+  }
+  
+  /**
+   * Directly gets the text of the title
+   * @return label of title
+   */
   public String getLabel() {
-    return label;
+    return title.label();
   }
 
   /**
-   * Sets the label (security threat but needed by rdfbeans)
+   * Sets the title (security threat but needed by rdfbeans)
    * 
-   * @param label the label to set
+   * @param title the title to set
    */
-  public void setLabel(String label) {
-    this.label = label;
+  public void setTitle(MetricTitle title) {
+    this.title = title;
   }
 
   /**
@@ -180,14 +188,14 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric>{
 
   @Override
   public String toString() {
-    if (value == null) return String.format("%s\tnull", label);
-    else if (label.length() < 8) return String.format("%s\t%s", label, getValueString());
-    else return String.format("%s%s", label, getValueString());
+    if (value == null) return String.format("%s\tnull", title);
+    else if (title.label().length() < 8) return String.format("%s\t%s", title, getValueString());
+    else return String.format("%s%s", title, getValueString());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(label, valClass, value);
+    return Objects.hash(title, valClass, value);
   }
 
   @Override
@@ -196,11 +204,11 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric>{
     if (obj == null) return false;
     if (!(obj instanceof ProfileMetric)) return false;
     ProfileMetric other = (ProfileMetric) obj;
-    return Objects.equals(label, other.label) && Objects.equals(valClass, other.valClass) && Objects.equals(value, other.value);
+    return Objects.equals(title, other.title) && Objects.equals(valClass, other.valClass) && Objects.equals(value, other.value);
   }
   
   public int compareTo(ProfileMetric other) {
-    return this.label.compareTo(other.label);
+    return this.title.label().compareTo(other.title.label());
   }
 
 }

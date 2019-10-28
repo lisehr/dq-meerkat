@@ -2,21 +2,26 @@ package dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.valuelength;
 
 import java.util.List;
 
+import org.cyberborean.rdfbeans.annotations.RDFBean;
+import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
+
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 
+import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
+
+@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
+@RDFBean("foaf:Decimals")
 public class Decimals extends ProfileMetric {
-  private static final String name = "Decimals";
-  
   public Decimals() {
     
   }
   
   public Decimals(DataProfile d) {
-    super(name, d);
+    super(dec, d);
   }
 
   @Override

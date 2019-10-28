@@ -4,21 +4,27 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.cyberborean.rdfbeans.annotations.RDFBean;
+import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
+
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 
+import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
+
+@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
+@RDFBean("foaf:Cardinality")
 public class Cardinality extends ProfileMetric {
-  private static final String name = "Cardinality";
 
   public Cardinality() {
     
   }
   
   public Cardinality(DataProfile d) {
-    super(name, d);
+    super(card, d);
   }
 
   @Override

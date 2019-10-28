@@ -13,21 +13,17 @@ import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
 
-@RDFNamespaces({ 
-  "foaf = http://xmlns.com/foaf/0.1/",
-})
+import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
+
+@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:Median")
 public class Median extends ProfileMetric {
-  private static final String name = "Median";
-  
-  //TODO: Update median via histogram
-
   public Median() {
-    
+
   }
-  
+
   public Median(DataProfile d) {
-    super(name, d);
+    super(med, d);
   }
 
   @Override
@@ -60,8 +56,8 @@ public class Median extends ProfileMetric {
     size /= 2;
     Number val = list.get(size);
     if (isEven) val = averageResult(val, list.get(size + 1));
-    if (((Attribute)super.getRefElem()).getDataType().equals(Long.class)) return val.longValue();
-    else if (((Attribute)super.getRefElem()).getDataType().equals(Double.class)) return val.doubleValue();
+    if (((Attribute) super.getRefElem()).getDataType().equals(Long.class)) return val.longValue();
+    else if (((Attribute) super.getRefElem()).getDataType().equals(Double.class)) return val.doubleValue();
     return val;
   }
 
@@ -84,7 +80,7 @@ public class Median extends ProfileMetric {
   public void update(RecordList rs) {
     calculation(rs, super.getValue());
   }
-  
+
   @Override
   public void calculationNumeric(List<Number> list, Object oldVal) {
     if (list == null || list.isEmpty()) {
@@ -103,6 +99,5 @@ public class Median extends ProfileMetric {
   protected String getValueString() {
     return super.getSimpleValueString();
   }
-
 
 }
