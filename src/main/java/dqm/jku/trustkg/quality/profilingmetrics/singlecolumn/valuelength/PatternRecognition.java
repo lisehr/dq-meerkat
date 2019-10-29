@@ -44,7 +44,7 @@ public class PatternRecognition extends ProfileMetric {
     PatternCounterList patterns = new PatternCounterList();
     try {
       List<String> regs = FileSelectionUtil.readAllPatternsOfFile(1);
-      for (String s : regs) patterns.addPattern(s);
+      for (String s : regs) if (!s.isEmpty()) patterns.addPattern(s);
     } catch (IOException e) {
       e.printStackTrace();
     }

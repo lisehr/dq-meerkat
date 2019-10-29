@@ -52,11 +52,20 @@ public class PatternCounter {
   }
   
   public float calcHitRate(int size) {
-    return (float) ((this.cnt / size) * 100.0);
+    return ((float)this.cnt / (float) size) * 100.0f;
   }
   
   @Override
   public String toString() {
-    return String.format("%s:\t\t%d ", pattern.toString(), cnt);
+    return String.format("%s:%s%d ", pattern.toString(), tabulatorInsert(), cnt);
+  }
+
+  private String tabulatorInsert() {
+    int len = pattern.toString().length();
+    if (len < 7) return "\t\t\t\t\t";
+    else if (len < 11) return "\t\t\t\t";
+    else if (len < 22) return "\t\t\t";
+    else if (len < 30) return "\t\t";
+    else return "\t";
   }
 }
