@@ -36,15 +36,16 @@ public class PatternCounterList {
   public String getValueStrings(int size) {
     StringBuilder sb = new StringBuilder();
     for (PatternCounter pc : list) {
-      if (pc.getPattern() == null) sb.append("Invalid Pattern!\n");
+      if (pc.getPattern() == null) sb.append("  Invalid Pattern!\n");
       else {
+    	sb.append("  ");
         sb.append(pc.toString());
         sb.append(String.format("(%.2f", pc.calcHitRate(size)));
         sb.append('%');
         sb.append(String.format(")\n"));
       }
     }
-    sb.deleteCharAt(sb.length() - 1);
+    if(sb.length() > 0) sb.deleteCharAt(sb.length() - 1);    
     return sb.toString();
   }
 

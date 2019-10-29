@@ -2,13 +2,11 @@ package dqm.jku.trustkg.demos.lisa;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
 
 import dqm.jku.trustkg.connectors.ConnectorCSV;
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.Concept;
 import dqm.jku.trustkg.dsd.elements.Datasource;
-import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordList;
 
 public class TributechDataProfile {

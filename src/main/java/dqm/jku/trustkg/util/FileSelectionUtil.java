@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -67,7 +68,12 @@ public class FileSelectionUtil {
     List<Path> files = paths.collect(Collectors.toList());
     paths.close();
 
-    return Files.readAllLines(files.get(index));
+    if(files.size() > 1) {
+    	return Files.readAllLines(files.get(index));
+    } else {
+    	// return empty list if no patterns found
+    	return new ArrayList<String>();
+    }
   }
 
 }
