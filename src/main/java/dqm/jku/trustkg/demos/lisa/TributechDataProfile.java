@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -21,6 +24,8 @@ import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.distribution.Histog
 import javafx.util.Pair;
 
 public class TributechDataProfile {
+  private static final String RESOURCE_PATH = "src/main/java/dqm/jku/trustkg/resources/";
+  
 	private static final int RDP_SIZE = 5000;
 	private static final String[] FILENAMES = { "Acceleration breaking or forward", "Acceleration side to side",
 			"Acceleration up or down", "Device Voltage", "Engine RPM", "Engine Speed", "Engine Temperature" };
@@ -41,13 +46,13 @@ public class TributechDataProfile {
 				val.printAnnotatedProfile();
 			}
 		}
-		exportDataProfileToCSV(dss.keySet(), "src/main/java/dqm/jku/trustkg/resources/export/TributechDP.csv");
+		exportDataProfileToCSV(dss.keySet(), RESOURCE_PATH + "export/TributechDP.csv");
 	}
 
 	private static void loadDataSets(int[] ind) throws IOException {
 		for (int i : ind) {
 			String fname = FILENAMES[i];
-			String fpath = "src/main/java/dqm/jku/trustkg/resources/csv/Telematic Device Report - " + fname + ".csv";
+			String fpath = RESOURCE_PATH + "csv/Telematic Device Report - " + fname + ".csv";
 			ConnectorCSV conn = new ConnectorCSV(fpath, ",", "\n", fname, true);
 			Datasource ds = conn.loadSchema();
 			dss.put(ds, conn);
@@ -134,7 +139,16 @@ public class TributechDataProfile {
 			}
 			sb.append("\n");
 		}
-
+		
+		Path path = Paths.get(RESOURCE_PATH + "export");
+		if (Files.notExists(path)) {
+		  try {
+        Files.createDirectory(path);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+		}
+		
 		try (PrintWriter writer = new PrintWriter(new File(filepath))) {
 			writer.write(sb.toString());
 		} catch (FileNotFoundException e) {
