@@ -1,5 +1,8 @@
 package dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.distribution;
 
+import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.hist;
+import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.size;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,8 +17,6 @@ import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
 import dqm.jku.trustkg.util.numericvals.ValueDistributionUtils;
-
-import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
 
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:Histogram")
@@ -102,7 +103,7 @@ public class Histogram extends ProfileMetric {
    */
   private int[] constructArray() {
     if (super.getValue() == null) throw new IllegalStateException("Map has to exist here!");
-    int k = ValueDistributionUtils.calculateNumberClasses((int) super.getRefProf().getMetric(size).getValue());
+    int k = getNumberOfClasses();
     int classes[] = new int[k];
     int j = 0;
     for (Integer i : ((SerializableMap) super.getValue()).values()) {
@@ -121,10 +122,7 @@ public class Histogram extends ProfileMetric {
     sb.append(", ClassRange: ");
     sb.append(classrange);
     sb.append(", Values: ");
-    for (Integer i : ((SerializableMap) super.getValue()).values()) {
-      sb.append(i);
-      sb.append("-");
-    }
+    sb.append(getClassValues());
     sb.deleteCharAt(sb.length() - 1);
     return sb.toString();
   }
@@ -184,6 +182,19 @@ public class Histogram extends ProfileMetric {
    */
   public void setClassrange(Number classrange) {
     this.classrange = classrange;
+  }
+  
+  public int getNumberOfClasses() {
+	  return ValueDistributionUtils.calculateNumberClasses((int)super.getRefProf().getMetric(size).getValue());
+  }
+  
+  public String getClassValues() {
+	  StringBuilder sb = new StringBuilder();
+	  for (Integer i : ((SerializableMap) super.getValue()).values()) {
+	      sb.append(i);
+	      sb.append("-");
+	    }
+	  return sb.toString();
   }
 
 }

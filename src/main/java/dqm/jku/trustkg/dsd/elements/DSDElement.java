@@ -23,8 +23,12 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
 
   private static final long serialVersionUID = 1L;
   private static HashMap<String, DSDElement> cache = new HashMap<String, DSDElement>();
-
   private String uri;
+  
+  protected String label;
+  protected String labelOriginal;
+
+  private DataProfile dataProfile;
 
   @RDFSubject
   public String getURI() {
@@ -34,11 +38,6 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
   public void setURI(String uri) {
     this.uri = uri;
   }
-
-  protected String label;
-  protected String labelOriginal;
-
-  private DataProfile dataProfile;
 
   public DSDElement() {
 
@@ -191,6 +190,4 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
     Builder measure = Point.measurement(getURI()).time(System.currentTimeMillis(), TimeUnit.MILLISECONDS);
     connection.write(profile.createMeasuringPoint(measure));
   }
-
-
 }
