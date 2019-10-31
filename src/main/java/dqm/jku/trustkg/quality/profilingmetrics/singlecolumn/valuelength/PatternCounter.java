@@ -62,7 +62,7 @@ public class PatternCounter {
 
   private String tabulatorInsert() {
     int len = pattern.toString().length();
-    if (len < 7) return "\t\t\t\t\t";
+    if (len < 6) return "\t\t\t\t\t";
     else if (len < 11) return "\t\t\t\t";
     else if (len < 22) return "\t\t\t";
     else if (len < 30) return "\t\t";
