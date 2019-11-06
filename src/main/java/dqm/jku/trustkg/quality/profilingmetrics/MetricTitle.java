@@ -8,7 +8,8 @@ import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 @RDFBean("foaf:MetricTitle")
 public enum MetricTitle {
   card("Cardinality"),
-  nullVal("Null Values"),
+  nullVal("# Null Values"),
+  nullValP("% Null Values"),
   size("Size"),
   unique("Uniqueness"),
   keyCand("isCandidateKey"),

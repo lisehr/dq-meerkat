@@ -33,7 +33,6 @@ public class NullValues extends ProfileMetric {
     }
     this.setValue(nullVals);
     this.setValueClass(a.getDataType());
-
   }
 
   @Override
@@ -49,9 +48,7 @@ public class NullValues extends ProfileMetric {
   @Override
   protected String getValueString() {
     if (getValue() == null) return "\tnull";
-    int denominator = (int)super.getRefProf().getMetric(size).getValue();
-    if (denominator == 0) return "\tnull";
-    return "\t" + getValue().toString() + " (" + ((long)getValue() / denominator) + "%)";
+    return "\t" + getValue().toString();
   }
 
 }

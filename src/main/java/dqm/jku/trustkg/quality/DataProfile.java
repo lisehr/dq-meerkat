@@ -21,6 +21,7 @@ import dqm.jku.trustkg.quality.profilingmetrics.MetricTitle;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Cardinality;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.NullValues;
+import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.NullValuesPercentage;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Size;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Uniqueness;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.datatypeinfo.*;
@@ -150,6 +151,8 @@ public class DataProfile {
     	      metrics.add(uniq);
     	      ProfileMetric nullVal = new NullValues(this);
     	      metrics.add(nullVal);
+            ProfileMetric nullValP = new NullValuesPercentage(this);
+            metrics.add(nullValP);    	      
     	      ProfileMetric hist = new Histogram(this);
     	      metrics.add(hist);
     	      ProfileMetric digits = new Digits(this);

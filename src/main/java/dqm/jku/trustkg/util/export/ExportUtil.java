@@ -31,7 +31,8 @@ public class ExportUtil {
 
   static {
     LABELS.add(new LabelTriple<>(size, cardCat.label(), "Num rows"));
-    LABELS.add(new LabelTriple<>(nullVal, cardCat.label(), "Null values"));
+    LABELS.add(new LabelTriple<>(nullVal, cardCat.label(), nullVal.label()));
+    LABELS.add(new LabelTriple<>(nullValP, cardCat.label(), nullValP.label()));
     LABELS.add(new LabelTriple<>(card, cardCat.label(), card.label()));
     LABELS.add(new LabelTriple<>(unique, cardCat.label(), unique.label()));
 
