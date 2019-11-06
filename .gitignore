@@ -1,5 +1,8 @@
 /target/*
-/src/main/java/dqm/jku/trustkg/resources/*
+/src/main/java/dqm/jku/trustkg/resources/csv/Telematic*
+/src/main/java/dqm/jku/trustkg/resources/export/Tributech*
+/src/main/java/dqm/jku/trustkg/resources/export/export_telematic*
+/src/main/java/dqm/jku/trustkg/resources/csv/1500000 Sales Records.csv
 /Neo4j/*
 /.settings/*
 .classpath

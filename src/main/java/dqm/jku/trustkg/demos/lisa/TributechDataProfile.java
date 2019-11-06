@@ -20,7 +20,7 @@ import dqm.jku.trustkg.dsd.elements.Datasource;
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
-import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.distribution.Histogram;
+import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.histogram.Histogram;
 import javafx.util.Pair;
 
 public class TributechDataProfile {
@@ -33,7 +33,7 @@ public class TributechDataProfile {
 	private static HashMap<Datasource, ConnectorCSV> dss = new HashMap<Datasource, ConnectorCSV>();
 
 	public static void main(String[] args) throws IOException, NoSuchMethodException {
-		int[] indices = { 0, 2, 3, 4, 5, 6 };
+		int[] indices = {0, 1, 2, 3, 4, 5, 6};
 		loadDataSets(indices);
 
 		for (Datasource ds : dss.keySet()) {

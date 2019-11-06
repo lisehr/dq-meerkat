@@ -19,13 +19,14 @@ import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.profilingmetrics.MetricTitle;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
-import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.valuelength.*;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Cardinality;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.NullValues;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Size;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Uniqueness;
+import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.datatypeinfo.*;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.dependency.KeyCandidate;
-import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.distribution.*;
+import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.histogram.*;
+import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.pattern.PatternRecognition;
 import dqm.jku.trustkg.util.Miscellaneous.DBType;
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
 
@@ -45,7 +46,7 @@ public class DataProfile {
   public DataProfile(RecordList rs, DSDElement d) throws NoSuchMethodException {
     this.elem = d;
     this.uri = elem.getURI() + "/profile";
-    createReferenceDataProfile();
+    createDataProfileSkeleton();
     calculateReferenceDataProfile(rs);
   }
 
@@ -128,7 +129,7 @@ public class DataProfile {
   /**
    * creates a reference data profile on which calculations can be made
    */
-  private void createReferenceDataProfile() {
+  private void createDataProfileSkeleton() {
     if (elem instanceof Attribute) {
     	Attribute a = (Attribute) elem;
     	Class<?> clazz = a.getDataType();
@@ -157,9 +158,10 @@ public class DataProfile {
     	      metrics.add(isCK);
     	      ProfileMetric decimals = new Decimals(this);
     	      metrics.add(decimals);
-    	      // ------ Still untested, comment out if not working (!)-----
     	      ProfileMetric patterns = new PatternRecognition(this);
     	      metrics.add(patterns);
+    	      ProfileMetric dataType = new DTCategory(this);
+    	      metrics.add(dataType);
     	} else {
     		System.err.println("Attribute '" + a.getLabel() + "' has data type '" + a.getDataTypeString() + "', which is currently not handled. ");
     	}

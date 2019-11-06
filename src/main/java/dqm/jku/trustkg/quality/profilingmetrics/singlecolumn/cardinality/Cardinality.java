@@ -1,8 +1,8 @@
 package dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
@@ -30,7 +30,7 @@ public class Cardinality extends ProfileMetric {
   @Override
   public void calculation(RecordList rs, Object oldVal) {
     Attribute a = (Attribute) super.getRefElem();
-    Set<Number> set = new TreeSet<Number>();
+    Set<Number> set = new HashSet<Number>();
     for (Record r : rs) {
       Number field = null;
       if (a.getDataType().equals(String.class) && r.getField(a) != null) field = ((String) r.getField(a)).length();
@@ -41,7 +41,7 @@ public class Cardinality extends ProfileMetric {
 
   @Override
   public void calculationNumeric(List<Number> list, Object oldVal) {
-    Set<Number> set = new TreeSet<Number>();
+    Set<Number> set = new HashSet<Number>();
     set.addAll(list);
     this.setValue((long) set.size());
     this.setValueClass(Long.class);

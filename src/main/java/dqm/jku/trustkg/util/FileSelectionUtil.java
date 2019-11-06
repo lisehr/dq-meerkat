@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.apache.commons.io.FilenameUtils;
 
 import dqm.jku.trustkg.connectors.ConnectorCSV;
 import dqm.jku.trustkg.connectors.ConnectorPartialCSV;
@@ -24,7 +25,7 @@ public class FileSelectionUtil {
     List<Path> files = paths.collect(Collectors.toList());
     paths.close();
 
-    return new ConnectorCSV(files.get(index).toString(), ",", "\n", "Test", true);
+    return new ConnectorCSV(files.get(index).toString(), ",", "\n", FilenameUtils.removeExtension(files.get(index).getFileName().toString()), true);
 
   }
 
@@ -46,7 +47,7 @@ public class FileSelectionUtil {
     List<Path> files = paths.collect(Collectors.toList());
     paths.close();
 
-    return new ConnectorPartialCSV(files.get(index).toString(), ",", "\n", "Test", true, offset, noRecords);
+    return new ConnectorPartialCSV(files.get(index).toString(), ",", "\n", FilenameUtils.removeExtension(files.get(index).getFileName().toString()), true, offset, noRecords);
 
   }
 

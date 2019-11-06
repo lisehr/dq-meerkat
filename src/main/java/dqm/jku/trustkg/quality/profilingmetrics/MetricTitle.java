@@ -19,7 +19,11 @@ public enum MetricTitle {
   max("Maximum"),
   med("Median"),
   min("Minimum"),
-  pattern("Pattern Recognition");
+  pattern("Pattern Recognition"),
+  dt("Data type"),
+  histCls("Number of classes"),
+  histCR("Class range"),
+  histVal("Values");
   
   private String label;
 
