@@ -390,6 +390,7 @@ public class DataTypeConverter {
 	  if (StringUtils.isBlank(val) || val.isEmpty()) return;
 	  if (TryParsers.tryParseLong(val)) a.setDataType(Long.class);
 	  else if (TryParsers.tryParseDouble(val)) a.setDataType(Double.class);
+	  else a.setDataType(String.class);
 	}
 	
 	/**

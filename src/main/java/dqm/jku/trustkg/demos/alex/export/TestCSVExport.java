@@ -16,7 +16,7 @@ public class TestCSVExport {
   private static final boolean DEBUG = false;
   
   public static void main(String args[]) throws IOException, NoSuchMethodException {
-    DSInstanceConnector conn = FileSelectionUtil.connectToCSV(11);
+    DSInstanceConnector conn = FileSelectionUtil.connectToCSV(20);
     
     Datasource ds;
     try {

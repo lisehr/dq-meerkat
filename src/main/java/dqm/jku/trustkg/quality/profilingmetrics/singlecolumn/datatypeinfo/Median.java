@@ -55,7 +55,10 @@ public class Median extends ProfileMetric {
     if (size % 2 == 0) isEven = true;
     size /= 2;
     Number val = list.get(size);
-    if (isEven) val = averageResult(val, list.get(size + 1));
+    if (isEven) {
+      if (size == 1) val = averageResult(val, list.get(0));
+      else val = averageResult(val, list.get(size + 1));
+    }
     if (((Attribute) super.getRefElem()).getDataType().equals(Long.class)) return val.longValue();
     else if (((Attribute) super.getRefElem()).getDataType().equals(Double.class)) return val.doubleValue();
     return val;

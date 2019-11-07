@@ -142,6 +142,10 @@ public class ExportUtil {
       e.printStackTrace();
     }
   }
+  
+  public static void exportToCSV(List<Datasource> dss) {
+    for (Datasource ds : dss) exportToCSV(ds);
+  }
 
   private static String formatFloat(Object num) {
     DecimalFormat decimalFormat = new DecimalFormat("#,##0.0000");
