@@ -58,6 +58,10 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
   public DataProfile getProfile() {
     return dataProfile;
   }
+  
+  public boolean hasProfile() {
+	  return !(dataProfile == null);
+  }
 
   public void setProfile(DataProfile dataProfile) {
     this.dataProfile = dataProfile;

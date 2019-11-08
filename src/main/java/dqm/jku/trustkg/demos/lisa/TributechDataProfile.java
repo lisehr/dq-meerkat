@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,6 +22,7 @@ import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.histogram.Histogram;
+import dqm.jku.trustkg.util.export.ExportUtil;
 import javafx.util.Pair;
 
 public class TributechDataProfile {
@@ -46,7 +48,10 @@ public class TributechDataProfile {
 				val.printAnnotatedProfile();
 			}
 		}
-		exportDataProfileToCSV(dss.keySet(), RESOURCE_PATH + "export/TributechDP.csv");
+//		exportDataProfileToCSV(dss.keySet(), RESOURCE_PATH + "export/TributechDP.csv");
+		List<Datasource> dssList = new ArrayList<Datasource>();
+		dssList.addAll(dss.keySet());
+		ExportUtil.exportToCSV(dssList);
 	}
 
 	private static void loadDataSets(int[] ind) throws IOException {

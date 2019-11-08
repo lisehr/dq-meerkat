@@ -10,12 +10,11 @@ import dqm.jku.trustkg.dsd.records.RecordList;
 
 public class MySQLDBDemo {
 	private static final int AMOUNT = 5000;
-	private static final int FILEINDEX = 21;
-
+	
 	public static void main(String[] args) throws IOException, NoSuchMethodException {
 //		InfluxDBConnection influx = new InfluxDBConnection();
 		int noRecs = 0;
-	    int offset = 0;
+//	    int offset = 0;
 		ConnectorMySQL conn = ConnectorMySQL.getInstance("jdbc:mysql://localhost:3366/", "Northwind", "dquser", "dataQ4T!_pw");	
 		Concept testCon = null;
 		
@@ -29,6 +28,7 @@ public class MySQLDBDemo {
 	      }
 	    }
 	    noRecs = conn.getNrRecords(testCon);
+	    System.out.println(noRecs);
 //	    ds.addProfileToInflux(influx);
 
 	}
