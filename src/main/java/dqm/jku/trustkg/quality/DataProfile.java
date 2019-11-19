@@ -58,7 +58,7 @@ public class DataProfile {
    * @param rs the set of records used for calculation
    * @param d  the dsd element to be annotated (currently only Attribute for
    *           single column metrics)
-   * @throws NoSuchMethodException 
+   * @throws NoSuchMethodException
    */
   private void calculateReferenceDataProfile(RecordList rs) throws NoSuchMethodException {
     if (elem instanceof Attribute) calculateSingleColumn(rs);
@@ -87,7 +87,7 @@ public class DataProfile {
    * Helper method for calculating the single column values for the profile
    * 
    * @param rs the recordset for measuring
-   * @throws NoSuchMethodException 
+   * @throws NoSuchMethodException
    */
   private void calculateSingleColumn(RecordList rs) throws NoSuchMethodException {
     List<Number> l = createValueList(rs);
@@ -110,17 +110,12 @@ public class DataProfile {
     for (Record r : rs) {
       Number field = null;
       Class<?> clazz = a.getDataType();
-      if (String.class.isAssignableFrom(clazz) && r.getField(a) != null) field = ((String) r.getField(a)).length();
-      else if(a.getConcept().getDatasource().getDBType().equals(DBType.CSV)) {
-    	  field = (Number) r.getField(a);
-      } else if(a.getConcept().getDatasource().getDBType().equals(DBType.MYSQL)) {
-    	  if(Number.class.isAssignableFrom(clazz)) {
-    		  field = (Number) r.getField(a);
-    	  } 
-      } 
-      if (field != null) {
-    	  list.add(field);
+      if (String.class.isAssignableFrom(clazz) && r.getField(a) != null) field = r.getField(a).toString().length();
+      else if (a.getConcept().getDatasource().getDBType().equals(DBType.CSV)) field = (Number) r.getField(a);
+      else if (a.getConcept().getDatasource().getDBType().equals(DBType.MYSQL)) {
+        if (Number.class.isAssignableFrom(clazz)) field = (Number) r.getField(a);
       }
+      if (field != null) list.add(field);
     }
     list.sort(new NumberComparator());
     list.size();
@@ -132,42 +127,42 @@ public class DataProfile {
    */
   private void createDataProfileSkeleton() {
     if (elem instanceof Attribute) {
-    	Attribute a = (Attribute) elem;
-    	Class<?> clazz = a.getDataType();
-    	if(String.class.isAssignableFrom(clazz) || Number.class.isAssignableFrom(clazz)) {
-    	      ProfileMetric size = new Size(this);
-    	      metrics.add(size);
-    	      ProfileMetric min = new Minimum(this);
-    	      metrics.add(min);
-    	      ProfileMetric max = new Maximum(this);
-    	      metrics.add(max);
-    	      ProfileMetric avg = new Average(this);
-    	      metrics.add(avg);
-    	      ProfileMetric med = new Median(this);
-    	      metrics.add(med);
-    	      ProfileMetric card = new Cardinality(this);
-    	      metrics.add(card);
-    	      ProfileMetric uniq = new Uniqueness(this);
-    	      metrics.add(uniq);
-    	      ProfileMetric nullVal = new NullValues(this);
-    	      metrics.add(nullVal);
-            ProfileMetric nullValP = new NullValuesPercentage(this);
-            metrics.add(nullValP);    	      
-    	      ProfileMetric hist = new Histogram(this);
-    	      metrics.add(hist);
-    	      ProfileMetric digits = new Digits(this);
-    	      metrics.add(digits);
-    	      ProfileMetric isCK = new KeyCandidate(this);
-    	      metrics.add(isCK);
-    	      ProfileMetric decimals = new Decimals(this);
-    	      metrics.add(decimals);
-    	      ProfileMetric patterns = new PatternRecognition(this);
-    	      metrics.add(patterns);
-    	      ProfileMetric dataType = new DTCategory(this);
-    	      metrics.add(dataType);
-    	} else {
-    		System.err.println("Attribute '" + a.getLabel() + "' has data type '" + a.getDataTypeString() + "', which is currently not handled. ");
-    	}
+      Attribute a = (Attribute) elem;
+      Class<?> clazz = a.getDataType();
+      if (String.class.isAssignableFrom(clazz) || Number.class.isAssignableFrom(clazz)) {
+        ProfileMetric size = new Size(this);
+        metrics.add(size);
+        ProfileMetric min = new Minimum(this);
+        metrics.add(min);
+        ProfileMetric max = new Maximum(this);
+        metrics.add(max);
+        ProfileMetric avg = new Average(this);
+        metrics.add(avg);
+        ProfileMetric med = new Median(this);
+        metrics.add(med);
+        ProfileMetric card = new Cardinality(this);
+        metrics.add(card);
+        ProfileMetric uniq = new Uniqueness(this);
+        metrics.add(uniq);
+        ProfileMetric nullVal = new NullValues(this);
+        metrics.add(nullVal);
+        ProfileMetric nullValP = new NullValuesPercentage(this);
+        metrics.add(nullValP);
+        ProfileMetric hist = new Histogram(this);
+        metrics.add(hist);
+        ProfileMetric digits = new Digits(this);
+        metrics.add(digits);
+        ProfileMetric isCK = new KeyCandidate(this);
+        metrics.add(isCK);
+        ProfileMetric decimals = new Decimals(this);
+        metrics.add(decimals);
+        ProfileMetric patterns = new PatternRecognition(this);
+        metrics.add(patterns);
+        ProfileMetric dataType = new DTCategory(this);
+        metrics.add(dataType);
+      } else {
+        System.err.println("Attribute '" + a.getLabel() + "' has data type '" + a.getDataTypeString() + "', which is currently not handled. ");
+      }
     }
   }
 
@@ -204,9 +199,10 @@ public class DataProfile {
   public void setMetrics(List<ProfileMetric> metrics) {
     this.metrics = metrics;
   }
-  
+
   /**
    * Method for getting a specific ProfileMetric with its corresponding label.
+   * 
    * @param label the label to compare with the profile metrics
    * @return ProfileMetric if found, null otherwise
    */
