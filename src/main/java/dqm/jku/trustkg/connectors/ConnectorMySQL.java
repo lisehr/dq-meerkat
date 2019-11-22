@@ -318,31 +318,37 @@ public class ConnectorMySQL extends DSInstanceConnector {
 		referenceAssociation.add(assocName);
 	}
 
-  @Override
-  public RecordList getRecordSet(Concept concept) throws IOException {
-    Iterator<Record> rIt = getRecords(concept);
-    RecordList rs = new RecordList();
-    while (rIt.hasNext()) {
-      rs.addRecord(rIt.next());
-    }
-    return rs;
-  }
+	@Override
+	public RecordList getRecordSet(Concept concept) throws IOException {
+		Iterator<Record> rIt = getRecords(concept);
+		RecordList rs = new RecordList();
+		while (rIt.hasNext()) {
+			rs.addRecord(rIt.next());
+		}
+		return rs;
+	}
 
-  public RecordList getPartialRecordSet(final Concept concept, int offset, int noRecs) throws IOException {
-	    Iterator<Record> rIt = getRecords(concept);
-	    RecordList rs = new RecordList();
-	    int i = 0;
-	    while (rIt.hasNext() && i < offset) {
-	      rIt.next();
-	      i++;
-	    }
-	    i = 0;
-	    while (rIt.hasNext() && i < noRecs) {
-	      rs.addRecord(rIt.next());
-	      i++;
-	    }
-	    return rs;
+	public RecordList getPartialRecordSet(final Concept concept, int offset, int noRecs) throws IOException {
+		Iterator<Record> rIt = getRecords(concept);
+		RecordList rs = new RecordList();
+		int i = 0;
+		while (rIt.hasNext() && i < offset) {
+			rIt.next();
+			i++;
+		}
+		i = 0;
+		while (rIt.hasNext() && i < noRecs) {
+			rs.addRecord(rIt.next());
+			i++;
+		}
+		return rs;
 
-	  }
+	}
+
+	//TODO: implement
+	@Override
+	public Datasource loadSchema(String uri, String prefix) throws IOException {
+		return loadSchema();
+	}
 
 }

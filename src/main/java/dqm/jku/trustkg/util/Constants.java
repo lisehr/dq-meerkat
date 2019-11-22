@@ -8,6 +8,7 @@ public class Constants {
 	public static final boolean PRINT_WORKING_MESSAGES = false;
 
 	public static final String WN_HOME = "src/resources/wordnet"; // location of wordnet
+	public static final String RESSOURCES = "src/main/java/dqm/jku/trustkg/resources/";
 
 	// Time Constants
 	public final static long MILLIS_IN_SEC = 1000;
@@ -16,5 +17,9 @@ public class Constants {
 	public final static long HOUR_IN_DAY = 24;
 	public final static long DAY_IN_MONTH = 30;
 	public final static long DAY_IN_YEAR = 365;
+	
+	// Graph Constants
+	public final static String DEFAULT_URI = "http://example.com";
+	public final static String DEFAULT_PREFIX = "ex:";
 
 }

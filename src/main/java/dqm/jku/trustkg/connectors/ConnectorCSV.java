@@ -19,6 +19,7 @@ import dqm.jku.trustkg.dsd.elements.Datasource;
 import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.util.AttributeSet;
+import dqm.jku.trustkg.util.Constants;
 import dqm.jku.trustkg.util.DataTypeConverter;
 import dqm.jku.trustkg.util.Miscellaneous.DBType;
 
@@ -144,7 +145,12 @@ public class ConnectorCSV extends DSInstanceConnector {
 
 	@Override
 	public Datasource loadSchema() throws IOException {
-		Datasource ds = DSDFactory.makeDatasource(label, DBType.CSV);
+		return loadSchema(Constants.DEFAULT_URI, Constants.DEFAULT_PREFIX);
+	}
+	
+	@Override
+	public Datasource loadSchema(String uri, String prefix) throws IOException {
+		Datasource ds = DSDFactory.makeDatasource(label, DBType.CSV, uri, prefix);
 		BufferedReader reader = new BufferedReader(new FileReader(file));
 		String[] attNames = reader.readLine().split(seperator);
 		Concept c = DSDFactory.makeConcept(label, ds);

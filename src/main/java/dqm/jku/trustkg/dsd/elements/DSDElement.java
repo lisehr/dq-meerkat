@@ -88,6 +88,10 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
   public String getLabel() {
     return label;
   }
+  
+  public String getLabelWithoutBlanks(String replmt) {
+	  return label.replace(" ", replmt);
+  }
 
   public void setLabel(String label) {
     this.label = label;

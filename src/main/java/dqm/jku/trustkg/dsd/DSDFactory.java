@@ -20,6 +20,10 @@ public class DSDFactory {
 	public static Datasource makeDatasource(String label, DBType dbtype) {
 		return DSDElement.get(new Datasource(label, dbtype));
 	}
+	
+	public static Datasource makeDatasource(String label, DBType dbtype, String uri, String prefix) {
+		return DSDElement.get(new Datasource(label, dbtype, uri, prefix));
+	}
 
 	public static Concept makeConcept(String label, Datasource datasource) {
 		Concept var = DSDElement.get(new Concept(label, datasource));
