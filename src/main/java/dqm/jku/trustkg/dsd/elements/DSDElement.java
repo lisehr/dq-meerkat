@@ -51,7 +51,7 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
   public DSDElement(String label, String uri) {
     this.label = label.toLowerCase();
     this.labelOriginal = label;
-    this.uri = uri;
+    this.uri = uri + label;
   }
 
   @RDF("foaf:dataProfile")

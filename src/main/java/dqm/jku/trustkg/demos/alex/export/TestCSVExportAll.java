@@ -17,7 +17,7 @@ import dqm.jku.trustkg.util.export.ExportUtil;
 
 public class TestCSVExportAll {
   private static final boolean DEBUG = false;
-  private static final boolean EXTENSIVE_PRINT = false;
+  private static final boolean EXTENSIVE_PRINT = true;
   private static final String CSV_PATH = "src/main/java/dqm/jku/trustkg/resources/csv/";
 
   public static void main(String args[]) throws IOException, NoSuchMethodException {
@@ -28,7 +28,7 @@ public class TestCSVExportAll {
     List<Datasource> dss = new ArrayList<>();
     Datasource ds;
 
-    for (int i = 1; i <= fileCount; i++) {
+    for (int i = 3; i <= fileCount; i++) {
         try {
           conn = FileSelectionUtil.connectToCSV(i);
           ds = conn.loadSchema();

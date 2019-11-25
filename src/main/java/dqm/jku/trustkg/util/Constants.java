@@ -19,7 +19,7 @@ public class Constants {
 	public final static long DAY_IN_YEAR = 365;
 	
 	// Graph Constants
-	public final static String DEFAULT_URI = "http://example.com";
+	public final static String DEFAULT_URI = "http://example.com/";
 	public final static String DEFAULT_PREFIX = "ex:";
 
 }

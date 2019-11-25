@@ -13,5 +13,5 @@ Data type info;# Digits;2,0000;2,0000;6,0000
 Data type info;# Decimals;2,0000;6,0000;6,0000
 Histogram;# Classes;4,0000;4,0000;4,0000
 Histogram;Class range;18,5250;6,8525;86 358,6869
-Histogram;Values;[0, 1, 1, 3];[0, 1, 1, 3];[0, 0, 1, 4]
+Histogram;Values;[3, 1, 1, 0];[3, 0, 1, 1];[4, 1, 0, 0]
 Dependencies;isCandidateKey;true;true;true

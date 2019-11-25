@@ -1,0 +1,28 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<ex:telematic_device_report_acceleration_corr> <ex:> "ex:acceleration_forward_or_braking",
+    "ex:acceleration_side_to_side", "ex:acceleration_up_down", "ex:controller", "ex:date",
+    "ex:device_group", "ex:source", "ex:time", "ex:vehicle" .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<ex:test> <ex:> "ex:val1", "ex:val2", "ex:val3" .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<ex:wetterdaten> <ex:> "ex:actual_max_temp", "ex:actual_mean_temp", "ex:actual_min_temp",
+    "ex:actual_precipitation", "ex:average_max_temp", "ex:average_min_temp", "ex:average_precipitation",
+    "ex:date", "ex:record_max_temp", "ex:record_max_temp_year", "ex:record_min_temp",
+    "ex:record_min_temp_year", "ex:record_precipitation" .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<ex:telematic_device_report_engine> <ex:> "ex:controller", "ex:date", "ex:device_group",
+    "ex:engine_coolant_temperature", "ex:engine_road_speed", "ex:engine_speed", "ex:source",
+    "ex:time", "ex:vehicle" .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<ex:telematic_device_report_device-voltage> <ex:> "ex:controller", "ex:date", "ex:description",
+    "ex:device_group", "ex:source", "ex:time", "ex:value", "ex:vehicle" .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<ex:telematic_device_report_acceleration> <ex:> "ex:acceleration_forward_or_braking",
+    "ex:acceleration_side_to_side", "ex:acceleration_up_down", "ex:controller", "ex:date",
+    "ex:device_group", "ex:source", "ex:time", "ex:vehicle" .

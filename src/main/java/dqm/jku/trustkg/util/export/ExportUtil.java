@@ -45,7 +45,7 @@ import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.histogram.Histogram
 public class ExportUtil {
 	private static final List<LabelTriple<MetricTitle, String, String>> LABELS = new ArrayList<>();
 
-	private static final String EXPORT_PATH = "src/main/java/dqm/jku/trustkg/resources/export/";
+	private static final String EXPORT_PATH = "src/main/java/dqm/jku/trustkg/resources/export/csv/";
 
 	static {
 		LABELS.add(new LabelTriple<>(size, cardCat.label(), "# Rows"));
