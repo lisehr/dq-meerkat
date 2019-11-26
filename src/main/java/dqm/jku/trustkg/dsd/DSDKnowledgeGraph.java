@@ -30,6 +30,7 @@ import dqm.jku.trustkg.util.export.ExportUtil;
 
 /**
  * @author Lisa
+ * @author optimusseptim
  * 
  *         Wrapper class for the entire KG to manage multiple data sources and
  *         their connections. Allows to automatically annotate data profiles for
@@ -37,13 +38,13 @@ import dqm.jku.trustkg.util.export.ExportUtil;
  *
  */
 public class DSDKnowledgeGraph {
-
-  EmbeddedGraphDB kgstore;
-
-  HashMap<String, Datasource> dss = new HashMap<String, Datasource>();
-  HashMap<String, DSConnector> conns = new HashMap<String, DSConnector>();
+  private String label;
+  private EmbeddedGraphDB kgstore;
+  private HashMap<String, Datasource> dss = new HashMap<String, Datasource>();
+  private HashMap<String, DSConnector> conns = new HashMap<String, DSConnector>();
 
   public DSDKnowledgeGraph(String label) {
+    this.label = label;
     kgstore = new EmbeddedGraphDB(label);
   }
 
@@ -57,6 +58,14 @@ public class DSDKnowledgeGraph {
   public void addDatasourceAndConnector(Datasource ds, DSConnector conn) {
     dss.put(ds.getLabel(), ds);
     conns.put(ds.getLabel(), conn);
+  }
+  
+  public String getLabel() {
+    return label;
+  }
+  
+  public HashMap<String, Datasource> getDatasources(){
+    return dss;
   }
 
   /**
@@ -114,6 +123,7 @@ public class DSDKnowledgeGraph {
           a.annotateProfile(rs);
         }
       }
+      dss.put(ds.getLabel(), ds);
     }
   }
 
@@ -133,6 +143,7 @@ public class DSDKnowledgeGraph {
           a.annotateProfile(rs);
         }
       }
+      dss.put(ds.getLabel(), ds);
     }
   }
 
@@ -166,6 +177,49 @@ public class DSDKnowledgeGraph {
    */
   public void exportToCSV() {
     ExportUtil.exportToCSV(new ArrayList<Datasource>(dss.values()));
+  }
+  
+  /**
+   * Method for printing out the Structure of the KG in Tree-format
+   */
+  public void printKGStructure() {
+    System.out.print("Structure of KG: ");
+    System.out.println(label);
+    for (Datasource ds : dss.values()) {
+      ds.printStructure();
+    }
+  }
+
+  /**
+   * Method for printing out the Structure of the KG
+   */
+  public void printDataprofiles() {
+    System.out.print("Dataprofiles of KG: ");
+    System.out.println(label);
+    for (Datasource ds : dss.values()) {
+      System.out.print("Dataprofiles of Datasource: ");
+      System.out.println(ds.getLabel());
+      for (Concept c : ds.getConcepts()) {
+        System.out.print("Dataprofiles of Concept: ");
+        System.out.println(ds.getLabel());
+        for (Attribute a : c.getAttributes()) a.printAnnotatedProfile();   
+      }
+    }    
+  }
+  
+  /**
+   * Method for getting a complete print of both structure and data profiles
+   */
+  public void printAll() {
+    printKGStructure();
+    printDataprofiles();
+  }
+  
+  /**
+   * Method for exporting the overview of the KG to a textfile
+   */
+  public void exportReport() {
+    ExportUtil.exportReport(this);
   }
 
 }

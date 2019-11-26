@@ -25,7 +25,7 @@ public class Attribute extends DSDElement {
   }
   
   public Attribute(String label, Concept concept) {
-    super(label, concept.getURI() + "/" + label);
+    super(label, concept.getURI());
     this.concept = concept;
   }
 

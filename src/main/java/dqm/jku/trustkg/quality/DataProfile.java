@@ -179,6 +179,28 @@ public class DataProfile {
     }
     System.out.println();
   }
+  
+  /**
+   * Method for printing out the data profile as a string
+   */
+  public String getProfileString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("Data Profile:");
+    sb.append('\n');
+    if (metrics.stream().anyMatch(p -> p.getValueClass().equals(String.class))) {
+      sb.append("Strings use String length for value length metrics!");
+      sb.append('\n');
+    }
+    SortedSet<ProfileMetric> metricSorted = new TreeSet<>();
+    metricSorted.addAll(metrics);
+    for (ProfileMetric p : metricSorted) {
+      sb.append(p.toString());
+      sb.append('\n');
+    }
+    sb.append('\n');
+    return sb.toString();
+  }
+
 
   /**
    * Method for getting the set of metrics

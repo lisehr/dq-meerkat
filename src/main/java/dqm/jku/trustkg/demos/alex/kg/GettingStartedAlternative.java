@@ -34,6 +34,9 @@ public class GettingStartedAlternative {
     //kg.exportKGToFile("CSVTest");
     
     // Export data profiles to CSV files
-    kg.exportToCSV();
+    //kg.exportToCSV();
+    
+    // Export KG-Report to textfile
+    kg.exportReport();
   }
 }

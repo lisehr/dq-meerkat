@@ -51,7 +51,7 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
   public DSDElement(String label, String uri) {
     this.label = label.toLowerCase();
     this.labelOriginal = label;
-    this.uri = uri + label;
+    this.uri = uri + '/' + label;
   }
 
   @RDF("foaf:dataProfile")
@@ -82,6 +82,19 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
     } else {
     	System.out.println("No data profile annotated for DSDElement: " + label);
     }
+  }
+  
+  public String getProfileString() {
+    StringBuilder sb = new StringBuilder();
+    if(dataProfile != null) {
+      sb.append("Annotated data profile for DSDElement: " + label);
+      sb.append('\n');
+      sb.append(dataProfile.getProfileString());
+    } else {
+      sb.append("No data profile annotated for DSDElement: " + label);
+      sb.append('\n');
+    }
+    return sb.toString();
   }
 
   @RDF("foaf:label")

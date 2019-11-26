@@ -38,7 +38,7 @@ public class Concept extends DSDElement {
   }
 
   public Concept(String label, Datasource datasource) {
-    super(label, datasource.getURI() + "/" + label);
+    super(label, datasource.getURI());
     this.datasource = datasource;
   }
 

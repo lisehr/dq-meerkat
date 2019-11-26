@@ -16,7 +16,7 @@ public class GettingStarted {
     ConnectorCSV conn = new ConnectorCSV(Constants.RESSOURCES + "csv/DataCoSupplyChainDataset.csv", ",", "\n", "SupplyChain");
 
     // Init KG by loading DSD elements
-    Datasource ds = conn.loadSchema("https://faw.jku.at/", "sc:");
+    Datasource ds = conn.loadSchema("https://faw.jku.at", "sc:");
 
     // Create Knowledge Graph and add (possibly multiple data sources)
     DSDKnowledgeGraph kg = new DSDKnowledgeGraph("supplychain");

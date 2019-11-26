@@ -34,6 +34,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import dqm.jku.trustkg.dsd.DSDKnowledgeGraph;
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.Concept;
 import dqm.jku.trustkg.dsd.elements.Datasource;
@@ -45,7 +46,9 @@ import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.histogram.Histogram
 public class ExportUtil {
 	private static final List<LabelTriple<MetricTitle, String, String>> LABELS = new ArrayList<>();
 
-	private static final String EXPORT_PATH = "src/main/java/dqm/jku/trustkg/resources/export/csv/";
+	private static final String EXPORT_PATH = "src/main/java/dqm/jku/trustkg/resources/export/";
+	private static final String EXPORT_CSV = "csv/";
+  private static final String EXPORT_REPORT = "report/";
 
 	static {
 		LABELS.add(new LabelTriple<>(size, cardCat.label(), "# Rows"));
@@ -146,7 +149,7 @@ public class ExportUtil {
 			sb.append("\n");
 		}
 
-		Path path = Paths.get(EXPORT_PATH);
+		Path path = Paths.get(EXPORT_PATH + EXPORT_CSV);
 		if (Files.notExists(path)) {
 			try {
 				Files.createDirectory(path);
@@ -155,7 +158,7 @@ public class ExportUtil {
 			}
 		}
 
-		try (PrintWriter writer = new PrintWriter(new File(EXPORT_PATH + "export_" + ds.getLabel() + ".csv"))) {
+		try (PrintWriter writer = new PrintWriter(new File(EXPORT_PATH + EXPORT_CSV + "export_" + ds.getLabel() + ".csv"))) {
 			writer.write(sb.toString());
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -164,6 +167,47 @@ public class ExportUtil {
 
 	public static void exportToCSV(List<Datasource> dss) {
 		for (Datasource ds : dss) exportToCSV(ds);
+	}
+	
+	public static void exportReport(DSDKnowledgeGraph kg) {
+	  StringBuilder sb = new StringBuilder();
+	  
+    sb.append("Structure of KG: ");
+    sb.append(kg.getLabel()).append('\n').append('\t');
+    for (Datasource ds : kg.getDatasources().values()) {
+      sb.append(ds.getStructureString().replace("\n", "\n\t"));
+    }
+    sb.append('\n');
+    
+    sb.append("Dataprofiles of KG: ");
+    sb.append(kg.getLabel()).append('\n').append('\t');
+    for (Datasource ds : kg.getDatasources().values()) {
+      sb.append("Dataprofiles of Datasource: ");
+      sb.append(ds.getLabel()).append('\n').append('\t').append('\t');
+      for (Concept c : ds.getConcepts()) {
+        sb.append("Dataprofiles of Concept: ");
+        sb.append(c.getLabel()).append('\n').append('\t').append('\t').append('\t');
+        for (Attribute a : c.getAttributes()) sb.append(a.getProfileString().replace("\n", "\n\t\t\t"));
+        sb.append('\t').append('\t');
+      }
+      sb.delete(sb.length() - 5, sb.length() - 1);
+    }    
+	  
+	  Path path = Paths.get(EXPORT_PATH + EXPORT_REPORT);
+	    if (Files.notExists(path)) {
+	      try {
+	        Files.createDirectory(path);
+	      } catch (IOException e) {
+	        e.printStackTrace();
+	      }
+	    }
+
+	    try (PrintWriter writer = new PrintWriter(new File(EXPORT_PATH + EXPORT_REPORT + "export_report_" + kg.getLabel() + ".txt"))) {
+	      writer.write(sb.toString());
+	    } catch (FileNotFoundException e) {
+	      e.printStackTrace();
+	    }
+
 	}
 
 	private static String formatFloat(Object num) {

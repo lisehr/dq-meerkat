@@ -189,4 +189,30 @@ public class Datasource extends DSDElement {
 	public DBType getDBType() {
 		return dbtype;
 	}
+
+  public void printStructure() {
+    for (Concept c : getConcepts()) {
+      System.out.println(c.getURI());
+      for (Attribute a : c.getAttributes()) {
+        System.out.print("\t");
+        System.out.println(a.getDataType().getSimpleName() + "\t" + a.getURI());
+      }
+      System.out.println();
+    }
+  }
+
+  public String getStructureString() {
+    StringBuilder sb = new StringBuilder();
+    for (Concept c : getConcepts()) {
+      sb.append(c.getURI());
+      sb.append('\n');
+      for (Attribute a : c.getAttributes()) {
+        sb.append("\t");
+        sb.append(a.getDataType().getSimpleName() + "\t" + a.getURI());
+        sb.append('\n');
+      }
+    }
+    return sb.toString();
+  }
+
 }
