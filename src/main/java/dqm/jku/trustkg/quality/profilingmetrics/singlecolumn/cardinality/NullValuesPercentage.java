@@ -25,7 +25,7 @@ public class NullValuesPercentage extends ProfileMetric {
     if (denominator == 0) result = Double.valueOf(0);
     result = (double) nominator / (double) denominator;
     super.setValue(result);
-    this.setValueClass(super.getRefProf().getMetric(nullVal).getValueClass());
+    this.setValueClass(Double.class);
   }
 
   @Override

@@ -32,7 +32,7 @@ public class NullValues extends ProfileMetric {
       if (r.getField(a) == null) nullVals++;
     }
     this.setValue(nullVals);
-    this.setValueClass(a.getDataType());
+    this.setValueClass(Long.class);
   }
 
   @Override

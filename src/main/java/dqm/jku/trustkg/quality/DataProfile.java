@@ -264,9 +264,11 @@ public class DataProfile {
   }
 
   private void addMeasuringValue(ProfileMetric p, Builder measure) {
-    if (p.getValue() == null) return;
+    if (p.getValue() == null || p.getLabel().equals(pattern.label())) return;
     if (p.getValueClass().equals(Long.class)) measure.addField(p.getLabel(), (long) p.getValue());
     else if (p.getValueClass().equals(Double.class)) measure.addField(p.getLabel(), (double) p.getValue());
+    else if (p.getValueClass().equals(String.class) && p.getLabel().equals(dt.label())) measure.addField(p.getLabel(), (String) p.getValue());
+    else if (p.getValueClass().equals(Boolean.class)) measure.addField(p.getLabel(), (boolean) p.getValue());
     else measure.addField(p.getLabel(), (int) p.getValue());
   }
 
