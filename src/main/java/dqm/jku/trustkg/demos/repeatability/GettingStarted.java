@@ -1,4 +1,4 @@
-package dqm.jku.trustkg.demos;
+package dqm.jku.trustkg.demos.repeatability;
 
 import java.io.IOException;
 

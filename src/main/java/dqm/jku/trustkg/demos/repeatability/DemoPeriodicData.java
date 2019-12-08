@@ -1,4 +1,4 @@
-package dqm.jku.trustkg.demos.alex.visualization;
+package dqm.jku.trustkg.demos.repeatability;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;

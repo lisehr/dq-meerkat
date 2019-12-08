@@ -48,7 +48,7 @@ public class DSDKnowledgeGraph {
 		this.label = label;
 		kgstore = new EmbeddedGraphDB(label);
 	}
-
+	
 	public void addDatasource(Datasource ds) throws RepositoryConfigException, RDFHandlerException, RDFParseException, RepositoryException, IOException {
 		dss.put(ds.getLabel(), ds);
 		kgstore.createRepositoryIfNotExists(ds.getLabel());
@@ -222,7 +222,7 @@ public class DSDKnowledgeGraph {
 	public void exportReport() {
 		ExportUtil.exportReport(this);
 	}
-	
+
 	/**
 	 * Method for adding all data profiles for all data sources to influx
 	 */
