@@ -24,8 +24,9 @@ import dqm.jku.trustkg.util.FileSelectionUtil;
  *
  */
 public class DemoPeriodicData {
-  private static final int FILEINDEX = 4;
+  private static final int FILEINDEX = 2;
   private static final boolean DEBUG = false;
+  private static final boolean DELETE_INFLUX = false;
   private static final int AMOUNT = 100;
   private static final String NAME = "supplychain";
 
@@ -35,7 +36,7 @@ public class DemoPeriodicData {
     int offset = 0;
     ConnectorCSV conn = FileSelectionUtil.connectToCSV(FILEINDEX, NAME);
 
-    if (DEBUG) {
+    if (DELETE_INFLUX) {
       influx.deleteDB();
       influx = new InfluxDBConnection();
     }
@@ -48,21 +49,23 @@ public class DemoPeriodicData {
       RecordList rs = conn.getPartialRecordSet(c, 0, AMOUNT);
       for (Attribute a : c.getSortedAttributes()) {
         a.annotateProfile(rs);
-        a.printAnnotatedProfile();
+        if (DEBUG) a.printAnnotatedProfile();
       }
     }
     noRecs = conn.getNrRecords(testCon);
 
     ds.addProfileToInflux(influx);
+    System.out.println("Profile from batch 1 stored!");
 
     for (offset = AMOUNT + 1; offset < noRecs; offset += AMOUNT) {
       TimeUnit.MILLISECONDS.sleep(2500);
       RecordList rs = conn.getPartialRecordSet(testCon, offset, AMOUNT);
       for (Attribute a : testCon.getSortedAttributes()) {
         DataProfile dp = a.createDataProfile(rs);
-        //dp.printProfile();
+        if (DEBUG) dp.printProfile();
         influx.storeProfile(dp);
       }
+      System.out.println(String.format("Profile from batch %d stored!", offset/AMOUNT + 1));
     }
 
   }

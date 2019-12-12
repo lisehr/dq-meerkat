@@ -92,7 +92,7 @@ public class DataProfile {
   private void calculateSingleColumn(RecordList rs) throws NoSuchMethodException {
     List<Number> l = createValueList(rs);
     for (ProfileMetric p : metrics) {
-      if (p.getTitle().equals(nullVal)) p.calculation(rs, p.getValue());
+      if (p.getTitle().equals(nullVal) || p.getTitle().equals(size)) p.calculation(rs, p.getValue());
       else p.calculationNumeric(l, p.getValue());
     }
 
