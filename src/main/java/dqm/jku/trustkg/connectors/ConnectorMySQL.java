@@ -328,7 +328,8 @@ public class ConnectorMySQL extends DSInstanceConnector {
 		return rs;
 	}
 
-	public RecordList getPartialRecordSet(final Concept concept, int offset, int noRecs) throws IOException {
+	@Override
+	public RecordList getPartialRecordSet(Concept concept, int offset, int noRecs) throws IOException {
 		Iterator<Record> rIt = getRecords(concept);
 		RecordList rs = new RecordList();
 		int i = 0;
@@ -342,7 +343,6 @@ public class ConnectorMySQL extends DSInstanceConnector {
 			i++;
 		}
 		return rs;
-
 	}
 
 	//TODO: implement

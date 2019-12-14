@@ -16,6 +16,8 @@ public abstract class DSInstanceConnector extends DSConnector {
 	public abstract void findFunctionalDependencies(Concept concept) throws IOException;
 
 	public abstract int getNrRecords(Concept c) throws IOException;
+	
+	public abstract RecordList getPartialRecordSet(Concept concept, int offset, int noRecords) throws IOException;
 
 	public Iterable<Record> records(final Concept c) {
 		return new Iterable<Record>() {
@@ -31,5 +33,4 @@ public abstract class DSInstanceConnector extends DSConnector {
 			}
 		};
 	}
-
 }

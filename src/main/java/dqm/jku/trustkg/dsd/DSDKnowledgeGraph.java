@@ -19,7 +19,7 @@ import org.eclipse.rdf4j.rio.RDFParseException;
 import org.eclipse.rdf4j.rio.Rio;
 
 import dqm.jku.trustkg.connectors.ConnectorCSV;
-import dqm.jku.trustkg.connectors.DSConnector;
+import dqm.jku.trustkg.connectors.DSInstanceConnector;
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.Concept;
 import dqm.jku.trustkg.dsd.elements.Datasource;
@@ -27,6 +27,7 @@ import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.graphdb.EmbeddedGraphDB;
 import dqm.jku.trustkg.influxdb.InfluxDBConnection;
 import dqm.jku.trustkg.util.Constants;
+import dqm.jku.trustkg.util.Miscellaneous.DBType;
 import dqm.jku.trustkg.util.export.ExportUtil;
 
 /**
@@ -42,7 +43,7 @@ public class DSDKnowledgeGraph {
 	private String label;
 	private EmbeddedGraphDB kgstore;
 	private HashMap<String, Datasource> dss = new HashMap<String, Datasource>();
-	private HashMap<String, DSConnector> conns = new HashMap<String, DSConnector>();
+	private HashMap<String, DSInstanceConnector> conns = new HashMap<String, DSInstanceConnector>();
 
 	public DSDKnowledgeGraph(String label) {
 		this.label = label;
@@ -56,7 +57,7 @@ public class DSDKnowledgeGraph {
 		repConn.add(ds.getGraphModel());
 	}
 
-	public void addDatasourceAndConnector(Datasource ds, DSConnector conn) {
+	public void addDatasourceAndConnector(Datasource ds, DSInstanceConnector conn) {
 		dss.put(ds.getLabel(), ds);
 		conns.put(ds.getLabel(), conn);
 	}
@@ -76,7 +77,7 @@ public class DSDKnowledgeGraph {
 	 * @param prefix prefix of the datasource
 	 * @throws IOException
 	 */
-	public void addDatasourceViaConnector(DSConnector conn, String uri, String prefix) throws IOException {
+	public void addDatasourceViaConnector(DSInstanceConnector conn, String uri, String prefix) throws IOException {
 		Datasource ds = conn.loadSchema(uri, prefix);
 		dss.put(ds.getLabel(), ds);
 		conns.put(ds.getLabel(), conn);
@@ -87,7 +88,7 @@ public class DSDKnowledgeGraph {
 	 * @param conn the Datasource connector
 	 * @throws IOException
 	 */
-	public void addDatasourceViaConnector(DSConnector conn) throws IOException {
+	public void addDatasourceViaConnector(DSInstanceConnector conn) throws IOException {
 		Datasource ds = conn.loadSchema();
 		dss.put(ds.getLabel(), ds);
 		conns.put(ds.getLabel(), conn);
@@ -98,8 +99,8 @@ public class DSDKnowledgeGraph {
 	 * @param conn the Datasource connector
 	 * @throws IOException
 	 */
-	public void addDatasourcesViaConnectors(List<DSConnector> connls) throws IOException {
-		for (DSConnector conn : connls) {
+	public void addDatasourcesViaConnectors(List<DSInstanceConnector> connls) throws IOException {
+		for (DSInstanceConnector conn : connls) {
 			Datasource ds = conn.loadSchema();
 			dss.put(ds.getLabel(), ds);
 			conns.put(ds.getLabel(), conn);
@@ -118,10 +119,15 @@ public class DSDKnowledgeGraph {
 	public void addDataProfile(Integer noRecords) throws IOException, NoSuchMethodException {
 		for (Datasource ds : dss.values()) {
 			for (Concept c : ds.getConceptsAndAssociations()) {
-				ConnectorCSV conn = (ConnectorCSV) conns.get(ds.getLabel());
-				RecordList rs = conn.getPartialRecordSet(c, 0, noRecords);
-				for (Attribute a : c.getAttributes()) {
-					a.annotateProfile(rs);
+				DBType dbtype = ds.getDBType();
+				if(dbtype.equals(DBType.CSV) || dbtype.equals(DBType.MYSQL)) {
+					DSInstanceConnector conn = conns.get(ds.getLabel());
+					RecordList rs = conn.getPartialRecordSet(c, 0, noRecords);
+					for (Attribute a : c.getAttributes()) {
+						a.annotateProfile(rs);
+					}
+				} else {
+					System.err.println("Data Profile Generation for DBType " + dbtype + " not implemented.");
 				}
 			}
 			dss.put(ds.getLabel(), ds);
@@ -138,10 +144,15 @@ public class DSDKnowledgeGraph {
 	public void addDataProfile() throws IOException, NoSuchMethodException {
 		for (Datasource ds : dss.values()) {
 			for (Concept c : ds.getConceptsAndAssociations()) {
-				ConnectorCSV conn = (ConnectorCSV) conns.get(ds.getLabel());
-				RecordList rs = conn.getRecordSet(c);
-				for (Attribute a : c.getAttributes()) {
-					a.annotateProfile(rs);
+				DBType dbtype = ds.getDBType();
+				if(dbtype.equals(DBType.CSV)) {
+					ConnectorCSV conn = (ConnectorCSV) conns.get(ds.getLabel());
+					RecordList rs = conn.getRecordSet(c);
+					for (Attribute a : c.getAttributes()) {
+						a.annotateProfile(rs);
+					}
+				} else {
+					System.err.println("Data Profile Generation for DBType " + dbtype + " not implemented.");
 				}
 			}
 			dss.put(ds.getLabel(), ds);
