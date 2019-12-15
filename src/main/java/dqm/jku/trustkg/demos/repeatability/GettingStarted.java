@@ -2,10 +2,12 @@ package dqm.jku.trustkg.demos.repeatability;
 
 import java.io.IOException;
 
+import dqm.jku.trustkg.connectors.ConnectorCSV;
 import dqm.jku.trustkg.connectors.ConnectorMySQL;
 import dqm.jku.trustkg.dsd.DSDKnowledgeGraph;
 import dqm.jku.trustkg.dsd.elements.Datasource;
 import dqm.jku.trustkg.influxdb.InfluxDBConnection;
+import dqm.jku.trustkg.util.Constants;
 
 public class GettingStarted {
 
@@ -15,8 +17,8 @@ public class GettingStarted {
 	  
 	/** PHASE 2: SYSTEM SETUP & RDP CREATION *****/
 	// Create Connection to CSV Connector
-//    ConnectorCSV conn = new ConnectorCSV(Constants.RESSOURCES + "csv/DataCoSupplyChainDataset.csv", ",", "\n", "SupplyChain");
-	  ConnectorMySQL conn = ConnectorMySQL.getInstance("jdbc:mysql://localhost:3366/", "DataCo_Supplychain", "dquser", "dataQ4T!_pw");	
+    ConnectorCSV conn = new ConnectorCSV(Constants.RESSOURCES + "csv/DataCoSupplyChainDataset.csv", ",", "\n", "SupplyChain");
+//	  ConnectorMySQL conn = ConnectorMySQL.getInstance("jdbc:mysql://localhost:3366/", "DataCo_Supplychain", "dquser", "dataQ4T!_pw");	
     
     // Init KG by loading DSD elements
     Datasource ds = conn.loadSchema("https://faw.jku.at", "sc:");

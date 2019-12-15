@@ -29,15 +29,33 @@ public class Digits extends ProfileMetric {
   public void calculation(RecordList rs, Object oldVal) {
     Attribute a = (Attribute) super.getRefElem();
     super.setValueClass(Integer.class);
-
+    if (a.getDataType() == Object.class) return;
     if (a.getDataType() == String.class) {
       super.setValue(0);
       return;
     }
     Number maxNum = (Number) super.getRefProf().getMetric(max).getValue();
     Number minNum = (Number) super.getRefProf().getMetric(min).getValue();
-    int maxDigs = NumberValueUtils.countDigits(maxNum);
-    int minDigs = NumberValueUtils.countDigits(minNum);
+    if (maxNum == null && minNum == null) {
+      super.setValue(null);
+      return;
+    }
+    int maxDigs = 0;
+    int minDigs = 0;
+    if (maxNum != null) {
+      maxDigs = NumberValueUtils.countDigits(maxNum);
+      if (minNum == null) {
+        super.setValue(maxDigs);
+        return;
+      }
+    }
+    if (minNum != null) {
+      minDigs = NumberValueUtils.countDigits(minNum);  
+      if (maxNum == null) {
+        super.setValue(minDigs);
+        return;
+      }
+    }    
     if (maxDigs > minDigs) super.setValue(maxDigs);
     else super.setValue(minDigs);
   }

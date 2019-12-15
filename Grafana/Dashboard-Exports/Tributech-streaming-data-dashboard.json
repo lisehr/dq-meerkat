@@ -674,10 +674,27 @@
       "renderer": "flot",
       "seriesOverrides": [
         {
-          "alias": "metric",
+          "alias": "average",
           "fill": 0,
           "hideTooltip": true,
-          "legend": false,
+          "points": false
+        },
+        {
+          "alias": "maximum",
+          "fill": 0,
+          "hideTooltip": true,
+          "points": false
+        },
+        {
+          "alias": "minimum",
+          "fill": 0,
+          "hideTooltip": true,
+          "points": false
+        },
+        {
+          "alias": "median",
+          "fill": 0,
+          "hideTooltip": true,
           "points": false
         }
       ],
@@ -705,7 +722,7 @@
           "tags": []
         },
         {
-          "alias": "metric",
+          "alias": "average",
           "groupBy": [],
           "measurement": "http://example.com/Telematic_device_report_acceleration/Telematic_device_report_acceleration/Controller",
           "orderByTime": "ASC",
@@ -725,7 +742,7 @@
           "tags": []
         },
         {
-          "alias": "metric",
+          "alias": "maximum",
           "groupBy": [],
           "measurement": "http://example.com/Telematic_device_report_acceleration/Telematic_device_report_acceleration/Controller",
           "orderByTime": "ASC",
@@ -745,7 +762,7 @@
           "tags": []
         },
         {
-          "alias": "metric",
+          "alias": "median",
           "groupBy": [],
           "measurement": "http://example.com/Telematic_device_report_acceleration/Telematic_device_report_acceleration/Controller",
           "orderByTime": "ASC",
@@ -765,7 +782,7 @@
           "tags": []
         },
         {
-          "alias": "metric",
+          "alias": "minimum",
           "groupBy": [],
           "measurement": "http://example.com/Telematic_device_report_acceleration/Telematic_device_report_acceleration/Controller",
           "orderByTime": "ASC",
@@ -1062,5 +1079,5 @@
   "timezone": "browser",
   "title": "Tributech Acceleration Data",
   "uid": "8cKXpfNZz",
-  "version": 13
+  "version": 15
 }

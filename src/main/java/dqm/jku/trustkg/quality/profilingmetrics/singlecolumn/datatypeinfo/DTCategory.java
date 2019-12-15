@@ -26,6 +26,7 @@ public class DTCategory extends ProfileMetric{
   @Override
   public void calculation(RecordList rs, Object oldVal) {
     if (((Attribute) super.getRefElem()).getDataType().equals(String.class)) super.setValue("String");
+    else if (((Attribute) super.getRefElem()).getDataType().equals(Object.class)) super.setValue("Null");
     else super.setValue("Numeric");
     super.setValueClass(String.class);
   }

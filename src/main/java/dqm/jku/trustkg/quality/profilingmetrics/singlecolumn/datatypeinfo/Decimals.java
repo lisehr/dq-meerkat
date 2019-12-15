@@ -28,6 +28,7 @@ public class Decimals extends ProfileMetric {
   public void calculation(RecordList rs, Object oldVal) {
     Attribute a = (Attribute) super.getRefElem();
     this.setValueClass(Integer.class);
+    if (a.getDataType() == Object.class) return;
     if (a.getDataType() == Integer.class || a.getDataType() == Long.class || a.getDataType() == String.class) {
       this.setValue(0);
       return;
@@ -40,11 +41,13 @@ public class Decimals extends ProfileMetric {
       Object field = r.getField(a);
       decimals = getDecimals(decimals, (Number) field);
     }
-    this.setValue(decimals);
+    if (decimals == -1) this.setValue(null);
+    else this.setValue(decimals);
   }
 
   private int getDecimals(int decimals, Number field) {
     String numStr = field.toString();
+    if (numStr.isBlank() || numStr.isEmpty()) return -1;
     int pointPos = numStr.indexOf('.');
     int dec = numStr.length() - pointPos - 1;
     if (dec > decimals) return dec;
@@ -55,6 +58,11 @@ public class Decimals extends ProfileMetric {
   public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
     Attribute a = (Attribute) super.getRefElem();
     this.setValueClass(Integer.class);
+    if (a.getDataType() == Object.class) return;
+    if (list.isEmpty()) {
+      this.setValue(null);
+      return;
+    }
     if (a.getDataType() == Integer.class || a.getDataType() == Long.class || a.getDataType() == String.class) {
       this.setValue(0);
       return;

@@ -25,7 +25,6 @@ import dqm.jku.trustkg.dsd.elements.Datasource;
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.graphdb.EmbeddedGraphDB;
 
-@SuppressWarnings("unused")
 public class StoreDataRDFTest {
   public static void main(String args[]) throws NoSuchMethodException {
     // Create Connection to CSV Connector

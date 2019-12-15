@@ -218,7 +218,8 @@ public class Concept extends DSDElement {
     Builder measure = Point.measurement(getLabel()).time(System.currentTimeMillis(), TimeUnit.MILLISECONDS);
     for (Attribute a : record.getFields()) {
       if (record.getField(a) != null) {
-        if (a.getDataType().equals(Long.class)) measure.addField(a.getLabel(), (long) record.getField(a));
+        if (a.getDataType().equals(Integer.class)) measure.addField(a.getLabel(), (int) record.getField(a));
+        else if (a.getDataType().equals(Long.class)) measure.addField(a.getLabel(), (long) record.getField(a));
         else if (a.getDataType().equals(Double.class)) measure.addField(a.getLabel(), (double) record.getField(a));
         else measure.addField(a.getLabel(), (int) ((String) record.getField(a)).length());
       }

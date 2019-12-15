@@ -28,6 +28,7 @@ public class DemoPeriodicData {
   private static final boolean DEBUG = false;
   private static final boolean DELETE_INFLUX = false;
   private static final int AMOUNT = 100;
+  private static final int SLEEP_TIME_MS = 1000;
   private static final String NAME = "supplychain";
 
   public static void main(String args[]) throws IOException, InterruptedException, NoSuchMethodException {
@@ -58,7 +59,7 @@ public class DemoPeriodicData {
     System.out.println("Profile from batch 1 stored!");
 
     for (offset = AMOUNT + 1; offset < noRecs; offset += AMOUNT) {
-      TimeUnit.MILLISECONDS.sleep(2500);
+      TimeUnit.MILLISECONDS.sleep(SLEEP_TIME_MS);
       RecordList rs = conn.getPartialRecordList(testCon, offset, AMOUNT);
       for (Attribute a : testCon.getSortedAttributes()) {
         DataProfile dp = a.createDataProfile(rs);

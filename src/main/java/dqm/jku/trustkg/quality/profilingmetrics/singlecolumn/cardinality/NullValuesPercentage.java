@@ -23,7 +23,7 @@ public class NullValuesPercentage extends ProfileMetric {
     int denominator = (int)super.getRefProf().getMetric(size).getValue();
     double result;
     if (denominator == 0) result = Double.valueOf(0);
-    result = (double) nominator / (double) denominator;
+    result = (double) nominator * 100.0 / (double) denominator;
     super.setValue(result);
     this.setValueClass(Double.class);
   }

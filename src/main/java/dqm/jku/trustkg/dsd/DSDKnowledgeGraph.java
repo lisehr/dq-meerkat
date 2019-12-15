@@ -20,7 +20,6 @@ import org.eclipse.rdf4j.rio.Rio;
 
 import dqm.jku.trustkg.connectors.ConnectorCSV;
 import dqm.jku.trustkg.connectors.DSConnector;
-import dqm.jku.trustkg.connectors.DSConnector;
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.Concept;
 import dqm.jku.trustkg.dsd.elements.Datasource;

@@ -209,7 +209,7 @@
       "options": {},
       "percentage": false,
       "pointradius": 2,
-      "points": false,
+      "points": true,
       "renderer": "flot",
       "seriesOverrides": [],
       "spaceLength": 10,
@@ -526,7 +526,7 @@
       "options": {},
       "percentage": false,
       "pointradius": 2,
-      "points": false,
+      "points": true,
       "renderer": "flot",
       "seriesOverrides": [],
       "spaceLength": 10,
@@ -850,9 +850,167 @@
       "steppedLine": false,
       "targets": [
         {
+          "alias": "% Null Values",
+          "groupBy": [],
+          "measurement": "http://example.com/supplychain/supplychain/Order Zipcode",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "% Null Values"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "% Uniqueness",
+          "groupBy": [],
+          "measurement": "http://example.com/supplychain/supplychain/Order Zipcode",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Uniqueness"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "# Digits",
+          "groupBy": [],
+          "measurement": "http://example.com/supplychain/supplychain/Order Zipcode",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Digits"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "# Decimals",
+          "groupBy": [],
+          "measurement": "http://example.com/supplychain/supplychain/Order Zipcode",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Decimals"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Order Zipcode Cardinalities",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "fill": 1,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 24
+      },
+      "id": 12,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {},
+      "percentage": false,
+      "pointradius": 2,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
           "alias": "Average",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Order Item Discount",
+          "measurement": "http://example.com/supplychain/supplychain/Order Profit Per Order",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -872,7 +1030,7 @@
         {
           "alias": "Maximum",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Order Item Discount",
+          "measurement": "http://example.com/supplychain/supplychain/Order Profit Per Order",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -892,10 +1050,10 @@
         {
           "alias": "Median",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Order Item Discount",
+          "measurement": "http://example.com/supplychain/supplychain/Order Profit Per Order",
           "orderByTime": "ASC",
           "policy": "default",
-          "refId": "C",
+          "refId": "D",
           "resultFormat": "time_series",
           "select": [
             [
@@ -912,10 +1070,10 @@
         {
           "alias": "Minimum",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Order Item Discount",
+          "measurement": "http://example.com/supplychain/supplychain/Order Profit Per Order",
           "orderByTime": "ASC",
           "policy": "default",
-          "refId": "D",
+          "refId": "C",
           "resultFormat": "time_series",
           "select": [
             [
@@ -934,7 +1092,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Order Item Discount",
+      "title": "Order Profit Per Order",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1128,167 +1286,9 @@
         "align": false,
         "alignLevel": null
       }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "fill": 1,
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 32
-      },
-      "id": 12,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {},
-      "percentage": false,
-      "pointradius": 2,
-      "points": true,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "alias": "Average",
-          "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Order Profit Per Order",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "Average"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": []
-        },
-        {
-          "alias": "Maximum",
-          "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Order Profit Per Order",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "Maximum"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": []
-        },
-        {
-          "alias": "Median",
-          "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Order Profit Per Order",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "D",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "Median"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": []
-        },
-        {
-          "alias": "Minimum",
-          "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Order Profit Per Order",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "C",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "Minimum"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Order Profit Per Order",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
     }
   ],
-  "refresh": "10s",
+  "refresh": "5s",
   "schemaVersion": 18,
   "style": "dark",
   "tags": [],
@@ -1327,5 +1327,5 @@
   "timezone": "",
   "title": "DataCo SMART SUPPLY CHAIN FOR BIG DATA ANALYSIS",
   "uid": "GYKQeSHZz",
-  "version": 5
+  "version": 7
 }

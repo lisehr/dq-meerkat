@@ -129,7 +129,7 @@ public class DataProfile {
     if (elem instanceof Attribute) {
       Attribute a = (Attribute) elem;
       Class<?> clazz = a.getDataType();
-      if (String.class.isAssignableFrom(clazz) || Number.class.isAssignableFrom(clazz)) {
+      if (String.class.isAssignableFrom(clazz) || Number.class.isAssignableFrom(clazz) || clazz.equals(Object.class)) {
         ProfileMetric size = new Size(this);
         metrics.add(size);
         ProfileMetric min = new Minimum(this);
@@ -264,8 +264,8 @@ public class DataProfile {
   }
 
   private void addMeasuringValue(ProfileMetric p, Builder measure) {
-    if (p.getValue() == null || p.getLabel().equals(pattern.label())) return;
-    if (p.getValueClass().equals(Long.class)) measure.addField(p.getLabel(), (long) p.getValue());
+    if (p.getValue() == null || p.getLabel().equals(pattern.label())) measure.addField(p.getLabel(), 0);
+    else if (p.getValueClass().equals(Long.class)) measure.addField(p.getLabel(), (long) p.getValue());
     else if (p.getValueClass().equals(Double.class)) measure.addField(p.getLabel(), (double) p.getValue());
     else if (p.getValueClass().equals(String.class) && p.getLabel().equals(dt.label())) measure.addField(p.getLabel(), (String) p.getValue());
     else if (p.getValueClass().equals(Boolean.class)) measure.addField(p.getLabel(), (boolean) p.getValue());

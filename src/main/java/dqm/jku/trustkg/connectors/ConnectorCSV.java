@@ -101,7 +101,7 @@ public class ConnectorCSV extends DSConnector {
 				}
 				String[] values = removeQuotes ? line.replace("\"", "").split(seperator) : line.split(seperator);
 
-				// Change data types for CSV files (default: string) when reading field values for the first time
+				// Change data types for CSV files (default: Object) when reading field values for the first time
 				if (first) {
 					for (int j = 0; j < Math.min(values.length, attributes.size()); j++) {
 						DataTypeConverter.getDataTypeFromCSVRecord(attributes.get(j), values[j]);
