@@ -12,7 +12,7 @@ import org.eclipse.rdf4j.repository.sail.SailRepository;
 import org.eclipse.rdf4j.sail.nativerdf.NativeStore;
 
 import dqm.jku.trustkg.blockchain.standardchain.BlockChain;
-import dqm.jku.trustkg.connectors.DSInstanceConnector;
+import dqm.jku.trustkg.connectors.DSConnector;
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.Concept;
 import dqm.jku.trustkg.dsd.elements.Datasource;
@@ -24,7 +24,7 @@ public class TestRDFBeansDemo {
 
   @SuppressWarnings("deprecation")
   public static void main(String args[]) throws Exception {
-    DSInstanceConnector conn = FileSelectionUtil.connectToCSV(1);
+    DSConnector conn = FileSelectionUtil.connectToCSV(1);
 
     File dataDir = new File("./testrepo");
     SailRepository repo = new SailRepository(new NativeStore(dataDir));
@@ -37,7 +37,7 @@ public class TestRDFBeansDemo {
       ds = conn.loadSchema();
       for (Concept c : ds.getConcepts()) {
         System.out.println(c.getURI());
-        RecordList rs = conn.getRecordSet(c);
+        RecordList rs = conn.getRecordList(c);
         for (Attribute a : c.getAttributes()) {
           a.annotateProfile(rs);
 

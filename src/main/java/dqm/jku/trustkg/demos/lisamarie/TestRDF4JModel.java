@@ -1,14 +1,11 @@
 package dqm.jku.trustkg.demos.lisamarie;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import dqm.jku.trustkg.connectors.ConnectorCSV;
-import dqm.jku.trustkg.connectors.DSInstanceConnector;
-import dqm.jku.trustkg.dsd.elements.Attribute;
-import dqm.jku.trustkg.dsd.elements.Concept;
-import dqm.jku.trustkg.dsd.elements.Datasource;
+import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.model.Resource;
+import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.util.RDFCollections;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
@@ -17,17 +14,19 @@ import org.eclipse.rdf4j.repository.RepositoryConnection;
 import org.eclipse.rdf4j.repository.RepositoryResult;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
-import org.eclipse.rdf4j.model.Model;
-import org.eclipse.rdf4j.model.Resource;
-import org.eclipse.rdf4j.model.Statement;
 
-import dqm.jku.trustkg.graphdb.*;
+import dqm.jku.trustkg.connectors.ConnectorCSV;
+import dqm.jku.trustkg.connectors.DSConnector;
+import dqm.jku.trustkg.dsd.elements.Attribute;
+import dqm.jku.trustkg.dsd.elements.Concept;
+import dqm.jku.trustkg.dsd.elements.Datasource;
+import dqm.jku.trustkg.graphdb.EmbeddedGraphDB;
 
 @SuppressWarnings("unused")
 public class TestRDF4JModel {
   public static void main(String args[]) {
     // Create Connection to CSV Connector
-    DSInstanceConnector conn = new ConnectorCSV("src/main/java/dqm/jku/trustkg/resources/Telematic Device Report - Device Voltage.csv", ",", "\n", "Device Voltage", true);
+    DSConnector conn = new ConnectorCSV("src/main/java/dqm/jku/trustkg/resources/Telematic Device Report - Device Voltage.csv", ",", "\n", "Device Voltage", true);
 
     // Create Schema from it
     Datasource ds;

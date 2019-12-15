@@ -3,7 +3,7 @@ package dqm.jku.trustkg.demos.alex.export;
 import java.io.IOException;
 import java.util.Iterator;
 
-import dqm.jku.trustkg.connectors.DSInstanceConnector;
+import dqm.jku.trustkg.connectors.DSConnector;
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.Concept;
 import dqm.jku.trustkg.dsd.elements.Datasource;
@@ -16,7 +16,7 @@ public class TestCSVExport {
   private static final boolean DEBUG = false;
   
   public static void main(String args[]) throws IOException, NoSuchMethodException {
-    DSInstanceConnector conn = FileSelectionUtil.connectToCSV(17);
+    DSConnector conn = FileSelectionUtil.connectToCSV(17);
     
     Datasource ds;
     try {
@@ -45,7 +45,7 @@ public class TestCSVExport {
       System.out.println("Creating Data Profile...");
 
       for (Concept c : ds.getConcepts()) {
-        RecordList rs = conn.getRecordSet(c);
+        RecordList rs = conn.getRecordList(c);
         for (Attribute a : c.getAttributes()) a.annotateProfile(rs);        
         System.out.println("Done!");
       }

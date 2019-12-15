@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import dqm.jku.trustkg.connectors.DSInstanceConnector;
+import dqm.jku.trustkg.connectors.DSConnector;
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.Concept;
 import dqm.jku.trustkg.dsd.elements.Datasource;
@@ -23,7 +23,7 @@ public class TestCSVExportAll {
   public static void main(String args[]) throws IOException, NoSuchMethodException {
     File directory = new File(CSV_PATH);
     int fileCount = directory.list().length;
-    DSInstanceConnector conn;
+    DSConnector conn;
 
     List<Datasource> dss = new ArrayList<>();
     Datasource ds;
@@ -57,7 +57,7 @@ public class TestCSVExportAll {
           System.out.println("Creating Data Profile for " + ds.getLabel() + "...");
 
           for (Concept c : ds.getConcepts()) {
-            RecordList rs = conn.getRecordSet(c);
+            RecordList rs = conn.getRecordList(c);
             for (Attribute a : c.getAttributes()) a.annotateProfile(rs);
             System.out.println("Done!");
           }

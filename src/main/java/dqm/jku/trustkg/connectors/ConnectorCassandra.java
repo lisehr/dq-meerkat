@@ -1,6 +1,7 @@
 package dqm.jku.trustkg.connectors;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 
 import com.datastax.driver.core.Cluster;
@@ -13,6 +14,9 @@ import dqm.jku.trustkg.dsd.DSDFactory;
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.Concept;
 import dqm.jku.trustkg.dsd.elements.Datasource;
+import dqm.jku.trustkg.dsd.records.Record;
+import dqm.jku.trustkg.dsd.records.RecordList;
+import dqm.jku.trustkg.util.Constants;
 import dqm.jku.trustkg.util.DataTypeConverter;
 import dqm.jku.trustkg.util.Miscellaneous.DBType;
 
@@ -54,9 +58,9 @@ public class ConnectorCassandra extends DSConnector {
 	}
 
 	@Override
-	public Datasource loadSchema() throws IOException {
+	public Datasource loadSchema(String uri, String prefix) throws IOException {
 		// Create empty datasource object
-		Datasource ds = DSDFactory.makeDatasource(keyspace, DBType.CASSANDRA);
+		Datasource ds = DSDFactory.makeDatasource(keyspace, DBType.CASSANDRA, uri, prefix);
 		// Go over all tables in the keyspace
 		for (TableMetadata table : this.session.getCluster().getMetadata().getKeyspace(keyspace).getTables()) {
 			// Create concept
@@ -65,6 +69,11 @@ public class ConnectorCassandra extends DSConnector {
 			loadAttributes(table, c);
 		}
 		return ds;
+	}
+	
+	@Override
+	public Datasource loadSchema() throws IOException {
+		return loadSchema(Constants.DEFAULT_URI, Constants.DEFAULT_PREFIX);
 	}
 
 	/**
@@ -102,7 +111,25 @@ public class ConnectorCassandra extends DSConnector {
 	}
 
 	@Override
-	public dqm.jku.trustkg.dsd.elements.Datasource loadSchema(String uri, String prefix) throws IOException {
+	public Iterator<Record> getRecords(Concept concept) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public RecordList getRecordList(Concept concept) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getNrRecords(Concept c) throws IOException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public RecordList getPartialRecordList(Concept concept, int offset, int noRecords) throws IOException {
 		// TODO Auto-generated method stub
 		return null;
 	}

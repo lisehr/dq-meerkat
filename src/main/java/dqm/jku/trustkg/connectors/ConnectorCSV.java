@@ -29,7 +29,7 @@ import dqm.jku.trustkg.util.Miscellaneous.DBType;
  * @author Bernhard
  */
 
-public class ConnectorCSV extends DSInstanceConnector {
+public class ConnectorCSV extends DSConnector {
 
 	public final String filename;
 	public final String label;
@@ -118,7 +118,7 @@ public class ConnectorCSV extends DSInstanceConnector {
 		};
 	}
 
-	public RecordList getRecordSet(final Concept concept) throws IOException {
+	public RecordList getRecordList(final Concept concept) throws IOException {
 		Iterator<Record> rIt = getRecords(concept);
 		RecordList rs = new RecordList();
 		while (rIt.hasNext()) {
@@ -128,7 +128,7 @@ public class ConnectorCSV extends DSInstanceConnector {
 	}
 
 	@Override
-	public RecordList getPartialRecordSet(Concept concept, int offset, int noRecs) throws IOException {
+	public RecordList getPartialRecordList(Concept concept, int offset, int noRecs) throws IOException {
 		Iterator<Record> rIt = getRecords(concept);
 		RecordList rs = new RecordList();
 		int i = 0;
@@ -168,7 +168,6 @@ public class ConnectorCSV extends DSInstanceConnector {
 		return ds;
 	}
 
-	@Override
 	public void findFunctionalDependencies(Concept concept) throws IOException {
 		FDAnalyzer analyzer = new FDAnalyzer(getFDLeftSides(concept), concept.getAttributes());
 		analyzer.analyze(getRecords(concept), concept);

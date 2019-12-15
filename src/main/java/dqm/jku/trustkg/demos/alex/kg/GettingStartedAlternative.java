@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import dqm.jku.trustkg.connectors.DSInstanceConnector;
+import dqm.jku.trustkg.connectors.DSConnector;
 import dqm.jku.trustkg.dsd.DSDKnowledgeGraph;
 import dqm.jku.trustkg.util.FileSelectionUtil;
 
@@ -17,7 +17,7 @@ public class GettingStartedAlternative {
     int fileCount = directory.list().length;
 
     // Init KG by loading DSD elements
-    List<DSInstanceConnector> conns = new ArrayList<>();
+    List<DSConnector> conns = new ArrayList<>();
     for (int i = 1; i <= fileCount; i++) conns.add(FileSelectionUtil.connectToCSV(i));
 
     // Create Knowledge Graph and add (possibly multiple data sources)

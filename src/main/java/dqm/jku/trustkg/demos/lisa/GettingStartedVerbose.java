@@ -25,7 +25,7 @@ public class GettingStartedVerbose {
 	    
 	    // Annotate reference data profile to KG
 	    for (Concept c : ds.getConceptsAndAssociations()) {
-			RecordList rs = conn.getPartialRecordSet(c, 0, RDP_SIZE);
+			RecordList rs = conn.getPartialRecordList(c, 0, RDP_SIZE);
 			for(Attribute a : c.getAttributes()) {
 				a.annotateProfile(rs);
 			}

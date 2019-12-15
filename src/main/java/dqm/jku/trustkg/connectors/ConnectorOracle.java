@@ -200,6 +200,7 @@ public class ConnectorOracle {
 		for (Concept c : aggConcepts) {
 			AggregationAssociation assoc = (AggregationAssociation) c;
 			Set<ForeignKey> fkList = assoc.getForeignKeys();
+			@SuppressWarnings("unused")
 			List<Attribute> fkAttributes = aggregationAssociation.get(assoc.getLabel()).stream().map(x -> assoc.getAttribute(x)).collect(Collectors.toList());
 			AttributeList fkAttSet = new AttributeList();
 

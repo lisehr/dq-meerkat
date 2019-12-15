@@ -46,7 +46,7 @@ public class DemoPeriodicData {
     Datasource ds = conn.loadSchema();
     for (Concept c : ds.getConcepts()) {
       testCon = c;
-      RecordList rs = conn.getPartialRecordSet(c, 0, AMOUNT);
+      RecordList rs = conn.getPartialRecordList(c, 0, AMOUNT);
       for (Attribute a : c.getSortedAttributes()) {
         a.annotateProfile(rs);
         if (DEBUG) a.printAnnotatedProfile();
@@ -59,7 +59,7 @@ public class DemoPeriodicData {
 
     for (offset = AMOUNT + 1; offset < noRecs; offset += AMOUNT) {
       TimeUnit.MILLISECONDS.sleep(2500);
-      RecordList rs = conn.getPartialRecordSet(testCon, offset, AMOUNT);
+      RecordList rs = conn.getPartialRecordList(testCon, offset, AMOUNT);
       for (Attribute a : testCon.getSortedAttributes()) {
         DataProfile dp = a.createDataProfile(rs);
         if (DEBUG) dp.printProfile();

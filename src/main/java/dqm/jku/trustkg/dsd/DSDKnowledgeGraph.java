@@ -19,7 +19,8 @@ import org.eclipse.rdf4j.rio.RDFParseException;
 import org.eclipse.rdf4j.rio.Rio;
 
 import dqm.jku.trustkg.connectors.ConnectorCSV;
-import dqm.jku.trustkg.connectors.DSInstanceConnector;
+import dqm.jku.trustkg.connectors.DSConnector;
+import dqm.jku.trustkg.connectors.DSConnector;
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.Concept;
 import dqm.jku.trustkg.dsd.elements.Datasource;
@@ -43,7 +44,7 @@ public class DSDKnowledgeGraph {
 	private String label;
 	private EmbeddedGraphDB kgstore;
 	private HashMap<String, Datasource> dss = new HashMap<String, Datasource>();
-	private HashMap<String, DSInstanceConnector> conns = new HashMap<String, DSInstanceConnector>();
+	private HashMap<String, DSConnector> conns = new HashMap<String, DSConnector>();
 
 	public DSDKnowledgeGraph(String label) {
 		this.label = label;
@@ -57,7 +58,7 @@ public class DSDKnowledgeGraph {
 		repConn.add(ds.getGraphModel());
 	}
 
-	public void addDatasourceAndConnector(Datasource ds, DSInstanceConnector conn) {
+	public void addDatasourceAndConnector(Datasource ds, DSConnector conn) {
 		dss.put(ds.getLabel(), ds);
 		conns.put(ds.getLabel(), conn);
 	}
@@ -77,7 +78,7 @@ public class DSDKnowledgeGraph {
 	 * @param prefix prefix of the datasource
 	 * @throws IOException
 	 */
-	public void addDatasourceViaConnector(DSInstanceConnector conn, String uri, String prefix) throws IOException {
+	public void addDatasourceViaConnector(DSConnector conn, String uri, String prefix) throws IOException {
 		Datasource ds = conn.loadSchema(uri, prefix);
 		dss.put(ds.getLabel(), ds);
 		conns.put(ds.getLabel(), conn);
@@ -88,7 +89,7 @@ public class DSDKnowledgeGraph {
 	 * @param conn the Datasource connector
 	 * @throws IOException
 	 */
-	public void addDatasourceViaConnector(DSInstanceConnector conn) throws IOException {
+	public void addDatasourceViaConnector(DSConnector conn) throws IOException {
 		Datasource ds = conn.loadSchema();
 		dss.put(ds.getLabel(), ds);
 		conns.put(ds.getLabel(), conn);
@@ -99,8 +100,8 @@ public class DSDKnowledgeGraph {
 	 * @param conn the Datasource connector
 	 * @throws IOException
 	 */
-	public void addDatasourcesViaConnectors(List<DSInstanceConnector> connls) throws IOException {
-		for (DSInstanceConnector conn : connls) {
+	public void addDatasourcesViaConnectors(List<DSConnector> connls) throws IOException {
+		for (DSConnector conn : connls) {
 			Datasource ds = conn.loadSchema();
 			dss.put(ds.getLabel(), ds);
 			conns.put(ds.getLabel(), conn);
@@ -121,8 +122,8 @@ public class DSDKnowledgeGraph {
 			for (Concept c : ds.getConceptsAndAssociations()) {
 				DBType dbtype = ds.getDBType();
 				if(dbtype.equals(DBType.CSV) || dbtype.equals(DBType.MYSQL)) {
-					DSInstanceConnector conn = conns.get(ds.getLabel());
-					RecordList rs = conn.getPartialRecordSet(c, 0, noRecords);
+					DSConnector conn = conns.get(ds.getLabel());
+					RecordList rs = conn.getPartialRecordList(c, 0, noRecords);
 					for (Attribute a : c.getAttributes()) {
 						a.annotateProfile(rs);
 					}
@@ -147,7 +148,7 @@ public class DSDKnowledgeGraph {
 				DBType dbtype = ds.getDBType();
 				if(dbtype.equals(DBType.CSV)) {
 					ConnectorCSV conn = (ConnectorCSV) conns.get(ds.getLabel());
-					RecordList rs = conn.getRecordSet(c);
+					RecordList rs = conn.getRecordList(c);
 					for (Attribute a : c.getAttributes()) {
 						a.annotateProfile(rs);
 					}

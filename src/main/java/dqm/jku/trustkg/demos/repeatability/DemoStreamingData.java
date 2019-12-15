@@ -42,7 +42,7 @@ public class DemoStreamingData {
 
     Datasource ds = conn.loadSchema();
     for (Concept c : ds.getConcepts()) {
-      RecordList rs = conn.getPartialRecordSet(c, 0, 5000);
+      RecordList rs = conn.getPartialRecordList(c, 0, 5000);
       for (Attribute a : c.getSortedAttributes()) {
         a.annotateProfile(rs);
       }
@@ -50,7 +50,7 @@ public class DemoStreamingData {
     }
 
     ds.addProfileToInflux(influx);
-    RecordList rs = conn.getPartialRecordSet(testCon, 5001, Integer.MAX_VALUE);
+    RecordList rs = conn.getPartialRecordList(testCon, 5001, Integer.MAX_VALUE);
     boolean fileFinished = false;
     int i = 0;
     Iterator<Record> itR = rs.iterator();
