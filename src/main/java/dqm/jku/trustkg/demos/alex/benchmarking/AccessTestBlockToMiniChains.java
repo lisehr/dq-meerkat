@@ -16,6 +16,7 @@ import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.Concept;
 import dqm.jku.trustkg.dsd.elements.DSDElement;
 import dqm.jku.trustkg.dsd.elements.Datasource;
+import dqm.jku.trustkg.util.Constants;
 import dqm.jku.trustkg.util.FileSelectionUtil;
 
 public class AccessTestBlockToMiniChains {
@@ -30,7 +31,7 @@ public class AccessTestBlockToMiniChains {
       System.out.println("Connection established!");
       System.out.println("Start testing...");
       System.out.println("Printing results to file!");
-      System.setOut(new PrintStream("./resultfiles/AccessTestBlockToMiniChain_" + System.currentTimeMillis() + ".txt"));
+      System.setOut(new PrintStream(Constants.RESOURCES + "/export/benchmarking/AccessTestBlockToMiniChain_" + System.currentTimeMillis() + ".txt"));
     }
 
     Datasource ds = conn.loadSchema();

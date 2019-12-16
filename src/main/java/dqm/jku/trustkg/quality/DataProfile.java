@@ -264,7 +264,7 @@ public class DataProfile {
   }
 
   private void addMeasuringValue(ProfileMetric p, Builder measure) {
-    if (p.getValue() == null || p.getLabel().equals(pattern.label())) measure.addField(p.getLabel(), 0);
+    if (p.getValue() == null || p.getLabel().equals(pattern.label())) measure.addField(p.getLabel(), 0); //TODO: replace 0 with NaN, when hitting v2.0 of influxdb-java
     else if (p.getValueClass().equals(Long.class)) measure.addField(p.getLabel(), (long) p.getValue());
     else if (p.getValueClass().equals(Double.class)) measure.addField(p.getLabel(), (double) p.getValue());
     else if (p.getValueClass().equals(String.class) && p.getLabel().equals(dt.label())) measure.addField(p.getLabel(), (String) p.getValue());

@@ -166,7 +166,7 @@ public class DSDKnowledgeGraph {
 	 * @param fileName
 	 */
 	public void exportKGToFile(String fileName) {
-		Path path = Paths.get(Constants.RESSOURCES + "export/ttl/");
+		Path path = Paths.get(Constants.RESOURCES + "export/ttl/");
 		if (Files.notExists(path)) {
 			try {
 				Files.createDirectory(path);
@@ -174,7 +174,7 @@ public class DSDKnowledgeGraph {
 				e.printStackTrace();
 			}
 		}
-		try (PrintWriter out = new PrintWriter(new File(Constants.RESSOURCES + "export/ttl/" + fileName + ".ttl"))){      
+		try (PrintWriter out = new PrintWriter(new File(Constants.RESOURCES + "export/ttl/" + fileName + ".ttl"))){      
 			for (Datasource ds : dss.values()) {
 				Rio.write(ds.getGraphModel(), out, RDFFormat.TURTLE);
 			}

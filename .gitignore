@@ -7,5 +7,4 @@
 /.settings/*
 .classpath
 /target/
-/GraphDB/*
 Grafana/grafana-6.2.5_windows/data/

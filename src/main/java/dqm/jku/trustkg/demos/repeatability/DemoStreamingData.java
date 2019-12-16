@@ -19,8 +19,6 @@ import dqm.jku.trustkg.util.FileSelectionUtil;
  * implementation, we use a fixed scheduling rate to submit new jobs (i.e. every
  * 20 seconds).
  * 
- * Implementation: - noRecords = 1 in ConnectorPartialCSV - Timers and
- * TimerTasks
  * 
  * @author optimusseptim
  *
