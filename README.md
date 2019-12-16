@@ -20,8 +20,8 @@ Afterwards, in order to execute the program, you need to start influxDB and Graf
 A common choice for storing CDQM results are time-series DBs like InfluxDB, which provides a Java API. Since the Java API was not working by the time of the creation of the project, we replaced it by the browser version. BlocK-DaQ does not offer an embedded mode (like Derby or GraphDB), but runs InfluxDB outside the Java runtime to persist CDQM results over time. 
 
 Run on Linux: <br/>
-```startInflux.sh``` (for starting InfluxDB server)<br/>
-```startInfluxConsole.sh``` (for querying InfluxDB using the console)
+```InfluxDB\startInflux.sh``` (for starting InfluxDB server)<br/>
+```InfluxDB\startInfluxConsole.sh``` (for querying InfluxDB using the console)
 
 Run on Windows: <br/>
 ```InfluxDB\influxdb-1.7.7-1_windows\influxd.exe```
@@ -30,7 +30,7 @@ Run on Windows: <br/>
 <a href="https://grafana.com" target="_blank">Grafana</a> is a browser-based dashboard for visualization. After the start, a browser window is opened with the dashboard URL (http://localhost:3000 by default).
 
 Run on Linux:<br/>
-```startGrafana.sh```
+```Grafana\startGrafana.sh```
 
 Run on Windows: <br/>
 ```Grafana\grafana-6.2.5_windows\bin\grafana-server.exe```
