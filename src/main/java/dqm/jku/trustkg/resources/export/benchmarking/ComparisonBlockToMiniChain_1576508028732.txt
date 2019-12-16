@@ -1771,3 +1771,1024 @@ Block http://example.com/100000 Sales Records/100000 Sales Records/Order Priorit
 Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Priority
 Block http://example.com/100000 Sales Records/100000 Sales Records/Order Date mined!
 Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order ID mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order ID
+Block http://example.com/100000 Sales Records/100000 Sales Records/Ship Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Ship Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Units Sold mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Units Sold
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Price mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Price
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Profit mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Profit
+Test ended with testsize of 15 blocks and a time of 43643 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/100000 Sales Records/100000 Sales Records mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records
+Block http://example.com/100000 Sales Records/100000 Sales Records/Region mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Region
+Block http://example.com/100000 Sales Records/100000 Sales Records/Country mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Country
+Block http://example.com/100000 Sales Records/100000 Sales Records/Item Type mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Item Type
+Block http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Priority mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Priority
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order ID mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order ID
+Block http://example.com/100000 Sales Records/100000 Sales Records/Ship Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Ship Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Units Sold mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Units Sold
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Price mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Price
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Profit mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Profit
+Test ended with testsize of 15 blocks and a time of 43505 ms
+
+
+Starting with BlockChain creation test
+Block http://example.com/100000 Sales Records/100000 Sales Records mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records
+Block http://example.com/100000 Sales Records/100000 Sales Records/Region mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Region
+Block http://example.com/100000 Sales Records/100000 Sales Records/Country mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Country
+Block http://example.com/100000 Sales Records/100000 Sales Records/Item Type mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Item Type
+Block http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Priority mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Priority
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order ID mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order ID
+Block http://example.com/100000 Sales Records/100000 Sales Records/Ship Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Ship Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Units Sold mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Units Sold
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Price mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Price
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Profit mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Profit
+Test ended with testsize of 15 blocks and a time of 39747 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/100000 Sales Records/100000 Sales Records mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records
+Block http://example.com/100000 Sales Records/100000 Sales Records/Region mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Region
+Block http://example.com/100000 Sales Records/100000 Sales Records/Country mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Country
+Block http://example.com/100000 Sales Records/100000 Sales Records/Item Type mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Item Type
+Block http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Priority mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Priority
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order ID mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order ID
+Block http://example.com/100000 Sales Records/100000 Sales Records/Ship Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Ship Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Units Sold mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Units Sold
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Price mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Price
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Profit mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Profit
+Test ended with testsize of 15 blocks and a time of 60527 ms
+
+
+Starting with BlockChain creation test
+Block http://example.com/100000 Sales Records/100000 Sales Records mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records
+Block http://example.com/100000 Sales Records/100000 Sales Records/Region mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Region
+Block http://example.com/100000 Sales Records/100000 Sales Records/Country mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Country
+Block http://example.com/100000 Sales Records/100000 Sales Records/Item Type mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Item Type
+Block http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Priority mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Priority
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order ID mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order ID
+Block http://example.com/100000 Sales Records/100000 Sales Records/Ship Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Ship Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Units Sold mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Units Sold
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Price mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Price
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Profit mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Profit
+Test ended with testsize of 15 blocks and a time of 35178 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/100000 Sales Records/100000 Sales Records mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records
+Block http://example.com/100000 Sales Records/100000 Sales Records/Region mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Region
+Block http://example.com/100000 Sales Records/100000 Sales Records/Country mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Country
+Block http://example.com/100000 Sales Records/100000 Sales Records/Item Type mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Item Type
+Block http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Priority mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Priority
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order ID mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order ID
+Block http://example.com/100000 Sales Records/100000 Sales Records/Ship Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Ship Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Units Sold mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Units Sold
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Price mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Price
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Profit mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Profit
+Test ended with testsize of 15 blocks and a time of 32189 ms
+
+
+Mesuring with BlockChain was faster by 17653 ms than measuring with MiniBlockChain.
+The faster method resulted in a performance growth by -14,89 %
+
+Starting with BlockChain creation test
+Block http://example.com/100000 Sales Records/100000 Sales Records mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records
+Block http://example.com/100000 Sales Records/100000 Sales Records/Region mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Region
+Block http://example.com/100000 Sales Records/100000 Sales Records/Country mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Country
+Block http://example.com/100000 Sales Records/100000 Sales Records/Item Type mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Item Type
+Block http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Priority mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Priority
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order ID mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order ID
+Block http://example.com/100000 Sales Records/100000 Sales Records/Ship Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Ship Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Units Sold mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Units Sold
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Price mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Price
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Profit mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Profit
+Test ended with testsize of 15 blocks and a time of 36413 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/100000 Sales Records/100000 Sales Records mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records
+Block http://example.com/100000 Sales Records/100000 Sales Records/Region mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Region
+Block http://example.com/100000 Sales Records/100000 Sales Records/Country mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Country
+Block http://example.com/100000 Sales Records/100000 Sales Records/Item Type mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Item Type
+Block http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Priority mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Priority
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order ID mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order ID
+Block http://example.com/100000 Sales Records/100000 Sales Records/Ship Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Ship Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Units Sold mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Units Sold
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Price mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Price
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Profit mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Profit
+Test ended with testsize of 15 blocks and a time of 57741 ms
+
+
+Starting with BlockChain creation test
+Block http://example.com/100000 Sales Records/100000 Sales Records mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records
+Block http://example.com/100000 Sales Records/100000 Sales Records/Region mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Region
+Block http://example.com/100000 Sales Records/100000 Sales Records/Country mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Country
+Block http://example.com/100000 Sales Records/100000 Sales Records/Item Type mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Item Type
+Block http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Priority mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Priority
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order ID mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order ID
+Block http://example.com/100000 Sales Records/100000 Sales Records/Ship Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Ship Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Units Sold mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Units Sold
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Price mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Price
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Profit mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Profit
+Test ended with testsize of 15 blocks and a time of 39425 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/100000 Sales Records/100000 Sales Records mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records
+Block http://example.com/100000 Sales Records/100000 Sales Records/Region mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Region
+Block http://example.com/100000 Sales Records/100000 Sales Records/Country mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Country
+Block http://example.com/100000 Sales Records/100000 Sales Records/Item Type mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Item Type
+Block http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Priority mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Priority
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order ID mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order ID
+Block http://example.com/100000 Sales Records/100000 Sales Records/Ship Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Ship Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Units Sold mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Units Sold
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Price mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Price
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Profit mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Profit
+Test ended with testsize of 15 blocks and a time of 40113 ms
+
+
+Starting with BlockChain creation test
+Block http://example.com/100000 Sales Records/100000 Sales Records mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records
+Block http://example.com/100000 Sales Records/100000 Sales Records/Region mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Region
+Block http://example.com/100000 Sales Records/100000 Sales Records/Country mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Country
+Block http://example.com/100000 Sales Records/100000 Sales Records/Item Type mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Item Type
+Block http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Priority mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Priority
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order ID mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order ID
+Block http://example.com/100000 Sales Records/100000 Sales Records/Ship Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Ship Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Units Sold mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Units Sold
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Price mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Price
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Profit mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Profit
+Test ended with testsize of 15 blocks and a time of 40994 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/100000 Sales Records/100000 Sales Records mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records
+Block http://example.com/100000 Sales Records/100000 Sales Records/Region mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Region
+Block http://example.com/100000 Sales Records/100000 Sales Records/Country mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Country
+Block http://example.com/100000 Sales Records/100000 Sales Records/Item Type mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Item Type
+Block http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Priority mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Priority
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order ID mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order ID
+Block http://example.com/100000 Sales Records/100000 Sales Records/Ship Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Ship Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Units Sold mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Units Sold
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Price mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Price
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Profit mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Profit
+Test ended with testsize of 15 blocks and a time of 57097 ms
+
+
+Mesuring with BlockChain was faster by 38119 ms than measuring with MiniBlockChain.
+The faster method resulted in a performance growth by -32,63 %
+
+Starting with BlockChain creation test
+Block http://example.com/100000 Sales Records/100000 Sales Records mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records
+Block http://example.com/100000 Sales Records/100000 Sales Records/Region mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Region
+Block http://example.com/100000 Sales Records/100000 Sales Records/Country mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Country
+Block http://example.com/100000 Sales Records/100000 Sales Records/Item Type mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Item Type
+Block http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Priority mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Priority
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order ID mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order ID
+Block http://example.com/100000 Sales Records/100000 Sales Records/Ship Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Ship Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Units Sold mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Units Sold
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Price mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Price
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Profit mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Profit
+Test ended with testsize of 15 blocks and a time of 49396 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/100000 Sales Records/100000 Sales Records mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records
+Block http://example.com/100000 Sales Records/100000 Sales Records/Region mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Region
+Block http://example.com/100000 Sales Records/100000 Sales Records/Country mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Country
+Block http://example.com/100000 Sales Records/100000 Sales Records/Item Type mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Item Type
+Block http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Priority mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Priority
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order ID mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order ID
+Block http://example.com/100000 Sales Records/100000 Sales Records/Ship Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Ship Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Units Sold mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Units Sold
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Price mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Price
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Profit mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Profit
+Test ended with testsize of 15 blocks and a time of 25421 ms
+
+
+Starting with BlockChain creation test
+Block http://example.com/100000 Sales Records/100000 Sales Records mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records
+Block http://example.com/100000 Sales Records/100000 Sales Records/Region mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Region
+Block http://example.com/100000 Sales Records/100000 Sales Records/Country mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Country
+Block http://example.com/100000 Sales Records/100000 Sales Records/Item Type mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Item Type
+Block http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Priority mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Priority
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order ID mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order ID
+Block http://example.com/100000 Sales Records/100000 Sales Records/Ship Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Ship Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Units Sold mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Units Sold
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Price mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Price
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Profit mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Profit
+Test ended with testsize of 15 blocks and a time of 59222 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/100000 Sales Records/100000 Sales Records mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records
+Block http://example.com/100000 Sales Records/100000 Sales Records/Region mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Region
+Block http://example.com/100000 Sales Records/100000 Sales Records/Country mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Country
+Block http://example.com/100000 Sales Records/100000 Sales Records/Item Type mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Item Type
+Block http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Priority mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Priority
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order ID mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order ID
+Block http://example.com/100000 Sales Records/100000 Sales Records/Ship Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Ship Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Units Sold mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Units Sold
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Price mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Price
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Profit mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Profit
+Test ended with testsize of 15 blocks and a time of 52897 ms
+
+
+Starting with BlockChain creation test
+Block http://example.com/100000 Sales Records/100000 Sales Records mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records
+Block http://example.com/100000 Sales Records/100000 Sales Records/Region mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Region
+Block http://example.com/100000 Sales Records/100000 Sales Records/Country mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Country
+Block http://example.com/100000 Sales Records/100000 Sales Records/Item Type mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Item Type
+Block http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Priority mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Priority
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order ID mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order ID
+Block http://example.com/100000 Sales Records/100000 Sales Records/Ship Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Ship Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Units Sold mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Units Sold
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Price mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Price
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Profit mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Profit
+Test ended with testsize of 15 blocks and a time of 47404 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/100000 Sales Records/100000 Sales Records mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records
+Block http://example.com/100000 Sales Records/100000 Sales Records/Region mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Region
+Block http://example.com/100000 Sales Records/100000 Sales Records/Country mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Country
+Block http://example.com/100000 Sales Records/100000 Sales Records/Item Type mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Item Type
+Block http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Priority mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Priority
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order ID mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order ID
+Block http://example.com/100000 Sales Records/100000 Sales Records/Ship Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Ship Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Units Sold mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Units Sold
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Price mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Price
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Profit mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Profit
+Test ended with testsize of 15 blocks and a time of 71693 ms
+
+
+Mesuring with MiniBlockChain was faster by 6011 ms than measuring with BlockChain.
+The faster method resulted in a performance growth by 3,85 %
+
+Starting with BlockChain creation test
+Block http://example.com/100000 Sales Records/100000 Sales Records mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records
+Block http://example.com/100000 Sales Records/100000 Sales Records/Region mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Region
+Block http://example.com/100000 Sales Records/100000 Sales Records/Country mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Country
+Block http://example.com/100000 Sales Records/100000 Sales Records/Item Type mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Item Type
+Block http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Priority mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Priority
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order ID mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order ID
+Block http://example.com/100000 Sales Records/100000 Sales Records/Ship Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Ship Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Units Sold mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Units Sold
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Price mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Price
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Profit mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Profit
+Test ended with testsize of 15 blocks and a time of 51730 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/100000 Sales Records/100000 Sales Records mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records
+Block http://example.com/100000 Sales Records/100000 Sales Records/Region mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Region
+Block http://example.com/100000 Sales Records/100000 Sales Records/Country mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Country
+Block http://example.com/100000 Sales Records/100000 Sales Records/Item Type mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Item Type
+Block http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Priority mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Priority
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order ID mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order ID
+Block http://example.com/100000 Sales Records/100000 Sales Records/Ship Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Ship Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Units Sold mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Units Sold
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Price mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Price
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Profit mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Profit
+Test ended with testsize of 15 blocks and a time of 51834 ms
+
+
+Starting with BlockChain creation test
+Block http://example.com/100000 Sales Records/100000 Sales Records mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records
+Block http://example.com/100000 Sales Records/100000 Sales Records/Region mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Region
+Block http://example.com/100000 Sales Records/100000 Sales Records/Country mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Country
+Block http://example.com/100000 Sales Records/100000 Sales Records/Item Type mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Item Type
+Block http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Priority mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Priority
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order ID mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order ID
+Block http://example.com/100000 Sales Records/100000 Sales Records/Ship Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Ship Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Units Sold mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Units Sold
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Price mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Price
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Profit mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Profit
+Test ended with testsize of 15 blocks and a time of 70191 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/100000 Sales Records/100000 Sales Records mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records
+Block http://example.com/100000 Sales Records/100000 Sales Records/Region mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Region
+Block http://example.com/100000 Sales Records/100000 Sales Records/Country mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Country
+Block http://example.com/100000 Sales Records/100000 Sales Records/Item Type mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Item Type
+Block http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Priority mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Priority
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order ID mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order ID
+Block http://example.com/100000 Sales Records/100000 Sales Records/Ship Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Ship Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Units Sold mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Units Sold
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Price mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Price
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Profit mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Profit
+Test ended with testsize of 15 blocks and a time of 54150 ms
+
+
+Starting with BlockChain creation test
+Block http://example.com/100000 Sales Records/100000 Sales Records mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records
+Block http://example.com/100000 Sales Records/100000 Sales Records/Region mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Region
+Block http://example.com/100000 Sales Records/100000 Sales Records/Country mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Country
+Block http://example.com/100000 Sales Records/100000 Sales Records/Item Type mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Item Type
+Block http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Priority mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Priority
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order ID mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order ID
+Block http://example.com/100000 Sales Records/100000 Sales Records/Ship Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Ship Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Units Sold mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Units Sold
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Price mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Price
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Profit mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Profit
+Test ended with testsize of 15 blocks and a time of 34334 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/100000 Sales Records/100000 Sales Records mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records
+Block http://example.com/100000 Sales Records/100000 Sales Records/Region mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Region
+Block http://example.com/100000 Sales Records/100000 Sales Records/Country mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Country
+Block http://example.com/100000 Sales Records/100000 Sales Records/Item Type mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Item Type
+Block http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Priority mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Priority
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order ID mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order ID
+Block http://example.com/100000 Sales Records/100000 Sales Records/Ship Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Ship Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Units Sold mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Units Sold
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Price mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Price
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Profit mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Profit
+Test ended with testsize of 15 blocks and a time of 73015 ms
+
+
+Mesuring with BlockChain was faster by 22744 ms than measuring with MiniBlockChain.
+The faster method resulted in a performance growth by -14,56 %
+
+Starting with BlockChain creation test
+Block http://example.com/100000 Sales Records/100000 Sales Records mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records
+Block http://example.com/100000 Sales Records/100000 Sales Records/Region mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Region
+Block http://example.com/100000 Sales Records/100000 Sales Records/Country mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Country
+Block http://example.com/100000 Sales Records/100000 Sales Records/Item Type mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Item Type
+Block http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Priority mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Priority
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order ID mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order ID
+Block http://example.com/100000 Sales Records/100000 Sales Records/Ship Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Ship Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Units Sold mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Units Sold
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Price mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Price
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Profit mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Profit
+Test ended with testsize of 15 blocks and a time of 49034 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/100000 Sales Records/100000 Sales Records mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records
+Block http://example.com/100000 Sales Records/100000 Sales Records/Region mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Region
+Block http://example.com/100000 Sales Records/100000 Sales Records/Country mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Country
+Block http://example.com/100000 Sales Records/100000 Sales Records/Item Type mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Item Type
+Block http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Priority mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Priority
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order ID mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order ID
+Block http://example.com/100000 Sales Records/100000 Sales Records/Ship Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Ship Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Units Sold mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Units Sold
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Price mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Price
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Profit mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Profit
+Test ended with testsize of 15 blocks and a time of 39419 ms
+
+
+Starting with BlockChain creation test
+Block http://example.com/100000 Sales Records/100000 Sales Records mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records
+Block http://example.com/100000 Sales Records/100000 Sales Records/Region mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Region
+Block http://example.com/100000 Sales Records/100000 Sales Records/Country mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Country
+Block http://example.com/100000 Sales Records/100000 Sales Records/Item Type mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Item Type
+Block http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Priority mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Priority
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order ID mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order ID
+Block http://example.com/100000 Sales Records/100000 Sales Records/Ship Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Ship Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Units Sold mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Units Sold
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Price mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Price
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Profit mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Profit
+Test ended with testsize of 15 blocks and a time of 39995 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/100000 Sales Records/100000 Sales Records mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records
+Block http://example.com/100000 Sales Records/100000 Sales Records/Region mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Region
+Block http://example.com/100000 Sales Records/100000 Sales Records/Country mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Country
+Block http://example.com/100000 Sales Records/100000 Sales Records/Item Type mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Item Type
+Block http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Priority mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Priority
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order ID mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order ID
+Block http://example.com/100000 Sales Records/100000 Sales Records/Ship Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Ship Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Units Sold mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Units Sold
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Price mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Price
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Profit mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Profit
+Test ended with testsize of 15 blocks and a time of 66750 ms
+
+
+Starting with BlockChain creation test
+Block http://example.com/100000 Sales Records/100000 Sales Records mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records
+Block http://example.com/100000 Sales Records/100000 Sales Records/Region mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Region
+Block http://example.com/100000 Sales Records/100000 Sales Records/Country mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Country
+Block http://example.com/100000 Sales Records/100000 Sales Records/Item Type mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Item Type
+Block http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Priority mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Priority
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order ID mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order ID
+Block http://example.com/100000 Sales Records/100000 Sales Records/Ship Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Ship Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Units Sold mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Units Sold
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Price mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Price
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Profit mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Profit
+Test ended with testsize of 15 blocks and a time of 56019 ms
+
+
+Starting with MiniBlockChain creation test
+Block http://example.com/100000 Sales Records/100000 Sales Records mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records
+Block http://example.com/100000 Sales Records/100000 Sales Records/Region mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Region
+Block http://example.com/100000 Sales Records/100000 Sales Records/Country mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Country
+Block http://example.com/100000 Sales Records/100000 Sales Records/Item Type mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Item Type
+Block http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Sales Channel
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Priority mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Priority
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Order ID mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Order ID
+Block http://example.com/100000 Sales Records/100000 Sales Records/Ship Date mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Ship Date
+Block http://example.com/100000 Sales Records/100000 Sales Records/Units Sold mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Units Sold
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Price mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Price
+Block http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Unit Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Revenue
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Cost mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Cost
+Block http://example.com/100000 Sales Records/100000 Sales Records/Total Profit mined!
+Added block with element: http://example.com/100000 Sales Records/100000 Sales Records/Total Profit
+Test ended with testsize of 15 blocks and a time of 64481 ms
+
+
+Mesuring with BlockChain was faster by 25602 ms than measuring with MiniBlockChain.
+The faster method resulted in a performance growth by -17,65 %
+
+MiniBlockChains were faster with an average performance growth of -0,18 %
