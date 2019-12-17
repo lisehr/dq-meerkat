@@ -129,19 +129,8 @@ public class ConnectorCSV extends DSConnector {
 
 	@Override
 	public RecordList getPartialRecordList(Concept concept, int offset, int noRecs) throws IOException {
-		Iterator<Record> rIt = getRecords(concept);
-		RecordList rs = new RecordList();
-		int i = 0;
-		while (rIt.hasNext() && i < offset) {
-			rIt.next();
-			i++;
-		}
-		i = 0;
-		while (rIt.hasNext() && i < noRecs) {
-			rs.addRecord(rIt.next());
-			i++;
-		}
-		return rs;
+	  RecordList allRecords = getRecordList(concept);
+	  return allRecords.splitPartialRecordList(offset, noRecs);
 	}
 
 	@Override

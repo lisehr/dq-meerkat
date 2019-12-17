@@ -9,6 +9,14 @@ public class RecordList implements Iterable<Record> {
 
   @SuppressWarnings("unchecked")
   private List<Record> records = new TreeList();
+  
+  public RecordList() {
+    
+  }
+  
+  public RecordList(List<Record> recs) {
+    records.addAll(recs);
+  }
 
   public void addRecord(Record r) {
     records.add(r);
@@ -16,6 +24,12 @@ public class RecordList implements Iterable<Record> {
 
   public int size() {
     return records.size();
+  }
+  
+  public RecordList splitPartialRecordList(int offset, int noRecs) {
+    if (offset < 0 || offset > noRecs || offset > size()) return new RecordList();
+    int end = noRecs > size() ? size() : noRecs;
+    return new RecordList(records.subList(offset, end));
   }
 
   @Override

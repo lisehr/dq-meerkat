@@ -53,12 +53,12 @@ public class DemoStreamingData {
     int i = 0;
     Iterator<Record> itR = rs.iterator();
     while (!fileFinished) {
-      createTimeout(i);
       fileFinished = addMeasurement(influx, testCon, itR);
       // adds one measurement to the profile (static, but periodic), so limits can be
       // displayed
       ds.addProfileToInflux(influx);
-      System.out.println("Record " + i + " stored!");
+      System.out.println("Record " + (i + 1) + " stored!");
+      createTimeout(i);
       i++;
     }
 

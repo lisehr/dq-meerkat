@@ -1,15 +1,512 @@
-t=2019-12-16T00:47:44+0100 lvl=info msg="Shutdown started" logger=server reason="System signal: interrupt"
-t=2019-12-16T00:47:44+0100 lvl=info msg="Stopped UsageStatsService" logger=server reason="context canceled"
-t=2019-12-16T00:47:44+0100 lvl=info msg="Stopped UserAuthTokenService" logger=server reason="context canceled"
-t=2019-12-16T00:47:44+0100 lvl=info msg="Stopped CleanUpService" logger=server reason="context canceled"
-t=2019-12-16T00:47:44+0100 lvl=info msg="Stopped RemoteCache" logger=server reason="context canceled"
-t=2019-12-16T00:47:44+0100 lvl=info msg="Stopped NotificationService" logger=server reason="context canceled"
-t=2019-12-16T00:47:44+0100 lvl=info msg="Stopped PluginManager" logger=server reason="context canceled"
-t=2019-12-16T00:47:44+0100 lvl=info msg="Stopped Stream Manager"
-t=2019-12-16T00:47:44+0100 lvl=info msg="Stopped RenderingService" logger=server reason=nil
-t=2019-12-16T00:47:44+0100 lvl=info msg="Stopped TracingService" logger=server reason=nil
-t=2019-12-16T00:47:44+0100 lvl=info msg="Stopped provisioningServiceImpl" logger=server reason="context canceled"
-t=2019-12-16T00:47:44+0100 lvl=info msg="Stopped InternalMetricsService" logger=server reason="context canceled"
-t=2019-12-16T00:47:44+0100 lvl=info msg="Stopped AlertingService" logger=server reason="context canceled"
-t=2019-12-16T00:47:44+0100 lvl=info msg="Stopped HTTPServer" logger=server reason=nil
-t=2019-12-16T00:47:44+0100 lvl=eror msg="Server shutdown" logger=server reason="System signal: interrupt"
+t=2019-12-18T00:04:42+0100 lvl=info msg="Request Completed" logger=context userId=1 orgId=1 uname=admin method=GET path=/api/datasources/proxy/1/query status=502 remote_addr=127.0.0.1 time_ms=29 size=0 referer="http://localhost:3000/?orgId=1"
+t=2019-12-18T00:04:56+0100 lvl=info msg="Starting Grafana" logger=server version=6.2.5 commit=6082d19 branch=HEAD compiled=2019-06-25T19:56:19+0200
+t=2019-12-18T00:04:56+0100 lvl=info msg="Config loaded from" logger=settings file="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/conf/defaults.ini"
+t=2019-12-18T00:04:56+0100 lvl=info msg="Path Home" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5"
+t=2019-12-18T00:04:56+0100 lvl=info msg="Path Data" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data"
+t=2019-12-18T00:04:56+0100 lvl=info msg="Path Logs" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data/log"
+t=2019-12-18T00:04:56+0100 lvl=info msg="Path Plugins" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data/plugins"
+t=2019-12-18T00:04:56+0100 lvl=info msg="Path Provisioning" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/conf/provisioning"
+t=2019-12-18T00:04:56+0100 lvl=info msg="App mode production" logger=settings
+t=2019-12-18T00:04:56+0100 lvl=info msg="Initializing SqlStore" logger=server
+t=2019-12-18T00:04:56+0100 lvl=info msg="Connecting to DB" logger=sqlstore dbtype=sqlite3
+t=2019-12-18T00:04:56+0100 lvl=info msg="Starting DB migration" logger=migrator
+t=2019-12-18T00:04:56+0100 lvl=info msg="Initializing HTTPServer" logger=server
+t=2019-12-18T00:04:56+0100 lvl=info msg="Initializing InternalMetricsService" logger=server
+t=2019-12-18T00:04:56+0100 lvl=info msg="Initializing RemoteCache" logger=server
+t=2019-12-18T00:04:56+0100 lvl=info msg="Initializing QuotaService" logger=server
+t=2019-12-18T00:04:56+0100 lvl=info msg="Initializing LoginService" logger=server
+t=2019-12-18T00:04:56+0100 lvl=info msg="Initializing PluginManager" logger=server
+t=2019-12-18T00:04:56+0100 lvl=info msg="Starting plugin search" logger=plugins
+t=2019-12-18T00:04:56+0100 lvl=info msg="Initializing RenderingService" logger=server
+t=2019-12-18T00:04:56+0100 lvl=info msg="Initializing AlertingService" logger=server
+t=2019-12-18T00:04:56+0100 lvl=info msg="Initializing DatasourceCacheService" logger=server
+t=2019-12-18T00:04:56+0100 lvl=info msg="Initializing HooksService" logger=server
+t=2019-12-18T00:04:56+0100 lvl=info msg="Initializing SearchService" logger=server
+t=2019-12-18T00:04:56+0100 lvl=info msg="Initializing ServerLockService" logger=server
+t=2019-12-18T00:04:56+0100 lvl=info msg="Initializing TracingService" logger=server
+t=2019-12-18T00:04:56+0100 lvl=info msg="Initializing UsageStatsService" logger=server
+t=2019-12-18T00:04:56+0100 lvl=info msg="Initializing UserAuthTokenService" logger=server
+t=2019-12-18T00:04:56+0100 lvl=info msg="Initializing CleanUpService" logger=server
+t=2019-12-18T00:04:56+0100 lvl=info msg="Initializing NotificationService" logger=server
+t=2019-12-18T00:04:56+0100 lvl=info msg="Initializing provisioningServiceImpl" logger=server
+t=2019-12-18T00:04:56+0100 lvl=info msg="Initializing Stream Manager"
+t=2019-12-18T00:04:56+0100 lvl=info msg="HTTP Server Listen" logger=http.server address=0.0.0.0:3000 protocol=http subUrl= socket=
+t=2019-12-18T00:04:56+0100 lvl=eror msg="Stopped HTTPServer" logger=server reason="listen tcp 0.0.0.0:3000: bind: address already in use"
+t=2019-12-18T00:04:56+0100 lvl=info msg="Stopped Stream Manager"
+t=2019-12-18T00:04:56+0100 lvl=info msg="Stopped UserAuthTokenService" logger=server reason="context canceled"
+t=2019-12-18T00:04:56+0100 lvl=info msg="Stopped CleanUpService" logger=server reason="context canceled"
+t=2019-12-18T00:04:56+0100 lvl=info msg="Stopped TracingService" logger=server reason=nil
+t=2019-12-18T00:04:56+0100 lvl=info msg="Stopped RemoteCache" logger=server reason="context canceled"
+t=2019-12-18T00:04:56+0100 lvl=info msg="Stopped RenderingService" logger=server reason=nil
+t=2019-12-18T00:04:56+0100 lvl=info msg="Stopped InternalMetricsService" logger=server reason="context canceled"
+t=2019-12-18T00:04:56+0100 lvl=info msg="Stopped NotificationService" logger=server reason="context canceled"
+t=2019-12-18T00:04:56+0100 lvl=info msg="Stopped provisioningServiceImpl" logger=server reason="context canceled"
+t=2019-12-18T00:04:56+0100 lvl=info msg="Stopped AlertingService" logger=server reason="context canceled"
+t=2019-12-18T00:04:56+0100 lvl=info msg="Stopped UsageStatsService" logger=server reason="context canceled"
+t=2019-12-18T00:04:56+0100 lvl=info msg="Stopped PluginManager" logger=server reason="context canceled"
+t=2019-12-18T00:04:56+0100 lvl=eror msg="Server shutdown" logger=server reason="listen tcp 0.0.0.0:3000: bind: address already in use"
+t=2019-12-18T00:05:11+0100 lvl=info msg="Starting Grafana" logger=server version=6.2.5 commit=6082d19 branch=HEAD compiled=2019-06-25T19:56:19+0200
+t=2019-12-18T00:05:11+0100 lvl=info msg="Config loaded from" logger=settings file="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/conf/defaults.ini"
+t=2019-12-18T00:05:11+0100 lvl=info msg="Path Home" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5"
+t=2019-12-18T00:05:11+0100 lvl=info msg="Path Data" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data"
+t=2019-12-18T00:05:11+0100 lvl=info msg="Path Logs" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data/log"
+t=2019-12-18T00:05:11+0100 lvl=info msg="Path Plugins" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data/plugins"
+t=2019-12-18T00:05:11+0100 lvl=info msg="Path Provisioning" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/conf/provisioning"
+t=2019-12-18T00:05:11+0100 lvl=info msg="App mode production" logger=settings
+t=2019-12-18T00:05:11+0100 lvl=info msg="Initializing SqlStore" logger=server
+t=2019-12-18T00:05:11+0100 lvl=info msg="Connecting to DB" logger=sqlstore dbtype=sqlite3
+t=2019-12-18T00:05:11+0100 lvl=info msg="Starting DB migration" logger=migrator
+t=2019-12-18T00:05:11+0100 lvl=info msg="Initializing HTTPServer" logger=server
+t=2019-12-18T00:05:11+0100 lvl=info msg="Initializing InternalMetricsService" logger=server
+t=2019-12-18T00:05:11+0100 lvl=info msg="Initializing RemoteCache" logger=server
+t=2019-12-18T00:05:11+0100 lvl=info msg="Initializing QuotaService" logger=server
+t=2019-12-18T00:05:11+0100 lvl=info msg="Initializing LoginService" logger=server
+t=2019-12-18T00:05:11+0100 lvl=info msg="Initializing PluginManager" logger=server
+t=2019-12-18T00:05:11+0100 lvl=info msg="Starting plugin search" logger=plugins
+t=2019-12-18T00:05:11+0100 lvl=info msg="Initializing RenderingService" logger=server
+t=2019-12-18T00:05:11+0100 lvl=info msg="Initializing AlertingService" logger=server
+t=2019-12-18T00:05:11+0100 lvl=info msg="Initializing DatasourceCacheService" logger=server
+t=2019-12-18T00:05:11+0100 lvl=info msg="Initializing HooksService" logger=server
+t=2019-12-18T00:05:11+0100 lvl=info msg="Initializing SearchService" logger=server
+t=2019-12-18T00:05:11+0100 lvl=info msg="Initializing ServerLockService" logger=server
+t=2019-12-18T00:05:11+0100 lvl=info msg="Initializing TracingService" logger=server
+t=2019-12-18T00:05:11+0100 lvl=info msg="Initializing UsageStatsService" logger=server
+t=2019-12-18T00:05:11+0100 lvl=info msg="Initializing UserAuthTokenService" logger=server
+t=2019-12-18T00:05:11+0100 lvl=info msg="Initializing CleanUpService" logger=server
+t=2019-12-18T00:05:11+0100 lvl=info msg="Initializing NotificationService" logger=server
+t=2019-12-18T00:05:11+0100 lvl=info msg="Initializing provisioningServiceImpl" logger=server
+t=2019-12-18T00:05:11+0100 lvl=info msg="Initializing Stream Manager"
+t=2019-12-18T00:05:11+0100 lvl=info msg="HTTP Server Listen" logger=http.server address=0.0.0.0:3000 protocol=http subUrl= socket=
+t=2019-12-18T00:05:11+0100 lvl=eror msg="Stopped HTTPServer" logger=server reason="listen tcp 0.0.0.0:3000: bind: address already in use"
+t=2019-12-18T00:05:11+0100 lvl=info msg="Stopped UsageStatsService" logger=server reason="context canceled"
+t=2019-12-18T00:05:11+0100 lvl=info msg="Stopped TracingService" logger=server reason=nil
+t=2019-12-18T00:05:11+0100 lvl=info msg="Stopped RenderingService" logger=server reason=nil
+t=2019-12-18T00:05:11+0100 lvl=info msg="Stopped InternalMetricsService" logger=server reason="context canceled"
+t=2019-12-18T00:05:11+0100 lvl=info msg="Stopped AlertingService" logger=server reason="context canceled"
+t=2019-12-18T00:05:11+0100 lvl=info msg="Stopped NotificationService" logger=server reason="context canceled"
+t=2019-12-18T00:05:11+0100 lvl=info msg="Stopped Stream Manager"
+t=2019-12-18T00:05:11+0100 lvl=info msg="Stopped CleanUpService" logger=server reason="context canceled"
+t=2019-12-18T00:05:11+0100 lvl=info msg="Stopped UserAuthTokenService" logger=server reason="context canceled"
+t=2019-12-18T00:05:11+0100 lvl=info msg="Stopped provisioningServiceImpl" logger=server reason="context canceled"
+t=2019-12-18T00:05:11+0100 lvl=info msg="Stopped RemoteCache" logger=server reason="context canceled"
+t=2019-12-18T00:05:11+0100 lvl=info msg="Stopped PluginManager" logger=server reason="context canceled"
+t=2019-12-18T00:05:11+0100 lvl=eror msg="Server shutdown" logger=server reason="listen tcp 0.0.0.0:3000: bind: address already in use"
+t=2019-12-18T00:09:43+0100 lvl=info msg="Starting Grafana" logger=server version=6.2.5 commit=6082d19 branch=HEAD compiled=2019-06-25T19:56:19+0200
+t=2019-12-18T00:09:43+0100 lvl=info msg="Config loaded from" logger=settings file="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/conf/defaults.ini"
+t=2019-12-18T00:09:43+0100 lvl=info msg="Path Home" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5"
+t=2019-12-18T00:09:43+0100 lvl=info msg="Path Data" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data"
+t=2019-12-18T00:09:43+0100 lvl=info msg="Path Logs" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data/log"
+t=2019-12-18T00:09:43+0100 lvl=info msg="Path Plugins" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data/plugins"
+t=2019-12-18T00:09:43+0100 lvl=info msg="Path Provisioning" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/conf/provisioning"
+t=2019-12-18T00:09:43+0100 lvl=info msg="App mode production" logger=settings
+t=2019-12-18T00:09:43+0100 lvl=info msg="Initializing SqlStore" logger=server
+t=2019-12-18T00:09:43+0100 lvl=info msg="Connecting to DB" logger=sqlstore dbtype=sqlite3
+t=2019-12-18T00:09:43+0100 lvl=info msg="Starting DB migration" logger=migrator
+t=2019-12-18T00:09:43+0100 lvl=info msg="Initializing HTTPServer" logger=server
+t=2019-12-18T00:09:43+0100 lvl=info msg="Initializing InternalMetricsService" logger=server
+t=2019-12-18T00:09:43+0100 lvl=info msg="Initializing RemoteCache" logger=server
+t=2019-12-18T00:09:43+0100 lvl=info msg="Initializing QuotaService" logger=server
+t=2019-12-18T00:09:43+0100 lvl=info msg="Initializing LoginService" logger=server
+t=2019-12-18T00:09:43+0100 lvl=info msg="Initializing PluginManager" logger=server
+t=2019-12-18T00:09:43+0100 lvl=info msg="Starting plugin search" logger=plugins
+t=2019-12-18T00:09:43+0100 lvl=info msg="Initializing RenderingService" logger=server
+t=2019-12-18T00:09:43+0100 lvl=info msg="Initializing AlertingService" logger=server
+t=2019-12-18T00:09:43+0100 lvl=info msg="Initializing DatasourceCacheService" logger=server
+t=2019-12-18T00:09:43+0100 lvl=info msg="Initializing HooksService" logger=server
+t=2019-12-18T00:09:43+0100 lvl=info msg="Initializing SearchService" logger=server
+t=2019-12-18T00:09:43+0100 lvl=info msg="Initializing ServerLockService" logger=server
+t=2019-12-18T00:09:43+0100 lvl=info msg="Initializing TracingService" logger=server
+t=2019-12-18T00:09:43+0100 lvl=info msg="Initializing UsageStatsService" logger=server
+t=2019-12-18T00:09:43+0100 lvl=info msg="Initializing UserAuthTokenService" logger=server
+t=2019-12-18T00:09:43+0100 lvl=info msg="Initializing CleanUpService" logger=server
+t=2019-12-18T00:09:43+0100 lvl=info msg="Initializing NotificationService" logger=server
+t=2019-12-18T00:09:43+0100 lvl=info msg="Initializing provisioningServiceImpl" logger=server
+t=2019-12-18T00:09:43+0100 lvl=info msg="Initializing Stream Manager"
+t=2019-12-18T00:09:43+0100 lvl=info msg="HTTP Server Listen" logger=http.server address=0.0.0.0:3000 protocol=http subUrl= socket=
+t=2019-12-18T00:09:43+0100 lvl=eror msg="Stopped HTTPServer" logger=server reason="listen tcp 0.0.0.0:3000: bind: address already in use"
+t=2019-12-18T00:09:43+0100 lvl=info msg="Stopped UserAuthTokenService" logger=server reason="context canceled"
+t=2019-12-18T00:09:43+0100 lvl=info msg="Stopped Stream Manager"
+t=2019-12-18T00:09:43+0100 lvl=info msg="Stopped CleanUpService" logger=server reason="context canceled"
+t=2019-12-18T00:09:43+0100 lvl=info msg="Stopped TracingService" logger=server reason=nil
+t=2019-12-18T00:09:43+0100 lvl=info msg="Stopped RenderingService" logger=server reason=nil
+t=2019-12-18T00:09:43+0100 lvl=info msg="Stopped RemoteCache" logger=server reason="context canceled"
+t=2019-12-18T00:09:43+0100 lvl=info msg="Stopped InternalMetricsService" logger=server reason="context canceled"
+t=2019-12-18T00:09:43+0100 lvl=info msg="Stopped provisioningServiceImpl" logger=server reason="context canceled"
+t=2019-12-18T00:09:43+0100 lvl=info msg="Stopped UsageStatsService" logger=server reason="context canceled"
+t=2019-12-18T00:09:43+0100 lvl=info msg="Stopped NotificationService" logger=server reason="context canceled"
+t=2019-12-18T00:09:43+0100 lvl=info msg="Stopped AlertingService" logger=server reason="context canceled"
+t=2019-12-18T00:09:43+0100 lvl=info msg="Stopped PluginManager" logger=server reason="context canceled"
+t=2019-12-18T00:09:43+0100 lvl=eror msg="Server shutdown" logger=server reason="listen tcp 0.0.0.0:3000: bind: address already in use"
+t=2019-12-18T00:09:44+0100 lvl=info msg="Request Completed" logger=context userId=1 orgId=1 uname=admin method=GET path=/api/datasources/proxy/1/query status=502 remote_addr=127.0.0.1 time_ms=29 size=0 referer="http://localhost:3000/?orgId=1"
+t=2019-12-18T00:11:22+0100 lvl=info msg="Starting Grafana" logger=server version=6.2.5 commit=6082d19 branch=HEAD compiled=2019-06-25T19:56:19+0200
+t=2019-12-18T00:11:22+0100 lvl=info msg="Config loaded from" logger=settings file="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/conf/defaults.ini"
+t=2019-12-18T00:11:22+0100 lvl=info msg="Path Home" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5"
+t=2019-12-18T00:11:22+0100 lvl=info msg="Path Data" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data"
+t=2019-12-18T00:11:22+0100 lvl=info msg="Path Logs" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data/log"
+t=2019-12-18T00:11:22+0100 lvl=info msg="Path Plugins" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data/plugins"
+t=2019-12-18T00:11:22+0100 lvl=info msg="Path Provisioning" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/conf/provisioning"
+t=2019-12-18T00:11:22+0100 lvl=info msg="App mode production" logger=settings
+t=2019-12-18T00:11:22+0100 lvl=info msg="Initializing SqlStore" logger=server
+t=2019-12-18T00:11:22+0100 lvl=info msg="Connecting to DB" logger=sqlstore dbtype=sqlite3
+t=2019-12-18T00:11:22+0100 lvl=info msg="Starting DB migration" logger=migrator
+t=2019-12-18T00:11:22+0100 lvl=info msg="Initializing HTTPServer" logger=server
+t=2019-12-18T00:11:22+0100 lvl=info msg="Initializing InternalMetricsService" logger=server
+t=2019-12-18T00:11:22+0100 lvl=info msg="Initializing RemoteCache" logger=server
+t=2019-12-18T00:11:22+0100 lvl=info msg="Initializing QuotaService" logger=server
+t=2019-12-18T00:11:22+0100 lvl=info msg="Initializing LoginService" logger=server
+t=2019-12-18T00:11:22+0100 lvl=info msg="Initializing PluginManager" logger=server
+t=2019-12-18T00:11:22+0100 lvl=info msg="Starting plugin search" logger=plugins
+t=2019-12-18T00:11:22+0100 lvl=info msg="Initializing RenderingService" logger=server
+t=2019-12-18T00:11:22+0100 lvl=info msg="Initializing AlertingService" logger=server
+t=2019-12-18T00:11:22+0100 lvl=info msg="Initializing DatasourceCacheService" logger=server
+t=2019-12-18T00:11:22+0100 lvl=info msg="Initializing HooksService" logger=server
+t=2019-12-18T00:11:22+0100 lvl=info msg="Initializing SearchService" logger=server
+t=2019-12-18T00:11:22+0100 lvl=info msg="Initializing ServerLockService" logger=server
+t=2019-12-18T00:11:22+0100 lvl=info msg="Initializing TracingService" logger=server
+t=2019-12-18T00:11:22+0100 lvl=info msg="Initializing UsageStatsService" logger=server
+t=2019-12-18T00:11:22+0100 lvl=info msg="Initializing UserAuthTokenService" logger=server
+t=2019-12-18T00:11:22+0100 lvl=info msg="Initializing CleanUpService" logger=server
+t=2019-12-18T00:11:22+0100 lvl=info msg="Initializing NotificationService" logger=server
+t=2019-12-18T00:11:22+0100 lvl=info msg="Initializing provisioningServiceImpl" logger=server
+t=2019-12-18T00:11:22+0100 lvl=info msg="Initializing Stream Manager"
+t=2019-12-18T00:11:22+0100 lvl=info msg="HTTP Server Listen" logger=http.server address=0.0.0.0:3000 protocol=http subUrl= socket=
+t=2019-12-18T00:11:22+0100 lvl=eror msg="Stopped HTTPServer" logger=server reason="listen tcp 0.0.0.0:3000: bind: address already in use"
+t=2019-12-18T00:11:22+0100 lvl=info msg="Stopped Stream Manager"
+t=2019-12-18T00:11:22+0100 lvl=info msg="Stopped NotificationService" logger=server reason="context canceled"
+t=2019-12-18T00:11:22+0100 lvl=info msg="Stopped CleanUpService" logger=server reason="context canceled"
+t=2019-12-18T00:11:22+0100 lvl=info msg="Stopped UserAuthTokenService" logger=server reason="context canceled"
+t=2019-12-18T00:11:22+0100 lvl=info msg="Stopped TracingService" logger=server reason=nil
+t=2019-12-18T00:11:22+0100 lvl=info msg="Stopped RenderingService" logger=server reason=nil
+t=2019-12-18T00:11:22+0100 lvl=info msg="Stopped UsageStatsService" logger=server reason="context canceled"
+t=2019-12-18T00:11:22+0100 lvl=info msg="Stopped RemoteCache" logger=server reason="context canceled"
+t=2019-12-18T00:11:22+0100 lvl=info msg="Stopped InternalMetricsService" logger=server reason="context canceled"
+t=2019-12-18T00:11:22+0100 lvl=info msg="Stopped provisioningServiceImpl" logger=server reason="context canceled"
+t=2019-12-18T00:11:22+0100 lvl=info msg="Stopped AlertingService" logger=server reason="context canceled"
+t=2019-12-18T00:11:23+0100 lvl=info msg="Stopped PluginManager" logger=server reason="context canceled"
+t=2019-12-18T00:11:23+0100 lvl=eror msg="Server shutdown" logger=server reason="listen tcp 0.0.0.0:3000: bind: address already in use"
+t=2019-12-18T00:11:23+0100 lvl=info msg="Request Completed" logger=context userId=1 orgId=1 uname=admin method=GET path=/api/datasources/proxy/1/query status=502 remote_addr=127.0.0.1 time_ms=29 size=0 referer="http://localhost:3000/?orgId=1"
+t=2019-12-18T00:11:37+0100 lvl=info msg="Starting Grafana" logger=server version=6.2.5 commit=6082d19 branch=HEAD compiled=2019-06-25T19:56:19+0200
+t=2019-12-18T00:11:37+0100 lvl=info msg="Config loaded from" logger=settings file="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/conf/defaults.ini"
+t=2019-12-18T00:11:37+0100 lvl=info msg="Path Home" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5"
+t=2019-12-18T00:11:37+0100 lvl=info msg="Path Data" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data"
+t=2019-12-18T00:11:37+0100 lvl=info msg="Path Logs" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data/log"
+t=2019-12-18T00:11:37+0100 lvl=info msg="Path Plugins" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data/plugins"
+t=2019-12-18T00:11:37+0100 lvl=info msg="Path Provisioning" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/conf/provisioning"
+t=2019-12-18T00:11:37+0100 lvl=info msg="App mode production" logger=settings
+t=2019-12-18T00:11:37+0100 lvl=info msg="Initializing SqlStore" logger=server
+t=2019-12-18T00:11:37+0100 lvl=info msg="Connecting to DB" logger=sqlstore dbtype=sqlite3
+t=2019-12-18T00:11:37+0100 lvl=info msg="Starting DB migration" logger=migrator
+t=2019-12-18T00:11:37+0100 lvl=info msg="Initializing HTTPServer" logger=server
+t=2019-12-18T00:11:37+0100 lvl=info msg="Initializing InternalMetricsService" logger=server
+t=2019-12-18T00:11:37+0100 lvl=info msg="Initializing RemoteCache" logger=server
+t=2019-12-18T00:11:37+0100 lvl=info msg="Initializing QuotaService" logger=server
+t=2019-12-18T00:11:37+0100 lvl=info msg="Initializing LoginService" logger=server
+t=2019-12-18T00:11:37+0100 lvl=info msg="Initializing PluginManager" logger=server
+t=2019-12-18T00:11:37+0100 lvl=info msg="Starting plugin search" logger=plugins
+t=2019-12-18T00:11:37+0100 lvl=info msg="Initializing RenderingService" logger=server
+t=2019-12-18T00:11:37+0100 lvl=info msg="Initializing AlertingService" logger=server
+t=2019-12-18T00:11:37+0100 lvl=info msg="Initializing DatasourceCacheService" logger=server
+t=2019-12-18T00:11:37+0100 lvl=info msg="Initializing HooksService" logger=server
+t=2019-12-18T00:11:37+0100 lvl=info msg="Initializing SearchService" logger=server
+t=2019-12-18T00:11:37+0100 lvl=info msg="Initializing ServerLockService" logger=server
+t=2019-12-18T00:11:37+0100 lvl=info msg="Initializing TracingService" logger=server
+t=2019-12-18T00:11:37+0100 lvl=info msg="Initializing UsageStatsService" logger=server
+t=2019-12-18T00:11:37+0100 lvl=info msg="Initializing UserAuthTokenService" logger=server
+t=2019-12-18T00:11:37+0100 lvl=info msg="Initializing CleanUpService" logger=server
+t=2019-12-18T00:11:37+0100 lvl=info msg="Initializing NotificationService" logger=server
+t=2019-12-18T00:11:37+0100 lvl=info msg="Initializing provisioningServiceImpl" logger=server
+t=2019-12-18T00:11:37+0100 lvl=info msg="Initializing Stream Manager"
+t=2019-12-18T00:11:37+0100 lvl=info msg="HTTP Server Listen" logger=http.server address=0.0.0.0:3000 protocol=http subUrl= socket=
+t=2019-12-18T00:11:37+0100 lvl=eror msg="Stopped HTTPServer" logger=server reason="listen tcp 0.0.0.0:3000: bind: address already in use"
+t=2019-12-18T00:11:37+0100 lvl=info msg="Stopped Stream Manager"
+t=2019-12-18T00:11:37+0100 lvl=info msg="Stopped RenderingService" logger=server reason=nil
+t=2019-12-18T00:11:37+0100 lvl=info msg="Stopped CleanUpService" logger=server reason="context canceled"
+t=2019-12-18T00:11:37+0100 lvl=info msg="Stopped NotificationService" logger=server reason="context canceled"
+t=2019-12-18T00:11:37+0100 lvl=info msg="Stopped UsageStatsService" logger=server reason="context canceled"
+t=2019-12-18T00:11:37+0100 lvl=info msg="Stopped TracingService" logger=server reason=nil
+t=2019-12-18T00:11:37+0100 lvl=info msg="Stopped UserAuthTokenService" logger=server reason="context canceled"
+t=2019-12-18T00:11:37+0100 lvl=info msg="Stopped RemoteCache" logger=server reason="context canceled"
+t=2019-12-18T00:11:37+0100 lvl=info msg="Stopped InternalMetricsService" logger=server reason="context canceled"
+t=2019-12-18T00:11:37+0100 lvl=info msg="Stopped provisioningServiceImpl" logger=server reason="context canceled"
+t=2019-12-18T00:11:37+0100 lvl=info msg="Stopped AlertingService" logger=server reason="context canceled"
+t=2019-12-18T00:11:38+0100 lvl=info msg="Stopped PluginManager" logger=server reason="context canceled"
+t=2019-12-18T00:11:38+0100 lvl=eror msg="Server shutdown" logger=server reason="listen tcp 0.0.0.0:3000: bind: address already in use"
+t=2019-12-18T00:11:38+0100 lvl=info msg="Request Completed" logger=context userId=1 orgId=1 uname=admin method=GET path=/api/datasources/proxy/1/query status=502 remote_addr=127.0.0.1 time_ms=33 size=0 referer="http://localhost:3000/?orgId=1"
+t=2019-12-18T00:12:07+0100 lvl=info msg="Starting Grafana" logger=server version=6.2.5 commit=6082d19 branch=HEAD compiled=2019-06-25T19:56:19+0200
+t=2019-12-18T00:12:07+0100 lvl=info msg="Config loaded from" logger=settings file="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/conf/defaults.ini"
+t=2019-12-18T00:12:07+0100 lvl=info msg="Path Home" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5"
+t=2019-12-18T00:12:07+0100 lvl=info msg="Path Data" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data"
+t=2019-12-18T00:12:07+0100 lvl=info msg="Path Logs" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data/log"
+t=2019-12-18T00:12:07+0100 lvl=info msg="Path Plugins" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data/plugins"
+t=2019-12-18T00:12:07+0100 lvl=info msg="Path Provisioning" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/conf/provisioning"
+t=2019-12-18T00:12:07+0100 lvl=info msg="App mode production" logger=settings
+t=2019-12-18T00:12:07+0100 lvl=info msg="Initializing SqlStore" logger=server
+t=2019-12-18T00:12:07+0100 lvl=info msg="Connecting to DB" logger=sqlstore dbtype=sqlite3
+t=2019-12-18T00:12:07+0100 lvl=info msg="Starting DB migration" logger=migrator
+t=2019-12-18T00:12:07+0100 lvl=info msg="Initializing HTTPServer" logger=server
+t=2019-12-18T00:12:07+0100 lvl=info msg="Initializing InternalMetricsService" logger=server
+t=2019-12-18T00:12:07+0100 lvl=info msg="Initializing RemoteCache" logger=server
+t=2019-12-18T00:12:07+0100 lvl=info msg="Initializing QuotaService" logger=server
+t=2019-12-18T00:12:07+0100 lvl=info msg="Initializing LoginService" logger=server
+t=2019-12-18T00:12:07+0100 lvl=info msg="Initializing PluginManager" logger=server
+t=2019-12-18T00:12:07+0100 lvl=info msg="Starting plugin search" logger=plugins
+t=2019-12-18T00:12:07+0100 lvl=info msg="Initializing RenderingService" logger=server
+t=2019-12-18T00:12:07+0100 lvl=info msg="Initializing AlertingService" logger=server
+t=2019-12-18T00:12:07+0100 lvl=info msg="Initializing DatasourceCacheService" logger=server
+t=2019-12-18T00:12:07+0100 lvl=info msg="Initializing HooksService" logger=server
+t=2019-12-18T00:12:07+0100 lvl=info msg="Initializing SearchService" logger=server
+t=2019-12-18T00:12:07+0100 lvl=info msg="Initializing ServerLockService" logger=server
+t=2019-12-18T00:12:07+0100 lvl=info msg="Initializing TracingService" logger=server
+t=2019-12-18T00:12:07+0100 lvl=info msg="Initializing UsageStatsService" logger=server
+t=2019-12-18T00:12:07+0100 lvl=info msg="Initializing UserAuthTokenService" logger=server
+t=2019-12-18T00:12:07+0100 lvl=info msg="Initializing CleanUpService" logger=server
+t=2019-12-18T00:12:07+0100 lvl=info msg="Initializing NotificationService" logger=server
+t=2019-12-18T00:12:07+0100 lvl=info msg="Initializing provisioningServiceImpl" logger=server
+t=2019-12-18T00:12:07+0100 lvl=info msg="Initializing Stream Manager"
+t=2019-12-18T00:12:07+0100 lvl=info msg="HTTP Server Listen" logger=http.server address=0.0.0.0:3000 protocol=http subUrl= socket=
+t=2019-12-18T00:12:07+0100 lvl=eror msg="Stopped HTTPServer" logger=server reason="listen tcp 0.0.0.0:3000: bind: address already in use"
+t=2019-12-18T00:12:07+0100 lvl=info msg="Stopped Stream Manager"
+t=2019-12-18T00:12:07+0100 lvl=info msg="Stopped UsageStatsService" logger=server reason="context canceled"
+t=2019-12-18T00:12:07+0100 lvl=info msg="Stopped NotificationService" logger=server reason="context canceled"
+t=2019-12-18T00:12:07+0100 lvl=info msg="Stopped CleanUpService" logger=server reason="context canceled"
+t=2019-12-18T00:12:07+0100 lvl=info msg="Stopped AlertingService" logger=server reason="context canceled"
+t=2019-12-18T00:12:07+0100 lvl=info msg="Stopped provisioningServiceImpl" logger=server reason="context canceled"
+t=2019-12-18T00:12:07+0100 lvl=info msg="Stopped RenderingService" logger=server reason=nil
+t=2019-12-18T00:12:07+0100 lvl=info msg="Stopped InternalMetricsService" logger=server reason="context canceled"
+t=2019-12-18T00:12:07+0100 lvl=info msg="Stopped RemoteCache" logger=server reason="context canceled"
+t=2019-12-18T00:12:07+0100 lvl=info msg="Stopped TracingService" logger=server reason=nil
+t=2019-12-18T00:12:07+0100 lvl=info msg="Stopped UserAuthTokenService" logger=server reason="context canceled"
+t=2019-12-18T00:12:08+0100 lvl=info msg="Stopped PluginManager" logger=server reason="context canceled"
+t=2019-12-18T00:12:08+0100 lvl=eror msg="Server shutdown" logger=server reason="listen tcp 0.0.0.0:3000: bind: address already in use"
+t=2019-12-18T00:14:30+0100 lvl=info msg="Starting Grafana" logger=server version=6.2.5 commit=6082d19 branch=HEAD compiled=2019-06-25T19:56:19+0200
+t=2019-12-18T00:14:30+0100 lvl=info msg="Config loaded from" logger=settings file="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/conf/defaults.ini"
+t=2019-12-18T00:14:30+0100 lvl=info msg="Path Home" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5"
+t=2019-12-18T00:14:30+0100 lvl=info msg="Path Data" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data"
+t=2019-12-18T00:14:30+0100 lvl=info msg="Path Logs" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data/log"
+t=2019-12-18T00:14:30+0100 lvl=info msg="Path Plugins" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data/plugins"
+t=2019-12-18T00:14:30+0100 lvl=info msg="Path Provisioning" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/conf/provisioning"
+t=2019-12-18T00:14:30+0100 lvl=info msg="App mode production" logger=settings
+t=2019-12-18T00:14:30+0100 lvl=info msg="Initializing SqlStore" logger=server
+t=2019-12-18T00:14:30+0100 lvl=info msg="Connecting to DB" logger=sqlstore dbtype=sqlite3
+t=2019-12-18T00:14:30+0100 lvl=info msg="Starting DB migration" logger=migrator
+t=2019-12-18T00:14:30+0100 lvl=info msg="Initializing HTTPServer" logger=server
+t=2019-12-18T00:14:30+0100 lvl=info msg="Initializing InternalMetricsService" logger=server
+t=2019-12-18T00:14:30+0100 lvl=info msg="Initializing RemoteCache" logger=server
+t=2019-12-18T00:14:30+0100 lvl=info msg="Initializing QuotaService" logger=server
+t=2019-12-18T00:14:30+0100 lvl=info msg="Initializing LoginService" logger=server
+t=2019-12-18T00:14:30+0100 lvl=info msg="Initializing PluginManager" logger=server
+t=2019-12-18T00:14:30+0100 lvl=info msg="Starting plugin search" logger=plugins
+t=2019-12-18T00:14:31+0100 lvl=info msg="Initializing RenderingService" logger=server
+t=2019-12-18T00:14:31+0100 lvl=info msg="Initializing AlertingService" logger=server
+t=2019-12-18T00:14:31+0100 lvl=info msg="Initializing DatasourceCacheService" logger=server
+t=2019-12-18T00:14:31+0100 lvl=info msg="Initializing HooksService" logger=server
+t=2019-12-18T00:14:31+0100 lvl=info msg="Initializing SearchService" logger=server
+t=2019-12-18T00:14:31+0100 lvl=info msg="Initializing ServerLockService" logger=server
+t=2019-12-18T00:14:31+0100 lvl=info msg="Initializing TracingService" logger=server
+t=2019-12-18T00:14:31+0100 lvl=info msg="Initializing UsageStatsService" logger=server
+t=2019-12-18T00:14:31+0100 lvl=info msg="Initializing UserAuthTokenService" logger=server
+t=2019-12-18T00:14:31+0100 lvl=info msg="Initializing CleanUpService" logger=server
+t=2019-12-18T00:14:31+0100 lvl=info msg="Initializing NotificationService" logger=server
+t=2019-12-18T00:14:31+0100 lvl=info msg="Initializing provisioningServiceImpl" logger=server
+t=2019-12-18T00:14:31+0100 lvl=info msg="Initializing Stream Manager"
+t=2019-12-18T00:14:31+0100 lvl=info msg="HTTP Server Listen" logger=http.server address=0.0.0.0:3000 protocol=http subUrl= socket=
+t=2019-12-18T00:14:31+0100 lvl=eror msg="Stopped HTTPServer" logger=server reason="listen tcp 0.0.0.0:3000: bind: address already in use"
+t=2019-12-18T00:14:31+0100 lvl=info msg="Stopped Stream Manager"
+t=2019-12-18T00:14:31+0100 lvl=info msg="Stopped UserAuthTokenService" logger=server reason="context canceled"
+t=2019-12-18T00:14:31+0100 lvl=info msg="Stopped NotificationService" logger=server reason="context canceled"
+t=2019-12-18T00:14:31+0100 lvl=info msg="Stopped CleanUpService" logger=server reason="context canceled"
+t=2019-12-18T00:14:31+0100 lvl=info msg="Stopped UsageStatsService" logger=server reason="context canceled"
+t=2019-12-18T00:14:31+0100 lvl=info msg="Stopped provisioningServiceImpl" logger=server reason="context canceled"
+t=2019-12-18T00:14:31+0100 lvl=info msg="Stopped TracingService" logger=server reason=nil
+t=2019-12-18T00:14:31+0100 lvl=info msg="Stopped RenderingService" logger=server reason=nil
+t=2019-12-18T00:14:31+0100 lvl=info msg="Stopped InternalMetricsService" logger=server reason="context canceled"
+t=2019-12-18T00:14:31+0100 lvl=info msg="Stopped RemoteCache" logger=server reason="context canceled"
+t=2019-12-18T00:14:31+0100 lvl=info msg="Stopped AlertingService" logger=server reason="context canceled"
+t=2019-12-18T00:14:31+0100 lvl=info msg="Stopped PluginManager" logger=server reason="context canceled"
+t=2019-12-18T00:14:31+0100 lvl=eror msg="Server shutdown" logger=server reason="listen tcp 0.0.0.0:3000: bind: address already in use"
+t=2019-12-18T00:14:32+0100 lvl=info msg="Request Completed" logger=context userId=1 orgId=1 uname=admin method=GET path=/api/datasources/proxy/1/query status=502 remote_addr=127.0.0.1 time_ms=54 size=0 referer="http://localhost:3000/?orgId=1"
+t=2019-12-18T00:23:36+0100 lvl=info msg="Starting Grafana" logger=server version=6.2.5 commit=6082d19 branch=HEAD compiled=2019-06-25T19:56:19+0200
+t=2019-12-18T00:23:36+0100 lvl=info msg="Config loaded from" logger=settings file="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/conf/defaults.ini"
+t=2019-12-18T00:23:36+0100 lvl=info msg="Path Home" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5"
+t=2019-12-18T00:23:36+0100 lvl=info msg="Path Data" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data"
+t=2019-12-18T00:23:36+0100 lvl=info msg="Path Logs" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data/log"
+t=2019-12-18T00:23:36+0100 lvl=info msg="Path Plugins" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data/plugins"
+t=2019-12-18T00:23:36+0100 lvl=info msg="Path Provisioning" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/conf/provisioning"
+t=2019-12-18T00:23:36+0100 lvl=info msg="App mode production" logger=settings
+t=2019-12-18T00:23:36+0100 lvl=info msg="Initializing SqlStore" logger=server
+t=2019-12-18T00:23:36+0100 lvl=info msg="Connecting to DB" logger=sqlstore dbtype=sqlite3
+t=2019-12-18T00:23:36+0100 lvl=info msg="Starting DB migration" logger=migrator
+t=2019-12-18T00:23:36+0100 lvl=info msg="Initializing HTTPServer" logger=server
+t=2019-12-18T00:23:36+0100 lvl=info msg="Initializing InternalMetricsService" logger=server
+t=2019-12-18T00:23:36+0100 lvl=info msg="Initializing RemoteCache" logger=server
+t=2019-12-18T00:23:36+0100 lvl=info msg="Initializing QuotaService" logger=server
+t=2019-12-18T00:23:36+0100 lvl=info msg="Initializing LoginService" logger=server
+t=2019-12-18T00:23:36+0100 lvl=info msg="Initializing PluginManager" logger=server
+t=2019-12-18T00:23:36+0100 lvl=info msg="Starting plugin search" logger=plugins
+t=2019-12-18T00:23:36+0100 lvl=info msg="Initializing RenderingService" logger=server
+t=2019-12-18T00:23:36+0100 lvl=info msg="Initializing AlertingService" logger=server
+t=2019-12-18T00:23:36+0100 lvl=info msg="Initializing DatasourceCacheService" logger=server
+t=2019-12-18T00:23:36+0100 lvl=info msg="Initializing HooksService" logger=server
+t=2019-12-18T00:23:36+0100 lvl=info msg="Initializing SearchService" logger=server
+t=2019-12-18T00:23:36+0100 lvl=info msg="Initializing ServerLockService" logger=server
+t=2019-12-18T00:23:36+0100 lvl=info msg="Initializing TracingService" logger=server
+t=2019-12-18T00:23:36+0100 lvl=info msg="Initializing UsageStatsService" logger=server
+t=2019-12-18T00:23:36+0100 lvl=info msg="Initializing UserAuthTokenService" logger=server
+t=2019-12-18T00:23:36+0100 lvl=info msg="Initializing CleanUpService" logger=server
+t=2019-12-18T00:23:36+0100 lvl=info msg="Initializing NotificationService" logger=server
+t=2019-12-18T00:23:36+0100 lvl=info msg="Initializing provisioningServiceImpl" logger=server
+t=2019-12-18T00:23:36+0100 lvl=info msg="Initializing Stream Manager"
+t=2019-12-18T00:23:36+0100 lvl=info msg="HTTP Server Listen" logger=http.server address=0.0.0.0:3000 protocol=http subUrl= socket=
+t=2019-12-18T00:23:36+0100 lvl=eror msg="Stopped HTTPServer" logger=server reason="listen tcp 0.0.0.0:3000: bind: address already in use"
+t=2019-12-18T00:23:36+0100 lvl=info msg="Stopped Stream Manager"
+t=2019-12-18T00:23:36+0100 lvl=info msg="Stopped CleanUpService" logger=server reason="context canceled"
+t=2019-12-18T00:23:36+0100 lvl=info msg="Stopped UserAuthTokenService" logger=server reason="context canceled"
+t=2019-12-18T00:23:36+0100 lvl=info msg="Stopped UsageStatsService" logger=server reason="context canceled"
+t=2019-12-18T00:23:36+0100 lvl=info msg="Stopped TracingService" logger=server reason=nil
+t=2019-12-18T00:23:36+0100 lvl=info msg="Stopped NotificationService" logger=server reason="context canceled"
+t=2019-12-18T00:23:36+0100 lvl=info msg="Stopped RenderingService" logger=server reason=nil
+t=2019-12-18T00:23:36+0100 lvl=info msg="Stopped RemoteCache" logger=server reason="context canceled"
+t=2019-12-18T00:23:36+0100 lvl=info msg="Stopped InternalMetricsService" logger=server reason="context canceled"
+t=2019-12-18T00:23:36+0100 lvl=info msg="Stopped provisioningServiceImpl" logger=server reason="context canceled"
+t=2019-12-18T00:23:36+0100 lvl=info msg="Stopped AlertingService" logger=server reason="context canceled"
+t=2019-12-18T00:23:37+0100 lvl=info msg="Stopped PluginManager" logger=server reason="context canceled"
+t=2019-12-18T00:23:37+0100 lvl=eror msg="Server shutdown" logger=server reason="listen tcp 0.0.0.0:3000: bind: address already in use"
+t=2019-12-18T00:23:38+0100 lvl=info msg="Request Completed" logger=context userId=1 orgId=1 uname=admin method=GET path=/api/datasources/proxy/1/query status=502 remote_addr=127.0.0.1 time_ms=96 size=0 referer="http://localhost:3000/?orgId=1"
+t=2019-12-18T00:31:31+0100 lvl=info msg="Starting Grafana" logger=server version=6.2.5 commit=6082d19 branch=HEAD compiled=2019-06-25T19:56:19+0200
+t=2019-12-18T00:31:31+0100 lvl=info msg="Config loaded from" logger=settings file="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/conf/defaults.ini"
+t=2019-12-18T00:31:31+0100 lvl=info msg="Path Home" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5"
+t=2019-12-18T00:31:31+0100 lvl=info msg="Path Data" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data"
+t=2019-12-18T00:31:31+0100 lvl=info msg="Path Logs" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data/log"
+t=2019-12-18T00:31:31+0100 lvl=info msg="Path Plugins" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data/plugins"
+t=2019-12-18T00:31:31+0100 lvl=info msg="Path Provisioning" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/conf/provisioning"
+t=2019-12-18T00:31:31+0100 lvl=info msg="App mode production" logger=settings
+t=2019-12-18T00:31:31+0100 lvl=info msg="Initializing SqlStore" logger=server
+t=2019-12-18T00:31:31+0100 lvl=info msg="Connecting to DB" logger=sqlstore dbtype=sqlite3
+t=2019-12-18T00:31:31+0100 lvl=info msg="Starting DB migration" logger=migrator
+t=2019-12-18T00:31:31+0100 lvl=info msg="Initializing HTTPServer" logger=server
+t=2019-12-18T00:31:31+0100 lvl=info msg="Initializing InternalMetricsService" logger=server
+t=2019-12-18T00:31:31+0100 lvl=info msg="Initializing RemoteCache" logger=server
+t=2019-12-18T00:31:31+0100 lvl=info msg="Initializing QuotaService" logger=server
+t=2019-12-18T00:31:31+0100 lvl=info msg="Initializing LoginService" logger=server
+t=2019-12-18T00:31:31+0100 lvl=info msg="Initializing PluginManager" logger=server
+t=2019-12-18T00:31:31+0100 lvl=info msg="Starting plugin search" logger=plugins
+t=2019-12-18T00:31:31+0100 lvl=info msg="Initializing RenderingService" logger=server
+t=2019-12-18T00:31:31+0100 lvl=info msg="Initializing AlertingService" logger=server
+t=2019-12-18T00:31:31+0100 lvl=info msg="Initializing DatasourceCacheService" logger=server
+t=2019-12-18T00:31:31+0100 lvl=info msg="Initializing HooksService" logger=server
+t=2019-12-18T00:31:31+0100 lvl=info msg="Initializing SearchService" logger=server
+t=2019-12-18T00:31:31+0100 lvl=info msg="Initializing ServerLockService" logger=server
+t=2019-12-18T00:31:31+0100 lvl=info msg="Initializing TracingService" logger=server
+t=2019-12-18T00:31:31+0100 lvl=info msg="Initializing UsageStatsService" logger=server
+t=2019-12-18T00:31:31+0100 lvl=info msg="Initializing UserAuthTokenService" logger=server
+t=2019-12-18T00:31:31+0100 lvl=info msg="Initializing CleanUpService" logger=server
+t=2019-12-18T00:31:31+0100 lvl=info msg="Initializing NotificationService" logger=server
+t=2019-12-18T00:31:31+0100 lvl=info msg="Initializing provisioningServiceImpl" logger=server
+t=2019-12-18T00:31:31+0100 lvl=info msg="Initializing Stream Manager"
+t=2019-12-18T00:31:31+0100 lvl=info msg="HTTP Server Listen" logger=http.server address=0.0.0.0:3000 protocol=http subUrl= socket=
+t=2019-12-18T00:31:31+0100 lvl=eror msg="Stopped HTTPServer" logger=server reason="listen tcp 0.0.0.0:3000: bind: address already in use"
+t=2019-12-18T00:31:31+0100 lvl=info msg="Stopped Stream Manager"
+t=2019-12-18T00:31:31+0100 lvl=info msg="Stopped RenderingService" logger=server reason=nil
+t=2019-12-18T00:31:31+0100 lvl=info msg="Stopped CleanUpService" logger=server reason="context canceled"
+t=2019-12-18T00:31:31+0100 lvl=info msg="Stopped NotificationService" logger=server reason="context canceled"
+t=2019-12-18T00:31:31+0100 lvl=info msg="Stopped RemoteCache" logger=server reason="context canceled"
+t=2019-12-18T00:31:31+0100 lvl=info msg="Stopped InternalMetricsService" logger=server reason="context canceled"
+t=2019-12-18T00:31:31+0100 lvl=info msg="Stopped TracingService" logger=server reason=nil
+t=2019-12-18T00:31:31+0100 lvl=info msg="Stopped provisioningServiceImpl" logger=server reason="context canceled"
+t=2019-12-18T00:31:31+0100 lvl=info msg="Stopped AlertingService" logger=server reason="context canceled"
+t=2019-12-18T00:31:31+0100 lvl=info msg="Stopped UsageStatsService" logger=server reason="context canceled"
+t=2019-12-18T00:31:31+0100 lvl=info msg="Stopped UserAuthTokenService" logger=server reason="context canceled"
+t=2019-12-18T00:31:32+0100 lvl=info msg="Stopped PluginManager" logger=server reason="context canceled"
+t=2019-12-18T00:31:32+0100 lvl=eror msg="Server shutdown" logger=server reason="listen tcp 0.0.0.0:3000: bind: address already in use"
+t=2019-12-18T00:31:51+0100 lvl=info msg="Starting Grafana" logger=server version=6.2.5 commit=6082d19 branch=HEAD compiled=2019-06-25T19:56:19+0200
+t=2019-12-18T00:31:51+0100 lvl=info msg="Config loaded from" logger=settings file="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/conf/defaults.ini"
+t=2019-12-18T00:31:51+0100 lvl=info msg="Path Home" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5"
+t=2019-12-18T00:31:51+0100 lvl=info msg="Path Data" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data"
+t=2019-12-18T00:31:51+0100 lvl=info msg="Path Logs" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data/log"
+t=2019-12-18T00:31:51+0100 lvl=info msg="Path Plugins" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data/plugins"
+t=2019-12-18T00:31:51+0100 lvl=info msg="Path Provisioning" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/conf/provisioning"
+t=2019-12-18T00:31:51+0100 lvl=info msg="App mode production" logger=settings
+t=2019-12-18T00:31:51+0100 lvl=info msg="Initializing SqlStore" logger=server
+t=2019-12-18T00:31:51+0100 lvl=info msg="Connecting to DB" logger=sqlstore dbtype=sqlite3
+t=2019-12-18T00:31:51+0100 lvl=info msg="Starting DB migration" logger=migrator
+t=2019-12-18T00:31:51+0100 lvl=info msg="Initializing HTTPServer" logger=server
+t=2019-12-18T00:31:51+0100 lvl=info msg="Initializing InternalMetricsService" logger=server
+t=2019-12-18T00:31:51+0100 lvl=info msg="Initializing RemoteCache" logger=server
+t=2019-12-18T00:31:51+0100 lvl=info msg="Initializing QuotaService" logger=server
+t=2019-12-18T00:31:51+0100 lvl=info msg="Initializing LoginService" logger=server
+t=2019-12-18T00:31:51+0100 lvl=info msg="Initializing PluginManager" logger=server
+t=2019-12-18T00:31:51+0100 lvl=info msg="Starting plugin search" logger=plugins
+t=2019-12-18T00:31:51+0100 lvl=info msg="Initializing RenderingService" logger=server
+t=2019-12-18T00:31:51+0100 lvl=info msg="Initializing AlertingService" logger=server
+t=2019-12-18T00:31:51+0100 lvl=info msg="Initializing DatasourceCacheService" logger=server
+t=2019-12-18T00:31:51+0100 lvl=info msg="Initializing HooksService" logger=server
+t=2019-12-18T00:31:51+0100 lvl=info msg="Initializing SearchService" logger=server
+t=2019-12-18T00:31:51+0100 lvl=info msg="Initializing ServerLockService" logger=server
+t=2019-12-18T00:31:51+0100 lvl=info msg="Initializing TracingService" logger=server
+t=2019-12-18T00:31:51+0100 lvl=info msg="Initializing UsageStatsService" logger=server
+t=2019-12-18T00:31:51+0100 lvl=info msg="Initializing UserAuthTokenService" logger=server
+t=2019-12-18T00:31:51+0100 lvl=info msg="Initializing CleanUpService" logger=server
+t=2019-12-18T00:31:51+0100 lvl=info msg="Initializing NotificationService" logger=server
+t=2019-12-18T00:31:51+0100 lvl=info msg="Initializing provisioningServiceImpl" logger=server
+t=2019-12-18T00:31:51+0100 lvl=info msg="Initializing Stream Manager"
+t=2019-12-18T00:31:51+0100 lvl=info msg="HTTP Server Listen" logger=http.server address=0.0.0.0:3000 protocol=http subUrl= socket=
+t=2019-12-18T00:31:51+0100 lvl=eror msg="Stopped HTTPServer" logger=server reason="listen tcp 0.0.0.0:3000: bind: address already in use"
+t=2019-12-18T00:31:51+0100 lvl=info msg="Stopped Stream Manager"
+t=2019-12-18T00:31:51+0100 lvl=info msg="Stopped TracingService" logger=server reason=nil
+t=2019-12-18T00:31:51+0100 lvl=info msg="Stopped RemoteCache" logger=server reason="context canceled"
+t=2019-12-18T00:31:51+0100 lvl=info msg="Stopped InternalMetricsService" logger=server reason="context canceled"
+t=2019-12-18T00:31:51+0100 lvl=info msg="Stopped provisioningServiceImpl" logger=server reason="context canceled"
+t=2019-12-18T00:31:51+0100 lvl=info msg="Stopped UsageStatsService" logger=server reason="context canceled"
+t=2019-12-18T00:31:51+0100 lvl=info msg="Stopped AlertingService" logger=server reason="context canceled"
+t=2019-12-18T00:31:51+0100 lvl=info msg="Stopped UserAuthTokenService" logger=server reason="context canceled"
+t=2019-12-18T00:31:51+0100 lvl=info msg="Stopped PluginManager" logger=server reason="context canceled"
+t=2019-12-18T00:31:51+0100 lvl=eror msg="Server shutdown" logger=server reason="listen tcp 0.0.0.0:3000: bind: address already in use"
+t=2019-12-18T00:32:11+0100 lvl=info msg="Starting Grafana" logger=server version=6.2.5 commit=6082d19 branch=HEAD compiled=2019-06-25T19:56:19+0200
+t=2019-12-18T00:32:11+0100 lvl=info msg="Config loaded from" logger=settings file="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/conf/defaults.ini"
+t=2019-12-18T00:32:11+0100 lvl=info msg="Path Home" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5"
+t=2019-12-18T00:32:11+0100 lvl=info msg="Path Data" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data"
+t=2019-12-18T00:32:11+0100 lvl=info msg="Path Logs" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data/log"
+t=2019-12-18T00:32:11+0100 lvl=info msg="Path Plugins" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data/plugins"
+t=2019-12-18T00:32:11+0100 lvl=info msg="Path Provisioning" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/conf/provisioning"
+t=2019-12-18T00:32:11+0100 lvl=info msg="App mode production" logger=settings
+t=2019-12-18T00:32:11+0100 lvl=info msg="Initializing SqlStore" logger=server
+t=2019-12-18T00:32:11+0100 lvl=info msg="Connecting to DB" logger=sqlstore dbtype=sqlite3
+t=2019-12-18T00:32:11+0100 lvl=info msg="Starting DB migration" logger=migrator
+t=2019-12-18T00:32:11+0100 lvl=info msg="Initializing HTTPServer" logger=server
+t=2019-12-18T00:32:11+0100 lvl=info msg="Initializing InternalMetricsService" logger=server
+t=2019-12-18T00:32:11+0100 lvl=info msg="Initializing RemoteCache" logger=server
+t=2019-12-18T00:32:11+0100 lvl=info msg="Initializing QuotaService" logger=server
+t=2019-12-18T00:32:11+0100 lvl=info msg="Initializing LoginService" logger=server
+t=2019-12-18T00:32:11+0100 lvl=info msg="Initializing PluginManager" logger=server
+t=2019-12-18T00:32:11+0100 lvl=info msg="Starting plugin search" logger=plugins
+t=2019-12-18T00:32:11+0100 lvl=info msg="Initializing RenderingService" logger=server
+t=2019-12-18T00:32:11+0100 lvl=info msg="Initializing AlertingService" logger=server
+t=2019-12-18T00:32:11+0100 lvl=info msg="Initializing DatasourceCacheService" logger=server
+t=2019-12-18T00:32:11+0100 lvl=info msg="Initializing HooksService" logger=server
+t=2019-12-18T00:32:11+0100 lvl=info msg="Initializing SearchService" logger=server
+t=2019-12-18T00:32:11+0100 lvl=info msg="Initializing ServerLockService" logger=server
+t=2019-12-18T00:32:11+0100 lvl=info msg="Initializing TracingService" logger=server
+t=2019-12-18T00:32:11+0100 lvl=info msg="Initializing UsageStatsService" logger=server
+t=2019-12-18T00:32:11+0100 lvl=info msg="Initializing UserAuthTokenService" logger=server
+t=2019-12-18T00:32:11+0100 lvl=info msg="Initializing CleanUpService" logger=server
+t=2019-12-18T00:32:11+0100 lvl=info msg="Initializing NotificationService" logger=server
+t=2019-12-18T00:32:11+0100 lvl=info msg="Initializing provisioningServiceImpl" logger=server
+t=2019-12-18T00:32:11+0100 lvl=info msg="Initializing Stream Manager"
+t=2019-12-18T00:32:11+0100 lvl=info msg="HTTP Server Listen" logger=http.server address=0.0.0.0:3000 protocol=http subUrl= socket=
+t=2019-12-18T00:32:11+0100 lvl=eror msg="Stopped HTTPServer" logger=server reason="listen tcp 0.0.0.0:3000: bind: address already in use"
+t=2019-12-18T00:32:11+0100 lvl=info msg="Stopped Stream Manager"
+t=2019-12-18T00:32:11+0100 lvl=info msg="Stopped TracingService" logger=server reason=nil
+t=2019-12-18T00:32:11+0100 lvl=info msg="Stopped provisioningServiceImpl" logger=server reason="context canceled"
+t=2019-12-18T00:32:11+0100 lvl=info msg="Stopped RenderingService" logger=server reason=nil
+t=2019-12-18T00:32:11+0100 lvl=info msg="Stopped RemoteCache" logger=server reason="context canceled"
+t=2019-12-18T00:32:11+0100 lvl=info msg="Stopped AlertingService" logger=server reason="context canceled"
+t=2019-12-18T00:32:11+0100 lvl=info msg="Stopped UsageStatsService" logger=server reason="context canceled"
+t=2019-12-18T00:32:12+0100 lvl=info msg="Stopped PluginManager" logger=server reason="context canceled"
+t=2019-12-18T00:32:12+0100 lvl=eror msg="Server shutdown" logger=server reason="listen tcp 0.0.0.0:3000: bind: address already in use"
+t=2019-12-18T00:32:12+0100 lvl=info msg="Request Completed" logger=context userId=1 orgId=1 uname=admin method=GET path=/api/datasources/proxy/1/query status=502 remote_addr=127.0.0.1 time_ms=33 size=0 referer="http://localhost:3000/?orgId=1"
+t=2019-12-18T00:32:15+0100 lvl=info msg="Request Completed" logger=context userId=1 orgId=1 uname=admin method=GET path=/api/datasources/proxy/1/query status=502 remote_addr=127.0.0.1 time_ms=89 size=0 referer="http://localhost:3000/d/8cKXpfNZz/tributech-acceleration-data?orgId=1&refresh=5s"
+t=2019-12-18T00:32:15+0100 lvl=info msg="Request Completed" logger=context userId=1 orgId=1 uname=admin method=GET path=/api/datasources/proxy/1/query status=502 remote_addr=127.0.0.1 time_ms=120 size=0 referer="http://localhost:3000/d/8cKXpfNZz/tributech-acceleration-data?orgId=1&refresh=5s"
+t=2019-12-18T00:32:15+0100 lvl=info msg="Request Completed" logger=context userId=1 orgId=1 uname=admin method=GET path=/api/datasources/proxy/1/query status=502 remote_addr=127.0.0.1 time_ms=124 size=0 referer="http://localhost:3000/d/8cKXpfNZz/tributech-acceleration-data?orgId=1&refresh=5s"
+t=2019-12-18T00:32:15+0100 lvl=info msg="Request Completed" logger=context userId=1 orgId=1 uname=admin method=GET path=/api/datasources/proxy/1/query status=502 remote_addr=127.0.0.1 time_ms=137 size=0 referer="http://localhost:3000/d/8cKXpfNZz/tributech-acceleration-data?orgId=1&refresh=5s"
+t=2019-12-18T00:32:15+0100 lvl=info msg="Request Completed" logger=context userId=1 orgId=1 uname=admin method=GET path=/api/datasources/proxy/1/query status=502 remote_addr=127.0.0.1 time_ms=161 size=0 referer="http://localhost:3000/d/8cKXpfNZz/tributech-acceleration-data?orgId=1&refresh=5s"
+t=2019-12-18T00:32:15+0100 lvl=info msg="Request Completed" logger=context userId=1 orgId=1 uname=admin method=GET path=/api/datasources/proxy/1/query status=502 remote_addr=127.0.0.1 time_ms=95 size=0 referer="http://localhost:3000/d/8cKXpfNZz/tributech-acceleration-data?orgId=1&refresh=5s"
