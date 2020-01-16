@@ -7,9 +7,11 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import dqm.jku.trustkg.dsd.DSDFactory;
@@ -37,6 +39,7 @@ public class ConnectorCSV extends DSConnector {
 	public final String linebreak;
 	public final boolean removeQuotes;
 	private final File file;
+	private final Map<Concept, RecordList> recordMap = new HashMap<>();
 
 	public ConnectorCSV(String filename, String seperator, String linebreak) {
 		this(filename, seperator, linebreak, filename);
@@ -119,18 +122,21 @@ public class ConnectorCSV extends DSConnector {
 	}
 
 	public RecordList getRecordList(final Concept concept) throws IOException {
+	  if (!recordMap.values().isEmpty()) return recordMap.get(concept);
 		Iterator<Record> rIt = getRecords(concept);
 		RecordList rs = new RecordList();
 		while (rIt.hasNext()) {
 			rs.addRecord(rIt.next());
 		}
+		recordMap.put(concept, rs);
 		return rs;
 	}
 
 	@Override
 	public RecordList getPartialRecordList(Concept concept, int offset, int noRecs) throws IOException {
-	  RecordList allRecords = getRecordList(concept);
-	  return allRecords.splitPartialRecordList(offset, noRecs);
+	  if (!recordMap.values().isEmpty()) return recordMap.get(concept).splitPartialRecordList(offset, noRecs);
+    RecordList allRecords = getRecordList(concept);
+    return allRecords.splitPartialRecordList(offset, noRecs);
 	}
 
 	@Override

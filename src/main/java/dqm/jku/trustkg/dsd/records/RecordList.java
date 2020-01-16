@@ -18,8 +18,20 @@ public class RecordList implements Iterable<Record> {
     records.addAll(recs);
   }
 
-  public void addRecord(Record r) {
-    records.add(r);
+  public boolean addRecord(Record r) {
+    return records.add(r);
+  }
+  
+  public boolean addAll(RecordList rl) {
+    return records.addAll(rl.toList());
+  }
+  
+  public List<Record> toList(){
+    return records;
+  }
+  
+  public boolean isEmpty() {
+    return records.isEmpty();
   }
 
   public int size() {
@@ -27,8 +39,8 @@ public class RecordList implements Iterable<Record> {
   }
   
   public RecordList splitPartialRecordList(int offset, int noRecs) {
-    if (offset < 0 || offset > noRecs || offset > size()) return new RecordList();
-    int end = noRecs > size() ? size() : noRecs;
+    if (offset < 0 || noRecs < 0 || (offset + noRecs) > size()) return new RecordList();
+    int end = noRecs > size() ? size() : (noRecs + offset);
     return new RecordList(records.subList(offset, end));
   }
 
