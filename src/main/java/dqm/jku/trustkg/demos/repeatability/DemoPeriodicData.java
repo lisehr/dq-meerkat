@@ -62,10 +62,13 @@ public class DemoPeriodicData {
       TimeUnit.MILLISECONDS.sleep(SLEEP_TIME_MS);
       RecordList rs = conn.getPartialRecordList(testCon, offset, AMOUNT);
       for (Attribute a : testCon.getSortedAttributes()) {
+        // With that, it is also possible to create DataProfiles without changing
+        // the reference profile.
         DataProfile dp = a.createDataProfile(rs);
         if (DEBUG) dp.printProfile();
-        influx.storeProfile(dp);
+        a.setProfile(dp);
       }
+      ds.addProfileToInflux(influx);
       System.out.println(String.format("Profile from batch %d stored!", offset/AMOUNT + 1));
     }
 

@@ -9,7 +9,6 @@ import org.influxdb.dto.QueryResult.Result;
 import org.influxdb.dto.QueryResult.Series;
 
 import dqm.jku.trustkg.dsd.records.Record;
-import dqm.jku.trustkg.quality.DataProfile;
 
 public class InfluxDBConnection {
   private static final String URL = "http://localhost:8086";
@@ -143,9 +142,4 @@ public class InfluxDBConnection {
     write(record.assignedFrom.createMeasurement(record));
   }
   
-  public void storeProfile(DataProfile profile) {
-    if (profile == null || profile.getElem() == null) return;
-    profile.getElem().storeProfile(this, profile);
-  }
-
 }
