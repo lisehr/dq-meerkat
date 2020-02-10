@@ -1,5 +1,6 @@
 package dqm.jku.trustkg.demos.lisamarie;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -26,7 +27,7 @@ import dqm.jku.trustkg.graphdb.EmbeddedGraphDB;
 public class TestRDF4JModel {
   public static void main(String args[]) {
     // Create Connection to CSV Connector
-    DSConnector conn = new ConnectorCSV("src/main/java/dqm/jku/trustkg/resources/Telematic Device Report - Device Voltage.csv", ",", "\n", "Device Voltage", true);
+    DSConnector conn = new ConnectorCSV("src/main/java/dqm/jku/trustkg/resources/csv/Telematic Device Report - Device Voltage.csv", ",", "\n", "Device Voltage", true);
 
     // Create Schema from it
     Datasource ds;
@@ -57,7 +58,7 @@ public class TestRDF4JModel {
       EmbeddedGraphDB db = new dqm.jku.trustkg.graphdb.EmbeddedGraphDB("test");
 
       // activate for first time creation
-      db.createRepository("test");
+      //db.createRepository("test");
       Repository testRep = db.getRepository("test");
       RepositoryConnection repConn = testRep.getConnection();
 
@@ -70,10 +71,9 @@ public class TestRDF4JModel {
       Model m2 = RDFCollections.asRDF(a, null, m);
 
       // testing the Rio writing function
-      // FileOutputStream out = new
-      // FileOutputStream("//home//lisa//graphdb_test//file.ttl");
-      // Rio.write(m, out, RDFFormat.TURTLE);
-      // out.close();
+      FileOutputStream out = new FileOutputStream("//home//optimusseptim//graphdb_test//file.ttl");
+      Rio.write(m, out, RDFFormat.TURTLE);
+      out.close();
 
       try (RepositoryResult<Statement> result = repConn.getStatements(null, null, null);) {
         while (result.hasNext()) {
@@ -86,6 +86,7 @@ public class TestRDF4JModel {
 
     } catch (IOException e) {
       System.err.println("Could not load Schema!");
+      e.printStackTrace();
     }
 
   }
