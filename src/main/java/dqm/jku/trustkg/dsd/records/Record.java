@@ -1,6 +1,7 @@
 package dqm.jku.trustkg.dsd.records;
 
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import dqm.jku.trustkg.dsd.elements.Attribute;
@@ -31,6 +32,10 @@ public class Record implements Comparable<Record> {
 
 		if (values.containsKey(attribute))
 			throw new IllegalArgumentException("Override in Record");
+		values.put(attribute, o);
+	}
+	
+	public void addValueNeo4J(Attribute attribute, Object o) {
 		values.put(attribute, o);
 	}
 
@@ -65,6 +70,20 @@ public class Record implements Comparable<Record> {
 			sb.append(" | ");
 		}
 		return sb.substring(0, sb.length() - 3);
+	}
+	
+	public String toStringNeo4J() {
+		StringBuilder sb = new StringBuilder();
+		
+		for(Map.Entry<Attribute, Object> entry : values.entrySet()) {
+			String att = entry.getKey().toString();
+			String prop = entry.getValue().toString();
+			
+			sb.append("Attribute: " + att + " - Properties: " + prop);
+			sb.append(" | ");
+		}
+	
+		return sb.toString();
 	}
 
 	@Override
