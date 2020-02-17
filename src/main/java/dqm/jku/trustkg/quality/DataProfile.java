@@ -47,7 +47,8 @@ public class DataProfile {
   public DataProfile(RecordList rs, DSDElement d) throws NoSuchMethodException {
     this.elem = d;
     this.uri = elem.getURI() + "/profile";
-    createDataProfileSkeleton();
+    //TODO: distinguish between Neo4J and relational DB
+    createDataProfileSkeletonRDB();
     calculateReferenceDataProfile(rs);
   }
 
@@ -125,7 +126,7 @@ public class DataProfile {
   /**
    * creates a reference data profile on which calculations can be made
    */
-  private void createDataProfileSkeleton() {
+  private void createDataProfileSkeletonRDB() {
     if (elem instanceof Attribute) {
       Attribute a = (Attribute) elem;
       Class<?> clazz = a.getDataType();
