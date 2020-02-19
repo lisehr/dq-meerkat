@@ -63,6 +63,7 @@ public class Maximum extends ProfileMetric {
     Attribute a = (Attribute) super.getRefElem();
     if (a.getDataType().equals(Long.class)) return Long.max((long) current, ((Number) toComp).longValue());
     else if (a.getDataType().equals(Double.class)) return Double.max((double) current, ((Number) toComp).doubleValue());
+    else if (a.getDataType().equals(String.class)) return Integer.max((int) current, ((String)toComp).length()); 
     else return Integer.max((int) current, ((Number) toComp).intValue());
   }
 
@@ -90,6 +91,18 @@ public class Maximum extends ProfileMetric {
   @Override
   protected String getValueString() {
     return super.getSimpleValueString();
+  }
+
+  @Override
+  protected void dependencyCalculationWithNumericList(List<Number> list) {
+  }
+
+  @Override
+  protected void dependencyCalculationWithRecordList(RecordList rl) {
+  }
+
+  @Override
+  protected void dependencyCheck() { 
   }
 
 }

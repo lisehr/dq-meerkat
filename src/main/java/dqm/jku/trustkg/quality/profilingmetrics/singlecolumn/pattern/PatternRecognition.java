@@ -11,6 +11,7 @@ import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
+import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Size;
 import dqm.jku.trustkg.util.FileSelectionUtil;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
@@ -28,6 +29,7 @@ public class PatternRecognition extends ProfileMetric {
 
   @Override
   public void calculation(RecordList rs, Object oldVal) {
+    this.dependencyCalculationWithRecordList(rs);
     Attribute a = (Attribute) super.getRefElem();
     this.setValueClass(PatternCounterList.class);
     PatternCounterList patterns = null;
@@ -52,7 +54,8 @@ public class PatternRecognition extends ProfileMetric {
   }
 
   @Override
-  public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
+  public void calculationNumeric(List<Number> list, Object oldVal) {
+    this.dependencyCalculationWithNumericList(list);
     this.setValueClass(PatternCounterList.class);
     PatternCounterList patterns = null;
     if (oldVal == null) patterns = initPatterns();
@@ -80,5 +83,24 @@ public class PatternRecognition extends ProfileMetric {
     StringBuilder sb = new StringBuilder().append("\n");
     sb.append(((PatternCounterList) getValue()).getValueStrings(denominator));
     return sb.toString();
+  }
+
+  @Override
+  protected void dependencyCalculationWithNumericList(List<Number> list) {
+    if (super.getMetricPos(pattern) - 1 <= super.getMetricPos(size)) super.getRefProf().getMetric(size).calculationNumeric(list, null);
+  }
+
+  @Override
+  protected void dependencyCalculationWithRecordList(RecordList rl) {
+    if (super.getMetricPos(pattern) - 1 <= super.getMetricPos(size)) super.getRefProf().getMetric(size).calculation(rl, null);
+  }
+
+  @Override
+  protected void dependencyCheck() {
+    ProfileMetric sizeM = super.getRefProf().getMetric(size);
+    if (sizeM == null) {
+      sizeM = new Size(super.getRefProf());
+      super.getRefProf().addMetric(sizeM);
+    }
   }
 }

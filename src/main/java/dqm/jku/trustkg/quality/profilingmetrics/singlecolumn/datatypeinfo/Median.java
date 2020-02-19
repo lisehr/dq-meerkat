@@ -103,4 +103,16 @@ public class Median extends ProfileMetric {
     return super.getSimpleValueString();
   }
 
+  @Override
+  protected void dependencyCalculationWithNumericList(List<Number> list) {   
+  }
+
+  @Override
+  protected void dependencyCalculationWithRecordList(RecordList rl) {  
+  }
+
+  @Override
+  protected void dependencyCheck() {
+  }
+
 }

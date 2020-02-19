@@ -37,6 +37,8 @@ public class Cardinality extends ProfileMetric {
       else field = (Number) r.getField(a);
       if (field != null) set.add(field);
     }
+    this.setValue((long) set.size());
+    this.setValueClass(Long.class);
   }
 
   @Override
@@ -55,6 +57,18 @@ public class Cardinality extends ProfileMetric {
   @Override
   protected String getValueString() {
     return super.getSimpleValueString();
+  }
+
+  @Override
+  protected void dependencyCalculationWithNumericList(List<Number> list) {
+  }
+
+  @Override
+  protected void dependencyCalculationWithRecordList(RecordList rl) {
+  }
+
+  @Override
+  protected void dependencyCheck() {
   }
 
 }

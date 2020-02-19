@@ -17,16 +17,21 @@ import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
 @RDFBean("foaf:Digits")
 public class Digits extends ProfileMetric {
   public Digits() {
-    
+
   }
-  
+
   public Digits(DataProfile d) {
     super(dig, d);
   }
 
-
-  @Override
-  public void calculation(RecordList rs, Object oldVal) {
+  /**
+   * Local variant of calculation to prevent a double check for dependent metrics
+   * 
+   * @param rl      the recordlist
+   * @param oldVal  old value of metric
+   * @param checked flag for dependency check
+   */
+  private void calculation(RecordList rl, Object oldVal, boolean checked) {
     Attribute a = (Attribute) super.getRefElem();
     super.setValueClass(Integer.class);
     if (a.getDataType() == Object.class) return;
@@ -34,6 +39,7 @@ public class Digits extends ProfileMetric {
       super.setValue(0);
       return;
     }
+    if (!checked) this.dependencyCalculationWithRecordList(rl);
     Number maxNum = (Number) super.getRefProf().getMetric(max).getValue();
     Number minNum = (Number) super.getRefProf().getMetric(min).getValue();
     if (maxNum == null && minNum == null) {
@@ -50,19 +56,25 @@ public class Digits extends ProfileMetric {
       }
     }
     if (minNum != null) {
-      minDigs = NumberValueUtils.countDigits(minNum);  
+      minDigs = NumberValueUtils.countDigits(minNum);
       if (maxNum == null) {
         super.setValue(minDigs);
         return;
       }
-    }    
+    }
     if (maxDigs > minDigs) super.setValue(maxDigs);
     else super.setValue(minDigs);
   }
 
   @Override
-  public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
-    calculation(null, null);
+  public void calculation(RecordList rs, Object oldVal) {
+    calculation(rs, null, false);
+  }
+
+  @Override
+  public void calculationNumeric(List<Number> list, Object oldVal) {
+    this.dependencyCalculationWithNumericList(list);
+    calculation(null, null, true);
   }
 
   @Override
@@ -73,6 +85,32 @@ public class Digits extends ProfileMetric {
   @Override
   protected String getValueString() {
     return super.getSimpleValueString();
+  }
+
+  @Override
+  protected void dependencyCalculationWithNumericList(List<Number> list) {
+    if (super.getMetricPos(dig) - 1 <= super.getMetricPos(max)) super.getRefProf().getMetric(max).calculationNumeric(list, null);
+    if (super.getMetricPos(dig) - 2 <= super.getMetricPos(min)) super.getRefProf().getMetric(min).calculationNumeric(list, null);
+  }
+
+  @Override
+  protected void dependencyCalculationWithRecordList(RecordList rl) {
+    if (super.getMetricPos(dig) - 1 <= super.getMetricPos(max)) super.getRefProf().getMetric(max).calculation(rl, null);
+    if (super.getMetricPos(dig) - 2 <= super.getMetricPos(min)) super.getRefProf().getMetric(min).calculation(rl, null);
+  }
+
+  @Override
+  protected void dependencyCheck() {
+    ProfileMetric maxM = super.getRefProf().getMetric(max);
+    if (maxM == null) {
+      maxM = new Maximum(super.getRefProf());
+      super.getRefProf().addMetric(maxM);
+    }
+    ProfileMetric minM = super.getRefProf().getMetric(min);
+    if (minM == null) {
+      minM = new Minimum(super.getRefProf());
+      super.getRefProf().addMetric(minM);
+    }
   }
 
 }

@@ -10,6 +10,7 @@ import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
+import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Size;
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
@@ -27,6 +28,7 @@ public class Average extends ProfileMetric {
 
   @Override
   public void calculation(RecordList rs, Object oldVal) {
+    this.dependencyCalculationWithRecordList(rs);
     Object val = null;
     if (oldVal == null) val = getBasicInstance();
     else val = oldVal;
@@ -99,6 +101,7 @@ public class Average extends ProfileMetric {
 
   @Override
   public void calculationNumeric(List<Number> list, Object oldVal) {
+    this.dependencyCalculationWithNumericList(list);
     if (list == null || list.isEmpty()) {
       if (oldVal != null) return;
       else this.setValue(null);
@@ -121,6 +124,25 @@ public class Average extends ProfileMetric {
   @Override
   protected String getValueString() {
     return super.getSimpleValueString();
+  }
+
+  @Override
+  protected void dependencyCalculationWithNumericList(List<Number> list) {
+    if (super.getMetricPos(avg) - 1 <= super.getMetricPos(size)) super.getRefProf().getMetric(size).calculationNumeric(list, null);  
+  }
+
+  @Override
+  protected void dependencyCalculationWithRecordList(RecordList rl) {
+    if (super.getMetricPos(avg) - 2 <= super.getMetricPos(size)) super.getRefProf().getMetric(size).calculation(rl, null);  
+  }
+
+  @Override
+  protected void dependencyCheck() {
+    ProfileMetric sizeM = super.getRefProf().getMetric(size);
+    if (sizeM == null) {
+      sizeM = new Size(super.getRefProf());
+      super.getRefProf().addMetric(sizeM);
+    }
   }
 
 }

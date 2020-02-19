@@ -30,7 +30,7 @@ public class Size extends ProfileMetric {
   }
 
   @Override
-  public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
+  public void calculationNumeric(List<Number> list, Object oldVal) {
     super.setValue(list.size());
     super.setValueClass(Integer.class);
   }
@@ -44,6 +44,18 @@ public class Size extends ProfileMetric {
   @Override
   protected String getValueString() {
     return super.getSimpleValueString();
+  }
+
+  @Override
+  protected void dependencyCalculationWithNumericList(List<Number> list) {
+  }
+
+  @Override
+  protected void dependencyCalculationWithRecordList(RecordList rl) {
+  }
+
+  @Override
+  protected void dependencyCheck() {
   }
 
 }

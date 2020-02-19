@@ -56,7 +56,7 @@ public class Decimals extends ProfileMetric {
 	}
 
 	@Override
-	public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
+	public void calculationNumeric(List<Number> list, Object oldVal) {
 		Attribute a = (Attribute) super.getRefElem();
 		this.setValueClass(Integer.class);
 		if (a.getDataType() == Object.class) return;
@@ -87,5 +87,17 @@ public class Decimals extends ProfileMetric {
 	protected String getValueString() {
 		return super.getSimpleValueString();
 	}
+
+  @Override
+  protected void dependencyCalculationWithNumericList(List<Number> list) {
+  }
+
+  @Override
+  protected void dependencyCalculationWithRecordList(RecordList rl) {
+  }
+
+  @Override
+  protected void dependencyCheck() {
+  }
 
 }

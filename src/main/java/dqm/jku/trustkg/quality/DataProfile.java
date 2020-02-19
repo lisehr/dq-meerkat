@@ -222,6 +222,14 @@ public class DataProfile {
   public void setMetrics(List<ProfileMetric> metrics) {
     this.metrics = metrics;
   }
+  
+  /**
+   * Method for adding a metric via a data profile object
+   * @param m the metric to be added
+   */
+  public void addMetric(ProfileMetric m) {
+    this.metrics.add(m);
+  }
 
   /**
    * Method for getting a specific ProfileMetric with its corresponding label.

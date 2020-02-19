@@ -1499,3 +1499,52 @@ t=2020-01-28T15:22:02+0100 lvl=info msg="Stopped InternalMetricsService" logger=
 t=2020-01-28T15:22:02+0100 lvl=info msg="Stopped AlertingService" logger=server reason="context canceled"
 t=2020-01-28T15:22:03+0100 lvl=info msg="Stopped HTTPServer" logger=server reason=nil
 t=2020-01-28T15:22:03+0100 lvl=eror msg="Server shutdown" logger=server reason="System signal: terminated"
+t=2020-02-17T12:50:21+0100 lvl=info msg="Starting Grafana" logger=server version=6.2.5 commit=6082d19 branch=HEAD compiled=2019-06-25T19:56:19+0200
+t=2020-02-17T12:50:21+0100 lvl=info msg="Config loaded from" logger=settings file="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/conf/defaults.ini"
+t=2020-02-17T12:50:21+0100 lvl=info msg="Path Home" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5"
+t=2020-02-17T12:50:21+0100 lvl=info msg="Path Data" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data"
+t=2020-02-17T12:50:21+0100 lvl=info msg="Path Logs" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data/log"
+t=2020-02-17T12:50:21+0100 lvl=info msg="Path Plugins" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/data/plugins"
+t=2020-02-17T12:50:21+0100 lvl=info msg="Path Provisioning" logger=settings path="/media/optimusseptim/D424233624231ACE/Users/Alexander Gindlhumer/Desktop/Arbeit/JKU - FAW/TrustGraphs/trustkg/Grafana/grafana-6.2.5/conf/provisioning"
+t=2020-02-17T12:50:21+0100 lvl=info msg="App mode production" logger=settings
+t=2020-02-17T12:50:21+0100 lvl=info msg="Initializing SqlStore" logger=server
+t=2020-02-17T12:50:21+0100 lvl=info msg="Connecting to DB" logger=sqlstore dbtype=sqlite3
+t=2020-02-17T12:50:21+0100 lvl=info msg="Starting DB migration" logger=migrator
+t=2020-02-17T12:50:21+0100 lvl=info msg="Initializing HTTPServer" logger=server
+t=2020-02-17T12:50:21+0100 lvl=info msg="Initializing InternalMetricsService" logger=server
+t=2020-02-17T12:50:21+0100 lvl=info msg="Initializing RemoteCache" logger=server
+t=2020-02-17T12:50:21+0100 lvl=info msg="Initializing QuotaService" logger=server
+t=2020-02-17T12:50:21+0100 lvl=info msg="Initializing LoginService" logger=server
+t=2020-02-17T12:50:21+0100 lvl=info msg="Initializing PluginManager" logger=server
+t=2020-02-17T12:50:21+0100 lvl=info msg="Starting plugin search" logger=plugins
+t=2020-02-17T12:50:21+0100 lvl=info msg="Initializing RenderingService" logger=server
+t=2020-02-17T12:50:21+0100 lvl=info msg="Initializing AlertingService" logger=server
+t=2020-02-17T12:50:21+0100 lvl=info msg="Initializing DatasourceCacheService" logger=server
+t=2020-02-17T12:50:21+0100 lvl=info msg="Initializing HooksService" logger=server
+t=2020-02-17T12:50:21+0100 lvl=info msg="Initializing SearchService" logger=server
+t=2020-02-17T12:50:21+0100 lvl=info msg="Initializing ServerLockService" logger=server
+t=2020-02-17T12:50:21+0100 lvl=info msg="Initializing TracingService" logger=server
+t=2020-02-17T12:50:21+0100 lvl=info msg="Initializing UsageStatsService" logger=server
+t=2020-02-17T12:50:21+0100 lvl=info msg="Initializing UserAuthTokenService" logger=server
+t=2020-02-17T12:50:21+0100 lvl=info msg="Initializing CleanUpService" logger=server
+t=2020-02-17T12:50:21+0100 lvl=info msg="Initializing NotificationService" logger=server
+t=2020-02-17T12:50:21+0100 lvl=info msg="Initializing provisioningServiceImpl" logger=server
+t=2020-02-17T12:50:21+0100 lvl=info msg="Initializing Stream Manager"
+t=2020-02-17T12:50:21+0100 lvl=info msg="HTTP Server Listen" logger=http.server address=0.0.0.0:3000 protocol=http subUrl= socket=
+t=2020-02-17T12:50:22+0100 lvl=eror msg="failed to look up user based on cookie" logger=context error="user token not found"
+t=2020-02-17T12:50:22+0100 lvl=info msg="Request Completed" logger=context userId=0 orgId=0 uname= method=GET path=/ status=302 remote_addr=127.0.0.1 time_ms=1 size=29 referer=
+t=2020-02-17T14:45:47+0100 lvl=info msg="Shutdown started" logger=server reason="System signal: terminated"
+t=2020-02-17T14:45:47+0100 lvl=info msg="Stopped UsageStatsService" logger=server reason="context canceled"
+t=2020-02-17T14:45:47+0100 lvl=info msg="Stopped Stream Manager"
+t=2020-02-17T14:45:47+0100 lvl=info msg="Stopped PluginManager" logger=server reason="context canceled"
+t=2020-02-17T14:45:47+0100 lvl=info msg="Stopped CleanUpService" logger=server reason="context canceled"
+t=2020-02-17T14:45:47+0100 lvl=info msg="Stopped RemoteCache" logger=server reason="context canceled"
+t=2020-02-17T14:45:47+0100 lvl=info msg="Stopped UserAuthTokenService" logger=server reason="context canceled"
+t=2020-02-17T14:45:47+0100 lvl=info msg="Stopped RenderingService" logger=server reason=nil
+t=2020-02-17T14:45:47+0100 lvl=info msg="Stopped NotificationService" logger=server reason="context canceled"
+t=2020-02-17T14:45:47+0100 lvl=info msg="Stopped TracingService" logger=server reason=nil
+t=2020-02-17T14:45:47+0100 lvl=info msg="Stopped provisioningServiceImpl" logger=server reason="context canceled"
+t=2020-02-17T14:45:47+0100 lvl=info msg="Stopped InternalMetricsService" logger=server reason="context canceled"
+t=2020-02-17T14:45:47+0100 lvl=info msg="Stopped AlertingService" logger=server reason="context canceled"
+t=2020-02-17T14:45:47+0100 lvl=info msg="Stopped HTTPServer" logger=server reason=nil
+t=2020-02-17T14:45:47+0100 lvl=eror msg="Server shutdown" logger=server reason="System signal: terminated"
