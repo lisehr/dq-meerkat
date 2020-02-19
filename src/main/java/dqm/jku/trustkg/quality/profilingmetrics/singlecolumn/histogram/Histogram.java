@@ -1,7 +1,6 @@
 package dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.histogram;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.hist;
-import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.nullVal;
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.size;
 
 import java.util.ArrayList;
@@ -215,12 +214,12 @@ public class Histogram extends ProfileMetric {
 
   @Override
   protected void dependencyCalculationWithNumericList(List<Number> list) {
-    if (super.getMetricPos(nullVal) - 1 <= super.getMetricPos(size)) super.getRefProf().getMetric(size).calculationNumeric(list, null);
+    if (super.getMetricPos(hist) - 1 <= super.getMetricPos(size)) super.getRefProf().getMetric(size).calculationNumeric(list, null);
   }
 
   @Override
   protected void dependencyCalculationWithRecordList(RecordList rl) {
-    if (super.getMetricPos(nullVal) - 2 <= super.getMetricPos(size)) super.getRefProf().getMetric(size).calculation(rl, null);
+    if (super.getMetricPos(hist) - 2 <= super.getMetricPos(size)) super.getRefProf().getMetric(size).calculation(rl, null);
   }
 
   @Override
