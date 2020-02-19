@@ -28,7 +28,6 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric>{
     this.title = title;
     this.refProf = refProf;
     value = null;
-    this.dependencyCheck();
   }
 
   /**
@@ -186,27 +185,6 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric>{
     if (getValue() == null) return "\tnull";
     else return "\t" + getValue().toString();
   }
-  
-  /**
-   * Helper method to calculate missing dependencies in calculation with a list of numbers as base.
-   * Can be empty in Metrics without a dependency.
-   * @param list the numeric value list
-   * @param oldVal the old value
-   */
-  protected abstract void dependencyCalculationWithNumericList(List<Number> list);
-
-  /**
-   * Helper method to calculate missing dependencies in calculation with a RecordList as base.
-   * Can be empty in Metrics without a dependency.
-   * @param rl the recordlist
-   * @param oldVal the old value
-   */
-  protected abstract void dependencyCalculationWithRecordList(RecordList rl);
-  
-  /**
-   * Helper method to add missing dependencies needed for metric calculation
-   */
-  protected abstract void dependencyCheck();
   
   @Override
   public String toString() {

@@ -6,9 +6,10 @@ import java.util.List;
 
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
+import dqm.jku.trustkg.quality.profilingmetrics.DependentProfileMetric;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 
-public class NullValuesPercentage extends ProfileMetric {
+public class NullValuesPercentage extends DependentProfileMetric {
   public NullValuesPercentage() {
 
   }

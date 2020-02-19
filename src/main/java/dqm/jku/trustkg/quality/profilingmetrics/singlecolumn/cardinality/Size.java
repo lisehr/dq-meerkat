@@ -45,17 +45,4 @@ public class Size extends ProfileMetric {
   protected String getValueString() {
     return super.getSimpleValueString();
   }
-
-  @Override
-  protected void dependencyCalculationWithNumericList(List<Number> list) {
-  }
-
-  @Override
-  protected void dependencyCalculationWithRecordList(RecordList rl) {
-  }
-
-  @Override
-  protected void dependencyCheck() {
-  }
-
 }

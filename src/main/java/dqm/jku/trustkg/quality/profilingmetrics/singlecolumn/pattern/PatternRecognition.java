@@ -10,6 +10,7 @@ import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
+import dqm.jku.trustkg.quality.profilingmetrics.DependentProfileMetric;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Size;
 import dqm.jku.trustkg.util.FileSelectionUtil;
@@ -18,7 +19,7 @@ import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
 
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:PatternCounter")
-public class PatternRecognition extends ProfileMetric {
+public class PatternRecognition extends DependentProfileMetric {
   public PatternRecognition() {
 
   }

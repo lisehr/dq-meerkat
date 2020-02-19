@@ -33,7 +33,7 @@ public class Maximum extends ProfileMetric {
     else val = oldVal;
     for (Record r : rs) {
       Object field = r.getField(a);
-      val = getMaximum(val, field);
+      val = getMaximum(val, field, false);
     }
     this.setValue(val);
     this.setValueClass(a.getDataType());
@@ -56,14 +56,15 @@ public class Maximum extends ProfileMetric {
    * 
    * @param current the current maximum value
    * @param toComp  the new value to compare
+   * @param isNumericList check, if calculation is performed with numeric list
    * @return the new maximum value
    */
-  private Object getMaximum(Object current, Object toComp) {
+  private Object getMaximum(Object current, Object toComp, boolean isNumericList) {
     if (toComp == null) return current;
     Attribute a = (Attribute) super.getRefElem();
     if (a.getDataType().equals(Long.class)) return Long.max((long) current, ((Number) toComp).longValue());
     else if (a.getDataType().equals(Double.class)) return Double.max((double) current, ((Number) toComp).doubleValue());
-    else if (a.getDataType().equals(String.class)) return Integer.max((int) current, ((String)toComp).length()); 
+    else if (a.getDataType().equals(String.class) && !isNumericList) return Integer.max((int) current, ((String)toComp).length()); 
     else return Integer.max((int) current, ((Number) toComp).intValue());
   }
 
@@ -80,8 +81,8 @@ public class Maximum extends ProfileMetric {
     } else {
       list.sort(new NumberComparator());
       Object val = null;
-      if (oldVal == null) val = getMaximum(list.get(list.size() - 1), getBasicInstance());
-      else val = getMaximum(list.get(list.size() - 1), oldVal);
+      if (oldVal == null) val = getMaximum(list.get(list.size() - 1), getBasicInstance(), true);
+      else val = getMaximum(list.get(list.size() - 1), oldVal, true);
       this.setValue(val);
     }
     Attribute a = (Attribute) super.getRefElem();
@@ -92,17 +93,4 @@ public class Maximum extends ProfileMetric {
   protected String getValueString() {
     return super.getSimpleValueString();
   }
-
-  @Override
-  protected void dependencyCalculationWithNumericList(List<Number> list) {
-  }
-
-  @Override
-  protected void dependencyCalculationWithRecordList(RecordList rl) {
-  }
-
-  @Override
-  protected void dependencyCheck() { 
-  }
-
 }
