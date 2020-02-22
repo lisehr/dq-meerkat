@@ -45,7 +45,7 @@ public class Uniqueness extends DependentProfileMetric{
   }
 
   @Override
-  public void calculationNumeric(List<Number> list, Object oldVal) {
+  public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
     this.dependencyCalculationWithNumericList(list);
     calculation(null, null, true); // in this case, no record set is needed, therefore null for rs is allowed
   }
@@ -69,7 +69,7 @@ public class Uniqueness extends DependentProfileMetric{
   }
 
   @Override
-  protected void dependencyCalculationWithNumericList(List<Number> list) {
+  protected void dependencyCalculationWithNumericList(List<Number> list) throws NoSuchMethodException {
     if (super.getMetricPos(unique) - 1 <= super.getMetricPos(size)) super.getRefProf().getMetric(size).calculationNumeric(list, null);
     if (super.getMetricPos(unique) - 2 <= super.getMetricPos(card)) super.getRefProf().getMetric(card).calculationNumeric(list, null);
   }

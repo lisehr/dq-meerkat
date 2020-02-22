@@ -73,7 +73,7 @@ public class Digits extends DependentProfileMetric {
   }
 
   @Override
-  public void calculationNumeric(List<Number> list, Object oldVal) {
+  public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
     this.dependencyCalculationWithNumericList(list);
     calculation(null, null, true);
   }
@@ -89,7 +89,7 @@ public class Digits extends DependentProfileMetric {
   }
 
   @Override
-  protected void dependencyCalculationWithNumericList(List<Number> list) {
+  protected void dependencyCalculationWithNumericList(List<Number> list) throws NoSuchMethodException {
     if (super.getMetricPos(dig) - 1 <= super.getMetricPos(max)) super.getRefProf().getMetric(max).calculationNumeric(list, null);
     if (super.getMetricPos(dig) - 2 <= super.getMetricPos(min)) super.getRefProf().getMetric(min).calculationNumeric(list, null);
   }

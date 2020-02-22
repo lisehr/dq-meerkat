@@ -51,7 +51,7 @@ public class Histogram extends DependentProfileMetric {
   }
 
   @Override
-  public void calculationNumeric(List<Number> list, Object oldVal) {
+  public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
     this.dependencyCalculationWithNumericList(list);
     if (list == null || list.isEmpty()) {
       if (oldVal != null) return;
@@ -214,7 +214,7 @@ public class Histogram extends DependentProfileMetric {
   }
 
   @Override
-  protected void dependencyCalculationWithNumericList(List<Number> list) {
+  protected void dependencyCalculationWithNumericList(List<Number> list) throws NoSuchMethodException {
     if (super.getMetricPos(hist) - 1 <= super.getMetricPos(size)) super.getRefProf().getMetric(size).calculationNumeric(list, null);
   }
 

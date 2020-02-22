@@ -43,7 +43,7 @@ public class KeyCandidate extends DependentProfileMetric {
   }
 
   @Override
-  public void calculationNumeric(List<Number> list, Object oldVal) {
+  public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
     this.dependencyCalculationWithNumericList(list);
     calculation(null, null, true);
   }
@@ -65,7 +65,7 @@ public class KeyCandidate extends DependentProfileMetric {
   }
 
   @Override
-  protected void dependencyCalculationWithNumericList(List<Number> list) {
+  protected void dependencyCalculationWithNumericList(List<Number> list) throws NoSuchMethodException {
     if (super.getMetricPos(keyCand) - 1 <= super.getMetricPos(size)) super.getRefProf().getMetric(size).calculationNumeric(list, null);
     if (super.getMetricPos(keyCand) - 2 <= super.getMetricPos(card)) super.getRefProf().getMetric(card).calculationNumeric(list, null);
   }

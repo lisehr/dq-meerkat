@@ -55,7 +55,7 @@ public class PatternRecognition extends DependentProfileMetric {
   }
 
   @Override
-  public void calculationNumeric(List<Number> list, Object oldVal) {
+  public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
     this.dependencyCalculationWithNumericList(list);
     this.setValueClass(PatternCounterList.class);
     PatternCounterList patterns = null;
@@ -87,7 +87,7 @@ public class PatternRecognition extends DependentProfileMetric {
   }
 
   @Override
-  protected void dependencyCalculationWithNumericList(List<Number> list) {
+  protected void dependencyCalculationWithNumericList(List<Number> list) throws NoSuchMethodException {
     if (super.getMetricPos(pattern) - 1 <= super.getMetricPos(size)) super.getRefProf().getMetric(size).calculationNumeric(list, null);
   }
 

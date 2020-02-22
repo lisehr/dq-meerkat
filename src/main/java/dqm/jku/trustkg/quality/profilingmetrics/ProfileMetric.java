@@ -160,7 +160,7 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric>{
    * @param list   a sorted list, containing all values
    * @throws NoSuchMethodException in cases like null values, since here records are not allowed for processing
    */
-  public abstract void calculationNumeric(List<Number> list, Object oldVal);
+  public abstract void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException;
 
   /**
    * Method for updating the metric value, overriden by each metric

@@ -26,7 +26,7 @@ public abstract class DependentProfileMetric extends ProfileMetric {
   public abstract void calculation(RecordList rs, Object oldVal);
 
   @Override
-  public abstract void calculationNumeric(List<Number> list, Object oldVal);
+  public abstract void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException;
   
   @Override
   public abstract void update(RecordList rs);
@@ -39,8 +39,9 @@ public abstract class DependentProfileMetric extends ProfileMetric {
    * Can be empty in Metrics without a dependency.
    * @param list the numeric value list
    * @param oldVal the old value
+   * @throws NoSuchMethodException 
    */
-  protected abstract void dependencyCalculationWithNumericList(List<Number> list);
+  protected abstract void dependencyCalculationWithNumericList(List<Number> list) throws NoSuchMethodException;
 
   /**
    * Helper method to calculate missing dependencies in calculation with a RecordList as base.
