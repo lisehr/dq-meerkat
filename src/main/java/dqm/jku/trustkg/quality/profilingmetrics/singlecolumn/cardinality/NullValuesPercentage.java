@@ -32,7 +32,7 @@ public class NullValuesPercentage extends DependentProfileMetric {
   private void calculation(RecordList rl, Object oldVal, boolean checked) {
     if (!checked) dependencyCalculationWithRecordList(rl);
     long nominator = (long) super.getRefProf().getMetric(nullVal).getValue();
-    int denominator = (int) super.getRefProf().getMetric(size).getValue();
+    int denominator = (int) super.getRefProf().getMetric(numrows).getValue();
     double result;
     if (denominator == 0) result = Double.valueOf(0);
     result = (double) nominator * 100.0 / (double) denominator;
@@ -59,22 +59,22 @@ public class NullValuesPercentage extends DependentProfileMetric {
 
   @Override
   protected void dependencyCalculationWithRecordList(RecordList rl) {
-    if (super.getMetricPos(nullValP) - 1 <= super.getMetricPos(size)) super.getRefProf().getMetric(size).calculation(rl, null);
+    if (super.getMetricPos(nullValP) - 1 <= super.getMetricPos(numrows)) super.getRefProf().getMetric(numrows).calculation(rl, null);
     if (super.getMetricPos(nullValP) - 2 <= super.getMetricPos(nullVal)) super.getRefProf().getMetric(nullVal).calculation(rl, null);
     
   }
 
   @Override
   protected void dependencyCalculationWithNumericList(List<Number> list) throws NoSuchMethodException {
-    if (super.getMetricPos(nullValP) - 1 <= super.getMetricPos(size)) super.getRefProf().getMetric(size).calculationNumeric(list, null);
+    if (super.getMetricPos(nullValP) - 1 <= super.getMetricPos(numrows)) super.getRefProf().getMetric(numrows).calculationNumeric(list, null);
     if (super.getMetricPos(nullValP) - 2 <= super.getMetricPos(nullVal)) super.getRefProf().getMetric(nullVal).calculationNumeric(list, null);
   }
 
   @Override
   protected void dependencyCheck() {
-    ProfileMetric sizeM = super.getRefProf().getMetric(size);
+    ProfileMetric sizeM = super.getRefProf().getMetric(numrows);
     if (sizeM == null) {
-      sizeM = new Size(super.getRefProf());
+      sizeM = new NumRows(super.getRefProf());
       super.getRefProf().addMetric(sizeM);
     }
     ProfileMetric nullV = super.getRefProf().getMetric(nullVal);

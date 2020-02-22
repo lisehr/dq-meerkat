@@ -32,7 +32,7 @@ public class Uniqueness extends DependentProfileMetric{
   private void calculation(RecordList rl, Object oldVal, boolean checked) {
     if (!checked) dependencyCalculationWithRecordList(rl);
     long cardinality = (long)(super.getRefProf().getMetric(card).getValue());
-    int numRecs = (int) super.getRefProf().getMetric(size).getValue();
+    int numRecs = (int) super.getRefProf().getMetric(numrows).getValue();
     double result = cardinality * 100.0 / numRecs;
     this.setValue(result);
     this.setValueClass(Double.class);
@@ -63,22 +63,22 @@ public class Uniqueness extends DependentProfileMetric{
 
   @Override
   protected void dependencyCalculationWithRecordList(RecordList rl) {
-    if (super.getMetricPos(unique) - 1 <= super.getMetricPos(size)) super.getRefProf().getMetric(size).calculation(rl, null);
+    if (super.getMetricPos(unique) - 1 <= super.getMetricPos(numrows)) super.getRefProf().getMetric(numrows).calculation(rl, null);
     if (super.getMetricPos(unique) - 2 <= super.getMetricPos(card)) super.getRefProf().getMetric(card).calculation(rl, null);
     
   }
 
   @Override
   protected void dependencyCalculationWithNumericList(List<Number> list) throws NoSuchMethodException {
-    if (super.getMetricPos(unique) - 1 <= super.getMetricPos(size)) super.getRefProf().getMetric(size).calculationNumeric(list, null);
+    if (super.getMetricPos(unique) - 1 <= super.getMetricPos(numrows)) super.getRefProf().getMetric(numrows).calculationNumeric(list, null);
     if (super.getMetricPos(unique) - 2 <= super.getMetricPos(card)) super.getRefProf().getMetric(card).calculationNumeric(list, null);
   }
 
   @Override
   protected void dependencyCheck() {
-    ProfileMetric sizeM = super.getRefProf().getMetric(size);
+    ProfileMetric sizeM = super.getRefProf().getMetric(numrows);
     if (sizeM == null) {
-      sizeM = new Size(super.getRefProf());
+      sizeM = new NumRows(super.getRefProf());
       super.getRefProf().addMetric(sizeM);
     }
     ProfileMetric cardM = super.getRefProf().getMetric(card);

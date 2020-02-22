@@ -1,11 +1,10 @@
-package dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.datatypeinfo;
+package dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality;
 
 import java.util.List;
 
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 
-import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
@@ -13,32 +12,33 @@ import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
 
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
-@RDFBean("foaf:DTCategory")
-public class DTCategory extends ProfileMetric{
-  public DTCategory() {
-
-  }
-
-  public DTCategory(DataProfile d) {
-    super(dt, d);
+@RDFBean("foaf:NumRows")
+public class NumRows extends ProfileMetric {
+  public NumRows() {
+    
   }
   
+  public NumRows(DataProfile d) {
+    super(numrows, d);
+  }
+
+
   @Override
   public void calculation(RecordList rs, Object oldVal) {
-    if (((Attribute) super.getRefElem()).getDataType().equals(String.class)) super.setValue("String");
-    else if (((Attribute) super.getRefElem()).getDataType().equals(Object.class)) super.setValue("Null");
-    else super.setValue("Numeric");
-    super.setValueClass(String.class);
+    super.setValue(rs.size());
+    super.setValueClass(Integer.class);
   }
 
   @Override
   public void calculationNumeric(List<Number> list, Object oldVal) {
-    calculation(null, null);
+    super.setValue(list.size());
+    super.setValueClass(Integer.class);
   }
 
   @Override
   public void update(RecordList rs) {
-    calculation(null, null);
+    int oldSize = (int) super.getValue();
+    super.setValue(oldSize + rs.size());
   }
 
   @Override

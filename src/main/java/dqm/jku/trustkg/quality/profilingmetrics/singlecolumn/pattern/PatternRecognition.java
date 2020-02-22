@@ -12,7 +12,7 @@ import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.DependentProfileMetric;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
-import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Size;
+import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.NumRows;
 import dqm.jku.trustkg.util.FileSelectionUtil;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
@@ -79,7 +79,7 @@ public class PatternRecognition extends DependentProfileMetric {
   @Override
   protected String getValueString() {
     if (getValue() == null) return "\tnull";
-    int denominator = (int) super.getRefProf().getMetric(size).getValue();
+    int denominator = (int) super.getRefProf().getMetric(numrows).getValue();
     if (denominator == 0) return "\tnull";
     StringBuilder sb = new StringBuilder().append("\n");
     sb.append(((PatternCounterList) getValue()).getValueStrings(denominator));
@@ -88,19 +88,19 @@ public class PatternRecognition extends DependentProfileMetric {
 
   @Override
   protected void dependencyCalculationWithNumericList(List<Number> list) throws NoSuchMethodException {
-    if (super.getMetricPos(pattern) - 1 <= super.getMetricPos(size)) super.getRefProf().getMetric(size).calculationNumeric(list, null);
+    if (super.getMetricPos(pattern) - 1 <= super.getMetricPos(numrows)) super.getRefProf().getMetric(numrows).calculationNumeric(list, null);
   }
 
   @Override
   protected void dependencyCalculationWithRecordList(RecordList rl) {
-    if (super.getMetricPos(pattern) - 1 <= super.getMetricPos(size)) super.getRefProf().getMetric(size).calculation(rl, null);
+    if (super.getMetricPos(pattern) - 1 <= super.getMetricPos(numrows)) super.getRefProf().getMetric(numrows).calculation(rl, null);
   }
 
   @Override
   protected void dependencyCheck() {
-    ProfileMetric sizeM = super.getRefProf().getMetric(size);
+    ProfileMetric sizeM = super.getRefProf().getMetric(numrows);
     if (sizeM == null) {
-      sizeM = new Size(super.getRefProf());
+      sizeM = new NumRows(super.getRefProf());
       super.getRefProf().addMetric(sizeM);
     }
   }

@@ -1,25 +1,7 @@
 package dqm.jku.trustkg.util.export;
 
-import static dqm.jku.trustkg.quality.profilingmetrics.MetricCategory.cardCat;
-import static dqm.jku.trustkg.quality.profilingmetrics.MetricCategory.depend;
-import static dqm.jku.trustkg.quality.profilingmetrics.MetricCategory.dti;
-import static dqm.jku.trustkg.quality.profilingmetrics.MetricCategory.histCat;
-import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.avg;
-import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.card;
-import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.dec;
-import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.dig;
-import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.dt;
-import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.histCR;
-import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.histCls;
-import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.histVal;
-import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.keyCand;
-import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.max;
-import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.med;
-import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.min;
-import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.nullVal;
-import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.nullValP;
-import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.size;
-import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.unique;
+import static dqm.jku.trustkg.quality.profilingmetrics.MetricCategory.*;
+import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -51,18 +33,19 @@ public class ExportUtil {
   private static final String EXPORT_REPORT = "report/";
 
 	static {
-		LABELS.add(new LabelTriple<>(size, cardCat.label(), "# Rows"));
+		LABELS.add(new LabelTriple<>(numrows, cardCat.label(), numrows.label()));
 		LABELS.add(new LabelTriple<>(nullVal, cardCat.label(), nullVal.label()));
 		LABELS.add(new LabelTriple<>(nullValP, cardCat.label(), nullValP.label()));
 		LABELS.add(new LabelTriple<>(card, cardCat.label(), card.label()));
 		LABELS.add(new LabelTriple<>(unique, cardCat.label(), unique.label()));
 
+		LABELS.add(new LabelTriple<>(bt, dti.label(), bt.label()));
 		LABELS.add(new LabelTriple<>(dt, dti.label(), dt.label()));
 		LABELS.add(new LabelTriple<>(min, dti.label(), min.label()));
 		LABELS.add(new LabelTriple<>(max, dti.label(), max.label()));
 		LABELS.add(new LabelTriple<>(avg, dti.label(), avg.label()));
 		LABELS.add(new LabelTriple<>(med, dti.label(), med.label()));
-		LABELS.add(new LabelTriple<>(dig, dti.label(), "# Digits"));
+		LABELS.add(new LabelTriple<>(size, dti.label(), size.label()));
 		LABELS.add(new LabelTriple<>(dec, dti.label(), "# Decimals"));
 
 		LABELS.add(new LabelTriple<>(histCls, histCat.label(), "# Classes"));

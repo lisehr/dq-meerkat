@@ -22,7 +22,7 @@ import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Cardinality;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.NullValues;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.NullValuesPercentage;
-import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Size;
+import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.NumRows;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Uniqueness;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.datatypeinfo.*;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.dependency.KeyCandidate;
@@ -47,7 +47,7 @@ public class DataProfile {
   public DataProfile(RecordList rs, DSDElement d) throws NoSuchMethodException {
     this.elem = d;
     this.uri = elem.getURI() + "/profile";
-    //TODO: distinguish between Neo4J and relational DB
+    // TODO: distinguish between Neo4J and relational DB
     createDataProfileSkeletonRDB();
     calculateReferenceDataProfile(rs);
   }
@@ -93,7 +93,9 @@ public class DataProfile {
   private void calculateSingleColumn(RecordList rs) throws NoSuchMethodException {
     List<Number> l = createValueList(rs);
     for (ProfileMetric p : metrics) {
-      if (p.getTitle().equals(nullValP) || p.getTitle().equals(nullVal) || p.getTitle().equals(size)) p.calculation(rs, p.getValue());
+      if (p.getTitle().equals(unique) || p.getTitle().equals(keyCand) || 
+          p.getTitle().equals(nullValP) || p.getTitle().equals(nullVal) || 
+          p.getTitle().equals(numrows)) p.calculation(rs, p.getValue());
       else p.calculationNumeric(l, p.getValue());
     }
 
@@ -131,7 +133,7 @@ public class DataProfile {
       Attribute a = (Attribute) elem;
       Class<?> clazz = a.getDataType();
       if (String.class.isAssignableFrom(clazz) || Number.class.isAssignableFrom(clazz) || clazz.equals(Object.class)) {
-        ProfileMetric size = new Size(this);
+        ProfileMetric size = new NumRows(this);
         metrics.add(size);
         ProfileMetric min = new Minimum(this);
         metrics.add(min);
@@ -151,7 +153,7 @@ public class DataProfile {
         metrics.add(nullValP);
         ProfileMetric hist = new Histogram(this);
         metrics.add(hist);
-        ProfileMetric digits = new Digits(this);
+        ProfileMetric digits = new Size(this);
         metrics.add(digits);
         ProfileMetric isCK = new KeyCandidate(this);
         metrics.add(isCK);
@@ -159,7 +161,9 @@ public class DataProfile {
         metrics.add(decimals);
         ProfileMetric patterns = new PatternRecognition(this);
         metrics.add(patterns);
-        ProfileMetric dataType = new DTCategory(this);
+        ProfileMetric basicType = new BasicType(this);
+        metrics.add(basicType);
+        ProfileMetric dataType = new DataType(this);
         metrics.add(dataType);
       } else {
         System.err.println("Attribute '" + a.getLabel() + "' has data type '" + a.getDataTypeString() + "', which is currently not handled. ");
@@ -180,7 +184,7 @@ public class DataProfile {
     }
     System.out.println();
   }
-  
+
   /**
    * Method for printing out the data profile as a string
    */
@@ -202,7 +206,6 @@ public class DataProfile {
     return sb.toString();
   }
 
-
   /**
    * Method for getting the set of metrics
    * 
@@ -222,9 +225,10 @@ public class DataProfile {
   public void setMetrics(List<ProfileMetric> metrics) {
     this.metrics = metrics;
   }
-  
+
   /**
    * Method for adding a metric via a data profile object
+   * 
    * @param m the metric to be added
    */
   public void addMetric(ProfileMetric m) {
@@ -273,10 +277,10 @@ public class DataProfile {
   }
 
   private void addMeasuringValue(ProfileMetric p, Builder measure) {
-    if (p.getValue() == null || p.getLabel().equals(pattern.label())) measure.addField(p.getLabel(), 0); //TODO: replace 0 with NaN, when hitting v2.0 of influxdb-java
+    if (p.getValue() == null || p.getLabel().equals(pattern.label())) measure.addField(p.getLabel(), 0); // TODO: replace 0 with NaN, when hitting v2.0 of influxdb-java
     else if (p.getValueClass().equals(Long.class)) measure.addField(p.getLabel(), (long) p.getValue());
     else if (p.getValueClass().equals(Double.class)) measure.addField(p.getLabel(), (double) p.getValue());
-    else if (p.getValueClass().equals(String.class) && p.getLabel().equals(dt.label())) measure.addField(p.getLabel(), (String) p.getValue());
+    else if (p.getValueClass().equals(String.class) && p.getLabel().equals(bt.label())) measure.addField(p.getLabel(), (String) p.getValue());
     else if (p.getValueClass().equals(Boolean.class)) measure.addField(p.getLabel(), (boolean) p.getValue());
     else measure.addField(p.getLabel(), (int) p.getValue());
   }

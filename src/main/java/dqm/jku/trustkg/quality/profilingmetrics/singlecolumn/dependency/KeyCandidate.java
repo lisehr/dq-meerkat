@@ -9,8 +9,7 @@ import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.DependentProfileMetric;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
-import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Cardinality;
-import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Size;
+import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Uniqueness;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
 
@@ -33,7 +32,7 @@ public class KeyCandidate extends DependentProfileMetric {
    */
   private void calculation(RecordList rl, Object oldVal, boolean checked) {
     if (!checked) this.dependencyCalculationWithRecordList(rl);
-    super.setValue(((long) super.getRefProf().getMetric(card).getValue()) == (int) super.getRefProf().getMetric(size).getValue()); 
+    super.setValue(((double)this.getRefProf().getMetric(unique).getValue()) == (double)1); 
     super.setValueClass(Boolean.class);
   }
   
@@ -60,27 +59,20 @@ public class KeyCandidate extends DependentProfileMetric {
   
   @Override
   protected void dependencyCalculationWithRecordList(RecordList rl) {
-    if (super.getMetricPos(keyCand) - 1 <= super.getMetricPos(size)) super.getRefProf().getMetric(size).calculation(rl, null);
-    if (super.getMetricPos(keyCand) - 2 <= super.getMetricPos(card)) super.getRefProf().getMetric(card).calculation(rl, null);    
+    if (super.getMetricPos(keyCand) - 1 <= super.getMetricPos(unique)) super.getRefProf().getMetric(unique).calculation(rl, null);
   }
 
   @Override
   protected void dependencyCalculationWithNumericList(List<Number> list) throws NoSuchMethodException {
-    if (super.getMetricPos(keyCand) - 1 <= super.getMetricPos(size)) super.getRefProf().getMetric(size).calculationNumeric(list, null);
-    if (super.getMetricPos(keyCand) - 2 <= super.getMetricPos(card)) super.getRefProf().getMetric(card).calculationNumeric(list, null);
+    if (super.getMetricPos(keyCand) - 1 <= super.getMetricPos(unique)) super.getRefProf().getMetric(unique).calculationNumeric(list, null);
   }
 
   @Override
   protected void dependencyCheck() {
-    ProfileMetric sizeM = super.getRefProf().getMetric(size);
-    if (sizeM == null) {
-      sizeM = new Size(super.getRefProf());
-      super.getRefProf().addMetric(sizeM);
-    }
-    ProfileMetric cardM = super.getRefProf().getMetric(card);
-    if (cardM == null) {
-      cardM = new Cardinality(super.getRefProf());
-      super.getRefProf().addMetric(cardM);
+    ProfileMetric uniqueM = super.getRefProf().getMetric(unique);
+    if (uniqueM == null) {
+      uniqueM = new Uniqueness(super.getRefProf());
+      super.getRefProf().addMetric(uniqueM);
     }
   }
 }

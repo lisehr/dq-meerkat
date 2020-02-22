@@ -1,7 +1,7 @@
 package dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.histogram;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.hist;
-import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.size;
+import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.numrows;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.DependentProfileMetric;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
-import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Size;
+import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.NumRows;
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
 import dqm.jku.trustkg.util.numericvals.ValueDistributionUtils;
 
@@ -72,7 +72,7 @@ public class Histogram extends DependentProfileMetric {
     else min = Math.min(min.doubleValue(), list.get(0).doubleValue());
     if (max == null) max = list.get(list.size() - 1).doubleValue();
     else max = Math.max(max.doubleValue(), list.get(list.size() - 1).doubleValue());
-    int k = ValueDistributionUtils.calculateNumberClasses((int) super.getRefProf().getMetric(size).getValue());
+    int k = ValueDistributionUtils.calculateNumberClasses((int) super.getRefProf().getMetric(numrows).getValue());
     classrange = (max.doubleValue() - min.doubleValue()) / k;
     int classVals[];
     if (vals == null) classVals = new int[k];
@@ -120,7 +120,7 @@ public class Histogram extends DependentProfileMetric {
   protected String getValueString() {
     if (super.getValue() == null) return "\tnull";
     StringBuilder sb = new StringBuilder().append("\tNumber of classes: ");
-    int k = ValueDistributionUtils.calculateNumberClasses((int) super.getRefProf().getMetric(size).getValue());
+    int k = ValueDistributionUtils.calculateNumberClasses((int) super.getRefProf().getMetric(numrows).getValue());
     sb.append(k);
     sb.append(", ClassRange: ");
     sb.append(classrange);
@@ -188,7 +188,7 @@ public class Histogram extends DependentProfileMetric {
   }
 
   public int getNumberOfClasses() {
-    return ValueDistributionUtils.calculateNumberClasses((int) super.getRefProf().getMetric(size).getValue());
+    return ValueDistributionUtils.calculateNumberClasses((int) super.getRefProf().getMetric(numrows).getValue());
   }
 
   public String getClassValues() {
@@ -215,19 +215,19 @@ public class Histogram extends DependentProfileMetric {
 
   @Override
   protected void dependencyCalculationWithNumericList(List<Number> list) throws NoSuchMethodException {
-    if (super.getMetricPos(hist) - 1 <= super.getMetricPos(size)) super.getRefProf().getMetric(size).calculationNumeric(list, null);
+    if (super.getMetricPos(hist) - 1 <= super.getMetricPos(numrows)) super.getRefProf().getMetric(numrows).calculationNumeric(list, null);
   }
 
   @Override
   protected void dependencyCalculationWithRecordList(RecordList rl) {
-    if (super.getMetricPos(hist) - 2 <= super.getMetricPos(size)) super.getRefProf().getMetric(size).calculation(rl, null);
+    if (super.getMetricPos(hist) - 2 <= super.getMetricPos(numrows)) super.getRefProf().getMetric(numrows).calculation(rl, null);
   }
 
   @Override
   protected void dependencyCheck() {
-    ProfileMetric sizeM = super.getRefProf().getMetric(size);
+    ProfileMetric sizeM = super.getRefProf().getMetric(numrows);
     if (sizeM == null) {
-      sizeM = new Size(super.getRefProf());
+      sizeM = new NumRows(super.getRefProf());
       super.getRefProf().addMetric(sizeM);
     }
   }

@@ -11,7 +11,7 @@ import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.DependentProfileMetric;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
-import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Size;
+import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.NumRows;
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
@@ -50,9 +50,9 @@ public class Average extends DependentProfileMetric {
    */
   private Object performAveraging(Object sum) {
     Attribute a = (Attribute) super.getRefElem();
-    if (a.getDataType().equals(Long.class)) return (long) sum / (int) super.getRefProf().getMetric(size).getValue();
-    else if (a.getDataType().equals(Double.class)) return (double) sum / (int) super.getRefProf().getMetric(size).getValue();
-    return (int) sum / (int) super.getRefProf().getMetric(size).getValue();
+    if (a.getDataType().equals(Long.class)) return (long) sum / (int) super.getRefProf().getMetric(numrows).getValue();
+    else if (a.getDataType().equals(Double.class)) return (double) sum / (int) super.getRefProf().getMetric(numrows).getValue();
+    return (int) sum / (int) super.getRefProf().getMetric(numrows).getValue();
   }
 
   /**
@@ -95,9 +95,9 @@ public class Average extends DependentProfileMetric {
    */
   private Object getOriginalSum() {
     Attribute a = (Attribute) super.getRefElem();
-    if (a.getDataType().equals(Long.class)) return ((Number) super.getValue()).longValue() * (int) super.getRefProf().getMetric(size).getValue();
-    else if (a.getDataType().equals(Double.class)) return ((Number) super.getValue()).doubleValue() * (int) super.getRefProf().getMetric(size).getValue();
-    else return ((int) super.getValue()) * (int) super.getRefProf().getMetric(size).getValue();
+    if (a.getDataType().equals(Long.class)) return ((Number) super.getValue()).longValue() * (int) super.getRefProf().getMetric(numrows).getValue();
+    else if (a.getDataType().equals(Double.class)) return ((Number) super.getValue()).doubleValue() * (int) super.getRefProf().getMetric(numrows).getValue();
+    else return ((int) super.getValue()) * (int) super.getRefProf().getMetric(numrows).getValue();
   }
 
   @Override
@@ -129,19 +129,19 @@ public class Average extends DependentProfileMetric {
 
   @Override
   protected void dependencyCalculationWithNumericList(List<Number> list) throws NoSuchMethodException {
-    if (super.getMetricPos(avg) - 1 <= super.getMetricPos(size)) super.getRefProf().getMetric(size).calculationNumeric(list, null);  
+    if (super.getMetricPos(avg) - 1 <= super.getMetricPos(numrows)) super.getRefProf().getMetric(numrows).calculationNumeric(list, null);  
   }
 
   @Override
   protected void dependencyCalculationWithRecordList(RecordList rl) {
-    if (super.getMetricPos(avg) - 2 <= super.getMetricPos(size)) super.getRefProf().getMetric(size).calculation(rl, null);  
+    if (super.getMetricPos(avg) - 2 <= super.getMetricPos(numrows)) super.getRefProf().getMetric(numrows).calculation(rl, null);  
   }
 
   @Override
   protected void dependencyCheck() {
-    ProfileMetric sizeM = super.getRefProf().getMetric(size);
+    ProfileMetric sizeM = super.getRefProf().getMetric(numrows);
     if (sizeM == null) {
-      sizeM = new Size(super.getRefProf());
+      sizeM = new NumRows(super.getRefProf());
       super.getRefProf().addMetric(sizeM);
     }
   }
