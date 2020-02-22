@@ -59,15 +59,15 @@ public class NullValuesPercentage extends DependentProfileMetric {
 
   @Override
   protected void dependencyCalculationWithRecordList(RecordList rl) {
-    if (super.getMetricPos(nullValP) - 1 <= super.getMetricPos(numrows)) super.getRefProf().getMetric(numrows).calculation(rl, null);
-    if (super.getMetricPos(nullValP) - 2 <= super.getMetricPos(nullVal)) super.getRefProf().getMetric(nullVal).calculation(rl, null);
+    if (super.getMetricPos(nullValP) - 2 <= super.getMetricPos(numrows)) super.getRefProf().getMetric(numrows).calculation(rl, null);
+    if (super.getMetricPos(nullValP) - 1 <= super.getMetricPos(nullVal)) super.getRefProf().getMetric(nullVal).calculation(rl, null);
     
   }
 
   @Override
   protected void dependencyCalculationWithNumericList(List<Number> list) throws NoSuchMethodException {
-    if (super.getMetricPos(nullValP) - 1 <= super.getMetricPos(numrows)) super.getRefProf().getMetric(numrows).calculationNumeric(list, null);
-    if (super.getMetricPos(nullValP) - 2 <= super.getMetricPos(nullVal)) super.getRefProf().getMetric(nullVal).calculationNumeric(list, null);
+    if (super.getMetricPos(nullValP) - 2 <= super.getMetricPos(numrows)) super.getRefProf().getMetric(numrows).calculationNumeric(list, null);
+    if (super.getMetricPos(nullValP) - 1 <= super.getMetricPos(nullVal)) super.getRefProf().getMetric(nullVal).calculationNumeric(list, null);
   }
 
   @Override

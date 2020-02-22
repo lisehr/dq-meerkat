@@ -63,15 +63,15 @@ public class Uniqueness extends DependentProfileMetric{
 
   @Override
   protected void dependencyCalculationWithRecordList(RecordList rl) {
-    if (super.getMetricPos(unique) - 1 <= super.getMetricPos(numrows)) super.getRefProf().getMetric(numrows).calculation(rl, null);
-    if (super.getMetricPos(unique) - 2 <= super.getMetricPos(card)) super.getRefProf().getMetric(card).calculation(rl, null);
+    if (super.getMetricPos(unique) - 2 <= super.getMetricPos(numrows)) super.getRefProf().getMetric(numrows).calculation(rl, null);
+    if (super.getMetricPos(unique) - 1 <= super.getMetricPos(card)) super.getRefProf().getMetric(card).calculation(rl, null);
     
   }
 
   @Override
   protected void dependencyCalculationWithNumericList(List<Number> list) throws NoSuchMethodException {
-    if (super.getMetricPos(unique) - 1 <= super.getMetricPos(numrows)) super.getRefProf().getMetric(numrows).calculationNumeric(list, null);
-    if (super.getMetricPos(unique) - 2 <= super.getMetricPos(card)) super.getRefProf().getMetric(card).calculationNumeric(list, null);
+    if (super.getMetricPos(unique) - 2 <= super.getMetricPos(numrows)) super.getRefProf().getMetric(numrows).calculationNumeric(list, null);
+    if (super.getMetricPos(unique) - 1 <= super.getMetricPos(card)) super.getRefProf().getMetric(card).calculationNumeric(list, null);
   }
 
   @Override
