@@ -1048,7 +1048,7 @@
     "list": []
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {
@@ -1079,5 +1079,5 @@
   "timezone": "browser",
   "title": "Tributech Acceleration Data",
   "uid": "8cKXpfNZz",
-  "version": 15
+  "version": 16
 }

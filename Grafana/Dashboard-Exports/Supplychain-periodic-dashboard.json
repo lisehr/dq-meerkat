@@ -257,7 +257,7 @@
           "tags": []
         },
         {
-          "alias": "# Digits",
+          "alias": "Size",
           "groupBy": [],
           "measurement": "http://example.com/supplychain/supplychain/Benefit per order",
           "orderByTime": "ASC",
@@ -268,7 +268,7 @@
             [
               {
                 "params": [
-                  "Digits"
+                  "Size"
                 ],
                 "type": "field"
               }
@@ -594,7 +594,7 @@
           "tags": []
         },
         {
-          "alias": "# Digits",
+          "alias": "Size",
           "groupBy": [],
           "measurement": "http://example.com/supplychain/supplychain/Order Item Discount Rate",
           "orderByTime": "ASC",
@@ -605,7 +605,7 @@
             [
               {
                 "params": [
-                  "Digits"
+                  "Size"
                 ],
                 "type": "field"
               }
@@ -890,7 +890,7 @@
           "tags": []
         },
         {
-          "alias": "# Digits",
+          "alias": "Size",
           "groupBy": [],
           "measurement": "http://example.com/supplychain/supplychain/Order Zipcode",
           "orderByTime": "ASC",
@@ -901,7 +901,7 @@
             [
               {
                 "params": [
-                  "Digits"
+                  "Size"
                 ],
                 "type": "field"
               }
@@ -1327,5 +1327,5 @@
   "timezone": "",
   "title": "DataCo SMART SUPPLY CHAIN FOR BIG DATA ANALYSIS",
   "uid": "GYKQeSHZz",
-  "version": 7
+  "version": 8
 }
