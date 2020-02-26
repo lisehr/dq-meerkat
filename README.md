@@ -1,7 +1,7 @@
 # Block-DaQ
 A Blockchain-based Knowledge Graph for Data Quality Measurement using Reference Data Profiles
 
-BlocK-DaQ is a research project initiated by Johannes Kepler University (<a href="https://www.jku.at/en/institute-for-application-oriented-knowledge-processing" target="_blank">JKU</a>) Linz and Software Competence Center Hagenberg (<a href="https://scch.at/en/news" target="_blank">SCCH</a>). The implementation provides a novel view on automated and continuous data quality measurement (CDQM), which is based on the initial creation of <i>reference data profiles</i>. 
+BlocK-DaQ is a research project initiated by Johannes Kepler University (<a href="https://www.jku.at/en/institute-for-application-oriented-knowledge-processing" target="_blank">JKU</a>) Linz and Software Competence Center Hagenberg (<a href="https://scch.at/en/news" target="_blank">SCCH</a>). BlocK-DaQ implements a novel method for automated and continuous data quality measurement (CDQM), which is based on the creation of <i>reference data profiles</i>. 
 
 ## Disclaimer
 The provided frameworks and Bash-script are tested for Linux Mint 19.2 (Tina) and Windows 10 64bit. 
