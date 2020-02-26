@@ -51,7 +51,7 @@ Used in BigChainDB and generally a widespread approach:
 
 ## Microchains
 Microchains are a further approach to improve performance of blockchains. Since DSDElements are seperated objects, they can be seperated into several miniature versions of blockchains, one for each DSDElement.
-As shown in the tests in the package *demos.alex.benchmarking*, these chains are slightly better in adding and creating (about 9-15%) and significantly better for accessing data (about 75%).
+As shown in the tests in the package *demos.alex.benchmarking*, these chains are slightly better in adding and creating (about 9-15 %) and significantly better for accessing data (about 75 %).
 Each chain contains a blockchain for the element, adapted with an identifier for the minichain and flags used for merging and deletion control.
 
 # Persistence
@@ -86,7 +86,4 @@ RDFBeans (https://rdfbeans.github.io/) is a library, which allows a developer to
 * Grafana Docs: https://grafana.com/docs/
 * RDFBeans: https://rdfbeans.github.io/ 
 * RDF4j: https://rdf4j.eclipse.org/
-* Quaiie (usage of connectors): http://dqm.faw.jku.at/
-## Blockchains
-* Creating Blockchain in Java from Scratch: https://medium.com/programmers-blockchain/create-simple-blockchain-java-tutorial-from-scratch-6eeed3cb03fa
-* Tutorial Code for Blockchains in Java: https://github.com/CryptoKass/NoobChain-Tutorial-Part-1/tree/master/src/noobchain
+* QuaIIe (usage of connectors): http://dqm.faw.jku.at/
