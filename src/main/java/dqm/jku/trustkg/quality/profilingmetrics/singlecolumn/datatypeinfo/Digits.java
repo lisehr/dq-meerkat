@@ -28,6 +28,7 @@ public class Digits extends ProfileMetric {
     String valueStr = String.valueOf(field);
     int value = valueStr.indexOf(".");
     if (value == -1) value = valueStr.length();
+    if (valueStr.indexOf('-') != -1) value--;
     return value;
   }
 
