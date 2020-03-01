@@ -15,13 +15,13 @@ import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
 
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:Digits")
-public class Size extends ProfileMetric {
-  public Size() {
+public class Digits extends ProfileMetric {
+  public Digits() {
 
   }
 
-  public Size(DataProfile d) {
-    super(size, d);
+  public Digits(DataProfile d) {
+    super(dig, d);
   }
 
   private int calculateDigits(Object field) {

@@ -45,7 +45,7 @@ public class ExportUtil {
 		LABELS.add(new LabelTriple<>(max, dti.label(), max.label()));
 		LABELS.add(new LabelTriple<>(avg, dti.label(), avg.label()));
 		LABELS.add(new LabelTriple<>(med, dti.label(), med.label()));
-		LABELS.add(new LabelTriple<>(size, dti.label(), size.label()));
+		LABELS.add(new LabelTriple<>(dig, dti.label(), dig.label()));
 		LABELS.add(new LabelTriple<>(dec, dti.label(), "# Decimals"));
 
 		LABELS.add(new LabelTriple<>(histCls, histCat.label(), "# Classes"));

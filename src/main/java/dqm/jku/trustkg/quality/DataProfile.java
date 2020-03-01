@@ -153,7 +153,7 @@ public class DataProfile {
         metrics.add(nullValP);
         ProfileMetric hist = new Histogram(this);
         metrics.add(hist);
-        ProfileMetric digits = new Size(this);
+        ProfileMetric digits = new Digits(this);
         metrics.add(digits);
         ProfileMetric isCK = new KeyCandidate(this);
         metrics.add(isCK);

@@ -16,7 +16,7 @@ public enum MetricTitle {
   hist("Histogram"),
   avg("Average"),
   dec("Decimals"),
-  size("Size"),
+  dig("Digits"),
   max("Maximum"),
   med("Median"),
   min("Minimum"),

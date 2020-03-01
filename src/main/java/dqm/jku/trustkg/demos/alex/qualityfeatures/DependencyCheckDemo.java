@@ -10,7 +10,7 @@ import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.NullValuesPercentage;
-import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.datatypeinfo.Size;
+import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.datatypeinfo.Digits;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.dependency.KeyCandidate;
 import dqm.jku.trustkg.util.FileSelectionUtil;
 
@@ -32,7 +32,7 @@ public class DependencyCheckDemo {
           dp.setElem(a);
           dp.setURI(a.getURI() + "/profile");
           dp.addMetric(new NullValuesPercentage(dp));
-          dp.addMetric(new Size(dp));
+          dp.addMetric(new Digits(dp));
           dp.addMetric(new KeyCandidate(dp));
           for (ProfileMetric m : dp.getMetrics()) m.calculation(rs, null);
           dp.printProfile();
