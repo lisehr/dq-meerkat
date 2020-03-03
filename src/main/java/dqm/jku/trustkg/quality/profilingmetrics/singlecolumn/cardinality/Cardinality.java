@@ -31,13 +31,17 @@ public class Cardinality extends ProfileMetric {
   public void calculation(RecordList rs, Object oldVal) {
     Attribute a = (Attribute) super.getRefElem();
     Set<Number> set = new HashSet<Number>();
+    Set<String> strSet = new HashSet<String>();
     for (Record r : rs) {
       Number field = null;
-      if (a.getDataType().equals(String.class) && r.getField(a) != null) field = r.getField(a).toString().length();
-      else field = (Number) r.getField(a);
-      if (field != null) set.add(field);
+      if (a.getDataType().equals(String.class) && r.getField(a) != null) strSet.add(r.getField(a).toString());
+      else {
+        field = (Number) r.getField(a);
+        if (field != null) set.add(field);
+      }
     }
-    this.setValue((long) set.size());
+    if (a.getDataType().equals(String.class)) this.setValue((long) strSet.size());
+    else this.setValue((long) set.size());
     this.setValueClass(Long.class);
   }
 

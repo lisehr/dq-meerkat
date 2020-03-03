@@ -95,7 +95,7 @@ public class DataProfile {
     for (ProfileMetric p : metrics) {
       if (p.getTitle().equals(unique) || p.getTitle().equals(keyCand) || 
           p.getTitle().equals(nullValP) || p.getTitle().equals(nullVal) || 
-          p.getTitle().equals(numrows)) p.calculation(rs, p.getValue());
+          p.getTitle().equals(numrows) || p.getTitle().equals(card)) p.calculation(rs, p.getValue());
       else p.calculationNumeric(l, p.getValue());
     }
 
