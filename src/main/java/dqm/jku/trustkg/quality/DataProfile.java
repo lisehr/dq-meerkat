@@ -36,9 +36,9 @@ import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:DataProfile")
 public class DataProfile {
-  private List<ProfileMetric> metrics = new ArrayList<>();
-  private DSDElement elem;
-  private String uri;
+  private List<ProfileMetric> metrics = new ArrayList<>(); // a list containing all profile metrics
+  private DSDElement elem; // DSDElement, where this DataProfile is annotated to
+  private String uri; // uniform resource identifier of this profile
 
   public DataProfile() {
 
@@ -93,14 +93,25 @@ public class DataProfile {
   private void calculateSingleColumn(RecordList rs) throws NoSuchMethodException {
     List<Number> l = createValueList(rs);
     for (ProfileMetric p : metrics) {
-      if (p.getTitle().equals(unique) || p.getTitle().equals(keyCand) || 
-          p.getTitle().equals(nullValP) || p.getTitle().equals(nullVal) || 
-          p.getTitle().equals(numrows) || p.getTitle().equals(card)) p.calculation(rs, p.getValue());
+      if (needsRecordListCalc(p)) p.calculation(rs, p.getValue());
       else p.calculationNumeric(l, p.getValue());
     }
 
   }
 
+  /**
+   * Helper method to determine if a record list calculation is needed (i.e. a list 
+   * of numeric values can lead to incorrect metrics)
+   * @param p the profile metric to check
+   * @return true, if the profile metric needs to be calculated with a record list, false if not
+   */
+  private boolean needsRecordListCalc(ProfileMetric p) {
+    return p.getTitle().equals(unique) || p.getTitle().equals(keyCand) || 
+    p.getTitle().equals(nullValP) || p.getTitle().equals(nullVal) || 
+    p.getTitle().equals(numrows) || p.getTitle().equals(card) ||
+    p.getTitle().equals(hist);
+  }
+  
   /**
    * Helper method for creating a list of numeric values
    * 
@@ -126,7 +137,7 @@ public class DataProfile {
   }
 
   /**
-   * creates a reference data profile on which calculations can be made
+   * Helper method to create a reference data profile on which calculations can be made.
    */
   private void createDataProfileSkeletonRDB() {
     if (elem instanceof Attribute) {
@@ -172,7 +183,7 @@ public class DataProfile {
   }
 
   /**
-   * Method for printing out the data profile
+   * Method for printing out the data profile.
    */
   public void printProfile() {
     System.out.println("Data Profile:");
@@ -186,7 +197,7 @@ public class DataProfile {
   }
 
   /**
-   * Method for printing out the data profile as a string
+   * Method for printing out the data profile as a string.
    */
   public String getProfileString() {
     StringBuilder sb = new StringBuilder();
@@ -267,6 +278,11 @@ public class DataProfile {
     return elem;
   }
 
+  /**
+   * Method for creating a point of measure for InfluxDB.
+   * @param measure the builder for a measurement
+   * @return a measuring point for insertion into InfluxDB
+   */
   public Point createMeasuringPoint(Builder measure) {
     SortedSet<ProfileMetric> metricSorted = new TreeSet<>();
     metricSorted.addAll(metrics);
@@ -276,6 +292,11 @@ public class DataProfile {
     return measure.build();
   }
 
+  /**
+   * Helper method for adding the correct measuring value (including its data type) to the builder
+   * @param p the profile metric to add
+   * @param measure the builder for a measurement
+   */
   private void addMeasuringValue(ProfileMetric p, Builder measure) {
     if (p.getValue() == null || p.getLabel().equals(pattern.label())) measure.addField(p.getLabel(), 0); // TODO: replace 0 with NaN, when hitting v2.0 of influxdb-java
     else if (p.getValueClass().equals(Long.class)) measure.addField(p.getLabel(), (long) p.getValue());
