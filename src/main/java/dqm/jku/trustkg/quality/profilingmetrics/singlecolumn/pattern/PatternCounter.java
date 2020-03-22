@@ -12,6 +12,7 @@ import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 @RDFBean("foaf:PatternCounter")
 public class PatternCounter {
   private Pattern pattern;
+  private String altPattern;
   private int cnt = 0;
 
   
@@ -24,6 +25,7 @@ public class PatternCounter {
       pattern = Pattern.compile(regex);
     } catch (PatternSyntaxException e) {
       pattern = null;
+      altPattern = regex;
     }
   }
   
@@ -57,11 +59,14 @@ public class PatternCounter {
   
   @Override
   public String toString() {
-    return String.format("%s:%s%d ", pattern.toString(), tabulatorInsert(), cnt);
+    if (pattern == null) return String.format("%s:%s%d ", altPattern, tabulatorInsert(), cnt);
+    else return String.format("%s:%s%d ", pattern.toString(), tabulatorInsert(), cnt);
   }
 
   private String tabulatorInsert() {
-    int len = pattern.toString().length();
+    int len = 0;
+    if (pattern == null) len = altPattern.toString().length();
+    else len = pattern.toString().length();
     if (len < 6) return "\t\t\t\t\t";
     else if (len < 11) return "\t\t\t\t";
     else if (len < 22) return "\t\t\t";
