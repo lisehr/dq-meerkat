@@ -2,15 +2,15 @@ Category;Metric;year of birth;gender;ethnicity;child's first name;count;rank
 Cardinalities;Number of Rows;5 000,0000;5 000,0000;5 000,0000;5 000,0000;5 000,0000;5 000,0000
 Cardinalities;# Null Values;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000
 Cardinalities;% Null Values;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000
-Cardinalities;Cardinality;3,0000;2,0000;3,0000;10,0000;214,0000;99,0000
-Cardinalities;Uniqueness;0,0600;0,0400;0,0600;0,2000;4,2800;1,9800
+Cardinalities;Cardinality;3,0000;2,0000;4,0000;1 450,0000;214,0000;99,0000
+Cardinalities;Uniqueness;0,0600;0,0400;0,0800;29,0000;4,2800;1,9800
 Data type info;Basic type;Numeric;String;String;String;Numeric;Numeric
 Data type info;Data type;Integer;String;String;String;Integer;Integer
 Data type info;Minimum;2 014,0000;4,0000;8,0000;2,0000;10,0000;1,0000
 Data type info;Maximum;2 016,0000;6,0000;26,0000;11,0000;387,0000;99,0000
 Data type info;Average;2 015,0000;5,0000;16,0000;5,0000;32,0000;52,0000
 Data type info;Median;2 015,0000;6,0000;18,0000;6,0000;20,0000;51,0000
-Data type info;Size;4,0000;0,0000;0,0000;0,0000;3,0000;2,0000
+Data type info;Digits;4,0000;0,0000;0,0000;0,0000;3,0000;2,0000
 Data type info;# Decimals;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000
 Histogram;# Classes;14,0000;14,0000;14,0000;14,0000;14,0000;14,0000
 Histogram;Class range;0,1429;0,1429;1,2857;0,6429;26,9286;7,0000

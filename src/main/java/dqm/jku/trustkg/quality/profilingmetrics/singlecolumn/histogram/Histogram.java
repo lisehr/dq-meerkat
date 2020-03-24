@@ -42,7 +42,7 @@ public class Histogram extends DependentProfileMetric {
     List<Number> list = new ArrayList<Number>();
     for (Record r : rs) {
       Number field = null;
-      if (a.getDataType().equals(String.class) && r.getField(a) != null) field = ((String) r.getField(a)).length();
+      if (a.getDataType().equals(String.class) && r.getField(a) != null) field = r.getField(a).toString().length();
       else field = (Number) r.getField(a);
       if (field != null) list.add(field);
     }
@@ -67,6 +67,10 @@ public class Histogram extends DependentProfileMetric {
    * @param list the list to be processed
    */
   private void processList(List<Number> list, SerializableMap vals) {
+    if (list.isEmpty()) {
+      this.setValue(null);
+      return;
+    }
     list.sort(new NumberComparator());
     if (min == null) min = list.get(0).doubleValue();
     else min = Math.min(min.doubleValue(), list.get(0).doubleValue());
