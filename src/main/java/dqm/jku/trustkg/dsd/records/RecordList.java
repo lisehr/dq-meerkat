@@ -1,14 +1,13 @@
 package dqm.jku.trustkg.dsd.records;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.collections.list.TreeList;
 
 public class RecordList implements Iterable<Record> {
 
-  @SuppressWarnings("unchecked")
-  private List<Record> records = new TreeList();
+  private List<Record> records = new ArrayList<>();
   
   public RecordList() {
     
