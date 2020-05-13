@@ -1,13 +1,13 @@
-# Block-DaQ
-A Blockchain-based Knowledge Graph for Data Quality Measurement using Reference Data Profiles
+# DQ-MeeRKat
+Automating Data Quality Measurement with aReference-Data-Profile-Annotated Knowledge Graph
 
-BlocK-DaQ is a research project initiated by Johannes Kepler University (<a href="https://www.jku.at/en/institute-for-application-oriented-knowledge-processing" target="_blank">JKU</a>) Linz and Software Competence Center Hagenberg (<a href="https://scch.at/en/news" target="_blank">SCCH</a>). BlocK-DaQ implements a novel method for automated and continuous data quality measurement (CDQM), which is based on the creation of <i>reference data profiles</i>. 
+DQ-MeeRKat is a research project initiated by Johannes Kepler University (<a href="https://www.jku.at/en/institute-for-application-oriented-knowledge-processing" target="_blank">JKU</a>) Linz and Software Competence Center Hagenberg (<a href="https://scch.at/en/news" target="_blank">SCCH</a>). DQ-MeeRKat implements a novel method for automated and continuous data quality measurement (CDQM), which is based on the creation of <i>reference data profiles</i>. 
 
 ## Disclaimer
 The provided frameworks and Bash-script are tested for Linux Mint 19.2 (Tina) and Windows 10 64bit. 
 
 ## Getting Started
-BlocK-DaQ is a Java maven project and in order to build the sources you need the following requirements:
+DQ-MeeRKat is a Java maven project and in order to build the sources you need the following requirements:
 <ol>
   <li>Java JDK 1.8 or higher</li>
   <li>Maven 3.1.0</li>
@@ -22,7 +22,7 @@ Run on Linux (Mint): <br/>
 Windows users have to start executables provided in the following sections.
 
 ### InfluxDB
-A common choice for storing CDQM results are time-series DBs like InfluxDB, which provides a Java API. Since the Java API was not working by the time of the creation of the project, we replaced it by the browser version. BlocK-DaQ does not offer an embedded mode (like Derby or GraphDB), but runs InfluxDB outside the Java runtime to persist CDQM results over time. 
+A common choice for storing CDQM results are time-series DBs like InfluxDB, which provides a Java API. Since the Java API was not working by the time of the creation of the project, we replaced it by the browser version. DQ-MeeRKat does not offer an embedded mode (like Derby or GraphDB), but runs InfluxDB outside the Java runtime to persist CDQM results over time. 
 
 Run on Linux: <br/>
 ```InfluxDB\startInflux.sh``` (for starting InfluxDB server)<br/>
