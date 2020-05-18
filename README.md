@@ -1,7 +1,20 @@
 # DQ-MeeRKat
-Automating Data Quality Measurement with aReference-Data-Profile-Annotated Knowledge Graph
+Automating Data Quality Measurement with a Reference-Data-Profile-Annotated Knowledge Graph. In a reference to pop culture,
+the *t* is silent. DQ-MeeRKat implements a novel method for automated and continuous data quality measurement (CDQM), which is based on the creation of <i>reference data profiles</i>. 
 
-DQ-MeeRKat is a research project initiated by Johannes Kepler University (<a href="https://www.jku.at/en/institute-for-application-oriented-knowledge-processing" target="_blank">JKU</a>) Linz and Software Competence Center Hagenberg (<a href="https://scch.at/en/news" target="_blank">SCCH</a>). DQ-MeeRKat implements a novel method for automated and continuous data quality measurement (CDQM), which is based on the creation of <i>reference data profiles</i>. 
+# History
+DQ-MeeRKat is a research project initiated by Johannes Kepler University (<a href="https://www.jku.at/en/institute-for-application-oriented-knowledge-processing" target="_blank">JKU</a>) Linz and Software Competence Center Hagenberg (<a href="https://scch.at/en/news" target="_blank">SCCH</a>). 
+Founded in July, 2019, back then under the title "BlocK-DaQ", its original purpose was to (1) research further on DQ measurement with the help of Reference Data Profiles (RDPs)
+and (2) storage in a Knowledge Graph and (3) on the trust aspect by ensuring authenticity of the RDPs with Blockchains. Therefore
+the title BlocK-DaQ (Blockchain-based Knowledge Graph for Data Quality Measurement using Reference data profiles) was born.
+
+However, during research one of our main findings was the redundancy of the Blockchain-aspect for the specific use case of this project, shifting the focus of the implementation
+more onto the side of the first two topics, with (3) as an optional addition. Thus outsourcing research on problems with the Blockchain aspect into a different 
+sub-project, pursued on a different date. Similar to the "ugly duckling" (H.C. Andersen, 1995), our DaQ had to undergo a transformation from
+the ugly "BlocK-DaQ" ... to a beautiful DQ-MeeRKat. The main reason for a meerkat instead of a swan has something to do with the 
+behaviour of the real animal. Since meerkats are alarm callers (standing on high ground and calling the others in case of an attacking predator, see https://doi.org/10.1111/j.1439-0310.1984.tb00101.x),
+similarities to our project, whose goal is to create an extensive alarm and crisis management system for observed systems, preferably with machine learning (ML) support.
+
 
 ## Disclaimer
 The provided frameworks and Bash-script are tested for Linux Mint 19.2 (Tina) and Windows 10 64bit. 
