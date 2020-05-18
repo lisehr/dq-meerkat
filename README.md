@@ -1,5 +1,5 @@
 # DQ-MeeRKat
-Automating Data Quality Measurement with a Reference-Data-Profile-Annotated Knowledge Graph. In a reference to pop culture,
+Automating Data Quality Measurement with a Reference-Data-Profile-Annotated Knowledge Graph. In a reference to pop culture (https://www.imdb.com/title/tt1853728/),
 the *t* is silent. DQ-MeeRKat implements a novel method for automated and continuous data quality measurement (CDQM), which is based on the creation of <i>reference data profiles</i>. 
 
 # History
