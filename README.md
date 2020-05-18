@@ -1,5 +1,5 @@
 # DQ-MeeRKat
-Automating Data Quality Measurement with a Reference-Data-Profile-Annotated Knowledge Graph. In a reference to pop culture (https://www.imdb.com/title/tt1853728/),
+Automating Data Quality Measurement with a Reference-Data-Profile-Annotated Knowledge Graph. In a reference to pop culture (<a href="https://www.imdb.com/title/tt1853728/" target="_blank">Tarantino: Django Unchained (2012)</a>),
 the *t* is silent. DQ-MeeRKat implements a novel method for automated and continuous data quality measurement (CDQM), which is based on the creation of <i>reference data profiles</i>. 
 
 # History
@@ -10,10 +10,10 @@ the title BlocK-DaQ (Blockchain-based Knowledge Graph for Data Quality Measureme
 
 However, during research one of our main findings was the redundancy of the Blockchain-aspect for the specific use case of this project, shifting the focus of the implementation
 more onto the side of the first two topics, with (3) as an optional addition. Thus outsourcing research on problems with the Blockchain aspect into a different 
-sub-project, pursued on a different date. Similar to the "ugly duckling" (H.C. Andersen, 1995), our DaQ had to undergo a transformation from
+sub-project, pursued on a different date. Similar to the "<a href="http://hca.gilead.org.il/ugly_duc.html" target="_blank"> ugly duckling</a>" (H.C. Andersen, 1844), our DaQ had to undergo a transformation from
 the ugly "BlocK-DaQ" ... to a beautiful DQ-MeeRKat. The main reason for a meerkat instead of a swan has something to do with the 
-behaviour of the real animal. Since meerkats are alarm callers (standing on high ground and calling the others in case of an attacking predator, see https://doi.org/10.1111/j.1439-0310.1984.tb00101.x),
-similarities to our project, whose goal is to create an extensive alarm and crisis management system for observed systems, preferably with machine learning (ML) support.
+behaviour of the real animal. Since meerkats are alarm callers (standing on high ground and calling the others in case of an attacking predator, see <a href="https://doi.org/10.1111/j.1439-0310.1984.tb00101.x" target="_blank">here</a>),
+similarities to our project, whose goal is to create an extensive alarm and crisis management system for observed systems, preferably with machine learning (ML) support, are present.
 
 
 ## Disclaimer
