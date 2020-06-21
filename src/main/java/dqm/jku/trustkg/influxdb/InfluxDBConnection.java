@@ -27,21 +27,20 @@ public class InfluxDBConnection {
     this.retentionPolicyName = DEF_RET;
     createDB();
   }
-  
+
   public InfluxDBConnection(String dbName) {
     instance = InfluxDBFactory.connect(URL, USER, PW);
     this.dbName = dbName;
     this.retentionPolicyName = DEF_RET;
     createDB();
   }
-  
+
   public InfluxDBConnection(String dbName, String retentionPolicyName) {
     instance = InfluxDBFactory.connect(URL, USER, PW);
     this.dbName = dbName;
     this.retentionPolicyName = retentionPolicyName;
     createDB();
   }
-
 
   /**
    * Gets the db name
@@ -79,7 +78,7 @@ public class InfluxDBConnection {
     QueryResult dbs = instance.query(new Query("SHOW DATABASES"));
     for (Result r : dbs.getResults()) {
       for (Series s : r.getSeries()) {
-        if(s.getValues().stream().flatMap(x -> x.stream()).anyMatch(str -> str.equals(dbName))) return true;
+        if (s.getValues().stream().flatMap(x -> x.stream()).anyMatch(str -> str.equals(dbName))) return true;
       }
     }
     return false;
@@ -132,14 +131,15 @@ public class InfluxDBConnection {
       }
     }
   }
-  
+
   /**
    * Stores the content of one record into influxDB. Stores nothing if null
+   * 
    * @param record the record to be stored
    */
   public void storeRecord(Record record) {
     if (record == null) return;
     write(record.assignedFrom.createMeasurement(record));
   }
-  
+
 }

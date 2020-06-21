@@ -18,6 +18,13 @@ import dqm.jku.trustkg.dsd.elements.Datasource;
 import dqm.jku.trustkg.util.Constants;
 import dqm.jku.trustkg.util.FileSelectionUtil;
 
+/**
+ * Test class for complete comparison testing of blockchains compared to
+ * minichains
+ * 
+ * @author optimusseptim
+ *
+ */
 public class ComparisonBlockToMiniChain {
   private static final boolean DEBUG = true;
   private static final int TESTRUNS = 10;

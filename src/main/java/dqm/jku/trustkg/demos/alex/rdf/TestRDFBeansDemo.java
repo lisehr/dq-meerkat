@@ -19,6 +19,12 @@ import dqm.jku.trustkg.dsd.elements.Datasource;
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.util.FileSelectionUtil;
 
+/**
+ * Test class for RDFBeans functionality
+ * 
+ * @author optimusseptim
+ *
+ */
 public class TestRDFBeansDemo {
 //  private static final boolean DEBUG = false;
 

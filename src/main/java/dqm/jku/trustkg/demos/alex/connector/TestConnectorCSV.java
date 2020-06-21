@@ -8,6 +8,12 @@ import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.Concept;
 import dqm.jku.trustkg.dsd.elements.Datasource;
 
+/**
+ * Test class for connection with CSV
+ * 
+ * @author optimusseptim
+ *
+ */
 public class TestConnectorCSV {
   public static void main(String args[]) {
     // Create Connection to CSV Connector

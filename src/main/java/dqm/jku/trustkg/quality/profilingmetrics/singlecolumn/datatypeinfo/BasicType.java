@@ -12,9 +12,16 @@ import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
 
+/**
+ * Describes the metric Basic Type, which categorizes an Attribute as a String,
+ * Null or Numeric value type.
+ * 
+ * @author optimusseptim
+ *
+ */
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:BasicType")
-public class BasicType extends ProfileMetric{
+public class BasicType extends ProfileMetric {
   public BasicType() {
 
   }
@@ -22,7 +29,7 @@ public class BasicType extends ProfileMetric{
   public BasicType(DataProfile d) {
     super(bt, d);
   }
-  
+
   @Override
   public void calculation(RecordList rs, Object oldVal) {
     if (((Attribute) super.getRefElem()).getDataType().equals(String.class)) super.setValue("String");

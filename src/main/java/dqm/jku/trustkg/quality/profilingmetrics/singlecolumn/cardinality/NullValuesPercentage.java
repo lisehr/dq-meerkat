@@ -9,6 +9,13 @@ import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.DependentProfileMetric;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 
+/**
+ * Describes the metric Null Values Percentage, which is the amount of Null
+ * Values in relation to the data set size.
+ * 
+ * @author optimusseptim
+ *
+ */
 public class NullValuesPercentage extends DependentProfileMetric {
   public NullValuesPercentage() {
 
@@ -22,11 +29,12 @@ public class NullValuesPercentage extends DependentProfileMetric {
   public void calculation(RecordList rs, Object oldVal) {
     calculation(rs, oldVal, false);
   }
-  
+
   /**
    * Local variant of calculation to prevent a double check for dependent metrics
-   * @param rl the recordlist
-   * @param oldVal old value of metric
+   * 
+   * @param rl      the recordlist
+   * @param oldVal  old value of metric
    * @param checked flag for dependency check
    */
   private void calculation(RecordList rl, Object oldVal, boolean checked) {
@@ -61,7 +69,7 @@ public class NullValuesPercentage extends DependentProfileMetric {
   protected void dependencyCalculationWithRecordList(RecordList rl) {
     if (super.getMetricPos(nullValP) - 2 <= super.getMetricPos(numrows)) super.getRefProf().getMetric(numrows).calculation(rl, null);
     if (super.getMetricPos(nullValP) - 1 <= super.getMetricPos(nullVal)) super.getRefProf().getMetric(nullVal).calculation(rl, null);
-    
+
   }
 
   @Override

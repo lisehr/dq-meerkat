@@ -12,33 +12,41 @@ import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
 
+/**
+ * Describes the metric Uniqueness, the Cardinality in relation to the number of
+ * rows.
+ * 
+ * @author optimusseptim
+ *
+ */
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:Uniqueness")
-public class Uniqueness extends DependentProfileMetric{
+public class Uniqueness extends DependentProfileMetric {
   public Uniqueness() {
-    
+
   }
-  
+
   public Uniqueness(DataProfile d) {
     super(unique, d);
   }
 
   /**
    * Local variant of calculation to prevent a double check for dependent metrics
-   * @param rl the recordlist
-   * @param oldVal old value of metric
+   * 
+   * @param rl      the recordlist
+   * @param oldVal  old value of metric
    * @param checked flag for dependency check
    */
   private void calculation(RecordList rl, Object oldVal, boolean checked) {
     if (!checked) dependencyCalculationWithRecordList(rl);
-    long cardinality = (long)(super.getRefProf().getMetric(card).getValue());
+    long cardinality = (long) (super.getRefProf().getMetric(card).getValue());
     int numRecs = (int) super.getRefProf().getMetric(numrows).getValue();
     double result = cardinality * 100.0 / numRecs;
     this.setValue(result);
     this.setValueClass(Double.class);
-    
+
   }
-  
+
   @Override
   public void calculation(RecordList rs, Object oldVal) {
     calculation(rs, null, false);
@@ -65,7 +73,7 @@ public class Uniqueness extends DependentProfileMetric{
   protected void dependencyCalculationWithRecordList(RecordList rl) {
     if (super.getMetricPos(unique) - 2 <= super.getMetricPos(numrows)) super.getRefProf().getMetric(numrows).calculation(rl, null);
     if (super.getMetricPos(unique) - 1 <= super.getMetricPos(card)) super.getRefProf().getMetric(card).calculation(rl, null);
-    
+
   }
 
   @Override

@@ -9,14 +9,15 @@ import dqm.jku.trustkg.dsd.elements.DSDElement;
 import dqm.jku.trustkg.util.HashingUtils;
 
 /**
+ * This class defines a block data structure for a blockchain containing an DSD
+ * element.
  * 
  * @author optimusseptim
- *
  */
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:DSDBlock")
 public class DSDBlock extends Block {
-  private DSDElement data;
+  private DSDElement data; // data in form of a DSDElement
 
   public DSDBlock() {
     super();

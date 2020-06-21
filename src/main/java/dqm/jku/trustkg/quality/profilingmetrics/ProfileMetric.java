@@ -11,9 +11,15 @@ import dqm.jku.trustkg.dsd.elements.DSDElement;
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
 
+/**
+ * Abstract class describing the basic structure for a Profilemetric
+ * 
+ * @author optimusseptim
+ *
+ */
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:ProfileMetric")
-public abstract class ProfileMetric implements Comparable<ProfileMetric>{
+public abstract class ProfileMetric implements Comparable<ProfileMetric> {
   private MetricTitle title; // the naming of the metric
   private Class<?> valClass; // the class of the value
   private Object value; // the value itself
@@ -39,9 +45,10 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric>{
   public MetricTitle getTitle() {
     return title;
   }
-  
+
   /**
    * Directly gets the text of the title
+   * 
    * @return label of title
    */
   public String getLabel() {
@@ -158,7 +165,8 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric>{
    * 
    * @param oldVal a oldValue to be updated, null for initial calculation
    * @param list   a sorted list, containing all values
-   * @throws NoSuchMethodException in cases like null values, since here records are not allowed for processing
+   * @throws NoSuchMethodException in cases like null values, since here records
+   *                               are not allowed for processing
    */
   public abstract void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException;
 
@@ -175,7 +183,7 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric>{
    * @return string repr of value
    */
   protected abstract String getValueString();
-  
+
   /**
    * Method for creating a simple string representation of the metric value
    * 
@@ -185,7 +193,7 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric>{
     if (getValue() == null) return "\tnull";
     else return "\t" + getValue().toString();
   }
-  
+
   @Override
   public String toString() {
     if (value == null) return String.format("%s\tnull", title);
@@ -206,11 +214,18 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric>{
     ProfileMetric other = (ProfileMetric) obj;
     return Objects.equals(title, other.title) && Objects.equals(valClass, other.valClass) && Objects.equals(value, other.value);
   }
-  
+
   public int compareTo(ProfileMetric other) {
     return this.title.label().compareTo(other.title.label());
   }
-  
+
+  /**
+   * Method for returning the position of a Profilemetric in the collection of
+   * this profile
+   * 
+   * @param t the title of the metric
+   * @return position if found, -1 otherwise
+   */
   public int getMetricPos(MetricTitle t) {
     List<ProfileMetric> metrics = this.getRefProf().getMetrics();
     for (int i = 0; i < metrics.size(); i++) if (metrics.get(i).getLabel().equals(t.label())) return i;

@@ -16,6 +16,13 @@ import dqm.jku.trustkg.util.numericvals.NumberComparator;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
 
+/**
+ * Describes the metric Average, where the average of all values in an Attribute
+ * is taken.
+ * 
+ * @author optimusseptim
+ *
+ */
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:Average")
 public class Average extends DependentProfileMetric {
@@ -129,12 +136,12 @@ public class Average extends DependentProfileMetric {
 
   @Override
   protected void dependencyCalculationWithNumericList(List<Number> list) throws NoSuchMethodException {
-    if (super.getMetricPos(avg) - 1 <= super.getMetricPos(numrows)) super.getRefProf().getMetric(numrows).calculationNumeric(list, null);  
+    if (super.getMetricPos(avg) - 1 <= super.getMetricPos(numrows)) super.getRefProf().getMetric(numrows).calculationNumeric(list, null);
   }
 
   @Override
   protected void dependencyCalculationWithRecordList(RecordList rl) {
-    if (super.getMetricPos(avg) - 2 <= super.getMetricPos(numrows)) super.getRefProf().getMetric(numrows).calculation(rl, null);  
+    if (super.getMetricPos(avg) - 2 <= super.getMetricPos(numrows)) super.getRefProf().getMetric(numrows).calculation(rl, null);
   }
 
   @Override

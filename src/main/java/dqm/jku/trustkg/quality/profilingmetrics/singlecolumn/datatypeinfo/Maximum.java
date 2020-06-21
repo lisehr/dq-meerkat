@@ -14,6 +14,13 @@ import dqm.jku.trustkg.util.numericvals.NumberComparator;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
 
+/**
+ * Describes the metric Maximum, which denotes the maximum value in an
+ * Attribute.
+ * 
+ * @author optimusseptim
+ *
+ */
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:Maximum")
 public class Maximum extends ProfileMetric {
@@ -54,8 +61,8 @@ public class Maximum extends ProfileMetric {
   /**
    * Checks the maximum value of two objects
    * 
-   * @param current the current maximum value
-   * @param toComp  the new value to compare
+   * @param current       the current maximum value
+   * @param toComp        the new value to compare
    * @param isNumericList check, if calculation is performed with numeric list
    * @return the new maximum value
    */
@@ -64,7 +71,7 @@ public class Maximum extends ProfileMetric {
     Attribute a = (Attribute) super.getRefElem();
     if (a.getDataType().equals(Long.class)) return Long.max((long) current, ((Number) toComp).longValue());
     else if (a.getDataType().equals(Double.class)) return Double.max((double) current, ((Number) toComp).doubleValue());
-    else if (a.getDataType().equals(String.class) && !isNumericList) return Integer.max((int) current, ((String)toComp).length()); 
+    else if (a.getDataType().equals(String.class) && !isNumericList) return Integer.max((int) current, ((String) toComp).length());
     else return Integer.max((int) current, ((Number) toComp).intValue());
   }
 

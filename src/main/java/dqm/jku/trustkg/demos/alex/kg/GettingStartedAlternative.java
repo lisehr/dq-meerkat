@@ -9,6 +9,12 @@ import dqm.jku.trustkg.connectors.DSConnector;
 import dqm.jku.trustkg.dsd.DSDKnowledgeGraph;
 import dqm.jku.trustkg.util.FileSelectionUtil;
 
+/**
+ * Alternative getting started class for first steps with DQ-MeeRKat
+ * 
+ * @author optimusseptim
+ *
+ */
 public class GettingStartedAlternative {
   private static final String CSV_PATH = "src/main/java/dqm/jku/trustkg/resources/csv/";
 
@@ -31,11 +37,11 @@ public class GettingStartedAlternative {
     // done automatically
 
     // Export KG to .ttl file
-    //kg.exportKGToFile("CSVTest");
-    
+    // kg.exportKGToFile("CSVTest");
+
     // Export data profiles to CSV files
-    //kg.exportToCSV();
-    
+    // kg.exportToCSV();
+
     // Export KG-Report to textfile
     kg.exportReport();
   }

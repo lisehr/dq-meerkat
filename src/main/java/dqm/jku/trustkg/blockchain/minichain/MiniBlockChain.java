@@ -13,6 +13,12 @@ import dqm.jku.trustkg.blockchain.Block;
 import dqm.jku.trustkg.blockchain.blocks.DSDBlock;
 import dqm.jku.trustkg.dsd.elements.DSDElement;
 
+/**
+ * Blockchain implementation for creating blockchains with a set of minichains.
+ * 
+ * @author optimusseptim
+ * 
+ */
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", "mbc = http://example.com/structures/miniblockchain/" })
 @RDFBean("foaf:MiniBlockChain")
 public class MiniBlockChain {
@@ -98,8 +104,7 @@ public class MiniBlockChain {
    * @return true if every minichain is valid, false if at least one is invalid
    */
   public boolean areChainsValid() {
-    for (MiniChain m : minichains)
-      if (!m.isChainValid()) return false;
+    for (MiniChain m : minichains) if (!m.isChainValid()) return false;
     return true;
   }
 
@@ -162,13 +167,13 @@ public class MiniBlockChain {
    * @return previousHash if found, "0" if not (genesis block)
    */
   public String findPreviousHash(DSDElement e) {
-    for (MiniChain m : minichains)
-      if (m.getChainId().equals(e.getURI())) return m.getPreviousHash();
+    for (MiniChain m : minichains) if (m.getChainId().equals(e.getURI())) return m.getPreviousHash();
     return "0";
   }
-  
+
   /**
-   * Flags a specific minichain as deleted, does nothing if no minichain is found 
+   * Flags a specific minichain as deleted, does nothing if no minichain is found
+   * 
    * @param chainId the id of the minichain
    */
   public void deleteChain(String chainId) {
@@ -178,7 +183,8 @@ public class MiniBlockChain {
   }
 
   /**
-   * Flags a specific minichain as merged, does nothing if no minichain is found 
+   * Flags a specific minichain as merged, does nothing if no minichain is found
+   * 
    * @param chainId the id of the minichain
    */
   public void mergeChain(String chainId) {
@@ -186,6 +192,5 @@ public class MiniBlockChain {
     if (mc == null) return;
     mc.merge();
   }
-
 
 }

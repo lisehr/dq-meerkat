@@ -17,6 +17,13 @@ import dqm.jku.trustkg.util.FileSelectionUtil;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
 
+/**
+ * Describes the metric PatternRecognition, which calculates hit rates for regex
+ * patterns
+ * 
+ * @author optimusseptim
+ *
+ */
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:PatternCounter")
 public class PatternRecognition extends DependentProfileMetric {

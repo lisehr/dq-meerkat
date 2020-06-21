@@ -12,6 +12,12 @@ import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.influxdb.InfluxDBConnection;
 import dqm.jku.trustkg.util.FileSelectionUtil;
 
+/**
+ * Test class for InfluxDB with CSV Source selector
+ * 
+ * @author optimusseptim
+ *
+ */
 public class InfluxDBWithSourceSelector {
   private static final boolean DEBUG = false;
 

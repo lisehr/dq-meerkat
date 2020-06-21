@@ -14,6 +14,13 @@ import dqm.jku.trustkg.util.numericvals.NumberComparator;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
 
+/**
+ * Describes the metric Minimum, which is the minimum value of all values of an
+ * Attribute.
+ * 
+ * @author optimusseptim
+ *
+ */
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:Minimum")
 public class Minimum extends ProfileMetric {
@@ -54,8 +61,8 @@ public class Minimum extends ProfileMetric {
   /**
    * Checks the minimum value of two objects
    * 
-   * @param current the current minimum value
-   * @param toComp  the new value to compare
+   * @param current       the current minimum value
+   * @param toComp        the new value to compare
    * @param isNumericList check, if calculation happens with numeric list
    * @return the new minimum value
    */
@@ -64,7 +71,7 @@ public class Minimum extends ProfileMetric {
     Attribute a = (Attribute) super.getRefElem();
     if (a.getDataType().equals(Long.class)) return Long.min(((Number) current).longValue(), ((Number) toComp).longValue());
     else if (a.getDataType().equals(Double.class)) return Double.min(((Number) current).doubleValue(), ((Number) toComp).doubleValue());
-    else if (a.getDataType().equals(String.class) && !isNumericList) return Integer.min((int) current, ((String)toComp).length()); 
+    else if (a.getDataType().equals(String.class) && !isNumericList) return Integer.min((int) current, ((String) toComp).length());
     else return Integer.min(((Number) current).intValue(), ((Number) toComp).intValue());
   }
 

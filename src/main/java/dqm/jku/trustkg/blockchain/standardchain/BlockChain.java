@@ -11,6 +11,14 @@ import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 import dqm.jku.trustkg.blockchain.Block;
 import dqm.jku.trustkg.blockchain.Chain;
 
+/**
+ * Implementation for a standard blockchain, adapted from CryptoKass' tutorial
+ * https://medium.com/programmers-blockchain/create-simple-blockchain-java-tutorial-from-scratch-6eeed3cb03fa
+ * 
+ * @author optimusseptim
+ *
+ */
+
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", "bc = http://example.com/structures/blockchain/" })
 @RDFBean("foaf:BlockChain")
 public class BlockChain extends Chain {

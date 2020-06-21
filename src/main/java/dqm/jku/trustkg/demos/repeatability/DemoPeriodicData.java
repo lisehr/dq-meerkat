@@ -69,7 +69,7 @@ public class DemoPeriodicData {
         a.setProfile(dp);
       }
       ds.addProfileToInflux(influx);
-      System.out.println(String.format("Profile from batch %d stored!", offset/AMOUNT + 1));
+      System.out.println(String.format("Profile from batch %d stored!", offset / AMOUNT + 1));
     }
 
   }

@@ -12,12 +12,18 @@ import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.util.FileSelectionUtil;
 import dqm.jku.trustkg.util.export.ExportUtil;
 
+/**
+ * Test class for export functionality for CSV files
+ * 
+ * @author optimusseptim
+ *
+ */
 public class TestCSVExport {
   private static final boolean DEBUG = false;
-  
+
   public static void main(String args[]) throws IOException, NoSuchMethodException {
     DSConnector conn = FileSelectionUtil.connectToCSV(3);
-    
+
     Datasource ds;
     try {
       ds = conn.loadSchema();
@@ -29,7 +35,7 @@ public class TestCSVExport {
         }
         System.out.println();
       }
-      
+
       if (DEBUG) {
         for (Concept c : ds.getConcepts()) {
           Iterator<Record> rIt = conn.getRecords(c);
@@ -41,19 +47,17 @@ public class TestCSVExport {
         }
       }
 
-      
       System.out.println("Creating Data Profile...");
 
       for (Concept c : ds.getConcepts()) {
         RecordList rs = conn.getRecordList(c);
-        for (Attribute a : c.getAttributes()) a.annotateProfile(rs);        
+        for (Attribute a : c.getAttributes()) a.annotateProfile(rs);
         System.out.println("Done!");
       }
       System.out.println();
       System.out.println("Exporting Data Profile...");
       ExportUtil.exportToCSV(ds);
       System.out.println("Done!");
-
 
     } catch (IOException e) {
       System.err.println("Could not load Schema!");

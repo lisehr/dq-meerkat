@@ -9,12 +9,19 @@ import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 
+/**
+ * Data structure for a serializable map for histogram bins, processable by
+ * RDFBeans
+ * 
+ * @author optimusseptim
+ *
+ */
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
-@RDFBean("foaf:SerializableMap")
-public class SerializableMap {
+@RDFBean("foaf:SerializableFrequencyMap")
+public class SerializableFrequencyMap {
   Set<FrequencyClass> classes = new HashSet<>();
 
-  public SerializableMap() {
+  public SerializableFrequencyMap() {
 
   }
 

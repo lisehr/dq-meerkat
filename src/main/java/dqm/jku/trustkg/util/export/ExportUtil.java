@@ -62,6 +62,7 @@ public class ExportUtil {
 	 * @param ds the datasource to be exported
 	 */
 	public static void exportToCSV(Datasource ds) {
+	  // TODO: maybe make Arraylist to map to better distinguish missing values and not do errors in calculation
 		Map<String, ArrayList<Object>> metricValues = new HashMap<String, ArrayList<Object>>();
 		List<String> elementLabels = new ArrayList<String>();
 

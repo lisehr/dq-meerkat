@@ -11,12 +11,18 @@ import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.util.FileSelectionUtil;
 
+/**
+ * Test class for CSV connection with the utility source selector
+ * 
+ * @author optimusseptim
+ *
+ */
 public class TestCSVDataConverterSourceSelector {
   private static final boolean DEBUG = false;
-  
+
   public static void main(String args[]) throws IOException, NoSuchMethodException {
     DSConnector conn = FileSelectionUtil.connectToCSV(7);
-    
+
     Datasource ds;
     try {
       ds = conn.loadSchema();
@@ -28,7 +34,7 @@ public class TestCSVDataConverterSourceSelector {
         }
         System.out.println();
       }
-      
+
       if (DEBUG) {
         for (Concept c : ds.getConcepts()) {
           Iterator<Record> rIt = conn.getRecords(c);
@@ -40,22 +46,19 @@ public class TestCSVDataConverterSourceSelector {
         }
       }
 
-      
       System.out.println("Changes on the Scheme:");
 
       for (Concept c : ds.getConcepts()) {
         System.out.println(c.getURI());
         RecordList rs = conn.getRecordList(c);
         for (Attribute a : c.getAttributes()) {
-          a.annotateProfile(rs);        
-          
+          a.annotateProfile(rs);
+
           System.out.println(a.getDataType().getSimpleName() + "\t" + a.getURI());
           a.printAnnotatedProfile();
         }
         System.out.println();
       }
-
-
 
     } catch (IOException e) {
       System.err.println("Could not load Schema!");

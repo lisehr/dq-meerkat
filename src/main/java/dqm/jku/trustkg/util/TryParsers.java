@@ -1,5 +1,12 @@
 package dqm.jku.trustkg.util;
 
+/**
+ * 
+ * @author optimusseptim
+ *
+ *         Utility class for using try-parsers, a concept found in C#, but had
+ *         to be implemented in Java first
+ */
 public class TryParsers {
 
   /**

@@ -15,14 +15,21 @@ import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
 
+/**
+ * Describes the metric Cardinality, the amount of different values in a data
+ * set
+ * 
+ * @author optimusseptim
+ *
+ */
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:Cardinality")
 public class Cardinality extends ProfileMetric {
 
   public Cardinality() {
-    
+
   }
-  
+
   public Cardinality(DataProfile d) {
     super(card, d);
   }

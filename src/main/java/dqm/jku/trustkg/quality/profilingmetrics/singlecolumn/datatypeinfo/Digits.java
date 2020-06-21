@@ -13,6 +13,13 @@ import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
 
+/**
+ * Describes the metric Digits, which is the amount of digits before the decimal
+ * point.
+ * 
+ * @author optimusseptim
+ *
+ */
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:Digits")
 public class Digits extends ProfileMetric {
@@ -63,7 +70,7 @@ public class Digits extends ProfileMetric {
       int dig = calculateDigits(n);
       if (dig > digits) digits = dig;
     }
-    super.setValue(digits);    
+    super.setValue(digits);
   }
 
   @Override

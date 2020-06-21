@@ -1,5 +1,11 @@
 package dqm.jku.trustkg.util.numericvals;
 
+/**
+ * Utility class for working with value distributions
+ * 
+ * @author optimusseptim
+ *
+ */
 public class ValueDistributionUtils {
   /**
    * Calculates the number of classes of a histogram via the sturges rule (k = 1 +

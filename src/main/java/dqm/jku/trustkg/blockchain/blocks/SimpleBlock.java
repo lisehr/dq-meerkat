@@ -7,8 +7,12 @@ import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 import dqm.jku.trustkg.blockchain.Block;
 import dqm.jku.trustkg.util.HashingUtils;
 
-//adapted from Tutorial from CryptoKass
-
+/**
+ * adapted from Tutorial from CryptoKass
+ * https://medium.com/programmers-blockchain/create-simple-blockchain-java-tutorial-from-scratch-6eeed3cb03fa
+ * 
+ * @author optimusseptim
+ */
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:SimpleBlock")
 public class SimpleBlock extends Block {
@@ -25,11 +29,21 @@ public class SimpleBlock extends Block {
     this.calculateHash(); // Making sure we do this after we set the other values.
   }
 
+  /**
+   * Gets the data contained in the block
+   * 
+   * @return data string
+   */
   @RDF("foaf:data")
   public String getData() {
     return data;
   }
 
+  /**
+   * Sets the data contained in the block
+   * 
+   * @param data the data to be set
+   */
   public void setData(String data) {
     this.data = data;
   }

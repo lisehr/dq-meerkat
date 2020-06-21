@@ -4,6 +4,12 @@ import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 
+/**
+ * Enumeration for all DP metrics
+ * 
+ * @author optimusseptim
+ *
+ */
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:MetricTitle")
 public enum MetricTitle {
@@ -27,7 +33,7 @@ public enum MetricTitle {
   histCR("Class range"),
   histVal("Values");
   
-  private String label;
+  private String label; // the label of the title (string representation)
 
   private MetricTitle(String label) {
     this.label = label;
@@ -37,12 +43,22 @@ public enum MetricTitle {
   public String toString() {
     return label;
   }
-
+  
+  /**
+   * Gets the label
+   * 
+   * @return label
+   */
   @RDF("foaf:label")
   public String label() {
     return label;
   }
   
+  /**
+   * Sets the label
+   * 
+   * @param label the label to be set
+   */
   public void setLabel(String label) {
     this.label = label;
   }

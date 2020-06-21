@@ -12,6 +12,12 @@ import dqm.jku.trustkg.dsd.elements.Concept;
 import dqm.jku.trustkg.dsd.elements.DSDElement;
 import dqm.jku.trustkg.dsd.elements.Datasource;
 
+/**
+ * Test class for testing of blockchains containing DSD elements
+ * 
+ * @author optimusseptim
+ *
+ */
 public class TestDSDBlockChain {
 
   public static void main(String args[]) {

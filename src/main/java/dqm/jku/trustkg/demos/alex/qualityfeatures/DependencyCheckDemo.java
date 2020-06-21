@@ -14,6 +14,12 @@ import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.datatypeinfo.Digits
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.dependency.KeyCandidate;
 import dqm.jku.trustkg.util.FileSelectionUtil;
 
+/**
+ * Demo class for testing the dependency checks for DP metrics
+ * 
+ * @author optimusseptim
+ *
+ */
 public class DependencyCheckDemo {
   public static void main(String args[]) throws IOException, NoSuchMethodException {
     DSConnector conn = FileSelectionUtil.connectToCSV(7);

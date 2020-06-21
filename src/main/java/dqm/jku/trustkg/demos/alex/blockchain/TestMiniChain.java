@@ -11,6 +11,12 @@ import dqm.jku.trustkg.dsd.elements.Concept;
 import dqm.jku.trustkg.dsd.elements.DSDElement;
 import dqm.jku.trustkg.dsd.elements.Datasource;
 
+/**
+ * Test class for testing minichains
+ * 
+ * @author optimusseptim
+ *
+ */
 public class TestMiniChain {
 
   public static void main(String args[]) throws IOException {

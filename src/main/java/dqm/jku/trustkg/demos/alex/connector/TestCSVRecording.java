@@ -9,6 +9,12 @@ import dqm.jku.trustkg.dsd.elements.Concept;
 import dqm.jku.trustkg.dsd.elements.Datasource;
 import dqm.jku.trustkg.dsd.records.Record;
 
+/**
+ * Test class for record a CSV file as a whole
+ * 
+ * @author optimusseptim
+ *
+ */
 public class TestCSVRecording {
   public static void main(String args[]) {
     // Create Connection to CSV Connector
