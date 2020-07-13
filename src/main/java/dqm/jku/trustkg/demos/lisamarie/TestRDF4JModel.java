@@ -4,11 +4,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import dqm.jku.trustkg.connectors.ConnectorCSV;
-import dqm.jku.trustkg.connectors.DSInstanceConnector;
-import dqm.jku.trustkg.dsd.elements.Attribute;
-import dqm.jku.trustkg.dsd.elements.Concept;
-import dqm.jku.trustkg.dsd.elements.Datasource;
+import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.model.Resource;
+import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.util.RDFCollections;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
@@ -17,17 +15,19 @@ import org.eclipse.rdf4j.repository.RepositoryConnection;
 import org.eclipse.rdf4j.repository.RepositoryResult;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
-import org.eclipse.rdf4j.model.Model;
-import org.eclipse.rdf4j.model.Resource;
-import org.eclipse.rdf4j.model.Statement;
 
-import dqm.jku.trustkg.graphdb.*;
+import dqm.jku.trustkg.connectors.ConnectorCSV;
+import dqm.jku.trustkg.connectors.DSConnector;
+import dqm.jku.trustkg.dsd.elements.Attribute;
+import dqm.jku.trustkg.dsd.elements.Concept;
+import dqm.jku.trustkg.dsd.elements.Datasource;
+import dqm.jku.trustkg.graphdb.EmbeddedGraphDB;
 
 @SuppressWarnings("unused")
 public class TestRDF4JModel {
   public static void main(String args[]) {
     // Create Connection to CSV Connector
-    DSInstanceConnector conn = new ConnectorCSV("src/main/java/dqm/jku/trustkg/resources/Telematic Device Report - Device Voltage.csv", ",", "\n", "Device Voltage", true);
+    DSConnector conn = new ConnectorCSV("src/main/java/dqm/jku/trustkg/resources/csv/Telematic Device Report - Device Voltage.csv", ",", "\n", "Device Voltage", true);
 
     // Create Schema from it
     Datasource ds;
@@ -58,7 +58,7 @@ public class TestRDF4JModel {
       EmbeddedGraphDB db = new dqm.jku.trustkg.graphdb.EmbeddedGraphDB("test");
 
       // activate for first time creation
-      db.createRepository("test");
+      //db.createRepository("test");
       Repository testRep = db.getRepository("test");
       RepositoryConnection repConn = testRep.getConnection();
 
@@ -71,10 +71,9 @@ public class TestRDF4JModel {
       Model m2 = RDFCollections.asRDF(a, null, m);
 
       // testing the Rio writing function
-      // FileOutputStream out = new
-      // FileOutputStream("//home//lisa//graphdb_test//file.ttl");
-      // Rio.write(m, out, RDFFormat.TURTLE);
-      // out.close();
+      FileOutputStream out = new FileOutputStream("//home//optimusseptim//graphdb_test//file.ttl");
+      Rio.write(m, out, RDFFormat.TURTLE);
+      out.close();
 
       try (RepositoryResult<Statement> result = repConn.getStatements(null, null, null);) {
         while (result.hasNext()) {
@@ -87,6 +86,7 @@ public class TestRDF4JModel {
 
     } catch (IOException e) {
       System.err.println("Could not load Schema!");
+      e.printStackTrace();
     }
 
   }

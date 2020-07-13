@@ -3,7 +3,7 @@ package dqm.jku.trustkg.demos.lisamarie;
 import java.io.IOException;
 
 import dqm.jku.trustkg.connectors.ConnectorCSV;
-import dqm.jku.trustkg.connectors.DSInstanceConnector;
+import dqm.jku.trustkg.connectors.DSConnector;
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.Concept;
 import dqm.jku.trustkg.dsd.elements.Datasource;
@@ -11,7 +11,7 @@ import dqm.jku.trustkg.dsd.elements.Datasource;
 public class TestConnectorCSV2 {
   public static void main(String args[]) {
     // Create Connection to CSV Connector
-    DSInstanceConnector conn = new ConnectorCSV("src/main/java/dqm/jku/trustkg/resources/Telematic Device Report - Device Voltage.csv", ",", "\n", "Device Voltage", true);
+    DSConnector conn = new ConnectorCSV("src/main/java/dqm/jku/trustkg/resources/Telematic Device Report - Device Voltage.csv", ",", "\n", "Device Voltage", true);
 
     // Create Schema from it
     Datasource ds;

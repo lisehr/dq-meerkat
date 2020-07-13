@@ -8,7 +8,7 @@ public class Constants {
 	public static final boolean PRINT_WORKING_MESSAGES = false;
 
 	public static final String WN_HOME = "src/resources/wordnet"; // location of wordnet
-	public static final String RESSOURCES = "src/main/java/dqm/jku/trustkg/resources/";
+	public static final String RESOURCES = "src/main/java/dqm/jku/trustkg/resources/";
 
 	// Time Constants
 	public final static long MILLIS_IN_SEC = 1000;

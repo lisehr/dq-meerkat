@@ -3,7 +3,7 @@ package dqm.jku.trustkg.demos.alex.dbconnections;
 import java.io.IOException;
 import java.util.Iterator;
 
-import dqm.jku.trustkg.connectors.DSInstanceConnector;
+import dqm.jku.trustkg.connectors.DSConnector;
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.Concept;
 import dqm.jku.trustkg.dsd.elements.Datasource;
@@ -12,12 +12,18 @@ import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.influxdb.InfluxDBConnection;
 import dqm.jku.trustkg.util.FileSelectionUtil;
 
+/**
+ * Test class for InfluxDB with CSV Source selector
+ * 
+ * @author optimusseptim
+ *
+ */
 public class InfluxDBWithSourceSelector {
   private static final boolean DEBUG = false;
 
   public static void main(String args[]) throws IOException {
     InfluxDBConnection influxDB = new InfluxDBConnection();
-    DSInstanceConnector conn = FileSelectionUtil.connectToCSV(1);
+    DSConnector conn = FileSelectionUtil.connectToCSV(1);
 
     Datasource ds;
     try {
@@ -46,7 +52,7 @@ public class InfluxDBWithSourceSelector {
 
       for (Concept c : ds.getConcepts()) {
         System.out.println(c.getURI());
-        RecordList rs = conn.getRecordSet(c);
+        RecordList rs = conn.getRecordList(c);
         for (Attribute a : c.getAttributes()) {
           a.annotateProfile(rs);
 

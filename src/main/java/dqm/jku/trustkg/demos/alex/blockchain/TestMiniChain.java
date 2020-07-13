@@ -5,17 +5,23 @@ import java.util.ArrayList;
 
 import dqm.jku.trustkg.blockchain.minichain.MiniBlockChain;
 import dqm.jku.trustkg.connectors.ConnectorCSV;
-import dqm.jku.trustkg.connectors.DSInstanceConnector;
+import dqm.jku.trustkg.connectors.DSConnector;
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.Concept;
 import dqm.jku.trustkg.dsd.elements.DSDElement;
 import dqm.jku.trustkg.dsd.elements.Datasource;
 
+/**
+ * Test class for testing minichains
+ * 
+ * @author optimusseptim
+ *
+ */
 public class TestMiniChain {
 
   public static void main(String args[]) throws IOException {
     // Create Connection to CSV Connector
-    DSInstanceConnector conn = new ConnectorCSV("src/main/java/dqm/jku/trustkg/resources/Telematic Device Report - Device Voltage.csv", ",", "\n", "Device Voltage", true);
+    DSConnector conn = new ConnectorCSV("src/main/java/dqm/jku/trustkg/resources/Telematic Device Report - Device Voltage.csv", ",", "\n", "Device Voltage", true);
 
     MiniBlockChain mbc = new MiniBlockChain();
 

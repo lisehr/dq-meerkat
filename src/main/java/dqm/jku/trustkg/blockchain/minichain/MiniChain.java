@@ -9,6 +9,13 @@ import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 import dqm.jku.trustkg.blockchain.Block;
 import dqm.jku.trustkg.blockchain.standardchain.BlockChain;
 
+/**
+ * Data structure for creating minichains
+ * 
+ * @author optimusseptim
+ * 
+ */
+
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", "bc = http://example.com/structures/blockchain/" })
 @RDFBean("foaf:MiniChain")
 public class MiniChain extends BlockChain implements Comparable<MiniChain> {
@@ -101,7 +108,7 @@ public class MiniChain extends BlockChain implements Comparable<MiniChain> {
   public int compareTo(MiniChain other) {
     return this.getId().compareTo(other.getId());
   }
-  
+
   /**
    * Flags the chain as deleted, so additions cannot be made anymore
    */
@@ -109,17 +116,18 @@ public class MiniChain extends BlockChain implements Comparable<MiniChain> {
     if (isMerged || isDeleted) return;
     this.isDeleted = true;
   }
-  
+
   /**
    * Flags the chain as merged, so additions cannot be made anymore
    */
-  public void merge() {    
+  public void merge() {
     if (isMerged || isDeleted) return;
     this.isMerged = true;
   }
 
   /**
    * Gets the deleted flag
+   * 
    * @return deleted flag
    */
   @RDF
@@ -129,6 +137,7 @@ public class MiniChain extends BlockChain implements Comparable<MiniChain> {
 
   /**
    * Sets the deleted flag (security threat but needed by rdfbeans)
+   * 
    * @param isDeleted the status of the flag to be set
    */
   public void setDeleted(boolean isDeleted) {
@@ -137,6 +146,7 @@ public class MiniChain extends BlockChain implements Comparable<MiniChain> {
 
   /**
    * Gets the merged flag
+   * 
    * @return merged flag
    */
   @RDF
@@ -146,6 +156,7 @@ public class MiniChain extends BlockChain implements Comparable<MiniChain> {
 
   /**
    * Sets the merged flag (security threat but needed by rdfbeans)
+   * 
    * @param isMerged the status of the flag to be set
    */
   public void setMerged(boolean isMerged) {

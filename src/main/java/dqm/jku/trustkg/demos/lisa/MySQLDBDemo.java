@@ -21,7 +21,7 @@ public class MySQLDBDemo {
 		Datasource ds = conn.loadSchema();
 	    for (Concept c : ds.getConceptsAndAssociations()) {
 	      testCon = c;
-	      RecordList rs = conn.getPartialRecordSet(c, 0, AMOUNT);
+	      RecordList rs = conn.getPartialRecordList(c, 0, AMOUNT);
 	      for (Attribute a : c.getSortedAttributes()) {
 	        a.annotateProfile(rs);
 	        a.printAnnotatedProfile();

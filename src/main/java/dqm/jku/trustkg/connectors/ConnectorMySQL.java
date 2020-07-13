@@ -26,6 +26,7 @@ import dqm.jku.trustkg.dsd.elements.InheritanceAssociation;
 import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.util.AttributeSet;
+import dqm.jku.trustkg.util.Constants;
 import dqm.jku.trustkg.util.DataTypeConverter;
 import dqm.jku.trustkg.util.Miscellaneous.DBType;
 
@@ -35,7 +36,7 @@ import dqm.jku.trustkg.util.Miscellaneous.DBType;
  * @author Lisa & Bernhard
  */
 
-public class ConnectorMySQL extends DSInstanceConnector {
+public class ConnectorMySQL extends DSConnector {
 
 	private final Connection connection;
 	@SuppressWarnings("unused")
@@ -136,7 +137,6 @@ public class ConnectorMySQL extends DSInstanceConnector {
 		};
 	}
 
-	@Override
 	public void findFunctionalDependencies(Concept concept) throws IOException {
 		AttributeSet primarKey = concept.getPrimaryKeys();
 		Set<AttributeSet> lefts = new HashSet<AttributeSet>();
@@ -151,8 +151,8 @@ public class ConnectorMySQL extends DSInstanceConnector {
 	}
 
 	@Override
-	public Datasource loadSchema() throws IOException {
-		Datasource ds = DSDFactory.makeDatasource(DBName, DBType.MYSQL);
+	public Datasource loadSchema(String uri, String prefix) throws IOException {
+		Datasource ds = DSDFactory.makeDatasource(DBName, DBType.MYSQL, uri, prefix);
 
 		try {
 			PreparedStatement getConcepts = connection.prepareStatement(sql_get_tables);
@@ -173,6 +173,11 @@ public class ConnectorMySQL extends DSInstanceConnector {
 		setAssociationDirections(ds);
 
 		return ds;
+	}
+	
+	@Override
+	public Datasource loadSchema() throws IOException {
+		return loadSchema(Constants.DEFAULT_URI, Constants.DEFAULT_PREFIX);
 	}
 
 	private void setAssociationDirections(Datasource ds) {
@@ -319,7 +324,7 @@ public class ConnectorMySQL extends DSInstanceConnector {
 	}
 
 	@Override
-	public RecordList getRecordSet(Concept concept) throws IOException {
+	public RecordList getRecordList(Concept concept) throws IOException {
 		Iterator<Record> rIt = getRecords(concept);
 		RecordList rs = new RecordList();
 		while (rIt.hasNext()) {
@@ -328,7 +333,8 @@ public class ConnectorMySQL extends DSInstanceConnector {
 		return rs;
 	}
 
-	public RecordList getPartialRecordSet(final Concept concept, int offset, int noRecs) throws IOException {
+	@Override
+	public RecordList getPartialRecordList(Concept concept, int offset, int noRecs) throws IOException {
 		Iterator<Record> rIt = getRecords(concept);
 		RecordList rs = new RecordList();
 		int i = 0;
@@ -342,13 +348,5 @@ public class ConnectorMySQL extends DSInstanceConnector {
 			i++;
 		}
 		return rs;
-
 	}
-
-	//TODO: implement
-	@Override
-	public Datasource loadSchema(String uri, String prefix) throws IOException {
-		return loadSchema();
-	}
-
 }

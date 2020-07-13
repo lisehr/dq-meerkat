@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import dqm.jku.trustkg.connectors.DSInstanceConnector;
+import dqm.jku.trustkg.connectors.DSConnector;
 import dqm.jku.trustkg.dsd.DSDFactory;
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.Concept;
@@ -18,10 +18,10 @@ import dqm.jku.trustkg.util.AttributeSet;
 public class Identity extends Operator {
 
 	private final Concept content;
-	private final DSInstanceConnector conn;
+	private final DSConnector conn;
 	private final HashMap<Attribute, Attribute> attributeAssignment = new HashMap<Attribute, Attribute>();
 
-	public Identity(IntegratedConcept iconcept, Concept content, DSInstanceConnector conn) {
+	public Identity(IntegratedConcept iconcept, Concept content, DSConnector conn) {
 		super(iconcept);
 		this.content = content;
 		this.conn = conn;

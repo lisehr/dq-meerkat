@@ -387,8 +387,9 @@ public class DataTypeConverter {
 	 */
 	public static void getDataTypeFromCSVRecord(Attribute a, String val) {
 	  if (val == null) throw new IllegalArgumentException("Cannot work with invalid String!");
-	  if (StringUtils.isBlank(val) || val.isEmpty()) return;
-	  if (TryParsers.tryParseLong(val)) a.setDataType(Long.class);
+	  if (StringUtils.isBlank(val) || val.isEmpty()) a.setDataType(Object.class);
+	  else if (TryParsers.tryParseInt(val)) a.setDataType(Integer.class);
+	  else if (TryParsers.tryParseLong(val)) a.setDataType(Long.class);
 	  else if (TryParsers.tryParseDouble(val)) a.setDataType(Double.class);
 	  else a.setDataType(String.class);
 	}
@@ -404,6 +405,7 @@ public class DataTypeConverter {
 	public static Object getDataValueFromCSV(Attribute a, String val) {
 	  Class<?> clazz = a.getDataType();
 	  if (StringUtils.isBlank(val) || val.isEmpty()) return null;
+	  if (clazz.equals(Object.class)) return refineCSVDataType(a, val);
 	  try {
 	    if (Integer.class.isAssignableFrom(clazz)) return Integer.parseInt(val);
 	    else if (Long.class.isAssignableFrom(clazz)) return Long.parseLong(val);
@@ -411,7 +413,7 @@ public class DataTypeConverter {
 	    else return val; // case Class == String
 
 	  } catch (NumberFormatException e) {
-	    return refineDataType(a, val);
+	    return refineCSVDataType(a, val);
 	  }
 	}
 
@@ -421,7 +423,7 @@ public class DataTypeConverter {
 	 * @param val the string causing the refine
 	 * @return a value parsed with the refined type
 	 */
-  private static Object refineDataType(Attribute a, String val) {
+  private static Object refineCSVDataType(Attribute a, String val) {
     getDataTypeFromCSVRecord(a, val);
     return getDataValueFromCSV(a, val);
   }

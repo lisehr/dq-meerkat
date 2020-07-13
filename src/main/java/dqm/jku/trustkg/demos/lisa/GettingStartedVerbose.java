@@ -18,14 +18,14 @@ public class GettingStartedVerbose {
 
 	public static void main(String[] args) throws IOException, NoSuchMethodException {
 		// Create Connection to CSV Connector
-		ConnectorCSV conn = new ConnectorCSV(Constants.RESSOURCES + "csv/DataCoSupplyChainDataset.csv", ",", "\n", "SupplyChain");
+		ConnectorCSV conn = new ConnectorCSV(Constants.RESOURCES + "csv/DataCoSupplyChainDataset.csv", ",", "\n", "SupplyChain");
 	    
 	    // Init KG by loading DSD elements
 	    Datasource ds = conn.loadSchema();
 	    
 	    // Annotate reference data profile to KG
 	    for (Concept c : ds.getConceptsAndAssociations()) {
-			RecordList rs = conn.getPartialRecordSet(c, 0, RDP_SIZE);
+			RecordList rs = conn.getPartialRecordList(c, 0, RDP_SIZE);
 			for(Attribute a : c.getAttributes()) {
 				a.annotateProfile(rs);
 			}

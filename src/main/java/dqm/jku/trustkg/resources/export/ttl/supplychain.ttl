@@ -14,3 +14,19 @@
     "sc:product_description", "sc:product_image", "sc:product_name", "sc:product_price",
     "sc:product_status", "sc:sales", "sc:sales_per_customer", "sc:shipping_date_(dateorders)",
     "sc:shipping_mode", "sc:type" .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<ce:carenginestream> <ce:> "ce:benefit_per_order", "ce:category_id", "ce:category_name",
+    "ce:customer_city", "ce:customer_country", "ce:customer_email", "ce:customer_fname",
+    "ce:customer_id", "ce:customer_lname", "ce:customer_password", "ce:customer_segment",
+    "ce:customer_state", "ce:customer_street", "ce:customer_zipcode", "ce:days_for_shipment_(scheduled)",
+    "ce:days_for_shipping_(real)", "ce:delivery_status", "ce:department_id", "ce:department_name",
+    "ce:late_delivery_risk", "ce:latitude", "ce:longitude", "ce:market", "ce:order_city",
+    "ce:order_country", "ce:order_customer_id", "ce:order_date_(dateorders)", "ce:order_id",
+    "ce:order_item_cardprod_id", "ce:order_item_discount", "ce:order_item_discount_rate",
+    "ce:order_item_id", "ce:order_item_product_price", "ce:order_item_profit_ratio", "ce:order_item_quantity",
+    "ce:order_item_total", "ce:order_profit_per_order", "ce:order_region", "ce:order_state",
+    "ce:order_status", "ce:order_zipcode", "ce:product_card_id", "ce:product_category_id",
+    "ce:product_description", "ce:product_image", "ce:product_name", "ce:product_price",
+    "ce:product_status", "ce:sales", "ce:sales_per_customer", "ce:shipping_date_(dateorders)",
+    "ce:shipping_mode", "ce:type" .

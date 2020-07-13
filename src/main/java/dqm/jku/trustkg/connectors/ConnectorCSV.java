@@ -7,9 +7,11 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import dqm.jku.trustkg.dsd.DSDFactory;
@@ -29,7 +31,7 @@ import dqm.jku.trustkg.util.Miscellaneous.DBType;
  * @author Bernhard
  */
 
-public class ConnectorCSV extends DSInstanceConnector {
+public class ConnectorCSV extends DSConnector {
 
 	public final String filename;
 	public final String label;
@@ -37,6 +39,7 @@ public class ConnectorCSV extends DSInstanceConnector {
 	public final String linebreak;
 	public final boolean removeQuotes;
 	private final File file;
+	private final Map<Concept, RecordList> recordMap = new HashMap<>();
 
 	public ConnectorCSV(String filename, String seperator, String linebreak) {
 		this(filename, seperator, linebreak, filename);
@@ -101,7 +104,7 @@ public class ConnectorCSV extends DSInstanceConnector {
 				}
 				String[] values = removeQuotes ? line.replace("\"", "").split(seperator) : line.split(seperator);
 
-				// Change data types for CSV files (default: string) when reading field values for the first time
+				// Change data types for CSV files (default: Object) when reading field values for the first time
 				if (first) {
 					for (int j = 0; j < Math.min(values.length, attributes.size()); j++) {
 						DataTypeConverter.getDataTypeFromCSVRecord(attributes.get(j), values[j]);
@@ -118,29 +121,22 @@ public class ConnectorCSV extends DSInstanceConnector {
 		};
 	}
 
-	public RecordList getRecordSet(final Concept concept) throws IOException {
+	public RecordList getRecordList(final Concept concept) throws IOException {
+	  if (!recordMap.values().isEmpty()) return recordMap.get(concept);
 		Iterator<Record> rIt = getRecords(concept);
 		RecordList rs = new RecordList();
 		while (rIt.hasNext()) {
 			rs.addRecord(rIt.next());
 		}
+		recordMap.put(concept, rs);
 		return rs;
 	}
 
-	public RecordList getPartialRecordSet(final Concept concept, int offset, int noRecs) throws IOException {
-		Iterator<Record> rIt = getRecords(concept);
-		RecordList rs = new RecordList();
-		int i = 0;
-		while (rIt.hasNext() && i < offset) {
-			rIt.next();
-			i++;
-		}
-		i = 0;
-		while (rIt.hasNext() && i < noRecs) {
-			rs.addRecord(rIt.next());
-			i++;
-		}
-		return rs;
+	@Override
+	public RecordList getPartialRecordList(Concept concept, int offset, int noRecs) throws IOException {
+	  if (!recordMap.values().isEmpty()) return recordMap.get(concept).splitPartialRecordList(offset, noRecs);
+    RecordList allRecords = getRecordList(concept);
+    return allRecords.splitPartialRecordList(offset, noRecs);
 	}
 
 	@Override
@@ -167,7 +163,6 @@ public class ConnectorCSV extends DSInstanceConnector {
 		return ds;
 	}
 
-	@Override
 	public void findFunctionalDependencies(Concept concept) throws IOException {
 		FDAnalyzer analyzer = new FDAnalyzer(getFDLeftSides(concept), concept.getAttributes());
 		analyzer.analyze(getRecords(concept), concept);

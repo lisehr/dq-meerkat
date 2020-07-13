@@ -7,6 +7,12 @@ import java.util.Date;
 import org.cyberborean.rdfbeans.annotations.*;
 import org.cyberborean.rdfbeans.annotations.RDFContainer.ContainerType;
 
+/**
+ * Person class for testing purposes
+ * 
+ * @author optimusseptim
+ *
+ */
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", "persons = http://rdfbeans.viceversatech.com/test-ontology/persons/" })
 @RDFBean("foaf:Person")
 public class Person {

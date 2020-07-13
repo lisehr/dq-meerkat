@@ -1,17 +1,18 @@
 Category;Metric;date;actual_mean_temp;actual_min_temp;actual_max_temp;average_min_temp;average_max_temp;record_min_temp;record_max_temp;record_min_temp_year;record_max_temp_year;actual_precipitation;average_precipitation;record_precipitation
-Cardinalities;# Rows;365,0000;365,0000;365,0000;365,0000;365,0000;365,0000;365,0000;365,0000;365,0000;365,0000;365,0000;365,0000;365,0000
+Cardinalities;Number of Rows;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000
 Cardinalities;# Null Values;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000
-Cardinalities;% Null Values;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000
-Cardinalities;Cardinality;3,0000;57,0000;59,0000;61,0000;41,0000;43,0000;54,0000;46,0000;72,0000;92,0000;20,0000;6,0000;158,0000
-Cardinalities;Uniqueness;0,8219;15,6164;16,1644;16,7123;11,2329;11,7808;14,7945;12,6027;19,7260;25,2055;5,4795;1,6438;43,2877
-Data type info;Data type;String;Numeric;Numeric;Numeric;Numeric;Numeric;Numeric;Numeric;Numeric;Numeric;Numeric;Numeric;Numeric
-Data type info;Minimum;8,0000;41,0000;31,0000;46,0000;44,0000;65,0000;16,0000;77,0000;1 895,0000;1 896,0000;0,0000;0,0000;0,0100
-Data type info;Maximum;10,0000;105,0000;94,0000;116,0000;84,0000;107,0000;70,0000;122,0000;1 990,0000;2 015,0000;3,2900;0,0500;3,2900
-Data type info;Average;8,0000;77,0000;65,0000;88,0000;63,0000;86,0000;43,0000;100,0000;1 934,0000;1 976,0000;0,0277;0,0220;0,7705
-Data type info;Median;9,0000;77,0000;65,0000;89,0000;62,0000;87,0000;40,0000;102,0000;1 929,0000;1 985,0000;0,0000;0,0200;0,7100
-Data type info;# Digits;0,0000;3,0000;2,0000;3,0000;2,0000;3,0000;2,0000;3,0000;4,0000;4,0000;1,0000;0,0000;1,0000
-Data type info;# Decimals;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;2,0000;2,0000;2,0000
-Histogram;# Classes;10,0000;10,0000;10,0000;10,0000;10,0000;10,0000;10,0000;10,0000;10,0000;10,0000;10,0000;10,0000;10,0000
-Histogram;Class range;0,2000;6,4000;6,3000;7,0000;4,0000;4,2000;5,4000;4,5000;9,5000;11,9000;0,3290;0,0050;0,3280
-Histogram;Values;[0, 0, 65, 81, 0, 0, 219, 0, 0, 0];[46, 44, 4, 51, 60, 50, 52, 6, 34, 18];[5, 49, 9, 14, 63, 32, 47, 36, 52, 58];[53, 55, 3, 58, 2, 29, 31, 62, 25, 47];[79, 27, 22, 24, 26, 34, 68, 37, 23, 25];[25, 23, 28, 23, 33, 90, 24, 69, 24, 26];[32, 6, 44, 39, 73, 34, 32, 45, 36, 24];[32, 30, 33, 44, 71, 39, 38, 35, 30, 13];[42, 26, 37, 31, 15, 55, 68, 2, 83, 6];[66, 8, 18, 45, 16, 20, 34, 92, 13, 53];[0, 1, 0, 4, 0, 358, 0, 0, 1, 1];[0, 47, 3, 38, 0, 120, 56, 0, 0, 101];[9, 89, 3, 91, 25, 1, 83, 55, 5, 4]
+Cardinalities;% Null Values;NaN;NaN;NaN;NaN;NaN;NaN;NaN;NaN;NaN;NaN;NaN;NaN;NaN
+Cardinalities;Cardinality;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000
+Cardinalities;Uniqueness;NaN;NaN;NaN;NaN;NaN;NaN;NaN;NaN;NaN;NaN;NaN;NaN;NaN
+Data type info;Basic type;String;Numeric;Numeric;Numeric;Numeric;Numeric;Numeric;Numeric;Numeric;Numeric;Numeric;Numeric;Numeric
+Data type info;Data type;String;Integer;Integer;Integer;Integer;Integer;Integer;Integer;Integer;Integer;Double;Double;Double
+Data type info;Minimum;;;;;;;;;;;;;
+Data type info;Maximum;;;;;;;;;;;;;
+Data type info;Average;;;;;;;;;;;;;
+Data type info;Median;;;;;;;;;;;;;
+Data type info;Digits;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000
+Data type info;# Decimals;;;;;;;;;;;;;
+Histogram;# Classes;-2 147 483 648,0000;-2 147 483 648,0000;-2 147 483 648,0000;-2 147 483 648,0000;-2 147 483 648,0000;-2 147 483 648,0000;-2 147 483 648,0000;-2 147 483 648,0000;-2 147 483 648,0000;-2 147 483 648,0000;-2 147 483 648,0000;-2 147 483 648,0000;-2 147 483 648,0000
+Histogram;Class range;;;;;;;;;;;;;
+Histogram;Values;;;;;;;;;;;;;
 Dependencies;isCandidateKey;false;false;false;false;false;false;false;false;false;false;false;false;false

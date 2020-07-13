@@ -41,7 +41,7 @@ public class TributechDataProfile {
 		for (Datasource ds : dss.keySet()) {
 			for (Concept c : ds.getConceptsAndAssociations()) {
 				ConnectorCSV conn = dss.get(ds);
-				RecordList rs = conn.getPartialRecordSet(c, 0, RDP_SIZE);
+				RecordList rs = conn.getPartialRecordList(c, 0, RDP_SIZE);
 				Attribute val = c.getAttribute("value");
 				val.annotateProfile(rs);
 				System.out.println("=== " + ds.getLabel() + "===");

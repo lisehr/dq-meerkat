@@ -1,7 +1,14 @@
 package dqm.jku.trustkg.blockchain.merkletree;
 
+/**
+ * Implementation of a merklenode with additional hashes for left and right
+ * children
+ * 
+ * @author optimusseptim
+ * 
+ */
 public class MerkleHashNode extends MerkleNode {
-  
+
   public MerkleHashNode(MerkleNode parent, boolean isRoot) {
     super(parent, isRoot);
   }

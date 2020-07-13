@@ -22,7 +22,7 @@ import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Cardinality;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.NullValues;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.NullValuesPercentage;
-import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Size;
+import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.NumRows;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Uniqueness;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.datatypeinfo.*;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.dependency.KeyCandidate;
@@ -33,12 +33,19 @@ import dqm.jku.trustkg.util.numericvals.NumberComparator;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
 
+/**
+ * Class for creating the data structure of a DataProfile. A DataProfile (DP)
+ * can contain multiple metrics, which are calulated and evaluated
+ * 
+ * @author optimusseptim
+ *
+ */
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:DataProfile")
 public class DataProfile {
-  private List<ProfileMetric> metrics = new ArrayList<>();
-  private DSDElement elem;
-  private String uri;
+  private List<ProfileMetric> metrics = new ArrayList<>(); // a list containing all profile metrics
+  private DSDElement elem; // DSDElement, where this DataProfile is annotated to
+  private String uri; // uniform resource identifier of this profile
 
   public DataProfile() {
 
@@ -47,7 +54,8 @@ public class DataProfile {
   public DataProfile(RecordList rs, DSDElement d) throws NoSuchMethodException {
     this.elem = d;
     this.uri = elem.getURI() + "/profile";
-    createDataProfileSkeleton();
+    // TODO: distinguish between Neo4J and relational DB
+    createDataProfileSkeletonRDB();
     calculateReferenceDataProfile(rs);
   }
 
@@ -55,13 +63,13 @@ public class DataProfile {
    * calculates an initial data profile based on the values inserted in the
    * reference profile
    * 
-   * @param rs the set of records used for calculation
+   * @param rl the list of records used for calculation
    * @param d  the dsd element to be annotated (currently only Attribute for
    *           single column metrics)
    * @throws NoSuchMethodException
    */
-  private void calculateReferenceDataProfile(RecordList rs) throws NoSuchMethodException {
-    if (elem instanceof Attribute) calculateSingleColumn(rs);
+  private void calculateReferenceDataProfile(RecordList rl) throws NoSuchMethodException {
+    if (elem instanceof Attribute) calculateSingleColumn(rl);
   }
 
   /**
@@ -86,28 +94,39 @@ public class DataProfile {
   /**
    * Helper method for calculating the single column values for the profile
    * 
-   * @param rs the recordset for measuring
+   * @param rl the recordlist for measuring
    * @throws NoSuchMethodException
    */
-  private void calculateSingleColumn(RecordList rs) throws NoSuchMethodException {
-    List<Number> l = createValueList(rs);
+  private void calculateSingleColumn(RecordList rl) throws NoSuchMethodException {
+    List<Number> l = createValueList(rl);
     for (ProfileMetric p : metrics) {
-      if (p.getTitle().equals(nullVal)) p.calculation(rs, p.getValue());
+      if (needsRecordListCalc(p)) p.calculation(rl, p.getValue());
       else p.calculationNumeric(l, p.getValue());
     }
+  }
 
+  /**
+   * Helper method to determine if a record list calculation is needed (i.e. a
+   * list of numeric values can lead to incorrect metrics)
+   * 
+   * @param p the profile metric to check
+   * @return true, if the profile metric needs to be calculated with a record
+   *         list, false if not
+   */
+  private boolean needsRecordListCalc(ProfileMetric p) {
+    return p.getTitle().equals(unique) || p.getTitle().equals(keyCand) || p.getTitle().equals(nullValP) || p.getTitle().equals(nullVal) || p.getTitle().equals(numrows) || p.getTitle().equals(card) || p.getTitle().equals(hist);
   }
 
   /**
    * Helper method for creating a list of numeric values
    * 
-   * @param rs the record set for measuring
+   * @param rl the record list for measuring
    * @return list of numeric values of the records
    */
-  private List<Number> createValueList(RecordList rs) {
+  private List<Number> createValueList(RecordList rl) {
     List<Number> list = new ArrayList<Number>();
     Attribute a = (Attribute) elem;
-    for (Record r : rs) {
+    for (Record r : rl) {
       Number field = null;
       Class<?> clazz = a.getDataType();
       if (String.class.isAssignableFrom(clazz) && r.getField(a) != null) field = r.getField(a).toString().length();
@@ -118,19 +137,19 @@ public class DataProfile {
       if (field != null) list.add(field);
     }
     list.sort(new NumberComparator());
-    list.size();
     return list;
   }
 
   /**
-   * creates a reference data profile on which calculations can be made
+   * Helper method to create a reference data profile on which calculations can be
+   * made.
    */
-  private void createDataProfileSkeleton() {
+  private void createDataProfileSkeletonRDB() {
     if (elem instanceof Attribute) {
       Attribute a = (Attribute) elem;
       Class<?> clazz = a.getDataType();
-      if (String.class.isAssignableFrom(clazz) || Number.class.isAssignableFrom(clazz)) {
-        ProfileMetric size = new Size(this);
+      if (String.class.isAssignableFrom(clazz) || Number.class.isAssignableFrom(clazz) || clazz.equals(Object.class)) {
+        ProfileMetric size = new NumRows(this);
         metrics.add(size);
         ProfileMetric min = new Minimum(this);
         metrics.add(min);
@@ -158,7 +177,9 @@ public class DataProfile {
         metrics.add(decimals);
         ProfileMetric patterns = new PatternRecognition(this);
         metrics.add(patterns);
-        ProfileMetric dataType = new DTCategory(this);
+        ProfileMetric basicType = new BasicType(this);
+        metrics.add(basicType);
+        ProfileMetric dataType = new DataType(this);
         metrics.add(dataType);
       } else {
         System.err.println("Attribute '" + a.getLabel() + "' has data type '" + a.getDataTypeString() + "', which is currently not handled. ");
@@ -167,7 +188,7 @@ public class DataProfile {
   }
 
   /**
-   * Method for printing out the data profile
+   * Method for printing out the data profile.
    */
   public void printProfile() {
     System.out.println("Data Profile:");
@@ -179,9 +200,9 @@ public class DataProfile {
     }
     System.out.println();
   }
-  
+
   /**
-   * Method for printing out the data profile as a string
+   * Method for printing out the data profile as a string.
    */
   public String getProfileString() {
     StringBuilder sb = new StringBuilder();
@@ -201,7 +222,6 @@ public class DataProfile {
     return sb.toString();
   }
 
-
   /**
    * Method for getting the set of metrics
    * 
@@ -220,6 +240,15 @@ public class DataProfile {
    */
   public void setMetrics(List<ProfileMetric> metrics) {
     this.metrics = metrics;
+  }
+
+  /**
+   * Method for adding a metric via a data profile object
+   * 
+   * @param m the metric to be added
+   */
+  public void addMetric(ProfileMetric m) {
+    this.metrics.add(m);
   }
 
   /**
@@ -254,6 +283,12 @@ public class DataProfile {
     return elem;
   }
 
+  /**
+   * Method for creating a point of measure for InfluxDB.
+   * 
+   * @param measure the builder for a measurement
+   * @return a measuring point for insertion into InfluxDB
+   */
   public Point createMeasuringPoint(Builder measure) {
     SortedSet<ProfileMetric> metricSorted = new TreeSet<>();
     metricSorted.addAll(metrics);
@@ -263,10 +298,19 @@ public class DataProfile {
     return measure.build();
   }
 
+  /**
+   * Helper method for adding the correct measuring value (including its data
+   * type) to the builder
+   * 
+   * @param p       the profile metric to add
+   * @param measure the builder for a measurement
+   */
   private void addMeasuringValue(ProfileMetric p, Builder measure) {
-    if (p.getValue() == null) return;
-    if (p.getValueClass().equals(Long.class)) measure.addField(p.getLabel(), (long) p.getValue());
+    if (p.getValue() == null || p.getLabel().equals(pattern.label())) measure.addField(p.getLabel(), 0); // TODO: replace 0 with NaN, when hitting v2.0 of influxdb
+    else if (p.getValueClass().equals(Long.class)) measure.addField(p.getLabel(), (long) p.getValue());
     else if (p.getValueClass().equals(Double.class)) measure.addField(p.getLabel(), (double) p.getValue());
+    else if (p.getValueClass().equals(String.class) && (p.getLabel().equals(bt.label()) || p.getLabel().equals(dt.label()))) measure.addField(p.getLabel(), (String) p.getValue());
+    else if (p.getValueClass().equals(Boolean.class)) measure.addField(p.getLabel(), (boolean) p.getValue());
     else measure.addField(p.getLabel(), (int) p.getValue());
   }
 

@@ -9,14 +9,23 @@ import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
+import dqm.jku.trustkg.quality.profilingmetrics.DependentProfileMetric;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
+import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.NumRows;
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
 
+/**
+ * Describes the metric Average, where the average of all values in an Attribute
+ * is taken.
+ * 
+ * @author optimusseptim
+ *
+ */
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:Average")
-public class Average extends ProfileMetric {
+public class Average extends DependentProfileMetric {
   public Average() {
 
   }
@@ -27,6 +36,7 @@ public class Average extends ProfileMetric {
 
   @Override
   public void calculation(RecordList rs, Object oldVal) {
+    this.dependencyCalculationWithRecordList(rs);
     Object val = null;
     if (oldVal == null) val = getBasicInstance();
     else val = oldVal;
@@ -47,9 +57,9 @@ public class Average extends ProfileMetric {
    */
   private Object performAveraging(Object sum) {
     Attribute a = (Attribute) super.getRefElem();
-    if (a.getDataType().equals(Long.class)) return (long) sum / (int) super.getRefProf().getMetric(size).getValue();
-    else if (a.getDataType().equals(Double.class)) return (double) sum / (int) super.getRefProf().getMetric(size).getValue();
-    return (int) sum / (int) super.getRefProf().getMetric(size).getValue();
+    if (a.getDataType().equals(Long.class)) return (long) sum / (int) super.getRefProf().getMetric(numrows).getValue();
+    else if (a.getDataType().equals(Double.class)) return (double) sum / (int) super.getRefProf().getMetric(numrows).getValue();
+    return (int) sum / (int) super.getRefProf().getMetric(numrows).getValue();
   }
 
   /**
@@ -92,13 +102,14 @@ public class Average extends ProfileMetric {
    */
   private Object getOriginalSum() {
     Attribute a = (Attribute) super.getRefElem();
-    if (a.getDataType().equals(Long.class)) return ((Number) super.getValue()).longValue() * (int) super.getRefProf().getMetric(size).getValue();
-    else if (a.getDataType().equals(Double.class)) return ((Number) super.getValue()).doubleValue() * (int) super.getRefProf().getMetric(size).getValue();
-    else return ((int) super.getValue()) * (int) super.getRefProf().getMetric(size).getValue();
+    if (a.getDataType().equals(Long.class)) return ((Number) super.getValue()).longValue() * (int) super.getRefProf().getMetric(numrows).getValue();
+    else if (a.getDataType().equals(Double.class)) return ((Number) super.getValue()).doubleValue() * (int) super.getRefProf().getMetric(numrows).getValue();
+    else return ((int) super.getValue()) * (int) super.getRefProf().getMetric(numrows).getValue();
   }
 
   @Override
-  public void calculationNumeric(List<Number> list, Object oldVal) {
+  public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
+    this.dependencyCalculationWithNumericList(list);
     if (list == null || list.isEmpty()) {
       if (oldVal != null) return;
       else this.setValue(null);
@@ -121,6 +132,25 @@ public class Average extends ProfileMetric {
   @Override
   protected String getValueString() {
     return super.getSimpleValueString();
+  }
+
+  @Override
+  protected void dependencyCalculationWithNumericList(List<Number> list) throws NoSuchMethodException {
+    if (super.getMetricPos(avg) - 1 <= super.getMetricPos(numrows)) super.getRefProf().getMetric(numrows).calculationNumeric(list, null);
+  }
+
+  @Override
+  protected void dependencyCalculationWithRecordList(RecordList rl) {
+    if (super.getMetricPos(avg) - 2 <= super.getMetricPos(numrows)) super.getRefProf().getMetric(numrows).calculation(rl, null);
+  }
+
+  @Override
+  protected void dependencyCheck() {
+    ProfileMetric sizeM = super.getRefProf().getMetric(numrows);
+    if (sizeM == null) {
+      sizeM = new NumRows(super.getRefProf());
+      super.getRefProf().addMetric(sizeM);
+    }
   }
 
 }

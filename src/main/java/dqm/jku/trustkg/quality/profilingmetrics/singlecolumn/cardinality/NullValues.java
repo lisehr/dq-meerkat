@@ -13,13 +13,19 @@ import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
 
+/**
+ * Describes the metric Null Values, the amount of empty fields in a Attribute
+ * 
+ * @author optimusseptim
+ *
+ */
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:NullValues")
-public class NullValues extends ProfileMetric {  
+public class NullValues extends ProfileMetric {
   public NullValues() {
-    
+
   }
-  
+
   public NullValues(DataProfile d) {
     super(nullVal, d);
   }
@@ -32,12 +38,12 @@ public class NullValues extends ProfileMetric {
       if (r.getField(a) == null) nullVals++;
     }
     this.setValue(nullVals);
-    this.setValueClass(a.getDataType());
+    this.setValueClass(Long.class);
   }
 
   @Override
   public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
-    throw new NoSuchMethodException("Calculation has to be performed with Records!");
+    throw new NoSuchMethodException("Method not allowed for numeric lists!");
   }
 
   @Override
@@ -50,5 +56,4 @@ public class NullValues extends ProfileMetric {
     if (getValue() == null) return "\tnull";
     return "\t" + getValue().toString();
   }
-
 }

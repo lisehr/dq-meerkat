@@ -7,6 +7,12 @@ import org.influxdb.dto.Query;
 
 import dqm.jku.trustkg.influxdb.InfluxDBConnection;
 
+/**
+ * Demo class for connection with InfluxDB
+ * 
+ * @author optimusseptim
+ *
+ */
 public class InfluxDBDemo {
   public static void main(String args[]) {
     InfluxDBConnection influxDB = new InfluxDBConnection();

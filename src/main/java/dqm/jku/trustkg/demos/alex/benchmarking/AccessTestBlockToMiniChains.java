@@ -11,26 +11,33 @@ import dqm.jku.trustkg.blockchain.Block;
 import dqm.jku.trustkg.blockchain.blocks.DSDBlock;
 import dqm.jku.trustkg.blockchain.minichain.MiniBlockChain;
 import dqm.jku.trustkg.blockchain.standardchain.BlockChain;
-import dqm.jku.trustkg.connectors.DSInstanceConnector;
+import dqm.jku.trustkg.connectors.DSConnector;
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.Concept;
 import dqm.jku.trustkg.dsd.elements.DSDElement;
 import dqm.jku.trustkg.dsd.elements.Datasource;
+import dqm.jku.trustkg.util.Constants;
 import dqm.jku.trustkg.util.FileSelectionUtil;
 
+/**
+ * Test class for access testing of blockchains compared to minichains
+ * 
+ * @author optimusseptim
+ *
+ */
 public class AccessTestBlockToMiniChains {
   private static final boolean DEBUG = true;
   private static final int TESTRUNS = 10;
   private static final int SETSOFELEMS = 3;
 
   public static void main(String args[]) throws IOException {
-    DSInstanceConnector conn = FileSelectionUtil.connectToCSV(1);
+    DSConnector conn = FileSelectionUtil.connectToCSV(1);
 
     if (DEBUG) {
       System.out.println("Connection established!");
       System.out.println("Start testing...");
       System.out.println("Printing results to file!");
-      System.setOut(new PrintStream("./resultfiles/AccessTestBlockToMiniChain_" + System.currentTimeMillis() + ".txt"));
+      System.setOut(new PrintStream(Constants.RESOURCES + "/export/benchmarking/AccessTestBlockToMiniChain_" + System.currentTimeMillis() + ".txt"));
     }
 
     Datasource ds = conn.loadSchema();

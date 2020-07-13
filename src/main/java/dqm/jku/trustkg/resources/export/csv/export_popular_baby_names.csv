@@ -1,17 +1,18 @@
 Category;Metric;year of birth;gender;ethnicity;child's first name;count;rank
-Cardinalities;# Rows;19 418,0000;19 418,0000;19 418,0000;19 418,0000;19 418,0000;19 418,0000
+Cardinalities;Number of Rows;5 000,0000;5 000,0000;5 000,0000;5 000,0000;5 000,0000;5 000,0000
 Cardinalities;# Null Values;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000
 Cardinalities;% Null Values;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000
-Cardinalities;Cardinality;6,0000;2,0000;4,0000;10,0000;280,0000;102,0000
-Cardinalities;Uniqueness;0,0309;0,0103;0,0206;0,0515;1,4420;0,5253
-Data type info;Data type;Numeric;String;String;String;Numeric;Numeric
-Data type info;Minimum;2 011,0000;4,0000;8,0000;2,0000;10,0000;1,0000
-Data type info;Maximum;2 016,0000;6,0000;26,0000;11,0000;426,0000;102,0000
-Data type info;Average;2 013,0000;5,0000;15,0000;5,0000;33,0000;57,0000
-Data type info;Median;2 013,0000;6,0000;18,0000;6,0000;20,0000;59,0000
-Data type info;# Digits;4,0000;0,0000;0,0000;0,0000;3,0000;3,0000
+Cardinalities;Cardinality;3,0000;2,0000;4,0000;1 450,0000;214,0000;99,0000
+Cardinalities;Uniqueness;0,0600;0,0400;0,0800;29,0000;4,2800;1,9800
+Data type info;Basic type;Numeric;String;String;String;Numeric;Numeric
+Data type info;Data type;Integer;String;String;String;Integer;Integer
+Data type info;Minimum;2 014,0000;4,0000;8,0000;2,0000;10,0000;1,0000
+Data type info;Maximum;2 016,0000;6,0000;26,0000;11,0000;387,0000;99,0000
+Data type info;Average;2 015,0000;5,0000;16,0000;5,0000;32,0000;52,0000
+Data type info;Median;2 015,0000;6,0000;18,0000;6,0000;20,0000;51,0000
+Data type info;Digits;4,0000;0,0000;0,0000;0,0000;3,0000;2,0000
 Data type info;# Decimals;0,0000;0,0000;0,0000;0,0000;0,0000;0,0000
-Histogram;# Classes;16,0000;16,0000;16,0000;16,0000;16,0000;16,0000
-Histogram;Class range;0,3125;0,1250;1,1250;0,5625;26,0000;6,3125
-Histogram;Values;[0, 0, 2063, 0, 3790, 0, 3765, 0, 0, 0, 0, 0, 2045, 3855, 3900, 0];[0, 0, 0, 0, 0, 0, 9933, 9485, 0, 0, 0, 0, 0, 0, 0, 0];[0, 0, 0, 0, 2693, 0, 0, 0, 0, 0, 2712, 0, 0, 5714, 0, 8299];[1425, 5, 2530, 0, 0, 0, 3277, 0, 738, 674, 48, 0, 5476, 5149, 96, 0];[161, 505, 337, 1, 913, 2542, 172, 14544, 7, 24, 18, 4, 76, 73, 40, 1];[1868, 528, 1775, 616, 501, 1442, 949, 1563, 1079, 1280, 893, 975, 1409, 2364, 1057, 1119]
+Histogram;# Classes;14,0000;14,0000;14,0000;14,0000;14,0000;14,0000
+Histogram;Class range;0,1429;0,1429;1,2857;0,6429;26,9286;7,0000
+Histogram;Values;[0, 2063, 0, 0, 0, 2045, 892, 0, 0, 0, 0, 0, 0, 0];[0, 0, 0, 2017, 0, 2983, 0, 0, 0, 0, 0, 0, 0, 0];[0, 1088, 0, 1376, 0, 0, 0, 0, 2536, 0, 0, 0, 0, 0];[0, 0, 1353, 0, 1361, 817, 178, 206, 1, 380, 10, 25, 669, 0];[3838, 219, 1, 5, 36, 4, 18, 619, 68, 3, 15, 131, 33, 10];[265, 152, 405, 563, 289, 455, 427, 754, 338, 259, 285, 287, 340, 181]
 Dependencies;isCandidateKey;false;false;false;false;false;false

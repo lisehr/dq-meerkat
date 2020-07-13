@@ -15,6 +15,13 @@ import dqm.jku.trustkg.util.numericvals.NumberComparator;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
 
+/**
+ * Describes the metric Median, which is the middle value of the sorted values
+ * of the Attribute. Does not always have to be the average value.
+ * 
+ * @author optimusseptim
+ *
+ */
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:Median")
 public class Median extends ProfileMetric {
@@ -102,5 +109,4 @@ public class Median extends ProfileMetric {
   protected String getValueString() {
     return super.getSimpleValueString();
   }
-
 }

@@ -4,11 +4,17 @@ import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 
+/**
+ * Data structure to simulate histogram bins.
+ * 
+ * @author optimusseptim
+ *
+ */
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
 @RDFBean("foaf:FrequencyClass")
 public class FrequencyClass implements Comparable<FrequencyClass> {
-  private int classNo;
-  private int frequency;
+  private int classNo; // number of class
+  private int frequency; // amount of hits in class
 
   public FrequencyClass() {
 

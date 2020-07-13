@@ -4,8 +4,13 @@ import dqm.jku.trustkg.blockchain.blocks.SimpleBlock;
 import dqm.jku.trustkg.blockchain.standardchain.BlockChain;
 import dqm.jku.trustkg.util.HashingUtils;
 
-// adapted from Tutorial from CryptoKass
-
+/**
+ * adapted from Tutorial from CryptoKass
+ * https://medium.com/programmers-blockchain/create-simple-blockchain-java-tutorial-from-scratch-6eeed3cb03fa
+ * 
+ * @author optimusseptim
+ *
+ */
 public class SimpleBlockChainDemo {
   public static void main(String[] args) {
     // instanciate blockchain

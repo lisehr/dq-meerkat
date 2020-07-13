@@ -1,17 +1,18 @@
 Category;Metric;val1;val2;val3
-Cardinalities;# Rows;5,0000;5,0000;5,0000
+Cardinalities;Number of Rows;0,0000;0,0000;0,0000
 Cardinalities;# Null Values;0,0000;0,0000;0,0000
-Cardinalities;% Null Values;0,0000;0,0000;0,0000
-Cardinalities;Cardinality;5,0000;5,0000;5,0000
-Cardinalities;Uniqueness;100,0000;100,0000;100,0000
-Data type info;Data type;Numeric;Numeric;Numeric
-Data type info;Minimum;6,9000;1,0000;0,7111
-Data type info;Maximum;81,0000;28,4100;345 435,4586
-Data type info;Average;52,3800;10,4385;69 097,2339
-Data type info;Median;69,0000;6,7823;18,0000
-Data type info;# Digits;2,0000;2,0000;6,0000
-Data type info;# Decimals;2,0000;6,0000;6,0000
-Histogram;# Classes;4,0000;4,0000;4,0000
-Histogram;Class range;18,5250;6,8525;86 358,6869
-Histogram;Values;[3, 1, 1, 0];[1, 1, 3, 0];[1, 0, 4, 0]
-Dependencies;isCandidateKey;true;true;true
+Cardinalities;% Null Values;NaN;NaN;NaN
+Cardinalities;Cardinality;0,0000;0,0000;0,0000
+Cardinalities;Uniqueness;NaN;NaN;NaN
+Data type info;Basic type;Numeric;Numeric;Numeric
+Data type info;Data type;Double;Double;Double
+Data type info;Minimum;;;
+Data type info;Maximum;;;
+Data type info;Average;;;
+Data type info;Median;;;
+Data type info;Digits;0,0000;0,0000;0,0000
+Data type info;# Decimals;;;
+Histogram;# Classes;-2 147 483 648,0000;-2 147 483 648,0000;-2 147 483 648,0000
+Histogram;Class range;;;
+Histogram;Values;;;
+Dependencies;isCandidateKey;false;false;false

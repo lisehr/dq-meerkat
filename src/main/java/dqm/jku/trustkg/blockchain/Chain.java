@@ -5,6 +5,14 @@ import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 import org.cyberborean.rdfbeans.annotations.RDFSubject;
 
+/**
+ * abstract base class for a blockchain, adapted from CryptoKass' tutorial
+ * https://medium.com/programmers-blockchain/create-simple-blockchain-java-tutorial-from-scratch-6eeed3cb03fa
+ * 
+ * @author optimusseptim
+ * 
+ */
+
 @RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", "bc = http://example.com/structures/blockchain/" })
 @RDFBean("foaf:Chain")
 public abstract class Chain {

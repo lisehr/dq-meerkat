@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import dqm.jku.trustkg.connectors.DSInstanceConnector;
+import dqm.jku.trustkg.connectors.DSConnector;
 import dqm.jku.trustkg.dsd.DSDFactory;
 import dqm.jku.trustkg.dsd.elements.DSDElement;
 import dqm.jku.trustkg.dsd.elements.Datasource;
@@ -31,10 +31,10 @@ public class ISQLIntegrator {
 		EQAUALS, NEQUALS, SMALLER, SMALLEREQ, GREATER, GREATEREQ, SUBSTRING_OF;
 	}
 
-	private final Map<Datasource, DSInstanceConnector> conns = new HashMap<>();
+	private final Map<Datasource, DSConnector> conns = new HashMap<>();
 	private IntegratedDatasource ds;
 
-	public void add(Datasource ds, DSInstanceConnector conn) {
+	public void add(Datasource ds, DSConnector conn) {
 		conns.put(ds, conn);
 	}
 

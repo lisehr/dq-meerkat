@@ -1,19 +1,13 @@
 package dqm.jku.trustkg.demos.lisamarie;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 
-import dqm.jku.trustkg.blockchain.standardchain.BlockChain;
-import dqm.jku.trustkg.connectors.ConnectorCSV;
-import dqm.jku.trustkg.connectors.DSInstanceConnector;
-import dqm.jku.trustkg.dsd.elements.Attribute;
-import dqm.jku.trustkg.dsd.elements.Concept;
-import dqm.jku.trustkg.dsd.elements.Datasource;
-import dqm.jku.trustkg.dsd.records.RecordList;
-
+import org.cyberborean.rdfbeans.RDFBeanManager;
+import org.cyberborean.rdfbeans.exceptions.RDFBeanException;
+import org.eclipse.rdf4j.model.Model;
+import org.eclipse.rdf4j.model.Resource;
+import org.eclipse.rdf4j.model.Statement;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
-import org.eclipse.rdf4j.model.util.RDFCollections;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.repository.Repository;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
@@ -21,19 +15,20 @@ import org.eclipse.rdf4j.repository.RepositoryException;
 import org.eclipse.rdf4j.repository.RepositoryResult;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
-import org.cyberborean.rdfbeans.RDFBeanManager;
-import org.cyberborean.rdfbeans.exceptions.RDFBeanException;
-import org.eclipse.rdf4j.model.Model;
-import org.eclipse.rdf4j.model.Resource;
-import org.eclipse.rdf4j.model.Statement;
 
-import dqm.jku.trustkg.graphdb.*;
+import dqm.jku.trustkg.blockchain.standardchain.BlockChain;
+import dqm.jku.trustkg.connectors.ConnectorCSV;
+import dqm.jku.trustkg.connectors.DSConnector;
+import dqm.jku.trustkg.dsd.elements.Attribute;
+import dqm.jku.trustkg.dsd.elements.Concept;
+import dqm.jku.trustkg.dsd.elements.Datasource;
+import dqm.jku.trustkg.dsd.records.RecordList;
+import dqm.jku.trustkg.graphdb.EmbeddedGraphDB;
 
-@SuppressWarnings("unused")
 public class StoreDataRDFTest {
   public static void main(String args[]) throws NoSuchMethodException {
     // Create Connection to CSV Connector
-    DSInstanceConnector conn = new ConnectorCSV("src/main/java/dqm/jku/trustkg/resources/Telematic Device Report - Device Voltage.csv", ",", "\n", "Device Voltage", true);
+    DSConnector conn = new ConnectorCSV("src/main/java/dqm/jku/trustkg/resources/Telematic Device Report - Device Voltage.csv", ",", "\n", "Device Voltage", true);
 
     // Create Schema from it
     Datasource ds;
@@ -79,7 +74,7 @@ public class StoreDataRDFTest {
       // annotating the data quality profile
       for (Concept c : ds.getConcepts()) {
         System.out.println(c.getURI());
-        RecordList rs = conn.getRecordSet(c);
+        RecordList rs = conn.getRecordList(c);
         for (Attribute a : c.getAttributes()) {
           a.annotateProfile(rs);
 
