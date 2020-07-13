@@ -17,6 +17,10 @@ public class TestNeo4j {
 		ConnectorNeo4J conn = ConnectorNeo4J.getInstance("bolt://localhost:7687", "neo4j", "password", label);
 		//ConnectorNeo4J conn = ConnectorNeo4J.getInstance("bolt+routing://f6087a21.databases.neo4j.io:7687", "stackoverflow", "stackoverflow", label);
 		
+		/**
+		 * concept = labels
+		 * attributes = properties
+		 */
 
 	    Datasource ds;
 		

@@ -31,7 +31,7 @@ import dqm.jku.trustkg.util.Miscellaneous.DBType;
  * @author Katharina
  */
 
-public class ConnectorNeo4J extends DSInstanceConnector {
+public class ConnectorNeo4J extends DSConnector {
 
 	@SuppressWarnings("unused")
 	private final String DBUrl;
@@ -87,7 +87,7 @@ public class ConnectorNeo4J extends DSInstanceConnector {
 	}
 
 	@Override
-	public RecordList getRecordSet(Concept concept) throws IOException {
+	public RecordList getRecordList(Concept concept) throws IOException {
 		Iterator<dqm.jku.trustkg.dsd.records.Record> iter = getRecords(concept);
 		RecordList rs = new RecordList();
 		while (iter.hasNext()) {
@@ -96,10 +96,12 @@ public class ConnectorNeo4J extends DSInstanceConnector {
 		
 		return rs;
 	}
+	
 
 	@Override
-	public void findFunctionalDependencies(Concept concept) throws IOException {
-		// TODO 	
+	public RecordList getPartialRecordList(Concept concept, int offset, int noRecords) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/**
@@ -354,4 +356,6 @@ public class ConnectorNeo4J extends DSInstanceConnector {
 		
 		return properties;
 	}
+
+
 }
