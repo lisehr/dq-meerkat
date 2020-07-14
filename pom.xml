@@ -11,11 +11,11 @@
 	<name>trustkg</name>
 	<url>http://maven.apache.org</url>
 
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+		<pentaho.kettle.version>8.2.0.0-342</pentaho.kettle.version>
 	</properties>
 
 	<dependencies>
@@ -79,6 +79,25 @@
 			<artifactId>javafx-base</artifactId>
 			<version>14-ea+1</version>
 		</dependency>
+		<!-- Pentaho Plugin Repo -->
+		<!-- kettle interface libs -->
+		<dependency>
+			<groupId>pentaho-kettle</groupId>
+			<artifactId>kettle-core</artifactId>
+			<version>${pentaho.kettle.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>pentaho-kettle</groupId>
+			<artifactId>kettle-engine</artifactId>
+			<version>${pentaho.kettle.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>pentaho-kettle</groupId>
+			<artifactId>kettle-ui-swt</artifactId>
+			<version>${pentaho.kettle.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -91,4 +110,11 @@
 			</resource>
 		</resources>
 	</build>
+
+	<repositories>
+		<repository>
+			<id>pentaho</id>
+			<url>http://public.nexus.pentaho.org/content/groups/omni</url>
+		</repository>
+	</repositories>
 </project>
