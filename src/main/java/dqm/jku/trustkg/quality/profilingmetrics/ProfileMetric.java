@@ -6,6 +6,7 @@ import java.util.Objects;
 import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
+import org.cyberborean.rdfbeans.annotations.RDFSubject;
 
 import dqm.jku.trustkg.dsd.elements.DSDElement;
 import dqm.jku.trustkg.dsd.records.RecordList;
@@ -24,6 +25,7 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric> {
   private Class<?> valClass; // the class of the value
   private Object value; // the value itself
   private DataProfile refProf; // reference profile for calculations
+  private String uri; // uri of the metric
 
   public ProfileMetric() {
 
@@ -33,7 +35,17 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric> {
     if (title == null || refProf == null) throw new IllegalArgumentException("Parameters cannot be null!");
     this.title = title;
     this.refProf = refProf;
+    this.uri = refProf.getURI() + '/' + this.title.getLabel().replaceAll("\\s+", "");
     value = null;
+  }
+  
+  @RDFSubject
+  public String getUri() {
+	  return uri;
+  }
+  
+  public void setUri(String uri) {
+	  this.uri = uri;
   }
 
   /**
@@ -41,7 +53,7 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric> {
    * 
    * @return title of metric
    */
-  @RDF("foaf:label")
+  @RDF("foaf:hasTitle")
   public MetricTitle getTitle() {
     return title;
   }
@@ -52,7 +64,7 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric> {
    * @return label of title
    */
   public String getLabel() {
-    return title.label();
+    return title.getLabel();
   }
 
   /**
@@ -197,7 +209,7 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric> {
   @Override
   public String toString() {
     if (value == null) return String.format("%s\tnull", title);
-    else if (title.label().length() < 8) return String.format("%s\t%s", title, getValueString());
+    else if (title.getLabel().length() < 8) return String.format("%s\t%s", title, getValueString());
     else return String.format("%s%s", title, getValueString());
   }
 
@@ -216,7 +228,7 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric> {
   }
 
   public int compareTo(ProfileMetric other) {
-    return this.title.label().compareTo(other.title.label());
+    return this.title.getLabel().compareTo(other.title.getLabel());
   }
 
   /**
@@ -228,7 +240,7 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric> {
    */
   public int getMetricPos(MetricTitle t) {
     List<ProfileMetric> metrics = this.getRefProf().getMetrics();
-    for (int i = 0; i < metrics.size(); i++) if (metrics.get(i).getLabel().equals(t.label())) return i;
+    for (int i = 0; i < metrics.size(); i++) if (metrics.get(i).getLabel().equals(t.getLabel())) return i;
     return -1;
   }
 

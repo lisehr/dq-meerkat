@@ -3,6 +3,7 @@ package dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.histogram;
 import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
+import org.cyberborean.rdfbeans.annotations.RDFSubject;
 
 /**
  * Data structure to simulate histogram bins.
@@ -15,15 +16,27 @@ import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 public class FrequencyClass implements Comparable<FrequencyClass> {
   private int classNo; // number of class
   private int frequency; // amount of hits in class
+  private String uri;
 
   public FrequencyClass() {
 
   }
 
-  public FrequencyClass(int key, int value) {
+  public FrequencyClass(int key, int value, String uri) {
     this.classNo = key;
     this.frequency = value;
+    this.uri = uri + '/' + classNo;
   }
+  
+  @RDFSubject
+  public String getURI() {
+	  return this.uri;
+  }
+  
+  public void setURI(String uri) {
+	  this.uri = uri;
+  }
+
 
   /**
    * Gets the classnumber

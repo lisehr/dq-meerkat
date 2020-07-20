@@ -3,6 +3,7 @@ package dqm.jku.trustkg.quality.profilingmetrics;
 import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
+import org.cyberborean.rdfbeans.annotations.RDFSubject;
 
 /**
  * Enumeration for all DP metrics
@@ -34,6 +35,8 @@ public enum MetricTitle {
   histVal("Values");
   
   private String label; // the label of the title (string representation)
+  @SuppressWarnings("unused")
+  private String uri;
 
   private MetricTitle(String label) {
     this.label = label;
@@ -50,8 +53,17 @@ public enum MetricTitle {
    * @return label
    */
   @RDF("foaf:label")
-  public String label() {
+  public String getLabel() {
     return label;
+  }
+  
+  @RDFSubject(prefix = "http://example.com/Metrictitles/")
+  public String getUri() {
+	  return getLabel().replaceAll("\\s+", "");
+  }
+  
+  public void setUri(String uri) {
+	  this.uri = uri;
   }
   
   /**

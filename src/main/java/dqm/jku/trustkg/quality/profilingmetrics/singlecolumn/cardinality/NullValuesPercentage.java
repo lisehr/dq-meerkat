@@ -4,6 +4,9 @@ import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
 
 import java.util.List;
 
+import org.cyberborean.rdfbeans.annotations.RDFBean;
+import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
+
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.DependentProfileMetric;
@@ -16,6 +19,8 @@ import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
  * @author optimusseptim
  *
  */
+@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
+@RDFBean("foaf:NullValuesPercentage")
 public class NullValuesPercentage extends DependentProfileMetric {
   public NullValuesPercentage() {
 

@@ -91,7 +91,7 @@ public class Histogram extends DependentProfileMetric {
       if (n.doubleValue() == max.doubleValue()) classVals[k - 1]++;
       else classVals[(int) Math.floor((n.doubleValue() - min.doubleValue()) / classrange.doubleValue())]++;
     }
-    SerializableFrequencyMap classes = new SerializableFrequencyMap();
+    SerializableFrequencyMap classes = new SerializableFrequencyMap(this.getUri());
     for (int i = 0; i < k; i++) classes.put(i, classVals[i]);
     this.setValue(classes);
   }

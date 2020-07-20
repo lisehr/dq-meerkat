@@ -51,7 +51,7 @@ public class PatternRecognition extends DependentProfileMetric {
   }
 
   private PatternCounterList initPatterns() {
-    PatternCounterList patterns = new PatternCounterList();
+    PatternCounterList patterns = new PatternCounterList(this.getUri());
     try {
       List<String> regs = FileSelectionUtil.readAllPatternsOfFile(1);
       for (String s : regs) if (!s.isEmpty()) patterns.addPattern(s);

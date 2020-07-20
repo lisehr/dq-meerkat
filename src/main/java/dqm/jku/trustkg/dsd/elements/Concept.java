@@ -59,7 +59,7 @@ public class Concept extends DSDElement {
   /**
    * @param primaryKey the primaryKey to set
    */
-  public void setPrimaryKeys(AttributeSet primaryKey) {
+  public void setPrimaryKeySet(AttributeSet primaryKey) {
     this.primaryKeys = (HashSet<Attribute>) primaryKey.stream().collect(Collectors.toSet());
   }
 
@@ -82,10 +82,20 @@ public class Concept extends DSDElement {
     return datasource;
   }
 
-  @RDF("foaf:hasAttributeSet")
   public AttributeSet getAttributes() {
     return new AttributeSet(attributes);
   }
+  
+  @RDF("foaf:hasAttribute")
+  @RDFContainer
+  public HashSet<Attribute> getAttributeList(){
+	  return attributes;
+  }
+  
+  public void setAttributeList(HashSet<Attribute> att){
+	  this.attributes = att;
+  }
+
 
   public void addAttribute(Attribute attribute) {
     attributes.add(attribute);
@@ -100,6 +110,11 @@ public class Concept extends DSDElement {
   }
 
   @RDF("foaf:hasPK")
+  @RDFContainer
+  public HashSet<Attribute> getPrimaryKeySet(){
+	return primaryKeys;  
+  }
+  
   public AttributeSet getPrimaryKeys() {
     return new AttributeSet(primaryKeys);
   }

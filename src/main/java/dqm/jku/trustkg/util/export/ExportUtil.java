@@ -33,26 +33,26 @@ public class ExportUtil {
   private static final String EXPORT_REPORT = "report/";
 
 	static {
-		LABELS.add(new LabelTriple<>(numrows, cardCat.label(), numrows.label()));
-		LABELS.add(new LabelTriple<>(nullVal, cardCat.label(), nullVal.label()));
-		LABELS.add(new LabelTriple<>(nullValP, cardCat.label(), nullValP.label()));
-		LABELS.add(new LabelTriple<>(card, cardCat.label(), card.label()));
-		LABELS.add(new LabelTriple<>(unique, cardCat.label(), unique.label()));
+		LABELS.add(new LabelTriple<>(numrows, cardCat.label(), numrows.getLabel()));
+		LABELS.add(new LabelTriple<>(nullVal, cardCat.label(), nullVal.getLabel()));
+		LABELS.add(new LabelTriple<>(nullValP, cardCat.label(), nullValP.getLabel()));
+		LABELS.add(new LabelTriple<>(card, cardCat.label(), card.getLabel()));
+		LABELS.add(new LabelTriple<>(unique, cardCat.label(), unique.getLabel()));
 
-		LABELS.add(new LabelTriple<>(bt, dti.label(), bt.label()));
-		LABELS.add(new LabelTriple<>(dt, dti.label(), dt.label()));
-		LABELS.add(new LabelTriple<>(min, dti.label(), min.label()));
-		LABELS.add(new LabelTriple<>(max, dti.label(), max.label()));
-		LABELS.add(new LabelTriple<>(avg, dti.label(), avg.label()));
-		LABELS.add(new LabelTriple<>(med, dti.label(), med.label()));
-		LABELS.add(new LabelTriple<>(dig, dti.label(), dig.label()));
+		LABELS.add(new LabelTriple<>(bt, dti.label(), bt.getLabel()));
+		LABELS.add(new LabelTriple<>(dt, dti.label(), dt.getLabel()));
+		LABELS.add(new LabelTriple<>(min, dti.label(), min.getLabel()));
+		LABELS.add(new LabelTriple<>(max, dti.label(), max.getLabel()));
+		LABELS.add(new LabelTriple<>(avg, dti.label(), avg.getLabel()));
+		LABELS.add(new LabelTriple<>(med, dti.label(), med.getLabel()));
+		LABELS.add(new LabelTriple<>(dig, dti.label(), dig.getLabel()));
 		LABELS.add(new LabelTriple<>(dec, dti.label(), "# Decimals"));
 
 		LABELS.add(new LabelTriple<>(histCls, histCat.label(), "# Classes"));
-		LABELS.add(new LabelTriple<>(histCR, histCat.label(), histCR.label()));
-		LABELS.add(new LabelTriple<>(histVal, histCat.label(), histVal.label()));
+		LABELS.add(new LabelTriple<>(histCR, histCat.label(), histCR.getLabel()));
+		LABELS.add(new LabelTriple<>(histVal, histCat.label(), histVal.getLabel()));
 
-		LABELS.add(new LabelTriple<>(keyCand, depend.label(), keyCand.label()));
+		LABELS.add(new LabelTriple<>(keyCand, depend.label(), keyCand.getLabel()));
 	}
 
 	/**
@@ -82,9 +82,9 @@ public class ExportUtil {
 								metricValues.put(key, list);
 							} else { // implement special case for histogram: split into 3 lines
 								Histogram hist = (Histogram) m;
-								String s1 = histCls.label();
-								String s2 = histCR.label();
-								String s3 = histVal.label();
+								String s1 = histCls.getLabel();
+								String s2 = histCR.getLabel();
+								String s3 = histVal.getLabel();
 								ArrayList<Object> list1 = new ArrayList<Object>();
 								ArrayList<Object> list2 = new ArrayList<Object>();
 								ArrayList<Object> list3 = new ArrayList<Object>();
@@ -118,7 +118,7 @@ public class ExportUtil {
 
 		// Create Value lines
 		for (LabelTriple<MetricTitle, String, String> l : LABELS) {
-			String label = l.getKey().label();
+			String label = l.getKey().getLabel();
 			ArrayList<Object> list = metricValues.get(label);
 			sb.append(l.getCat(l.getKey()));
 			sb.append(";");

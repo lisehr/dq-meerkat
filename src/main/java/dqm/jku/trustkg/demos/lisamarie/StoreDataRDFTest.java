@@ -28,7 +28,7 @@ import dqm.jku.trustkg.graphdb.EmbeddedGraphDB;
 public class StoreDataRDFTest {
   public static void main(String args[]) throws NoSuchMethodException {
     // Create Connection to CSV Connector
-    DSConnector conn = new ConnectorCSV("src/main/java/dqm/jku/trustkg/resources/Telematic Device Report - Device Voltage.csv", ",", "\n", "Device Voltage", true);
+    DSConnector conn = new ConnectorCSV("src/main/java/dqm/jku/trustkg/resources/csv/Telematic Device Report - Device Voltage.csv", ",", "\n", "Device Voltage", true);
 
     // Create Schema from it
     Datasource ds;
@@ -36,11 +36,11 @@ public class StoreDataRDFTest {
       ds = conn.loadSchema();
 
       ModelBuilder builder = new ModelBuilder();
-      builder.setNamespace("ex", "http://example.com/");
+     // builder.setNamespace("ex", "http://example.com/");
 
       for (Concept c : ds.getConcepts()) {
         for (Attribute a : c.getAttributes()) {
-          builder.namedGraph("ex:testGraph").subject("ex:" + c.toString()).add(RDF.TYPE, "ex:" + a.toString());
+          builder.namedGraph(":testGraph").subject(c.toString()).add(RDF.TYPE,a.toString());
         }
 
       }
@@ -57,10 +57,11 @@ public class StoreDataRDFTest {
       }
 
       EmbeddedGraphDB db = new dqm.jku.trustkg.graphdb.EmbeddedGraphDB("test2");
+      
 
       // activate for first time creation
-      // db.createRepository("test2");
-      // db.createRepository("test3");
+      db.createRepositoryIfNotExists("test2");
+      db.createRepositoryIfNotExists("test3");
 
       // two separate repositories for the data and the blockchain
       Repository testRep = db.getRepository("test2");
@@ -86,7 +87,7 @@ public class StoreDataRDFTest {
 
       manager.add(ds);
 
-      BlockChain bc = new BlockChain(5, "test");
+      BlockChain bc = new BlockChain(2, "test");
       ds.fillBlockChain(bc);
       System.out.println(bc.isChainValid());
 
@@ -100,7 +101,7 @@ public class StoreDataRDFTest {
         }
         while (bcResult.hasNext()) {
           Statement st = bcResult.next();
-          System.out.println("db contains blockchain data: " + st);
+         System.out.println("db contains blockchain data: " + st);
         }
       }
 

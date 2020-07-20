@@ -1,6 +1,6 @@
 
 http://www.w3.org/2001/XMLSchema#string
 http://www.w3.org/2001/XMLSchema#boolean
-http://www.w3.org/2001/XMLSchema#double
 http://www.w3.org/2001/XMLSchema#int
 http://www.w3.org/2001/XMLSchema#long
+http://www.w3.org/2001/XMLSchema#double
