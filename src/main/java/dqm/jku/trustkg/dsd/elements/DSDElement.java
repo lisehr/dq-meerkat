@@ -17,8 +17,8 @@ import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.influxdb.InfluxDBConnection;
 import dqm.jku.trustkg.quality.DataProfile;
 
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
-@RDFBean("foaf:DSDElement")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:DSDElement")
 public abstract class DSDElement implements Serializable, Comparable<DSDElement> {
 
   private static final long serialVersionUID = 1L;
@@ -54,7 +54,7 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
     this.uri = uri + '/' + this.label;
   }
 
-  @RDF("foaf:dataProfile")
+  @RDF("dsd:annotatedWith")
   public DataProfile getProfile() {
     return dataProfile;
   }
@@ -97,7 +97,7 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
     return sb.toString();
   }
 
-  @RDF("foaf:label")
+  @RDF("dsd:hasLabel")
   public String getLabel() {
     return label;
   }

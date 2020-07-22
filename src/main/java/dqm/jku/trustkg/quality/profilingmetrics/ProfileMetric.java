@@ -18,10 +18,11 @@ import dqm.jku.trustkg.quality.DataProfile;
  * @author optimusseptim
  *
  */
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
-@RDFBean("foaf:ProfileMetric")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:quality/structures/ProfileMetric")
 public abstract class ProfileMetric implements Comparable<ProfileMetric> {
   private MetricTitle title; // the naming of the metric
+  private MetricCategory cat; // name of metric category
   private Class<?> valClass; // the class of the value
   private Object value; // the value itself
   private DataProfile refProf; // reference profile for calculations
@@ -31,10 +32,11 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric> {
 
   }
 
-  public ProfileMetric(MetricTitle title, DataProfile refProf) {
+  public ProfileMetric(MetricTitle title, MetricCategory cat, DataProfile refProf) {
     if (title == null || refProf == null) throw new IllegalArgumentException("Parameters cannot be null!");
     this.title = title;
     this.refProf = refProf;
+    this.cat = cat;
     this.uri = refProf.getURI() + '/' + this.title.getLabel().replaceAll("\\s+", "");
     value = null;
   }
@@ -53,7 +55,7 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric> {
    * 
    * @return title of metric
    */
-  @RDF("foaf:hasTitle")
+  @RDF("dsd:hasTitle")
   public MetricTitle getTitle() {
     return title;
   }
@@ -65,6 +67,15 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric> {
    */
   public String getLabel() {
     return title.getLabel();
+  }
+  
+  @RDF("dsd:isInCategory")
+  public MetricCategory getCat() {
+	return cat;
+  }
+
+  public void setCat(MetricCategory cat) {
+	this.cat = cat;
   }
 
   /**
@@ -90,7 +101,7 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric> {
    * 
    * @return value of metric
    */
-  @RDF("foaf:value")
+  @RDF("dsd:hasValue")
   public Object getValue() {
     return value;
   }
@@ -118,7 +129,7 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric> {
    * 
    * @return string of value class
    */
-  @RDF("foaf:valueClass")
+  @RDF("dsd:isInValueClass")
   public String getValueClassString() {
     return this.valClass.getName();
   }
@@ -150,7 +161,7 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric> {
    * 
    * @return the reference profile
    */
-  @RDF("foaf:refProf")
+  @RDF("dsd:isIncludedIn")
   public DataProfile getRefProf() {
     return refProf;
   }

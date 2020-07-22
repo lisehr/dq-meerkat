@@ -12,6 +12,9 @@ import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 
+import static dqm.jku.trustkg.quality.profilingmetrics.MetricCategory.*;
+
+
 /**
  * Describes the metric Data Type, which is a higher granularity than Basic
  * type, showing the Java class of the values.
@@ -19,15 +22,15 @@ import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
  * @author optimusseptim
  *
  */
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
-@RDFBean("foaf:DataType")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:quality/structures/metrics/dataTypeInfo/DataType")
 public class DataType extends ProfileMetric {
   public DataType() {
 
   }
 
   public DataType(DataProfile d) {
-    super(dt, d);
+    super(dt, dti, d);
   }
 
   @Override

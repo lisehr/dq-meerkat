@@ -55,7 +55,7 @@ public class AccessTestBlockToMiniChains {
     MiniBlockChain test2 = new MiniBlockChain("test");
     System.out.println("Blockchain:");
     for (DSDElement e : elements) {
-      test1.addBlock(new DSDBlock(test1.getPreviousHash(), e));
+      test1.addBlock(new DSDBlock(test1.getId(), test1.getPreviousHash(), e));
       System.out.println("Added block with element: " + e.getURI());
     }
     blankline();
@@ -87,7 +87,7 @@ public class AccessTestBlockToMiniChains {
     System.out.println("Blockchain:");
     for (int i = 0; i < SETSOFELEMS; i++) {
       for (DSDElement e : elements) {
-        test1.addBlock(new DSDBlock(test1.getPreviousHash(), e));
+        test1.addBlock(new DSDBlock(test1.getId(), test1.getPreviousHash(), e));
         System.out.println("Added block with element: " + e.getURI());
       }
       blankline();

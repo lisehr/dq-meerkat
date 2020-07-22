@@ -6,8 +6,8 @@ import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 
 import dqm.jku.trustkg.influxdb.InfluxDBConnection;
 
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
-@RDFBean("foaf:Attribute")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:Attribute")
 public class Attribute extends DSDElement {
 
   private static final long serialVersionUID = 1L;
@@ -29,7 +29,7 @@ public class Attribute extends DSDElement {
     this.concept = concept;
   }
 
-  @RDF("foaf:isNullable")
+  @RDF("dsd:isNullable")
   public boolean isNullable() {
     return nullable;
   }
@@ -38,7 +38,7 @@ public class Attribute extends DSDElement {
     this.nullable = nullable;
   }
 
-  @RDF("foaf:isUnique")
+  @RDF("dsd:isUnique")
   public boolean isUnique() {
     return unique;
   }
@@ -47,7 +47,7 @@ public class Attribute extends DSDElement {
     this.unique = unique;
   }
 
-  @RDF("foaf:isAutoIncrement")
+  @RDF("dsd:isAutoIncrement")
   public boolean isAutoIncrement() {
     return autoIncrement;
   }
@@ -56,7 +56,7 @@ public class Attribute extends DSDElement {
     this.autoIncrement = autoIncrement;
   }
 
-  @RDF("foaf:ordinalPosition")
+  @RDF("dsd:hasOrdinalPosition")
   public int getOrdinalPosition() {
     return ordinalPosition;
   }
@@ -65,7 +65,7 @@ public class Attribute extends DSDElement {
     this.ordinalPosition = ordinalPosition;
   }
 
-  @RDF("foaf:defaultValue")
+  @RDF("dsd:hasDefaultValue")
   public Object getDefaultValue() {
     return defaultValue;
   }
@@ -78,7 +78,7 @@ public class Attribute extends DSDElement {
     }
   }
 
-  @RDF("foaf:concept")
+  @RDF("dsd:hasConcept")
   public Concept getConcept() {
     return concept;
   }
@@ -96,7 +96,7 @@ public class Attribute extends DSDElement {
     this.dataType = dataType;
   }
 
-  @RDF("foaf:dataType")
+  @RDF("dsd:isOfDataType")
   public String getDataTypeString() {
     return this.dataType.getName();
   }

@@ -15,8 +15,8 @@ import org.cyberborean.rdfbeans.annotations.RDFSubject;
  * @author optimusseptim
  *
  */
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
-@RDFBean("foaf:PatternCounterList")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:quality/structures/PatternCounterList")
 public class PatternCounterList {
   private List<PatternCounter> list = new ArrayList<>(); // list for pattern counters
   private String uri;
@@ -44,7 +44,7 @@ public class PatternCounterList {
    * 
    * @return list of pattern counters
    */
-  @RDF("foaf:hasPattern")
+  @RDF("dsd:hasPattern")
   @RDFContainer
   public List<PatternCounter> getList() {
     return list;

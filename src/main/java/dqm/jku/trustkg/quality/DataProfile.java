@@ -40,8 +40,8 @@ import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
  * @author optimusseptim
  *
  */
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
-@RDFBean("foaf:DataProfile")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:quality/structures/DataProfile")
 public class DataProfile {
   private List<ProfileMetric> metrics = new ArrayList<>(); // a list containing all profile metrics
   private DSDElement elem; // DSDElement, where this DataProfile is annotated to
@@ -227,7 +227,7 @@ public class DataProfile {
    * 
    * @return set of metrics
    */
-  @RDF("foaf:includes")
+  @RDF("dsd:includesMetric")
   @RDFContainer
   public List<ProfileMetric> getMetrics() {
     return metrics;
@@ -278,7 +278,7 @@ public class DataProfile {
    * 
    * @return the reference element
    */
-  @RDF("foaf:annotatedTo")
+  @RDF("dsd:annotatedTo")
   public DSDElement getElem() {
     return elem;
   }

@@ -13,8 +13,8 @@ import org.cyberborean.rdfbeans.annotations.RDFContainer.ContainerType;
  * @author optimusseptim
  *
  */
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", "persons = http://rdfbeans.viceversatech.com/test-ontology/persons/" })
-@RDFBean("foaf:Person")
+@RDFNamespaces({ "dsd = http://xmlns.com/dsd/0.1/", "persons = http://rdfbeans.viceversatech.com/test-ontology/persons/" })
+@RDFBean("dsd:Person")
 public class Person {
 
   private String id;
@@ -38,7 +38,7 @@ public class Person {
     this.id = id;
   }
 
-  @RDF("foaf:name")
+  @RDF("dsd:name")
   public String getName() {
     return name;
   }
@@ -47,7 +47,7 @@ public class Person {
     this.name = name;
   }
 
-  @RDF("foaf:mbox")
+  @RDF("dsd:mbox")
   public String getEmail() {
     return email;
   }
@@ -56,7 +56,7 @@ public class Person {
     this.email = email;
   }
 
-  @RDF("foaf:homepage")
+  @RDF("dsd:homepage")
   public URI getHomepage() {
     return homepage;
   }
@@ -65,7 +65,7 @@ public class Person {
     this.homepage = homepage;
   }
 
-  @RDF("foaf:birthday")
+  @RDF("dsd:birthday")
   public Date getBirthday() {
     return birthday;
   }
@@ -74,7 +74,7 @@ public class Person {
     this.birthday = birthday;
   }
 
-  @RDF("foaf:nick")
+  @RDF("dsd:nick")
   @RDFContainer(ContainerType.ALT)
   public String[] getNick() {
     return nick;
@@ -92,7 +92,7 @@ public class Person {
     this.nick[i] = nick;
   }
 
-  @RDF("foaf:knows")
+  @RDF("dsd:knows")
   public Collection<Person> getKnows() {
     return knows;
   }

@@ -13,8 +13,8 @@ import org.cyberborean.rdfbeans.annotations.RDFSubject;
  * 
  */
 
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", "bc = http://example.com/structures/blockchain/" })
-@RDFBean("foaf:Chain")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:Chain")
 public abstract class Chain {
   private int difficulty; // difficulty value (amount of zeroes in front of the hash)
   private static final int HASH_LEN = 64; // standard length for a 256 bit SHA-256 hash
@@ -41,7 +41,7 @@ public abstract class Chain {
    * 
    * @return the id
    */
-  @RDFSubject(prefix = "bc:")
+  @RDFSubject
   public String getId() {
     return id;
   }
@@ -60,7 +60,7 @@ public abstract class Chain {
    * 
    * @return difficulty
    */
-  @RDF("foaf:difficulty")
+  @RDF("dsd:hasDifficulty")
   public int getDifficulty() {
     return difficulty;
   }

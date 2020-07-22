@@ -19,10 +19,8 @@ import dqm.jku.trustkg.influxdb.InfluxDBConnection;
 import dqm.jku.trustkg.util.Constants;
 import dqm.jku.trustkg.util.Miscellaneous.DBType;
 
-
-
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
-@RDFBean("foaf:Datasource")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:Datasource")
 public class Datasource extends DSDElement {
 
 	private static final long serialVersionUID = 1L;
@@ -55,7 +53,7 @@ public class Datasource extends DSDElement {
 		this.prefix = prefix;
 	}
 
-	@RDF("foaf:concept")
+	@RDF("dsd:hasConcept")
 	@RDFContainer
 	public Set<Concept> getConcepts() {
 		return Collections.unmodifiableSet(concepts);
@@ -146,15 +144,15 @@ public class Datasource extends DSDElement {
 
 	public void fillBlockChain(BlockChain bc) {
 		if (bc == null) throw new IllegalArgumentException("Blockchain has to exist!");
-		bc.addBlock(new DSDBlock(bc.getPreviousHash(), this));
+		bc.addBlock(new DSDBlock(bc.getId(), bc.getPreviousHash(), this));
 		for (Concept c : concepts) {
 			c.fillBlockChain(bc);
 		}
 		for (Association a : associations) {
-			bc.addBlock(new DSDBlock(bc.getPreviousHash(), a));
+			bc.addBlock(new DSDBlock(bc.getId(), bc.getPreviousHash(), a));
 		}
 		for (Constraint c : constraints) {
-			bc.addBlock(new DSDBlock(bc.getPreviousHash(), c));
+			bc.addBlock(new DSDBlock(bc.getId(), bc.getPreviousHash(), c));
 		}
 
 	}

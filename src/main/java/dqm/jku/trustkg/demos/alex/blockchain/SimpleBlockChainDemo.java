@@ -15,17 +15,18 @@ public class SimpleBlockChainDemo {
   public static void main(String[] args) {
     // instanciate blockchain
     BlockChain blockchain = new BlockChain();
+    blockchain.setId("http://example.com/blockchain/demo1");
 
     // add our blocks to the blockchain ArrayList:
 
     System.out.println("Trying to Mine block 1... ");
-    blockchain.addBlock(new SimpleBlock("Hi im the first block", "0"));
+    blockchain.addBlock(new SimpleBlock(blockchain.getId(), "Hi im the first block", "0"));
 
     System.out.println("Trying to Mine block 2... ");
-    blockchain.addBlock(new SimpleBlock("Yo im the second block", blockchain.accessBlock(blockchain.chainSize() - 1).getHash()));
+    blockchain.addBlock(new SimpleBlock(blockchain.getId(), "Yo im the second block", blockchain.accessBlock(blockchain.chainSize() - 1).getHash()));
 
     System.out.println("Trying to Mine block 3... ");
-    blockchain.addBlock(new SimpleBlock("Hey im the third block", blockchain.accessBlock(blockchain.chainSize() - 1).getHash()));
+    blockchain.addBlock(new SimpleBlock(blockchain.getId(), "Hey im the third block", blockchain.accessBlock(blockchain.chainSize() - 1).getHash()));
 
     System.out.println("\nBlockchain is Valid: " + blockchain.isChainValid());
 

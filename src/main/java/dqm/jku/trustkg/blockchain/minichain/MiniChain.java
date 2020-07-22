@@ -5,6 +5,7 @@ import java.util.Objects;
 import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
+import org.cyberborean.rdfbeans.annotations.RDFSubject;
 
 import dqm.jku.trustkg.blockchain.Block;
 import dqm.jku.trustkg.blockchain.standardchain.BlockChain;
@@ -16,8 +17,8 @@ import dqm.jku.trustkg.blockchain.standardchain.BlockChain;
  * 
  */
 
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", "bc = http://example.com/structures/blockchain/" })
-@RDFBean("foaf:MiniChain")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:MiniChain")
 public class MiniChain extends BlockChain implements Comparable<MiniChain> {
   private String chainId = ""; // the id of the minichain
   private boolean isEmpty = true; // flag if the chain is empty yet
@@ -42,7 +43,7 @@ public class MiniChain extends BlockChain implements Comparable<MiniChain> {
    * 
    * @return the chainId
    */
-  @RDF("foaf:chainId")
+  @RDFSubject
   public String getChainId() {
     return chainId;
   }
@@ -61,7 +62,7 @@ public class MiniChain extends BlockChain implements Comparable<MiniChain> {
    * 
    * @return the isEmpty
    */
-  @RDF("foaf:isEmpty")
+  @RDF("dsd:isEmpty")
   public boolean isEmpty() {
     return isEmpty;
   }
@@ -130,7 +131,7 @@ public class MiniChain extends BlockChain implements Comparable<MiniChain> {
    * 
    * @return deleted flag
    */
-  @RDF
+  @RDF("dsd:isDeleted")
   public boolean isDeleted() {
     return isDeleted;
   }
@@ -149,7 +150,7 @@ public class MiniChain extends BlockChain implements Comparable<MiniChain> {
    * 
    * @return merged flag
    */
-  @RDF
+  @RDF("dsd:isMerged")
   public boolean isMerged() {
     return isMerged;
   }

@@ -16,6 +16,7 @@ import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.NumRows
 import dqm.jku.trustkg.util.FileSelectionUtil;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
+import static dqm.jku.trustkg.quality.profilingmetrics.MetricCategory.*;
 
 /**
  * Describes the metric PatternRecognition, which calculates hit rates for regex
@@ -24,15 +25,15 @@ import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
  * @author optimusseptim
  *
  */
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
-@RDFBean("foaf:PatternCounter")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:quality/structures/metrics/dataTypeInfo/PatternRecognition")
 public class PatternRecognition extends DependentProfileMetric {
   public PatternRecognition() {
 
   }
 
   public PatternRecognition(DataProfile d) {
-    super(pattern, d);
+    super(pattern, dti, d);
   }
 
   @Override

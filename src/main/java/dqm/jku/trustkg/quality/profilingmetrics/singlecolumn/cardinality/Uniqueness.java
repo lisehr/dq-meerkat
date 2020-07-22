@@ -11,6 +11,8 @@ import dqm.jku.trustkg.quality.profilingmetrics.DependentProfileMetric;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
+import static dqm.jku.trustkg.quality.profilingmetrics.MetricCategory.*;
+
 
 /**
  * Describes the metric Uniqueness, the Cardinality in relation to the number of
@@ -19,15 +21,15 @@ import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
  * @author optimusseptim
  *
  */
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
-@RDFBean("foaf:Uniqueness")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:quality/structures/metrics/cardinality/Uniqueness")
 public class Uniqueness extends DependentProfileMetric {
   public Uniqueness() {
 
   }
 
   public Uniqueness(DataProfile d) {
-    super(unique, d);
+    super(unique, cardCat, d);
   }
 
   /**

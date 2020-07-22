@@ -19,8 +19,8 @@ import dqm.jku.trustkg.blockchain.Chain;
  *
  */
 
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", "bc = http://example.com/structures/blockchain/" })
-@RDFBean("foaf:BlockChain")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:BlockChain")
 public class BlockChain extends Chain {
   private SortedSet<Block> blockChain = new TreeSet<>();
 
@@ -121,7 +121,7 @@ public class BlockChain extends Chain {
    * 
    * @return the blockChain
    */
-  @RDF("foaf:hasBlock")
+  @RDF("dsd:hasBlock")
   public SortedSet<Block> getBlockChain() {
     return blockChain;
   }

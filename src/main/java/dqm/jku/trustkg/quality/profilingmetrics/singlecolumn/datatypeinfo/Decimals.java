@@ -14,6 +14,8 @@ import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 
+import static dqm.jku.trustkg.quality.profilingmetrics.MetricCategory.*;
+
 /**
  * Describes the metric Decimals, which are the amount of digits after the
  * decimal point.
@@ -21,15 +23,15 @@ import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
  * @author optimusseptim
  *
  */
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
-@RDFBean("foaf:Decimals")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:quality/structures/metrics/dataTypeInfo/Decimals")
 public class Decimals extends ProfileMetric {
   public Decimals() {
 
   }
 
   public Decimals(DataProfile d) {
-    super(dec, d);
+    super(dec, dti, d);
   }
 
   @Override

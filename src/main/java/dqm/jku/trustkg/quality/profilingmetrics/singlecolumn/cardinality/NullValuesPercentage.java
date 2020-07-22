@@ -12,6 +12,9 @@ import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.DependentProfileMetric;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 
+import static dqm.jku.trustkg.quality.profilingmetrics.MetricCategory.*;
+
+
 /**
  * Describes the metric Null Values Percentage, which is the amount of Null
  * Values in relation to the data set size.
@@ -19,15 +22,15 @@ import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
  * @author optimusseptim
  *
  */
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
-@RDFBean("foaf:NullValuesPercentage")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:quality/structures/metrics/cardinality/NullValuesPercentage")
 public class NullValuesPercentage extends DependentProfileMetric {
   public NullValuesPercentage() {
 
   }
 
   public NullValuesPercentage(DataProfile d) {
-    super(nullValP, d);
+    super(nullValP, cardCat, d);
   }
 
   @Override

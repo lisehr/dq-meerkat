@@ -18,8 +18,8 @@ public abstract class DependentProfileMetric extends ProfileMetric {
 
   }
 
-  public DependentProfileMetric(MetricTitle title, DataProfile refProf) {
-    super(title, refProf);
+  public DependentProfileMetric(MetricTitle title, MetricCategory cat, DataProfile refProf) {
+    super(title, cat, refProf);
     this.dependencyCheck();
   }
 

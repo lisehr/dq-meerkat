@@ -15,6 +15,8 @@ import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.NumRows
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
+import static dqm.jku.trustkg.quality.profilingmetrics.MetricCategory.*;
+
 
 /**
  * Describes the metric Average, where the average of all values in an Attribute
@@ -23,15 +25,15 @@ import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
  * @author optimusseptim
  *
  */
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
-@RDFBean("foaf:Average")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:quality/structures/metrics/dataTypeInfo/Average")
 public class Average extends DependentProfileMetric {
   public Average() {
 
   }
 
   public Average(DataProfile d) {
-    super(avg, d);
+    super(avg, dti, d);
   }
 
   @Override

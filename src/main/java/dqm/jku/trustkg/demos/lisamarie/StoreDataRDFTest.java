@@ -87,7 +87,7 @@ public class StoreDataRDFTest {
 
       manager.add(ds);
 
-      BlockChain bc = new BlockChain(2, "test");
+      BlockChain bc = new BlockChain(2, "http://example.com/blockchain/DeviceVoltageBC");
       ds.fillBlockChain(bc);
       System.out.println(bc.isChainValid());
 
@@ -103,9 +103,14 @@ public class StoreDataRDFTest {
           Statement st = bcResult.next();
          System.out.println("db contains blockchain data: " + st);
         }
+
       }
 
       finally {
+    	testRep.shutDown();
+    	bcRep.shutDown(); 
+    	repConn.close();
+    	bcConn.close();
         db.close();
       }
 

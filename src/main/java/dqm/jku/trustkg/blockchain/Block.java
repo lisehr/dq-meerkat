@@ -16,8 +16,8 @@ import dqm.jku.trustkg.util.HashingUtils;
  * @author optimusseptim
  *
  */
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", "block = http://example.com/structures/block/" })
-@RDFBean("foaf:Block")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:structures/Block")
 public abstract class Block implements Comparable<Block> {
   private String hash; // hash of the current block
   private String previousHash; // hash of the previous block
@@ -29,17 +29,17 @@ public abstract class Block implements Comparable<Block> {
 
   }
 
-  public Block(String previousHash) {
+  public Block(String chainId, String previousHash) {
     if (previousHash == null) throw new IllegalArgumentException("Previous hash value must be existing!");
     this.previousHash = previousHash;
-    this.id = previousHash;
+    this.id = chainId + '/' + previousHash;
     this.timeStamp = System.currentTimeMillis();
   }
 
-  public Block(String previousHash, DSDElement data) {
+  public Block(String chainId, String previousHash, DSDElement data) {
     if (previousHash == null || data == null) throw new IllegalArgumentException("Previous hash value must be existing!");
     this.previousHash = previousHash;
-    this.id = data.getURI() + "/" + previousHash;
+    this.id = chainId + '/' + previousHash;
     this.timeStamp = System.currentTimeMillis();
   }
 
@@ -48,7 +48,7 @@ public abstract class Block implements Comparable<Block> {
    * 
    * @return the id
    */
-  @RDFSubject(prefix = "block:")
+  @RDFSubject
   public String getId() {
     return id;
   }
@@ -67,7 +67,7 @@ public abstract class Block implements Comparable<Block> {
    * 
    * @return hash
    */
-  @RDF("foaf:hash")
+  @RDF("dsd:hasHash")
   public String getHash() {
     return hash;
   }
@@ -93,7 +93,7 @@ public abstract class Block implements Comparable<Block> {
    * 
    * @return previous hash
    */
-  @RDF("foaf:prevHash")
+  @RDF("dsd:hasPrevHash")
   public String getPreviousHash() {
     return previousHash;
   }
@@ -112,7 +112,7 @@ public abstract class Block implements Comparable<Block> {
    * 
    * @return timestamp
    */
-  @RDF("foaf:timestamp")
+  @RDF("dsd:hasTimestamp")
   public long getTimeStamp() {
     return timeStamp;
   }
@@ -131,7 +131,7 @@ public abstract class Block implements Comparable<Block> {
    * 
    * @return nonce
    */
-  @RDF("foaf:nonce")
+  @RDF("dsd:hasNonce")
   public int getNonce() {
     return nonce;
   }

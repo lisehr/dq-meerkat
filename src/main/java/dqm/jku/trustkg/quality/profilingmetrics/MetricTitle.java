@@ -11,8 +11,8 @@ import org.cyberborean.rdfbeans.annotations.RDFSubject;
  * @author optimusseptim
  *
  */
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
-@RDFBean("foaf:MetricTitle")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:quality/structures/MetricTitle")
 public enum MetricTitle {
   card("Cardinality"),
   nullVal("# Null Values"),
@@ -52,12 +52,12 @@ public enum MetricTitle {
    * 
    * @return label
    */
-  @RDF("foaf:label")
+  @RDF("dsd:hasLabel")
   public String getLabel() {
     return label;
   }
   
-  @RDFSubject(prefix = "http://example.com/Metrictitles/")
+  @RDFSubject(prefix = "dsd:quality/structures/MetricTitle/")
   public String getUri() {
 	  return getLabel().replaceAll("\\s+", "");
   }

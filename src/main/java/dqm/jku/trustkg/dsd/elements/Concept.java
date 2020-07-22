@@ -22,8 +22,8 @@ import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.influxdb.InfluxDBConnection;
 import dqm.jku.trustkg.util.AttributeSet;
 
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
-@RDFBean("foaf:Concept")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:Concept")
 public class Concept extends DSDElement {
 
   private static final long serialVersionUID = 1L;
@@ -77,7 +77,7 @@ public class Concept extends DSDElement {
     this.foreignKeys = foreignKeys;
   }
 
-  @RDF("foaf:hasDatasource")
+  @RDF("dsd:hasDatasource")
   public Datasource getDatasource() {
     return datasource;
   }
@@ -86,7 +86,7 @@ public class Concept extends DSDElement {
     return new AttributeSet(attributes);
   }
   
-  @RDF("foaf:hasAttribute")
+  @RDF("dsd:hasAttribute")
   @RDFContainer
   public HashSet<Attribute> getAttributeList(){
 	  return attributes;
@@ -109,7 +109,7 @@ public class Concept extends DSDElement {
     return this.getAttribute(attribute) != null;
   }
 
-  @RDF("foaf:hasPK")
+  @RDF("dsd:hasPrimaryKey")
   @RDFContainer
   public HashSet<Attribute> getPrimaryKeySet(){
 	return primaryKeys;  
@@ -145,7 +145,7 @@ public class Concept extends DSDElement {
     return list;
   }
 
-  @RDF("foaf:hasFD")
+  @RDF("dsd:hasFD")
   @RDFContainer
   public List<FunctionalDependency> getFunctionalDependencies() {
     return Collections.unmodifiableList(functionalDependencies);
@@ -182,7 +182,7 @@ public class Concept extends DSDElement {
     return res;
   }
 
-  @RDF("foaf:hasFK")
+  @RDF("dsd:hasForeignKey")
   @RDFContainer
   public Set<ForeignKey> getForeignKeys() {
     return Collections.unmodifiableSet(foreignKeys);
@@ -205,9 +205,9 @@ public class Concept extends DSDElement {
   }
 
   public void fillBlockChain(BlockChain bc) {
-    bc.addBlock(new DSDBlock(bc.getPreviousHash(), this));
+    bc.addBlock(new DSDBlock(bc.getId(), bc.getPreviousHash(), this));
     for (Attribute a : attributes) {
-      bc.addBlock(new DSDBlock(bc.getPreviousHash(), a));
+      bc.addBlock(new DSDBlock(bc.getId(), bc.getPreviousHash(), a));
     }
   }
 

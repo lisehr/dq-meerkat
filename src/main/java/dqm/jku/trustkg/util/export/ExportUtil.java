@@ -33,26 +33,26 @@ public class ExportUtil {
   private static final String EXPORT_REPORT = "report/";
 
 	static {
-		LABELS.add(new LabelTriple<>(numrows, cardCat.label(), numrows.getLabel()));
-		LABELS.add(new LabelTriple<>(nullVal, cardCat.label(), nullVal.getLabel()));
-		LABELS.add(new LabelTriple<>(nullValP, cardCat.label(), nullValP.getLabel()));
-		LABELS.add(new LabelTriple<>(card, cardCat.label(), card.getLabel()));
-		LABELS.add(new LabelTriple<>(unique, cardCat.label(), unique.getLabel()));
+		LABELS.add(new LabelTriple<>(numrows, cardCat.getLabel(), numrows.getLabel()));
+		LABELS.add(new LabelTriple<>(nullVal, cardCat.getLabel(), nullVal.getLabel()));
+		LABELS.add(new LabelTriple<>(nullValP, cardCat.getLabel(), nullValP.getLabel()));
+		LABELS.add(new LabelTriple<>(card, cardCat.getLabel(), card.getLabel()));
+		LABELS.add(new LabelTriple<>(unique, cardCat.getLabel(), unique.getLabel()));
 
-		LABELS.add(new LabelTriple<>(bt, dti.label(), bt.getLabel()));
-		LABELS.add(new LabelTriple<>(dt, dti.label(), dt.getLabel()));
-		LABELS.add(new LabelTriple<>(min, dti.label(), min.getLabel()));
-		LABELS.add(new LabelTriple<>(max, dti.label(), max.getLabel()));
-		LABELS.add(new LabelTriple<>(avg, dti.label(), avg.getLabel()));
-		LABELS.add(new LabelTriple<>(med, dti.label(), med.getLabel()));
-		LABELS.add(new LabelTriple<>(dig, dti.label(), dig.getLabel()));
-		LABELS.add(new LabelTriple<>(dec, dti.label(), "# Decimals"));
+		LABELS.add(new LabelTriple<>(bt, dti.getLabel(), bt.getLabel()));
+		LABELS.add(new LabelTriple<>(dt, dti.getLabel(), dt.getLabel()));
+		LABELS.add(new LabelTriple<>(min, dti.getLabel(), min.getLabel()));
+		LABELS.add(new LabelTriple<>(max, dti.getLabel(), max.getLabel()));
+		LABELS.add(new LabelTriple<>(avg, dti.getLabel(), avg.getLabel()));
+		LABELS.add(new LabelTriple<>(med, dti.getLabel(), med.getLabel()));
+		LABELS.add(new LabelTriple<>(dig, dti.getLabel(), dig.getLabel()));
+		LABELS.add(new LabelTriple<>(dec, dti.getLabel(), "# Decimals"));
 
-		LABELS.add(new LabelTriple<>(histCls, histCat.label(), "# Classes"));
-		LABELS.add(new LabelTriple<>(histCR, histCat.label(), histCR.getLabel()));
-		LABELS.add(new LabelTriple<>(histVal, histCat.label(), histVal.getLabel()));
+		LABELS.add(new LabelTriple<>(histCls, histCat.getLabel(), "# Classes"));
+		LABELS.add(new LabelTriple<>(histCR, histCat.getLabel(), histCR.getLabel()));
+		LABELS.add(new LabelTriple<>(histVal, histCat.getLabel(), histVal.getLabel()));
 
-		LABELS.add(new LabelTriple<>(keyCand, depend.label(), keyCand.getLabel()));
+		LABELS.add(new LabelTriple<>(keyCand, depend.getLabel(), keyCand.getLabel()));
 	}
 
 	/**

@@ -63,7 +63,7 @@ public class TestDSDBlockChain {
     System.out.println("Starting with Blockchain creation test");
     long sTime = System.currentTimeMillis();
     for (DSDElement e : elements) {
-      bC.addBlock(new DSDBlock(bC.getPreviousHash(), e));
+      bC.addBlock(new DSDBlock(bC.getId(), bC.getPreviousHash(), e));
       System.out.println("Added block with element: " + e.getURI());
     }
     long eTime = System.currentTimeMillis();

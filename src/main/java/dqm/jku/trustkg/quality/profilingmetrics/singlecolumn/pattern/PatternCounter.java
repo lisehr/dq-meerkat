@@ -15,8 +15,8 @@ import org.cyberborean.rdfbeans.annotations.RDFSubject;
  * @author optimusseptim
  *
  */
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
-@RDFBean("foaf:PatternCounter")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:quality/structures/PatternCounter")
 public class PatternCounter {
   private Pattern pattern; // pattern object
   private String altPattern; // string representation of pattern
@@ -61,7 +61,7 @@ public class PatternCounter {
    * 
    * @return pattern string
    */
-  @RDF("foaf:pattern")
+  @RDF("dsd:hasPattern")
   public String getPatternString() {
 	  return pattern.toString();
   }
@@ -90,7 +90,7 @@ public class PatternCounter {
    * 
    * @return counter value
    */
-  @RDF("foaf:cnt")
+  @RDF("dsd:hasCount")
   public int getCnt() {
     return cnt;
   }

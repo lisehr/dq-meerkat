@@ -11,8 +11,8 @@ import org.cyberborean.rdfbeans.annotations.RDFSubject;
  * @author optimusseptim
  *
  */
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
-@RDFBean("foaf:FrequencyClass")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:quality/structures/FrequencyClass")
 public class FrequencyClass implements Comparable<FrequencyClass> {
   private int classNo; // number of class
   private int frequency; // amount of hits in class
@@ -43,7 +43,7 @@ public class FrequencyClass implements Comparable<FrequencyClass> {
    * 
    * @return the classNo
    */
-  @RDF("foaf:classNo")
+  @RDF("dsd:hasClassNo")
   public int getClassNo() {
     return classNo;
   }
@@ -62,7 +62,7 @@ public class FrequencyClass implements Comparable<FrequencyClass> {
    * 
    * @return the frequency
    */
-  @RDF("foaf:frequency")
+  @RDF("dsd:hasFrequency")
   public int getFrequency() {
     return frequency;
   }

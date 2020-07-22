@@ -18,8 +18,8 @@ import org.cyberborean.rdfbeans.annotations.RDFSubject;
  * @author optimusseptim
  *
  */
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
-@RDFBean("foaf:SerializableFrequencyMap")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:quality/structures/SerializableFrequencyMap")
 public class SerializableFrequencyMap {
   private Set<FrequencyClass> classes = new HashSet<>();
   private String uri;
@@ -68,7 +68,7 @@ public class SerializableFrequencyMap {
    * 
    * @return the classes
    */
-  @RDF("foaf:hasClass")
+  @RDF("dsd:hasClass")
   @RDFContainer
   public Set<FrequencyClass> getClasses() {
     return classes;
