@@ -7,6 +7,9 @@ import static dqm.jku.trustkg.quality.profilingmetrics.MetricCategory.dti;
 
 import java.util.List;
 
+import org.cyberborean.rdfbeans.annotations.RDFBean;
+import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
+
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordList;
@@ -16,6 +19,8 @@ import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.NumRows;
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
 
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:quality/structures/metrics/dataTypeInfo/StandardDeviation")
 public class StandardDeviation extends DependentProfileMetric {
 	public StandardDeviation() {
 
@@ -54,10 +59,10 @@ public class StandardDeviation extends DependentProfileMetric {
 	private Object addValue(Object current, Object toAdd, Object avg) {
 		if (toAdd == null) return current;
 		Attribute a = (Attribute) super.getRefElem();
-		if (a.getDataType().equals(Long.class)) return (long) current + (((Number) toAdd).longValue() - ((Number) avg).longValue()) * (((Number) toAdd).longValue() - ((Number) avg).longValue());
-		else if (a.getDataType().equals(Double.class)) return (double) current + (((Number) toAdd).doubleValue() - ((Number) avg).doubleValue()) * (((Number) toAdd).doubleValue() - ((Number) avg).doubleValue());
-		else if (toAdd.getClass().equals(String.class)) return (int) current + (((String) toAdd).length() - ((String) avg).length()) * (((String) toAdd).length() - ((String) avg).length());
-		else return (int) current + ((int) toAdd - (int) avg) * ((int) toAdd - (int) avg);
+		if (a.getDataType().equals(Long.class)) return (long) current + ((((Number) toAdd).longValue() - ((Number) avg).longValue()) * (((Number) toAdd).longValue() - ((Number) avg).longValue()));
+		else if (a.getDataType().equals(Double.class)) return (double) current + ((((Number) toAdd).doubleValue() - ((Number) avg).doubleValue()) * (((Number) toAdd).doubleValue() - ((Number) avg).doubleValue()));
+		else if (toAdd.getClass().equals(String.class)) return (int) current + ((((String) toAdd).length() - ((String) avg).length()) * (((String) toAdd).length() - ((String) avg).length()));
+		else return (int) current + (((int) toAdd - (int) avg) * ((int) toAdd - (int) avg));
 	}
 
 	/**
