@@ -36,6 +36,7 @@ public class FileSelectionUtil {
     // for the demo
     Stream<Path> paths = Files.walk(Paths.get(PREFIX + CSV));
     List<Path> files = paths.collect(Collectors.toList());
+    files = files.subList(1, files.size());
     paths.close();
 
     return new ConnectorCSV(files.get(index).toString(), ",", "\n", FilenameUtils.removeExtension(files.get(index).getFileName().toString()), true);

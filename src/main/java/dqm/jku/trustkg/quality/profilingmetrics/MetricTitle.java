@@ -27,6 +27,7 @@ public enum MetricTitle {
   max("Maximum"),
   med("Median"),
   min("Minimum"),
+  sd("Standard Deviation"),
   pattern("Pattern recognition"),
   bt("Basic type"),
   dt("Data type"),

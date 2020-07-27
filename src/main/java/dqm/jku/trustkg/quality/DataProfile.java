@@ -181,6 +181,9 @@ public class DataProfile {
         metrics.add(basicType);
         ProfileMetric dataType = new DataType(this);
         metrics.add(dataType);
+        // experimental metrics
+        ProfileMetric standardDev = new StandardDeviation(this);
+        metrics.add(standardDev);
       } else {
         System.err.println("Attribute '" + a.getLabel() + "' has data type '" + a.getDataTypeString() + "', which is currently not handled. ");
       }
