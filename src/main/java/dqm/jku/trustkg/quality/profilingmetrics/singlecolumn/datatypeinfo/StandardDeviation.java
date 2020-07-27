@@ -61,16 +61,16 @@ public class StandardDeviation extends DependentProfileMetric {
 	}
 
 	/**
-	 * Method for getting the average value of the objects
+	 * Method for getting the square root of the average value of the objects
 	 * 
 	 * @param sum the sum of values
-	 * @return the average value
+	 * @return the square root of the average value 
 	 */
 	private Object performAveraging(Object sum) {
 		Attribute a = (Attribute) super.getRefElem();
-		if (a.getDataType().equals(Long.class)) return (long) sum / ((int) super.getRefProf().getMetric(numrows).getValue() - 1);
-		else if (a.getDataType().equals(Double.class)) return (double) sum / ((int) super.getRefProf().getMetric(numrows).getValue() - 1);
-		return (int) sum / ((int) super.getRefProf().getMetric(numrows).getValue() - 1);
+		if (a.getDataType().equals(Long.class)) return (((long) sum / ((int) super.getRefProf().getMetric(numrows).getValue() - 1)) ^ (1/2));
+		else if (a.getDataType().equals(Double.class)) return Math.sqrt(((double) sum / ((int) super.getRefProf().getMetric(numrows).getValue() - 1)));
+		return ((int) sum / ((int) super.getRefProf().getMetric(numrows).getValue() - 1)) ^ (1/2);
 	}
 
 	@Override
