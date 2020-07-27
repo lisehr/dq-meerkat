@@ -72,7 +72,7 @@ public class StoreDataRDFSourceSelector {
 			// annotating the data quality profile
 			for (Concept c : ds.getConcepts()) {
 				System.out.println(c.getURI());
-				RecordList rs = conn.getRecordList(c);
+				RecordList rs = conn.getPartialRecordList(c, 0, 5000);
 				for (Attribute a : c.getAttributes()) {
 					a.annotateProfile(rs);
 
