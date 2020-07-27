@@ -5,6 +5,7 @@ import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.avg;
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.sd;
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricCategory.dti;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import org.cyberborean.rdfbeans.annotations.RDFBean;
@@ -45,7 +46,6 @@ public class StandardDeviation extends DependentProfileMetric {
 
 		Attribute a = (Attribute) super.getRefElem();
 		this.setValueClass(a.getDataType());
-
 	}
 
 	/**
@@ -59,23 +59,41 @@ public class StandardDeviation extends DependentProfileMetric {
 	private Object addValue(Object current, Object toAdd, Object avg) {
 		if (toAdd == null) return current;
 		Attribute a = (Attribute) super.getRefElem();
-		if (a.getDataType().equals(Long.class)) return (long) current + ((((Number) toAdd).longValue() - ((Number) avg).longValue()) * (((Number) toAdd).longValue() - ((Number) avg).longValue()));
-		else if (a.getDataType().equals(Double.class)) return (double) current + ((((Number) toAdd).doubleValue() - ((Number) avg).doubleValue()) * (((Number) toAdd).doubleValue() - ((Number) avg).doubleValue()));
-		else if (toAdd.getClass().equals(String.class)) return (int) current + ((((String) toAdd).length() - ((String) avg).length()) * (((String) toAdd).length() - ((String) avg).length()));
-		else return (int) current + (((int) toAdd - (int) avg) * ((int) toAdd - (int) avg));
+		if (a.getDataType().equals(Long.class)) return (long) current + powerN(((((Number) toAdd).longValue() - ((Number) avg).longValue())), 2);
+		else if (a.getDataType().equals(Double.class)) return (double) current + Math.pow((((Number) toAdd).doubleValue() - ((Number) avg).doubleValue()), 2);
+		else if (a.getClass().equals(String.class)) return (int) current + (int) Math.pow((double)(((String) toAdd).length() - ((String) avg).length()), 2);
+		else return (intToBigInteger(current).add(intToBigInteger(toAdd).subtract(intToBigInteger(avg)).pow(2)));
+	}
+	
+	private BigInteger intToBigInteger(Object i) {
+		if (i.getClass().equals(BigInteger.class)) return (BigInteger) i;
+		return BigInteger.valueOf((int) i);
+	}
+
+	private long powerN(long number, int power) {
+		long res = 1;
+		long sq = number;
+		while (power > 0) {
+			if (power % 2 == 1) {
+				res *= sq;
+			}
+			sq = sq * sq;
+			power /= 2;
+		}
+		return res;
 	}
 
 	/**
 	 * Method for getting the square root of the average value of the objects
 	 * 
 	 * @param sum the sum of values
-	 * @return the square root of the average value 
+	 * @return the square root of the average value
 	 */
 	private Object performAveraging(Object sum) {
 		Attribute a = (Attribute) super.getRefElem();
-		if (a.getDataType().equals(Long.class)) return (((long) sum / ((int) super.getRefProf().getMetric(numrows).getValue() - 1)) ^ (1/2));
+		if (a.getDataType().equals(Long.class)) return Math.sqrt((((long) sum / ((int) super.getRefProf().getMetric(numrows).getValue() - 1))));
 		else if (a.getDataType().equals(Double.class)) return Math.sqrt(((double) sum / ((int) super.getRefProf().getMetric(numrows).getValue() - 1)));
-		return ((int) sum / ((int) super.getRefProf().getMetric(numrows).getValue() - 1)) ^ (1/2);
+		return Math.sqrt((intToBigInteger(sum).divide((intToBigInteger(super.getRefProf().getMetric(numrows).getValue())).subtract(BigInteger.ONE)).doubleValue()));
 	}
 
 	@Override
