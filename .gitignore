@@ -1,6 +1,6 @@
 /target/*
 /src/main/java/dqm/jku/trustkg/resources/csv/Telematic*
-/src/main/java/dqm/jku/trustkg/resources/export/csv/Acceleration*
+/src/main/java/dqm/jku/trustkg/resources/csv/Acceleration*
 /src/main/java/dqm/jku/trustkg/resources/export/csv/Tributech*
 /src/main/java/dqm/jku/trustkg/resources/export/csv/export_telematic*
 /src/main/java/dqm/jku/trustkg/resources/export/csv/export_Acceleration*
