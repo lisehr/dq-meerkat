@@ -62,10 +62,10 @@ public class StoreDataRDFSourceSelector {
 		      
 
 		      // activate for first time creation
-		      db.createRepositoryIfNotExists("test" + FILENO);
+		      db.createRepositoryIfNotExists("kg-repo");
 
 		      // two separate repositories for the data and the blockchain
-		      Repository bcRep = db.getRepository("test" + FILENO);
+		      Repository bcRep = db.getRepository("kg-repo");
 		      RepositoryConnection bcConn = bcRep.getConnection();
 
 		      RDFBeanManager bcmanager = new RDFBeanManager(bcConn);
