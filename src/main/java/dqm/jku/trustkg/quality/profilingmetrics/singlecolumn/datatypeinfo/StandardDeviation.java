@@ -45,7 +45,7 @@ public class StandardDeviation extends DependentProfileMetric {
 		this.setValue(val);
 
 		Attribute a = (Attribute) super.getRefElem();
-		this.setValueClass(a.getDataType());
+		this.setValueClass(Double.class);
 	}
 
 	/**
@@ -121,7 +121,7 @@ public class StandardDeviation extends DependentProfileMetric {
 
 		}
 		Attribute a = (Attribute) super.getRefElem();
-		this.setValueClass(a.getDataType());
+		this.setValueClass(Double.class);
 	}
 
 	@Override

@@ -3,7 +3,6 @@ package dqm.jku.trustkg.demos.lisamarie;
 import java.io.IOException;
 
 import org.cyberborean.rdfbeans.RDFBeanManager;
-import org.cyberborean.rdfbeans.exceptions.RDFBeanException;
 import org.eclipse.rdf4j.model.Model;
 import org.eclipse.rdf4j.model.Resource;
 import org.eclipse.rdf4j.model.Statement;
@@ -11,7 +10,6 @@ import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.model.vocabulary.RDF;
 import org.eclipse.rdf4j.repository.Repository;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
-import org.eclipse.rdf4j.repository.RepositoryException;
 import org.eclipse.rdf4j.repository.RepositoryResult;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
@@ -34,7 +32,12 @@ public class StoreDataRDFSourceSelector {
 
 		// Create Schema from it
 		Datasource ds;
-		try {
+		Repository bcRep = null;
+		RepositoryConnection bcConn = null;
+		RepositoryResult<Statement> result = null;
+		
+		try (EmbeddedGraphDB db = new dqm.jku.trustkg.graphdb.EmbeddedGraphDB("test2")) {
+
 			ds = conn.loadSchema();
 
 			ModelBuilder builder = new ModelBuilder();
@@ -58,14 +61,12 @@ public class StoreDataRDFSourceSelector {
 				Rio.write(m.filter(null, null, null, context), System.out, RDFFormat.TURTLE);
 			}
 
-			EmbeddedGraphDB db = new dqm.jku.trustkg.graphdb.EmbeddedGraphDB("test2");
-
 			// activate for first time creation
 			db.createRepositoryIfNotExists("kg-repo");
 
 			// two separate repositories for the data and the blockchain
-			Repository bcRep = db.getRepository("kg-repo");
-			RepositoryConnection bcConn = bcRep.getConnection();
+			bcRep = db.getRepository("kg-repo");
+			bcConn = bcRep.getConnection();
 
 			RDFBeanManager bcmanager = new RDFBeanManager(bcConn);
 
@@ -88,28 +89,18 @@ public class StoreDataRDFSourceSelector {
 
 			bcmanager.add(bc);
 
+			result = bcConn.getStatements(null, null, null);
+
 			// proof that the data + blockchain have been stored in the database
-			try (RepositoryResult<Statement> result = bcConn.getStatements(null, null, null)) {
-				while (result.hasNext()) {
-					Statement st = result.next();
-					System.out.println("db contains data: " + st);
-				}
+			while (result.hasNext()) {
+				Statement st = result.next();
+				System.out.println("db contains data: " + st);
 			}
-
-			finally {
-				db.close();
-			}
-
 		} catch (IOException e) {
 			System.err.println("Could not load Schema!");
-		} catch (RepositoryException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (RDFBeanException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} 
 		}
-
-	}
-
 }

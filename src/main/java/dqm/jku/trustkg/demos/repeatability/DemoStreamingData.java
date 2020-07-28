@@ -24,7 +24,7 @@ import dqm.jku.trustkg.util.FileSelectionUtil;
  *
  */
 public class DemoStreamingData {
-  private static final int FILEINDEX = 14;
+  private static final int FILEINDEX = 1;
   private static final boolean DEBUG = false;
 
   public static void main(String args[]) throws IOException, InterruptedException, NoSuchMethodException {

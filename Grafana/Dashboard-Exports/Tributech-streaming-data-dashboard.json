@@ -1,4 +1,19 @@
 {
+  "__inputs": [],
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "6.2.5"
+    },
+    {
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph",
+      "version": ""
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -16,7 +31,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 2,
+  "id": null,
   "links": [],
   "panels": [
     {
@@ -88,7 +103,7 @@
       "targets": [
         {
           "groupBy": [],
-          "measurement": "telematic_device_report_acceleration",
+          "measurement": "Acceleration",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -97,7 +112,7 @@
             [
               {
                 "params": [
-                  "acceleration forward or braking"
+                  "ForwardOrBraking"
                 ],
                 "type": "field"
               }
@@ -108,7 +123,7 @@
         {
           "alias": "average",
           "groupBy": [],
-          "measurement": "http://example.com/Telematic_device_report_acceleration/Telematic_device_report_acceleration/Acceleration forward or braking",
+          "measurement": "http://example.com/Acceleration/Acceleration/ForwardOrBraking",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -128,7 +143,7 @@
         {
           "alias": "maximum",
           "groupBy": [],
-          "measurement": "http://example.com/Telematic_device_report_acceleration/Telematic_device_report_acceleration/Acceleration forward or braking",
+          "measurement": "http://example.com/Acceleration/Acceleration/ForwardOrBraking",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "C",
@@ -148,7 +163,7 @@
         {
           "alias": "minimum",
           "groupBy": [],
-          "measurement": "http://example.com/Telematic_device_report_acceleration/Telematic_device_report_acceleration/Acceleration forward or braking",
+          "measurement": "http://example.com/Acceleration/Acceleration/ForwardOrBraking",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "D",
@@ -168,7 +183,7 @@
         {
           "alias": "median",
           "groupBy": [],
-          "measurement": "http://example.com/Telematic_device_report_acceleration/Telematic_device_report_acceleration/Acceleration forward or braking",
+          "measurement": "http://example.com/Acceleration/Acceleration/ForwardOrBraking",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "E",
@@ -178,6 +193,27 @@
               {
                 "params": [
                   "Median"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "standard deviation",
+          "groupBy": [],
+          "hide": false,
+          "measurement": "http://example.com/Acceleration/Acceleration/ForwardOrBraking",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Standard Deviation"
                 ],
                 "type": "field"
               }
@@ -294,7 +330,7 @@
       "targets": [
         {
           "groupBy": [],
-          "measurement": "telematic_device_report_acceleration",
+          "measurement": "Acceleration",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -303,7 +339,7 @@
             [
               {
                 "params": [
-                  "acceleration side to side"
+                  "SideToSide"
                 ],
                 "type": "field"
               }
@@ -314,7 +350,7 @@
         {
           "alias": "average",
           "groupBy": [],
-          "measurement": "http://example.com/Telematic_device_report_acceleration/Telematic_device_report_acceleration/Acceleration side to side",
+          "measurement": "http://example.com/Acceleration/Acceleration/SideToSide",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -334,7 +370,7 @@
         {
           "alias": "maximum",
           "groupBy": [],
-          "measurement": "http://example.com/Telematic_device_report_acceleration/Telematic_device_report_acceleration/Acceleration side to side",
+          "measurement": "http://example.com/Acceleration/Acceleration/SideToSide",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "C",
@@ -354,7 +390,7 @@
         {
           "alias": "minimum",
           "groupBy": [],
-          "measurement": "http://example.com/Telematic_device_report_acceleration/Telematic_device_report_acceleration/Acceleration side to side",
+          "measurement": "http://example.com/Acceleration/Acceleration/SideToSide",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "E",
@@ -374,7 +410,7 @@
         {
           "alias": "median",
           "groupBy": [],
-          "measurement": "http://example.com/Telematic_device_report_acceleration/Telematic_device_report_acceleration/Acceleration side to side",
+          "measurement": "http://example.com/Acceleration/Acceleration/SideToSide",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "D",
@@ -384,6 +420,26 @@
               {
                 "params": [
                   "Median"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "standard deviation",
+          "groupBy": [],
+          "measurement": "http://example.com/Acceleration/Acceleration/SideToSide",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Standard Deviation"
                 ],
                 "type": "field"
               }
@@ -498,7 +554,7 @@
       "targets": [
         {
           "groupBy": [],
-          "measurement": "telematic_device_report_acceleration",
+          "measurement": "Acceleration",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -507,7 +563,7 @@
             [
               {
                 "params": [
-                  "acceleration up down"
+                  "UpDown"
                 ],
                 "type": "field"
               }
@@ -518,7 +574,7 @@
         {
           "alias": "average",
           "groupBy": [],
-          "measurement": "http://example.com/Telematic_device_report_acceleration/Telematic_device_report_acceleration/Acceleration up down",
+          "measurement": "http://example.com/Acceleration/Acceleration/UpDown",
           "orderByTime": "ASC",
           "policy": "default",
           "query": "SELECT \"Average\" FROM \"http://example.com/Test/Test/Acceleration up down\" WHERE $timeFilter",
@@ -540,7 +596,7 @@
         {
           "alias": "maximum",
           "groupBy": [],
-          "measurement": "http://example.com/Telematic_device_report_acceleration/Telematic_device_report_acceleration/Acceleration up down",
+          "measurement": "http://example.com/Acceleration/Acceleration/UpDown",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "C",
@@ -560,7 +616,7 @@
         {
           "alias": "minimum",
           "groupBy": [],
-          "measurement": "http://example.com/Telematic_device_report_acceleration/Telematic_device_report_acceleration/Acceleration up down",
+          "measurement": "http://example.com/Acceleration/Acceleration/UpDown",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "D",
@@ -580,7 +636,7 @@
         {
           "alias": "median",
           "groupBy": [],
-          "measurement": "http://example.com/Telematic_device_report_acceleration/Telematic_device_report_acceleration/Acceleration up down",
+          "measurement": "http://example.com/Acceleration/Acceleration/UpDown",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "E",
@@ -590,6 +646,26 @@
               {
                 "params": [
                   "Median"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "standard deviation",
+          "groupBy": [],
+          "measurement": "http://example.com/Acceleration/Acceleration/UpDown",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Standard Deviation"
                 ],
                 "type": "field"
               }
@@ -704,7 +780,7 @@
       "targets": [
         {
           "groupBy": [],
-          "measurement": "telematic_device_report_acceleration",
+          "measurement": "Acceleration",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -713,7 +789,7 @@
             [
               {
                 "params": [
-                  "controller"
+                  "Controller"
                 ],
                 "type": "field"
               }
@@ -724,7 +800,7 @@
         {
           "alias": "average",
           "groupBy": [],
-          "measurement": "http://example.com/Telematic_device_report_acceleration/Telematic_device_report_acceleration/Controller",
+          "measurement": "http://example.com/Acceleration/Acceleration/Controller",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -744,7 +820,7 @@
         {
           "alias": "maximum",
           "groupBy": [],
-          "measurement": "http://example.com/Telematic_device_report_acceleration/Telematic_device_report_acceleration/Controller",
+          "measurement": "http://example.com/Acceleration/Acceleration/Controller",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "C",
@@ -764,7 +840,7 @@
         {
           "alias": "median",
           "groupBy": [],
-          "measurement": "http://example.com/Telematic_device_report_acceleration/Telematic_device_report_acceleration/Controller",
+          "measurement": "http://example.com/Acceleration/Acceleration/Controller",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "D",
@@ -784,7 +860,7 @@
         {
           "alias": "minimum",
           "groupBy": [],
-          "measurement": "http://example.com/Telematic_device_report_acceleration/Telematic_device_report_acceleration/Controller",
+          "measurement": "http://example.com/Acceleration/Acceleration/Controller",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "E",
@@ -794,6 +870,26 @@
               {
                 "params": [
                   "Minimum"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "standard deviation",
+          "groupBy": [],
+          "measurement": "http://example.com/Acceleration/Acceleration/Controller",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Standard Deviation"
                 ],
                 "type": "field"
               }
@@ -881,7 +977,7 @@
       "targets": [
         {
           "groupBy": [],
-          "measurement": "telematic_device_report_acceleration",
+          "measurement": "Acceleration",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -890,7 +986,7 @@
             [
               {
                 "params": [
-                  "vehicle"
+                  "Vehicle"
                 ],
                 "type": "field"
               }
@@ -980,7 +1076,7 @@
       "targets": [
         {
           "groupBy": [],
-          "measurement": "telematic_device_report_acceleration",
+          "measurement": "Acceleration",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -989,7 +1085,7 @@
             [
               {
                 "params": [
-                  "device group"
+                  "DeviceGroup"
                 ],
                 "type": "field"
               }
@@ -1079,5 +1175,5 @@
   "timezone": "browser",
   "title": "Tributech Acceleration Data",
   "uid": "8cKXpfNZz",
-  "version": 16
+  "version": 2
 }
