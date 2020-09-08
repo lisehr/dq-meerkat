@@ -24,7 +24,7 @@ public class GettingStartedAlternative {
 
     // Init KG by loading DSD elements
     List<DSConnector> conns = new ArrayList<>();
-    for (int i = 1; i <= fileCount; i++) conns.add(FileSelectionUtil.connectToCSV(i));
+    for (int i = 0; i < fileCount; i++) conns.add(FileSelectionUtil.connectToCSV(i));
 
     // Create Knowledge Graph and add (possibly multiple data sources)
     DSDKnowledgeGraph kg = new DSDKnowledgeGraph("CSVTest");

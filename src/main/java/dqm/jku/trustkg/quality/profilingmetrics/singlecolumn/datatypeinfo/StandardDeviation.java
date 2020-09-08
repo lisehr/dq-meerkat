@@ -43,8 +43,6 @@ public class StandardDeviation extends DependentProfileMetric {
 		}
 		val = performAveraging(val);
 		this.setValue(val);
-
-		Attribute a = (Attribute) super.getRefElem();
 		this.setValueClass(Double.class);
 	}
 
@@ -90,6 +88,7 @@ public class StandardDeviation extends DependentProfileMetric {
 	 * @return the square root of the average value
 	 */
 	private Object performAveraging(Object sum) {
+		if (((int) super.getRefProf().getMetric(numrows).getValue()) == 1) return sum;
 		Attribute a = (Attribute) super.getRefElem();
 		if (a.getDataType().equals(Long.class)) return Math.sqrt((((long) sum / ((int) super.getRefProf().getMetric(numrows).getValue() - 1))));
 		else if (a.getDataType().equals(Double.class)) return Math.sqrt(((double) sum / ((int) super.getRefProf().getMetric(numrows).getValue() - 1)));
@@ -120,7 +119,6 @@ public class StandardDeviation extends DependentProfileMetric {
 			this.setValue(val);
 
 		}
-		Attribute a = (Attribute) super.getRefElem();
 		this.setValueClass(Double.class);
 	}
 

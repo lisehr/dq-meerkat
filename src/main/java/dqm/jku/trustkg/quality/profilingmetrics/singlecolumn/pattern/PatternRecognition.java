@@ -14,6 +14,7 @@ import dqm.jku.trustkg.quality.profilingmetrics.DependentProfileMetric;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.NumRows;
 import dqm.jku.trustkg.util.FileSelectionUtil;
+import dqm.jku.trustkg.util.Miscellaneous.DBType;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricCategory.*;
@@ -54,7 +55,7 @@ public class PatternRecognition extends DependentProfileMetric {
   private PatternCounterList initPatterns() {
     PatternCounterList patterns = new PatternCounterList(this.getUri());
     try {
-      List<String> regs = FileSelectionUtil.readAllPatternsOfFile(1);
+      List<String> regs = FileSelectionUtil.readAllPatternsOfFile(1, ((Attribute) this.getRefElem()).getConcept().getDatasource().getDBType() == DBType.PENTAHOETL);
       for (String s : regs) if (!s.isEmpty()) patterns.addPattern(s);
     } catch (IOException e) {
       e.printStackTrace();

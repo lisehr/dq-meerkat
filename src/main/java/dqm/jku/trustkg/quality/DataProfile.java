@@ -131,7 +131,7 @@ public class DataProfile {
       Class<?> clazz = a.getDataType();
       if (String.class.isAssignableFrom(clazz) && r.getField(a) != null) field = r.getField(a).toString().length();
       else if (a.getConcept().getDatasource().getDBType().equals(DBType.CSV)) field = (Number) r.getField(a);
-      else if (a.getConcept().getDatasource().getDBType().equals(DBType.MYSQL)) {
+      else if (a.getConcept().getDatasource().getDBType().equals(DBType.MYSQL) || a.getConcept().getDatasource().getDBType().equals(DBType.PENTAHOETL)) {
         if (Number.class.isAssignableFrom(clazz)) field = (Number) r.getField(a);
       }
       if (field != null) list.add(field);

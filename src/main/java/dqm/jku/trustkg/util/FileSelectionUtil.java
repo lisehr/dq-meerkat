@@ -21,6 +21,7 @@ import dqm.jku.trustkg.connectors.ConnectorCSV;
  */
 public class FileSelectionUtil {
   private static final String PREFIX = "src/main/java/dqm/jku/trustkg/resources/";
+  private static final String PENT_PREFIX = "/plugins/DQ-MeeRKat/";
   private static final String CSV = "csv/";
   private static final String PATTERNS = "patterns/";
 
@@ -66,13 +67,16 @@ public class FileSelectionUtil {
    * Method for reading all regex patterns in the respective file
    * 
    * @param index the file index, sorted alphabetically
+   * @param pentaho checks if file is accessed from pentaho
    * @return list of strings containing regex patterns
    * @throws IOException
    */
-  public static List<String> readAllPatternsOfFile(int index) throws IOException {
+  public static List<String> readAllPatternsOfFile(int index, boolean pentaho) throws IOException {
     // walk resources package to make a selection on which pattern file should be
     // used for the demo
-    Stream<Path> paths = Files.walk(Paths.get(PREFIX + PATTERNS));
+  	Stream<Path> paths;
+  	if (pentaho) paths = Files.walk(Paths.get(Paths.get("").toAbsolutePath().toString() + PENT_PREFIX + PATTERNS));
+  	else paths = Files.walk(Paths.get(PREFIX + PATTERNS));
     List<Path> files = paths.collect(Collectors.toList());
     paths.close();
 
