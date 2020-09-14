@@ -170,7 +170,6 @@ public class Datasource extends DSDElement {
 		}
 	}
 
-	//TODO: format export appropriately
 	public Model getGraphModel() {
 		ModelBuilder builder = new ModelBuilder();
 		System.out.println(this.getURI());

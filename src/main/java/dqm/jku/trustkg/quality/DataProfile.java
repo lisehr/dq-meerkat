@@ -1,5 +1,6 @@
 package dqm.jku.trustkg.quality;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedSet;
@@ -129,7 +130,7 @@ public class DataProfile {
     for (Record r : rl) {
       Number field = null;
       Class<?> clazz = a.getDataType();
-      if (String.class.isAssignableFrom(clazz) && r.getField(a) != null) field = r.getField(a).toString().length();
+      if ((String.class.isAssignableFrom(clazz) || Date.class.isAssignableFrom(clazz)) && r.getField(a) != null) field = r.getField(a).toString().length();
       else if (a.getConcept().getDatasource().getDBType().equals(DBType.CSV)) field = (Number) r.getField(a);
       else if (a.getConcept().getDatasource().getDBType().equals(DBType.MYSQL) || a.getConcept().getDatasource().getDBType().equals(DBType.PENTAHOETL)) {
         if (Number.class.isAssignableFrom(clazz)) field = (Number) r.getField(a);

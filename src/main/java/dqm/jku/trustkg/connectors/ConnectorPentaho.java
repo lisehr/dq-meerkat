@@ -2,6 +2,7 @@ package dqm.jku.trustkg.connectors;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.Iterator;
 
 import org.pentaho.di.core.row.RowMetaInterface;
@@ -93,7 +94,7 @@ public class ConnectorPentaho extends DSConnector {
 	      //metaClass = Boolean.class;
 	      break;
 	    case ValueMetaInterface.TYPE_DATE:
-	      //metaClass = Date.class;
+	      metaClass = Date.class;
 	      break;
 	    case ValueMetaInterface.TYPE_INTEGER:
 	      metaClass = Long.class;

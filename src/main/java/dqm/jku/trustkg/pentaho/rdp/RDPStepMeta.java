@@ -1,5 +1,7 @@
 package dqm.jku.trustkg.pentaho.rdp;
 
+import java.nio.file.Paths;
+
 import org.pentaho.di.core.annotations.Step;
 import org.pentaho.di.trans.Trans;
 import org.pentaho.di.trans.TransMeta;
@@ -19,16 +21,50 @@ import org.pentaho.di.trans.step.StepMetaInterface;
 )
 public class RDPStepMeta extends BaseStepMeta implements StepMetaInterface {
 	
+	// fields for parameters in RDP creation process
+	private int rowCnt;
+	private String patternFilePath;
+	private boolean isCSV; // true CSV, false nothing
+
+	
 	@SuppressWarnings("unused")
 	private static final Class<?> PKG = RDPStepMeta.class; // i18n purposes
+  private static final String PENT_PREFIX = "/plugins/DQ-MeeRKat/patterns";
 
 	public RDPStepMeta() {
 		super();
 	}
+	
+	public int getRowCnt() {
+		return rowCnt;
+	}
+
+	public void setRowCnt(int rowCnt) {
+		this.rowCnt = rowCnt;
+	}
+
+	public String getFilePath() {
+		return patternFilePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.patternFilePath = filePath;
+	}
+
+	public boolean isCSV() {
+		return isCSV;
+	}
+
+	public void setCSV(boolean isCSV) {
+		this.isCSV = isCSV;
+		this.log.logBasic("Hello there! " + isCSV);
+	}
 
 	@Override
 	public void setDefault() {
-		setOutputField("demo_field");
+		rowCnt = 5000;
+		patternFilePath = Paths.get("").toAbsolutePath().toString() + PENT_PREFIX;
+		isCSV = false;
 	}
 
 	@Override
@@ -39,14 +75,6 @@ public class RDPStepMeta extends BaseStepMeta implements StepMetaInterface {
 	@Override
 	public StepDataInterface getStepData() {
 		return new RDPStepData();
-	}
-
-	public String getOutputField() {
-		// TODO Auto-generated method stub
-		return "";
-	}
-
-	public void setOutputField(String text) {
 	}
 
 }

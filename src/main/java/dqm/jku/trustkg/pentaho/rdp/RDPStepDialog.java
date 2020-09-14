@@ -9,8 +9,9 @@ import org.eclipse.swt.events.ShellAdapter;
 import org.eclipse.swt.events.ShellEvent;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
-import org.eclipse.swt.layout.FormLayout;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
@@ -34,6 +35,8 @@ public class RDPStepDialog extends BaseStepDialog implements StepDialogInterface
 	 */
 	private static Class<?> PKG = RDPStepMeta.class; // for i18n purposes
 
+	private static final String CSV = "CSV";
+	
 	// this is the object the stores the step's settings
 	// the dialog reads the settings from it when opening
 	// the dialog writes the settings to it when confirmed
@@ -42,41 +45,12 @@ public class RDPStepDialog extends BaseStepDialog implements StepDialogInterface
 	// text field holding the name of the field to add to the row stream
 	private LabelText wHelloFieldName;
 	
-	// fields for parameters in RDP creation process
-	private int rowCnt;
-	public int getRowCnt() {
-		return rowCnt;
-	}
-
-	public void setRowCnt(int rowCnt) {
-		this.rowCnt = rowCnt;
-	}
-
-	public String getFilePath() {
-		return filePath;
-	}
-
-	public void setFilePath(String filePath) {
-		this.filePath = filePath;
-	}
-
-	public boolean isCSV() {
-		return isCSV;
-	}
-
-	public void setCSV(boolean isCSV) {
-		this.isCSV = isCSV;
-	}
-
-	private String filePath;
-	private boolean isCSV; // true CSV, false nothing
 
 	public RDPStepDialog(Shell parent, Object in, TransMeta transMeta, String stepname) {
 		super(parent, (BaseStepMeta) in, transMeta, stepname);
 		meta = (RDPStepMeta) in;
-
 	}
-
+	
 	@Override
 	public String open() {
 		// store some convenient SWT variables
@@ -104,32 +78,28 @@ public class RDPStepDialog extends BaseStepDialog implements StepDialogInterface
 		// ------------------------------------------------------- //
 		// SWT code for building the actual settings dialog //
 		// ------------------------------------------------------- //
-		FormLayout formLayout = new FormLayout();
-		formLayout.marginWidth = Const.FORM_MARGIN;
-		formLayout.marginHeight = Const.FORM_MARGIN;
-		shell.setLayout(formLayout);
+	  GridLayout gridLayout = new GridLayout();
+    gridLayout.numColumns = 2;
+    shell.setLayout(gridLayout);
 		shell.setText(BaseMessages.getString(PKG, "Demo.Shell.Title"));
-		int middle = props.getMiddlePct();
 		int margin = Const.MARGIN;
 
 		// Stepname line
-		wlStepname = new Label(shell, SWT.RIGHT);
-		wlStepname.setText(BaseMessages.getString(PKG, "System.Label.StepName"));
-		props.setLook(wlStepname);
+		wlStepname = new Label(shell, SWT.NONE);
+		wlStepname.setText("Pattern file: ");
 		fdlStepname = new FormData();
-		fdlStepname.left = new FormAttachment(0, 0);
-		fdlStepname.right = new FormAttachment(middle, -margin);
-		fdlStepname.top = new FormAttachment(0, margin);
+//		fdlStepname.left = new FormAttachment(0, 0);
+//		fdlStepname.right = new FormAttachment(middle, -margin);
+//		fdlStepname.top = new FormAttachment(0, margin);
 		wlStepname.setLayoutData(fdlStepname);
 
-		wStepname = new Text(shell, SWT.SINGLE | SWT.LEFT | SWT.BORDER);
+		wStepname = new Text(shell, SWT.NONE);
 		wStepname.setText(stepname);
-		props.setLook(wStepname);
 		wStepname.addModifyListener(lsMod);
 		fdStepname = new FormData();
-		fdStepname.left = new FormAttachment(middle, 0);
-		fdStepname.top = new FormAttachment(0, margin);
-		fdStepname.right = new FormAttachment(100, 0);
+//		fdStepname.left = new FormAttachment(middle, 0);
+//		fdStepname.top = new FormAttachment(0, margin);
+//		fdStepname.right = new FormAttachment(100, 0);
 		wStepname.setLayoutData(fdStepname);
 
 		wHelloFieldName = new LabelText(shell, BaseMessages.getString(PKG, "Demo.FieldName.Label"), null);
@@ -140,13 +110,33 @@ public class RDPStepDialog extends BaseStepDialog implements StepDialogInterface
 		fdValName.right = new FormAttachment(100, 0);
 		fdValName.top = new FormAttachment(wStepname, margin);
 		wHelloFieldName.setLayoutData(fdValName);
+		
+		//dropdown for export
+		Text label = new Text(shell, SWT.NONE);
+		label.setText("Output-Type:");
+		props.setLook(label);
+     
+		Combo combo = new Combo(shell, SWT.DROP_DOWN | SWT.READ_ONLY);
+		String[] items = new String[] { CSV, "None" };
+		combo.setItems(items);
+		combo.select(1);
+		combo.addSelectionListener(new SelectionAdapter() {
+      @Override
+      public void widgetSelected(SelectionEvent e) {
+          int idx = combo.getSelectionIndex();
+          String language = combo.getItem(idx);
+          if (language.equals(CSV)) meta.setCSV(true);
+          else meta.setCSV(false);
+      }
+  });
+
 
 		// OK and cancel buttons
 		wOK = new Button(shell, SWT.PUSH);
 		wOK.setText(BaseMessages.getString(PKG, "System.Button.OK"));
 		wCancel = new Button(shell, SWT.PUSH);
 		wCancel.setText(BaseMessages.getString(PKG, "System.Button.Cancel"));
-		setButtonPositions(new Button[] { wOK, wCancel }, margin, wHelloFieldName);
+		setButtonPositions(new Button[] { wOK, wCancel }, margin, combo);
 
 		// Add listeners for cancel and OK
 		lsCancel = new Listener() {
@@ -161,7 +151,9 @@ public class RDPStepDialog extends BaseStepDialog implements StepDialogInterface
 		};
 		wCancel.addListener(SWT.Selection, lsCancel);
 		wOK.addListener(SWT.Selection, lsOK);
-
+		
+		
+		
 		// default listener (for hitting "enter")
 		lsDef = new SelectionAdapter() {
 			public void widgetDefaultSelected(SelectionEvent e) {
@@ -210,7 +202,6 @@ public class RDPStepDialog extends BaseStepDialog implements StepDialogInterface
 	 */
 	private void populateDialog() {
 		wStepname.selectAll();
-		wHelloFieldName.setText(meta.getOutputField());
 	}
 
 	/**
@@ -233,8 +224,6 @@ public class RDPStepDialog extends BaseStepDialog implements StepDialogInterface
 		// The "stepname" variable will be the return value for the open() method.
 		// Setting to step name from the dialog control
 		stepname = wStepname.getText();
-		// Setting the settings to the meta object
-		meta.setOutputField(wHelloFieldName.getText());
 		// close the SWT dialog window
 		dispose();
 	}
