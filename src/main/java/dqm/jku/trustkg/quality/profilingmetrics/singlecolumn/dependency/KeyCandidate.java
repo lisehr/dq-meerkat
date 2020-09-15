@@ -42,7 +42,7 @@ public class KeyCandidate extends DependentProfileMetric {
    */
   private void calculation(RecordList rl, Object oldVal, boolean checked) {
     if (!checked) this.dependencyCalculationWithRecordList(rl);
-    super.setValue(((double) this.getRefProf().getMetric(unique).getValue()) == (double) 1);
+    super.setValue(((double) this.getRefProf().getMetric(unique).getValue()) == (double) 100.0);
     super.setValueClass(Boolean.class);
   }
 

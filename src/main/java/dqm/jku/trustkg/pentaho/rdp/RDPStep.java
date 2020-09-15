@@ -28,6 +28,8 @@ public class RDPStep extends BaseStep implements StepInterface {
 	private RowMetaInterface meta;
 	private Datasource ds;
 	private int rowCnt; 
+	
+	private RDPStepMeta metaRDPStep;
 
 	public RDPStep(StepMeta stepMeta, StepDataInterface stepDataInterface, int copyNr, TransMeta transMeta, Trans trans) {
 		super(stepMeta, stepDataInterface, copyNr, transMeta, trans);
@@ -37,9 +39,9 @@ public class RDPStep extends BaseStep implements StepInterface {
 
 	public boolean init(StepMetaInterface smi, StepDataInterface sdi) {
 		// Casting to step-specific implementation classes is safe
-		RDPStepMeta meta = (RDPStepMeta) smi;
+		metaRDPStep = (RDPStepMeta) smi;
 		RDPStepData data = (RDPStepData) sdi;
-		if (!super.init(meta, data)) {
+		if (!super.init((StepMetaInterface) meta, data)) {
 			return false;
 		}
 		// Add any step-specific initialization that may be needed here
@@ -49,7 +51,7 @@ public class RDPStep extends BaseStep implements StepInterface {
 	public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws KettleException {
 		Object[] r = getRow();
 		
-		if(rowCnt == 5000) {
+		if(rowCnt == metaRDPStep.getRowCnt()) {
 			if (r != null) return true;
 			this.logBasic("Information about Input Rows:");
 			this.logBasic("RecordList size: " + records.size());
