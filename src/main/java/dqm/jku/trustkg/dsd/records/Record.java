@@ -26,7 +26,7 @@ public class Record implements Comparable<Record> {
 	}
 	
 	public void addValue(Attribute attribute, Object o) {
-		if (!attribute.getDataType().isInstance(o) && !(attribute.isNullable() && o == null))
+		if (!attribute.getDataType().isInstance(o) && (!attribute.isNullable() && o == null))
 			throw new IllegalArgumentException("Attribute Type " + attribute.getDataType() + " does not allow Value " + o);
 
 		if (values.containsKey(attribute))

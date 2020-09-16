@@ -23,5 +23,18 @@ public enum FileOutputType {
 	public static String[] getTypes() {
 		return new String[]{none.label, csv.label, json.label, text.label};
 	}
+	
+	public static FileOutputType asFileOutputType(String label) {
+		switch (label) {
+		case "CSV": 
+			return csv;
+		case "JSON": 
+			return json;
+		case "txt": 
+			return text;
+		default: 
+			return none;
+		}
+	}
 
 }

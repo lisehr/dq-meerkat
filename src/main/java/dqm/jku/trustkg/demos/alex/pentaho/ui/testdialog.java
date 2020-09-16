@@ -1,4 +1,4 @@
-package dqm.jku.trustkg;
+package dqm.jku.trustkg.demos.alex.pentaho.ui;
 
 import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.Display;

@@ -53,6 +53,7 @@ public class RDPStepDialog extends BaseStepDialog implements StepDialogInterface
 	private Button btnDirButton;
 	private Combo combo;
 	private Spinner spinner;
+	private Button checkBoxOutput;
 
 	public RDPStepDialog(Shell parent, Object in, TransMeta transMeta, String stepname) {
 		super(parent, (BaseStepMeta) in, transMeta, stepname);
@@ -94,12 +95,12 @@ public class RDPStepDialog extends BaseStepDialog implements StepDialogInterface
 		shell.setBackgroundMode(SWT.INHERIT_FORCE);
 		int margin = Const.MARGIN;
 
-		Button btnCheckButton = new Button(shell, SWT.CHECK);
+		checkBoxOutput = new Button(shell, SWT.CHECK);
 		FormData fd_btnCheckButton = new FormData();
 		fd_btnCheckButton.left = new FormAttachment(0, 10);
-		btnCheckButton.setLayoutData(fd_btnCheckButton);
-		btnCheckButton.setText("Enable File-Output");
-		btnCheckButton.setSelection(false);
+		checkBoxOutput.setLayoutData(fd_btnCheckButton);
+		checkBoxOutput.setText("Enable File-Output");
+		checkBoxOutput.setSelection(meta.isOutEnabled());
 
 		lblNewLabel = new Label(shell, SWT.NONE);
 		fd_btnCheckButton.bottom = new FormAttachment(lblNewLabel, -16);
@@ -110,7 +111,7 @@ public class RDPStepDialog extends BaseStepDialog implements StepDialogInterface
 
 		combo = new Combo(shell, SWT.NONE);
 		combo.setItems(FileOutputType.getTypes());
-		combo.select(combo.indexOf(FileOutputType.none.label()));
+		combo.select(combo.indexOf(meta.getType()));
 		FormData fd_combo = new FormData();
 		fd_combo.right = new FormAttachment(100, -10);
 		fd_combo.bottom = new FormAttachment(lblNewLabel, 0, SWT.BOTTOM);
@@ -133,7 +134,7 @@ public class RDPStepDialog extends BaseStepDialog implements StepDialogInterface
 		lblNewLabel_1.setText("File Name");
 
 		fileName = new Text(shell, SWT.BORDER);
-		fileName.setText(meta.getOutputDirPath());
+		fileName.setText(meta.getOutputFileName());
 		FormData fd_text = new FormData();
 		fd_text.bottom = new FormAttachment(lblNewLabel_1, 0, SWT.BOTTOM);
 		fd_text.left = new FormAttachment(lblFileLocation, 20);
@@ -168,13 +169,13 @@ public class RDPStepDialog extends BaseStepDialog implements StepDialogInterface
 		fd_spinner.right = new FormAttachment(combo, 0, SWT.RIGHT);
 		spinner.setLayoutData(fd_spinner);
 		spinner.setMaximum(100000000);
-		spinner.setMinimum(0);
+		spinner.setMinimum(1);
 		spinner.setSelection(meta.getRowCnt());
 		
 		Label lblPatternFile = new Label(shell, SWT.NONE);
 		FormData fd_lblPatternFile = new FormData();
 		fd_lblPatternFile.top = new FormAttachment(lblNumberOfRows, 12);
-		fd_lblPatternFile.left = new FormAttachment(btnCheckButton, 0, SWT.LEFT);
+		fd_lblPatternFile.left = new FormAttachment(checkBoxOutput, 0, SWT.LEFT);
 		lblPatternFile.setLayoutData(fd_lblPatternFile);
 		lblPatternFile.setText("Pattern File");
 		
@@ -195,7 +196,7 @@ public class RDPStepDialog extends BaseStepDialog implements StepDialogInterface
 		btnNewButton_1.setText("File...");
 		
 		
-		setOutSettings(false);
+		setOutSettings(meta.isOutEnabled());
 
 		// OK and cancel buttons
 		wOK = new Button(shell, SWT.PUSH);
@@ -219,7 +220,7 @@ public class RDPStepDialog extends BaseStepDialog implements StepDialogInterface
 		wCancel.addListener(SWT.Selection, lsCancel);
 		wOK.addListener(SWT.Selection, lsOK);
 		
-		btnCheckButton.addSelectionListener(new SelectionAdapter() {
+		checkBoxOutput.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent event) {
 				Button button = (Button) event.widget;
@@ -252,7 +253,7 @@ public class RDPStepDialog extends BaseStepDialog implements StepDialogInterface
 		patternFileName.addModifyListener(lsMod);
 		combo.addModifyListener(lsMod);
 		spinner.addModifyListener(lsMod);
-
+		
 		// Set/Restore the dialog size based on last position on screen
 		// The setSize() method is inherited from BaseStepDialog
 		setSize();
@@ -303,11 +304,12 @@ public class RDPStepDialog extends BaseStepDialog implements StepDialogInterface
 	 * Called when the user confirms the dialog
 	 */
 	private void ok() {
-		// The "stepname" variable will be the return value for the open() method.
 		meta.setCSV(combo.getText());
+		meta.setFilePath(patternFileName.getText());
 		meta.setOutputDirPath(fileLoc.getText());
 		meta.setOutputFileName(fileName.getText());
 		meta.setRowCnt(spinner.getSelection());
+		meta.setOutEnabled(checkBoxOutput.getSelection());
 		// close the SWT dialog window
 		dispose();
 	}
