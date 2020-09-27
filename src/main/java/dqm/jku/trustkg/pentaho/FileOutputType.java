@@ -21,7 +21,8 @@ public enum FileOutputType {
 	}
 	
 	public static String[] getTypes() {
-		return new String[]{none.label, csv.label, json.label, text.label};
+		//return new String[]{none.label, csv.label, json.label, text.label};
+		return new String[]{none.label, csv.label, text.label}; // only implemented types
 	}
 	
 	public static FileOutputType asFileOutputType(String label) {

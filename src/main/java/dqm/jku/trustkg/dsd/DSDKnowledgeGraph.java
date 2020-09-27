@@ -41,7 +41,7 @@ import dqm.jku.trustkg.util.export.ExportUtil;
  */
 public class DSDKnowledgeGraph {
 	private String label;
-	private EmbeddedGraphDB kgstore;
+	private EmbeddedGraphDB kgstore = null;
 	private HashMap<String, Datasource> dss = new HashMap<String, Datasource>();
 	private HashMap<String, DSConnector> conns = new HashMap<String, DSConnector>();
 
@@ -50,11 +50,19 @@ public class DSDKnowledgeGraph {
 		kgstore = new EmbeddedGraphDB(label);
 	}
 	
+	public DSDKnowledgeGraph(String label, boolean graphdb) {
+		this.label = label;
+		if (graphdb) kgstore = new EmbeddedGraphDB(label);
+	}
+
+	
 	public void addDatasource(Datasource ds) throws RepositoryConfigException, RDFHandlerException, RDFParseException, RepositoryException, IOException {
 		dss.put(ds.getLabel(), ds);
-		kgstore.createRepositoryIfNotExists(ds.getLabel());
-		RepositoryConnection repConn = kgstore.getRepository(ds.getLabel()).getConnection();
-		repConn.add(ds.getGraphModel());
+		if (kgstore != null) {
+			kgstore.createRepositoryIfNotExists(ds.getLabel());
+			RepositoryConnection repConn = kgstore.getRepository(ds.getLabel()).getConnection();
+			repConn.add(ds.getGraphModel());
+		}
 	}
 
 	public void addDatasourceAndConnector(Datasource ds, DSConnector conn) {

@@ -64,61 +64,59 @@ public class testdialog extends Dialog {
 		
 		Button btnCheckButton = new Button(shell, SWT.CHECK);
 		FormData fd_btnCheckButton = new FormData();
+		fd_btnCheckButton.left = new FormAttachment(0, 10);
 		btnCheckButton.setLayoutData(fd_btnCheckButton);
 		btnCheckButton.setText("Enable File-Output");
 		
 		Label lblNewLabel = new Label(shell, SWT.NONE);
-		fd_btnCheckButton.bottom = new FormAttachment(lblNewLabel, -19);
-		fd_btnCheckButton.left = new FormAttachment(lblNewLabel, 0, SWT.LEFT);
 		FormData fd_lblNewLabel = new FormData();
-		fd_lblNewLabel.left = new FormAttachment(0, 10);
+		fd_lblNewLabel.left = new FormAttachment(btnCheckButton, 0, SWT.LEFT);
 		lblNewLabel.setLayoutData(fd_lblNewLabel);
 		lblNewLabel.setText("Output Format");
 		
 		Combo combo = new Combo(shell, SWT.NONE);
 		combo.setItems(new String[] {"CSV", "JSON", "txt"});
 		FormData fd_combo = new FormData();
-		fd_combo.top = new FormAttachment(lblNewLabel, -3, SWT.TOP);
+		fd_combo.right = new FormAttachment(100, -10);
+		fd_combo.bottom = new FormAttachment(lblNewLabel, 0, SWT.BOTTOM);
 		combo.setLayoutData(fd_combo);
 		
 		Label lblFileLocation = new Label(shell, SWT.NONE);
-		fd_lblNewLabel.bottom = new FormAttachment(lblFileLocation, -19);
 		FormData fd_lblFileLocation = new FormData();
-		fd_lblFileLocation.left = new FormAttachment(0, 10);
+		fd_lblFileLocation.top = new FormAttachment(lblNewLabel, 17);
+		fd_lblFileLocation.left = new FormAttachment(btnCheckButton, 0, SWT.LEFT);
 		lblFileLocation.setLayoutData(fd_lblFileLocation);
 		lblFileLocation.setText("File Location");
 		
 		Label lblNewLabel_1 = new Label(shell, SWT.NONE);
 		FormData fd_lblNewLabel_1 = new FormData();
-		fd_lblNewLabel_1.left = new FormAttachment(0, 10);
+		fd_lblNewLabel_1.top = new FormAttachment(lblFileLocation, 20);
+		fd_lblNewLabel_1.left = new FormAttachment(btnCheckButton, 0, SWT.LEFT);
 		lblNewLabel_1.setLayoutData(fd_lblNewLabel_1);
 		lblNewLabel_1.setText("File Name");
 		
 		text = new Text(shell, SWT.BORDER);
-		fd_combo.right = new FormAttachment(text, 0, SWT.RIGHT);
-		fd_lblNewLabel_1.top = new FormAttachment(text, 2, SWT.TOP);
 		FormData fd_text = new FormData();
+		fd_text.top = new FormAttachment(lblNewLabel_1, -2, SWT.TOP);
 		fd_text.left = new FormAttachment(lblNewLabel_1, 37);
-		fd_text.right = new FormAttachment(100, -10);
+		fd_text.right = new FormAttachment(combo, 0, SWT.RIGHT);
 		text.setLayoutData(fd_text);
 		
 		text_1 = new Text(shell, SWT.BORDER);
-		fd_lblFileLocation.top = new FormAttachment(text_1, 2, SWT.TOP);
 		FormData fd_text_1 = new FormData();
-		fd_text_1.left = new FormAttachment(0, 114);
-		fd_text_1.bottom = new FormAttachment(text, -19);
+		fd_text_1.left = new FormAttachment(lblFileLocation, 20);
+		fd_text_1.top = new FormAttachment(lblFileLocation, -2, SWT.TOP);
 		text_1.setLayoutData(fd_text_1);
 		
 		Button btnNewButton = new Button(shell, SWT.NONE);
-		fd_text_1.right = new FormAttachment(btnNewButton, -6);
+		fd_text_1.right = new FormAttachment(100, -98);
 		FormData fd_btnNewButton = new FormData();
-		fd_btnNewButton.right = new FormAttachment(100, -10);
-		fd_btnNewButton.top = new FormAttachment(text_1, -3, SWT.TOP);
+		fd_btnNewButton.top = new FormAttachment(lblFileLocation, -5, SWT.TOP);
+		fd_btnNewButton.right = new FormAttachment(combo, 0, SWT.RIGHT);
 		btnNewButton.setLayoutData(fd_btnNewButton);
 		btnNewButton.setText("Directory...");
 		
 		Button btnOk = new Button(shell, SWT.NONE);
-		fd_text.bottom = new FormAttachment(btnOk, -45);
 		FormData fd_btnOk = new FormData();
 		fd_btnOk.left = new FormAttachment(0, 126);
 		fd_btnOk.bottom = new FormAttachment(100, -10);
@@ -163,10 +161,19 @@ public class testdialog extends Dialog {
 		fd_text_2.bottom = new FormAttachment(btnNewButton_1, 0, SWT.BOTTOM);
 		fd_text_2.right = new FormAttachment(btnNewButton_1, -6);
 		FormData fd_btnNewButton_1 = new FormData();
+		fd_btnNewButton_1.right = new FormAttachment(100, -10);
 		fd_btnNewButton_1.top = new FormAttachment(lblPatternFile, -5, SWT.TOP);
-		fd_btnNewButton_1.right = new FormAttachment(combo, 0, SWT.RIGHT);
 		btnNewButton_1.setLayoutData(fd_btnNewButton_1);
 		btnNewButton_1.setText("File...");
+		
+		Button btnEnableVerboseLogging = new Button(shell, SWT.CHECK);
+		fd_lblNewLabel.top = new FormAttachment(btnEnableVerboseLogging, 15);
+		fd_btnCheckButton.bottom = new FormAttachment(btnEnableVerboseLogging, -6);
+		btnEnableVerboseLogging.setText("Enable Verbose Logging");
+		FormData fd_btnEnableVerboseLogging = new FormData();
+		fd_btnEnableVerboseLogging.top = new FormAttachment(0, 144);
+		fd_btnEnableVerboseLogging.left = new FormAttachment(btnCheckButton, 0, SWT.LEFT);
+		btnEnableVerboseLogging.setLayoutData(fd_btnEnableVerboseLogging);
 
 	}
 }

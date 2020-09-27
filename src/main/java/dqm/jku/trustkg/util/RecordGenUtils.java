@@ -36,7 +36,7 @@ public class RecordGenUtils {
 		return r;
 	}
 	
-	public static Record generateRecordFromFirstConceptObjectRow(Datasource conn, Object[] row, boolean first, BaseStep bs) {
+	public static Record generateRecordFromFirstConceptObjectRow(Datasource conn, Object[] row, boolean first, BaseStep bs, boolean debug) {
 		Concept target = null;
 		for (Concept c : conn.getConcepts()) {
 			target = c;
@@ -46,7 +46,7 @@ public class RecordGenUtils {
 		List<Attribute> attributes = target.getSortedAttributes();
 		for (int j = 0; j < Math.min(row.length, attributes.size()); j++) {
 			if (first) { 				
-				if (bs != null) bs.logBasic(attributes.get(j).toString() + " " + attributes.get(j).getDataTypeString() + " " + row[j]);
+				if (bs != null && debug) bs.logBasic(attributes.get(j).toString() + " " + attributes.get(j).getDataTypeString() + " " + row[j]);
 			}
 			r.addValue(attributes.get(j), row[j]);
 		}		

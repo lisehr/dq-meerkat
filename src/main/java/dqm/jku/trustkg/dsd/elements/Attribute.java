@@ -3,7 +3,6 @@ package dqm.jku.trustkg.dsd.elements;
 import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
-
 import dqm.jku.trustkg.influxdb.InfluxDBConnection;
 
 @RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
@@ -122,4 +121,5 @@ public class Attribute extends DSDElement {
   public void addProfileToInflux(InfluxDBConnection connection) {
     super.storeProfile(connection);
   }
+
 }

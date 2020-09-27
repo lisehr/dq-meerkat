@@ -2,6 +2,7 @@ package dqm.jku.trustkg.pentaho.rdp;
 
 import java.io.File;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.pentaho.di.core.CheckResultInterface;
@@ -12,6 +13,7 @@ import org.pentaho.di.core.exception.KettleStepException;
 import org.pentaho.di.core.exception.KettleValueException;
 import org.pentaho.di.core.exception.KettleXMLException;
 import org.pentaho.di.core.row.RowMetaInterface;
+import org.pentaho.di.core.row.ValueMetaAndData;
 import org.pentaho.di.core.variables.VariableSpace;
 import org.pentaho.di.core.xml.XMLHandler;
 import org.pentaho.di.repository.ObjectId;
@@ -27,6 +29,7 @@ import org.pentaho.metastore.api.IMetaStore;
 import org.w3c.dom.Node;
 
 import dqm.jku.trustkg.pentaho.FileOutputType;
+import dqm.jku.trustkg.quality.DataProfile;
 
 @Step(id = "RDPStep", name = "RDPStep.Name", image = "dqm/jku/trustkg/pentaho/rdp/resources/meerkat.svg", i18nPackageName = "dqm.jku.trustkg.pentaho.rdp", description = "RDPStep.TooltipDesc", categoryDescription = "RDP.Category")
 public class RDPStepMeta extends BaseStepMeta implements StepMetaInterface {
@@ -38,11 +41,12 @@ public class RDPStepMeta extends BaseStepMeta implements StepMetaInterface {
 	private String outputFileName;
 	private String type; 
 	private boolean outEnabled;
+	private boolean verboseLogEnabled;
 
 	@SuppressWarnings("unused")
 	private static final Class<?> PKG = RDPStepMeta.class; // i18n purposes
 	private static final String STD_FILE_NAME = "rdp_report";
-	private static final String PENT_PREFIX_FILE = "\\plugins\\DQ-MeeRKat\\patterns";
+	private static final String PENT_PREFIX_FILE = "\\plugins\\DQ-MeeRKat\\patterns\\pattern_test.in";
 	private static final String PENT_PREFIX_DIR = "\\plugins\\DQ-MeeRKat\\output";
 
 	public RDPStepMeta() {
@@ -63,7 +67,7 @@ public class RDPStepMeta extends BaseStepMeta implements StepMetaInterface {
 	}
 
 	public void setFilePath(String filePath) {
-		File file = new File(outputDirPath);
+		File file = new File(filePath);
 		if (file.exists()) this.patternFilePath = filePath;
 		else patternFilePath = Paths.get("").toAbsolutePath().toString() + PENT_PREFIX_FILE;
 	}
@@ -83,6 +87,7 @@ public class RDPStepMeta extends BaseStepMeta implements StepMetaInterface {
 		outputFileName = STD_FILE_NAME;
 		type = FileOutputType.none.label();
 		outEnabled = false;
+		verboseLogEnabled = true;
 	}
 
 	@Override
@@ -129,8 +134,9 @@ public class RDPStepMeta extends BaseStepMeta implements StepMetaInterface {
 			rep.saveStepAttribute(id_transformation, id_step, "patternFilePath", patternFilePath);
 			rep.saveStepAttribute(id_transformation, id_step, "outputDirPath", outputDirPath);
 			rep.saveStepAttribute(id_transformation, id_step, "outputFileName", outputFileName);
-			rep.saveStepAttribute(id_transformation, id_step, "type", type);
+			rep.saveStepAttribute(id_transformation, id_step, "typeString", type);
 			rep.saveStepAttribute(id_transformation, id_step, "outEnabled", outEnabled);
+			rep.saveStepAttribute(id_transformation, id_step, "verboseLogEnabled", verboseLogEnabled);
 		} catch (Exception e) {
 			throw new KettleException("Unable to save step into repository: " + id_step, e);
 		}
@@ -152,8 +158,9 @@ public class RDPStepMeta extends BaseStepMeta implements StepMetaInterface {
 			patternFilePath = rep.getStepAttributeString(id_step, "patternFilePath");
 			outputDirPath = rep.getStepAttributeString(id_step, "outputDirPath");
 			outputFileName = rep.getStepAttributeString(id_step, "outputFileName");
-			type = rep.getStepAttributeString(id_step, "type");
+			type = rep.getStepAttributeString(id_step, "typeString");
 			outEnabled = rep.getStepAttributeBoolean(id_step, "outEnabled");
+			verboseLogEnabled = rep.getStepAttributeBoolean(id_step, "verboseLogEnabled");
 		} catch (Exception e) {
 			throw new KettleException("Unable to load step from repository", e);
 		}
@@ -175,8 +182,9 @@ public class RDPStepMeta extends BaseStepMeta implements StepMetaInterface {
 		xml.append(XMLHandler.addTagValue("patternFilePath", patternFilePath));
 		xml.append(XMLHandler.addTagValue("outputDirPath", outputDirPath));
 		xml.append(XMLHandler.addTagValue("outputFileName", outputFileName));
-		xml.append(XMLHandler.addTagValue("type", type));
+		xml.append(XMLHandler.addTagValue("typeString", type));
 		xml.append(XMLHandler.addTagValue("outEnabled", outEnabled));
+		xml.append(XMLHandler.addTagValue("verboseLogEnabled", verboseLogEnabled));
 		return xml.toString();
 	}
 
@@ -197,8 +205,9 @@ public class RDPStepMeta extends BaseStepMeta implements StepMetaInterface {
 			patternFilePath = XMLHandler.getNodeValue(XMLHandler.getSubNode(stepnode, "patternFilePath"));
 			outputDirPath = XMLHandler.getNodeValue(XMLHandler.getSubNode(stepnode, "outputDirPath"));
 			outputFileName = XMLHandler.getNodeValue(XMLHandler.getSubNode(stepnode, "outputFileName"));
-			type = XMLHandler.getNodeValue(XMLHandler.getSubNode(stepnode, "type"));
-			outEnabled = Boolean.parseBoolean(XMLHandler.getNodeValue(XMLHandler.getSubNode(stepnode, "outEnabled")));
+			type = XMLHandler.getNodeValue(XMLHandler.getSubNode(stepnode, "typeString"));
+			outEnabled = "Y".equalsIgnoreCase(XMLHandler.getNodeValue(XMLHandler.getSubNode(stepnode, "outEnabled")));
+			verboseLogEnabled = "Y".equalsIgnoreCase(XMLHandler.getNodeValue(XMLHandler.getSubNode(stepnode, "verboseLogEnabled")));
 		} catch (Exception e) {
 			throw new KettleXMLException("Demo plugin unable to read step info from XML node", e);
 		}
@@ -225,7 +234,15 @@ public class RDPStepMeta extends BaseStepMeta implements StepMetaInterface {
 	 * @param metaStore    the metaStore to optionally read from
 	 */
 	public void getFields(RowMetaInterface inputRowMeta, String name, RowMetaInterface[] info, StepMeta nextStep, VariableSpace space, Repository repository, IMetaStore metaStore) throws KettleStepException {
-
+		inputRowMeta.clear();
+		List<ValueMetaAndData> values = new ArrayList<>();
+		try {
+			values = DataProfile.createPentahoOutputMeta();
+		} catch (KettleValueException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (ValueMetaAndData v : values) inputRowMeta.addValueMeta(v.getValueMeta());
 	}
 
 	/**
@@ -255,8 +272,18 @@ public class RDPStepMeta extends BaseStepMeta implements StepMetaInterface {
 		return outEnabled;
 	}
 
-	public void setOutEnabled(boolean outEnabled) {
-		this.outEnabled = outEnabled;
+	public void setOutEnabled(boolean isOutEnabled) {
+		this.outEnabled = isOutEnabled;
 	}
+	
+
+	public boolean isVerboseLogEnabled() {
+		return verboseLogEnabled;
+	}
+
+	public void setVerboseLogEnabled(boolean verboseLogEnabled) {
+		this.verboseLogEnabled = verboseLogEnabled;
+	}
+
 
 }

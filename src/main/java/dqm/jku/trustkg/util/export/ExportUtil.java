@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import dqm.jku.trustkg.dsd.DSDKnowledgeGraph;
 import dqm.jku.trustkg.dsd.elements.Attribute;
@@ -30,7 +31,7 @@ public class ExportUtil {
 
 	private static final String EXPORT_PATH = "src/main/java/dqm/jku/trustkg/resources/export/";
 	private static final String EXPORT_CSV = "csv/";
-  private static final String EXPORT_REPORT = "report/";
+	private static final String EXPORT_REPORT = "report/";
 
 	static {
 		LABELS.add(new LabelTriple<>(numrows, cardCat.getLabel(), numrows.getLabel()));
@@ -47,10 +48,12 @@ public class ExportUtil {
 		LABELS.add(new LabelTriple<>(med, dti.getLabel(), med.getLabel()));
 		LABELS.add(new LabelTriple<>(dig, dti.getLabel(), dig.getLabel()));
 		LABELS.add(new LabelTriple<>(dec, dti.getLabel(), "# Decimals"));
+		LABELS.add(new LabelTriple<>(sd, dti.getLabel(), sd.getLabel()));
 
 		LABELS.add(new LabelTriple<>(histCls, histCat.getLabel(), "# Classes"));
 		LABELS.add(new LabelTriple<>(histCR, histCat.getLabel(), histCR.getLabel()));
 		LABELS.add(new LabelTriple<>(histVal, histCat.getLabel(), histVal.getLabel()));
+		
 
 		LABELS.add(new LabelTriple<>(keyCand, depend.getLabel(), keyCand.getLabel()));
 	}
@@ -62,13 +65,14 @@ public class ExportUtil {
 	 * @param ds the datasource to be exported
 	 */
 	public static void exportToCSV(Datasource ds) {
-	  // TODO: maybe make Arraylist to map to better distinguish missing values and not do errors in calculation
+		// TODO: maybe make Arraylist to map to better distinguish missing values and
+		// not do errors in calculation
 		Map<String, ArrayList<Object>> metricValues = new HashMap<String, ArrayList<Object>>();
 		List<String> elementLabels = new ArrayList<String>();
 
 		for (Concept c : ds.getConcepts()) {
 			for (Attribute a : c.getAttributes()) {
-				if(a.hasProfile()) {
+				if (a.hasProfile()) {
 					elementLabels.add(a.getLabel());
 					if (a.getProfile() != null) {
 						DataProfile dp = a.getProfile();
@@ -148,7 +152,7 @@ public class ExportUtil {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Method for exporting a complete datasource to a csv-file. Currently only data
 	 * profiles on attribute level are supported.
@@ -156,17 +160,27 @@ public class ExportUtil {
 	 * @param ds the datasource to be exported
 	 */
 	public static void exportToCSV(Datasource ds, String dirpath, String filename) {
-	  // TODO: maybe make Arraylist to map to better distinguish missing values and not do errors in calculation
+		// TODO: maybe make Arraylist to map to better distinguish missing values and
+		// not do errors in calculation
 		Map<String, ArrayList<Object>> metricValues = new HashMap<String, ArrayList<Object>>();
 		List<String> elementLabels = new ArrayList<String>();
 
 		for (Concept c : ds.getConcepts()) {
 			for (Attribute a : c.getAttributes()) {
-				if(a.hasProfile()) {
+				if (a.hasProfile()) {
 					elementLabels.add(a.getLabel());
 					if (a.getProfile() != null) {
 						DataProfile dp = a.getProfile();
 						List<ProfileMetric> metrics = dp.getMetrics();
+						if (metrics.size() == 0) {
+							Set<String> metricStringSet = metricValues.keySet();
+							for (String key : metricStringSet) {
+								ArrayList<Object> list = new ArrayList<Object>();
+								if (metricValues.containsKey(key)) list = metricValues.get(key);
+								list.add("");
+								metricValues.put(key, list);
+							}
+						}
 						for (ProfileMetric m : metrics) {
 							String key = m.getLabel();
 							if (!key.contains("Histogram")) {
@@ -220,7 +234,8 @@ public class ExportUtil {
 			for (Object o : list) {
 				sb.append(";");
 				if (o != null) {
-					if (o instanceof Number) sb.append(formatFloat(o));
+					if (o instanceof Integer || o instanceof Long) sb.append(o.toString());
+					else if (o instanceof Number) sb.append(formatFloat(o));
 					else sb.append(o.toString());
 				}
 			}
@@ -243,93 +258,126 @@ public class ExportUtil {
 		}
 	}
 
-
 	public static void exportToCSV(List<Datasource> dss) {
 		for (Datasource ds : dss) exportToCSV(ds);
 	}
-	
+
 	public static void exportReport(DSDKnowledgeGraph kg) {
-	  StringBuilder sb = new StringBuilder();
-	  
-    sb.append("Structure of KG: ");
-    sb.append(kg.getLabel()).append('\n').append('\t');
-    for (Datasource ds : kg.getDatasources().values()) {
-      sb.append(ds.getStructureString().replace("\n", "\n\t"));
-    }
-    sb.append('\n');
-    
-    sb.append("Dataprofiles of KG: ");
-    sb.append(kg.getLabel()).append('\n').append('\t');
-    for (Datasource ds : kg.getDatasources().values()) {
-      sb.append("Dataprofiles of Datasource: ");
-      sb.append(ds.getLabel()).append('\n').append('\t').append('\t');
-      for (Concept c : ds.getConcepts()) {
-        sb.append("Dataprofiles of Concept: ");
-        sb.append(c.getLabel()).append('\n').append('\t').append('\t').append('\t');
-        for (Attribute a : c.getAttributes()) sb.append(a.getProfileString().replace("\n", "\n\t\t\t"));
-        sb.append('\t').append('\t');
-      }
-      sb.delete(sb.length() - 5, sb.length() - 1);
-    }    
-	  
-	  Path path = Paths.get(EXPORT_PATH + EXPORT_REPORT);
-	    if (Files.notExists(path)) {
-	      try {
-	        Files.createDirectory(path);
-	      } catch (IOException e) {
-	        e.printStackTrace();
-	      }
-	    }
+		StringBuilder sb = new StringBuilder();
 
-	    try (PrintWriter writer = new PrintWriter(new File(EXPORT_PATH + EXPORT_REPORT + "export_report_" + kg.getLabel() + ".txt"))) {
-	      writer.write(sb.toString());
-	    } catch (FileNotFoundException e) {
-	      e.printStackTrace();
-	    }
+		sb.append("Structure of KG: ");
+		sb.append(kg.getLabel()).append('\n').append('\t');
+		for (Datasource ds : kg.getDatasources().values()) {
+			sb.append(ds.getStructureString().replace("\n", "\n\t"));
+		}
+		sb.append('\n');
+
+		sb.append("Dataprofiles of KG: ");
+		sb.append(kg.getLabel()).append('\n').append('\t');
+		for (Datasource ds : kg.getDatasources().values()) {
+			sb.append("Dataprofiles of Datasource: ");
+			sb.append(ds.getLabel()).append('\n').append('\t').append('\t');
+			for (Concept c : ds.getConcepts()) {
+				sb.append("Dataprofiles of Concept: ");
+				sb.append(c.getLabel()).append('\n').append('\t').append('\t').append('\t');
+				for (Attribute a : c.getAttributes()) sb.append(a.getProfileString().replace("\n", "\n\t\t\t"));
+				sb.append('\t').append('\t');
+			}
+			sb.delete(sb.length() - 5, sb.length() - 1);
+		}
+
+		Path path = Paths.get(EXPORT_PATH + EXPORT_REPORT);
+		if (Files.notExists(path)) {
+			try {
+				Files.createDirectory(path);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		try (PrintWriter writer = new PrintWriter(new File(EXPORT_PATH + EXPORT_REPORT + "export_report_" + kg.getLabel() + ".txt"))) {
+			writer.write(sb.toString());
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 
 	}
-	
+
 	public static void exportReport(DSDKnowledgeGraph kg, String dirPath, String fileName) {
-	  StringBuilder sb = new StringBuilder();
-	  
-    sb.append("Structure of KG: ");
-    sb.append(kg.getLabel()).append('\n').append('\t');
-    for (Datasource ds : kg.getDatasources().values()) {
-      sb.append(ds.getStructureString().replace("\n", "\n\t"));
-    }
-    sb.append('\n');
-    
-    sb.append("Dataprofiles of KG: ");
-    sb.append(kg.getLabel()).append('\n').append('\t');
-    for (Datasource ds : kg.getDatasources().values()) {
-      sb.append("Dataprofiles of Datasource: ");
-      sb.append(ds.getLabel()).append('\n').append('\t').append('\t');
-      for (Concept c : ds.getConcepts()) {
-        sb.append("Dataprofiles of Concept: ");
-        sb.append(c.getLabel()).append('\n').append('\t').append('\t').append('\t');
-        for (Attribute a : c.getAttributes()) sb.append(a.getProfileString().replace("\n", "\n\t\t\t"));
-        sb.append('\t').append('\t');
-      }
-      sb.delete(sb.length() - 5, sb.length() - 1);
-    }    
-	  
-	  Path path = Paths.get(dirPath);
-	    if (Files.notExists(path)) {
-	      try {
-	        Files.createDirectory(path);
-	      } catch (IOException e) {
-	        e.printStackTrace();
-	      }
-	    }
+		StringBuilder sb = new StringBuilder();
 
-	    try (PrintWriter writer = new PrintWriter(new File(dirPath + "\\" + fileName + ".txt"))) {
-	      writer.write(sb.toString());
-	    } catch (FileNotFoundException e) {
-	      e.printStackTrace();
-	    }
+		sb.append("Structure of KG: ");
+		sb.append(kg.getLabel()).append('\n').append('\t');
+		for (Datasource ds : kg.getDatasources().values()) {
+			sb.append(ds.getStructureString().replace("\n", "\n\t"));
+		}
+		sb.append('\n');
+
+		sb.append("Dataprofiles of KG: ");
+		sb.append(kg.getLabel()).append('\n').append('\t');
+		for (Datasource ds : kg.getDatasources().values()) {
+			sb.append("Dataprofiles of Datasource: ");
+			sb.append(ds.getLabel()).append('\n').append('\t').append('\t');
+			for (Concept c : ds.getConcepts()) {
+				sb.append("Dataprofiles of Concept: ");
+				sb.append(c.getLabel()).append('\n').append('\t').append('\t').append('\t');
+				for (Attribute a : c.getAttributes()) sb.append(a.getProfileString().replace("\n", "\n\t\t\t"));
+				sb.append('\t').append('\t');
+			}
+			sb.delete(sb.length() - 5, sb.length() - 1);
+		}
+
+		Path path = Paths.get(dirPath);
+		if (Files.notExists(path)) {
+			try {
+				Files.createDirectory(path);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		try (PrintWriter writer = new PrintWriter(new File(dirPath + "\\" + fileName + ".txt"))) {
+			writer.write(sb.toString());
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 
 	}
 
+	public static void exportReportOfDatasource(Datasource ds, String dirPath, String fileName) {
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("Structure of DS: ");
+		sb.append(ds.getStructureString().replace("\n", "\n\t"));
+		sb.append('\n');
+
+		sb.append("Dataprofiles of DS: ");
+		sb.append("Dataprofiles of Datasource: ");
+		sb.append(ds.getLabel()).append('\n').append('\t').append('\t');
+		for (Concept c : ds.getConcepts()) {
+			sb.append("Dataprofiles of Concept: ");
+			sb.append(c.getLabel()).append('\n').append('\t').append('\t').append('\t');
+			for (Attribute a : c.getAttributes()) sb.append(a.getProfileString().replace("\n", "\n\t\t\t"));
+			sb.append('\t').append('\t');
+		}
+		sb.delete(sb.length() - 5, sb.length() - 1);
+
+		Path path = Paths.get(dirPath);
+		if (Files.notExists(path)) {
+			try {
+				Files.createDirectory(path);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		try (PrintWriter writer = new PrintWriter(new File(dirPath + "\\" + fileName + ".txt"))) {
+			writer.write(sb.toString());
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+	}
 
 	private static String formatFloat(Object num) {
 		DecimalFormat decimalFormat = new DecimalFormat("#,##0.0000");

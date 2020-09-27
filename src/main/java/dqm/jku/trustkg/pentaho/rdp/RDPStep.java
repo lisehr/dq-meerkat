@@ -1,9 +1,14 @@
 package dqm.jku.trustkg.pentaho.rdp;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.pentaho.di.core.exception.KettleException;
+import org.pentaho.di.core.row.RowMeta;
 import org.pentaho.di.core.row.RowMetaInterface;
+import org.pentaho.di.core.row.ValueMetaAndData;
 import org.pentaho.di.trans.Trans;
 import org.pentaho.di.trans.TransMeta;
 import org.pentaho.di.trans.step.BaseStep;
@@ -13,13 +18,13 @@ import org.pentaho.di.trans.step.StepMeta;
 import org.pentaho.di.trans.step.StepMetaInterface;
 
 import dqm.jku.trustkg.connectors.ConnectorPentaho;
-import dqm.jku.trustkg.dsd.DSDKnowledgeGraph;
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.Concept;
 import dqm.jku.trustkg.dsd.elements.Datasource;
 import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.pentaho.FileOutputType;
+
 import dqm.jku.trustkg.util.RecordGenUtils;
 import dqm.jku.trustkg.util.export.ExportUtil;
 
@@ -27,6 +32,7 @@ public class RDPStep extends BaseStep implements StepInterface {
 
 	@SuppressWarnings("unused")
 	private static final Class<?> PKG = RDPStepMeta.class; // i18n purposes
+	private static final boolean DEBUG = false;
 	private RecordList records;
 	private RowMetaInterface meta;
 	private Datasource ds;
@@ -60,12 +66,29 @@ public class RDPStep extends BaseStep implements StepInterface {
 			this.logBasic("Rows converted, beginning Calculation of RDPs.");
 			for (Concept c : ds.getConcepts()) {
 				System.out.println(c.getURI());
+				RDPStepData data = (RDPStepData) sdi;
+				boolean firstRow = true;
 				for (Attribute a : c.getAttributes()) {
 					try {
 						this.logBasic("Calculating Data Profile for Attribute: " + a.getLabel());
-						this.logBasic(a.getDataTypeString());
-						a.annotateProfile(records);
-						this.logBasic(a.getProfileString());
+						this.logBasic("Datatype:" + a.getDataTypeString());
+						a.annotateProfile(records, metaRDPStep.getFilePath());
+						List<ValueMetaAndData> values = a.getProfile().createPentahoOutputRowMeta();
+						RowMetaInterface rowMeta = new RowMeta();
+						if (firstRow) {
+							for (ValueMetaAndData v : values) rowMeta.addValueMeta(v.getValueMeta());
+							data.outputRowMeta = rowMeta;
+							firstRow = false;
+						} else rowMeta = data.outputRowMeta;
+						Object[] objects = new Object[rowMeta.size()];
+						int i = 0;
+						for (ValueMetaAndData v : values) {
+							objects[i] = v.getValueData();
+							i++;
+						}
+
+						if (values.size() == rowMeta.size()) putRow(rowMeta, objects);
+						if ((metaRDPStep.isOutEnabled() && metaRDPStep.isVerboseLogEnabled()) || !metaRDPStep.isOutEnabled()) this.logBasic(a.getProfileString());
 					} catch (NoSuchMethodException e) {
 						e.printStackTrace();
 					}
@@ -77,19 +100,13 @@ public class RDPStep extends BaseStep implements StepInterface {
 			if (metaRDPStep.isOutEnabled()) {
 				switch (FileOutputType.asFileOutputType(metaRDPStep.getType())) {
 				case csv:
-					ExportUtil.exportToCSV(ds, metaRDPStep.getOutputDirPath(), metaRDPStep.getOutputFileName());
+					ExportUtil.exportToCSV(ds, metaRDPStep.getOutputDirPath(), metaRDPStep.getOutputFileName() + "_" + LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")));
 					break;
 				case json:
 					this.logBasic("Not implemented yet!");
 					break;
 				case text:
-					DSDKnowledgeGraph kg = new DSDKnowledgeGraph("Pentaho");
-					try {
-						kg.addDatasource(ds);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					ExportUtil.exportReport(kg, metaRDPStep.getOutputDirPath(), metaRDPStep.getOutputFileName());
+					ExportUtil.exportReportOfDatasource(ds, metaRDPStep.getOutputDirPath(), metaRDPStep.getOutputFileName() + "_" + LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")));
 					break;
 				default:
 					break;
@@ -98,7 +115,7 @@ public class RDPStep extends BaseStep implements StepInterface {
 			setOutputDone();
 			return false;
 		}
-		// this.logBasic(r.toString());
+		if (DEBUG) this.logBasic(r.toString());
 
 		if (first) {
 			meta = this.getInputRowMeta();
@@ -108,11 +125,11 @@ public class RDPStep extends BaseStep implements StepInterface {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			Record rec = RecordGenUtils.generateRecordFromFirstConceptObjectRow(ds, r, first, this);
-			this.logBasic(rec.toString());
+			Record rec = RecordGenUtils.generateRecordFromFirstConceptObjectRow(ds, r, first, this, DEBUG);
+			if (DEBUG) this.logBasic(rec.toString());
 			records.addRecord(rec);
 			first = false;
-		} else records.addRecord(RecordGenUtils.generateRecordFromFirstConceptObjectRow(ds, r, first, null));
+		} else records.addRecord(RecordGenUtils.generateRecordFromFirstConceptObjectRow(ds, r, first, null, DEBUG));
 		rowCnt++;
 
 		return true;

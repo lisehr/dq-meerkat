@@ -1,6 +1,8 @@
 package dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.pattern;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.cyberborean.rdfbeans.annotations.RDFBean;
@@ -29,12 +31,21 @@ import static dqm.jku.trustkg.quality.profilingmetrics.MetricCategory.*;
 @RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/PatternRecognition")
 public class PatternRecognition extends DependentProfileMetric {
+	
+	private String filePathString;
+	
   public PatternRecognition() {
 
   }
-
+  
   public PatternRecognition(DataProfile d) {
+  	super(pattern, dti, d);
+  	setFilePathString(null);
+  }
+
+  public PatternRecognition(DataProfile d, String path) {
     super(pattern, dti, d);
+    setFilePathString(path);
   }
 
   @Override
@@ -55,7 +66,9 @@ public class PatternRecognition extends DependentProfileMetric {
   private PatternCounterList initPatterns() {
     PatternCounterList patterns = new PatternCounterList(this.getUri());
     try {
-      List<String> regs = FileSelectionUtil.readAllPatternsOfFile(1, ((Attribute) this.getRefElem()).getConcept().getDatasource().getDBType() == DBType.PENTAHOETL);
+    	List<String> regs;
+      if (filePathString == null) regs = FileSelectionUtil.readAllPatternsOfFile(1, ((Attribute) this.getRefElem()).getConcept().getDatasource().getDBType() == DBType.PENTAHOETL);
+      else regs = Files.readAllLines(Paths.get(filePathString));
       for (String s : regs) if (!s.isEmpty()) patterns.addPattern(s);
     } catch (IOException e) {
       e.printStackTrace();
@@ -113,4 +126,12 @@ public class PatternRecognition extends DependentProfileMetric {
       super.getRefProf().addMetric(sizeM);
     }
   }
+
+	public String getFilePathString() {
+		return filePathString;
+	}
+
+	public void setFilePathString(String filePathString) {
+		this.filePathString = filePathString;
+	}
 }
