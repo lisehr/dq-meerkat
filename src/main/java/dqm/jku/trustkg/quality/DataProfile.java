@@ -346,7 +346,7 @@ public class DataProfile {
 	
 	public List<ValueMetaAndData> createPentahoOutputRowMeta() throws KettleValueException {
 		List<ValueMetaAndData> list = new ArrayList<>();
-		list.add(new ValueMetaAndData("URI", this.getURI()));
+		list.add(new ValueMetaAndData("URI", this.getElem().getURI()));
 		for (ProfileMetric profileMetric : metrics) if (profileMetric.getTitle() != hist && profileMetric.getTitle() != pattern) list.add(new ValueMetaAndData(profileMetric.getLabel(), profileMetric.getValue()));
 		return list;
 	}
