@@ -1,6 +1,5 @@
 package dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.pattern;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.cyberborean.rdfbeans.annotations.RDF;
@@ -8,6 +7,7 @@ import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFContainer;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 import org.cyberborean.rdfbeans.annotations.RDFSubject;
+import org.magicwerk.brownies.collections.GapList;
 
 /**
  * Wrapper data structure to properly handle all Pattern counters
@@ -18,7 +18,7 @@ import org.cyberborean.rdfbeans.annotations.RDFSubject;
 @RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
 @RDFBean("dsd:quality/structures/PatternCounterList")
 public class PatternCounterList {
-  private List<PatternCounter> list = new ArrayList<>(); // list for pattern counters
+  private List<PatternCounter> list = new GapList<>(); // list for pattern counters
   private String uri;
 
   public PatternCounterList() {
