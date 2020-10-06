@@ -1,9 +1,7 @@
 package dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.histogram;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
@@ -21,7 +19,7 @@ import org.cyberborean.rdfbeans.annotations.RDFSubject;
 @RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
 @RDFBean("dsd:quality/structures/SerializableFrequencyMap")
 public class SerializableFrequencyMap {
-  private Set<FrequencyClass> classes = new HashSet<>();
+  private List<FrequencyClass> classes = new ArrayList<>();
   private String uri;
 
   public SerializableFrequencyMap() {
@@ -70,7 +68,7 @@ public class SerializableFrequencyMap {
    */
   @RDF("dsd:hasClass")
   @RDFContainer
-  public Set<FrequencyClass> getClasses() {
+  public List<FrequencyClass> getClasses() {
     return classes;
   }
 
@@ -79,7 +77,7 @@ public class SerializableFrequencyMap {
    * 
    * @param classes the classes to set
    */
-  public void setClasses(Set<FrequencyClass> classes) {
+  public void setClasses(List<FrequencyClass> classes) {
     this.classes = classes;
   }
 
