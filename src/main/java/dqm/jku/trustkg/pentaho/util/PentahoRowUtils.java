@@ -8,9 +8,9 @@ import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.hist;
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.numrows;
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.pattern;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.magicwerk.brownies.collections.GapList;
 import org.pentaho.di.core.exception.KettleValueException;
 import org.pentaho.di.core.row.RowMetaInterface;
 import org.pentaho.di.core.row.ValueMetaAndData;
@@ -81,7 +81,7 @@ public class PentahoRowUtils {
 		attribute.setDataType(Integer.class);
 		dp.setElem(attribute);
 		dp.createDataProfileSkeletonRDB();
-		List<ValueMetaInterface> list = new GapList<>();
+		List<ValueMetaInterface> list = new ArrayList<>();
 		list.add(new ValueMetaString("URI"));
 		for (ProfileMetric m : dp.getMetrics()) {
 			if (m.getTitle() != pattern) {
@@ -103,7 +103,7 @@ public class PentahoRowUtils {
 	
 
 	public static List<ValueMetaAndData> createPentahoOutputRowMeta(DataProfile dp) throws KettleValueException {
-		List<ValueMetaAndData> list = new GapList<>();
+		List<ValueMetaAndData> list = new ArrayList<>();
 		list.add(new ValueMetaAndData("URI", dp.getElem().getURI()));
 		for (ProfileMetric profileMetric : dp.getMetrics()) if (profileMetric.getTitle() != pattern) {
 			if (dp.profileMetricIsNumeric(profileMetric) || profileMetric.getTitle() == dec || profileMetric.getTitle() == dig || profileMetric.getTitle() == numrows) list.add(new ValueMetaAndData(profileMetric.getLabel(), profileMetric.getNumericVal()));

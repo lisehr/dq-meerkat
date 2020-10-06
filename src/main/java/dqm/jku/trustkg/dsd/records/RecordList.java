@@ -1,14 +1,13 @@
 package dqm.jku.trustkg.dsd.records;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import org.magicwerk.brownies.collections.BigList;
 
 
 public class RecordList implements Iterable<Record> {
 
-  private List<Record> records = new BigList<>();
+  private List<Record> records = new ArrayList<>();
   
   public RecordList() {
     

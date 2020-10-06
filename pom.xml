@@ -24,12 +24,6 @@
 			<artifactId>grafana-api-java-client</artifactId>
 			<version>1.0.5</version>
 		</dependency>
-		<dependency>
-			<groupId>org.magicwerk</groupId>
-			<artifactId>brownies-collections</artifactId>
-			<version>0.9.14</version>
-		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/com.ontotext.graphdb/graphdb-free-runtime -->
 		<dependency>
 			<groupId>com.ontotext.graphdb</groupId>

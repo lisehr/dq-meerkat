@@ -15,7 +15,6 @@ import org.cyberborean.rdfbeans.annotations.RDFContainer;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 import org.influxdb.dto.Point;
 import org.influxdb.dto.Point.Builder;
-import org.magicwerk.brownies.collections.GapList;
 
 import dqm.jku.trustkg.blockchain.blocks.DSDBlock;
 import dqm.jku.trustkg.blockchain.standardchain.BlockChain;
@@ -31,7 +30,7 @@ public class Concept extends DSDElement {
   private Datasource datasource;
   private HashSet<Attribute> attributes = new HashSet<Attribute>();
   private HashSet<Attribute> primaryKeys = new HashSet<Attribute>();
-  private List<FunctionalDependency> functionalDependencies = new GapList<FunctionalDependency>();
+  private List<FunctionalDependency> functionalDependencies = new ArrayList<FunctionalDependency>();
   protected Set<ForeignKey> foreignKeys = new HashSet<ForeignKey>();
 
   public Concept() {

@@ -1,10 +1,10 @@
 package dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.datatypeinfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
-import org.magicwerk.brownies.collections.GapList;
 
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.records.Record;
@@ -38,7 +38,7 @@ public class Median extends ProfileMetric {
   @Override
   public void calculation(RecordList rs, Object oldVal) {
     Attribute a = (Attribute) super.getRefElem();
-    List<Number> list = new GapList<Number>();
+    List<Number> list = new ArrayList<Number>();
     for (Record r : rs) {
       Number field = null;
       if (a.getDataType().equals(String.class) && r.getField(a) != null) field = ((String) r.getField(a)).length();
