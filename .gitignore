@@ -7,9 +7,6 @@
 /src/main/java/dqm/jku/trustkg/resources/csv/1500000 Sales Records.csv
 /Neo4j/*
 /.settings/*
-/src/main/java/dqm/jku/trustkg/pentaho/*
-/src/main/java/dqm/jku/trustkg/pentaho/rdp/*
-/src/main/resource/dqm/jku/trustkg/pentaho/*
 .classpath
 /target/
 Grafana/grafana-6.2.5_windows/data/
