@@ -13,9 +13,6 @@ import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 import org.cyberborean.rdfbeans.annotations.RDFSubject;
 import org.influxdb.dto.Point;
 import org.influxdb.dto.Point.Builder;
-import org.pentaho.di.core.exception.KettleValueException;
-import org.pentaho.di.core.row.RowMetaInterface;
-import org.pentaho.di.core.row.ValueMetaAndData;
 
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.DSDElement;
@@ -153,10 +150,10 @@ public class DataProfile {
 	}
 
 	/**
-	 * Helper method to create a reference data profile on which calculations can be
+	 * Method to create a reference data profile on which calculations can be
 	 * made.
 	 */
-	private void createDataProfileSkeletonRDB() {
+	public void createDataProfileSkeletonRDB() {
 		if (elem instanceof Attribute) {
 			Attribute a = (Attribute) elem;
 			Class<?> clazz = a.getDataType();
@@ -343,28 +340,11 @@ public class DataProfile {
 		else if (p.getValueClass().equals(Boolean.class)) measure.addField(p.getLabel(), (boolean) p.getValue());
 		else measure.addField(p.getLabel(), (int) p.getValue());
 	}
-	
-	public List<ValueMetaAndData> createPentahoOutputRowMeta() throws KettleValueException {
-		List<ValueMetaAndData> list = new ArrayList<>();
-		list.add(new ValueMetaAndData("URI", this.getElem().getURI()));
-		for (ProfileMetric profileMetric : metrics) if (profileMetric.getTitle() != hist && profileMetric.getTitle() != pattern) list.add(new ValueMetaAndData(profileMetric.getLabel(), profileMetric.getValue()));
-		return list;
-	}
-	
-	public static List<ValueMetaAndData> createPentahoOutputMeta() throws KettleValueException {
-		DataProfile dp = new DataProfile();
-		Attribute attribute = new Attribute();
-		attribute.setDataType(Integer.class);
-		dp.setElem(attribute);
-		dp.createDataProfileSkeletonRDB();
-		return dp.createPentahoOutputRowMeta();
-	}
 
-	public Object[] getPentahoOutputRowData(RowMetaInterface rowMeta) {
-		Object[] objects = new Object[rowMeta.size()];
-		objects[0] = this.getURI();
-		for (int i = 1; i < rowMeta.size(); i++) getMetrics().get(i - 1);
-		return objects;
+	public boolean profileMetricIsNumeric(ProfileMetric profileMetric) {
+		return profileMetric.getTitle() == avg || profileMetric.getTitle() == sd || profileMetric.getTitle() == max || profileMetric.getTitle() == min || profileMetric.getTitle() == med
+		    || profileMetric.getTitle() == nullValP || profileMetric.getTitle() == unique;
+
 	}
 
 }

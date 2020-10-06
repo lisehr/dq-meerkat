@@ -45,6 +45,7 @@ public class Uniqueness extends DependentProfileMetric {
     int numRecs = (int) super.getRefProf().getMetric(numrows).getValue();
     double result = cardinality * 100.0 / numRecs;
     this.setValue(result);
+    this.setNumericVal((Number) result);
     this.setValueClass(Double.class);
 
   }

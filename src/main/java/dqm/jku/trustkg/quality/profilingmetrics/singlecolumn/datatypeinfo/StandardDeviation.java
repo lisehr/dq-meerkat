@@ -43,6 +43,7 @@ public class StandardDeviation extends DependentProfileMetric {
 		}
 		val = performAveraging(val);
 		this.setValue(val);
+		this.setNumericVal(((Number) val).doubleValue());
 		this.setValueClass(Double.class);
 	}
 
@@ -117,7 +118,7 @@ public class StandardDeviation extends DependentProfileMetric {
 			}
 			val = performAveraging(val);
 			this.setValue(val);
-
+			this.setNumericVal(((Number) val).doubleValue());
 		}
 		this.setValueClass(Double.class);
 	}

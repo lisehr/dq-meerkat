@@ -33,12 +33,14 @@ public class NumRows extends ProfileMetric {
   @Override
   public void calculation(RecordList rs, Object oldVal) {
     super.setValue(rs.size());
+    super.setNumericVal(((Number) rs.size()).longValue());
     super.setValueClass(Integer.class);
   }
 
   @Override
   public void calculationNumeric(List<Number> list, Object oldVal) {
     super.setValue(list.size());
+    super.setNumericVal(((Number) list.size()).longValue());
     super.setValueClass(Integer.class);
   }
 

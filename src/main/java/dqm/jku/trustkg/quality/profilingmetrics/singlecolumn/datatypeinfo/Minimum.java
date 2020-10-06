@@ -45,6 +45,7 @@ public class Minimum extends ProfileMetric {
       val = getMinimum(val, field, false);
     }
     this.setValue(val);
+    this.setNumericVal(((Number) val).doubleValue());
     this.setValueClass(a.getDataType());
   }
 
@@ -93,6 +94,7 @@ public class Minimum extends ProfileMetric {
       if (oldVal == null) val = getMinimum(list.get(0), getBasicInstance(), true);
       else val = getMinimum(list.get(0), oldVal, true);
       this.setValue(val);
+      this.setNumericVal(((Number) val).doubleValue());
     }
     Attribute a = (Attribute) super.getRefElem();
     this.setValueClass(a.getDataType());

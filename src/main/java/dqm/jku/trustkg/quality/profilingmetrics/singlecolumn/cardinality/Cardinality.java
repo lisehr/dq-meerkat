@@ -49,8 +49,14 @@ public class Cardinality extends ProfileMetric {
         if (field != null) set.add(field);
       }
     }
-    if (a.getDataType().equals(String.class)) this.setValue((long) strSet.size());
-    else this.setValue((long) set.size());
+    if (a.getDataType().equals(String.class)) {
+    	this.setValue((long) strSet.size());
+    	this.setNumericVal((Number) strSet.size());
+    }
+    else {
+    	this.setValue((long) set.size());
+    	this.setNumericVal((Number) set.size());
+    }
     this.setValueClass(Long.class);
   }
 

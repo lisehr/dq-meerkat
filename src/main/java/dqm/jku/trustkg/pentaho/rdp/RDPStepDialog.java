@@ -29,7 +29,7 @@ import org.pentaho.di.trans.step.BaseStepMeta;
 import org.pentaho.di.trans.step.StepDialogInterface;
 import org.pentaho.di.ui.trans.step.BaseStepDialog;
 
-import dqm.jku.trustkg.pentaho.FileOutputType;
+import dqm.jku.trustkg.pentaho.util.FileOutputType;
 
 public class RDPStepDialog extends BaseStepDialog implements StepDialogInterface {
 

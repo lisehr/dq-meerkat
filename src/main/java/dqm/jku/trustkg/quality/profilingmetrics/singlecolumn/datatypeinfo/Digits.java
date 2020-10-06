@@ -48,6 +48,7 @@ public class Digits extends ProfileMetric {
     if (a.getDataType() == Object.class) return;
     if (a.getDataType() == String.class) {
       super.setValue(0);
+      this.setNumericVal(((Number) 0).longValue());
       return;
     }
     int digits = 0;
@@ -56,6 +57,7 @@ public class Digits extends ProfileMetric {
       if (dig > digits) digits = dig;
     }
     super.setValue(digits);
+    this.setNumericVal(((Number) digits).longValue());
   }
 
   @Override
@@ -65,6 +67,7 @@ public class Digits extends ProfileMetric {
     if (a.getDataType() == Object.class) return;
     if (a.getDataType() == String.class) {
       super.setValue(0);
+      this.setNumericVal(((Number) 0).longValue());
       return;
     }
     int digits = 0;
@@ -73,6 +76,7 @@ public class Digits extends ProfileMetric {
       if (dig > digits) digits = dig;
     }
     super.setValue(digits);
+    this.setNumericVal(((Number) digits).longValue());
   }
 
   @Override

@@ -48,6 +48,7 @@ public class Median extends ProfileMetric {
     list.sort(new NumberComparator());
     Object val = getMedian(list, rs.size());
     this.setValue(val);
+    this.setNumericVal(((Number) val).doubleValue());
     this.setValueClass(a.getDataType());
   }
 
@@ -102,6 +103,7 @@ public class Median extends ProfileMetric {
       list.sort(new NumberComparator());
       Object val = getMedian(list, list.size());
       this.setValue(val);
+      this.setNumericVal(((Number) val).doubleValue());
     }
     Attribute a = (Attribute) super.getRefElem();
     this.setValueClass(a.getDataType());

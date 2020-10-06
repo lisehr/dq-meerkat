@@ -13,7 +13,7 @@ import org.pentaho.di.core.exception.KettleStepException;
 import org.pentaho.di.core.exception.KettleValueException;
 import org.pentaho.di.core.exception.KettleXMLException;
 import org.pentaho.di.core.row.RowMetaInterface;
-import org.pentaho.di.core.row.ValueMetaAndData;
+import org.pentaho.di.core.row.ValueMetaInterface;
 import org.pentaho.di.core.variables.VariableSpace;
 import org.pentaho.di.core.xml.XMLHandler;
 import org.pentaho.di.repository.ObjectId;
@@ -28,8 +28,8 @@ import org.pentaho.di.trans.step.StepMetaInterface;
 import org.pentaho.metastore.api.IMetaStore;
 import org.w3c.dom.Node;
 
-import dqm.jku.trustkg.pentaho.FileOutputType;
-import dqm.jku.trustkg.quality.DataProfile;
+import dqm.jku.trustkg.pentaho.util.FileOutputType;
+import dqm.jku.trustkg.pentaho.util.PentahoRowUtils;
 
 @Step(id = "RDPStep", name = "RDPStep.Name", image = "dqm/jku/trustkg/pentaho/rdp/resources/meerkat.svg", i18nPackageName = "dqm.jku.trustkg.pentaho.rdp", description = "RDPStep.TooltipDesc", categoryDescription = "RDP.Category")
 public class RDPStepMeta extends BaseStepMeta implements StepMetaInterface {
@@ -42,6 +42,7 @@ public class RDPStepMeta extends BaseStepMeta implements StepMetaInterface {
 	private String type; 
 	private boolean outEnabled;
 	private boolean verboseLogEnabled;
+	private RowMetaInterface outputRowMeta;
 
 	@SuppressWarnings("unused")
 	private static final Class<?> PKG = RDPStepMeta.class; // i18n purposes
@@ -52,6 +53,7 @@ public class RDPStepMeta extends BaseStepMeta implements StepMetaInterface {
 	public RDPStepMeta() {
 		super();
 		setDefault();
+		outputRowMeta = null;
 	}
 
 	public int getRowCnt() {
@@ -234,15 +236,18 @@ public class RDPStepMeta extends BaseStepMeta implements StepMetaInterface {
 	 * @param metaStore    the metaStore to optionally read from
 	 */
 	public void getFields(RowMetaInterface inputRowMeta, String name, RowMetaInterface[] info, StepMeta nextStep, VariableSpace space, Repository repository, IMetaStore metaStore) throws KettleStepException {
-		inputRowMeta.clear();
-		List<ValueMetaAndData> values = new ArrayList<>();
-		try {
-			values = DataProfile.createPentahoOutputMeta();
-		} catch (KettleValueException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		for (ValueMetaAndData v : values) inputRowMeta.addValueMeta(v.getValueMeta());
+//		if (outputRowMeta == null) {			
+			inputRowMeta.clear();
+			List<ValueMetaInterface> values = new ArrayList<>();
+			try {
+				values = PentahoRowUtils.createPentahoOutputMeta();
+			} catch (KettleValueException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			for (ValueMetaInterface v : values) inputRowMeta.addValueMeta(v);
+			outputRowMeta = inputRowMeta.clone();
+//		} else inputRowMeta = outputRowMeta.clone();
 	}
 
 	/**
@@ -284,6 +289,16 @@ public class RDPStepMeta extends BaseStepMeta implements StepMetaInterface {
 	public void setVerboseLogEnabled(boolean verboseLogEnabled) {
 		this.verboseLogEnabled = verboseLogEnabled;
 	}
+	
+	public RowMetaInterface getOutputRowMeta() {
+		return outputRowMeta;
+	}
+
+	public void setOutputRowMeta(RowMetaInterface outputRowMeta) {
+		this.outputRowMeta = outputRowMeta;
+	}
+
+
 
 
 }

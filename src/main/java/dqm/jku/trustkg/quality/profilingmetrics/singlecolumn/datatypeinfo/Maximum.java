@@ -45,6 +45,7 @@ public class Maximum extends ProfileMetric {
       val = getMaximum(val, field, false);
     }
     this.setValue(val);
+    this.setNumericVal(((Number) val).doubleValue());
     this.setValueClass(a.getDataType());
   }
 
@@ -93,6 +94,7 @@ public class Maximum extends ProfileMetric {
       if (oldVal == null) val = getMaximum(list.get(list.size() - 1), getBasicInstance(), true);
       else val = getMaximum(list.get(list.size() - 1), oldVal, true);
       this.setValue(val);
+      this.setNumericVal(((Number) val).doubleValue());
     }
     Attribute a = (Attribute) super.getRefElem();
     this.setValueClass(a.getDataType());

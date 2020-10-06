@@ -48,6 +48,7 @@ public class Average extends DependentProfileMetric {
     }
     val = performAveraging(val);
     this.setValue(val);
+    this.setNumericVal(((Number) val).doubleValue());
     this.setValueClass(((Attribute) super.getRefElem()).getDataType());
   }
 
@@ -125,7 +126,7 @@ public class Average extends DependentProfileMetric {
       }
       sum = performAveraging(sum);
       this.setValue(sum);
-
+      this.setNumericVal(((Number) sum).doubleValue());
     }
     Attribute a = (Attribute) super.getRefElem();
     this.setValueClass(a.getDataType());

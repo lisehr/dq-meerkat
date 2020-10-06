@@ -25,6 +25,7 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric> {
   private MetricCategory cat; // name of metric category
   private Class<?> valClass; // the class of the value
   private Object value; // the value itself
+  private Number numericVal; // numeric representation (e.g. double for values that can be integer as well)
   private DataProfile refProf; // reference profile for calculations
   private String uri; // uri of the metric
 
@@ -39,6 +40,7 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric> {
     this.cat = cat;
     this.uri = refProf.getURI() + '/' + this.title.getLabel().replaceAll("\\s+", "");
     value = null;
+    numericVal = null;
   }
   
   @RDFSubject
@@ -254,5 +256,13 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric> {
     for (int i = 0; i < metrics.size(); i++) if (metrics.get(i).getLabel().equals(t.getLabel())) return i;
     return -1;
   }
+
+	public Number getNumericVal() {
+		return numericVal;
+	}
+
+	public void setNumericVal(Number numericVal) {
+		this.numericVal = numericVal;
+	}
 
 }

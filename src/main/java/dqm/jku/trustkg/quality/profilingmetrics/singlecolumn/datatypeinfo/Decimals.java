@@ -41,6 +41,7 @@ public class Decimals extends ProfileMetric {
     if (a.getDataType() == Object.class) return;
     if (a.getDataType() == Integer.class || a.getDataType() == Long.class || a.getDataType() == String.class) {
       this.setValue(0);
+      this.setNumericVal(((Number) 0).longValue());
       return;
     }
 
@@ -52,7 +53,10 @@ public class Decimals extends ProfileMetric {
       decimals = getDecimals(decimals, (Number) field);
     }
     if (decimals == -1) this.setValue(null);
-    else this.setValue(decimals);
+    else {
+    	this.setValue(decimals);
+    	this.setNumericVal(((Number) decimals).longValue());
+    }
   }
 
   private int getDecimals(int decimals, Number field) {
@@ -75,6 +79,7 @@ public class Decimals extends ProfileMetric {
     }
     if (a.getDataType() == Integer.class || a.getDataType() == Long.class || a.getDataType() == String.class) {
       this.setValue(0);
+      this.setNumericVal(((Number) 0).longValue());
       return;
     }
 
@@ -85,6 +90,7 @@ public class Decimals extends ProfileMetric {
       decimals = getDecimals(decimals, (Number) n);
     }
     this.setValue(decimals);
+    this.setNumericVal(((Number) decimals).longValue());
   }
 
   @Override

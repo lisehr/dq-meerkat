@@ -40,6 +40,7 @@ public class NullValues extends ProfileMetric {
       if (r.getField(a) == null) nullVals++;
     }
     this.setValue(nullVals);
+    this.setNumericVal((Number) nullVals);
     this.setValueClass(Long.class);
   }
 

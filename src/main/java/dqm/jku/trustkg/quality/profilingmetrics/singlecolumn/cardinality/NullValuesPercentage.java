@@ -53,6 +53,7 @@ public class NullValuesPercentage extends DependentProfileMetric {
     if (denominator == 0) result = Double.valueOf(0);
     result = (double) nominator * 100.0 / (double) denominator;
     super.setValue(result);
+    super.setNumericVal((Number) result);
     this.setValueClass(Double.class);
   }
 
