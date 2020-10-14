@@ -31,7 +31,13 @@ import org.w3c.dom.Node;
 import dqm.jku.trustkg.pentaho.util.FileOutputType;
 import dqm.jku.trustkg.pentaho.util.PentahoRowUtils;
 
-@Step(id = "RDPStep", name = "RDPStep.Name", image = "dqm/jku/trustkg/pentaho/rdp/resources/meerkat.svg", i18nPackageName = "dqm.jku.trustkg.pentaho.rdp", description = "RDPStep.TooltipDesc", categoryDescription = "RDP.Category")
+@Step(id = "RDPStep", 
+			name = "RDPStep.Name", 
+			image = "dqm/jku/trustkg/pentaho/rdp/resources/meerkat.svg", 
+			i18nPackageName = "dqm.jku.trustkg.pentaho.rdp", 
+			description = "RDPStep.TooltipDesc", 
+			categoryDescription = "RDP.Category"
+)
 public class RDPStepMeta extends BaseStepMeta implements StepMetaInterface {
 
 	// fields for parameters in RDP creation process
