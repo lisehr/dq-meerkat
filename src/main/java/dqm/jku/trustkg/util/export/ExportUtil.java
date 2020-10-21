@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.magicwerk.brownies.collections.GapList;
+
 import dqm.jku.trustkg.dsd.DSDKnowledgeGraph;
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.Concept;
@@ -67,8 +69,8 @@ public class ExportUtil {
 	public static void exportToCSV(Datasource ds) {
 		// TODO: maybe make Arraylist to map to better distinguish missing values and
 		// not do errors in calculation
-		Map<String, ArrayList<Object>> metricValues = new HashMap<String, ArrayList<Object>>();
-		List<String> elementLabels = new ArrayList<String>();
+		Map<String, GapList<Object>> metricValues = new HashMap<String, GapList<Object>>();
+		List<String> elementLabels = new GapList<String>();
 
 		for (Concept c : ds.getConcepts()) {
 			for (Attribute a : c.getAttributes()) {
@@ -80,7 +82,7 @@ public class ExportUtil {
 						for (ProfileMetric m : metrics) {
 							String key = m.getLabel();
 							if (!key.contains("Histogram")) {
-								ArrayList<Object> list = new ArrayList<Object>();
+								GapList<Object> list = new GapList<Object>();
 								if (metricValues.containsKey(key)) list = metricValues.get(key);
 								list.add(m.getValue());
 								metricValues.put(key, list);
@@ -89,9 +91,9 @@ public class ExportUtil {
 								String s1 = histCls.getLabel();
 								String s2 = histCR.getLabel();
 								String s3 = histVal.getLabel();
-								ArrayList<Object> list1 = new ArrayList<Object>();
-								ArrayList<Object> list2 = new ArrayList<Object>();
-								ArrayList<Object> list3 = new ArrayList<Object>();
+								GapList<Object> list1 = new GapList<Object>();
+								GapList<Object> list2 = new GapList<Object>();
+								GapList<Object> list3 = new GapList<Object>();
 
 								if (metricValues.containsKey(s1)) {
 									list1 = metricValues.get(s1);
@@ -123,7 +125,7 @@ public class ExportUtil {
 		// Create Value lines
 		for (LabelTriple<MetricTitle, String, String> l : LABELS) {
 			String label = l.getKey().getLabel();
-			ArrayList<Object> list = metricValues.get(label);
+			GapList<Object> list = metricValues.get(label);
 			sb.append(l.getCat(l.getKey()));
 			sb.append(";");
 			sb.append(l.getLabel(l.getKey()));

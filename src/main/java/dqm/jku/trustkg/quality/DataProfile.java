@@ -1,7 +1,6 @@
 package dqm.jku.trustkg.quality;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -13,6 +12,8 @@ import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 import org.cyberborean.rdfbeans.annotations.RDFSubject;
 import org.influxdb.dto.Point;
 import org.influxdb.dto.Point.Builder;
+import org.magicwerk.brownies.collections.BigList;
+import org.magicwerk.brownies.collections.GapList;
 
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.DSDElement;
@@ -44,7 +45,7 @@ import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
 @RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
 @RDFBean("dsd:quality/structures/DataProfile")
 public class DataProfile {
-	private List<ProfileMetric> metrics = new ArrayList<>(); // a list containing all profile metrics
+	private List<ProfileMetric> metrics = new BigList<>(); // a list containing all profile metrics
 	private DSDElement elem; // DSDElement, where this DataProfile is annotated to
 	private String uri; // uniform resource identifier of this profile
 
@@ -133,7 +134,7 @@ public class DataProfile {
 	 * @return list of numeric values of the records
 	 */
 	private List<Number> createValueList(RecordList rl) {
-		List<Number> list = new ArrayList<Number>();
+		List<Number> list = new GapList<Number>();
 		Attribute a = (Attribute) elem;
 		for (Record r : rl) {
 			Number field = null;

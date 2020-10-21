@@ -8,6 +8,7 @@ import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFContainer;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 import org.cyberborean.rdfbeans.annotations.RDFSubject;
+import org.magicwerk.brownies.collections.GapList;
 
 /**
  * Data structure for a serializable map for histogram bins, processable by
@@ -19,7 +20,7 @@ import org.cyberborean.rdfbeans.annotations.RDFSubject;
 @RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
 @RDFBean("dsd:quality/structures/SerializableFrequencyMap")
 public class SerializableFrequencyMap {
-  private List<FrequencyClass> classes = new ArrayList<>();
+  private List<FrequencyClass> classes = new GapList<>();
   private String uri;
 
   public SerializableFrequencyMap() {
