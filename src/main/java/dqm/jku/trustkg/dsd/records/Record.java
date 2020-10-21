@@ -5,20 +5,23 @@ import java.util.Map.Entry;
 
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.Concept;
+import dqm.jku.trustkg.util.ArrayListMap;
 import dqm.jku.trustkg.util.AttributeSet;
 import dqm.jku.trustkg.util.DataTypeConverter;
 
-import java.util.SortedMap;
-import java.util.TreeMap;
+//import java.util.SortedMap;
+//import java.util.TreeMap;
 
 public class Record implements Comparable<Record> {
 
-	private SortedMap<Attribute, Object> values;
+	//private SortedMap<Attribute, Object> values;
+	private ArrayListMap<Attribute, Object> values;
 	public final Concept assignedFrom;
 
 	public Record(Concept assignedFrom) {
 		this.assignedFrom = assignedFrom;
-		values = new TreeMap<Attribute, Object>();
+		//values = new TreeMap<Attribute, Object>();
+		values = new ArrayListMap<Attribute, Object>(Attribute.class, Object.class);
 	}
 	
 	public void addValueFromCSV(Attribute attribute, String string) {
@@ -29,8 +32,7 @@ public class Record implements Comparable<Record> {
 		if (!attribute.getDataType().isInstance(o) && (!attribute.isNullable() && o == null))
 			throw new IllegalArgumentException("Attribute Type " + attribute.getDataType() + " does not allow Value " + o);
 
-		if (values.containsKey(attribute))
-			throw new IllegalArgumentException("Override in Record");
+		//if (values.containsKey(attribute)) throw new IllegalArgumentException("Override in Record");
 		values.put(attribute, o);
 	}
 
