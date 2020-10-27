@@ -28,6 +28,7 @@ public class Concept extends DSDElement {
 
   private static final long serialVersionUID = 1L;
   private Datasource datasource;
+  private Attribute[] recordStructure;
   private HashSet<Attribute> attributes = new HashSet<Attribute>();
   private HashSet<Attribute> primaryKeys = new HashSet<Attribute>();
   private List<FunctionalDependency> functionalDependencies = new ArrayList<FunctionalDependency>();
@@ -54,9 +55,17 @@ public class Concept extends DSDElement {
    */
   public void setAttributes(AttributeSet attributes) {
     this.attributes = (HashSet<Attribute>) attributes.stream().collect(Collectors.toSet());
+    updateStructure();
   }
 
-  /**
+  private void updateStructure() {
+    this.recordStructure = new Attribute[this.attributes.size()];
+    for (int i = 0; i < recordStructure.length; i++) {
+			recordStructure[i] = this.getAttributes().getAttributes().get(i);
+		}
+	}
+
+	/**
    * @param primaryKey the primaryKey to set
    */
   public void setPrimaryKeySet(AttributeSet primaryKey) {
@@ -94,11 +103,13 @@ public class Concept extends DSDElement {
   
   public void setAttributeList(HashSet<Attribute> att){
 	  this.attributes = att;
+	  updateStructure();
   }
 
 
   public void addAttribute(Attribute attribute) {
     attributes.add(attribute);
+    updateStructure();
   }
 
   public boolean containsAttribute(Attribute attribute) {
@@ -241,5 +252,13 @@ public class Concept extends DSDElement {
     }
     return measure.build();
   }
+
+	public Attribute[] getRecordStructure() {
+		return recordStructure;
+	}
+
+	public void setRecordStructure(Attribute[] recordStructure) {
+		this.recordStructure = recordStructure;
+	}
 
 }

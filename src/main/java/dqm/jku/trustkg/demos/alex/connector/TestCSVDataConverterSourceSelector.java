@@ -21,7 +21,7 @@ public class TestCSVDataConverterSourceSelector {
   private static final boolean DEBUG = false;
 
   public static void main(String args[]) throws IOException, NoSuchMethodException {
-    DSConnector conn = FileSelectionUtil.connectToCSV(1);
+    DSConnector conn = FileSelectionUtil.connectToCSV(0);
 
     Datasource ds;
     try {
