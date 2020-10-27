@@ -191,6 +191,8 @@ public class DataProfile {
 				// experimental metrics
 				ProfileMetric standardDev = new StandardDeviation(this);
 				metrics.add(standardDev);
+				ProfileMetric mediAbsDevMetric = new MedianAbsoluteDeviation(this);
+				metrics.add(mediAbsDevMetric);
 			} else {
 				System.err.println("Attribute '" + a.getLabel() + "' has data type '" + a.getDataTypeString() + "', which is currently not handled. ");
 			}

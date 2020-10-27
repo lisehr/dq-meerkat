@@ -5,9 +5,9 @@ import java.util.Map.Entry;
 
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.Concept;
-import dqm.jku.trustkg.util.ArrayListMap;
 import dqm.jku.trustkg.util.AttributeSet;
 import dqm.jku.trustkg.util.DataTypeConverter;
+import dqm.jku.trustkg.util.datastructures.RecordArrayMap;
 
 //import java.util.SortedMap;
 //import java.util.TreeMap;
@@ -15,13 +15,13 @@ import dqm.jku.trustkg.util.DataTypeConverter;
 public class Record implements Comparable<Record> {
 
 	//private SortedMap<Attribute, Object> values;
-	private ArrayListMap<Attribute, Object> values;
+	private RecordArrayMap<Attribute, Object> values;
 	public final Concept assignedFrom;
 
 	public Record(Concept assignedFrom) {
 		this.assignedFrom = assignedFrom;
 		//values = new TreeMap<Attribute, Object>();
-		values = new ArrayListMap<Attribute, Object>(Attribute.class, Object.class);
+		values = new RecordArrayMap<Attribute, Object>(Attribute.class, Object.class, assignedFrom.getAttributes().getSize());
 	}
 	
 	public void addValueFromCSV(Attribute attribute, String string) {
