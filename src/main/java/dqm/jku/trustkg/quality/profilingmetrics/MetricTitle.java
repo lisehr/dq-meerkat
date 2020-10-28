@@ -28,6 +28,7 @@ public enum MetricTitle {
   med("Median"),
   min("Minimum"),
   sd("Standard Deviation"),
+  mad("Mean Absolute Deviation"),
   pattern("Pattern recognition"),
   bt("Basic type"),
   dt("Data type"),

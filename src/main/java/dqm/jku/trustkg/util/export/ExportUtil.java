@@ -49,6 +49,7 @@ public class ExportUtil {
 		LABELS.add(new LabelTriple<>(dig, dti.getLabel(), dig.getLabel()));
 		LABELS.add(new LabelTriple<>(dec, dti.getLabel(), "# Decimals"));
 		LABELS.add(new LabelTriple<>(sd, dti.getLabel(), sd.getLabel()));
+		LABELS.add(new LabelTriple<>(mad, dti.getLabel(), mad.getLabel()));
 
 		LABELS.add(new LabelTriple<>(histCls, histCat.getLabel(), "# Classes"));
 		LABELS.add(new LabelTriple<>(histCR, histCat.getLabel(), histCR.getLabel()));
