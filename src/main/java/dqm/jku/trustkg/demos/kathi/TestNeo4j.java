@@ -1,64 +1,47 @@
 package dqm.jku.trustkg.demos.kathi;
 
 import dqm.jku.trustkg.connectors.ConnectorNeo4J;
+import dqm.jku.trustkg.dsd.elements.Attribute;
+import dqm.jku.trustkg.dsd.elements.Concept;
 import dqm.jku.trustkg.dsd.elements.Datasource;
-import dqm.jku.trustkg.dsd.records.Record;
-
-import java.io.IOException;
-import java.util.Iterator;
+import dqm.jku.trustkg.dsd.records.RecordList;
 
 public class TestNeo4j {
 
-	public static void main(String[] args) throws ClassNotFoundException {
+	public static void main(String[] args)  {
 		
 		String label = "neo4j";
 		String uri = "bolt://localhost:7687";
 		
-		ConnectorNeo4J conn = ConnectorNeo4J.getInstance("bolt://localhost:7687", "neo4j", "password", label);
-		//ConnectorNeo4J conn = ConnectorNeo4J.getInstance("bolt+routing://f6087a21.databases.neo4j.io:7687", "stackoverflow", "stackoverflow", label);
-		
-		/**
-		 * concept = labels
-		 * attributes = properties
-		 */
-
+		ConnectorNeo4J conn = ConnectorNeo4J.getInstance(uri, "neo4j", "password", label);
 	    Datasource ds;
 		
 	    try {
 	    	ds = conn.loadSchema(uri, label);
 	    	System.out.println("Schema: ");
 	    	ds.printStructure();
-	    	
-	    	System.out.println("All Nodes: ");
-	    	Iterator<Record> recList = conn.getRecords(ds.getConcept(label));
-	    	while (recList.hasNext()) {
-	    		Record next = recList.next();
-	    		System.out.println(next.toStringNeo4J());
-	    	}
-	    	
-	    	System.out.println();
-	    	System.out.println("All Nodes and their number of Relationships");
-	    	recList = conn.getDegreeDistribution(ds.getConcept(label));
-	    	while (recList.hasNext()) {
-	    		Record next = recList.next();
-	    		System.out.println(next.toStringNeo4J());
-	    	} 
-	    	
-	    	System.out.println();
+
+			for (Concept c : ds.getConceptsAndAssociations()) {
+				RecordList rs = conn.getRecordList(c);
+				for (Attribute a : c.getSortedAttributes()) {
+					a.annotateProfile(rs);
+					System.out.println("Attribute a: " + a.toString());
+					a.printAnnotatedProfile();
+				}
+			}
+
+			//Iterator<Record> record = conn.getDegreeDistribution(ds.getConcept(label));
+
 	    	System.out.println("Number of Nodes: " + conn.getNrRecords(ds.getConcept(label)));
-	    	System.out.println();
 	    	System.out.println("Number of Relationships: " + conn.getNrRelationships(ds.getConcept(label)));
-	    	System.out.println();
-	    	System.out.println("Graph is fully connected: " + conn.isGraphFullyConnected(ds.getConcept(label)));
-	    			    		 
-		} catch (IOException e) {
+	    	System.out.println("Graph has unconnected nodes: " + conn.isGraphConnected(ds.getConcept(label)));
+
+	    	
+		} catch (NoSuchMethodException e) {
 			e.printStackTrace();
 		} finally {
 			conn.close(); 
 		}
-		
-		
-		
 		
 	}
 

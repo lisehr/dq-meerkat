@@ -1,34 +1,33 @@
 package dqm.jku.trustkg.connectors;
 
-import java.io.IOException;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.text.ParseException;
+import java.util.*;
 
-import org.neo4j.driver.v1.AuthTokens;
-import org.neo4j.driver.v1.Driver;
-import org.neo4j.driver.v1.GraphDatabase;
-import org.neo4j.driver.v1.Session;
-import org.neo4j.driver.v1.StatementResult;
-import org.neo4j.driver.v1.Record;
+import com.google.gson.Gson;
+
+import dqm.jku.trustkg.dsd.elements.*;
+import dqm.jku.trustkg.util.DataTypeConverter;
+import org.json.JSONObject;
+import org.json.JSONArray;
+
+import org.neo4j.driver.AuthTokens;
+import org.neo4j.driver.Driver;
+import org.neo4j.driver.GraphDatabase;
+import org.neo4j.driver.Session;
+import org.neo4j.driver.Record;
+import org.neo4j.driver.Result;
 
 import dqm.jku.trustkg.dsd.DSDFactory;
-import dqm.jku.trustkg.dsd.elements.Attribute;
-import dqm.jku.trustkg.dsd.elements.Concept;
-import dqm.jku.trustkg.dsd.elements.Datasource;
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.util.Constants;
 import dqm.jku.trustkg.util.Miscellaneous.DBType;
+import org.neo4j.driver.types.Relationship;
 
 /**
  * Connector for neo4j databases
- * 
- * @author Katharina
+ *
+ * @author Katharina Wolf
  */
 
 public class ConnectorNeo4J extends DSConnector {
@@ -36,326 +35,315 @@ public class ConnectorNeo4J extends DSConnector {
 	@SuppressWarnings("unused")
 	private final String DBUrl;
 	@SuppressWarnings("unused")
-	private final String DBname;
+	private final String DBName;
 	private final String label;
-	
-	private Driver driver;
-	private Session session;
 
-	private final static String cypher_get_all_labels = "call db.labels()";
-	private final static String cypher_get_all_property_keys = "CALL db.propertyKeys()";
-	private final static String cypher_get_all_relationship_types = "call db.relationshipTypes()";
+	private final Driver driver;
+	private final Session session;
+
+	Gson gson = new Gson();
+
+	private final static String cypher_schema = "CALL apoc.meta.schema() YIELD value as schemaMap";
 	private final static String cypher_get_nr_edges = "MATCH ()-->() RETURN count(*)";
 	private final static String cypher_get_nr_nodes = "MATCH (n) RETURN count(n)";
-	private final static String cypher_get_all_nodes = "MATCH (n) RETURN n";
+	private final static String cypher_get_relationship_by_type = "MATCH p=()-[r:?]->() RETURN p";
+	private final static String cypher_get_nodes_by_type = "MATCH (n:?) RETURN n";
 	private final static String cypher_get_unconnected_nodes = "MATCH (n) WHERE NOT (n)--() RETURN n";
-	private final static String cypher_get_all_nodes_and_relationships = "MATCH (n)-[r]-(p) RETURN n, r, p";
 	private final static String cypher_get_degree_distribution = "MATCH (n)-[]-() RETURN n, count(*)";
-	
-	
-	private ConnectorNeo4J(String DBUrl, String DBname, String DBpw, String label) {
+
+
+	private ConnectorNeo4J(String DBUrl, String DBName, String DBpw, String label) {
 		this.DBUrl = DBUrl;
-		this.DBname = DBname;
+		this.DBName = DBName;
 		this.label = label;
-		this.driver = GraphDatabase.driver(DBUrl, AuthTokens.basic(DBname, DBpw));
+		this.driver = GraphDatabase.driver(DBUrl, AuthTokens.basic(DBName, DBpw));
 		this.session = driver.session();
 	}
-	
-	public static ConnectorNeo4J getInstance(String DBUrl, String DBname, String DBpw, String label) throws ClassNotFoundException {
+
+	public static ConnectorNeo4J getInstance(String DBUrl, String DBname, String DBpw, String label) {
 		ConnectorNeo4J instance;
 		instance = new ConnectorNeo4J(DBUrl, DBname, DBpw, label);
-		
+
 		return instance;
 	}
-	
+
 	public void close() {
 		session.close();
 		driver.close();
 	}
-	
+
 	@Override
-	public Iterator<dqm.jku.trustkg.dsd.records.Record> getRecords(Concept concept) throws IOException {	
+	public Iterator<dqm.jku.trustkg.dsd.records.Record> getRecords(Concept concept) {
 		RecordList result = new RecordList();
 		try {
 			result = getAllNodes(concept);
-		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException
-				| NoSuchMethodException | InvocationTargetException e) {
+		} catch (SecurityException | IllegalArgumentException e) {
 			e.printStackTrace();
 		}
-	
+
 		return result.iterator();
 	}
 
 	@Override
-	public RecordList getRecordList(Concept concept) throws IOException {
+	public RecordList getRecordList(Concept concept) {
 		Iterator<dqm.jku.trustkg.dsd.records.Record> iter = getRecords(concept);
 		RecordList rs = new RecordList();
 		while (iter.hasNext()) {
 			rs.addRecord(iter.next());
 		}
-		
 		return rs;
 	}
-	
 
 	@Override
-	public RecordList getPartialRecordList(Concept concept, int offset, int noRecords) throws IOException {
+	public RecordList getPartialRecordList(Concept concept, int offset, int noRecords) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	/**
-	 * 
-	 * @param c Concept c
-	 * @return number of nodes in neo4j
-	 * @throws IOException
-	 */
 	@Override
-	public int getNrRecords(Concept c) throws IOException {
+	public int getNrRecords(Concept c) {
 		return  getNrNodes();
 	}
-	
-	/**
-	 * 
-	 * @param c Concept c
-	 * @return number of edges in neo4j
-	 * @throws IOException
-	 */
-	public int getNrRelationships(Concept c) throws IOException {
+
+	public int getNrRelationships(Concept c) {
 		return getNrRelationships();
 	}
-	
-	/**
-	 * 
-	 * @param c Concept c
-	 * @return true, if Neo4J Graph is fully connected, else false
-	 * @throws IOException
-	 */
-	public boolean isGraphFullyConnected(Concept c) throws IOException {
-		return isFullyConnected();
+
+	public boolean isGraphConnected(Concept c) {
+		return isConnected();
 	}
-	
-	/**
-	 * 
-	 * @param c Concept c
-	 * @return nodes and the number of incoming + outgoint relationships relationships
-	 */
+
 	public Iterator<dqm.jku.trustkg.dsd.records.Record> getDegreeDistribution(Concept c) {
 		RecordList rs = new RecordList();
-		
+
 		try {
 			rs = getNodeDegree(c);
 		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
 			e.printStackTrace();
 		}
-
 		return rs.iterator();
 	}
 
-	/**
-	 * return returns the labels, properties and relationship-types in neo4j database
-	 */
 	@Override
-	public Datasource loadSchema() throws IOException {
+	public Datasource loadSchema() {
 		return loadSchema(Constants.DEFAULT_URI, Constants.DEFAULT_PREFIX);
 	}
 
-	/**
-	 * @return returns the labels, properties and relationship-types in neo4j database
-	 */
 	@Override
-	public Datasource loadSchema(String uri, String prefix) throws IOException {
+	public Datasource loadSchema(String uri, String prefix) {
 		Datasource ds = DSDFactory.makeDatasource(label, DBType.NEO4J, uri, prefix);
-		Concept c = DSDFactory.makeConcept(label, ds);
-		StatementResult nodelabels = getAllLabels();
-		List<Record> records = nodelabels.list();
-		int i = 0;
-		for(Record r: records) {
-			String s = r.get(0).toString();
-			Attribute a = DSDFactory.makeAttribute(s, c);
-			a.setDataType(String.class);
-			a.setOrdinalPosition(i++);
-			a.setNullable(true);
-			a.setAutoIncrement(false);			
+
+		Result relSchema = execute(cypher_schema);
+
+		String json = "";
+
+		while (relSchema.hasNext()) {
+			Record rec = relSchema.next();
+			json = gson.toJson(rec.asMap());
 		}
-		
-		StatementResult nodeProperties = getAllPropertyKeys();
-		records = nodeProperties.list();
-		for(Record r: records) {
-			String s = r.get(0).toString();
-			Attribute a = DSDFactory.makeAttribute(s, c);
-			a.setDataType(String.class);
-			a.setOrdinalPosition(i++);
-			a.setNullable(true);
-			a.setAutoIncrement(false);			
+
+		try {
+			JSONObject jo = new JSONObject(json);
+			JSONObject schemaObjects = jo.getJSONObject("schemaMap");
+			Set<String> keys = schemaObjects.keySet();
+			JSONArray schema = schemaObjects.toJSONArray(new JSONArray(keys));
+
+			int counter = 0;
+
+			for(String s : keys) {
+				Concept c = DSDFactory.makeConcept(s, ds);
+				loadAttributes(c, schema.getJSONObject(counter));
+				counter++;
+			}
+		} catch (Exception e) {
+			throw new IllegalStateException("Invalid JSON: " + json, e);
 		}
-		
-		StatementResult relType = getAllRelationshipTypes();
-		records = relType.list();
-		for(Record r: records) {
-			String s = r.get(0).toString();
-			Attribute a = DSDFactory.makeAttribute(s, c);
-			a.setDataType(String.class);
-			a.setOrdinalPosition(i++);
-			a.setNullable(true);
-			a.setAutoIncrement(false);			
-		}
-		
+
 		return ds;
 	}
-	
+
 
 	// ------------------------------------------------------------------------------------------------
 	// ------------------------- Private Helping Methods ----------------------------------------------
 	// ------------------------------------------------------------------------------------------------
-	
-	private RecordList getAllNodes(Concept concept) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
-		StatementResult result = execute(cypher_get_all_nodes);
-		List<Record> records = result.list();
-		RecordList list = new RecordList();
-		
-		for(Record r : records) {
-			String labels = "";
-			HashMap<String, String> properties = new HashMap<>();		
-			Map<String, Object> map = r.asMap();
 
-			for(Map.Entry<String, Object> entry : map.entrySet()) {
-				Object o = entry.getValue();
-				
-				labels = getLabelString(o);
-				properties = getPropertiesMap(o);
+	private void loadAttributes(Concept c, JSONObject obj) {
+
+		// relationships, count, type, properties, labels
+		Set<String> keys = obj.keySet();
+		Attribute dsdAttribute;
+
+		for(String s : keys) {
+
+			if(obj.get(s) instanceof JSONObject) {
+				JSONObject att = obj.getJSONObject(s);
+
+				// acted_in, reviewed, wrote, produced, directed
+				Set<String> attributes = att.keySet();
+
+				for(String a : attributes) {
+					dsdAttribute = DSDFactory.makeAttribute(a, c);
+					dsdAttribute.setNullable(true);
+
+					try {
+						DataTypeConverter.getTypeFromNeo4J(dsdAttribute, "String", a);
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+				}
+			} else {
+				Object o = obj.get(s);
+				dsdAttribute = DSDFactory.makeAttribute(s, c);
+				String dataType;
+
+				if(o instanceof Integer) {
+					dataType = "int";
+				} else if (o instanceof String) {
+					dataType = "String";
+				} else if (o instanceof Boolean) {
+					dataType = "boolean";
+				} else {
+					dataType = "String";
+				}
+
+				try {
+					DataTypeConverter.getTypeFromNeo4J(dsdAttribute, dataType, o.toString());
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 			}
-			
-			Attribute att  = new Attribute(labels, concept);
-			dqm.jku.trustkg.dsd.records.Record rec = new dqm.jku.trustkg.dsd.records.Record(concept);
-			rec.addValueNeo4J(att, properties);
-			
-			list.addRecord(rec);		
 		}
-		
+	}
+
+	private RecordList getAllNodes(Concept concept) throws SecurityException, IllegalArgumentException {
+
+		RecordList list = new RecordList();
+
+		// Distinguish between Relationship and Node
+		Attribute type = concept.getAttribute("type");
+
+		if(type.getDefaultValue().equals("relationship")) {
+			String query = cypher_get_relationship_by_type;
+			query = query.replaceFirst("\\?", concept.getLabelOriginal());
+			Result result = execute(query);
+			List<Record> records = result.list();
+
+			for(Record r : records) {
+				dqm.jku.trustkg.dsd.records.Record rec = new dqm.jku.trustkg.dsd.records.Record(concept);
+
+				for (Relationship item : r.values().get(0).asPath().relationships()) {
+					Map<String, Object> map = item.asMap();
+					for (Map.Entry<String, Object> entry : map.entrySet()) {
+						Attribute a = concept.getAttribute(entry.getKey());
+						rec.addValueNeo4J(a, DataTypeConverter.getNeo4JRecordvalue(a, entry.getValue()));
+					}
+				}
+				list.addRecord(rec);
+			}
+		} else if(type.getDefaultValue().equals("node")) {
+			String query = cypher_get_nodes_by_type;
+			query = query.replaceFirst("\\?", concept.getLabelOriginal());
+			Result result = execute(query);
+			List<Record> records = result.list();
+
+			for(Record r : records) {
+				dqm.jku.trustkg.dsd.records.Record rec = new dqm.jku.trustkg.dsd.records.Record(concept);
+				Map<String, Object> o = r.values().get(0).asNode().asMap();
+
+				for(Map.Entry<String, Object> entry : o.entrySet()) {
+					Attribute a = concept.getAttribute(entry.getKey());
+					rec.addValueNeo4J(a, DataTypeConverter.getNeo4JRecordvalue(a, entry.getValue()));
+				}
+				list.addRecord(rec);
+			}
+		} else {
+			throw new IllegalArgumentException("No mapping known for this Neo4J data type: " + type);
+		}
 		return list;
 	}
-	
-	private StatementResult getAllLabels() {
-		StatementResult result = execute(cypher_get_all_labels);
-		
-		return result;
-	}
-	
-	private StatementResult getAllPropertyKeys() {
-		StatementResult result = execute(cypher_get_all_property_keys);
-		
-		return result;
-	}
-	
-	private StatementResult getAllRelationshipTypes() {
-		StatementResult result = execute(cypher_get_all_relationship_types);
-		
-		return result;
-	}
-	
+
 	private int getNrRelationships() {
-		StatementResult resultRelationships = execute(cypher_get_nr_edges);
+		Result resultRelationships = execute(cypher_get_nr_edges);
 		List<Record> records = resultRelationships.list();
 		String s = records.get(0).get(0).toString();
-		
+
 		return Integer.parseInt(s);
 	}
-	
+
 	private int getNrNodes() {
-		StatementResult resultNodes = execute(cypher_get_nr_nodes);
+		Result resultNodes = execute(cypher_get_nr_nodes);
 		List<Record> records = resultNodes.list();
 		String s =  records.get(0).get(0).toString();
-		
-		return Integer.parseInt(s);	
+
+		return Integer.parseInt(s);
 	}
-	
-	
-	private boolean isFullyConnected() {
-		StatementResult resultNodes = execute(cypher_get_unconnected_nodes);
+
+	private boolean isConnected() {
+		Result resultNodes = execute(cypher_get_unconnected_nodes);
 		List<Record> records = resultNodes.list();
-		
-		if(records.isEmpty()) {
-			return true;
-		} else {
-			return false;
-		}
+
+		return records.isEmpty();
 	}
-	
+
 	private RecordList getNodeDegree(Concept c) throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
-		StatementResult result = execute(cypher_get_degree_distribution);
-		List<Record> records = result.list();		
+		Result result = execute(cypher_get_degree_distribution);
+		List<Record> records = result.list();
 		RecordList list = new RecordList();
 
 		for(Record r : records) {
-			Map<String, Object> map = r.asMap();		
+			Map<String, Object> map = r.asMap();
 			Collection<Object> coll = map.values();
 			Object[] o = coll.toArray();
-				
+
 			String labels = getLabelString(o[0]);
 			HashMap<String, String> properties = getPropertiesMap(o[0]);
 			properties.put("Label:", labels);
-			
+
 			long counter = (Long) o[1];
-			
+
 			Attribute att = new Attribute(properties.toString(), c);
 			dqm.jku.trustkg.dsd.records.Record rec = new dqm.jku.trustkg.dsd.records.Record(c);
 			rec.addValueNeo4J(att, counter);
-			
+
 			list.addRecord(rec);
-		}	
-		
+		}
 		return list;
 	}
-	
-	private StatementResult execute(String statement) {
-		StatementResult result = session.run(statement);
-		
-		return result;
+
+	private Result execute(String statement) {
+		return session.run(statement);
 	}
-	
-	@SuppressWarnings("unused")
-	private int getNodesAndRelationships() {
-		StatementResult result = execute(cypher_get_all_nodes_and_relationships);
-		List<Record> records = result.list();
-		
-		//NOT IMPLEMENTED
-		
-		return 0;
-	}
-	
+
 	private String getLabelString(Object o) throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
-		ArrayList<?> labelsGeneric = new ArrayList<>();
-		ArrayList<String> labels = new ArrayList<>();;
-		
+		ArrayList<?> labelsGeneric;
+		ArrayList<String> labels = new ArrayList<>();
+
 		Field field = o.getClass().getDeclaredField("labels");
-		field.setAccessible(true);				
+		field.setAccessible(true);
 		labelsGeneric = (ArrayList<?>) field.get(o);
-		
-		for(int i = 0; i < labelsGeneric.size(); i++) {
-			labels.add(labelsGeneric.get(i).toString());
+
+		for (Object value : labelsGeneric) {
+			labels.add(value.toString());
 		}
-		
-		return labels.toString();	
+		return labels.toString();
 	}
-	
+
 	private HashMap<String, String> getPropertiesMap(Object o) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
-		HashMap<?, ?> propertiesGeneric = new HashMap<>();
+		HashMap<?, ?> propertiesGeneric;
 		HashMap<String, String> properties = new HashMap<>();
-		
+
 		Field field = o.getClass().getSuperclass().getDeclaredField("properties");
 		field.setAccessible(true);
 		propertiesGeneric = (HashMap<?, ?>) field.get(o);
-		
+
 		for(Map.Entry<?, ?> entry : propertiesGeneric.entrySet()) {
 			Object key = entry.getKey();
 			Object val = entry.getValue();
-			
-			properties.put(key.toString(), val.toString());		
+
+			properties.put(key.toString(), val.toString());
 		}
-		
 		return properties;
 	}
-
-
 }
+
+

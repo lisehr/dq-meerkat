@@ -44,7 +44,7 @@
 		<dependency>
 			<groupId>com.github.jsonld-java</groupId>
 			<artifactId>jsonld-java</artifactId>
-			<version>0.9.0</version>
+			<version>0.13.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.jena</groupId>
@@ -82,7 +82,7 @@
 		<dependency>
 			<groupId>org.neo4j.driver</groupId>
 			<artifactId>neo4j-java-driver</artifactId>
-			<version>1.7.2</version>
+			<version>4.1.0</version>		
 		</dependency>
 		<dependency>
 		    <groupId>org.neo4j</groupId>
@@ -92,7 +92,13 @@
 		<dependency>
 		    <groupId>org.neo4j</groupId>
 		    <artifactId>neo4j</artifactId>
-		    <version>3.4.0</version>
+		    <version>3.5.12</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20200518</version>
 		</dependency>
 	</dependencies>
 
