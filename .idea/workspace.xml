@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6b3839f9-04d1-40c4-b6b7-ec83830e76bb" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.metadata/.log" beforeDir="false" afterPath="$PROJECT_DIR$/.metadata/.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.metadata/.mylyn/tasks.xml.zip" beforeDir="false" afterPath="$PROJECT_DIR$/.metadata/.mylyn/tasks.xml.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.root/4.tree" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources" beforeDir="false" afterPath="$PROJECT_DIR$/.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi" beforeDir="false" afterPath="$PROJECT_DIR$/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.metadata/.plugins/org.eclipse.m2e.logback.configuration/0.log" beforeDir="false" afterPath="$PROJECT_DIR$/.metadata/.plugins/org.eclipse.m2e.logback.configuration/0.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.metadata/version.ini" beforeDir="false" afterPath="$PROJECT_DIR$/.metadata/version.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.project" beforeDir="false" afterPath="$PROJECT_DIR$/.project" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.settings/org.eclipse.core.resources.prefs" beforeDir="false" afterPath="$PROJECT_DIR$/.settings/org.eclipse.core.resources.prefs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/slnx.sqlite" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dqm/jku/trustkg/connectors/ConnectorNeo4J.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/trustkg/connectors/ConnectorNeo4J.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dqm/jku/trustkg/demos/kathi/TestNeo4j.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/trustkg/demos/kathi/TestNeo4j.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dqm/jku/trustkg/util/DataTypeConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/trustkg/util/DataTypeConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dqm/jku/trustkg/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dqm/jku/trustkg/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/dqm/jku/trustkg/AppTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/dqm/jku/trustkg/AppTest.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA 2020.2.3\plugins\maven\lib\maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1jTi4lYtCrxDlEixM74KK5YdrcU" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/json-20200518.jar" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="Debugger_Data_Views_Java" />
+  </component>
+  <component name="RunManager">
+    <configuration name="TestNeo4j" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="dqm.jku.trustkg.demos.kathi.TestNeo4j" />
+      <module name="trustkg" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dqm.jku.trustkg.demos.kathi.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.TestNeo4j" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6b3839f9-04d1-40c4-b6b7-ec83830e76bb" name="Default Changelist" comment="" />
+      <created>1603834295184</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1603834295184</updated>
+      <workItem from="1603834296503" duration="4413000" />
+      <workItem from="1603967195777" duration="1208000" />
+      <workItem from="1604334336491" duration="23024000" />
+      <workItem from="1604427781281" duration="6942000" />
+      <workItem from="1605627661875" duration="22101000" />
+      <workItem from="1605698835524" duration="4354000" />
+      <workItem from="1605717702548" duration="42000" />
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="586" y="198" key="#Inspections" timestamp="1605644931168">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="586" y="198" key="#Inspections/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1605644931168" />
+    <state x="440" y="94" key="#Project_Structure" timestamp="1603834399046">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="440" y="94" key="#Project_Structure/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1603834399046" />
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603834365166">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1603834365166" />
+    <state x="772" y="219" width="849" height="631" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog" timestamp="1604343257544">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="772" y="219" width="849" height="631" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1604343257544" />
+    <state x="646" y="267" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog" timestamp="1604343234517">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="646" y="267" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1604343234517" />
+    <state x="622" y="253" key="FileChooserDialogImpl" timestamp="1604343220467">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="622" y="253" key="FileChooserDialogImpl/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1604343220467" />
+    <state width="1877" height="402" key="GridCell.Tab.0.bottom" timestamp="1605703954175">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="402" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1605703954175" />
+    <state width="1877" height="402" key="GridCell.Tab.0.center" timestamp="1605703954175">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="402" key="GridCell.Tab.0.center/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1605703954175" />
+    <state width="1877" height="402" key="GridCell.Tab.0.left" timestamp="1605703954175">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="402" key="GridCell.Tab.0.left/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1605703954175" />
+    <state width="1877" height="402" key="GridCell.Tab.0.right" timestamp="1605703954175">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="402" key="GridCell.Tab.0.right/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1605703954175" />
+    <state width="1877" height="240" key="GridCell.Tab.1.bottom" timestamp="1605650836340">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="240" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1605650836340" />
+    <state width="1877" height="240" key="GridCell.Tab.1.center" timestamp="1605650836340">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="240" key="GridCell.Tab.1.center/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1605650836340" />
+    <state width="1877" height="240" key="GridCell.Tab.1.left" timestamp="1605650836340">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="240" key="GridCell.Tab.1.left/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1605650836340" />
+    <state width="1877" height="240" key="GridCell.Tab.1.right" timestamp="1605650836340">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="240" key="GridCell.Tab.1.right/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1605650836340" />
+    <state x="253" y="79" width="1326" height="866" key="SettingsEditor" timestamp="1605630015204">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="253" y="79" width="1326" height="866" key="SettingsEditor/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1605630015204" />
+    <state x="608" y="408" width="685" height="251" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1604343233842">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="608" y="408" width="685" height="251" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1604343233842" />
+    <state x="523" y="249" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1605648009799">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="523" y="249" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1605648009799" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1605643404453">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1605643404453" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/dqm/jku/trustkg/connectors/ConnectorNeo4J.java</url>
+          <line>288</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/dqm/jku/trustkg/demos/kathi/TestNeo4j.java</url>
+          <line>25</line>
+          <option name="timeStamp" value="61" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="dqm.jku.trustkg.dsd.elements.Concept" memberName="attributes" />
+      </pinned-members>
+    </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="relSchema" />
+        <watch expression="conn.DBUrl" />
+        <watch expression="((String)keys.toArray()[0]).value" custom="java.lang.String" />
+        <watch expression="att" />
+        <watch expression="c.datasource.dataProfile" />
+        <watch expression="c.datasource.dataProfile" language="JAVA" />
+        <watch expression="((Concept)ds.concepts.toArray()[5]).attributes" custom="dqm.jku.trustkg.dsd.elements.Concept" />
+        <watch expression="a.concept.attributes" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>
