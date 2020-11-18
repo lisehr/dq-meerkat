@@ -19,8 +19,8 @@ import dqm.jku.trustkg.dsd.elements.DSDElement;
  * @author optimusseptim
  * 
  */
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", "mbc = http://example.com/structures/miniblockchain/" })
-@RDFBean("foaf:MiniBlockChain")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:MiniBlockChain")
 public class MiniBlockChain {
   private SortedSet<MiniChain> minichains = new TreeSet<>(); // the set of minichains for each dsdblock set
   private String id; // the id of the miniblockchain
@@ -38,7 +38,7 @@ public class MiniBlockChain {
    * 
    * @return the id
    */
-  @RDFSubject(prefix = "mbc:")
+  @RDFSubject
   public String getId() {
     return id;
   }
@@ -57,7 +57,7 @@ public class MiniBlockChain {
    * 
    * @return the minichains
    */
-  @RDF("foaf:hasMinichain")
+  @RDF("dsd:hasMinichain")
   @RDFContainer
   public SortedSet<MiniChain> getMinichains() {
     return minichains;
@@ -145,7 +145,7 @@ public class MiniBlockChain {
    * @return true if added, false otherwise
    */
   public boolean addDSDElement(DSDElement e) {
-    return this.addBlock(new DSDBlock(findPreviousHash(e), e), e.getURI());
+    return this.addBlock(new DSDBlock(id, findPreviousHash(e), e), e.getURI());
   }
 
   /**

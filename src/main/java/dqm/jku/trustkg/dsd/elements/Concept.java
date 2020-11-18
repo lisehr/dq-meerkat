@@ -22,12 +22,13 @@ import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.influxdb.InfluxDBConnection;
 import dqm.jku.trustkg.util.AttributeSet;
 
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
-@RDFBean("foaf:Concept")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:Concept")
 public class Concept extends DSDElement {
 
   private static final long serialVersionUID = 1L;
   private Datasource datasource;
+  private Attribute[] recordStructure;
   private HashSet<Attribute> attributes = new HashSet<Attribute>();
   private HashSet<Attribute> primaryKeys = new HashSet<Attribute>();
   private List<FunctionalDependency> functionalDependencies = new ArrayList<FunctionalDependency>();
@@ -54,12 +55,20 @@ public class Concept extends DSDElement {
    */
   public void setAttributes(AttributeSet attributes) {
     this.attributes = (HashSet<Attribute>) attributes.stream().collect(Collectors.toSet());
+    updateStructure();
   }
 
-  /**
+  private void updateStructure() {
+    this.recordStructure = new Attribute[this.attributes.size()];
+    for (int i = 0; i < recordStructure.length; i++) {
+			recordStructure[i] = this.getAttributes().getAttributes().get(i);
+		}
+	}
+
+	/**
    * @param primaryKey the primaryKey to set
    */
-  public void setPrimaryKeys(AttributeSet primaryKey) {
+  public void setPrimaryKeySet(AttributeSet primaryKey) {
     this.primaryKeys = (HashSet<Attribute>) primaryKey.stream().collect(Collectors.toSet());
   }
 
@@ -77,18 +86,30 @@ public class Concept extends DSDElement {
     this.foreignKeys = foreignKeys;
   }
 
-  @RDF("foaf:hasDatasource")
+  @RDF("dsd:hasDatasource")
   public Datasource getDatasource() {
     return datasource;
   }
 
-  @RDF("foaf:hasAttributeSet")
   public AttributeSet getAttributes() {
     return new AttributeSet(attributes);
   }
+  
+  @RDF("dsd:hasAttribute")
+  @RDFContainer
+  public HashSet<Attribute> getAttributeList(){
+	  return attributes;
+  }
+  
+  public void setAttributeList(HashSet<Attribute> att){
+	  this.attributes = att;
+	  updateStructure();
+  }
+
 
   public void addAttribute(Attribute attribute) {
     attributes.add(attribute);
+    updateStructure();
   }
 
   public boolean containsAttribute(Attribute attribute) {
@@ -99,7 +120,12 @@ public class Concept extends DSDElement {
     return this.getAttribute(attribute) != null;
   }
 
-  @RDF("foaf:hasPK")
+  @RDF("dsd:hasPrimaryKey")
+  @RDFContainer
+  public HashSet<Attribute> getPrimaryKeySet(){
+	return primaryKeys;  
+  }
+  
   public AttributeSet getPrimaryKeys() {
     return new AttributeSet(primaryKeys);
   }
@@ -130,7 +156,7 @@ public class Concept extends DSDElement {
     return list;
   }
 
-  @RDF("foaf:hasFD")
+  @RDF("dsd:hasFD")
   @RDFContainer
   public List<FunctionalDependency> getFunctionalDependencies() {
     return Collections.unmodifiableList(functionalDependencies);
@@ -167,7 +193,7 @@ public class Concept extends DSDElement {
     return res;
   }
 
-  @RDF("foaf:hasFK")
+  @RDF("dsd:hasForeignKey")
   @RDFContainer
   public Set<ForeignKey> getForeignKeys() {
     return Collections.unmodifiableSet(foreignKeys);
@@ -190,9 +216,9 @@ public class Concept extends DSDElement {
   }
 
   public void fillBlockChain(BlockChain bc) {
-    bc.addBlock(new DSDBlock(bc.getPreviousHash(), this));
+    bc.addBlock(new DSDBlock(bc.getId(), bc.getPreviousHash(), this));
     for (Attribute a : attributes) {
-      bc.addBlock(new DSDBlock(bc.getPreviousHash(), a));
+      bc.addBlock(new DSDBlock(bc.getId(), bc.getPreviousHash(), a));
     }
   }
 
@@ -226,5 +252,13 @@ public class Concept extends DSDElement {
     }
     return measure.build();
   }
+
+	public Attribute[] getRecordStructure() {
+		return recordStructure;
+	}
+
+	public void setRecordStructure(Attribute[] recordStructure) {
+		this.recordStructure = recordStructure;
+	}
 
 }

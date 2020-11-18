@@ -13,8 +13,8 @@ import dqm.jku.trustkg.util.HashingUtils;
  * 
  * @author optimusseptim
  */
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
-@RDFBean("foaf:SimpleBlock")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:SimpleBlock")
 public class SimpleBlock extends Block {
   private String data; // our data will be a simple message.
 
@@ -23,8 +23,8 @@ public class SimpleBlock extends Block {
   }
 
   // Block Constructor.
-  public SimpleBlock(String data, String previousHash) {
-    super(previousHash);
+  public SimpleBlock(String chainId, String data, String previousHash) {
+    super(chainId, previousHash);
     this.data = data;
     this.calculateHash(); // Making sure we do this after we set the other values.
   }
@@ -34,7 +34,7 @@ public class SimpleBlock extends Block {
    * 
    * @return data string
    */
-  @RDF("foaf:data")
+  @RDF("dsd:hasData")
   public String getData() {
     return data;
   }

@@ -14,8 +14,8 @@ import dqm.jku.trustkg.util.HashingUtils;
  * 
  * @author optimusseptim
  */
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
-@RDFBean("foaf:DSDBlock")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:DSDBlock")
 public class DSDBlock extends Block {
   private DSDElement data; // data in form of a DSDElement
 
@@ -23,8 +23,8 @@ public class DSDBlock extends Block {
     super();
   }
 
-  public DSDBlock(String previousHash, DSDElement data) {
-    super(previousHash, data);
+  public DSDBlock(String chainId, String previousHash, DSDElement data) {
+    super(chainId, previousHash, data);
     this.data = data;
     this.calculateHash();
   }
@@ -34,7 +34,7 @@ public class DSDBlock extends Block {
    * 
    * @return the dsd element stored in the block
    */
-  @RDF("foaf:hasDSDElement")
+  @RDF("dsd:hasDSDElement")
   public DSDElement getData() {
     return data;
   }

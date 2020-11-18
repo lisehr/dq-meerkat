@@ -4,10 +4,16 @@ import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
 
 import java.util.List;
 
+import org.cyberborean.rdfbeans.annotations.RDFBean;
+import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
+
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.DependentProfileMetric;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
+
+import static dqm.jku.trustkg.quality.profilingmetrics.MetricCategory.*;
+
 
 /**
  * Describes the metric Null Values Percentage, which is the amount of Null
@@ -16,13 +22,15 @@ import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
  * @author optimusseptim
  *
  */
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:quality/structures/metrics/cardinality/NullValuesPercentage")
 public class NullValuesPercentage extends DependentProfileMetric {
   public NullValuesPercentage() {
 
   }
 
   public NullValuesPercentage(DataProfile d) {
-    super(nullValP, d);
+    super(nullValP, cardCat, d);
   }
 
   @Override
@@ -45,6 +53,7 @@ public class NullValuesPercentage extends DependentProfileMetric {
     if (denominator == 0) result = Double.valueOf(0);
     result = (double) nominator * 100.0 / (double) denominator;
     super.setValue(result);
+    super.setNumericVal((Number) result);
     this.setValueClass(Double.class);
   }
 

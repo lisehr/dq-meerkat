@@ -3,6 +3,7 @@ package dqm.jku.trustkg.quality.profilingmetrics;
 import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
+import org.cyberborean.rdfbeans.annotations.RDFSubject;
 
 /**
  * Enumeration for all DP metrics
@@ -10,8 +11,8 @@ import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
  * @author optimusseptim
  *
  */
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
-@RDFBean("foaf:MetricTitle")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:quality/structures/MetricTitle")
 public enum MetricTitle {
   card("Cardinality"),
   nullVal("# Null Values"),
@@ -26,6 +27,8 @@ public enum MetricTitle {
   max("Maximum"),
   med("Median"),
   min("Minimum"),
+  sd("Standard Deviation"),
+  mad("Mean Absolute Deviation"),
   pattern("Pattern recognition"),
   bt("Basic type"),
   dt("Data type"),
@@ -34,6 +37,8 @@ public enum MetricTitle {
   histVal("Values");
   
   private String label; // the label of the title (string representation)
+  @SuppressWarnings("unused")
+  private String uri;
 
   private MetricTitle(String label) {
     this.label = label;
@@ -49,9 +54,18 @@ public enum MetricTitle {
    * 
    * @return label
    */
-  @RDF("foaf:label")
-  public String label() {
+  @RDF("dsd:hasLabel")
+  public String getLabel() {
     return label;
+  }
+  
+  @RDFSubject(prefix = "dsd:quality/structures/MetricTitle/")
+  public String getUri() {
+	  return getLabel().replaceAll("\\s+", "");
+  }
+  
+  public void setUri(String uri) {
+	  this.uri = uri;
   }
   
   /**

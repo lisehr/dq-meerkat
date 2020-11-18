@@ -20,14 +20,17 @@ import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.NumRows
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
 import dqm.jku.trustkg.util.numericvals.ValueDistributionUtils;
 
+import static dqm.jku.trustkg.quality.profilingmetrics.MetricCategory.*;
+
+
 /**
  * Describes the metric Histogram, which is a value distribution (equi-width).
  * 
  * @author optimusseptim
  *
  */
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
-@RDFBean("foaf:Histogram")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:quality/structures/metrics/histogram/Histogram")
 public class Histogram extends DependentProfileMetric {
   private Number min; // minimum value
   private Number max; // maximum value
@@ -38,7 +41,7 @@ public class Histogram extends DependentProfileMetric {
   }
 
   public Histogram(DataProfile d) {
-    super(hist, d);
+    super(hist, histCat, d);
   }
 
   @Override
@@ -91,7 +94,7 @@ public class Histogram extends DependentProfileMetric {
       if (n.doubleValue() == max.doubleValue()) classVals[k - 1]++;
       else classVals[(int) Math.floor((n.doubleValue() - min.doubleValue()) / classrange.doubleValue())]++;
     }
-    SerializableFrequencyMap classes = new SerializableFrequencyMap();
+    SerializableFrequencyMap classes = new SerializableFrequencyMap(this.getUri());
     for (int i = 0; i < k; i++) classes.put(i, classVals[i]);
     this.setValue(classes);
   }
@@ -145,7 +148,7 @@ public class Histogram extends DependentProfileMetric {
    * 
    * @return the min
    */
-  @RDF("foaf:min")
+  @RDF("dsd:hasMin")
   public Number getMin() {
     return min;
   }
@@ -164,7 +167,7 @@ public class Histogram extends DependentProfileMetric {
    * 
    * @return the max
    */
-  @RDF("foaf:max")
+  @RDF("dsd:hasMax")
   public Number getMax() {
     return max;
   }
@@ -183,7 +186,7 @@ public class Histogram extends DependentProfileMetric {
    * 
    * @return the classrange
    */
-  @RDF("foaf:classrange")
+  @RDF("dsd:hasClassrange")
   public Number getClassrange() {
     return classrange;
   }

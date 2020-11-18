@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
+import org.cyberborean.rdfbeans.annotations.RDFContainer;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
+import org.cyberborean.rdfbeans.annotations.RDFSubject;
 
 /**
  * Wrapper data structure to properly handle all Pattern counters
@@ -13,21 +15,37 @@ import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
  * @author optimusseptim
  *
  */
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
-@RDFBean("foaf:PatternCounterList")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:quality/structures/PatternCounterList")
 public class PatternCounterList {
   private List<PatternCounter> list = new ArrayList<>(); // list for pattern counters
+  private String uri;
 
   public PatternCounterList() {
 
   }
+  
+  public PatternCounterList(String uri) {
+	  this.uri = uri + "/patternCounterList";
+  }
 
+  @RDFSubject
+  public String getURI() {
+	  return this.uri;
+  }
+  
+  public void setURI(String uri) {
+	  this.uri = uri;
+  }
+
+  
   /**
    * Gets the list of pattern counters
    * 
    * @return list of pattern counters
    */
-  @RDF("foaf:list")
+  @RDF("dsd:hasPattern")
+  @RDFContainer
   public List<PatternCounter> getList() {
     return list;
   }
@@ -47,7 +65,7 @@ public class PatternCounterList {
    * @param regex the regex string to be added
    */
   public void addPattern(String regex) {
-    this.list.add(new PatternCounter(regex));
+    this.list.add(new PatternCounter(regex, uri));
   }
 
   /**

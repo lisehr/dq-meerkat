@@ -12,6 +12,8 @@ import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
+import static dqm.jku.trustkg.quality.profilingmetrics.MetricCategory.*;
+
 
 /**
  * Describes the metric Digits, which is the amount of digits before the decimal
@@ -20,15 +22,15 @@ import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
  * @author optimusseptim
  *
  */
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
-@RDFBean("foaf:Digits")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:quality/structures/metrics/dataTypeInfo/Digits")
 public class Digits extends ProfileMetric {
   public Digits() {
 
   }
 
   public Digits(DataProfile d) {
-    super(dig, d);
+    super(dig, dti, d);
   }
 
   private int calculateDigits(Object field) {
@@ -46,6 +48,7 @@ public class Digits extends ProfileMetric {
     if (a.getDataType() == Object.class) return;
     if (a.getDataType() == String.class) {
       super.setValue(0);
+      this.setNumericVal(((Number) 0).longValue());
       return;
     }
     int digits = 0;
@@ -54,6 +57,7 @@ public class Digits extends ProfileMetric {
       if (dig > digits) digits = dig;
     }
     super.setValue(digits);
+    this.setNumericVal(((Number) digits).longValue());
   }
 
   @Override
@@ -63,6 +67,7 @@ public class Digits extends ProfileMetric {
     if (a.getDataType() == Object.class) return;
     if (a.getDataType() == String.class) {
       super.setValue(0);
+      this.setNumericVal(((Number) 0).longValue());
       return;
     }
     int digits = 0;
@@ -71,6 +76,7 @@ public class Digits extends ProfileMetric {
       if (dig > digits) digits = dig;
     }
     super.setValue(digits);
+    this.setNumericVal(((Number) digits).longValue());
   }
 
   @Override

@@ -6,6 +6,7 @@ import java.util.Objects;
 import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
+import org.cyberborean.rdfbeans.annotations.RDFSubject;
 
 import dqm.jku.trustkg.dsd.elements.DSDElement;
 import dqm.jku.trustkg.dsd.records.RecordList;
@@ -17,23 +18,38 @@ import dqm.jku.trustkg.quality.DataProfile;
  * @author optimusseptim
  *
  */
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
-@RDFBean("foaf:ProfileMetric")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:quality/structures/ProfileMetric")
 public abstract class ProfileMetric implements Comparable<ProfileMetric> {
   private MetricTitle title; // the naming of the metric
+  private MetricCategory cat; // name of metric category
   private Class<?> valClass; // the class of the value
   private Object value; // the value itself
+  private Number numericVal; // numeric representation (e.g. double for values that can be integer as well)
   private DataProfile refProf; // reference profile for calculations
+  private String uri; // uri of the metric
 
   public ProfileMetric() {
 
   }
 
-  public ProfileMetric(MetricTitle title, DataProfile refProf) {
+  public ProfileMetric(MetricTitle title, MetricCategory cat, DataProfile refProf) {
     if (title == null || refProf == null) throw new IllegalArgumentException("Parameters cannot be null!");
     this.title = title;
     this.refProf = refProf;
+    this.cat = cat;
+    this.uri = refProf.getURI() + '/' + this.title.getLabel().replaceAll("\\s+", "");
     value = null;
+    numericVal = null;
+  }
+  
+  @RDFSubject
+  public String getUri() {
+	  return uri;
+  }
+  
+  public void setUri(String uri) {
+	  this.uri = uri;
   }
 
   /**
@@ -41,7 +57,7 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric> {
    * 
    * @return title of metric
    */
-  @RDF("foaf:label")
+  @RDF("dsd:hasTitle")
   public MetricTitle getTitle() {
     return title;
   }
@@ -52,7 +68,16 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric> {
    * @return label of title
    */
   public String getLabel() {
-    return title.label();
+    return title.getLabel();
+  }
+  
+  @RDF("dsd:isInCategory")
+  public MetricCategory getCat() {
+	return cat;
+  }
+
+  public void setCat(MetricCategory cat) {
+	this.cat = cat;
   }
 
   /**
@@ -78,7 +103,7 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric> {
    * 
    * @return value of metric
    */
-  @RDF("foaf:value")
+  @RDF("dsd:hasValue")
   public Object getValue() {
     return value;
   }
@@ -106,7 +131,7 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric> {
    * 
    * @return string of value class
    */
-  @RDF("foaf:valueClass")
+  @RDF("dsd:isInValueClass")
   public String getValueClassString() {
     return this.valClass.getName();
   }
@@ -138,7 +163,7 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric> {
    * 
    * @return the reference profile
    */
-  @RDF("foaf:refProf")
+  @RDF("dsd:isIncludedIn")
   public DataProfile getRefProf() {
     return refProf;
   }
@@ -197,7 +222,7 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric> {
   @Override
   public String toString() {
     if (value == null) return String.format("%s\tnull", title);
-    else if (title.label().length() < 8) return String.format("%s\t%s", title, getValueString());
+    else if (title.getLabel().length() < 8) return String.format("%s\t%s", title, getValueString());
     else return String.format("%s%s", title, getValueString());
   }
 
@@ -216,7 +241,7 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric> {
   }
 
   public int compareTo(ProfileMetric other) {
-    return this.title.label().compareTo(other.title.label());
+    return this.title.getLabel().compareTo(other.title.getLabel());
   }
 
   /**
@@ -228,8 +253,16 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric> {
    */
   public int getMetricPos(MetricTitle t) {
     List<ProfileMetric> metrics = this.getRefProf().getMetrics();
-    for (int i = 0; i < metrics.size(); i++) if (metrics.get(i).getLabel().equals(t.label())) return i;
+    for (int i = 0; i < metrics.size(); i++) if (metrics.get(i).getLabel().equals(t.getLabel())) return i;
     return -1;
   }
+
+	public Number getNumericVal() {
+		return numericVal;
+	}
+
+	public void setNumericVal(Number numericVal) {
+		this.numericVal = numericVal;
+	}
 
 }

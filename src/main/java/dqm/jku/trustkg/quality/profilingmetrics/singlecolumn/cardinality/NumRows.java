@@ -10,6 +10,8 @@ import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
+import static dqm.jku.trustkg.quality.profilingmetrics.MetricCategory.*;
+
 
 /**
  * Describes the metric NumRows, which is the amount of rows in a data set.
@@ -17,26 +19,28 @@ import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
  * @author optimusseptim
  *
  */
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
-@RDFBean("foaf:NumRows")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:quality/structures/metrics/cardinality/Cardinality")
 public class NumRows extends ProfileMetric {
   public NumRows() {
 
   }
 
   public NumRows(DataProfile d) {
-    super(numrows, d);
+    super(numrows, cardCat, d);
   }
 
   @Override
   public void calculation(RecordList rs, Object oldVal) {
     super.setValue(rs.size());
+    super.setNumericVal(((Number) rs.size()).longValue());
     super.setValueClass(Integer.class);
   }
 
   @Override
   public void calculationNumeric(List<Number> list, Object oldVal) {
     super.setValue(list.size());
+    super.setNumericVal(((Number) list.size()).longValue());
     super.setValueClass(Integer.class);
   }
 

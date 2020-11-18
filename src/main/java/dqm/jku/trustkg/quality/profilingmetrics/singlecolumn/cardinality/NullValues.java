@@ -12,6 +12,8 @@ import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
+import static dqm.jku.trustkg.quality.profilingmetrics.MetricCategory.*;
+
 
 /**
  * Describes the metric Null Values, the amount of empty fields in a Attribute
@@ -19,15 +21,15 @@ import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
  * @author optimusseptim
  *
  */
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
-@RDFBean("foaf:NullValues")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:quality/structures/metrics/cardinality/NullValues")
 public class NullValues extends ProfileMetric {
   public NullValues() {
 
   }
 
   public NullValues(DataProfile d) {
-    super(nullVal, d);
+    super(nullVal, cardCat, d);
   }
 
   @Override
@@ -38,6 +40,7 @@ public class NullValues extends ProfileMetric {
       if (r.getField(a) == null) nullVals++;
     }
     this.setValue(nullVals);
+    this.setNumericVal((Number) nullVals);
     this.setValueClass(Long.class);
   }
 

@@ -13,6 +13,8 @@ import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
+import static dqm.jku.trustkg.quality.profilingmetrics.MetricCategory.*;
+
 
 /**
  * Describes the metric Minimum, which is the minimum value of all values of an
@@ -21,15 +23,15 @@ import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
  * @author optimusseptim
  *
  */
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
-@RDFBean("foaf:Minimum")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:quality/structures/metrics/dataTypeInfo/Minimum")
 public class Minimum extends ProfileMetric {
   public Minimum() {
 
   }
 
   public Minimum(DataProfile d) {
-    super(min, d);
+    super(min, dti, d);
   }
 
   @Override
@@ -43,6 +45,7 @@ public class Minimum extends ProfileMetric {
       val = getMinimum(val, field, false);
     }
     this.setValue(val);
+    this.setNumericVal(((Number) val).doubleValue());
     this.setValueClass(a.getDataType());
   }
 
@@ -91,6 +94,7 @@ public class Minimum extends ProfileMetric {
       if (oldVal == null) val = getMinimum(list.get(0), getBasicInstance(), true);
       else val = getMinimum(list.get(0), oldVal, true);
       this.setValue(val);
+      this.setNumericVal(((Number) val).doubleValue());
     }
     Attribute a = (Attribute) super.getRefElem();
     this.setValueClass(a.getDataType());

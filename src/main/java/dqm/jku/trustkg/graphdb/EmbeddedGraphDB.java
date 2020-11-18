@@ -6,7 +6,6 @@ import java.nio.file.Path;
 
 import org.eclipse.rdf4j.model.Literal;
 import org.eclipse.rdf4j.model.Resource;
-import org.eclipse.rdf4j.console.setting.LogLevel;
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
 import org.eclipse.rdf4j.model.impl.TreeModel;
@@ -48,8 +47,6 @@ public class EmbeddedGraphDB implements Closeable {
 	 */
 	public EmbeddedGraphDB(String baseDir) throws RepositoryException {
 		repositoryManager = new LocalRepositoryManager(new File(baseDir));
-		LogLevel logLvl = new LogLevel();
-		logLvl.set(org.eclipse.rdf4j.common.logging.LogLevel.ERROR.name());
 		repositoryManager.init();
 	}
 

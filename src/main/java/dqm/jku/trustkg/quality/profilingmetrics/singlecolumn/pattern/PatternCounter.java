@@ -7,6 +7,7 @@ import java.util.regex.PatternSyntaxException;
 import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
+import org.cyberborean.rdfbeans.annotations.RDFSubject;
 
 /**
  * Data structure to handle single patterns with their hit rates
@@ -14,34 +15,65 @@ import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
  * @author optimusseptim
  *
  */
-@RDFNamespaces({ "foaf = http://xmlns.com/foaf/0.1/", })
-@RDFBean("foaf:PatternCounter")
+@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFBean("dsd:quality/structures/PatternCounter")
 public class PatternCounter {
   private Pattern pattern; // pattern object
   private String altPattern; // string representation of pattern
   private int cnt = 0; // counter for amount of hits
+  private String uri;
 
   public PatternCounter() {
 
   }
-
-  public PatternCounter(String regex) {
+  
+  public PatternCounter(String regex, String uri) {
     try {
       pattern = Pattern.compile(regex);
     } catch (PatternSyntaxException e) {
       pattern = null;
       altPattern = regex;
     }
+    this.uri = uri + '/' + regex;
   }
+  
+  @RDFSubject
+  public String getURI() {
+	  return this.uri;
+  }
+  
+  public void setURI(String uri) {
+	  this.uri = uri;
+  }
+
 
   /**
    * Gets the pattern
    * 
    * @return pattern
    */
-  @RDF("foaf:pattern")
   public Pattern getPattern() {
     return pattern;
+  }
+  
+  /**
+   * Gets the pattern
+   * 
+   * @return pattern string
+   */
+  @RDF("dsd:hasPattern")
+  public String getPatternString() {
+	  return pattern.toString();
+  }
+  
+
+  /**
+   * Sets the pattern
+   * 
+   * @param p the pattern string to be set
+   */
+  public void setPatternString(String p) {
+      this.pattern = Pattern.compile(p);
   }
 
   /**
@@ -58,7 +90,7 @@ public class PatternCounter {
    * 
    * @return counter value
    */
-  @RDF("foaf:cnt")
+  @RDF("dsd:hasCount")
   public int getCnt() {
     return cnt;
   }
