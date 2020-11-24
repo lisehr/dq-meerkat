@@ -25,7 +25,7 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric> {
   private MetricCategory cat; // name of metric category
   private Class<?> valClass; // the class of the value
   private Object value; // the value itself
-  private Number numericVal; // numeric representation (e.g. double for values that can be integer as well)
+  private Object numericVal; // numeric representation (e.g. double for values that can be integer as well), also string for unified and recognizable formats for RDFBeans for ex.
   private DataProfile refProf; // reference profile for calculations
   private String uri; // uri of the metric
 
@@ -103,7 +103,6 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric> {
    * 
    * @return value of metric
    */
-  @RDF("dsd:hasValue")
   public Object getValue() {
     return value;
   }
@@ -257,11 +256,12 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric> {
     return -1;
   }
 
-	public Number getNumericVal() {
+  @RDF("dsd:hasValue")
+	public Object getNumericVal() {
 		return numericVal;
 	}
 
-	public void setNumericVal(Number numericVal) {
+	public void setNumericVal(Object numericVal) {
 		this.numericVal = numericVal;
 	}
 

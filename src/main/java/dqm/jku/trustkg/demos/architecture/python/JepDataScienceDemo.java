@@ -33,16 +33,16 @@ public class JepDataScienceDemo {
 			interp.exec("plt.title('Raw data')");
 			interp.exec("plt.xlabel('X1')");
 			interp.exec("plt.ylabel('X2')");
-			interp.exec("plt.show()");
+			interp.exec("plt.show()"); // plot works on some machines 
 			
 			// define a function
 			interp.exec("def robust_scaler(x):\n\t med = statistics.median(x)\n\t return (x - med)/np.mean(abs(x - med))");
 
 			// use function
 			interp.exec("robust_scaler(X_train[:,[1]])");
-			
+			interp.exec("X_train_scaled = np.apply_along_axis(robust_scaler, 0, X_train)");
+			printNDArr((NDArray<?>)interp.getValue("X_train_scaled[:10,:]"));
 		} catch (JepException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

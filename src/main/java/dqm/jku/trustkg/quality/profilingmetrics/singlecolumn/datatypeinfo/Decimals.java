@@ -55,7 +55,7 @@ public class Decimals extends ProfileMetric {
     if (decimals == -1) this.setValue(null);
     else {
     	this.setValue(decimals);
-    	this.setNumericVal(((Number) decimals).longValue());
+    	this.setNumericVal(((Number) decimals).intValue());
     }
   }
 

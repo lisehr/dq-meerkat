@@ -24,7 +24,7 @@ import dqm.jku.trustkg.graphdb.EmbeddedGraphDB;
 import dqm.jku.trustkg.util.FileSelectionUtil;
 
 public class StoreDataRDFSourceSelector {
-	private static final int FILENO = 1;
+	private static final int FILENO = 2;
 
 	public static void main(String args[]) throws NoSuchMethodException, IOException {
 		// Create Connection to CSV Connector

@@ -335,12 +335,17 @@ public class DataProfile {
 	 * @param measure the builder for a measurement
 	 */
 	private void addMeasuringValue(ProfileMetric p, Builder measure) {
-		if (p.getValue() == null || p.getLabel().equals(pattern.getLabel())) measure.addField(p.getLabel(), 0); // TODO: replace 0 with NaN, when hitting v2.0 of influxdb
-		else if (p.getValueClass().equals(Long.class)) measure.addField(p.getLabel(), (long) p.getValue());
-		else if (p.getValueClass().equals(Double.class)) measure.addField(p.getLabel(), (double) p.getValue());
-		else if (p.getValueClass().equals(String.class) && (p.getLabel().equals(bt.getLabel()) || p.getLabel().equals(dt.getLabel()))) measure.addField(p.getLabel(), (String) p.getValue());
-		else if (p.getValueClass().equals(Boolean.class)) measure.addField(p.getLabel(), (boolean) p.getValue());
-		else measure.addField(p.getLabel(), (int) p.getValue());
+		try {
+			if (p.getValue() == null || p.getLabel().equals(pattern.getLabel())) measure.addField(p.getLabel(), 0); // TODO: replace 0 with NaN, when hitting v2.0 of influxdb
+			else if (p.getValueClass().equals(Long.class)) measure.addField(p.getLabel(),((Number) p.getNumericVal()).longValue());
+			else if (p.getValueClass().equals(Double.class)) measure.addField(p.getLabel(), (double) p.getNumericVal());
+			else if (p.getValueClass().equals(String.class) && (p.getLabel().equals(bt.getLabel()) || p.getLabel().equals(dt.getLabel()))) measure.addField(p.getLabel(), (String) p.getValue());
+			else if (p.getValueClass().equals(Boolean.class)) measure.addField(p.getLabel(), (boolean) p.getValue());
+			else measure.addField(p.getLabel(), (int) p.getValue());
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 	}
 
 	public boolean profileMetricIsNumeric(ProfileMetric profileMetric) {

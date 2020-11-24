@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
-
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
@@ -37,6 +36,7 @@ public class BasicType extends ProfileMetric {
     if (((Attribute) super.getRefElem()).getDataType().equals(String.class)) super.setValue("String");
     else if (((Attribute) super.getRefElem()).getDataType().equals(Object.class)) super.setValue("Null");
     else super.setValue("Numeric");
+    this.setNumericVal(this.getValue());
     super.setValueClass(String.class);
   }
 

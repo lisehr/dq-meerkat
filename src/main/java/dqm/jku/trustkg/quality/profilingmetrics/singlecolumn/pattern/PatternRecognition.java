@@ -61,6 +61,7 @@ public class PatternRecognition extends DependentProfileMetric {
       patterns.checkPatterns((String) field);
     }
     this.setValue(patterns);
+    this.setNumericVal(patterns);
   }
 
   private PatternCounterList initPatterns() {
@@ -85,6 +86,7 @@ public class PatternRecognition extends DependentProfileMetric {
     else patterns = (PatternCounterList) oldVal;
     for (Number n : list) patterns.checkPatterns(n.toString());
     this.setValue(patterns);
+    this.setNumericVal(patterns);
   }
 
   @Override
@@ -96,6 +98,7 @@ public class PatternRecognition extends DependentProfileMetric {
       patterns.checkPatterns((String) field);
     }
     this.setValue(patterns);
+    this.setNumericVal(patterns);
   }
 
   @Override

@@ -36,6 +36,7 @@ public class DataType extends ProfileMetric {
   @Override
   public void calculation(RecordList rs, Object oldVal) {
     super.setValue(((Attribute) super.getRefElem()).getDataType().getSimpleName());
+    super.setNumericVal(((Attribute) super.getRefElem()).getDataType().getSimpleName());
     super.setValueClass(String.class);
   }
 

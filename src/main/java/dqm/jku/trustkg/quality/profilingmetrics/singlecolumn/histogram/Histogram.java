@@ -97,6 +97,7 @@ public class Histogram extends DependentProfileMetric {
     SerializableFrequencyMap classes = new SerializableFrequencyMap(this.getUri());
     for (int i = 0; i < k; i++) classes.put(i, classVals[i]);
     this.setValue(classes);
+    this.setNumericVal(classes);
   }
 
   @Override
