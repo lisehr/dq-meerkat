@@ -1,15 +1,15 @@
 package dqm.jku.trustkg.demos.architecture.python;
 
+import dqm.jku.trustkg.util.python.JepInterpreter;
 import jep.Interpreter;
 import jep.JepException;
 import jep.NDArray;
-import jep.SharedInterpreter;
 
 public class JepDataScienceDemo {
 	public static void main(String[] args) {
 		// Tested on Python 3.8.6
 		// Taken from Python Outlier Detection Demo by M.Bechny
-		try (Interpreter interp = new SharedInterpreter()) {
+		try (Interpreter interp = JepInterpreter.getInterpreter()) {
 			interp.exec("import numpy as np"); // has to be 1.19.3 on windows machines (fmod() bug)
 			interp.exec("import matplotlib.pyplot as plt"); // # graphical library for plotting
 			interp.exec("import statistics"); // # to calculate some medians...
@@ -26,8 +26,8 @@ public class JepDataScienceDemo {
 			interp.exec("a = np.float32(333.333)");
 			System.out.println(interp.getValue("a"));
 			NDArray<?> arr = (NDArray<?>) interp.getValue("X_train[:10,:]");
-			printNDArr(arr);
-			printNDArr((NDArray<?>) interp.getValue("Y_train"));
+			JepInterpreter.printNDArr(arr);
+			JepInterpreter.printNDArr((NDArray<?>) interp.getValue("Y_train"));
 			
 			interp.exec("plt.scatter(X_train[:,[0]], X_train[:,[1]])");
 			interp.exec("plt.title('Raw data')");
@@ -41,22 +41,12 @@ public class JepDataScienceDemo {
 			// use function
 			interp.exec("robust_scaler(X_train[:,[1]])");
 			interp.exec("X_train_scaled = np.apply_along_axis(robust_scaler, 0, X_train)");
-			printNDArr((NDArray<?>)interp.getValue("X_train_scaled[:10,:]"));
+			JepInterpreter.printNDArr((NDArray<?>)interp.getValue("X_train_scaled[:10,:]"));
 		} catch (JepException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	private static void printNDArr(NDArray<?> arr) {
-		for (int i = 0; i < arr.getDimensions()[0]; i++) {
-			if (arr.getDimensions().length == 1) System.out.print(((double[]) arr.getData())[i] + "\t");
-			else {
-				for (int j = 0; j < arr.getDimensions()[1]; j++) {
-					System.out.print(((double[]) arr.getData())[arr.getDimensions()[0] * j + i] + "\t");
-				}
-			}
-			System.out.println();
-		}
-	}
+
 
 }

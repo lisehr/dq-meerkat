@@ -28,7 +28,7 @@ import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.MetricCategory;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
-import dqm.jku.trustkg.util.DataTypeConverter;
+import dqm.jku.trustkg.util.converters.DataTypeConverter;
 
 public class PentahoRowUtils {
 	

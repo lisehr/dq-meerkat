@@ -17,8 +17,8 @@ import dqm.jku.trustkg.dsd.elements.Datasource;
 import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.util.Constants;
-import dqm.jku.trustkg.util.DataTypeConverter;
 import dqm.jku.trustkg.util.Miscellaneous.DBType;
+import dqm.jku.trustkg.util.converters.DataTypeConverter;
 
 /**
  * The connector for the NoSQL database Cassandra

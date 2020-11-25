@@ -1,4 +1,4 @@
-package dqm.jku.trustkg.util;
+package dqm.jku.trustkg.util.datastructures;
 
 /**
  * 

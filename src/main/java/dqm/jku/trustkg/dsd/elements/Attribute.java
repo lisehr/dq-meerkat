@@ -121,5 +121,9 @@ public class Attribute extends DSDElement {
   public void addProfileToInflux(InfluxDBConnection connection) {
     super.storeProfile(connection);
   }
+  
+  public boolean hasNumericDataType() {
+  	return dataType == Integer.class || dataType == Long.class || dataType == Double.class;
+  }
 
 }

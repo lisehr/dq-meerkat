@@ -34,7 +34,9 @@ public enum MetricTitle {
   dt("Data type"),
   histCls("Number of classes"),
   histCR("Class range"),
-  histVal("Values");
+  histVal("Values"),
+  isoF("Isolation Forest"),
+  isoFP("Isolation Forest Outlier %");
   
   private String label; // the label of the title (string representation)
   @SuppressWarnings("unused")

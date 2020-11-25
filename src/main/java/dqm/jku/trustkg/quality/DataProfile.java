@@ -15,11 +15,15 @@ import org.influxdb.dto.Point;
 import org.influxdb.dto.Point.Builder;
 
 import dqm.jku.trustkg.dsd.elements.Attribute;
+import dqm.jku.trustkg.dsd.elements.Concept;
 import dqm.jku.trustkg.dsd.elements.DSDElement;
 import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordList;
+import dqm.jku.trustkg.quality.profilingmetrics.MetricCategory;
 import dqm.jku.trustkg.quality.profilingmetrics.MetricTitle;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
+import dqm.jku.trustkg.quality.profilingmetrics.multicolumn.outliers.IsolationForest;
+import dqm.jku.trustkg.quality.profilingmetrics.multicolumn.outliers.IsolationForestPercentage;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.Cardinality;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.NullValues;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.NullValuesPercentage;
@@ -79,6 +83,7 @@ public class DataProfile {
 	 */
 	private void calculateReferenceDataProfile(RecordList rl) throws NoSuchMethodException {
 		if (elem instanceof Attribute) calculateSingleColumn(rl);
+		else if (elem instanceof Concept) calculateMultiColumn(rl);
 	}
 
 	/**
@@ -111,6 +116,12 @@ public class DataProfile {
 		for (ProfileMetric p : metrics) {
 			if (needsRecordListCalc(p)) p.calculation(rl, p.getValue());
 			else p.calculationNumeric(l, p.getValue());
+		}
+	}
+	
+	private void calculateMultiColumn(RecordList rl) {
+		for (ProfileMetric p : metrics) {
+			p.calculation(rl, p.getValue());
 		}
 	}
 
@@ -196,6 +207,13 @@ public class DataProfile {
 			} else {
 				System.err.println("Attribute '" + a.getLabel() + "' has data type '" + a.getDataTypeString() + "', which is currently not handled. ");
 			}
+		} else if (elem instanceof Concept) {
+			ProfileMetric isoFor = new IsolationForest(this);
+			metrics.add(isoFor);
+			ProfileMetric isoForPer = new IsolationForestPercentage(this);
+			metrics.add(isoForPer);
+//			ProfileMetric lof = new LocalOutlierFactor();
+//			metrics.add(lof);
 		}
 	}
 
@@ -221,6 +239,7 @@ public class DataProfile {
 	public void printProfile() {
 		System.out.println("Data Profile:");
 		if (metrics.stream().anyMatch(p -> p.getValueClass().equals(String.class))) System.out.println("Strings use String length for value length metrics!");
+		if (metrics.stream().anyMatch(p -> p.getCat().equals(MetricCategory.out))) System.out.println("Outlier Detection shows all record numbers that contain outliers!");
 		SortedSet<ProfileMetric> metricSorted = new TreeSet<>();
 		metricSorted.addAll(metrics);
 		for (ProfileMetric p : metricSorted) {

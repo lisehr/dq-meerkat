@@ -1,13 +1,13 @@
 package dqm.jku.trustkg.demos.architecture.python;
 
+import dqm.jku.trustkg.util.python.JepInterpreter;
 import jep.Interpreter;
 import jep.JepException;
-import jep.SharedInterpreter;
 
 public class JepTest {
 	public static void main(String[] args) {
 		// Tested on Python 3.8.6
-		try (Interpreter interp = new SharedInterpreter()) {
+		try (Interpreter interp = JepInterpreter.getInterpreter()) {
 	    interp.exec("from java.lang import System");
 	    interp.exec("s = 'Hello World'");
 	    interp.exec("System.out.println(s)");

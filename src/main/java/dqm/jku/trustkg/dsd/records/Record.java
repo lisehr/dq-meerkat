@@ -6,7 +6,7 @@ import java.util.Map.Entry;
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.Concept;
 import dqm.jku.trustkg.util.AttributeSet;
-import dqm.jku.trustkg.util.DataTypeConverter;
+import dqm.jku.trustkg.util.converters.DataTypeConverter;
 //import dqm.jku.trustkg.util.datastructures.RecordArrayMap;
 import dqm.jku.trustkg.util.datastructures.SimpleRecordArrayMap;
 

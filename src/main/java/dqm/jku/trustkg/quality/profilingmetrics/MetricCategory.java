@@ -17,7 +17,8 @@ public enum MetricCategory {
   cardCat("Cardinalities"), 
   dti("Data type info"), 
   histCat("Histogram"), 
-  depend("Dependencies");
+  depend("Dependencies"),
+  out("Outliers");
 
   private String label; // the label of the category (string representation)
   @SuppressWarnings("unused")

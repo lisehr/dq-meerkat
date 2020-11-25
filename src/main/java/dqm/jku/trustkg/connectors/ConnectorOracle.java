@@ -25,8 +25,8 @@ import dqm.jku.trustkg.dsd.elements.Datasource;
 import dqm.jku.trustkg.dsd.elements.ForeignKey;
 import dqm.jku.trustkg.dsd.elements.InheritanceAssociation;
 import dqm.jku.trustkg.util.AttributeSet;
-import dqm.jku.trustkg.util.DataTypeConverter;
 import dqm.jku.trustkg.util.Miscellaneous.DBType;
+import dqm.jku.trustkg.util.converters.DataTypeConverter;
 
 /**
  * Connector for relational Oracle DBs

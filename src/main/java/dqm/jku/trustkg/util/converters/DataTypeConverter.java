@@ -1,4 +1,4 @@
-package dqm.jku.trustkg.util;
+package dqm.jku.trustkg.util.converters;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -26,6 +26,7 @@ import com.datastax.driver.core.DataType;
 
 import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.ForeignKeyRule;
+import dqm.jku.trustkg.util.datastructures.TryParsers;
 
 /**
  * @author lisa Conversion methods in this class have to convert to one of the

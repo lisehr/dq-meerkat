@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import dqm.jku.trustkg.util.AttributeSet;
+
 
 public class RecordList implements Iterable<Record> {
 
@@ -50,5 +52,10 @@ public class RecordList implements Iterable<Record> {
 
   public boolean contains(Record r) {
     return records.contains(r);
+  }
+  
+  public AttributeSet getAttributes() {
+  	if (this.isEmpty()) return null;
+  	return this.records.get(0).getFields();  
   }
 }
