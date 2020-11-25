@@ -48,7 +48,7 @@ public class IsolationForest extends ProfileMetric{
 		int[] results = (int[]) resultingRecords.getData();
 		ArrayList<Integer> recordNos = new ArrayList<>();
 		for (int i = 0; i < results.length; i++) {
-			if (results[i] == 1) recordNos.add(i + 1); // +1 for alignment (arrays start with 0, so record 1 is index 0)
+			if (results[i] == -1) recordNos.add(i + 1); // +1 for alignment (arrays start with 0, so record 1 is index 0)
 		}
 		this.setValueClass(ArrayList.class);
 		this.setValue(recordNos);
