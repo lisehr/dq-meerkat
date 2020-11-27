@@ -53,6 +53,9 @@ Run on Linux:<br/>
 Run on Windows: <br/>
 ```Grafana\grafana-6.2.5_windows\bin\grafana-server.exe```
 
+Import Demo Dashboards in Grafana:<br/>
+Grafana\Dashboard-Exports\*-dashboard.json
+
 # Blockchain aspect
 To generate tamper-free persistance of stored data a blockchain is used. Creating blockchains in Java is a difficult task since Reflections exist (more in section Persistance),
 so a pseudo-temper-free (therefore only temper-evident) chain is the nearest result is what can be achieved.
