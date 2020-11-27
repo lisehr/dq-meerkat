@@ -36,7 +36,7 @@ public class StoreDataRDFSourceSelector {
 		RepositoryConnection bcConn = null;
 		RepositoryResult<Statement> result = null;
 		
-		try (EmbeddedGraphDB db = new dqm.jku.trustkg.graphdb.EmbeddedGraphDB("test2")) {
+		try (EmbeddedGraphDB db = new dqm.jku.trustkg.graphdb.EmbeddedGraphDB("kg-repo")) {
 
 			ds = conn.loadSchema();
 

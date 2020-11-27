@@ -24,7 +24,7 @@ import dqm.jku.trustkg.util.FileSelectionUtil;
  *
  */
 public class DemoPeriodicData {
-  private static final int FILEINDEX = 2;
+  private static final int FILEINDEX = 3;
   private static final boolean DEBUG = false;
   private static final boolean DELETE_INFLUX = false;
   private static final int AMOUNT = 100;
