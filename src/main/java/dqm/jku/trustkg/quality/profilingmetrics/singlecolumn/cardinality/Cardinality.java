@@ -77,4 +77,14 @@ public class Cardinality extends ProfileMetric {
   protected String getValueString() {
     return super.getSimpleValueString();
   }
+
+	@Override
+	public boolean checkConformance(ProfileMetric m, double threshold) {
+		Number rdpVal = (Number) this.getNumericVal();
+		Number dpValue = (Number) m.getValue();
+		boolean x = (Math.abs(rdpVal.doubleValue() - dpValue.doubleValue()) < threshold);
+		System.out.println("Compare: " + rdpVal + "(RDP) with " + dpValue + " => " + x);
+		if (x) return true;
+		return false;
+	}
 }

@@ -156,4 +156,10 @@ public class Average extends DependentProfileMetric {
     }
   }
 
+@Override
+public boolean checkConformance(ProfileMetric m, double threshold) {
+	// TODO Auto-generated method stub
+	return false;
+}
+
 }

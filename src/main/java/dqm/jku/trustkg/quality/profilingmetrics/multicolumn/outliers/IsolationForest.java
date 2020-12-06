@@ -69,4 +69,10 @@ public class IsolationForest extends ProfileMetric{
 		return this.getSimpleValueString();
 	}
 
+	@Override
+	public boolean checkConformance(ProfileMetric m, double threshold) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

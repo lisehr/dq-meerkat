@@ -59,4 +59,12 @@ public class NullValues extends ProfileMetric {
     if (getValue() == null) return "\tnull";
     return "\t" + getValue().toString();
   }
+
+	@Override
+	public boolean checkConformance(ProfileMetric m, double threshold) {
+		long rdpVal = (long) this.getNumericVal();
+		long dpValue = (long) m.getValue();
+		if (Math.abs(rdpVal - dpValue) < threshold) return true;
+		return false;
+	}
 }

@@ -172,4 +172,10 @@ public class StandardDeviation extends DependentProfileMetric {
 		else return Integer.valueOf(0);
 	}
 
+	@Override
+	public boolean checkConformance(ProfileMetric m, double threshold) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

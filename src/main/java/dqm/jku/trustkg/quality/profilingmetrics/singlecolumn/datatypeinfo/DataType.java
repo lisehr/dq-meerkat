@@ -55,4 +55,10 @@ public class DataType extends ProfileMetric {
     return super.getSimpleValueString();
   }
 
+@Override
+public boolean checkConformance(ProfileMetric m, double threshold) {
+	// TODO Auto-generated method stub
+	return false;
+}
+
 }

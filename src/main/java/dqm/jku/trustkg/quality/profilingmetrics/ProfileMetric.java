@@ -207,6 +207,13 @@ public abstract class ProfileMetric implements Comparable<ProfileMetric> {
    * @return string repr of value
    */
   protected abstract String getValueString();
+  
+  /**
+   * Returns true or false, depending on whether the metric of a current DP conforms to the value in the RDP
+   * 
+   * @return boolean conformance to RDP value 
+   */
+  public abstract boolean checkConformance(ProfileMetric m, double threshold);
 
   /**
    * Method for creating a simple string representation of the metric value

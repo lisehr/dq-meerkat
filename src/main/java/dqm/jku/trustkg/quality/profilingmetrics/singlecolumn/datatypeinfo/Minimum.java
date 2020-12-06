@@ -104,4 +104,10 @@ public class Minimum extends ProfileMetric {
   protected String getValueString() {
     return super.getSimpleValueString();
   }
+
+@Override
+public boolean checkConformance(ProfileMetric m, double threshold) {
+	// TODO Auto-generated method stub
+	return false;
+}
 }

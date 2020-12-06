@@ -74,9 +74,11 @@ public class RDPConformanceStreamingData {
   private static boolean checkMeasurement(Concept testCon, Iterator<Record> itR) {
 	  if (!itR.hasNext()) return true;
 	    Record r = itR.next();
+	    RecordList rs = new RecordList();
+	    rs.addRecord(r);
 	    
 	    for(Attribute a : testCon.getSortedAttributes()) {
-	    	if(conformsToRDP(r, a)) {
+	    	if(conformsToRDP(rs, a)) {
 		    	Integer tmp = validityCounter.get(a.getURI());
 		    	validityCounter.put(a.getURI(), ++tmp);
 		    }
@@ -89,20 +91,23 @@ public class RDPConformanceStreamingData {
   }
   
 
-  public static boolean conformsToRDP(Record r, Attribute a) {
-	  DataProfile profile = a.getProfile();
-	  
-	  ProfileMetric min = profile.getMetric(MetricTitle.min);
-	  ProfileMetric max = profile.getMetric(MetricTitle.max);
-
-	  Double val = (double) r.getField(a);
-	  Double minVal = (double) min.getValue();
-	  Double maxVal = (double) max.getValue();
-	  if(val >= minVal && val <= maxVal) {
-		  return true;
-	  }
-	  
-	  exceptions.add(val);
+  public static boolean conformsToRDP(RecordList rs, Attribute a) {
+//	  DataProfile profile = a.getProfile();
+//	  for(ProfileMetric pm : profile.getMetrics()) {
+//		  pm.checkConformance(rs, THRESHOLD);
+//	  }
+//	  
+//	  ProfileMetric min = profile.getMetric(MetricTitle.min);
+//	  ProfileMetric max = profile.getMetric(MetricTitle.max);
+//
+//	  Double val = (double) r.getField(a);
+//	  Double minVal = (double) min.getValue();
+//	  Double maxVal = (double) max.getValue();
+//	  if(val >= minVal && val <= maxVal) {
+//		  return true;
+//	  }
+//	  
+//	  exceptions.add(val);
 	  return false;
   }
 }

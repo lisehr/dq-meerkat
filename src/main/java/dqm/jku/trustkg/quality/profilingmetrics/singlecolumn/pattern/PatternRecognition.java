@@ -137,4 +137,10 @@ public class PatternRecognition extends DependentProfileMetric {
 	public void setFilePathString(String filePathString) {
 		this.filePathString = filePathString;
 	}
+
+	@Override
+	public boolean checkConformance(ProfileMetric m, double threshold) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
