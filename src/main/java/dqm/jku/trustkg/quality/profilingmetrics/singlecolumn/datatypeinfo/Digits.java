@@ -89,9 +89,10 @@ public class Digits extends ProfileMetric {
     return super.getSimpleValueString();
   }
 
-@Override
-public boolean checkConformance(ProfileMetric m, double threshold) {
-	// TODO Auto-generated method stub
-	return false;
-}
+	@Override
+	public boolean checkConformance(ProfileMetric m, double threshold) {
+		Number rdpVal = (Number) this.getNumericVal();
+		Number dpValue = (Number) m.getValue();
+		return ((Math.abs(rdpVal.doubleValue() - dpValue.doubleValue()) < threshold));
+	}
 }

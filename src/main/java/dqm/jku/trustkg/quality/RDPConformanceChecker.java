@@ -13,6 +13,7 @@ import dqm.jku.trustkg.dsd.elements.Datasource;
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.profilingmetrics.MetricTitle;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
+import dqm.jku.trustkg.util.Constants;
 
 /**
  * Class for checking the conformance of a DP to its RDP in a generic way.
@@ -29,7 +30,7 @@ public class RDPConformanceChecker {
 	private int batchSize;
 	private double threshold;
 	private Map<String, Integer> totalCounter;		// counts all checked DPs per attribute
-	private Map<String, Integer> confCounter;		// conts all conforming DPs per attribute
+	private Map<String, Double> confCounter;		// conts all conforming DPs per attribute
 	
 	public RDPConformanceChecker() {
 		this.rdpSize = 0;
@@ -44,7 +45,7 @@ public class RDPConformanceChecker {
 		this.batchSize = batchSize;
 		this.threshold = threshold;
 		this.totalCounter = new HashMap<String, Integer>();
-		this.confCounter = new HashMap<String, Integer>();
+		this.confCounter = new HashMap<String, Double>();
 	}
 	
 	/**
@@ -58,7 +59,8 @@ public class RDPConformanceChecker {
 	    int offset = 0;
 	    for (Concept c : ds.getConcepts()) {
 	    	noRecs = conn.getNrRecords(c);
-	    	for(offset = rdpSize + 1; offset < noRecs; offset += batchSize) {
+	    	for(offset = rdpSize + 1; offset+batchSize < noRecs; offset += batchSize) {
+//	    		if(offset+batchSize > noRecs) batchSize = noRecs-offset;	// currently, the very last batch is not used since it contains less records than the others
 		    	RecordList rs = conn.getPartialRecordList(c, offset, batchSize);
 		    	for(Attribute a : c.getSortedAttributes()) {
 		    		// generate current DP and store to list
@@ -68,14 +70,13 @@ public class RDPConformanceChecker {
 		    		if(cnt == null) {
 		    			cnt = 0;
 		    			totalCounter.put(key, cnt);
-		    			confCounter.put(key, cnt);
+		    			confCounter.put(key, (double) cnt);
 		    		}
 		    		totalCounter.put(a.getURI(), ++cnt);
 		    		
-		    		if(conformsToRDP(a, dp)) {
-		    			cnt = confCounter.get(key);
-			    		confCounter.put(a.getURI(), ++cnt);
-		    		}
+		    		double confVal = confCounter.get(key);
+		    		confVal += conformsToRDP(a, dp);
+		    		confCounter.put(a.getURI(), confVal);
 		    	}
 		    }
 	    }
@@ -96,17 +97,33 @@ public class RDPConformanceChecker {
 		return sb.toString();
 	}
 	
-	private boolean conformsToRDP(Attribute a, DataProfile dp) {
+	private double conformsToRDP(Attribute a, DataProfile dp) {
 		DataProfile rdp = a.getProfile();
 		
-//		for(ProfileMetric rdpMetric : rdp.getMetrics()) {
-//			rdpMetric.checkConformance(dp.getMetric(rdpMetric.getTitle()), threshold);
-//		}
+		int conf = 0;
+		for(ProfileMetric rdpMetric : getSelectedMetrics(rdp)) {
+			if(rdpMetric.checkConformance(dp.getMetric(rdpMetric.getTitle()), threshold)) conf++;
+		}
+//		double value = conf / (double) rdp.getMetrics().size();
+		double value = conf / (double) getSelectedMetrics(rdp).size();
 		
-		System.out.println(a.getLabel());
-		ProfileMetric rdpMetric = rdp.getMetric(MetricTitle.card);
-		ProfileMetric dpMetric = dp.getMetric(MetricTitle.card);
-		boolean conformance = rdpMetric.checkConformance(dpMetric, threshold);
-		return conformance;
+		
+//		System.out.println(a.getLabel());
+//		ProfileMetric rdpMetric = rdp.getMetric(MetricTitle.card);
+//		ProfileMetric dpMetric = dp.getMetric(MetricTitle.card);
+//		boolean conformance = rdpMetric.checkConformance(dpMetric, threshold);
+		return value;
+	}
+	
+	private List<ProfileMetric> getSelectedMetrics(DataProfile rdp) {
+		List<ProfileMetric> mlist = new ArrayList<ProfileMetric>();
+		mlist.add(rdp.getMetric(MetricTitle.min));
+		mlist.add(rdp.getMetric(MetricTitle.max));
+		mlist.add(rdp.getMetric(MetricTitle.avg));
+//		mlist.add(rdp.getMetric(MetricTitle.avg));
+//		mlist.add(rdp.getMetric(MetricTitle.card));
+		//TODO: add all remaining metrics
+		
+		return mlist;
 	}
 }

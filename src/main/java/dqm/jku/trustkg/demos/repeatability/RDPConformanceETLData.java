@@ -24,12 +24,11 @@ import dqm.jku.trustkg.util.FileSelectionUtil;
  */
 public class RDPConformanceETLData {
   private static final int FILEINDEX = 8;
-  private static final double THRESHOLD = 0.95;
+  private static final double THRESHOLD = 0.8;
   private static final int RDP_SIZE = 2000;
   
   private static Map<String, Integer> validityCounter = new HashMap<String, Integer>();
   private static Map<String, Integer> totalCounter = new HashMap<String, Integer>();
-  private static List<Double> exceptions = new LinkedList<Double>();
 
   public static void main(String args[]) throws IOException, InterruptedException, NoSuchMethodException {
     ConnectorCSV conn = FileSelectionUtil.connectToCSV(FILEINDEX);

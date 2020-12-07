@@ -12,6 +12,7 @@ import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
+import dqm.jku.trustkg.util.Constants;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricCategory.*;
@@ -82,9 +83,6 @@ public class Cardinality extends ProfileMetric {
 	public boolean checkConformance(ProfileMetric m, double threshold) {
 		Number rdpVal = (Number) this.getNumericVal();
 		Number dpValue = (Number) m.getValue();
-		boolean x = (Math.abs(rdpVal.doubleValue() - dpValue.doubleValue()) < threshold);
-		System.out.println("Compare: " + rdpVal + "(RDP) with " + dpValue + " => " + x);
-		if (x) return true;
-		return false;
+		return ((Math.abs(rdpVal.doubleValue() - dpValue.doubleValue()) < threshold));
 	}
 }

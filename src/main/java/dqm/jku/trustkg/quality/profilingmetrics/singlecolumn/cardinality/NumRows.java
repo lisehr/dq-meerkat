@@ -55,9 +55,9 @@ public class NumRows extends ProfileMetric {
     return super.getSimpleValueString();
   }
 
-@Override
-public boolean checkConformance(ProfileMetric m, double threshold) {
-	// TODO Auto-generated method stub
-	return false;
-}
+	@Override
+	public boolean checkConformance(ProfileMetric m, double threshold) {
+		// Never evaluates to false, because the reference is here the size of the RDP and should not be compared to the batch size of the DPs
+		return true;
+	}
 }

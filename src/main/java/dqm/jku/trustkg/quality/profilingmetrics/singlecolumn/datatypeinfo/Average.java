@@ -10,8 +10,10 @@ import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.DependentProfileMetric;
+import dqm.jku.trustkg.quality.profilingmetrics.MetricTitle;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.NumRows;
+import dqm.jku.trustkg.util.Constants;
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
@@ -156,10 +158,16 @@ public class Average extends DependentProfileMetric {
     }
   }
 
-@Override
-public boolean checkConformance(ProfileMetric m, double threshold) {
-	// TODO Auto-generated method stub
-	return false;
-}
-
+	@Override
+	public boolean checkConformance(ProfileMetric m, double threshold) {
+		Number rdpVal = (Number) this.getNumericVal();
+		Number dpValue = (Number) m.getValue();
+		
+		double lowerBound = rdpVal.doubleValue() - (rdpVal.doubleValue() * threshold);
+		double upperBound = rdpVal.doubleValue() + (rdpVal.doubleValue() * threshold);
+		
+		boolean conf = dpValue.doubleValue() >= lowerBound && dpValue.doubleValue() <= upperBound;
+		if(!conf && Constants.DEBUG) System.out.println(this.getTitle() + " exceeded: " + dpValue + " not in [" + lowerBound + ", " + upperBound + "]");
+		return conf;		
+	}
 }

@@ -9,7 +9,9 @@ import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
+import dqm.jku.trustkg.quality.profilingmetrics.MetricTitle;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
+import dqm.jku.trustkg.util.Constants;
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
@@ -105,9 +107,17 @@ public class Minimum extends ProfileMetric {
     return super.getSimpleValueString();
   }
 
-@Override
-public boolean checkConformance(ProfileMetric m, double threshold) {
-	// TODO Auto-generated method stub
-	return false;
-}
+	@Override
+	public boolean checkConformance(ProfileMetric m, double threshold) {
+		Number rdpVal = (Number) this.getNumericVal();
+		Number dpValue = (Number) m.getValue();
+		if(rdpVal.doubleValue() < 0) {	// shift by threshold
+			rdpVal = rdpVal.doubleValue() / threshold;
+		} else {
+			rdpVal = rdpVal.doubleValue() * threshold;
+		}
+		boolean conf = dpValue.doubleValue() >= rdpVal.doubleValue();
+		if(!conf && Constants.DEBUG) System.out.println(MetricTitle.min + " exceeded: " + dpValue + " < " + rdpVal);
+		return conf;
+	}
 }

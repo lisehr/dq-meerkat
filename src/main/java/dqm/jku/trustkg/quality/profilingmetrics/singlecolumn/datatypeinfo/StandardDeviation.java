@@ -174,8 +174,8 @@ public class StandardDeviation extends DependentProfileMetric {
 
 	@Override
 	public boolean checkConformance(ProfileMetric m, double threshold) {
-		// TODO Auto-generated method stub
-		return false;
+		Number rdpVal = (Number) this.getNumericVal();
+		Number dpValue = (Number) m.getValue();
+		return ((Math.abs(rdpVal.doubleValue() - dpValue.doubleValue()) < threshold));
 	}
-
 }

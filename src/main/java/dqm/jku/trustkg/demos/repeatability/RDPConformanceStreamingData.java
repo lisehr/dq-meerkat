@@ -27,7 +27,7 @@ import dqm.jku.trustkg.util.FileSelectionUtil;
  *
  */
 public class RDPConformanceStreamingData {
-  private static final int FILEINDEX = 7;
+  private static final int FILEINDEX = 8;
   private static final double THRESHOLD = 0.95;
   
   private static Map<String, Integer> validityCounter = new HashMap<String, Integer>();
