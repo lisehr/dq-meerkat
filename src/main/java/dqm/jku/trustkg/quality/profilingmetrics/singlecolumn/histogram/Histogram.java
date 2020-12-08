@@ -17,6 +17,7 @@ import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.DependentProfileMetric;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.cardinality.NumRows;
+import dqm.jku.trustkg.util.Constants;
 import dqm.jku.trustkg.util.numericvals.NumberComparator;
 import dqm.jku.trustkg.util.numericvals.ValueDistributionUtils;
 
@@ -263,8 +264,15 @@ public class Histogram extends DependentProfileMetric {
 
 @Override
 public boolean checkConformance(ProfileMetric m, double threshold) {
-	// TODO Auto-generated method stub
-	return false;
+	int rdpVal = this.getNumberOfClasses();
+	int dpValue = this.getNumberOfClasses();
+	
+	double lowerBound = rdpVal - (Math.abs(rdpVal) * threshold);
+	double upperBound = rdpVal + (Math.abs(rdpVal) * threshold);
+	
+	boolean conf = dpValue >= lowerBound && dpValue <= upperBound;
+	if(!conf && Constants.DEBUG) System.out.println(this.getTitle() + " exceeded: " + dpValue + " not in [" + lowerBound + ", " + upperBound + "]");
+	return conf;	
 }
 
 }

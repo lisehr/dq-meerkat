@@ -168,6 +168,6 @@ public class Average extends DependentProfileMetric {
 		
 		boolean conf = dpValue >= lowerBound && dpValue <= upperBound;
 		if(!conf && Constants.DEBUG) System.out.println(this.getTitle() + " exceeded: " + dpValue + " not in [" + lowerBound + ", " + upperBound + "]");
-		return conf;		
+		return conf;	
 	}
 }

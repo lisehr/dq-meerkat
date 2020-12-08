@@ -23,7 +23,7 @@ import dqm.jku.trustkg.util.FileSelectionUtil;
 public class RDPConformanceETLData {
   private static final int FILEINDEX = 8;
   private static final double THRESHOLD = 0.1;		// Threshold indicates allowed deviation from reference value in percent
-  private static final int RDP_SIZE = 2000;
+  private static final int RDP_SIZE = 3000;
   
   private static Map<String, Integer> validityCounter = new HashMap<String, Integer>();
   private static Map<String, Integer> totalCounter = new HashMap<String, Integer>();
@@ -43,7 +43,7 @@ public class RDPConformanceETLData {
     }
 
     // Continuous generation of DPs and conformance checking
-    RDPConformanceChecker confChecker = new RDPConformanceChecker(ds, conn, RDP_SIZE, 1000, THRESHOLD);
+    RDPConformanceChecker confChecker = new RDPConformanceChecker(ds, conn, RDP_SIZE, 3000, THRESHOLD);
     confChecker.run();
     // Finally: print evaluation report
     System.out.println(confChecker.getReport());

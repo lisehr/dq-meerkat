@@ -1,9 +1,7 @@
 package dqm.jku.trustkg.quality;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import dqm.jku.trustkg.connectors.DSConnector;
@@ -11,7 +9,6 @@ import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.elements.Concept;
 import dqm.jku.trustkg.dsd.elements.Datasource;
 import dqm.jku.trustkg.dsd.records.RecordList;
-import dqm.jku.trustkg.quality.profilingmetrics.MetricTitle;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
 
 /**
@@ -100,37 +97,11 @@ public class RDPConformanceChecker {
 		DataProfile rdp = a.getProfile();
 		
 		int conf = 0;
-		for(ProfileMetric rdpMetric : getSelectedMetrics(rdp)) {
+		for(ProfileMetric rdpMetric : rdp.getNonDependentMetrics()) {
 			if(rdpMetric.checkConformance(dp.getMetric(rdpMetric.getTitle()), threshold)) conf++;
 		}
-//		double value = conf / (double) rdp.getMetrics().size();
-		double value = conf / (double) getSelectedMetrics(rdp).size();
+		double value = conf / (double) rdp.getNonDependentMetrics().size();
 		
-		
-//		System.out.println(a.getLabel());
-//		ProfileMetric rdpMetric = rdp.getMetric(MetricTitle.card);
-//		ProfileMetric dpMetric = dp.getMetric(MetricTitle.card);
-//		boolean conformance = rdpMetric.checkConformance(dpMetric, threshold);
 		return value;
-	}
-	
-	private List<ProfileMetric> getSelectedMetrics(DataProfile rdp) {
-		List<ProfileMetric> mlist = new ArrayList<ProfileMetric>();
-		mlist.add(rdp.getMetric(MetricTitle.min));
-		mlist.add(rdp.getMetric(MetricTitle.max));
-		mlist.add(rdp.getMetric(MetricTitle.avg));
-		mlist.add(rdp.getMetric(MetricTitle.med));
-		mlist.add(rdp.getMetric(MetricTitle.sd));
-		mlist.add(rdp.getMetric(MetricTitle.mad));
-		
-		mlist.add(rdp.getMetric(MetricTitle.dig));
-		mlist.add(rdp.getMetric(MetricTitle.dec));
-		mlist.add(rdp.getMetric(MetricTitle.bt));
-		mlist.add(rdp.getMetric(MetricTitle.dt));
-		
-//		mlist.add(rdp.getMetric(MetricTitle.card));
-		//TODO: add all remaining metrics
-		
-		return mlist;
 	}
 }

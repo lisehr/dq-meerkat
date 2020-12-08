@@ -11,6 +11,7 @@ import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.DependentProfileMetric;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
+import dqm.jku.trustkg.util.Constants;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricCategory.*;
 
@@ -103,8 +104,7 @@ public class NullValuesPercentage extends DependentProfileMetric {
 
 	@Override
 	public boolean checkConformance(ProfileMetric m, double threshold) {
-		Number rdpVal = (Number) this.getNumericVal();
-		Number dpValue = (Number) m.getValue();
-		return ((Math.abs(rdpVal.doubleValue() - dpValue.doubleValue()) < threshold));
+		// Excluded: depends on cardinality & num rows (RDP size != DP size)
+		return true;
 	}
 }
