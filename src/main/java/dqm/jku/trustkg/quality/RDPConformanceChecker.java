@@ -1,5 +1,6 @@
 package dqm.jku.trustkg.quality;
 
+import java.util.List;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -55,6 +56,7 @@ public class RDPConformanceChecker {
 	    int offset = 0;
 	    for (Concept c : ds.getConcepts()) {
 	    	noRecs = conn.getNrRecords(c);
+	    	if(noRecs < offset+batchSize) throw new IllegalArgumentException("Input file has too little records.");
 	    	for(offset = rdpSize + 1; offset+batchSize < noRecs; offset += batchSize) {
 //	    		if(offset+batchSize > noRecs) batchSize = noRecs-offset;	// currently, the very last batch is not used since it contains less records than the others
 		    	RecordList rs = conn.getPartialRecordList(c, offset, batchSize);
@@ -86,18 +88,35 @@ public class RDPConformanceChecker {
 		for (Concept c : ds.getConcepts()) {
 			for(Attribute a : c.getSortedAttributes()) {
 	    		sb.append(c.getLabel() + "," + a.getLabel() + ",");
-	    		sb.append(confCounter.get(a.getURI()) / (double) totalCounter.get(a.getURI()));
+	    		if(confCounter.size() > 0 && totalCounter.size() > 0) {
+	    			sb.append(confCounter.get(a.getURI()) / (double) totalCounter.get(a.getURI()));
+	    		} else {
+	    			sb.append("NaN");
+	    		}
 	    		sb.append("\n");
 	    	}
 	    }
 		return sb.toString();
 	}
 	
+	public double getConformanceValue(Attribute a) {
+		double val = 0.0;
+		if(confCounter.size() > 0 && totalCounter.size() > 0) {
+			val = confCounter.get(a.getURI()) / (double) totalCounter.get(a.getURI());
+		} 
+		return val;
+	}
+	
 	private double conformsToRDP(Attribute a, DataProfile dp) {
 		DataProfile rdp = a.getProfile();
 		
 		int conf = 0;
-		for(ProfileMetric rdpMetric : rdp.getNonDependentMetrics()) {
+		List<ProfileMetric> mlist = rdp.getNonDependentMetrics();
+		if(this.batchSize == 1) {   
+			mlist = rdp.getNonAggregateMetrics();
+		}
+		
+		for(ProfileMetric rdpMetric : mlist) {
 			if(rdpMetric.checkConformance(dp.getMetric(rdpMetric.getTitle()), threshold)) conf++;
 		}
 		double value = conf / (double) rdp.getNonDependentMetrics().size();

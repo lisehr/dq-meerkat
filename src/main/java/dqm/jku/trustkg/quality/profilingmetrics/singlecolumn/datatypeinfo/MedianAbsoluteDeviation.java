@@ -63,7 +63,7 @@ public class MedianAbsoluteDeviation extends DependentProfileMetric {
 		if (toAdd == null) return 0;
 		Attribute a = (Attribute) super.getRefElem();
 		if (a.getDataType().equals(Long.class)) return (long) toAdd - (long) med;
-		else if (a.getDataType().equals(Double.class)) return (double) toAdd - (double) med;
+		else if (a.getDataType().equals(Double.class)) return ((Number) toAdd).doubleValue() - ((Number) med).doubleValue();
 		else if (a.getClass().equals(String.class)) return (int) toAdd - (int) med;
 		else return (intToBigInteger(toAdd).subtract(intToBigInteger(med)));
 	}

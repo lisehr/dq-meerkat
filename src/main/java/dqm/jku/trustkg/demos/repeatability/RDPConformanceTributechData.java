@@ -1,8 +1,6 @@
 package dqm.jku.trustkg.demos.repeatability;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import dqm.jku.trustkg.connectors.ConnectorCSV;
 import dqm.jku.trustkg.dsd.elements.Attribute;
@@ -20,13 +18,11 @@ import dqm.jku.trustkg.util.FileSelectionUtil;
  * @author lisa
  *
  */
-public class RDPConformanceETLData {
+public class RDPConformanceTributechData {
   private static final int FILEINDEX = 8;
   private static final double THRESHOLD = 0.1;		// Threshold indicates allowed deviation from reference value in percent
-  private static final int RDP_SIZE = 3000;
-  
-  private static Map<String, Integer> validityCounter = new HashMap<String, Integer>();
-  private static Map<String, Integer> totalCounter = new HashMap<String, Integer>();
+  private static final int RDP_SIZE = 1000;
+  private static final int BATCH_SIZE = 1000;		// Set to 1 to simulate streaming data
 
   public static void main(String args[]) throws IOException, InterruptedException, NoSuchMethodException {
     ConnectorCSV conn = FileSelectionUtil.connectToCSV(FILEINDEX);
@@ -37,15 +33,13 @@ public class RDPConformanceETLData {
       RecordList rs = conn.getPartialRecordList(c, 0, RDP_SIZE);
       for (Attribute a : c.getSortedAttributes()) {
         a.annotateProfile(rs);
-        validityCounter.put(a.getURI(), 0);
-        totalCounter.put(a.getURI(), 0);
       }
     }
 
     // Continuous generation of DPs and conformance checking
-    RDPConformanceChecker confChecker = new RDPConformanceChecker(ds, conn, RDP_SIZE, 3000, THRESHOLD);
+    RDPConformanceChecker confChecker = new RDPConformanceChecker(ds, conn, RDP_SIZE, BATCH_SIZE, THRESHOLD);
     confChecker.run();
     // Finally: print evaluation report
     System.out.println(confChecker.getReport());
-  }  
+  }
 }

@@ -284,7 +284,7 @@ public class DataProfile {
 	/**
 	 * Method for getting the set of metrics
 	 * 
-	 * @return set of metrics
+	 * @return set of selected metrics
 	 */
 	public List<ProfileMetric> getNonDependentMetrics() {
 		List<ProfileMetric> mlist = new ArrayList<ProfileMetric>();
@@ -310,6 +310,34 @@ public class DataProfile {
 		
 		// Histogram
 		mlist.add(this.getMetric(MetricTitle.hist));
+		
+		// Dependencies
+		mlist.add(this.getMetric(MetricTitle.keyCand));
+		
+		return mlist;
+	}
+	
+	/**
+	 * Method for getting all metrics that are useful for single records (e.g., in a data stream) and do not rely on any kind of aggregation
+	 * 
+	 * @return set of selected metrics
+	 */
+	public List<ProfileMetric> getNonAggregateMetrics() {
+		List<ProfileMetric> mlist = new ArrayList<ProfileMetric>();
+		// Cardinalities
+		// No number of rows and metrics that depend on the num rows (RDP size != DP size)
+		mlist.add(this.getMetric(MetricTitle.nullVal));
+		
+		// Data type info
+		mlist.add(this.getMetric(MetricTitle.bt));
+		mlist.add(this.getMetric(MetricTitle.dt));
+		mlist.add(this.getMetric(MetricTitle.min));
+		mlist.add(this.getMetric(MetricTitle.max));
+		
+		mlist.add(this.getMetric(MetricTitle.dig));
+		if(this.getMetric(MetricTitle.pattern) != null) {
+			mlist.add(this.getMetric(MetricTitle.pattern));
+		}
 		
 		// Dependencies
 		mlist.add(this.getMetric(MetricTitle.keyCand));
