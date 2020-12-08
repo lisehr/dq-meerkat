@@ -13,6 +13,7 @@ import dqm.jku.trustkg.dsd.records.Record;
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
+import dqm.jku.trustkg.util.Constants;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricCategory.*;
 
@@ -105,8 +106,14 @@ public class Decimals extends ProfileMetric {
 
 	@Override
 	public boolean checkConformance(ProfileMetric m, double threshold) {
-		Number rdpVal = (Number) this.getNumericVal();
-		Number dpValue = (Number) m.getValue();
-		return ((Math.abs(rdpVal.doubleValue() - dpValue.doubleValue()) < threshold));
+		double rdpVal = ((Number) this.getNumericVal()).doubleValue();
+		double dpValue = ((Number) m.getValue()).doubleValue();
+		
+		double lowerBound = rdpVal - (Math.abs(rdpVal) * threshold);
+		double upperBound = rdpVal + (Math.abs(rdpVal) * threshold);
+		
+		boolean conf = dpValue >= lowerBound && dpValue <= upperBound;
+		if(!conf && Constants.DEBUG) System.out.println(this.getTitle() + " exceeded: " + dpValue + " not in [" + lowerBound + ", " + upperBound + "]");
+		return conf;
 	}
 }

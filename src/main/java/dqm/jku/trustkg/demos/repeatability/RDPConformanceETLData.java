@@ -2,8 +2,6 @@ package dqm.jku.trustkg.demos.repeatability;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 import dqm.jku.trustkg.connectors.ConnectorCSV;
@@ -24,7 +22,7 @@ import dqm.jku.trustkg.util.FileSelectionUtil;
  */
 public class RDPConformanceETLData {
   private static final int FILEINDEX = 8;
-  private static final double THRESHOLD = 0.8;
+  private static final double THRESHOLD = 0.1;		// Threshold indicates allowed deviation from reference value in percent
   private static final int RDP_SIZE = 2000;
   
   private static Map<String, Integer> validityCounter = new HashMap<String, Integer>();

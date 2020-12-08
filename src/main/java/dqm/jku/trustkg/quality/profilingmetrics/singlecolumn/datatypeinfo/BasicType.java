@@ -8,6 +8,7 @@ import dqm.jku.trustkg.dsd.elements.Attribute;
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.DataProfile;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
+import dqm.jku.trustkg.util.Constants;
 
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricTitle.*;
 import static dqm.jku.trustkg.quality.profilingmetrics.MetricCategory.*;
@@ -57,7 +58,11 @@ public class BasicType extends ProfileMetric {
 
 @Override
 public boolean checkConformance(ProfileMetric m, double threshold) {
-	// TODO Auto-generated method stub
-	return false;
+	String rdpVal = this.getSimpleValueString();
+	String dpValue = this.getSimpleValueString();
+	
+	boolean conf = rdpVal.equals(dpValue);
+	if(!conf && Constants.DEBUG) System.out.println(this.getTitle() + " exceeded: " + dpValue + " != " + rdpVal);
+	return conf;
 }
 }

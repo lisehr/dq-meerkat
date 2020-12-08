@@ -160,13 +160,13 @@ public class Average extends DependentProfileMetric {
 
 	@Override
 	public boolean checkConformance(ProfileMetric m, double threshold) {
-		Number rdpVal = (Number) this.getNumericVal();
-		Number dpValue = (Number) m.getValue();
+		double rdpVal = ((Number) this.getNumericVal()).doubleValue();
+		double dpValue = ((Number) m.getValue()).doubleValue();
 		
-		double lowerBound = rdpVal.doubleValue() - (rdpVal.doubleValue() * threshold);
-		double upperBound = rdpVal.doubleValue() + (rdpVal.doubleValue() * threshold);
+		double lowerBound = rdpVal - (Math.abs(rdpVal) * threshold);
+		double upperBound = rdpVal + (Math.abs(rdpVal) * threshold);
 		
-		boolean conf = dpValue.doubleValue() >= lowerBound && dpValue.doubleValue() <= upperBound;
+		boolean conf = dpValue >= lowerBound && dpValue <= upperBound;
 		if(!conf && Constants.DEBUG) System.out.println(this.getTitle() + " exceeded: " + dpValue + " not in [" + lowerBound + ", " + upperBound + "]");
 		return conf;		
 	}

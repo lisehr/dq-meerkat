@@ -109,15 +109,12 @@ public class Minimum extends ProfileMetric {
 
 	@Override
 	public boolean checkConformance(ProfileMetric m, double threshold) {
-		Number rdpVal = (Number) this.getNumericVal();
-		Number dpValue = (Number) m.getValue();
-		if(rdpVal.doubleValue() < 0) {	// shift by threshold
-			rdpVal = rdpVal.doubleValue() / threshold;
-		} else {
-			rdpVal = rdpVal.doubleValue() * threshold;
-		}
-		boolean conf = dpValue.doubleValue() >= rdpVal.doubleValue();
-		if(!conf && Constants.DEBUG) System.out.println(MetricTitle.min + " exceeded: " + dpValue + " < " + rdpVal);
+		double rdpVal = ((Number) this.getNumericVal()).doubleValue();
+		double dpValue = ((Number) m.getValue()).doubleValue();
+		
+		rdpVal = rdpVal - (Math.abs(rdpVal) * threshold);	// shift by threshold
+		boolean conf = dpValue >= rdpVal;
+		if(!conf && Constants.DEBUG) System.out.println(MetricTitle.min + " exceeded: " + dpValue + " < " + rdpVal + " (originally: " + this.getNumericVal() + ")");
 		return conf;
 	}
 }

@@ -13,7 +13,6 @@ import dqm.jku.trustkg.dsd.elements.Datasource;
 import dqm.jku.trustkg.dsd.records.RecordList;
 import dqm.jku.trustkg.quality.profilingmetrics.MetricTitle;
 import dqm.jku.trustkg.quality.profilingmetrics.ProfileMetric;
-import dqm.jku.trustkg.util.Constants;
 
 /**
  * Class for checking the conformance of a DP to its RDP in a generic way.
@@ -120,7 +119,15 @@ public class RDPConformanceChecker {
 		mlist.add(rdp.getMetric(MetricTitle.min));
 		mlist.add(rdp.getMetric(MetricTitle.max));
 		mlist.add(rdp.getMetric(MetricTitle.avg));
-//		mlist.add(rdp.getMetric(MetricTitle.avg));
+		mlist.add(rdp.getMetric(MetricTitle.med));
+		mlist.add(rdp.getMetric(MetricTitle.sd));
+		mlist.add(rdp.getMetric(MetricTitle.mad));
+		
+		mlist.add(rdp.getMetric(MetricTitle.dig));
+		mlist.add(rdp.getMetric(MetricTitle.dec));
+		mlist.add(rdp.getMetric(MetricTitle.bt));
+		mlist.add(rdp.getMetric(MetricTitle.dt));
+		
 //		mlist.add(rdp.getMetric(MetricTitle.card));
 		//TODO: add all remaining metrics
 		
