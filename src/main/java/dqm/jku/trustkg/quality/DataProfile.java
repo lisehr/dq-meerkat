@@ -405,7 +405,7 @@ public class DataProfile {
 		SortedSet<ProfileMetric> metricSorted = new TreeSet<>();
 		metricSorted.addAll(metrics);
 		for (ProfileMetric p : metricSorted) {
-			if (!p.getTitle().equals(hist)) addMeasuringValue(p, measure);
+			if (!p.getTitle().equals(hist) && !p.getTitle().equals(mad)) addMeasuringValue(p, measure);
 		}
 		return measure.build();
 	}
@@ -421,10 +421,10 @@ public class DataProfile {
 		try {
 			if (p.getValue() == null || p.getLabel().equals(pattern.getLabel())) measure.addField(p.getLabel(), 0); // TODO: replace 0 with NaN, when hitting v2.0 of influxdb
 			else if (p.getValueClass().equals(Long.class)) measure.addField(p.getLabel(),((Number) p.getNumericVal()).longValue());
-			else if (p.getValueClass().equals(Double.class)) measure.addField(p.getLabel(), (double) p.getNumericVal());
+			else if (p.getValueClass().equals(Double.class) || p.getLabel().equals(sd.getLabel())) measure.addField(p.getLabel(), ((Number) p.getNumericVal()).doubleValue());
 			else if (p.getValueClass().equals(String.class) && (p.getLabel().equals(bt.getLabel()) || p.getLabel().equals(dt.getLabel()))) measure.addField(p.getLabel(), (String) p.getValue());
 			else if (p.getValueClass().equals(Boolean.class)) measure.addField(p.getLabel(), (boolean) p.getValue());
-			else measure.addField(p.getLabel(), (int) p.getValue());
+			else measure.addField(p.getLabel(), ((Number) p.getNumericVal()).intValue());
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

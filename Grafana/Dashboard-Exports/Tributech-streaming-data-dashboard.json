@@ -60,25 +60,31 @@
         {
           "alias": "maximum",
           "fill": 0,
-          "hideTooltip": true,
           "points": false
         },
         {
           "alias": "minimum",
           "fill": 0,
-          "hideTooltip": true,
           "points": false
         },
         {
           "alias": "average",
           "fill": 0,
-          "hideTooltip": true,
           "points": false
         },
         {
           "alias": "median",
           "fill": 0,
-          "hideTooltip": true,
+          "points": false
+        },
+        {
+          "alias": "standard deviation (+ sigma)",
+          "fill": 0,
+          "points": false
+        },
+        {
+          "alias": "standard deviation (- sigma)",
+          "fill": 0,
           "points": false
         }
       ],
@@ -186,12 +192,14 @@
           "tags": []
         },
         {
-          "alias": "standard deviation",
+          "alias": "standard deviation (+ sigma)",
           "groupBy": [],
           "hide": false,
           "measurement": "http://example.com/Acceleration/Acceleration/ForwardOrBraking",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "SELECT  \"Average\" + \"Standard Deviation\"  FROM \"http://example.com/Acceleration/Acceleration/ForwardOrBraking\" WHERE $timeFilter",
+          "rawQuery": true,
           "refId": "F",
           "resultFormat": "time_series",
           "select": [
@@ -199,6 +207,45 @@
               {
                 "params": [
                   "Standard Deviation"
+                ],
+                "type": "field"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "Average"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "standard deviation (- sigma)",
+          "groupBy": [],
+          "hide": false,
+          "measurement": "http://example.com/Acceleration/Acceleration/ForwardOrBraking",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT  \"Average\" - \"Standard Deviation\" FROM \"http://example.com/Acceleration/Acceleration/ForwardOrBraking\" WHERE $timeFilter",
+          "rawQuery": true,
+          "refId": "G",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Standard Deviation"
+                ],
+                "type": "field"
+              }
+            ],
+            [
+              {
+                "params": [
+                  "Average"
                 ],
                 "type": "field"
               }
@@ -287,25 +334,31 @@
         {
           "alias": "average",
           "fill": 0,
-          "hideTooltip": true,
           "points": false
         },
         {
           "alias": "maximum",
           "fill": 0,
-          "hideTooltip": true,
           "points": false
         },
         {
           "alias": "median",
           "fill": 0,
-          "hideTooltip": true,
           "points": false
         },
         {
           "alias": "minimum",
           "fill": 0,
-          "hideTooltip": true,
+          "points": false
+        },
+        {
+          "alias": "standard deviation (+ sigma)",
+          "fill": 0,
+          "points": false
+        },
+        {
+          "alias": "standard deviation (- sigma)",
+          "fill": 0,
           "points": false
         }
       ],
@@ -413,12 +466,36 @@
           "tags": []
         },
         {
-          "alias": "standard deviation",
+          "alias": "standard deviation (+ sigma)",
           "groupBy": [],
           "measurement": "http://example.com/Acceleration/Acceleration/SideToSide",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "SELECT \"Average\" + \"Standard Deviation\" FROM \"http://example.com/Acceleration/Acceleration/SideToSide\" WHERE $timeFilter",
+          "rawQuery": true,
           "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Standard Deviation"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "standard deviation (- sigma)",
+          "groupBy": [],
+          "measurement": "http://example.com/Acceleration/Acceleration/SideToSide",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"Average\" - \"Standard Deviation\" FROM \"http://example.com/Acceleration/Acceleration/SideToSide\" WHERE $timeFilter",
+          "rawQuery": true,
+          "refId": "G",
           "resultFormat": "time_series",
           "select": [
             [
@@ -511,25 +588,31 @@
         {
           "alias": "average",
           "fill": 0,
-          "hideTooltip": true,
           "points": false
         },
         {
           "alias": "maximum",
           "fill": 0,
-          "hideTooltip": true,
           "points": false
         },
         {
           "alias": "minimum",
           "fill": 0,
-          "hideTooltip": true,
           "points": false
         },
         {
           "alias": "median",
           "fill": 0,
-          "hideTooltip": true,
+          "points": false
+        },
+        {
+          "alias": "standard deviation (+ sigma)",
+          "fill": 0,
+          "points": false
+        },
+        {
+          "alias": "standard deviation (- sigma)",
+          "fill": 0,
           "points": false
         }
       ],
@@ -639,12 +722,36 @@
           "tags": []
         },
         {
-          "alias": "standard deviation",
+          "alias": "standard deviation (+ sigma)",
           "groupBy": [],
           "measurement": "http://example.com/Acceleration/Acceleration/UpDown",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "SELECT \"Average\" + \"Standard Deviation\" FROM \"http://example.com/Acceleration/Acceleration/UpDown\" WHERE $timeFilter",
+          "rawQuery": true,
           "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Standard Deviation"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "standard deviation (- sigma)",
+          "groupBy": [],
+          "measurement": "http://example.com/Acceleration/Acceleration/UpDown",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"Average\" - \"Standard Deviation\" FROM \"http://example.com/Acceleration/Acceleration/UpDown\" WHERE $timeFilter",
+          "rawQuery": true,
+          "refId": "G",
           "resultFormat": "time_series",
           "select": [
             [
@@ -737,25 +844,31 @@
         {
           "alias": "average",
           "fill": 0,
-          "hideTooltip": true,
           "points": false
         },
         {
           "alias": "maximum",
           "fill": 0,
-          "hideTooltip": true,
           "points": false
         },
         {
           "alias": "minimum",
           "fill": 0,
-          "hideTooltip": true,
           "points": false
         },
         {
           "alias": "median",
           "fill": 0,
-          "hideTooltip": true,
+          "points": false
+        },
+        {
+          "alias": "standard deviation (+ sigma)",
+          "fill": 0,
+          "points": false
+        },
+        {
+          "alias": "standard deviation (- sigma)",
+          "fill": 0,
           "points": false
         }
       ],
@@ -863,12 +976,36 @@
           "tags": []
         },
         {
-          "alias": "standard deviation",
+          "alias": "standard deviation (+ sigma)",
           "groupBy": [],
           "measurement": "http://example.com/Acceleration/Acceleration/Controller",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "SELECT \"Average\" + \"Standard Deviation\" FROM \"http://example.com/Acceleration/Acceleration/Controller\" WHERE $timeFilter",
+          "rawQuery": true,
           "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Standard Deviation"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "standard deviation (- sigma)",
+          "groupBy": [],
+          "measurement": "http://example.com/Acceleration/Acceleration/Controller",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"Average\" - \"Standard Deviation\" FROM \"http://example.com/Acceleration/Acceleration/Controller\" WHERE $timeFilter",
+          "rawQuery": true,
+          "refId": "G",
           "resultFormat": "time_series",
           "select": [
             [
@@ -1160,5 +1297,5 @@
   "timezone": "browser",
   "title": "Tributech Acceleration Data",
   "uid": "8cKXpfNZz",
-  "version": 2
+  "version": 3
 }

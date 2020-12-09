@@ -29,13 +29,12 @@ public class DemoPeriodicData {
   private static final boolean DELETE_INFLUX = false;
   private static final int AMOUNT = 100;
   private static final int SLEEP_TIME_MS = 1000;
-  private static final String NAME = "supplychain";
 
   public static void main(String args[]) throws IOException, InterruptedException, NoSuchMethodException {
     InfluxDBConnection influx = new InfluxDBConnection();
     int noRecs = 0;
     int offset = 0;
-    ConnectorCSV conn = FileSelectionUtil.connectToCSV(FILEINDEX, NAME);
+    ConnectorCSV conn = FileSelectionUtil.connectToCSV(FILEINDEX);
 
     if (DELETE_INFLUX) {
       influx.deleteDB();
