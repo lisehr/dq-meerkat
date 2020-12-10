@@ -37,7 +37,7 @@ public class RDPConformanceTributechData {
     }
 
     // Continuous generation of DPs and conformance checking
-    RDPConformanceChecker confChecker = new RDPConformanceChecker(ds, conn, RDP_SIZE, BATCH_SIZE, THRESHOLD);
+    RDPConformanceChecker confChecker = new RDPConformanceChecker(ds, conn, BATCH_SIZE, THRESHOLD);
     confChecker.run();
     // Finally: print evaluation report
     System.out.println(confChecker.getReport());

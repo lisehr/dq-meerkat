@@ -35,10 +35,9 @@ public class RDPConformanceChecker {
 		this.threshold = 0;
 	}
 	
-	public RDPConformanceChecker(Datasource ds, DSConnector conn, int rdpSize, int batchSize, double threshold) {
+	public RDPConformanceChecker(Datasource ds, DSConnector conn, int batchSize, double threshold) {
 		this.ds = ds;
 		this.conn = conn;
-		this.rdpSize = rdpSize;
 		this.batchSize = batchSize;
 		this.threshold = threshold;
 		this.totalCounter = new HashMap<String, Integer>();
@@ -56,25 +55,27 @@ public class RDPConformanceChecker {
 	    int offset = 0;
 	    for (Concept c : ds.getConcepts()) {
 	    	noRecs = conn.getNrRecords(c);
-	    	if(noRecs < offset+batchSize) throw new IllegalArgumentException("Input file has too little records.");
+	    	if(noRecs < offset+batchSize) throw new IllegalArgumentException("Input file " + ds.getLabel() + "  has only " + noRecs + " records, which is too little for batch " + (offset+batchSize));
 	    	for(offset = rdpSize + 1; offset+batchSize < noRecs; offset += batchSize) {
 //	    		if(offset+batchSize > noRecs) batchSize = noRecs-offset;	// currently, the very last batch is not used since it contains less records than the others
 		    	RecordList rs = conn.getPartialRecordList(c, offset, batchSize);
 		    	for(Attribute a : c.getSortedAttributes()) {
-		    		// generate current DP and store to list
-		    		DataProfile dp = a.createDataProfile(rs);
-		    		String key = a.getURI();
-		    		Integer cnt = totalCounter.get(key);
-		    		if(cnt == null) {
-		    			cnt = 0;
-		    			totalCounter.put(key, cnt);
-		    			confCounter.put(key, (double) cnt);
+		    		if(a.hasProfile()) {
+		    			// generate current DP and store to list
+			    		DataProfile dp = a.createDataProfile(rs);
+			    		String key = a.getURI();
+			    		Integer cnt = totalCounter.get(key);
+			    		if(cnt == null) {
+			    			cnt = 0;
+			    			totalCounter.put(key, cnt);
+			    			confCounter.put(key, (double) cnt);
+			    		}
+			    		totalCounter.put(a.getURI(), ++cnt);
+			    		
+			    		double confVal = confCounter.get(key);
+			    		confVal += conformsToRDP(a, dp);
+			    		confCounter.put(a.getURI(), confVal);
 		    		}
-		    		totalCounter.put(a.getURI(), ++cnt);
-		    		
-		    		double confVal = confCounter.get(key);
-		    		confVal += conformsToRDP(a, dp);
-		    		confCounter.put(a.getURI(), confVal);
 		    	}
 		    }
 	    }

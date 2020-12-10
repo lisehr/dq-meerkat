@@ -3,7 +3,7 @@ package dqm.jku.trustkg.util;
 public class Constants {
 
 	public static final boolean STORE_CONSTRAINT_VIOLATIONS = true;
-	public static final boolean DEBUG = true;
+	public static final boolean DEBUG = false;
 	public static final boolean SIMILARITY_DEBUG = false;
 	public static final boolean PRINT_WORKING_MESSAGES = false;
 
