@@ -87,10 +87,10 @@ GraphDB by ontotext is a software which can be downloaded and installed in its s
 and is usable via Java in an embedded mode. To store concrete Java objects in GraphDB, they have to be mapped to RDF format. Since Java does not naturally support such a mapping toolbox, an external library has to be chosen.
 An aspect, which cannot be forgotten is the connection between Java and GraphDB. The embedded version mainly uses RDF4j as API. 
 
-Run on Windows:
+Run on Windows:<br/>
 ```GraphDB\ GraphDB_Free-9.0.0.exe```
 
-Open GraphDB Server and Workbench in browser:
+Open GraphDB Server and Workbench in browser:<br/>
 ```http://localhost:7200/```
 
 Quick start guide for further usage: http://graphdb.ontotext.com/free/quick-start-guide.html 
