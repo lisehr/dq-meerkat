@@ -56,7 +56,7 @@ Run on Windows: <br/>
 Configure Grafana to execute demos:<br/>
 - Provide password for user
 - Configuration - Data Sources - Add data source - InfluxDB 
-  - URL: 
+  - URL: http://localhost:8086
   - Basic Auth: add credentials
   - Database: "testSeries"
 - Import Demo Dashboards from GitHub directory:
