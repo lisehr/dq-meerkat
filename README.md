@@ -87,6 +87,22 @@ GraphDB by ontotext is a software which can be downloaded and installed in its s
 and is usable via Java in an embedded mode. To store concrete Java objects in GraphDB, they have to be mapped to RDF format. Since Java does not naturally support such a mapping toolbox, an external library has to be chosen.
 An aspect, which cannot be forgotten is the connection between Java and GraphDB. The embedded version mainly uses RDF4j as API. 
 
+Run on Windows:
+```GraphDB\ GraphDB_Free-9.0.0.exe```
+
+Open GraphDB Server and Workbench in browser:
+```http://localhost:7200/```
+
+Quick start guide for further usage: http://graphdb.ontotext.com/free/quick-start-guide.html 
+
+Open Demo Dashboard in GraphDB
+- Setup - Create new repository
+- Repository ID: DQM
+- Repository title: DQ-MeeRKat-repo
+- Storage folder: <local-path-to-repo>\kg-repo\repositories\kg-repo\storage
+- Leave default settings for remaining options
+Restart GraphDB and explore graph via Explore - Graphs overview.
+
 ## Mapping Java objects to RDF
 Three choices for mapping libraries were possible, namely:
 - Jackson (converts objects to JSON from which conversion is possible, not used because cyclic references could not be handled)
