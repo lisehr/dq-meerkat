@@ -53,7 +53,14 @@ Run on Linux:<br/>
 Run on Windows: <br/>
 ```Grafana\grafana-6.2.5_windows\bin\grafana-server.exe```
 
-Import Demo Dashboards in Grafana:<br/>
+Configure Grafana to execute demos:<br/>
+- Provide password for user
+- Configuration - Data Sources - Add data source - InfluxDB 
+  - URL: http://localhost:8086
+  - Basic Auth: add credentials
+  - Database: "testSeries"
+- Import Demo Dashboards from GitHub directory:
+  - Import - Upload .json File:
 ```Grafana\Dashboard-Exports\*-dashboard.json```
 
 # Blockchain aspect
@@ -79,6 +86,22 @@ To persist changes in the chain and also generate a graph out of it, multiple st
 GraphDB by ontotext is a software which can be downloaded and installed in its standalone form from http://graphdb.ontotext.com/. This method of storing knowledge graphs was mainly chosen because it supports rdf stores
 and is usable via Java in an embedded mode. To store concrete Java objects in GraphDB, they have to be mapped to RDF format. Since Java does not naturally support such a mapping toolbox, an external library has to be chosen.
 An aspect, which cannot be forgotten is the connection between Java and GraphDB. The embedded version mainly uses RDF4j as API. 
+
+Run on Windows:<br/>
+```GraphDB\ GraphDB_Free-9.0.0.exe```
+
+Open GraphDB Server and Workbench in browser:<br/>
+```http://localhost:7200/```
+
+Quick start guide for further usage: http://graphdb.ontotext.com/free/quick-start-guide.html 
+
+Open Demo Dashboard in GraphDB
+- Setup - Create new repository
+- Repository ID: DQM
+- Repository title: DQ-MeeRKat-repo
+- Storage folder: <local-path-to-repo>\kg-repo\repositories\kg-repo\storage
+- Leave default settings for remaining options
+Restart GraphDB and explore graph via Explore - Graphs overview.
 
 ## Mapping Java objects to RDF
 Three choices for mapping libraries were possible, namely:
