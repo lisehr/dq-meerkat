@@ -53,7 +53,14 @@ Run on Linux:<br/>
 Run on Windows: <br/>
 ```Grafana\grafana-6.2.5_windows\bin\grafana-server.exe```
 
-Import Demo Dashboards in Grafana:<br/>
+Configure Grafana to execute demos:<br/>
+- Provide password for user
+- Configuration - Data Sources - Add data source - InfluxDB 
+  - URL: 
+  - Basic Auth: add credentials
+  - Database: ````testSeries```
+- Import Demo Dashboards from GitHub directory:
+  - Import - Upload .json File:
 ```Grafana\Dashboard-Exports\*-dashboard.json```
 
 # Blockchain aspect
