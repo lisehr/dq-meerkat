@@ -25,7 +25,8 @@ public class RDPConformanceParameterPlots {
 	private static final int DEFAULT_RDP_SIZE = 1000;
 	private static final int DEFAULT_BATCH_SIZE = 1000;			// Set to 1 to simulate streaming data
 	
-	private static double[] thresholds = {0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5};
+	// private static double[] thresholds = {0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5};
+	private static double[] thresholds = {0.5, 0.45, 0.4, 0.35, 0.3, 0.25, 0.2, 0.15, 0.1, 0.05, 0.0};
 	private static int[] batchSize = {1, 2, 5, 10, 50, 100, 1000, 2000};
 	private static int[] rdpSize = {100, 200, 500, 1000, 2000, 3000, 5000};
 	
