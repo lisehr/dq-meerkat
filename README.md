@@ -58,7 +58,7 @@ Configure Grafana to execute demos:<br/>
 - Configuration - Data Sources - Add data source - InfluxDB 
   - URL: 
   - Basic Auth: add credentials
-  - Database: ````testSeries```
+  - Database: "testSeries"
 - Import Demo Dashboards from GitHub directory:
   - Import - Upload .json File:
 ```Grafana\Dashboard-Exports\*-dashboard.json```
