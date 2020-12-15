@@ -36,7 +36,7 @@ public class IsolationForest extends ProfileMetric{
 			py.exec("train_scaled = np.apply_along_axis(robust_scaler, 0, x)");
 			//JepInterpreter.printNDArr((NDArray<?>)py.getValue("train_scaled"));
 			py.exec("np.nan_to_num(train_scaled, copy=False)"); // replacement of nan values, since null values are not handled 
-			py.exec("ISO_forest = IsolationForest(n_estimators = 100, max_samples = 200, contamination='auto').fit(train_scaled)");
+			py.exec("ISO_forest = IsolationForest(n_estimators = 100, max_samples = 200, contamination=0.1).fit(train_scaled)");
 			py.exec("outliers = ISO_forest.predict(train_scaled)");
 			resultingRecords = (NDArray<?>) py.getValue("outliers");
 			py.exec("score = ISO_forest.score_samples(train_scaled)");

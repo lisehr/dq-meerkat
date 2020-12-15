@@ -29,11 +29,6 @@ public class JepDataScienceDemo {
 			JepInterpreter.printNDArr(arr);
 			JepInterpreter.printNDArr((NDArray<?>) interp.getValue("Y_train"));
 			
-			interp.exec("plt.scatter(X_train[:,[0]], X_train[:,[1]])");
-			interp.exec("plt.title('Raw data')");
-			interp.exec("plt.xlabel('X1')");
-			interp.exec("plt.ylabel('X2')");
-			interp.exec("plt.show()"); // plot works on some machines 
 			
 			// define a function
 			interp.exec("def robust_scaler(x):\n\t med = statistics.median(x)\n\t return (x - med)/np.mean(abs(x - med))");
@@ -42,6 +37,14 @@ public class JepDataScienceDemo {
 			interp.exec("robust_scaler(X_train[:,[1]])");
 			interp.exec("X_train_scaled = np.apply_along_axis(robust_scaler, 0, X_train)");
 			JepInterpreter.printNDArr((NDArray<?>)interp.getValue("X_train_scaled[:10,:]"));
+			
+			// print outliers
+			interp.exec("plt.scatter(X_train_scaled[:,[0]], X_train_scaled[:,[1]], c = ['red' if (x > 0)  else 'green' for x in Y_train ])");
+			interp.exec("plt.title('True outliers in the scaled data')");
+			interp.exec("plt.xlabel('X1')");
+			interp.exec("plt.ylabel('X2')");
+			interp.exec("plt.show()"); // plot works on some machines 
+
 		} catch (JepException e) {
 			e.printStackTrace();
 		}
