@@ -28,7 +28,7 @@ import javafx.util.Pair;
 
 public class TributechDataProfileValues {
   
-	private static final int RDP_SIZE = 5000;
+	private static final int RDP_SIZE = 1000;
 	private static final String[] FILENAMES = { "Acceleration breaking or forward", "Acceleration side to side",
 			"Acceleration up or down", "Device Voltage", "Engine RPM", "Engine Speed", "Engine Temperature" };
 
