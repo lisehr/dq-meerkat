@@ -133,3 +133,4 @@ RDFBeans (https://rdfbeans.github.io/) is a library, which allows a developer to
 * RDFBeans: https://rdfbeans.github.io/ 
 * RDF4j: https://rdf4j.eclipse.org/
 * QuaIIe (usage of connectors): http://dqm.faw.jku.at/
+* Pentaho Javadoc (Plugin Development): https://javadoc.pentaho.com/kettle900/kettle-core-9.0.0.1-426-javadoc/index.html 
