@@ -63,6 +63,13 @@ Configure Grafana to execute demos:<br/>
   - Import - Upload .json File:
 ```Grafana\Dashboard-Exports\*-dashboard.json```
 
+### Pentaho Data Integration
+DQ-MeeRKat also enables the possibility to use the generation of RDPs in <a href="https://www.hitachivantara.com/en-us/products/data-management-analytics/pentaho.html" target="_blank">Pentaho Data Integration (PDI) by Hitachi Vantara</a>. DQ-MeeRKat is tested and developed for compatibility of PDI 9.0, found <a href="https://sourceforge.net/projects/pentaho/files/Pentaho%209.0/client-tools/" target="_blank">here</a>. For usage in PDI, the Project has to be exported as a JAR archive (In Eclipse: Export => Export => Jar file). Surrounding folders can be excluded, since only the src folder matters. For correct inclusion the following steps have to be done:
+- Creation of folder "DQ-MeeRKat" in <Path-to-Pentaho>\data-integration\plugins
+- Place JAR in there
+- Create subfolders: \output and \patterns
+- Place file for pattern recognition called *.in into the \patterns subfolder
+
 # Blockchain aspect
 To generate tamper-free persistance of stored data a blockchain is used. Creating blockchains in Java is a difficult task since Reflections exist (more in section Persistance),
 so a pseudo-temper-free (therefore only temper-evident) chain is the nearest result is what can be achieved.
@@ -126,3 +133,4 @@ RDFBeans (https://rdfbeans.github.io/) is a library, which allows a developer to
 * RDFBeans: https://rdfbeans.github.io/ 
 * RDF4j: https://rdf4j.eclipse.org/
 * QuaIIe (usage of connectors): http://dqm.faw.jku.at/
+* Pentaho Javadoc (Plugin Development): https://javadoc.pentaho.com/kettle900/kettle-core-9.0.0.1-426-javadoc/index.html 
