@@ -112,15 +112,18 @@ public class RDPConformanceChecker {
 		DataProfile rdp = a.getProfile();
 		
 		int conf = 0;
-		List<ProfileMetric> mlist = rdp.getNonDependentMetrics();
-		if(this.batchSize == 1) {   
+		
+		List<ProfileMetric> mlist = null;
+		if(this.batchSize != 1) {   
+			mlist =  rdp.getNonDependentMetrics();
+		} else {
 			mlist = rdp.getNonAggregateMetrics();
 		}
 		
 		for(ProfileMetric rdpMetric : mlist) {
 			if(rdpMetric.checkConformance(dp.getMetric(rdpMetric.getTitle()), threshold)) conf++;
 		}
-		double value = conf / (double) rdp.getNonDependentMetrics().size();
+		double value = conf / (double) mlist.size();
 		
 		return value;
 	}
