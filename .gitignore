@@ -1,11 +1,11 @@
 /target/*
-/src/main/java/dqm/jku/trustkg/resources/csv/Telematic*
-/src/main/java/dqm/jku/trustkg/resources/csv/Acceleration*
-/src/main/java/dqm/jku/trustkg/resources/csv/I0625*
-/src/main/java/dqm/jku/trustkg/resources/export/csv/Tributech*
-/src/main/java/dqm/jku/trustkg/resources/export/csv/export_telematic*
-/src/main/java/dqm/jku/trustkg/resources/export/csv/export_Acceleration*
-/src/main/java/dqm/jku/trustkg/resources/csv/1500000 Sales Records.csv
+/src/main/java/dqm/jku/dqmeerkat/resources/csv/Telematic*
+/src/main/java/dqm/jku/dqmeerkat/resources/csv/Acceleration*
+/src/main/java/dqm/jku/dqmeerkat/resources/csv/I0625*
+/src/main/java/dqm/jku/dqmeerkat/resources/export/csv/Tributech*
+/src/main/java/dqm/jku/dqmeerkat/resources/export/csv/export_telematic*
+/src/main/java/dqm/jku/dqmeerkat/resources/export/csv/export_Acceleration*
+/src/main/java/dqm/jku/dqmeerkat/resources/csv/1500000 Sales Records.csv
 /Neo4j/*
 /.settings/*
 .classpath
