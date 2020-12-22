@@ -16,7 +16,7 @@ import dqm.jku.dqmeerkat.util.FileSelectionUtil;
  *
  */
 public class GettingStartedAlternative {
-  private static final String CSV_PATH = "src/main/java/dqm/jku/trustkg/resources/csv/";
+  private static final String CSV_PATH = "src/main/java/dqm/jku/dqmeerkat/resources/csv/";
 
   public static void main(String[] args) throws IOException, NoSuchMethodException {
     File directory = new File(CSV_PATH);

@@ -24,7 +24,7 @@ import dqm.jku.dqmeerkat.util.export.ExportUtil;
 public class TestCSVExportAll {
   private static final boolean DEBUG = false; // enables debug prints in this class
   private static final boolean EXTENSIVE_PRINT = false; // prints complete hierarchy of Sources
-  private static final String CSV_PATH = "src/main/java/dqm/jku/trustkg/resources/csv/";
+  private static final String CSV_PATH = "src/main/java/dqm/jku/dqmeerkat/resources/csv/";
   private static final int RDP_SIZE = 5000;
 
   public static void main(String args[]) throws IOException, NoSuchMethodException {

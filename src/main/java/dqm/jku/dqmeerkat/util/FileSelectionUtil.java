@@ -20,7 +20,7 @@ import dqm.jku.dqmeerkat.connectors.ConnectorCSV;
  *         Utility class for file selection purposes
  */
 public class FileSelectionUtil {
-  private static final String PREFIX = "src/main/java/dqm/jku/trustkg/resources/";
+  private static final String PREFIX = "src/main/java/dqm/jku/dqmeerkat/resources/";
   private static final String PENT_PREFIX = "/plugins/DQ-MeeRKat/";
   private static final String CSV = "csv/";
   private static final String PATTERNS = "patterns/";

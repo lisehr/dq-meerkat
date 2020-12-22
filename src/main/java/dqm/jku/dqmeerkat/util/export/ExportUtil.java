@@ -29,7 +29,7 @@ import dqm.jku.dqmeerkat.quality.profilingmetrics.singlecolumn.histogram.Histogr
 public class ExportUtil {
 	private static final List<LabelTriple<MetricTitle, String, String>> LABELS = new ArrayList<>();
 
-	private static final String EXPORT_PATH = "src/main/java/dqm/jku/trustkg/resources/export/";
+	private static final String EXPORT_PATH = "src/main/java/dqm/jku/dqmeerkat/resources/export/";
 	private static final String EXPORT_CSV = "csv/";
 	private static final String EXPORT_REPORT = "report/";
 

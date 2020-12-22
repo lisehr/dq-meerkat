@@ -27,7 +27,7 @@ import dqm.jku.dqmeerkat.graphdb.EmbeddedGraphDB;
 public class TestRDF4JModel {
   public static void main(String args[]) {
     // Create Connection to CSV Connector
-    DSConnector conn = new ConnectorCSV("src/main/java/dqm/jku/trustkg/resources/csv/Telematic Device Report - Device Voltage.csv", ",", "\n", "Device Voltage", true);
+    DSConnector conn = new ConnectorCSV("src/main/java/dqm/jku/dqmeerkat/resources/csv/Telematic Device Report - Device Voltage.csv", ",", "\n", "Device Voltage", true);
 
     // Create Schema from it
     Datasource ds;

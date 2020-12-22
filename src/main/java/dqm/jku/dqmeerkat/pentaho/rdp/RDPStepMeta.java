@@ -33,7 +33,7 @@ import dqm.jku.dqmeerkat.pentaho.util.PentahoRowUtils;
 
 @Step(id = "RDPStep", 
 			name = "RDPStep.Name", 
-			image = "dqm/jku/trustkg/pentaho/rdp/resources/meerkat.svg", 
+			image = "dqm/jku/dqmeerkat/pentaho/rdp/resources/meerkat.svg", 
 			i18nPackageName = "dqm.jku.trustkg.pentaho.rdp", 
 			description = "RDPStep.TooltipDesc", 
 			categoryDescription = "RDP.Category"

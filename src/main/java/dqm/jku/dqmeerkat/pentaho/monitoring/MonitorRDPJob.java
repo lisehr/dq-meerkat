@@ -21,7 +21,7 @@ import org.w3c.dom.Node;
 @JobEntry(
     id = "MonitorRDPJob",
     name = "MonitorRDPJob.Name",
-    image = "dqm/jku/trustkg/pentaho/monitoring/resources/meerkat.svg",
+    image = "dqm/jku/dqmeerkat/pentaho/monitoring/resources/meerkat.svg",
     i18nPackageName = "dqm.jku.trustkg.pentaho.monitoring",
 		description = "MonitorRDPJob.TooltipDesc", 
   	categoryDescription = "Monitoring.Category"  
