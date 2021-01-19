@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 1,
+  "id": 2,
   "links": [],
   "panels": [
     {
@@ -61,7 +61,7 @@
         {
           "alias": "Average",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Benefit per order",
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/Benefitperorder",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -81,7 +81,7 @@
         {
           "alias": "Maximum",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Benefit per order",
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/Benefitperorder",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -101,7 +101,7 @@
         {
           "alias": "Median",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Benefit per order",
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/Benefitperorder",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "D",
@@ -121,7 +121,7 @@
         {
           "alias": "Minimum",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Benefit per order",
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/Benefitperorder",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "C",
@@ -131,6 +131,50 @@
               {
                 "params": [
                   "Minimum"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Standard Deviation (+ sigma)",
+          "groupBy": [],
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/Benefitperorder",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"Average\" + \"Standard Deviation\" FROM \"http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/Benefitperorder\" WHERE $timeFilter",
+          "rawQuery": true,
+          "refId": "E",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Standard Deviation"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Standard Deviation (- sigma)",
+          "groupBy": [],
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/Benefitperorder",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"Average\" -  \"Standard Deviation\" FROM \"http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/Benefitperorder\" WHERE $timeFilter",
+          "rawQuery": true,
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Standard Deviation"
                 ],
                 "type": "field"
               }
@@ -219,7 +263,7 @@
         {
           "alias": "% Null Values",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Benefit per order",
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/Benefitperorder",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -239,7 +283,7 @@
         {
           "alias": "% Uniqueness",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Benefit per order",
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/Benefitperorder",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -259,7 +303,7 @@
         {
           "alias": "Size",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Benefit per order",
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/Benefitperorder",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "C",
@@ -279,7 +323,7 @@
         {
           "alias": "# Decimals",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Benefit per order",
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/Benefitperorder",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "D",
@@ -377,7 +421,7 @@
         {
           "alias": "Average",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Order Item Discount Rate",
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderItemDiscountRate",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -397,7 +441,7 @@
         {
           "alias": "Maximum",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Order Item Discount Rate",
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderItemDiscountRate",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -417,7 +461,7 @@
         {
           "alias": "Median",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Order Item Discount Rate",
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderItemDiscountRate",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "C",
@@ -437,7 +481,7 @@
         {
           "alias": "Minimum",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Order Item Discount Rate",
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderItemDiscountRate",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "D",
@@ -447,6 +491,50 @@
               {
                 "params": [
                   "Minimum"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Standard Deviation (+ sigma)",
+          "groupBy": [],
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderItemDiscountRate",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"Average\" + \"Standard Deviation\" FROM \"http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderItemDiscountRate\" WHERE $timeFilter",
+          "rawQuery": true,
+          "refId": "E",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Standard Deviation"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Standard Deviation (- sigma)",
+          "groupBy": [],
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderItemDiscountRate",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"Average\" - \"Standard Deviation\" FROM \"http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderItemDiscountRate\" WHERE $timeFilter",
+          "rawQuery": true,
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Standard Deviation"
                 ],
                 "type": "field"
               }
@@ -536,7 +624,7 @@
         {
           "alias": "% Null Values",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Order Item Discount Rate",
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderItemDiscountRate",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -556,7 +644,7 @@
         {
           "alias": "% Uniqueness",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Order Item Discount Rate",
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderItemDiscountRate",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -576,7 +664,7 @@
         {
           "alias": "# Decimals",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Order Item Discount Rate",
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderItemDiscountRate",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "C",
@@ -596,7 +684,7 @@
         {
           "alias": "Size",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Order Item Discount Rate",
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderItemDiscountRate",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "D",
@@ -694,7 +782,7 @@
         {
           "alias": "Average",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Order Item Total",
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderItemTotal",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -714,7 +802,7 @@
         {
           "alias": "Maximum",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Order Item Total",
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderItemTotal",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -734,7 +822,7 @@
         {
           "alias": "Median",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Order Item Total",
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderItemTotal",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "C",
@@ -754,7 +842,7 @@
         {
           "alias": "Minimum",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Order Item Total",
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderItemTotal",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "D",
@@ -764,6 +852,50 @@
               {
                 "params": [
                   "Minimum"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Standard Deviation (+ sigma)",
+          "groupBy": [],
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderItemTotal",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"Average\" + \"Standard Deviation\" FROM \"http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderItemTotal\" WHERE $timeFilter",
+          "rawQuery": true,
+          "refId": "E",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Standard Deviation"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Standard Deviation (- sigma)",
+          "groupBy": [],
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderItemTotal",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"Average\" - \"Standard Deviation\" FROM \"http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderItemTotal\" WHERE $timeFilter",
+          "rawQuery": true,
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Standard Deviation"
                 ],
                 "type": "field"
               }
@@ -852,7 +984,7 @@
         {
           "alias": "% Null Values",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Order Zipcode",
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderZipcode",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -872,7 +1004,7 @@
         {
           "alias": "% Uniqueness",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Order Zipcode",
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderZipcode",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -892,7 +1024,7 @@
         {
           "alias": "Size",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Order Zipcode",
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderZipcode",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "C",
@@ -912,7 +1044,7 @@
         {
           "alias": "# Decimals",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Order Zipcode",
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderZipcode",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "D",
@@ -934,7 +1066,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Order Zipcode Cardinalities",
+      "title": "Order Zipcode - Cardinalities",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1010,7 +1142,7 @@
         {
           "alias": "Average",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Order Profit Per Order",
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderProfitPerOrder",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -1030,7 +1162,7 @@
         {
           "alias": "Maximum",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Order Profit Per Order",
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderProfitPerOrder",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -1050,7 +1182,7 @@
         {
           "alias": "Median",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Order Profit Per Order",
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderProfitPerOrder",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "D",
@@ -1070,7 +1202,7 @@
         {
           "alias": "Minimum",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Order Profit Per Order",
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderProfitPerOrder",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "C",
@@ -1080,6 +1212,50 @@
               {
                 "params": [
                   "Minimum"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Standard Deviation (+ sigma)",
+          "groupBy": [],
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderProfitPerOrder",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"Average\" + \"Standard Deviation\" FROM \"http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderProfitPerOrder\" WHERE $timeFilter",
+          "rawQuery": true,
+          "refId": "E",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Standard Deviation"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Standard Deviation (- sigma)",
+          "groupBy": [],
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderProfitPerOrder",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"Average\" - \"Standard Deviation\" FROM \"http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderProfitPerOrder\" WHERE $timeFilter",
+          "rawQuery": true,
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Standard Deviation"
                 ],
                 "type": "field"
               }
@@ -1168,7 +1344,7 @@
         {
           "alias": "Average",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Order Item Product Price",
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderItemProductPrice",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -1188,7 +1364,7 @@
         {
           "alias": "Maximum",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Order Item Product Price",
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderItemProductPrice",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -1208,7 +1384,7 @@
         {
           "alias": "Median",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Order Item Product Price",
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderItemProductPrice",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "C",
@@ -1228,7 +1404,7 @@
         {
           "alias": "Minimum",
           "groupBy": [],
-          "measurement": "http://example.com/supplychain/supplychain/Order Item Product Price",
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderItemProductPrice",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "D",
@@ -1238,6 +1414,50 @@
               {
                 "params": [
                   "Minimum"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Standard Deviation (+ sigma)",
+          "groupBy": [],
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderItemProductPrice",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"Average\" + \"Standard Deviation\" FROM \"http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderItemProductPrice\" WHERE $timeFilter",
+          "rawQuery": true,
+          "refId": "E",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Standard Deviation"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "Standard Deviation (- sigma)",
+          "groupBy": [],
+          "measurement": "http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderItemProductPrice",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "SELECT \"Average\" - \"Standard Deviation\" FROM \"http://example.com/DataCoSupplyChainDataset/DataCoSupplyChainDataset/OrderItemProductPrice\" WHERE $timeFilter",
+          "rawQuery": true,
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "Standard Deviation"
                 ],
                 "type": "field"
               }
@@ -1327,5 +1547,5 @@
   "timezone": "",
   "title": "DataCo SMART SUPPLY CHAIN FOR BIG DATA ANALYSIS",
   "uid": "GYKQeSHZz",
-  "version": 8
+  "version": 5
 }

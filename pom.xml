@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>dqm.jku</groupId>
-	<artifactId>trustkg</artifactId>
+	<artifactId>dqmeerkat</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>trustkg</name>
+	<name>dqmeerkat</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -146,12 +146,19 @@
 			<artifactId>kettle-ui-swt</artifactId>
 			<version>${pentaho.kettle.version}</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/black.ninia/jep -->
+		<dependency>
+			<groupId>black.ninia</groupId>
+			<artifactId>jep</artifactId>
+			<version>3.9.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
 		<resources>
 			<resource>
-				<directory>${basedir}/src/main/java/dqm/jku/trustkg/graphdb</directory>
+				<directory>${basedir}/src/main/java/dqm/jku/dqmeerkat/graphdb</directory>
 				<includes>
 					<include>**/*</include>
 				</includes>

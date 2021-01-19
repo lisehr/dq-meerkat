@@ -1,0 +1,20 @@
+Category;Metric;Value
+Cardinalities;Number of Rows;1,000.0000
+Cardinalities;# Null Values;0.0000
+Cardinalities;% Null Values;0.0000
+Cardinalities;Cardinality;783.0000
+Cardinalities;Uniqueness;78.3000
+Data type info;Basic type;Numeric
+Data type info;Data type;Double
+Data type info;Minimum;0.0000
+Data type info;Maximum;3,174.0000
+Data type info;Average;1,449.8455
+Data type info;Median;1,520.5000
+Data type info;Digits;4.0000
+Data type info;# Decimals;1.0000
+Data type info;Standard Deviation;464.0502
+Data type info;Mean Absolute Deviation;398.0000
+Histogram;# Classes;11.0000
+Histogram;Class range;288.5455
+Histogram;Values;[1, 0, 135, 219, 108, 268, 161, 78, 23, 3, 4]
+Dependencies;isCandidateKey;false
