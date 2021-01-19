@@ -1,5 +1,6 @@
 package dqm.jku.trustkg.dsd.elements;
 
+import java.lang.ref.Reference;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -212,4 +213,12 @@ public class Datasource extends DSDElement {
     return sb.toString();
   }
 
+	public ReferenceAssociation getReferenceAssociations(String name) {
+		for (Association ac : associations) {
+			if (ac.getLabel().contains(name)) {
+				return (ReferenceAssociation) ac;
+			}
+		}
+		return null;
+	}
 }

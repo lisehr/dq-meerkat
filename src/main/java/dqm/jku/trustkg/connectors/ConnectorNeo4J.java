@@ -7,6 +7,7 @@ import java.util.*;
 import com.google.gson.Gson;
 
 import dqm.jku.trustkg.dsd.elements.*;
+import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.datatypeinfo.DataType;
 import dqm.jku.trustkg.util.DataTypeConverter;
 import org.json.JSONObject;
 import org.json.JSONArray;
@@ -49,7 +50,7 @@ public class ConnectorNeo4J extends DSConnector {
 	private final static String cypher_get_relationship_by_type = "MATCH p=()-[r:?]->() RETURN p";
 	private final static String cypher_get_nodes_by_type = "MATCH (n:?) RETURN n";
 	private final static String cypher_get_unconnected_nodes = "MATCH (n) WHERE NOT (n)--() RETURN n";
-	private final static String cypher_get_degree_distribution = "MATCH (n)-[]-() RETURN n, count(*)";
+	private final static String cypher_get_degree_distribution = "MATCH (n:?)-[]-() RETURN n, count(*)";
 
 
 	private ConnectorNeo4J(String DBUrl, String DBName, String DBpw, String label) {
@@ -113,15 +114,8 @@ public class ConnectorNeo4J extends DSConnector {
 		return isConnected();
 	}
 
-	public Iterator<dqm.jku.trustkg.dsd.records.Record> getDegreeDistribution(Concept c) {
-		RecordList rs = new RecordList();
-
-		try {
-			rs = getNodeDegree(c);
-		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
-			e.printStackTrace();
-		}
-		return rs.iterator();
+	public RecordList getDegreeDistribution(Concept c) {
+		return getNodeDegree(c);
 	}
 
 	@Override
@@ -172,6 +166,7 @@ public class ConnectorNeo4J extends DSConnector {
 		// relationships, count, type, properties, labels
 		Set<String> keys = obj.keySet();
 		Attribute dsdAttribute;
+		ReferenceAssociation referenceAttribute;
 
 		for(String s : keys) {
 
@@ -193,7 +188,6 @@ public class ConnectorNeo4J extends DSConnector {
 				}
 			} else {
 				Object o = obj.get(s);
-				dsdAttribute = DSDFactory.makeAttribute(s, c);
 				String dataType;
 
 				if(o instanceof Integer) {
@@ -206,10 +200,19 @@ public class ConnectorNeo4J extends DSConnector {
 					dataType = "String";
 				}
 
-				try {
-					DataTypeConverter.getTypeFromNeo4J(dsdAttribute, dataType, o.toString());
-				} catch (ParseException e) {
-					e.printStackTrace();
+				if(s.equals("type")) {
+					referenceAttribute = DSDFactory.makeReferenceAssociation("Ref/" + c.getLabelOriginal(), c.getDatasource());
+					referenceAttribute.setNeo4JType(o.toString());
+				} else if (s.equals("count")) {
+					referenceAttribute = DSDFactory.makeReferenceAssociation("Ref/" + c.getLabelOriginal(), c.getDatasource());
+					referenceAttribute.setNeo4JCount(Integer.parseInt(o.toString()));
+				} else {
+					dsdAttribute = DSDFactory.makeAttribute(s, c);
+					try {
+						DataTypeConverter.getTypeFromNeo4J(dsdAttribute, dataType, o.toString());
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		}
@@ -220,9 +223,10 @@ public class ConnectorNeo4J extends DSConnector {
 		RecordList list = new RecordList();
 
 		// Distinguish between Relationship and Node
-		Attribute type = concept.getAttribute("type");
+		//Attribute type = concept.getAttribute("type");
+		String type = concept.getDatasource().getReferenceAssociations("Ref/" + concept.getLabel()).getNeo4JType();
 
-		if(type.getDefaultValue().equals("relationship")) {
+		if(type.equals("relationship")) {
 			String query = cypher_get_relationship_by_type;
 			query = query.replaceFirst("\\?", concept.getLabelOriginal());
 			Result result = execute(query);
@@ -240,7 +244,7 @@ public class ConnectorNeo4J extends DSConnector {
 				}
 				list.addRecord(rec);
 			}
-		} else if(type.getDefaultValue().equals("node")) {
+		} else if(type.equals("node")) {
 			String query = cypher_get_nodes_by_type;
 			query = query.replaceFirst("\\?", concept.getLabelOriginal());
 			Result result = execute(query);
@@ -285,25 +289,35 @@ public class ConnectorNeo4J extends DSConnector {
 		return records.isEmpty();
 	}
 
-	private RecordList getNodeDegree(Concept c) throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
-		Result result = execute(cypher_get_degree_distribution);
+	private RecordList getNodeDegree(Concept c) {
+
+		String type = c.getDatasource().getReferenceAssociations("Ref/" + c.getLabel()).getNeo4JType();
+		if(type.equals("relationship")) {
+			return null;
+		}
+
+		String query = cypher_get_degree_distribution;
+		query = query.replaceFirst("\\?", c.getLabelOriginal());
+		Result result = execute(query);
 		List<Record> records = result.list();
 		RecordList list = new RecordList();
 
 		for(Record r : records) {
-			Map<String, Object> map = r.asMap();
-			Collection<Object> coll = map.values();
-			Object[] o = coll.toArray();
+			Map<String, Object> o = r.values().get(0).asNode().asMap();
+			Object counter = r.values().get(1);
 
-			String labels = getLabelString(o[0]);
-			HashMap<String, String> properties = getPropertiesMap(o[0]);
-			properties.put("Label:", labels);
+			c.addAttribute(DSDFactory.makeAttribute("NodeDegree", c));
+			Attribute nodeDegree = c.getAttribute("NodeDegree");
+			nodeDegree.setDataType(Integer.class);
+			nodeDegree.setNodeDegree(Integer.parseInt(counter.toString()));
 
-			long counter = (Long) o[1];
-
-			Attribute att = new Attribute(properties.toString(), c);
 			dqm.jku.trustkg.dsd.records.Record rec = new dqm.jku.trustkg.dsd.records.Record(c);
-			rec.addValueNeo4J(att, counter);
+			rec.addValueNeo4J(nodeDegree, Integer.parseInt(counter.toString()));
+
+			for(Map.Entry<String, Object> entry : o.entrySet()) {
+				Attribute a = c.getAttribute(entry.getKey());
+				rec.addValueNeo4J(a, DataTypeConverter.getNeo4JRecordvalue(a, entry.getValue()));
+			}
 
 			list.addRecord(rec);
 		}

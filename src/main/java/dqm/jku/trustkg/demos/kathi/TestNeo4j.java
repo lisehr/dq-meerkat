@@ -21,16 +21,25 @@ public class TestNeo4j {
 	    	System.out.println("Schema: ");
 	    	ds.printStructure();
 
-			for (Concept c : ds.getConceptsAndAssociations()) {
+			for (Concept c : ds.getConcepts()) {
 				RecordList rs = conn.getRecordList(c);
 				for (Attribute a : c.getSortedAttributes()) {
 					a.annotateProfile(rs);
-					System.out.println("Attribute a: " + a.toString());
+					System.out.println("Get all Records Attribute a: " + a.toString());
 					a.printAnnotatedProfile();
 				}
 			}
 
-			//Iterator<Record> record = conn.getDegreeDistribution(ds.getConcept(label));
+			for (Concept c : ds.getConcepts()) {
+				RecordList rs = conn.getDegreeDistribution(c);
+				if(rs != null) {
+					for (Attribute a : c.getSortedAttributes()) {
+						a.annotateProfile(rs);
+						System.out.println("Get Node Degree Attribute a: " + a.toString());
+						a.printAnnotatedProfile();
+					}
+				}
+			}
 
 	    	System.out.println("Number of Nodes: " + conn.getNrRecords(ds.getConcept(label)));
 	    	System.out.println("Number of Relationships: " + conn.getNrRelationships(ds.getConcept(label)));

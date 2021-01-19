@@ -19,6 +19,8 @@ public class Attribute extends DSDElement {
   private Object defaultValue;
   private Class<?> dataType;
 
+  private int nodeDegree;
+
   public Attribute() {
     super();
   }
@@ -121,5 +123,14 @@ public class Attribute extends DSDElement {
   public void addProfileToInflux(InfluxDBConnection connection) {
     super.storeProfile(connection);
   }
+
+  public void setNodeDegree(int degree) {
+    this.nodeDegree = degree;
+  }
+
+  public int getNodeDegree() {
+    return nodeDegree;
+  }
+
 
 }

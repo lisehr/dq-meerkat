@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.time.Year;
 import java.util.*;
 
+import dqm.jku.trustkg.dsd.elements.ReferenceAssociation;
 import org.apache.commons.lang.StringUtils;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
@@ -414,26 +415,24 @@ public class DataTypeConverter {
 	}
 
 	public static void getTypeFromNeo4J(Attribute a, String datatype, String defaultVal) throws ParseException {
-		// TODO
-
 		switch (datatype) {
 			case "String":
 				a.setDataType(String.class);
-				if (defaultVal != null) {
-					a.setDefaultValue(defaultVal);
-				}
+				//if (defaultVal != null) {
+				//	a.setDefaultValue(defaultVal);
+				//}
 				break;
 			case "int":
 				a.setDataType(Integer.class);
-				if (defaultVal != null) {
-					a.setDefaultValue(Integer.valueOf(defaultVal));
-				}
+				//if (defaultVal != null) {
+				//	a.setDefaultValue(Integer.valueOf(defaultVal));
+				//}
 				break;
 			case "boolean":
 				a.setDataType(Boolean.class);
-				if (defaultVal != null) {
-					a.setDefaultValue(Boolean.valueOf(defaultVal));
-				}
+				//if (defaultVal != null) {
+				//	a.setDefaultValue(Boolean.valueOf(defaultVal));
+				//}
 				break;
 			default:
 				throw new IllegalArgumentException("No mapping known for this Neo4J data type: " + datatype);
