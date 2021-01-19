@@ -1,0 +1,154 @@
+=== DeviceVoltage===
+Annotated data profile for DSDElement: Value
+Data Profile:
+Strings use String length for value length metrics!
+# Null Values	0
+% Null Values	0.0%
+Average		12.992417016100044
+Basic type	Numeric
+Cardinality	88
+Data type	Double
+Decimals	7
+Digits		2
+Histogram	Number of classes: 11, ClassRange: 0.29597985454545445, Values: 12-22-41-495-179-40-52-47-44-36-32
+Maximum		14.8615561
+Mean Absolute Deviation	0.14311219999999913
+Median		12.7506676
+Minimum		11.6057777
+Number of Rows	1000
+Standard Deviation	0.6190789267488349
+Uniqueness	8.8%
+isCandidateKey	false
+
+=== Accelerationbreakingorforward===
+Annotated data profile for DSDElement: Value
+Data Profile:
+Strings use String length for value length metrics!
+# Null Values	0
+% Null Values	0.0%
+Average		0.027497843861579847
+Basic type	Numeric
+Cardinality	200
+Data type	Double
+Decimals	14
+Digits		1
+Histogram	Number of classes: 11, ClassRange: 0.9048862457275391, Values: 1-3-8-44-140-0-600-122-58-22-2
+Maximum		4.44241189956665
+Mean Absolute Deviation	0.0
+Median		0.0
+Minimum		-5.51133680343628
+Number of Rows	1000
+Standard Deviation	1.1804810733356093
+Uniqueness	20.0%
+isCandidateKey	false
+
+=== Accelerationsidetoside===
+Annotated data profile for DSDElement: Value
+Data Profile:
+Strings use String length for value length metrics!
+# Null Values	0
+% Null Values	0.0%
+Average		-0.19287718498706818
+Basic type	Numeric
+Cardinality	209
+Data type	Double
+Decimals	14
+Digits		1
+Histogram	Number of classes: 11, ClassRange: 0.9173674583435063, Values: 1-3-10-38-77-102-601-0-100-57-11
+Maximum		3.71672010421753
+Mean Absolute Deviation	0.0
+Median		0.0
+Minimum		-6.37432193756104
+Number of Rows	1000
+Standard Deviation	1.3472059989625995
+Uniqueness	20.9%
+isCandidateKey	false
+
+=== EngineRPM===
+Annotated data profile for DSDElement: Value
+Data Profile:
+Strings use String length for value length metrics!
+# Null Values	0
+% Null Values	0.0%
+Average		1449.8455
+Basic type	Numeric
+Cardinality	783
+Data type	Double
+Decimals	1
+Digits		4
+Histogram	Number of classes: 11, ClassRange: 288.54545454545456, Values: 1-0-135-219-108-268-161-78-23-3-4
+Maximum		3174.0
+Mean Absolute Deviation	398.0
+Median		1520.5
+Minimum		0.0
+Number of Rows	1000
+Standard Deviation	464.05017610781675
+Uniqueness	78.3%
+isCandidateKey	false
+
+=== EngineTemperature===
+Annotated data profile for DSDElement: Value
+Data Profile:
+Strings use String length for value length metrics!
+# Null Values	0
+% Null Values	0.0%
+Average		64
+Basic type	Numeric
+Cardinality	85
+Data type	Integer
+Decimals	0
+Digits		2
+Histogram	Number of classes: 11, ClassRange: 8.090909090909092, Values: 6-32-44-64-58-71-82-99-140-310-94
+Maximum		94
+Mean Absolute Deviation	11
+Median		73
+Minimum		5
+Number of Rows	1000
+Standard Deviation	20.566963801203133
+Uniqueness	8.5%
+isCandidateKey	false
+
+=== Accelerationupordown===
+Annotated data profile for DSDElement: Value
+Data Profile:
+Strings use String length for value length metrics!
+# Null Values	0
+% Null Values	0.0%
+Average		10.231003702163695
+Basic type	Numeric
+Cardinality	177
+Data type	Double
+Decimals	14
+Digits		2
+Histogram	Number of classes: 11, ClassRange: 0.3138132095336937, Values: 4-10-60-223-376-240-62-16-4-2-3
+Maximum		12.2485103607178
+Mean Absolute Deviation	0.22555351257322975
+Median		10.2185297012329
+Minimum		8.79656505584717
+Number of Rows	1000
+Standard Deviation	0.37356458390842506
+Uniqueness	17.7%
+isCandidateKey	false
+
+=== EngineSpeed===
+Annotated data profile for DSDElement: Value
+Data Profile:
+Strings use String length for value length metrics!
+# Null Values	0
+% Null Values	0.0%
+Average		44
+Basic type	Numeric
+Cardinality	124
+Data type	Integer
+Decimals	0
+Digits		3
+Histogram	Number of classes: 11, ClassRange: 12.0, Values: 247-84-117-102-101-82-105-81-53-20-8
+Maximum		132
+Mean Absolute Deviation	31
+Median		40
+Minimum		0
+Number of Rows	1000
+Standard Deviation	34.161381705077446
+Uniqueness	12.4%
+isCandidateKey	false
+
