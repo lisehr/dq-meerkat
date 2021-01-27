@@ -49,7 +49,7 @@ public class RDPConformanceParameterPlots {
 		String[] fileNames = { "Acceleration breaking or forward", "Acceleration side to side", "Acceleration up or down", "Device Voltage", "Engine RPM", "Engine Speed"};
 		// , "Engine Temperature" 
 		for (String fname : fileNames) {
-			String fpath = Constants.RESOURCES + "csv/Telematic Device Report - " + fname + ".csv";
+			String fpath = Constants.RESOURCES_FOLDER + "csv/Telematic Device Report - " + fname + ".csv";
 			ConnectorCSV conn = new ConnectorCSV(fpath, ",", "\n", fname, true);
 			Datasource ds = conn.loadSchema();
 			dss.put(ds, conn);

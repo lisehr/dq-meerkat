@@ -11,6 +11,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.influxdb.InfluxDBConnection;
+import dqm.jku.dqmeerkat.util.Constants;
 import dqm.jku.dqmeerkat.util.FileSelectionUtil;
 
 /**
@@ -24,12 +25,11 @@ import dqm.jku.dqmeerkat.util.FileSelectionUtil;
  *
  */
 public class DemoStreamingData {
-  private static final int FILEINDEX = 1;
-  private static final boolean DEBUG = false;
+  private static final boolean DEBUG = true;
 
   public static void main(String args[]) throws IOException, InterruptedException, NoSuchMethodException {
     InfluxDBConnection influx = new InfluxDBConnection();
-    ConnectorCSV conn = FileSelectionUtil.connectToCSV(FILEINDEX);
+    ConnectorCSV conn = FileSelectionUtil.connectToCSV(Constants.FileName.acceleration.getPath());
 
     if (DEBUG) {
       influx.deleteDB();

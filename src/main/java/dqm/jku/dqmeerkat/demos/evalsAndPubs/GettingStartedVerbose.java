@@ -18,7 +18,7 @@ public class GettingStartedVerbose {
 
 	public static void main(String[] args) throws IOException, NoSuchMethodException {
 		// Create Connection to CSV Connector
-		ConnectorCSV conn = new ConnectorCSV(Constants.RESOURCES + "csv/DataCoSupplyChainDataset.csv", ",", "\n", "SupplyChain");
+		ConnectorCSV conn = new ConnectorCSV(Constants.RESOURCES_FOLDER + "csv/DataCoSupplyChainDataset.csv", ",", "\n", "SupplyChain");
 	    
 	    // Init KG by loading DSD elements
 	    Datasource ds = conn.loadSchema();

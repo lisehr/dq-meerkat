@@ -3,12 +3,14 @@ package dqm.jku.dqmeerkat.demos.architecture.python;
 import java.io.IOException;
 import java.util.Iterator;
 
+import dqm.jku.dqmeerkat.connectors.ConnectorCSV;
 import dqm.jku.dqmeerkat.connectors.DSConnector;
 import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
+import dqm.jku.dqmeerkat.util.Constants;
 import dqm.jku.dqmeerkat.util.FileSelectionUtil;
 
 /**
@@ -21,7 +23,7 @@ public class TestCSVMultiColumnWithPython {
   private static final boolean DEBUG = false;
 
   public static void main(String args[]) throws IOException, NoSuchMethodException {
-    DSConnector conn = FileSelectionUtil.connectToCSV(5);
+    DSConnector conn = FileSelectionUtil.connectToCSV(Constants.FileName.popularBabyNames.getPath());
 
     Datasource ds;
     try {

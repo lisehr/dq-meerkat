@@ -37,7 +37,7 @@ public class AccessTestBlockToMiniChains {
       System.out.println("Connection established!");
       System.out.println("Start testing...");
       System.out.println("Printing results to file!");
-      System.setOut(new PrintStream(Constants.RESOURCES + "/export/benchmarking/AccessTestBlockToMiniChain_" + System.currentTimeMillis() + ".txt"));
+      System.setOut(new PrintStream(Constants.RESOURCES_FOLDER + "/export/benchmarking/AccessTestBlockToMiniChain_" + System.currentTimeMillis() + ".txt"));
     }
 
     Datasource ds = conn.loadSchema();
