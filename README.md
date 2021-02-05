@@ -1,6 +1,9 @@
 # DQ-MeeRKat
 Automating Data Quality Measurement with a Reference-Data-Profile-Annotated Knowledge Graph. In a reference to pop culture (<a href="https://www.imdb.com/title/tt1853728/" target="_blank">Tarantino: Django Unchained (2012)</a>),
 the *t* is silent. DQ-MeeRKat implements a novel method for automated and continuous data quality measurement (CDQM), which is based on the creation of <i>reference data profiles</i>. 
+The following image illustrates the overall architecture of DQ-MeeRKat. Setup/installation instructions for each component are described in the following paragraphs.
+
+<img src="./documentation/DQ-MeeRKat-architecture.png" width=60% height=60%>
 
 # History
 DQ-MeeRKat is a research project initiated by Johannes Kepler University (<a href="https://www.jku.at/en/institute-for-application-oriented-knowledge-processing" target="_blank">JKU</a>) Linz and Software Competence Center Hagenberg (<a href="https://scch.at/en/news" target="_blank">SCCH</a>). 
