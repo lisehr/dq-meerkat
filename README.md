@@ -137,3 +137,6 @@ RDFBeans (https://rdfbeans.github.io/) is a library, which allows a developer to
 * RDF4j: https://rdf4j.eclipse.org/
 * QuaIIe (usage of connectors): http://dqm.faw.jku.at/
 * Pentaho Javadoc (Plugin Development): https://javadoc.pentaho.com/kettle900/kettle-core-9.0.0.1-426-javadoc/index.html 
+
+# Used libraries
+* ELKI: https://github.com/elki-project/elki <br>used Algorithm: Local Outlier Factor: https://doi.org/10.1145/335191.335388
