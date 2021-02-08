@@ -1,9 +1,5 @@
-package dqm.jku.dqmeerkat.demos.architecture.python;
+package dqm.jku.dqmeerkat.demos.architecture.multicolumn;
 
-import java.io.IOException;
-import java.util.Iterator;
-
-import dqm.jku.dqmeerkat.connectors.ConnectorCSV;
 import dqm.jku.dqmeerkat.connectors.DSConnector;
 import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.elements.Concept;
@@ -13,17 +9,20 @@ import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.util.Constants;
 import dqm.jku.dqmeerkat.util.FileSelectionUtil;
 
+import java.io.IOException;
+import java.util.Iterator;
+
 /**
- * Test class for CSV connection with the utility source selector
+ * Test class for multicolumn metrics using the DataCoSupplyChain as data source file
  * 
  * @author optimusseptim
  *
  */
-public class TestCSVMultiColumnWithPython {
+public class TestCSVMultiColumnSupplyChain {
   private static final boolean DEBUG = false;
 
   public static void main(String args[]) throws IOException, NoSuchMethodException {
-    DSConnector conn = FileSelectionUtil.connectToCSV(Constants.FileName.popularBabyNames.getPath());
+    DSConnector conn = FileSelectionUtil.connectToCSV(Constants.FileName.dataCoSupplyChainDataset.getPath());
 
     Datasource ds;
     try {
