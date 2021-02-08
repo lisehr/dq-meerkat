@@ -153,6 +153,13 @@
 			<version>3.9.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>de.lmu.ifi.dbs.elki</groupId>
+			<artifactId>elki</artifactId>
+			<version>0.7.5</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
