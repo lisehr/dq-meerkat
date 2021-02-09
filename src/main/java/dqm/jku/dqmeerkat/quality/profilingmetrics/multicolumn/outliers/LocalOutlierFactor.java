@@ -4,7 +4,10 @@ import static dqm.jku.dqmeerkat.quality.profilingmetrics.MetricCategory.*;
 import static dqm.jku.dqmeerkat.quality.profilingmetrics.MetricTitle.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
@@ -25,13 +28,16 @@ import de.lmu.ifi.dbs.elki.utilities.optionhandling.parameterization.ListParamet
 /**
  * A multicolumn profilemetric which computes the Local Outlier Factor
  * using the Library "Elki".
- *
+ * <p>
  * The LOF algorithm itself is described in https://doi.org/10.1145/335191.335388
  *
  * @author Johannes Schrott
  */
 
 public class LocalOutlierFactor extends ProfileMetric {
+
+    final private static float FACTOR_FOR_K = 0.1F; // Must be between 0 and 1
+    final private static double OUTLIER_THRESHOLD = 1.1;
 
     public LocalOutlierFactor() {
 
@@ -52,30 +58,47 @@ public class LocalOutlierFactor extends ProfileMetric {
         DatabaseConnection dbc = new ArrayAdapterDatabaseConnection(data);
         Database database = new StaticArrayDatabase(dbc, null);
         database.initialize();
-        // TODO --> Lizenz Problem Elki: AGPL ??#
 
-        int k = data.length / 50; // TODO: muss gut ausgewählt werden (ggfs auch abhängig von der Anzahl an Elementen?
-        // wenn zu kleinen hohe Statistische Schwankungen --> mind 10 sei epmpfohlen
-        // wenn abhängig von anzahl an records, dann sind ergebnisse bei unterschiedlichen Batch-größen nicht mehr vergleichbar, da ja ein anderes k verwendet wird.
-        // k abhängig von der Anzahl
+        // Choosing: int k for the algorithm
+        // according to https://doi.org/10.1145/335191.335388 (section 6) a minimum of 10 is advised
+        // in order to achieve best results, all the values between the minimum k and the maximum k should computed
+        // and the minimum, the maximum or the mean of this results should then be taken.
+        // As Computing LOF for all this k Values would take too long, we only compute it for the minimum (k=10), the maximum (k=length of data * 10%) and the mean value of this two.
+        // In the end the LOFs of this three k Values are taken and the mean value is returned as result.
 
-        // Setup parameters for the LOF
-        ListParameterization params = new ListParameterization();
-        params.addParameter(LOF.Parameterizer.K_ID, k);
+        int kMin = 10;
+        int kMax = Math.max(10, Math.round(data.length * FACTOR_FOR_K));
+        int kMiddle = (kMin + kMax) / 2;
 
-        // Run the LOF Algorithm
-        Algorithm alg = ClassGenericsUtil.parameterizeOrAbort(LOF.class, params);
-        OutlierResult result = (OutlierResult) alg.run(database);
+        int[] kValues = {kMin, kMiddle, kMax};
 
-        // Extract the computed results to an Array List.
-        ArrayList<Double> resultList = new ArrayList<>();
-        result.getScores().forEachDouble((id, v) -> resultList.add(v)); // we don't need the results internal id!
+        // For each k compute the LOF values
+        List<ArrayList<Double>> results = Arrays.stream(kValues)
+                .parallel()
+                .mapToObj(k -> {
+                    ListParameterization params = new ListParameterization();
+                    params.addParameter(LOF.Parameterizer.K_ID, k);
+
+                    // Run the LOF Algorithm
+                    Algorithm alg = ClassGenericsUtil.parameterizeOrAbort(LOF.class, params);
+                    OutlierResult result = (OutlierResult) alg.run(database);
+
+                    // Extract the computed results to an Array List.
+                    ArrayList<Double> resultList = new ArrayList<>();
+                    result.getScores().forEachDouble((id, v) -> resultList.add(v)); // we don't need the results internal id!
+                    return resultList;
+                }).collect(Collectors.toList());
+
+        // Merge all the results from the different k-Values to one resultlist containg the mean LOF for each record
+        ArrayList<Double> resultList = results.get(0);
+        IntStream.range(0, rs.size()).parallel().forEach(i -> { // for every resultList
+            IntStream.range(1, results.size()).parallel().forEach(j -> { // do for every index
+                resultList.set(i, (results.get(j).get(i) + resultList.get(i)) / 2);
+            });
+        });
 
         this.setValueClass(ArrayList.class);
         this.setValue(resultList);
-
-        // TODO:
-        System.out.println("A limit from which it is considered an outlier has yet to be set!"); // oder sollte man automatisch die höchsten 10% als Ausreißer betrachten?
 
 
     }
@@ -86,7 +109,6 @@ public class LocalOutlierFactor extends ProfileMetric {
     }
 
 
-
     @Override
     public void update(RecordList rs) {
         this.calculation(rs, null);
@@ -94,8 +116,19 @@ public class LocalOutlierFactor extends ProfileMetric {
 
     @Override
     protected String getValueString() {
-        // TODO Auto-generated method stub
-        return this.getSimpleValueString();
+
+        ArrayList<Double> results = (ArrayList<Double>) getValue();
+
+        long noOfOutliers = results.stream().filter(d -> d > OUTLIER_THRESHOLD).count();
+        double maxLOF = results.stream().mapToDouble(Double::doubleValue).max().orElse(1);
+        double minLOF = results.stream().mapToDouble(Double::doubleValue).min().orElse(1);
+
+        return this.getSimpleValueString() +
+                "\nNo of outliers: " +
+                noOfOutliers + " of " + results.size() + " records.\n" +
+                (double) noOfOutliers / results.size() * 100 + "% are outliers\n" +
+                maxLOF + " is the maximum LOF\n" +
+                minLOF + " is the minimum LOF";
     }
 
     @Override
