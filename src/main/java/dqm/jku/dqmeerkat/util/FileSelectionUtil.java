@@ -52,7 +52,13 @@ public class FileSelectionUtil {
    * @throws IOException when an error on reading the file occurs
    */
   public static ConnectorCSV connectToCSV(String path) throws IOException {
-    return new ConnectorCSV(path, ",", "\n", FilenameUtils.removeExtension(path), true);
+    // Extracts the filename without file suffix, as this is needed for CSVConnector param "label"
+    String[] pathParts = path.split("\\\\|\\/");
+    String filename = pathParts[pathParts.length-1];
+    String[] filenameSplitted = filename.split("\\.");
+    String filenameWithoutExtension = filenameSplitted[0];
+
+    return new ConnectorCSV(path, ",", "\n", filenameWithoutExtension, true);
   }
 
   /**

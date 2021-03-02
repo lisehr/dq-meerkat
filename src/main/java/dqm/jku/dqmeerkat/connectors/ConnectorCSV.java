@@ -49,6 +49,15 @@ public class ConnectorCSV extends DSConnector {
 		this(filename, seperator, linebreak, label, false);
 	}
 
+
+	/**
+	 *
+	 * @param filename Path of the CSV file
+	 * @param seperator String that contains the used column seperator in the CSV
+	 * @param linebreak String that contains the used linebreak used in the CSV
+	 * @param label Is used for the URI
+	 * @param removeQuotes whether qoutes of the values in the CSV should be removed
+	 */
 	public ConnectorCSV(String filename, String seperator, String linebreak, String label, boolean removeQuotes) {
 		super();
 		this.filename = filename;

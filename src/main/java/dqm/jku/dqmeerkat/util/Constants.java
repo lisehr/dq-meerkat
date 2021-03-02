@@ -8,6 +8,7 @@ public class Constants {
 	public static final boolean PRINT_WORKING_MESSAGES = false;
 	public static final boolean ENABLE_JEP = false; // if true JEP (Java Embedded Python) is activated (please make sure it is working and installed when setting this to true!)
 
+	// Todo: WN_HOME can be removed?
 	public static final String WN_HOME = "src/resources/wordnet"; // location of wordnet
 
 

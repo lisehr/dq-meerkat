@@ -25,10 +25,11 @@ import dqm.jku.dqmeerkat.util.FileSelectionUtil;
  *
  */
 public class DemoStreamingData {
-  private static final boolean DEBUG = true;
+  private static final boolean DEBUG = false;
 
   public static void main(String args[]) throws IOException, InterruptedException, NoSuchMethodException {
     InfluxDBConnection influx = new InfluxDBConnection();
+
     ConnectorCSV conn = FileSelectionUtil.connectToCSV(Constants.FileName.acceleration.getPath());
 
     if (DEBUG) {
@@ -39,6 +40,8 @@ public class DemoStreamingData {
     Concept testCon = null;
 
     Datasource ds = conn.loadSchema();
+
+
     for (Concept c : ds.getConcepts()) {
       RecordList rs = conn.getPartialRecordList(c, 0, 5000);
       for (Attribute a : c.getSortedAttributes()) {
