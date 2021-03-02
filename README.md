@@ -35,7 +35,11 @@ Afterwards, in order to execute the program, you need to start influxDB and Graf
 Run on Linux (Mint): <br/>
 ```startLinuxEnv.sh``` (for starting InfluxDB and Grafana in one script)<br/>
 
-Windows users have to start executables provided in the following sections.
+On Windows:<br>
+`startWinEnv.bat` (for starting InfluxDB and Grafana in one script)<br/>
+
+
+Alternatively, Windows users as well as Linux users can also start the executables provided in the following sections manually.
 
 ### InfluxDB
 A common choice for storing CDQM results are time-series DBs like InfluxDB, which provides a Java API. Since the Java API was not working by the time of the creation of the project, we replaced it by the browser version. DQ-MeeRKat does not offer an embedded mode (like Derby or GraphDB), but runs InfluxDB outside the Java runtime to persist CDQM results over time. 
