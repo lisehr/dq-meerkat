@@ -392,6 +392,36 @@
     <orderEntry type="library" name="Maven: org.eclipse.core:commands:3.3.0-I20070605-0010" level="project" />
     <orderEntry type="library" name="Maven: jfree:jfreechart:1.0.13" level="project" />
     <orderEntry type="library" name="Maven: black.ninia:jep:3.9.0" level="project" />
+    <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki:0.7.5" level="project" />
+    <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-clustering:0.7.5" level="project" />
+    <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-core:0.7.5" level="project" />
+    <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-core-parallel:0.7.5" level="project" />
+    <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-core-math:0.7.5" level="project" />
+    <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-core-api:0.7.5" level="project" />
+    <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-itemsets:0.7.5" level="project" />
+    <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-classification:0.7.5" level="project" />
+    <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-timeseries:0.7.5" level="project" />
+    <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-outlier:0.7.5" level="project" />
+    <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-data-generator:0.7.5" level="project" />
+    <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-index-rtree:0.7.5" level="project" />
+    <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-index:0.7.5" level="project" />
+    <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-index-mtree:0.7.5" level="project" />
+    <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-index-lsh:0.7.5" level="project" />
+    <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-index-various:0.7.5" level="project" />
+    <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-precomputed:0.7.5" level="project" />
+    <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-index-preprocessed:0.7.5" level="project" />
+    <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-database:0.7.5" level="project" />
+    <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-input:0.7.5" level="project" />
+    <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-core-distance:0.7.5" level="project" />
+    <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-core-data:0.7.5" level="project" />
+    <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-persistent:0.7.5" level="project" />
+    <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-core-util:0.7.5" level="project" />
+    <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-logging:0.7.5" level="project" />
+    <orderEntry type="library" name="Maven: net.jafama:jafama:2.3.2" level="project" />
+    <orderEntry type="library" name="Maven: it.unimi.dsi:fastutil:8.5.2" level="project" />
+    <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-geo:0.7.5" level="project" />
+    <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-core-dbids-int:0.7.5" level="project" />
+    <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-core-dbids:0.7.5" level="project" />
     <orderEntry type="library" name="Maven: org.neo4j.driver:neo4j-java-driver:4.1.0" level="project" />
     <orderEntry type="library" name="Maven: org.reactivestreams:reactive-streams:1.0.3" level="project" />
     <orderEntry type="library" name="Maven: org.neo4j:neo4j-graphdb-api:3.4.0" level="project" />

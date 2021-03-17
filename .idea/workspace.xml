@@ -36,28 +36,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b3839f9-04d1-40c4-b6b7-ec83830e76bb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__black_ninia_jep_3_9_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingmetrics/graphmetrics/DistinctEntries.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingmetrics/graphmetrics/GraphType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingmetrics/graphmetrics/MaximumEntry.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingmetrics/graphmetrics/MedianEntry.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingmetrics/graphmetrics/MinimumEntry.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingmetrics/graphmetrics/NumEntries.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_3_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_12_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_0_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_classification_0_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_clustering_0_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_core_0_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_core_api_0_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_core_data_0_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_core_dbids_0_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_core_dbids_int_0_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_core_distance_0_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_core_math_0_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_core_parallel_0_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_core_util_0_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_data_generator_0_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_database_0_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_geo_0_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_index_0_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_index_lsh_0_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_index_mtree_0_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_index_preprocessed_0_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_index_rtree_0_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_index_various_0_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_input_0_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_itemsets_0_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_logging_0_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_outlier_0_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_persistent_0_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_precomputed_0_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_timeseries_0_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__it_unimi_dsi_fastutil_8_5_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_jafama_jafama_2_3_2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/connectors/ConnectorNeo4J.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/connectors/ConnectorNeo4J.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/demos/kathi/TestNeo4j.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/demos/kathi/TestNeo4j.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/dsd/elements/DSDElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/dsd/elements/DSDElement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/dsd/records/Record.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/dsd/records/Record.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/dsd/records/RecordList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/dsd/records/RecordList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/DataProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/DataProfile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingmetrics/MetricCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingmetrics/MetricCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/block-daq/v16/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/block-daq/v16/.suo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/slnx.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/slnx.sqlite" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingmetrics/MetricTitle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingmetrics/MetricTitle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingmetrics/ProfileMetric.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingmetrics/ProfileMetric.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/util/converters/DataTypeConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/util/converters/DataTypeConverter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trustkg.iml" beforeDir="false" afterPath="$PROJECT_DIR$/trustkg.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -157,6 +169,7 @@
       <workItem from="1615546586579" duration="1198000" />
       <workItem from="1615807511314" duration="21825000" />
       <workItem from="1615899198854" duration="7852000" />
+      <workItem from="1615985820063" duration="307000" />
     </task>
     <servers />
   </component>
@@ -197,25 +210,25 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="419" y="289" key="FileChooserDialogImpl/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1613241945258" />
-    <state width="1677" height="385" key="GridCell.Tab.0.bottom" timestamp="1615914990340">
-      <screen x="1920" y="39" width="1720" height="1040" />
+    <state width="1622" height="330" key="GridCell.Tab.0.bottom" timestamp="1615986127679">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="226" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1615838155608" />
+    <state width="1622" height="330" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1615986127679" />
     <state width="1677" height="385" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.39.1720.1040@1920.39.1720.1040" timestamp="1615914990340" />
-    <state width="1677" height="385" key="GridCell.Tab.0.center" timestamp="1615914990340">
-      <screen x="1920" y="39" width="1720" height="1040" />
+    <state width="1622" height="330" key="GridCell.Tab.0.center" timestamp="1615986127679">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="226" key="GridCell.Tab.0.center/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1615838155608" />
+    <state width="1622" height="330" key="GridCell.Tab.0.center/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1615986127679" />
     <state width="1677" height="385" key="GridCell.Tab.0.center/0.0.1920.1040/1920.39.1720.1040@1920.39.1720.1040" timestamp="1615914990340" />
-    <state width="1677" height="385" key="GridCell.Tab.0.left" timestamp="1615914990340">
-      <screen x="1920" y="39" width="1720" height="1040" />
+    <state width="1622" height="330" key="GridCell.Tab.0.left" timestamp="1615986127679">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="226" key="GridCell.Tab.0.left/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1615838155608" />
+    <state width="1622" height="330" key="GridCell.Tab.0.left/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1615986127679" />
     <state width="1677" height="385" key="GridCell.Tab.0.left/0.0.1920.1040/1920.39.1720.1040@1920.39.1720.1040" timestamp="1615914990340" />
-    <state width="1677" height="385" key="GridCell.Tab.0.right" timestamp="1615914990340">
-      <screen x="1920" y="39" width="1720" height="1040" />
+    <state width="1622" height="330" key="GridCell.Tab.0.right" timestamp="1615986127679">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="226" key="GridCell.Tab.0.right/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1615838155608" />
+    <state width="1622" height="330" key="GridCell.Tab.0.right/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1615986127679" />
     <state width="1677" height="385" key="GridCell.Tab.0.right/0.0.1920.1040/1920.39.1720.1040@1920.39.1720.1040" timestamp="1615914990340" />
     <state width="1877" height="467" key="GridCell.Tab.1.bottom" timestamp="1615838155605">
       <screen x="0" y="0" width="1920" height="1040" />
