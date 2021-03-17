@@ -73,20 +73,6 @@ public class Record implements Comparable<Record> {
 		}
 		return sb.substring(0, sb.length() - 3);
 	}
-	
-	public String toStringNeo4J() {
-		StringBuilder sb = new StringBuilder();
-		
-		for(Map.Entry<Attribute, Object> entry : values.entrySet()) {
-			String att = entry.getKey().toString();
-			String prop = entry.getValue().toString();
-			
-			sb.append("Attribute: " + att + " - Properties: " + prop);
-			sb.append(" | ");
-		}
-	
-		return sb.toString();
-	}
 
 	@Override
 	public int compareTo(Record other) {
@@ -147,5 +133,16 @@ public class Record implements Comparable<Record> {
 
 	public AttributeSet getFields() {
 		return new AttributeSet(values.keySet());
+	}
+
+	public Object getValue(Attribute a) {
+		Object o = values.get(a);
+		int i = 0;
+
+		return o;
+	}
+
+	public int getNumberValues() {
+		return values.getSize();
 	}
 }

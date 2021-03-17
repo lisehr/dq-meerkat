@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import dqm.jku.dqmeerkat.dsd.elements.Attribute;
+import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.util.AttributeSet;
+import dqm.jku.dqmeerkat.util.converters.DataTypeConverter;
 
 
 public class RecordList implements Iterable<Record> {
@@ -58,4 +61,20 @@ public class RecordList implements Iterable<Record> {
   	if (this.isEmpty()) return null;
   	return this.records.get(0).getFields();  
   }
+
+  public RecordList getValues(Concept c, String label) {
+    RecordList rl = new RecordList();
+
+    for (Record r : records) {
+      Attribute a = r.getFields().get(label);
+      Object o = r.getValue(a);
+      if(o != null) {
+        Record rec = new Record(c);
+        rec.addValueNeo4J(a, o);
+        rl.addRecord(rec);
+      }
+    }
+    return rl;
+  }
 }
+

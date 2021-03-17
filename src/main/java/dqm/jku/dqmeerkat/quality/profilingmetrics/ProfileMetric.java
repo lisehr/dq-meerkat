@@ -3,6 +3,7 @@ package dqm.jku.dqmeerkat.quality.profilingmetrics;
 import java.util.List;
 import java.util.Objects;
 
+import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;

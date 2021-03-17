@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.time.Year;
 import java.util.*;
 
-import dqm.jku.trustkg.dsd.elements.ReferenceAssociation;
+import dqm.jku.dqmeerkat.dsd.elements.ReferenceAssociation;
 import org.apache.commons.lang.StringUtils;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;

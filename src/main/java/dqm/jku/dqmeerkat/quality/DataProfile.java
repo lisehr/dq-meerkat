@@ -3,11 +3,10 @@ package dqm.jku.dqmeerkat.quality;
 import static dqm.jku.dqmeerkat.quality.profilingmetrics.MetricTitle.*;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
+import dqm.jku.dqmeerkat.dsd.elements.*;
+import dqm.jku.dqmeerkat.quality.profilingmetrics.graphmetrics.*;
 import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFContainer;
@@ -16,9 +15,6 @@ import org.cyberborean.rdfbeans.annotations.RDFSubject;
 import org.influxdb.dto.Point;
 import org.influxdb.dto.Point.Builder;
 
-import dqm.jku.dqmeerkat.dsd.elements.Attribute;
-import dqm.jku.dqmeerkat.dsd.elements.Concept;
-import dqm.jku.dqmeerkat.dsd.elements.DSDElement;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.profilingmetrics.MetricCategory;
@@ -37,6 +33,11 @@ import dqm.jku.dqmeerkat.quality.profilingmetrics.singlecolumn.histogram.*;
 import dqm.jku.dqmeerkat.quality.profilingmetrics.singlecolumn.pattern.PatternRecognition;
 import dqm.jku.dqmeerkat.util.Miscellaneous.DBType;
 import dqm.jku.dqmeerkat.util.numericvals.NumberComparator;
+import org.w3c.dom.Attr;
+
+import javax.sql.DataSource;
+import javax.swing.text.html.Option;
+import javax.xml.crypto.Data;
 
 /**
  * Class for creating the data structure of a DataProfile. A DataProfile (DP)
@@ -59,26 +60,54 @@ public class DataProfile {
 	public DataProfile(RecordList rs, DSDElement d) throws NoSuchMethodException {
 		this.elem = d;
 		this.uri = elem.getURI() + "/profile";
-		// TODO: distinguish between Neo4J and relational DB
-		createDataProfileSkeletonRDB();
-		calculateReferenceDataProfile(rs);
+
+		Optional<Datasource> ds = DSDElement.getAllDatasources().stream().findFirst();
+
+		if(ds.isPresent() && ds.get().getDBType().equals(DBType.NEO4J)) {
+			createDataProfileSkeletonNeo4j();
+			calculateReferenceDataProfileNeo4j(rs);
+		} else {
+			createDataProfileSkeletonRDB();
+			calculateReferenceDataProfile(rs);
+		}
 	}
 
 	public DataProfile(RecordList records, DSDElement d, String filePath) throws NoSuchMethodException {
 		this.elem = d;
 		this.uri = elem.getURI() + "/profile";
-		// TODO: distinguish between Neo4J and relational DB
-		createDataProfileSkeletonRDB(filePath);
-		calculateReferenceDataProfile(records);
+
+		Optional<Datasource> ds = DSDElement.getAllDatasources().stream().findFirst();
+
+		if (ds.isPresent() && ds.get().getDBType().equals(DBType.NEO4J)) {
+			createDataProfileSkeletonNeo4j();
+			calculateReferenceDataProfileNeo4j(records);
+		} else {
+			createDataProfileSkeletonRDB(filePath);
+			calculateReferenceDataProfile(records);
+		}
 	}
+
+	public DataProfile(RecordList rs, DSDElement d, Attribute a) throws NoSuchMethodException {
+		this.elem = d;
+		this.uri = elem.getURI() + "/profile";
+
+		Optional<Datasource> ds = DSDElement.getAllDatasources().stream().findFirst();
+
+		if(ds.isPresent() && ds.get().getDBType().equals(DBType.NEO4J)) {
+			createDataProfileSkeletonNeo4j();
+			calculateReferenceDataProfileNeo4j(rs);
+		} else {
+			createDataProfileSkeletonRDB();
+			calculateReferenceDataProfile(rs);
+		}
+	}
+
 
 	/**
 	 * calculates an initial data profile based on the values inserted in the
 	 * reference profile
-	 * 
+	 *
 	 * @param rl the list of records used for calculation
-	 * @param d  the dsd element to be annotated (currently only Attribute for
-	 *           single column metrics)
 	 * @throws NoSuchMethodException
 	 */
 	private void calculateReferenceDataProfile(RecordList rl) throws NoSuchMethodException {
@@ -88,7 +117,7 @@ public class DataProfile {
 
 	/**
 	 * Gets the URI
-	 * 
+	 *
 	 * @return uri
 	 */
 	@RDFSubject
@@ -98,7 +127,7 @@ public class DataProfile {
 
 	/**
 	 * Sets the URI (security threat but used by rdfbeans)
-	 * 
+	 *
 	 * @param uri
 	 */
 	public void setURI(String uri) {
@@ -107,7 +136,7 @@ public class DataProfile {
 
 	/**
 	 * Helper method for calculating the single column values for the profile
-	 * 
+	 *
 	 * @param rl the recordlist for measuring
 	 * @throws NoSuchMethodException
 	 */
@@ -118,7 +147,7 @@ public class DataProfile {
 			else p.calculationNumeric(l, p.getValue());
 		}
 	}
-	
+
 	private void calculateMultiColumn(RecordList rl) {
 		for (ProfileMetric p : metrics) {
 			p.calculation(rl, p.getValue());
@@ -128,10 +157,10 @@ public class DataProfile {
 	/**
 	 * Helper method to determine if a record list calculation is needed (i.e. a
 	 * list of numeric values can lead to incorrect metrics)
-	 * 
+	 *
 	 * @param p the profile metric to check
 	 * @return true, if the profile metric needs to be calculated with a record
-	 *         list, false if not
+	 * list, false if not
 	 */
 	private boolean needsRecordListCalc(ProfileMetric p) {
 		return p.getTitle().equals(unique) || p.getTitle().equals(keyCand) || p.getTitle().equals(nullValP) || p.getTitle().equals(nullVal) || p.getTitle().equals(numrows) || p.getTitle().equals(card) || p.getTitle().equals(hist);
@@ -139,7 +168,7 @@ public class DataProfile {
 
 	/**
 	 * Helper method for creating a list of numeric values
-	 * 
+	 *
 	 * @param rl the record list for measuring
 	 * @return list of numeric values of the records
 	 */
@@ -149,7 +178,8 @@ public class DataProfile {
 		for (Record r : rl) {
 			Number field = null;
 			Class<?> clazz = a.getDataType();
-			if ((String.class.isAssignableFrom(clazz) || Date.class.isAssignableFrom(clazz)) && r.getField(a) != null) field = r.getField(a).toString().length();
+			if ((String.class.isAssignableFrom(clazz) || Date.class.isAssignableFrom(clazz)) && r.getField(a) != null)
+				field = r.getField(a).toString().length();
 			else if (a.getConcept().getDatasource().getDBType().equals(DBType.CSV)) field = (Number) r.getField(a);
 			else if (a.getConcept().getDatasource().getDBType().equals(DBType.MYSQL) || a.getConcept().getDatasource().getDBType().equals(DBType.PENTAHOETL)) {
 				if (Number.class.isAssignableFrom(clazz)) field = (Number) r.getField(a);
@@ -238,8 +268,10 @@ public class DataProfile {
 	 */
 	public void printProfile() {
 		System.out.println("Data Profile:");
-		if (metrics.stream().anyMatch(p -> p.getValueClass().equals(String.class))) System.out.println("Strings use String length for value length metrics!");
-		if (metrics.stream().anyMatch(p -> p.getCat().equals(MetricCategory.out))) System.out.println("Outlier Detection shows all record numbers that contain outliers!");
+		if (metrics.stream().anyMatch(p -> p.getValueClass().equals(String.class)))
+			System.out.println("Strings use String length for value length metrics!");
+		if (metrics.stream().anyMatch(p -> p.getCat().equals(MetricCategory.out)))
+			System.out.println("Outlier Detection shows all record numbers that contain outliers!");
 		SortedSet<ProfileMetric> metricSorted = new TreeSet<>();
 		metricSorted.addAll(metrics);
 		for (ProfileMetric p : metricSorted) {
@@ -272,7 +304,7 @@ public class DataProfile {
 
 	/**
 	 * Method for getting the set of metrics
-	 * 
+	 *
 	 * @return set of metrics
 	 */
 	@RDF("dsd:includesMetric")
@@ -280,10 +312,10 @@ public class DataProfile {
 	public List<ProfileMetric> getMetrics() {
 		return metrics;
 	}
-	
+
 	/**
 	 * Method for getting the set of metrics
-	 * 
+	 *
 	 * @return set of selected metrics
 	 */
 	public List<ProfileMetric> getNonDependentMetrics() {
@@ -292,7 +324,7 @@ public class DataProfile {
 		// No number of rows and metrics that depend on the num rows (RDP size != DP size)
 		mlist.add(this.getMetric(MetricTitle.card));
 		mlist.add(this.getMetric(MetricTitle.nullVal));
-		
+
 		// Data type info
 		mlist.add(this.getMetric(MetricTitle.bt));
 		mlist.add(this.getMetric(MetricTitle.dt));
@@ -304,22 +336,22 @@ public class DataProfile {
 		mlist.add(this.getMetric(MetricTitle.mad));
 		mlist.add(this.getMetric(MetricTitle.dig));
 		mlist.add(this.getMetric(MetricTitle.dec));
-		if(this.getMetric(MetricTitle.pattern) != null) {
+		if (this.getMetric(MetricTitle.pattern) != null) {
 			mlist.add(this.getMetric(MetricTitle.pattern));
 		}
-		
+
 		// Histogram
 		mlist.add(this.getMetric(MetricTitle.hist));
-		
+
 		// Dependencies
 		mlist.add(this.getMetric(MetricTitle.keyCand));
-		
+
 		return mlist;
 	}
-	
+
 	/**
 	 * Method for getting all metrics that are useful for single records (e.g., in a data stream) and do not rely on any kind of aggregation
-	 * 
+	 *
 	 * @return set of selected metrics
 	 */
 	public List<ProfileMetric> getNonAggregateMetrics() {
@@ -327,27 +359,27 @@ public class DataProfile {
 		// Cardinalities
 		// No number of rows and metrics that depend on the num rows (RDP size != DP size)
 		mlist.add(this.getMetric(MetricTitle.nullVal));
-		
+
 		// Data type info
 		mlist.add(this.getMetric(MetricTitle.bt));
 		mlist.add(this.getMetric(MetricTitle.dt));
 		mlist.add(this.getMetric(MetricTitle.min));
 		mlist.add(this.getMetric(MetricTitle.max));
-		
+
 		mlist.add(this.getMetric(MetricTitle.dig));
-		if(this.getMetric(MetricTitle.pattern) != null) {
+		if (this.getMetric(MetricTitle.pattern) != null) {
 			mlist.add(this.getMetric(MetricTitle.pattern));
 		}
-		
+
 		// Dependencies
 		mlist.add(this.getMetric(MetricTitle.keyCand));
-		
+
 		return mlist;
 	}
 
 	/**
 	 * Sets the metrics (security threat but used by rdfbeans)
-	 * 
+	 *
 	 * @param metrics the metrics to set
 	 */
 	public void setMetrics(List<ProfileMetric> metrics) {
@@ -356,7 +388,7 @@ public class DataProfile {
 
 	/**
 	 * Method for adding a metric via a data profile object
-	 * 
+	 *
 	 * @param m the metric to be added
 	 */
 	public void addMetric(ProfileMetric m) {
@@ -365,8 +397,8 @@ public class DataProfile {
 
 	/**
 	 * Method for getting a specific ProfileMetric with its corresponding label.
-	 * 
-	 * @param label the label to compare with the profile metrics
+	 *
+	 * @param title the label to compare with the profile metrics
 	 * @return ProfileMetric if found, null otherwise
 	 */
 	public ProfileMetric getMetric(MetricTitle title) {
@@ -378,7 +410,7 @@ public class DataProfile {
 
 	/**
 	 * Sets the dsd element (security threat but used by rdfbeans)
-	 * 
+	 *
 	 * @param elem the elem to set
 	 */
 	public void setElem(DSDElement elem) {
@@ -387,7 +419,7 @@ public class DataProfile {
 
 	/**
 	 * Gets the reference dsd element, used for calculation
-	 * 
+	 *
 	 * @return the reference element
 	 */
 	@RDF("dsd:annotatedTo")
@@ -397,7 +429,7 @@ public class DataProfile {
 
 	/**
 	 * Method for creating a point of measure for InfluxDB.
-	 * 
+	 *
 	 * @param measure the builder for a measurement
 	 * @return a measuring point for insertion into InfluxDB
 	 */
@@ -413,16 +445,20 @@ public class DataProfile {
 	/**
 	 * Helper method for adding the correct measuring value (including its data
 	 * type) to the builder
-	 * 
+	 *
 	 * @param p       the profile metric to add
 	 * @param measure the builder for a measurement
 	 */
 	private void addMeasuringValue(ProfileMetric p, Builder measure) {
 		try {
-			if (p.getValue() == null || p.getLabel().equals(pattern.getLabel())) measure.addField(p.getLabel(), 0); // TODO: replace 0 with NaN, when hitting v2.0 of influxdb
-			else if (p.getValueClass().equals(Long.class)) measure.addField(p.getLabel(),((Number) p.getNumericVal()).longValue());
-			else if (p.getValueClass().equals(Double.class) || p.getLabel().equals(sd.getLabel())) measure.addField(p.getLabel(), ((Number) p.getNumericVal()).doubleValue());
-			else if (p.getValueClass().equals(String.class) && (p.getLabel().equals(bt.getLabel()) || p.getLabel().equals(dt.getLabel()))) measure.addField(p.getLabel(), (String) p.getValue());
+			if (p.getValue() == null || p.getLabel().equals(pattern.getLabel()))
+				measure.addField(p.getLabel(), 0); // TODO: replace 0 with NaN, when hitting v2.0 of influxdb
+			else if (p.getValueClass().equals(Long.class))
+				measure.addField(p.getLabel(), ((Number) p.getNumericVal()).longValue());
+			else if (p.getValueClass().equals(Double.class) || p.getLabel().equals(sd.getLabel()))
+				measure.addField(p.getLabel(), ((Number) p.getNumericVal()).doubleValue());
+			else if (p.getValueClass().equals(String.class) && (p.getLabel().equals(bt.getLabel()) || p.getLabel().equals(dt.getLabel())))
+				measure.addField(p.getLabel(), (String) p.getValue());
 			else if (p.getValueClass().equals(Boolean.class)) measure.addField(p.getLabel(), (boolean) p.getValue());
 			else measure.addField(p.getLabel(), ((Number) p.getNumericVal()).intValue());
 		} catch (Exception e) {
@@ -433,8 +469,50 @@ public class DataProfile {
 
 	public boolean profileMetricIsNumeric(ProfileMetric profileMetric) {
 		return profileMetric.getTitle() == avg || profileMetric.getTitle() == sd || profileMetric.getTitle() == max || profileMetric.getTitle() == min || profileMetric.getTitle() == med
-		    || profileMetric.getTitle() == nullValP || profileMetric.getTitle() == unique;
+				|| profileMetric.getTitle() == nullValP || profileMetric.getTitle() == unique;
 
 	}
+
+	// ------------------- Graph Data Profiling ------------------------
+
+	public void createDataProfileSkeletonNeo4j() {
+		// distinguish between concept, attribute and datasource??
+		if (elem instanceof Concept) {
+			Concept c = (Concept) elem;
+
+			ReferenceAssociation association = (ReferenceAssociation) c.getDatasource().getAssociation("Ref/" + c.getLabelOriginal());
+			String neoType = association.getNeo4JType();
+
+			ProfileMetric size = new NumEntries(this);
+			metrics.add(size);
+			ProfileMetric distinctEntries = new DistinctEntries(this);
+			metrics.add(distinctEntries);
+			ProfileMetric type = new GraphType(this);
+			metrics.add(type);
+			ProfileMetric maximum = new MaximumEntry(this);
+			metrics.add(maximum);
+			ProfileMetric minimum = new MinimumEntry(this);
+			metrics.add(minimum);
+			ProfileMetric median = new MedianEntry(this);
+			metrics.add(median);
+
+		}
+	}
+
+	private void calculateReferenceDataProfileNeo4j(RecordList rl) throws NoSuchMethodException {
+		// distinguish between multi column and single column profiling
+
+		if(elem instanceof Concept) {
+			Concept c = (Concept) elem;
+			calculateSingleColumnNeo4j(rl);
+		}
+	}
+
+	private void calculateSingleColumnNeo4j(RecordList rl) throws  NoSuchMethodException {
+		for (ProfileMetric p : metrics) {
+			p.calculation(rl, p.getValue());
+		}
+	}
+
 
 }

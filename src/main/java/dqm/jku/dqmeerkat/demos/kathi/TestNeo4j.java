@@ -1,10 +1,11 @@
-package dqm.jku.trustkg.demos.kathi;
+package dqm.jku.dqmeerkat.demos.kathi;
 
-import dqm.jku.trustkg.connectors.ConnectorNeo4J;
-import dqm.jku.trustkg.dsd.elements.Attribute;
-import dqm.jku.trustkg.dsd.elements.Concept;
-import dqm.jku.trustkg.dsd.elements.Datasource;
-import dqm.jku.trustkg.dsd.records.RecordList;
+import dqm.jku.dqmeerkat.connectors.ConnectorNeo4J;
+import dqm.jku.dqmeerkat.dsd.elements.Attribute;
+import dqm.jku.dqmeerkat.dsd.elements.Concept;
+import dqm.jku.dqmeerkat.dsd.elements.Datasource;
+import dqm.jku.dqmeerkat.dsd.records.Record;
+import dqm.jku.dqmeerkat.dsd.records.RecordList;
 
 public class TestNeo4j {
 
@@ -21,31 +22,41 @@ public class TestNeo4j {
 	    	System.out.println("Schema: ");
 	    	ds.printStructure();
 
+	    	/*
 			for (Concept c : ds.getConcepts()) {
 				RecordList rs = conn.getRecordList(c);
-				for (Attribute a : c.getSortedAttributes()) {
-					a.annotateProfile(rs);
-					System.out.println("Get all Records Attribute a: " + a.toString());
-					a.printAnnotatedProfile();
+
+				for(Attribute a : c.getSortedAttributes()) {
+					RecordList newList = rs.getValues(c, a.getLabel());
+
+					if(newList.size() > 0) {
+						c.annotateProfile(newList);
+					} else {
+						c.emptyDataProfile();
+					}
+					c.printAnnotatedProfileNeo4J(a);
+
 				}
 			}
+			*/
 
 			for (Concept c : ds.getConcepts()) {
 				RecordList rs = conn.getDegreeDistribution(c);
 				if(rs != null) {
 					for (Attribute a : c.getSortedAttributes()) {
-						a.annotateProfile(rs);
-						System.out.println("Get Node Degree Attribute a: " + a.toString());
-						a.printAnnotatedProfile();
+						RecordList newList = rs.getValues(c, a.getLabel());
+
+						if(newList.size() > 0) {
+							c.annotateProfile(newList);
+						} else {
+							c.emptyDataProfile();
+						}
+						c.printAnnotatedProfileNeo4J(a);
 					}
 				}
 			}
 
-	    	System.out.println("Number of Nodes: " + conn.getNrRecords(ds.getConcept(label)));
-	    	System.out.println("Number of Relationships: " + conn.getNrRelationships(ds.getConcept(label)));
-	    	System.out.println("Graph has unconnected nodes: " + conn.isGraphConnected(ds.getConcept(label)));
 
-	    	
 		} catch (NoSuchMethodException e) {
 			e.printStackTrace();
 		} finally {

@@ -1,4 +1,4 @@
-package dqm.jku.trustkg.connectors;
+package dqm.jku.dqmeerkat.connectors;
 
 import java.lang.reflect.Field;
 import java.text.ParseException;
@@ -6,9 +6,8 @@ import java.util.*;
 
 import com.google.gson.Gson;
 
-import dqm.jku.trustkg.dsd.elements.*;
-import dqm.jku.trustkg.quality.profilingmetrics.singlecolumn.datatypeinfo.DataType;
-import dqm.jku.trustkg.util.DataTypeConverter;
+import dqm.jku.dqmeerkat.dsd.elements.*;
+import dqm.jku.dqmeerkat.util.converters.DataTypeConverter;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
@@ -18,12 +17,13 @@ import org.neo4j.driver.GraphDatabase;
 import org.neo4j.driver.Session;
 import org.neo4j.driver.Record;
 import org.neo4j.driver.Result;
-
-import dqm.jku.trustkg.dsd.DSDFactory;
-import dqm.jku.trustkg.dsd.records.RecordList;
-import dqm.jku.trustkg.util.Constants;
-import dqm.jku.trustkg.util.Miscellaneous.DBType;
 import org.neo4j.driver.types.Relationship;
+
+import dqm.jku.dqmeerkat.dsd.DSDFactory;
+import dqm.jku.dqmeerkat.dsd.records.RecordList;
+import dqm.jku.dqmeerkat.util.Constants;
+import dqm.jku.dqmeerkat.util.Miscellaneous.DBType;
+
 
 /**
  * Connector for neo4j databases
@@ -74,7 +74,7 @@ public class ConnectorNeo4J extends DSConnector {
 	}
 
 	@Override
-	public Iterator<dqm.jku.trustkg.dsd.records.Record> getRecords(Concept concept) {
+	public Iterator<dqm.jku.dqmeerkat.dsd.records.Record> getRecords(Concept concept) {
 		RecordList result = new RecordList();
 		try {
 			result = getAllNodes(concept);
@@ -87,7 +87,7 @@ public class ConnectorNeo4J extends DSConnector {
 
 	@Override
 	public RecordList getRecordList(Concept concept) {
-		Iterator<dqm.jku.trustkg.dsd.records.Record> iter = getRecords(concept);
+		Iterator<dqm.jku.dqmeerkat.dsd.records.Record> iter = getRecords(concept);
 		RecordList rs = new RecordList();
 		while (iter.hasNext()) {
 			rs.addRecord(iter.next());
@@ -233,7 +233,7 @@ public class ConnectorNeo4J extends DSConnector {
 			List<Record> records = result.list();
 
 			for(Record r : records) {
-				dqm.jku.trustkg.dsd.records.Record rec = new dqm.jku.trustkg.dsd.records.Record(concept);
+				dqm.jku.dqmeerkat.dsd.records.Record rec = new dqm.jku.dqmeerkat.dsd.records.Record(concept);
 
 				for (Relationship item : r.values().get(0).asPath().relationships()) {
 					Map<String, Object> map = item.asMap();
@@ -242,7 +242,9 @@ public class ConnectorNeo4J extends DSConnector {
 						rec.addValueNeo4J(a, DataTypeConverter.getNeo4JRecordvalue(a, entry.getValue()));
 					}
 				}
-				list.addRecord(rec);
+				if (rec.getNumberValues() > 0) {
+					list.addRecord(rec);
+				}
 			}
 		} else if(type.equals("node")) {
 			String query = cypher_get_nodes_by_type;
@@ -251,7 +253,7 @@ public class ConnectorNeo4J extends DSConnector {
 			List<Record> records = result.list();
 
 			for(Record r : records) {
-				dqm.jku.trustkg.dsd.records.Record rec = new dqm.jku.trustkg.dsd.records.Record(concept);
+				dqm.jku.dqmeerkat.dsd.records.Record rec = new dqm.jku.dqmeerkat.dsd.records.Record(concept);
 				Map<String, Object> o = r.values().get(0).asNode().asMap();
 
 				for(Map.Entry<String, Object> entry : o.entrySet()) {
@@ -311,7 +313,7 @@ public class ConnectorNeo4J extends DSConnector {
 			nodeDegree.setDataType(Integer.class);
 			nodeDegree.setNodeDegree(Integer.parseInt(counter.toString()));
 
-			dqm.jku.trustkg.dsd.records.Record rec = new dqm.jku.trustkg.dsd.records.Record(c);
+			dqm.jku.dqmeerkat.dsd.records.Record rec = new dqm.jku.dqmeerkat.dsd.records.Record(c);
 			rec.addValueNeo4J(nodeDegree, Integer.parseInt(counter.toString()));
 
 			for(Map.Entry<String, Object> entry : o.entrySet()) {

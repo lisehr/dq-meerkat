@@ -36,7 +36,16 @@ public enum MetricTitle {
   histCR("Class range"),
   histVal("Values"),
   isoF("Isolation Forest"),
-  isoFP("Isolation Forest Outlier %");
+  isoFP("Isolation Forest Outlier %"),
+
+  // graph metrics
+  numEntries("Number of Entries"),
+  distinctEntries("Number of Distinct Entries"),
+  graphType ("Type of the Graph Element"),
+  maximum ("Maximum Graph Element"),
+  minimum ("Minimum Graph Element"),
+  median ("Median Graph Element");
+
   
   private String label; // the label of the title (string representation)
   @SuppressWarnings("unused")

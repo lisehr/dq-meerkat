@@ -16,6 +16,7 @@ import org.influxdb.dto.Point.Builder;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.influxdb.InfluxDBConnection;
 import dqm.jku.dqmeerkat.quality.DataProfile;
+import org.w3c.dom.Attr;
 
 @RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
 @RDFBean("dsd:DSDElement")
@@ -215,5 +216,18 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
     if (profile.getMetrics().stream().allMatch(m -> (m.getValue() == null))) return;
     Builder measure = Point.measurement(getURI()).time(System.currentTimeMillis(), TimeUnit.MILLISECONDS);
     connection.write(profile.createMeasuringPoint(measure));
+  }
+
+  public void printAnnotatedProfileNeo4J(Attribute attribute) {
+    if(dataProfile != null) {
+      System.out.println("Annotated data profile for DSDElement: " + attribute.getURI());
+      dataProfile.printProfile();
+    } else {
+      System.out.println("No data profile annotated for DSDElement: " + attribute.getURI());
+    }
+  }
+
+  public void emptyDataProfile() throws NoSuchMethodException {
+    dataProfile = null;
   }
 }
