@@ -1,6 +1,9 @@
 # DQ-MeeRKat
 Automating Data Quality Measurement with a Reference-Data-Profile-Annotated Knowledge Graph. In a reference to pop culture (<a href="https://www.imdb.com/title/tt1853728/" target="_blank">Tarantino: Django Unchained (2012)</a>),
 the *t* is silent. DQ-MeeRKat implements a novel method for automated and continuous data quality measurement (CDQM), which is based on the creation of <i>reference data profiles</i>. 
+The following image illustrates the overall architecture of DQ-MeeRKat. Setup/installation instructions for each component are described in the following paragraphs.
+
+<img src="./documentation/DQ-MeeRKat-architecture.png" width=60% height=60%>
 
 # History
 DQ-MeeRKat is a research project initiated by Johannes Kepler University (<a href="https://www.jku.at/en/institute-for-application-oriented-knowledge-processing" target="_blank">JKU</a>) Linz and Software Competence Center Hagenberg (<a href="https://scch.at/en/news" target="_blank">SCCH</a>). 
@@ -32,7 +35,11 @@ Afterwards, in order to execute the program, you need to start influxDB and Graf
 Run on Linux (Mint): <br/>
 ```startLinuxEnv.sh``` (for starting InfluxDB and Grafana in one script)<br/>
 
-Windows users have to start executables provided in the following sections.
+On Windows:<br>
+`startWinEnv.bat` (for starting InfluxDB and Grafana in one script)<br/>
+
+
+Alternatively, Windows users as well as Linux users can also start the executables provided in the following sections manually.
 
 ### InfluxDB
 A common choice for storing CDQM results are time-series DBs like InfluxDB, which provides a Java API. Since the Java API was not working by the time of the creation of the project, we replaced it by the browser version. DQ-MeeRKat does not offer an embedded mode (like Derby or GraphDB), but runs InfluxDB outside the Java runtime to persist CDQM results over time. 
@@ -134,3 +141,6 @@ RDFBeans (https://rdfbeans.github.io/) is a library, which allows a developer to
 * RDF4j: https://rdf4j.eclipse.org/
 * QuaIIe (usage of connectors): http://dqm.faw.jku.at/
 * Pentaho Javadoc (Plugin Development): https://javadoc.pentaho.com/kettle900/kettle-core-9.0.0.1-426-javadoc/index.html 
+
+# Used libraries
+* ELKI: https://github.com/elki-project/elki <br>used Algorithm: Local Outlier Factor: https://doi.org/10.1145/335191.335388
