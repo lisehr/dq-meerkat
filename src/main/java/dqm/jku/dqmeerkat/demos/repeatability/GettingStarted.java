@@ -25,13 +25,13 @@ public class GettingStarted {
     // Create Connection to Supplychain dataset (once with CSV connector for
     // repeatability; and once with MySQL connector as used for the demo)
 //		ConnectorMySQL conn1 = ConnectorMySQL.getInstance("jdbc:mysql://localhost:3366/", "DataCo_Supplychain", args[0], args[1]);
-    ConnectorCSV conn1 = new ConnectorCSV(Constants.RESOURCES + "csv/DataCoSupplyChainDataset.csv", ",", "\n", "SupplyChain");
+    ConnectorCSV conn1 = new ConnectorCSV(Constants.RESOURCES_FOLDER + "csv/DataCoSupplyChainDataset.csv", ",", "\n", "SupplyChain");
 
     // Create Connection to Tributech car engine data stream (once with CSV
     // connector for repeatability; and once with Cassandra connector as used for
     // the demo)
 //		ConnectorCassandra conn2 = new ConnectorCassandra("bursa.scch.at", "Tributech-datastream", args[2], args[3]);
-    ConnectorCSV conn2 = new ConnectorCSV(Constants.RESOURCES + "csv/DataCoSupplyChainDataset.csv", ",", "\n", "CarEngineStream");
+    ConnectorCSV conn2 = new ConnectorCSV(Constants.RESOURCES_FOLDER + "csv/DataCoSupplyChainDataset.csv", ",", "\n", "CarEngineStream");
 
     // Optionally, create connection to Test data
 //		ConnectorCSV conn3 = new ConnectorCSV(Constants.RESSOURCES + "csv/Test.csv", ",", "\n", "Test data");

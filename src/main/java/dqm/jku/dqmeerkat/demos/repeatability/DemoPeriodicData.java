@@ -10,6 +10,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.influxdb.InfluxDBConnection;
 import dqm.jku.dqmeerkat.quality.DataProfile;
+import dqm.jku.dqmeerkat.util.Constants;
 import dqm.jku.dqmeerkat.util.FileSelectionUtil;
 
 /**
@@ -34,7 +35,7 @@ public class DemoPeriodicData {
     InfluxDBConnection influx = new InfluxDBConnection();
     int noRecs = 0;
     int offset = 0;
-    ConnectorCSV conn = FileSelectionUtil.connectToCSV(FILEINDEX);
+    ConnectorCSV conn = FileSelectionUtil.connectToCSV(Constants.FileName.dataCoSupplyChainDataset.getPath());
 
     if (DELETE_INFLUX) {
       influx.deleteDB();

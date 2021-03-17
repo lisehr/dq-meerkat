@@ -22,6 +22,7 @@ import dqm.jku.dqmeerkat.quality.profilingmetrics.MetricTitle;
 import dqm.jku.dqmeerkat.quality.profilingmetrics.ProfileMetric;
 import dqm.jku.dqmeerkat.quality.profilingmetrics.multicolumn.outliers.IsolationForest;
 import dqm.jku.dqmeerkat.quality.profilingmetrics.multicolumn.outliers.IsolationForestPercentage;
+import dqm.jku.dqmeerkat.quality.profilingmetrics.multicolumn.outliers.LocalOutlierFactor;
 import dqm.jku.dqmeerkat.quality.profilingmetrics.singlecolumn.cardinality.Cardinality;
 import dqm.jku.dqmeerkat.quality.profilingmetrics.singlecolumn.cardinality.NullValues;
 import dqm.jku.dqmeerkat.quality.profilingmetrics.singlecolumn.cardinality.NullValuesPercentage;
@@ -31,6 +32,7 @@ import dqm.jku.dqmeerkat.quality.profilingmetrics.singlecolumn.datatypeinfo.*;
 import dqm.jku.dqmeerkat.quality.profilingmetrics.singlecolumn.dependency.KeyCandidate;
 import dqm.jku.dqmeerkat.quality.profilingmetrics.singlecolumn.histogram.*;
 import dqm.jku.dqmeerkat.quality.profilingmetrics.singlecolumn.pattern.PatternRecognition;
+import dqm.jku.dqmeerkat.util.Constants;
 import dqm.jku.dqmeerkat.util.Miscellaneous.DBType;
 import dqm.jku.dqmeerkat.util.numericvals.NumberComparator;
 import org.w3c.dom.Attr;
@@ -238,12 +240,16 @@ public class DataProfile {
 				System.err.println("Attribute '" + a.getLabel() + "' has data type '" + a.getDataTypeString() + "', which is currently not handled. ");
 			}
 		} else if (elem instanceof Concept) {
-			ProfileMetric isoFor = new IsolationForest(this);
-			metrics.add(isoFor);
-			ProfileMetric isoForPer = new IsolationForestPercentage(this);
-			metrics.add(isoForPer);
-//			ProfileMetric lof = new LocalOutlierFactor();
-//			metrics.add(lof);
+
+			if (Constants.ENABLE_JEP) {
+				// As Isolation Forest and IsolationForestPercentage are dependant on JEP, only run them when it is enabled!
+				ProfileMetric isoFor = new IsolationForest(this);
+				metrics.add(isoFor);
+				ProfileMetric isoForPer = new IsolationForestPercentage(this);
+				metrics.add(isoForPer);
+			}
+			ProfileMetric lof = new LocalOutlierFactor(this);
+			metrics.add(lof);
 		}
 	}
 

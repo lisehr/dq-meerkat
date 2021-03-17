@@ -67,7 +67,7 @@ public class TributechDataProfileComplete {
 	private static void loadDataSets(int[] ind) throws IOException {
 		for (int i : ind) {
 			String fname = FILENAMES[i];
-			String fpath = Constants.RESOURCES + "csv/Telematic Device Report - " + fname + ".csv";
+			String fpath = Constants.RESOURCES_FOLDER + "csv/Telematic Device Report - " + fname + ".csv";
 			ConnectorCSV conn = new ConnectorCSV(fpath, ",", "\n", fname, true);
 			Datasource ds = conn.loadSchema();
 			dss.put(ds, conn);
@@ -155,7 +155,7 @@ public class TributechDataProfileComplete {
 			sb.append("\n");
 		}
 		
-		Path path = Paths.get(Constants.RESOURCES + "export");
+		Path path = Paths.get(Constants.RESOURCES_FOLDER + "export");
 		if (Files.notExists(path)) {
 		  try {
         Files.createDirectory(path);

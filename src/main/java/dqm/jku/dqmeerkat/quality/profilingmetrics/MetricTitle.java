@@ -37,6 +37,8 @@ public enum MetricTitle {
   histVal("Values"),
   isoF("Isolation Forest"),
   isoFP("Isolation Forest Outlier %"),
+  lof("Local outlier factor");
+  isoFP("Isolation Forest Outlier %"),
 
   // graph metrics
   numEntries("Number of Entries"),

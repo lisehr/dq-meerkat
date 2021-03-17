@@ -154,6 +154,13 @@
 		</dependency>
 
 		<dependency>
+			<groupId>de.lmu.ifi.dbs.elki</groupId>
+			<artifactId>elki</artifactId>
+			<version>0.7.5</version>
+		</dependency>
+
+
+		<dependency>
 			<groupId>org.neo4j.driver</groupId>
 			<artifactId>neo4j-java-driver</artifactId>
 			<version>4.1.0</version>		
