@@ -1,7 +1,7 @@
 package dqm.jku.dqmeerkat.util.export;
 
-import static dqm.jku.dqmeerkat.quality.profilingmetrics.MetricCategory.*;
-import static dqm.jku.dqmeerkat.quality.profilingmetrics.MetricTitle.*;
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.*;
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -22,12 +22,12 @@ import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingmetrics.MetricTitle;
-import dqm.jku.dqmeerkat.quality.profilingmetrics.ProfileMetric;
-import dqm.jku.dqmeerkat.quality.profilingmetrics.singlecolumn.histogram.Histogram;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.histogram.Histogram;
 
 public class ExportUtil {
-	private static final List<LabelTriple<MetricTitle, String, String>> LABELS = new ArrayList<>();
+	private static final List<LabelTriple<StatisticTitle, String, String>> LABELS = new ArrayList<>();
 
 	private static final String EXPORT_PATH = "src/main/java/dqm/jku/dqmeerkat/resources/export/";
 	private static final String EXPORT_CSV = "csv/";
@@ -77,8 +77,8 @@ public class ExportUtil {
 					elementLabels.add(a.getLabel());
 					if (a.getProfile() != null) {
 						DataProfile dp = a.getProfile();
-						List<ProfileMetric> metrics = dp.getMetrics();
-						for (ProfileMetric m : metrics) {
+						List<ProfileStatistic> metrics = dp.getStatistics();
+						for (ProfileStatistic m : metrics) {
 							String key = m.getLabel();
 							if (!key.contains("Histogram")) {
 								ArrayList<Object> list = new ArrayList<Object>();
@@ -122,7 +122,7 @@ public class ExportUtil {
 		sb.append("\n");
 
 		// Create Value lines
-		for (LabelTriple<MetricTitle, String, String> l : LABELS) {
+		for (LabelTriple<StatisticTitle, String, String> l : LABELS) {
 			String label = l.getKey().getLabel();
 			ArrayList<Object> list = metricValues.get(label);
 			sb.append(l.getCat(l.getKey()));
@@ -172,7 +172,7 @@ public class ExportUtil {
 					elementLabels.add(a.getLabel());
 					if (a.getProfile() != null) {
 						DataProfile dp = a.getProfile();
-						List<ProfileMetric> metrics = dp.getMetrics();
+						List<ProfileStatistic> metrics = dp.getStatistics();
 						if (metrics.size() == 0) {
 							Set<String> metricStringSet = metricValues.keySet();
 							for (String key : metricStringSet) {
@@ -182,7 +182,7 @@ public class ExportUtil {
 								metricValues.put(key, list);
 							}
 						}
-						for (ProfileMetric m : metrics) {
+						for (ProfileStatistic m : metrics) {
 							String key = m.getLabel();
 							if (!key.contains("Histogram")) {
 								ArrayList<Object> list = new ArrayList<Object>();
@@ -226,7 +226,7 @@ public class ExportUtil {
 		sb.append("\n");
 
 		// Create Value lines
-		for (LabelTriple<MetricTitle, String, String> l : LABELS) {
+		for (LabelTriple<StatisticTitle, String, String> l : LABELS) {
 			String label = l.getKey().getLabel();
 			ArrayList<Object> list = metricValues.get(label);
 			sb.append(l.getCat(l.getKey()));

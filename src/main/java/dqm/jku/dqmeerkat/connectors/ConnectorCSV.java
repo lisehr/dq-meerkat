@@ -130,6 +130,12 @@ public class ConnectorCSV extends DSConnector {
 		};
 	}
 
+	/**
+	 *
+	 * @param concept
+	 * @return A RecordList that contains all the records of a read CSV
+	 * @throws IOException
+	 */
 	public RecordList getRecordList(final Concept concept) throws IOException {
 	  if (!recordMap.values().isEmpty()) return recordMap.get(concept);
 		Iterator<Record> rIt = getRecords(concept);

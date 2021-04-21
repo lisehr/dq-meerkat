@@ -12,3 +12,4 @@
 /target/
 Grafana/grafana-6.2.5_windows/data/
 /kg-repo/*
+/.idea/*

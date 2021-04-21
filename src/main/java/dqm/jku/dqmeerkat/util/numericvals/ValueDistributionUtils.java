@@ -14,7 +14,7 @@ public class ValueDistributionUtils {
    * @param size the size of the dataset
    * @return amount of classes
    */
-  public static int calculateNumberClasses(int size) {
+  public static int calculateNumberClasses(long size) {
     return (int) Math.ceil(1 + (3.32 * Math.log10((double) size)));
   }
 

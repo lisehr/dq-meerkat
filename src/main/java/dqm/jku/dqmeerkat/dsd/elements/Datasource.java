@@ -170,6 +170,8 @@ public class Datasource extends DSDElement {
 		}
 	}
 
+	// TODO: getGraphModel liefert falschen Output
+	// --> Die Datasource TTL Repräsentation aus RDF4J auslesen
 	public Model getGraphModel() {
 		ModelBuilder builder = new ModelBuilder();
 		System.out.println(this.getURI());

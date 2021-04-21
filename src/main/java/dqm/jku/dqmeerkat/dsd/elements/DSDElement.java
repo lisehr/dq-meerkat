@@ -205,14 +205,14 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
 
   protected void storeProfile(InfluxDBConnection connection) {
     if (this.dataProfile == null) return;
-    if (this.dataProfile.getMetrics().stream().allMatch(m -> (m.getValue() == null))) return;
+    if (this.dataProfile.getStatistics().stream().allMatch(m -> (m.getValue() == null))) return;
     Builder measure = Point.measurement(getURI()).time(System.currentTimeMillis(), TimeUnit.MILLISECONDS);
     connection.write(this.dataProfile.createMeasuringPoint(measure));
   }
   
   protected void storeProfile(InfluxDBConnection connection, DataProfile profile) {
     if (profile == null) return;
-    if (profile.getMetrics().stream().allMatch(m -> (m.getValue() == null))) return;
+    if (profile.getStatistics().stream().allMatch(m -> (m.getValue() == null))) return;
     Builder measure = Point.measurement(getURI()).time(System.currentTimeMillis(), TimeUnit.MILLISECONDS);
     connection.write(profile.createMeasuringPoint(measure));
   }

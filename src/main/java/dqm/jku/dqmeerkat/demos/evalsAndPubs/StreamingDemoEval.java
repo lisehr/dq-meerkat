@@ -14,8 +14,8 @@ import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingmetrics.MetricTitle;
-import dqm.jku.dqmeerkat.quality.profilingmetrics.ProfileMetric;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.util.FileSelectionUtil;
 
 /**
@@ -87,8 +87,8 @@ public class StreamingDemoEval {
   //TODO: move to Record class if development finished
   public static boolean strictlyAdheresToRDP(Record r, Attribute a) {
 	  DataProfile profile = a.getProfile();
-	  ProfileMetric min = profile.getMetric(MetricTitle.min);
-	  ProfileMetric max = profile.getMetric(MetricTitle.max);
+	  ProfileStatistic min = profile.getStatistic(StatisticTitle.min);
+	  ProfileStatistic max = profile.getStatistic(StatisticTitle.max);
 
 	  Double val = (double) r.getField(a);
 	  Double minVal = (double) min.getValue();

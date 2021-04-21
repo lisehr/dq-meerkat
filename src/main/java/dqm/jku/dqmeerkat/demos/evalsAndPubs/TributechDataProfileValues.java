@@ -20,8 +20,8 @@ import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingmetrics.ProfileMetric;
-import dqm.jku.dqmeerkat.quality.profilingmetrics.singlecolumn.histogram.Histogram;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.histogram.Histogram;
 import dqm.jku.dqmeerkat.util.Constants;
 import dqm.jku.dqmeerkat.util.export.ExportUtil;
 import javafx.util.Pair;
@@ -81,8 +81,8 @@ public class TributechDataProfileValues {
 
 				if(a.getProfile() != null) {
 					DataProfile dp = a.getProfile();
-					List<ProfileMetric> metrics = dp.getMetrics();
-					for(ProfileMetric m : metrics) {
+					List<ProfileStatistic> metrics = dp.getStatistics();
+					for(ProfileStatistic m : metrics) {
 						String key = m.getLabel();
 						if(!key.contains("Histogram")) {
 							LinkedList<Object> list = new LinkedList<Object>();
