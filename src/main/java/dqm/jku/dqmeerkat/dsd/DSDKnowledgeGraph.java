@@ -103,8 +103,8 @@ public class DSDKnowledgeGraph {
 	}
 
 	/**
-	 * Method to create a datasource via the passed connection with standard uri and prefix
-	 * @param conn the Datasource connector
+	 * Method to create a datasource via the passed connections with standard uri and prefix
+	 * @param connls a list of Datasource connectors
 	 * @throws IOException
 	 */
 	public void addDatasourcesViaConnectors(List<DSConnector> connls) throws IOException {

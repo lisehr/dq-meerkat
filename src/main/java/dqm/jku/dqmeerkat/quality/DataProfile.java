@@ -370,9 +370,9 @@ public class DataProfile {
     }
 
     /**
-     * Method for getting a specific ProfileMetric with its corresponding label.
+     * Method for getting a specific ProfileStatistic with its corresponding label.
      *
-     * @param label the label to compare with the profile metrics
+     * @param title the label to compare with the profile metrics
      * @return ProfileMetric if found, null otherwise
      */
     public ProfileStatistic getStatistic(StatisticTitle title) {

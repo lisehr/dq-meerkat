@@ -22,8 +22,11 @@ public class Constants {
 	 */
 	public enum FileName {
 		// Paths in are relative to the RESOURCES_FOLDER constant!
-		acceleration("csv/Acceleration.csv"), dataCoSupplyChainDataset("csv/DataCoSupplyChainDataset.csv"),
-		popularBabyNames("csv/Popular_Baby_Names.csv"), salesRecords("csv/100000 Sales Records.csv");
+		acceleration("csv/Acceleration.csv"),
+		dataCoSupplyChainDataset("csv/DataCoSupplyChainDataset.csv"),
+		popularBabyNames("csv/Popular_Baby_Names.csv"),
+		salesRecords("csv/100000 Sales Records.csv"),
+		vehicles("csv/vehicles30000.csv");
 
 		private final String relativePath;
 
