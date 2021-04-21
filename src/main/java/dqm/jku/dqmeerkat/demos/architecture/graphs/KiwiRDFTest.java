@@ -40,7 +40,7 @@ public class KiwiRDFTest {
 		KiWiStore store = new KiWiStore(config);
 
 		// Create Connection to CSV Connector
-		DSConnector conn = FileSelectionUtil.connectToCSV(FILENO);
+		DSConnector conn = FileSelectionUtil.getConnectorCSV(FILENO);
 
 		// Create Schema from it
 		Datasource ds;

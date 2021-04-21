@@ -22,7 +22,7 @@ public class TestCSVExport {
   private static final boolean DEBUG = false;
 
   public static void main(String args[]) throws IOException, NoSuchMethodException {
-    DSConnector conn = FileSelectionUtil.connectToCSV(3);
+    DSConnector conn = FileSelectionUtil.getConnectorCSV(3);
 
     Datasource ds;
     try {

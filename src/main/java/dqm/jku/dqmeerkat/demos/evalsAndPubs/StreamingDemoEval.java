@@ -33,7 +33,7 @@ public class StreamingDemoEval {
   private static List<Double> exceptions = new LinkedList<Double>();
 
   public static void main(String args[]) throws IOException, InterruptedException, NoSuchMethodException {
-    ConnectorCSV conn = FileSelectionUtil.connectToCSV(FILEINDEX);
+    ConnectorCSV conn = FileSelectionUtil.getConnectorCSV(FILEINDEX);
 
     Concept testCon = null;
 

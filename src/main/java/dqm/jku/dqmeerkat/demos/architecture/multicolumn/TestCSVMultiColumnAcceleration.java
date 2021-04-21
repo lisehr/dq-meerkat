@@ -22,7 +22,7 @@ public class TestCSVMultiColumnAcceleration {
   private static final boolean DEBUG = false;
 
   public static void main(String args[]) throws IOException, NoSuchMethodException {
-    DSConnector conn = FileSelectionUtil.connectToCSV(Constants.FileName.acceleration.getPath());
+    DSConnector conn = FileSelectionUtil.getConnectorCSV(Constants.FileName.acceleration.getPath());
 
     Datasource ds;
     try {

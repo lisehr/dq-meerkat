@@ -22,7 +22,7 @@ import dqm.jku.dqmeerkat.util.FileSelectionUtil;
  */
 public class DependencyCheckDemo {
   public static void main(String args[]) throws IOException, NoSuchMethodException {
-    DSConnector conn = FileSelectionUtil.connectToCSV(7);
+    DSConnector conn = FileSelectionUtil.getConnectorCSV(7);
 
     Datasource ds;
     try {

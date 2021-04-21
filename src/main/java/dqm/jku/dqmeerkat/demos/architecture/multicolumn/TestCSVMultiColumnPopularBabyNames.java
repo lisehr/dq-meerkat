@@ -22,7 +22,7 @@ public class TestCSVMultiColumnPopularBabyNames {
   private static final boolean DEBUG = false;
 
   public static void main(String args[]) throws IOException, NoSuchMethodException {
-    DSConnector conn = FileSelectionUtil.connectToCSV(Constants.FileName.popularBabyNames.getPath());
+    DSConnector conn = FileSelectionUtil.getConnectorCSV(Constants.FileName.popularBabyNames.getPath());
 
     Datasource ds;
     try {
