@@ -22,6 +22,7 @@ import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.util.AttributeSet;
 import dqm.jku.dqmeerkat.util.Constants;
+import dqm.jku.dqmeerkat.util.FileReaderUtil;
 import dqm.jku.dqmeerkat.util.Miscellaneous.DBType;
 import dqm.jku.dqmeerkat.util.converters.DataTypeConverter;
 
@@ -94,7 +95,7 @@ public class ConnectorCSV extends DSConnector {
 				if (line != null) return true;
 				// Otherwise: try to read new line and store if for .next() calls
 				try {
-					line = reader.readLine();
+					line = Constants.ESCAPE_QUOTED_NEWLINES ? FileReaderUtil.readLineEscapingQuotedNewlines(reader, linebreak) : reader.readLine();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -106,7 +107,7 @@ public class ConnectorCSV extends DSConnector {
 				// Read new line if no line available from .hasNext()
 				if (line == null) {
 					try {
-						line = reader.readLine();
+						line = Constants.ESCAPE_QUOTED_NEWLINES ? FileReaderUtil.readLineEscapingQuotedNewlines(reader, linebreak) : reader.readLine();
 					} catch (IOException e) {
 						e.printStackTrace();
 					}

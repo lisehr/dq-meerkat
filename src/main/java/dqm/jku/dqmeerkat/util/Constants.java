@@ -6,14 +6,23 @@ public class Constants {
 	public static final boolean DEBUG = false;
 	public static final boolean SIMILARITY_DEBUG = false;
 	public static final boolean PRINT_WORKING_MESSAGES = false;
-	public static final boolean ENABLE_JEP = false; // if true JEP (Java Embedded Python) is activated (please make sure
-													// it is working and installed when setting this to true!)
+
+	/**
+	 * if true JEP (Java Embedded Python) is activated (please make sure it is working and installed when setting this to true!)
+	 */
+	public static final boolean ENABLE_JEP = false;
+
+	/**
+	 * if true, newlines between two quotation marks are escaped and trigger no new records when reading a csv.
+	 */
+	public static final boolean ESCAPE_QUOTED_NEWLINES = true;
 
 	// Todo: WN_HOME can be removed?
 	public static final String WN_HOME = "src/resources/wordnet"; // location of wordnet
 
-	/* Resources constants */
-
+	/**
+	 * The path to the resources folder, relative to the project directory.
+	 */
 	public static final String RESOURCES_FOLDER = "src/main/java/dqm/jku/dqmeerkat/resources/";
 
 	/**
@@ -26,7 +35,9 @@ public class Constants {
 		dataCoSupplyChainDataset("csv/DataCoSupplyChainDataset.csv"),
 		popularBabyNames("csv/Popular_Baby_Names.csv"),
 		salesRecords("csv/100000 Sales Records.csv"),
-		vehicles("csv/vehicles30000.csv");
+		vehicles("csv/vehicles30000.csv"),
+		vehiclesSmall("csv/vehicles3.csv");
+
 
 		private final String relativePath;
 

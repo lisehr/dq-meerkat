@@ -12,9 +12,9 @@ import org.junit.jupiter.api.Test;
 
 public class ConstantsTests {
     @Test
-    @DisplayName("Get Path from FileName Enum (exemplarily: Popular_Baby_Names.csv)")
+    @DisplayName("Get Path from FileName Enum (exemplarily: vehicles30000.csv)")
     // The test could be further extended with other resources using the JUnit TestFactory or the parameterized test.
     void testFileNameGetPath() {
-        assertEquals("src/main/java/dqm/jku/dqmeerkat/resources/csv/Popular_Baby_Names.csv", Constants.FileName.popularBabyNames.getPath());
+        assertEquals("src/main/java/dqm/jku/dqmeerkat/resources/csv/vehicles30000.csv", Constants.FileName.vehicles.getPath());
     }
 }
