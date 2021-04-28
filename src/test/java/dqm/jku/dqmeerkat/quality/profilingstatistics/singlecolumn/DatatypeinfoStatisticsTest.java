@@ -35,14 +35,20 @@ class DatatypeinfoStatisticsTest {
     // The expected results for the tests where calculated using LibreOffice Calc (Excel has troubles with CSV files)
     static final int NUMBER_OF_RECORDS = 29759;
     static final int NUMBER_OF_NULL_ID = 0; // Number of null values in "id" column
+
+    private final static int VEHICLE_ID_DIGITS = 10;
     private final static long VEHICLE_ID_MINIMUM = 7218891961L;
     private final static long VEHICLE_ID_AVERAGE = 7234653134L;
     private final static long VEHICLE_ID_MAXIMUM = 7240681620L;
+    private final static long VEHICLE_ID_MEDIAN = 7235754660L;
+
 
     private final static double VEHICLE_LATITUDE_MAXIMUM = 64.993698;
     private final static double VEHICLE_LATITUDE_AVERAGE = 38.09251058;
     private final static double VEHICLE_LATITUDE_MINIMUM = -79.80964;
+    private final static double VEHICLE_LATITUDE_MEDIAN = 34.668793;
     ;
+
 
 
     @BeforeAll
@@ -129,6 +135,17 @@ class DatatypeinfoStatisticsTest {
     }
 
     @Test
+    @DisplayName("Digits")
+    void testDigits() {
+        vehicleIdDP.addStatistic(new Digits(vehicleIdDP));
+        vehicleIdDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
+
+        Integer digits = (Integer) vehicleIdDP.getStatistic(StatisticTitle.dig).getValue();
+
+        assertEquals(VEHICLE_ID_DIGITS, digits);
+    }
+
+    @Test
     @DisplayName("Maximum (long)")
     void testMaximumLong() {
         vehicleIdDP.addStatistic(new Maximum(vehicleIdDP));
@@ -148,6 +165,17 @@ class DatatypeinfoStatisticsTest {
         Long averageId = (Long) vehicleIdDP.getStatistic(StatisticTitle.avg).getValue();
 
         assertEquals(VEHICLE_ID_AVERAGE, averageId);
+    }
+
+    @Test
+    @DisplayName("Median (long)")
+    void testMedianLong() {
+        vehicleIdDP.addStatistic(new Median(vehicleIdDP));
+        vehicleIdDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
+
+        Long medianId = (Long) vehicleIdDP.getStatistic(StatisticTitle.med).getValue();
+
+        assertEquals(VEHICLE_ID_MEDIAN, medianId);
     }
 
     @Test
@@ -192,6 +220,17 @@ class DatatypeinfoStatisticsTest {
         Double minLat = (Double) vehicleLatitudeDP.getStatistic(StatisticTitle.min).getNumericVal();
 
         assertEquals(VEHICLE_LATITUDE_MINIMUM, minLat);
+    }
+
+    @Test
+    @DisplayName("Median (double)")
+    void testMedianDouble() {
+        vehicleLatitudeDP.addStatistic(new Median(vehicleLatitudeDP));
+        vehicleLatitudeDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
+
+        Double medianLat = (Double) vehicleLatitudeDP.getStatistic(StatisticTitle.med).getNumericVal();
+
+        assertEquals(VEHICLE_LATITUDE_MEDIAN, medianLat, 2.0);
     }
 
 }

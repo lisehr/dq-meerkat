@@ -47,7 +47,7 @@ public class Median extends ProfileStatistic {
       if (field != null) list.add(field);
     }
     list.sort(new NumberComparator());
-    Object val = getMedian(list, rs.size());
+    Object val = getMedian(list, list.size());
     this.setValue(val);
     this.setNumericVal(((Number) val).doubleValue());
     this.setValueClass(a.getDataType());
