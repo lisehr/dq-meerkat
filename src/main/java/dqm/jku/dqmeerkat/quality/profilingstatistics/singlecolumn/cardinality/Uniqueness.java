@@ -17,7 +17,7 @@ import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentProfileStatistic;
 /**
  * Describes the metric Uniqueness, the Cardinality in relation to the number of
  * rows.
- * 
+ * The result is a percentage value between 0 and 100.
  * @author optimusseptim
  *
  */

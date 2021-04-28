@@ -13,6 +13,11 @@ public class Constants {
 	public static final boolean ENABLE_JEP = false;
 
 	/**
+	 * if true, commas "," between two quotation marks are escaped and trigger no new attribute value when reading a csv.
+	 */
+	public static final boolean ESCAPE_QUOTED_COMMAS = true;
+
+	/**
 	 * if true, newlines between two quotation marks are escaped and trigger no new records when reading a csv.
 	 */
 	public static final boolean ESCAPE_QUOTED_NEWLINES = true;

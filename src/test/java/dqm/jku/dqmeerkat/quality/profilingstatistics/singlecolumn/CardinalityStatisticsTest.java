@@ -9,10 +9,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.NullValues;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.NullValuesPercentage;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.NumRows;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.Uniqueness;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.*;
 import dqm.jku.dqmeerkat.util.Constants;
 import dqm.jku.dqmeerkat.util.FileSelectionUtil;
 import org.junit.jupiter.api.BeforeAll;
@@ -34,6 +31,7 @@ class CardinalityStatisticsTest {
     // The expected results for the tests where calculated using LibreOffice Calc (Excel has troubles with CSV files)
     static final int NUMBER_OF_RECORDS = 29759;
     static final int CARDINALITY = 29759;
+    static final double UNIQUENSS = ((double) CARDINALITY/(double) NUMBER_OF_RECORDS)*100;
     static final int NUMBER_OF_NULL_ID = 0; // Number of null values in "id" column
 
     static DataProfile vehicleIdDP;
@@ -114,7 +112,7 @@ class CardinalityStatisticsTest {
     @Test
     @DisplayName("Cardinality")
     void testCardinalityCount() {
-        vehicleIdDP.addStatistic(new Uniqueness(vehicleIdDP));
+        vehicleIdDP.addStatistic(new Cardinality(vehicleIdDP));
         vehicleIdDP.getStatistics().forEach(statistic -> statistic.calculation(records, null));
 
         // The profilemetrics computed value is a Long
@@ -132,6 +130,14 @@ class CardinalityStatisticsTest {
     @DisplayName("Uniqueness")
     void testUniqueness() {
         // Test is not implemented yet.
-        assertEquals(0,-1);
+        vehicleIdDP.addStatistic(new Uniqueness(vehicleIdDP));
+        vehicleIdDP.getStatistics().forEach(statistic -> statistic.calculation(records, null));
+
+        // The profilemetrics computed value is a Double
+        assertEquals(Double.class, vehicleIdDP.getStatistic(StatisticTitle.unique).getValueClass());
+
+        Double uniquenessPercentage = (Double) vehicleIdDP.getStatistic(StatisticTitle.unique).getValue();
+
+        assertEquals(UNIQUENSS, uniquenessPercentage);
     }
 }

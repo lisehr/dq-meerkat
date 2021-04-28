@@ -78,6 +78,7 @@ public class Minimum extends ProfileStatistic {
     else if (a.getDataType().equals(Double.class)) return Double.min(((Number) current).doubleValue(), ((Number) toComp).doubleValue());
     else if (a.getDataType().equals(String.class) && !isNumericList) return Integer.min((int) current, ((String) toComp).length());
     else return Integer.min(((Number) current).intValue(), ((Number) toComp).intValue());
+
   }
 
   @Override

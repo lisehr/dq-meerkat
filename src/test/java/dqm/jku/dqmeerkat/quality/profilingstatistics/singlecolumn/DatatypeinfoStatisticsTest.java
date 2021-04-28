@@ -39,9 +39,10 @@ class DatatypeinfoStatisticsTest {
     private final static long VEHICLE_ID_AVERAGE = 7234653134L;
     private final static long VEHICLE_ID_MAXIMUM = 7240681620L;
 
-    private final static double VEHICLE_LATITUDE_MAXIMUM = 64926;
-    private final static double VEHICLE_LATITUDE_AVERAGE = 35261.225865;
-    private final static double VEHICLE_LATITUDE_MINIMUM = 35261.225865;
+    private final static double VEHICLE_LATITUDE_MAXIMUM = 64.993698;
+    private final static double VEHICLE_LATITUDE_AVERAGE = 38.09251058;
+    private final static double VEHICLE_LATITUDE_MINIMUM = -79.80964;
+    ;
 
 
     @BeforeAll
@@ -160,7 +161,7 @@ class DatatypeinfoStatisticsTest {
         assertEquals(VEHICLE_ID_MINIMUM, minId);
     }
 
-  /*  @Test
+    @Test
     @DisplayName("Maximum (double)")
     void testMaximumDouble() {
         vehicleLatitudeDP.addStatistic(new Maximum(vehicleLatitudeDP));
@@ -185,12 +186,12 @@ class DatatypeinfoStatisticsTest {
     @Test
     @DisplayName("Minimum (double)")
     void testMinimumDouble() {
-        vehicleIdDP.addStatistic(new Minimum(vehicleIdDP));
-        vehicleIdDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
+        vehicleLatitudeDP.addStatistic(new Minimum(vehicleLatitudeDP));
+        vehicleLatitudeDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
 
-        Double minLat = (Long) vehicleIdDP.getStatistic(StatisticTitle.min).getNumericVal();
+        Double minLat = (Double) vehicleLatitudeDP.getStatistic(StatisticTitle.min).getNumericVal();
 
         assertEquals(VEHICLE_LATITUDE_MINIMUM, minLat);
-    }*/
+    }
 
 }

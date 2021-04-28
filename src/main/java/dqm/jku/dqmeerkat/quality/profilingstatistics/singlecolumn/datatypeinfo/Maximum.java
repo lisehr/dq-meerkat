@@ -72,12 +72,17 @@ public class Maximum extends ProfileStatistic {
    * @return the new maximum value
    */
   private Object getMaximum(Object current, Object toComp, boolean isNumericList) {
-    if (toComp == null) return current;
+    if (toComp == null) return current; // if the maximum of the former processed records is null, this record is the maximum
     Attribute a = (Attribute) super.getRefElem();
-    if (a.getDataType().equals(Long.class)) return Long.max((long) current, ((Number) toComp).longValue());
-    else if (a.getDataType().equals(Double.class)) return Double.max((double) current, ((Number) toComp).doubleValue());
-    else if (a.getDataType().equals(String.class) && !isNumericList) return Integer.max((int) current, ((String) toComp).length());
-    else return Integer.max((int) current, ((Number) toComp).intValue());
+    if (a.getDataType().equals(Long.class)) {
+      return Long.max((long) current, ((Number) toComp).longValue());
+    } else if (a.getDataType().equals(Double.class)) {
+      return Double.max((double) current, ((Number) toComp).doubleValue());
+    } else if (a.getDataType().equals(String.class) && !isNumericList) {
+      return Integer.max((int) current, ((String) toComp).length());
+    } else {
+      return Integer.max((int) current, ((Number) toComp).intValue());
+    }
   }
 
   @Override
