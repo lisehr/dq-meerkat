@@ -9,7 +9,7 @@ import org.cyberborean.rdfbeans.annotations.RDFSubject;
  * Enumeration for all DP metrics
  * 
  * @author optimusseptim
- *
+ * TODO : When changing this class the getModel method in DataSource must be changed too !!
  */
 @RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
 @RDFBean("dsd:quality/structures/MetricTitle")
