@@ -22,7 +22,7 @@ public class TestCSVMultiColumnSupplyChain {
   private static final boolean DEBUG = false;
 
   public static void main(String args[]) throws IOException, NoSuchMethodException {
-    DSConnector conn = FileSelectionUtil.connectToCSV(Constants.FileName.dataCoSupplyChainDataset.getPath());
+    DSConnector conn = FileSelectionUtil.getConnectorCSV(Constants.FileName.dataCoSupplyChainDataset.getPath());
 
     Datasource ds;
     try {

@@ -28,7 +28,7 @@ public class StoreDataRDFSourceSelector {
 
 	public static void main(String args[]) throws NoSuchMethodException, IOException {
 		// Create Connection to CSV Connector
-		DSConnector conn = FileSelectionUtil.connectToCSV(FILENO);
+		DSConnector conn = FileSelectionUtil.getConnectorCSV(FILENO);
 
 		// Create Schema from it
 		Datasource ds;

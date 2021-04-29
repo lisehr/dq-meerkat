@@ -23,7 +23,7 @@ public class InfluxDBWithSourceSelector {
 
   public static void main(String args[]) throws IOException {
     InfluxDBConnection influxDB = new InfluxDBConnection();
-    DSConnector conn = FileSelectionUtil.connectToCSV(1);
+    DSConnector conn = FileSelectionUtil.getConnectorCSV(1);
 
     Datasource ds;
     try {

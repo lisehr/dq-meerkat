@@ -25,7 +25,7 @@ import dqm.jku.dqmeerkat.blockchain.blocks.DSDBlock;
 import dqm.jku.dqmeerkat.blockchain.standardchain.BlockChain;
 import dqm.jku.dqmeerkat.influxdb.InfluxDBConnection;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingmetrics.ProfileMetric;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.util.Constants;
 import dqm.jku.dqmeerkat.util.Miscellaneous.DBType;
 
@@ -182,6 +182,7 @@ public class Datasource extends DSDElement {
 
 	// transforms the datasource to a rdf model
 	public Model getGraphModel(ModelBuilder builder) {
+
 		System.out.println(this.getURI());
 		this.prefix = prefix.replace(":", "");
 		builder.setNamespace(prefix, this.getURI() +"/");
@@ -218,7 +219,7 @@ public class Datasource extends DSDElement {
 		builder.namedGraph(prefix +":"+ concept.getLabel())
 		.subject(prefix+ ":"+ a.getLabel())
 		.add("dsd:hasDataprofile" ,prefix + ":" + a.getLabel() + "/" + "DataProfile");
-		for(ProfileMetric metric : profile.getMetrics()) {
+		for(ProfileStatistic metric : profile.getStatistics()) {
 
 			if(metric.getValue() != null) {
 				builder.namedGraph(prefix +":"+ concept.getLabel())

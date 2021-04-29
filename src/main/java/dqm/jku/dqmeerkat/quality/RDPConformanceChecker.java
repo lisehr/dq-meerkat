@@ -10,7 +10,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
-import dqm.jku.dqmeerkat.quality.profilingmetrics.ProfileMetric;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 
 /**
  * Class for checking the conformance of a DP to its RDP in a generic way.
@@ -113,15 +113,15 @@ public class RDPConformanceChecker {
 		
 		int conf = 0;
 		
-		List<ProfileMetric> mlist = null;
+		List<ProfileStatistic> mlist = null;
 		if(this.batchSize != 1) {   
-			mlist =  rdp.getNonDependentMetrics();
+			mlist =  rdp.getNonDependentStatistics();
 		} else {
-			mlist = rdp.getNonAggregateMetrics();
+			mlist = rdp.getNonAggregateStatistics();
 		}
 		
-		for(ProfileMetric rdpMetric : mlist) {
-			if(rdpMetric.checkConformance(dp.getMetric(rdpMetric.getTitle()), threshold)) conf++;
+		for(ProfileStatistic rdpMetric : mlist) {
+			if(rdpMetric.checkConformance(dp.getStatistic(rdpMetric.getTitle()), threshold)) conf++;
 		}
 		double value = conf / (double) mlist.size();
 		

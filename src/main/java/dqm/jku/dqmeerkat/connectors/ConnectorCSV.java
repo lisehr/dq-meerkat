@@ -7,12 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import dqm.jku.dqmeerkat.dsd.DSDFactory;
 import dqm.jku.dqmeerkat.dsd.elements.Attribute;
@@ -22,6 +17,7 @@ import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.util.AttributeSet;
 import dqm.jku.dqmeerkat.util.Constants;
+import dqm.jku.dqmeerkat.util.FileReaderUtil;
 import dqm.jku.dqmeerkat.util.Miscellaneous.DBType;
 import dqm.jku.dqmeerkat.util.converters.DataTypeConverter;
 
@@ -35,33 +31,34 @@ public class ConnectorCSV extends DSConnector {
 
 	public final String filename;
 	public final String label;
-	public final String seperator;
+	public final String separator;
 	public final String linebreak;
 	public final boolean removeQuotes;
+
 	private final File file;
 	private final Map<Concept, RecordList> recordMap = new HashMap<>();
 
-	public ConnectorCSV(String filename, String seperator, String linebreak) {
-		this(filename, seperator, linebreak, filename);
+	public ConnectorCSV(String filename, String separator, String linebreak) {
+		this(filename, separator, linebreak, filename);
 	}
 
-	public ConnectorCSV(String filename, String seperator, String linebreak, String label) {
-		this(filename, seperator, linebreak, label, false);
+	public ConnectorCSV(String filename, String separator, String linebreak, String label) {
+		this(filename, separator, linebreak, label, false);
 	}
 
 
 	/**
 	 *
 	 * @param filename Path of the CSV file
-	 * @param seperator String that contains the used column seperator in the CSV
+	 * @param separator String that contains the used column separator in the CSV
 	 * @param linebreak String that contains the used linebreak used in the CSV
 	 * @param label Is used for the URI
-	 * @param removeQuotes whether qoutes of the values in the CSV should be removed
+	 * @param removeQuotes whether quotes of the values in the CSV should be removed
 	 */
-	public ConnectorCSV(String filename, String seperator, String linebreak, String label, boolean removeQuotes) {
+	public ConnectorCSV(String filename, String separator, String linebreak, String label, boolean removeQuotes) {
 		super();
 		this.filename = filename;
-		this.seperator = seperator;
+		this.separator = separator;
 		this.linebreak = linebreak;
 		this.label = label;
 		this.removeQuotes = removeQuotes;
@@ -72,7 +69,7 @@ public class ConnectorCSV extends DSConnector {
 	public Iterator<Record> getRecords(final Concept concept) throws IOException {
 
 		return new Iterator<Record>() {
-			List<Attribute> attributes = concept.getSortedAttributes();	
+			List<Attribute> attributes = concept.getSortedAttributes();
 			boolean init = true;
 			boolean first = true;
 			BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -94,7 +91,7 @@ public class ConnectorCSV extends DSConnector {
 				if (line != null) return true;
 				// Otherwise: try to read new line and store if for .next() calls
 				try {
-					line = reader.readLine();
+					line = Constants.ESCAPE_QUOTED_NEWLINES ? FileReaderUtil.readLineEscapingQuotedNewlines(reader, linebreak) : reader.readLine();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -106,13 +103,42 @@ public class ConnectorCSV extends DSConnector {
 				// Read new line if no line available from .hasNext()
 				if (line == null) {
 					try {
-						line = reader.readLine();
+						line = Constants.ESCAPE_QUOTED_NEWLINES ? FileReaderUtil.readLineEscapingQuotedNewlines(reader, linebreak) : reader.readLine();
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				}
-				String[] values = removeQuotes ? line.replace("\"", "").split(seperator) : line.split(seperator);
 
+
+				String[] values = new String[0];
+				// Split up the record into the attribute values
+				if (Constants.ESCAPE_QUOTED_COMMAS) {
+					// Commas between quotes are not treated as column separator
+					List<String> valueList = new ArrayList<>();
+
+					int noOfQuotations = 0;
+					int startOfAttribute = 0;
+					char[] lineChars = line.toCharArray();
+					for (int i = 0; i < lineChars.length; i++) {
+						if (lineChars[i] == '\"') noOfQuotations++;
+
+						// attributes are added if
+						else if (lineChars[i] == ',' && noOfQuotations%2 == 0) { // a comma occurs and is not between two quotes
+							valueList.add(line.substring(startOfAttribute, i));
+							startOfAttribute = i+1;
+						}
+						else if (i == lineChars.length -1) { // the last char of a line has been read)
+							valueList.add(line.substring(startOfAttribute, i+1));
+						}
+					}
+					values = valueList.stream()
+							.map(value -> removeQuotes ? value.replace("\"","") : value)
+							.toArray(String[]::new);
+
+				} else {
+					// All commas are treated as attribute separator
+					if (line != null) values = removeQuotes ? line.replace("\"", "").split(separator) : line.split(separator);
+				}
 				// Change data types for CSV files (default: Object) when reading field values for the first time
 				if (first) {
 					for (int j = 0; j < Math.min(values.length, attributes.size()); j++) {
@@ -130,6 +156,12 @@ public class ConnectorCSV extends DSConnector {
 		};
 	}
 
+	/**
+	 *
+	 * @param concept
+	 * @return A RecordList that contains all the records of a read CSV
+	 * @throws IOException
+	 */
 	public RecordList getRecordList(final Concept concept) throws IOException {
 	  if (!recordMap.values().isEmpty()) return recordMap.get(concept);
 		Iterator<Record> rIt = getRecords(concept);
@@ -157,7 +189,7 @@ public class ConnectorCSV extends DSConnector {
 	public Datasource loadSchema(String uri, String prefix) throws IOException {
 		Datasource ds = DSDFactory.makeDatasource(label, DBType.CSV, uri, prefix);
 		BufferedReader reader = new BufferedReader(new FileReader(file));
-		String[] attNames = reader.readLine().split(seperator);
+		String[] attNames = reader.readLine().split(separator);
 		Concept c = DSDFactory.makeConcept(label, ds);
 		int i = 0;
 		for (String s : attNames) {

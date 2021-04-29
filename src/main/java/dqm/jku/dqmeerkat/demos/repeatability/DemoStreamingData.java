@@ -30,7 +30,7 @@ public class DemoStreamingData {
   public static void main(String args[]) throws IOException, InterruptedException, NoSuchMethodException {
     InfluxDBConnection influx = new InfluxDBConnection();
 
-    ConnectorCSV conn = FileSelectionUtil.connectToCSV(Constants.FileName.acceleration.getPath());
+    ConnectorCSV conn = FileSelectionUtil.getConnectorCSV(Constants.FileName.acceleration.getPath());
 
     if (DEBUG) {
       influx.deleteDB();

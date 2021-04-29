@@ -30,7 +30,7 @@ public class TestRDFBeansDemo {
 
   @SuppressWarnings("deprecation")
   public static void main(String args[]) throws Exception {
-    DSConnector conn = FileSelectionUtil.connectToCSV(1);
+    DSConnector conn = FileSelectionUtil.getConnectorCSV(1);
 
     File dataDir = new File("./testrepo");
     SailRepository repo = new SailRepository(new NativeStore(dataDir));

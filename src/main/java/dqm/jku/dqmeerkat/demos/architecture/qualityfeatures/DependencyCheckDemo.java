@@ -8,10 +8,10 @@ import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingmetrics.ProfileMetric;
-import dqm.jku.dqmeerkat.quality.profilingmetrics.singlecolumn.cardinality.NullValuesPercentage;
-import dqm.jku.dqmeerkat.quality.profilingmetrics.singlecolumn.datatypeinfo.Digits;
-import dqm.jku.dqmeerkat.quality.profilingmetrics.singlecolumn.dependency.KeyCandidate;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.NullValuesPercentage;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.datatypeinfo.Digits;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.dependency.KeyCandidate;
 import dqm.jku.dqmeerkat.util.FileSelectionUtil;
 
 /**
@@ -22,7 +22,7 @@ import dqm.jku.dqmeerkat.util.FileSelectionUtil;
  */
 public class DependencyCheckDemo {
   public static void main(String args[]) throws IOException, NoSuchMethodException {
-    DSConnector conn = FileSelectionUtil.connectToCSV(7);
+    DSConnector conn = FileSelectionUtil.getConnectorCSV(7);
 
     Datasource ds;
     try {
@@ -37,10 +37,10 @@ public class DependencyCheckDemo {
           DataProfile dp = new DataProfile();
           dp.setElem(a);
           dp.setURI(a.getURI() + "/profile");
-          dp.addMetric(new NullValuesPercentage(dp));
-          dp.addMetric(new Digits(dp));
-          dp.addMetric(new KeyCandidate(dp));
-          for (ProfileMetric m : dp.getMetrics()) m.calculation(rs, null);
+          dp.addStatistic(new NullValuesPercentage(dp));
+          dp.addStatistic(new Digits(dp));
+          dp.addStatistic(new KeyCandidate(dp));
+          for (ProfileStatistic m : dp.getStatistics()) m.calculation(rs, null);
           dp.printProfile();
         }
         System.out.println();

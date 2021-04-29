@@ -37,7 +37,7 @@ public class TestCSVExportAll {
 
     for (int i = 1; i <= fileCount; i++) {
       try {
-        conn = FileSelectionUtil.connectToCSV(i);
+        conn = FileSelectionUtil.getConnectorCSV(i);
         ds = conn.loadSchema();
         if (EXTENSIVE_PRINT) {
           for (Concept c : ds.getConcepts()) {

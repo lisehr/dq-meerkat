@@ -71,7 +71,7 @@ public class RDPStep extends BaseStep implements StepInterface {
 						this.logBasic("Calculating Data Profile for Attribute: " + a.getLabel());
 						this.logBasic("Datatype:" + a.getDataTypeString());
 						a.annotateProfile(records, metaRDPStep.getFilePath());
-						if (a.getProfile().getMetrics().size() == 0) {						
+						if (a.getProfile().getStatistics().size() == 0) {
 							this.logBasic("Datatype:" + a.getDataTypeString() + " is not supported. Skipping calculation!");
 						} else {
 							List<ValueMetaAndData> values = PentahoRowUtils.createPentahoOutputRowMeta(a.getProfile());
