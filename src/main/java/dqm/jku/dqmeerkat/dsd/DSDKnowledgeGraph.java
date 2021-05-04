@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
 import org.eclipse.rdf4j.repository.RepositoryException;
 import org.eclipse.rdf4j.repository.config.RepositoryConfigException;
@@ -61,7 +62,7 @@ public class DSDKnowledgeGraph {
 		if (kgstore != null) {
 			kgstore.createRepositoryIfNotExists(ds.getLabel());
 			RepositoryConnection repConn = kgstore.getRepository(ds.getLabel()).getConnection();
-			repConn.add(ds.getGraphModel());
+			repConn.add(ds.getGraphModel(new ModelBuilder()));
 		}
 	}
 
@@ -183,9 +184,18 @@ public class DSDKnowledgeGraph {
 			}
 		}
 		try (PrintWriter out = new PrintWriter(new File(Constants.RESOURCES_FOLDER + "export/ttl/" + fileName + ".ttl"))){
+			
+			ModelBuilder builder = new ModelBuilder();
+			builder.setNamespace("dsd", "http://dqm.faw.jku.at/dsd" +"/");
 			for (Datasource ds : dss.values()) {
-				Rio.write(ds.getGraphModel(), out, RDFFormat.TURTLE);
+				ds.getGraphModel(builder);
+			
+				for (Concept c : ds.getConcepts()) {
+					builder.subject("dsd:DataSources")
+					.add("dsd:hasDataSource", ds.getPrefix() +":" + c.getLabel());
+				}
 			}
+			Rio.write(builder.build(), out, RDFFormat.TURTLE);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

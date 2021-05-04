@@ -2,6 +2,7 @@ package dqm.jku.dqmeerkat.demos.evalsAndPubs;
 
 import java.io.IOException;
 
+import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.repository.RepositoryConnection;
 
 import dqm.jku.dqmeerkat.connectors.ConnectorCSV;
@@ -35,7 +36,7 @@ public class GettingStartedVerbose {
 	    EmbeddedGraphDB db = new EmbeddedGraphDB(ds.getLabel());
 	    db.createRepositoryIfNotExists(ds.getLabel());
 	    RepositoryConnection repConn = db.getRepository(ds.getLabel()).getConnection();
-	    repConn.add(ds.getGraphModel());
+	    repConn.add(ds.getGraphModel(new ModelBuilder()));
 	    db.close();
 	    
 	    // Export KG to .ttl file
