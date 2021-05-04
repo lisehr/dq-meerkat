@@ -81,18 +81,32 @@ public class Histogram extends DependentProfileStatistic {
       return;
     }
     list.sort(new NumberComparator());
-    if (min == null) min = list.get(0).doubleValue();
-    else min = Math.min(min.doubleValue(), list.get(0).doubleValue());
-    if (max == null) max = list.get(list.size() - 1).doubleValue();
-    else max = Math.max(max.doubleValue(), list.get(list.size() - 1).doubleValue());
+
+    if (min == null) {
+      min = list.get(0).doubleValue();
+    } else {
+      min = Math.min(min.doubleValue(), list.get(0).doubleValue());
+    }
+
+    if (max == null) {
+      max = list.get(list.size() - 1).doubleValue();
+    } else {
+      max = Math.max(max.doubleValue(), list.get(list.size() - 1).doubleValue());
+    }
+
     int k = ValueDistributionUtils.calculateNumberClasses((long) super.getRefProf().getStatistic(numrows).getValue());
+
     classrange = (max.doubleValue() - min.doubleValue()) / k;
+
     int classVals[];
     if (vals == null) classVals = new int[k];
     else classVals = constructArray();
     for (Number n : list) {
-      if (n.doubleValue() == max.doubleValue()) classVals[k - 1]++;
-      else classVals[(int) Math.floor((n.doubleValue() - min.doubleValue()) / classrange.doubleValue())]++;
+      if (n.doubleValue() == max.doubleValue()) {
+        classVals[k - 1]++;
+      } else {
+        classVals[(int) Math.floor((n.doubleValue() - min.doubleValue()) / classrange.doubleValue())]++;
+      }
     }
     SerializableFrequencyMap classes = new SerializableFrequencyMap(this.getUri());
     for (int i = 0; i < k; i++) classes.put(i, classVals[i]);

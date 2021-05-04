@@ -21,6 +21,10 @@ import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.Nu
 import dqm.jku.dqmeerkat.util.Constants;
 import dqm.jku.dqmeerkat.util.numericvals.NumberComparator;
 
+/**
+ * This class computes the standard deviation of a sample. It does not compute the standard deviation of a population.
+ */
+
 @RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/StandardDeviation")
 public class StandardDeviation extends DependentProfileStatistic {

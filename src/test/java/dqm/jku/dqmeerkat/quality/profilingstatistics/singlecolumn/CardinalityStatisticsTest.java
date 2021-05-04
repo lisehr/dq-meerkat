@@ -12,20 +12,18 @@ import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.*;
 import dqm.jku.dqmeerkat.util.Constants;
 import dqm.jku.dqmeerkat.util.FileSelectionUtil;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.io.IOException;
 
 /**
- * This class tests profile metrics that are in the package {@link dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality}.
- * The tests are run with the "Count" column of the vehicles30000.csv
+ * This class tests profile statistics that are in the package {@link dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality}.
+ * The tests are run with the "id" column of the vehicles30000.csv
  * @author Johannes Schrott
  */
 
 @DisplayName("ProfileStatistics: SingleColumn: Cardinality")
+@TestMethodOrder(MethodOrderer.DisplayName.class)
 class CardinalityStatisticsTest {
 
     // The expected results for the tests where calculated using LibreOffice Calc (Excel has troubles with CSV files)

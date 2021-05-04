@@ -9,9 +9,7 @@ import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.datatypeinfo.*;
 import dqm.jku.dqmeerkat.util.Constants;
 import dqm.jku.dqmeerkat.util.FileSelectionUtil;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.io.IOException;
 
@@ -19,40 +17,50 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
- * This class tests profile metrics that are in the package {@link dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.datatypeinfo}.
+ * This class tests profile statistics that are in the package {@link dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.datatypeinfo}.
  * The tests are run with the "id", the "region" and/or the "lat" column of the vehicles30000.csv
  * @author Johannes Schrott
  */
 
 @DisplayName("ProfileStatistics: SingleColumn: Datatypeinfo")
-class DatatypeinfoStatisticsTest {
+@TestMethodOrder(MethodOrderer.DisplayName.class)
+class DatatypeInfoStatisticsTest {
 
     private static DataProfile vehicleIdDP;
     private static DataProfile vehicleRegionDP;
     private static DataProfile vehicleLatitudeDP;
     private static RecordList vehicleRecords;
 
-    // The expected results for the tests where calculated using LibreOffice Calc (Excel has troubles with CSV files)
+    // The expected results for the tests where calculated using Excel (see the vehicles30000.xlsx, that contains a pivot table of the dataset)
     static final int NUMBER_OF_RECORDS = 29759;
     static final int NUMBER_OF_NULL_ID = 0; // Number of null values in "id" column
 
     private final static int VEHICLE_ID_DIGITS = 10;
+    private final static int VEHICLE_ID_DECIMALS = 0;
     private final static long VEHICLE_ID_MINIMUM = 7218891961L;
     private final static long VEHICLE_ID_AVERAGE = 7234653134L;
     private final static long VEHICLE_ID_MAXIMUM = 7240681620L;
     private final static long VEHICLE_ID_MEDIAN = 7235754660L;
+    private final static double VEHICLE_ID_STANDARD_DEVIATION = 4602599.10;
+    private final static long VEHICLE_ID_MEDIAN_ABSOLUTE_DEVIATION = 0;
 
-
+    private final static int VEHICLE_LATITUDE_DIGITS = 2;
+    private final static int VEHICLE_LATITUDE_DECIMALS = 15; // visible in csv text file; excel truncates decimals to 6
     private final static double VEHICLE_LATITUDE_MAXIMUM = 64.993698;
     private final static double VEHICLE_LATITUDE_AVERAGE = 38.09251058;
     private final static double VEHICLE_LATITUDE_MINIMUM = -79.80964;
     private final static double VEHICLE_LATITUDE_MEDIAN = 34.668793;
-    ;
+    private final static double VEHICLE_LATITUDE_STANDARD_DEVIATION = 9.07;
+    private final static double VEHICLE_LATITUDE_MEDIAN_ABSOLUTE_DEVIATION = 0.022574;
+
+    private final static int VEHICLE_REGION_DIGITS = 0;
+    private final static int VEHICLE_REGION_DECIMALS = 0;
+
 
 
 
     @BeforeAll
-    @DisplayName("Create a data profile for the vehicles30000.csv column \"id\"")
+    @DisplayName("Create a data profiles for the vehicles30000.csv column \"id\", \"lat\", and \"region\"")
     static void setUp() {
         try {
             vehicleIdDP = new DataProfile();
@@ -137,13 +145,53 @@ class DatatypeinfoStatisticsTest {
     @Test
     @DisplayName("Digits")
     void testDigits() {
+
         vehicleIdDP.addStatistic(new Digits(vehicleIdDP));
         vehicleIdDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
 
-        Integer digits = (Integer) vehicleIdDP.getStatistic(StatisticTitle.dig).getValue();
+        vehicleLatitudeDP.addStatistic(new Digits(vehicleLatitudeDP));
+        vehicleLatitudeDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
 
-        assertEquals(VEHICLE_ID_DIGITS, digits);
+        vehicleRegionDP.addStatistic(new Digits(vehicleRegionDP));
+        vehicleRegionDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
+
+
+        Integer idDigits = (Integer) vehicleIdDP.getStatistic(StatisticTitle.dig).getValue();
+        Integer latitudeDigits = (Integer) vehicleLatitudeDP.getStatistic(StatisticTitle.dig).getValue();
+        Integer regionDigits = (Integer) vehicleRegionDP.getStatistic(StatisticTitle.dig).getValue();
+
+
+        assertEquals(VEHICLE_ID_DIGITS, idDigits);
+        assertEquals(VEHICLE_LATITUDE_DIGITS, latitudeDigits);
+        assertEquals(VEHICLE_REGION_DIGITS, regionDigits);
+
     }
+
+    @Test
+    @DisplayName("Decimals")
+    void testDecimals() {
+
+        vehicleIdDP.addStatistic(new Decimals(vehicleIdDP));
+        vehicleIdDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
+
+        vehicleLatitudeDP.addStatistic(new Decimals(vehicleLatitudeDP));
+        vehicleLatitudeDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
+
+        vehicleRegionDP.addStatistic(new Decimals(vehicleRegionDP));
+        vehicleRegionDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
+
+
+        Integer idDecimals = (Integer) vehicleIdDP.getStatistic(StatisticTitle.dec).getValue();
+        Integer latitudeDecimals = (Integer) vehicleLatitudeDP.getStatistic(StatisticTitle.dec).getValue();
+        Integer regionDecimals = (Integer) vehicleRegionDP.getStatistic(StatisticTitle.dec).getValue();
+
+
+        assertEquals(VEHICLE_ID_DECIMALS, idDecimals);
+        assertEquals(VEHICLE_LATITUDE_DECIMALS, latitudeDecimals);
+        assertEquals(VEHICLE_REGION_DECIMALS, regionDecimals);
+
+    }
+
 
     @Test
     @DisplayName("Maximum (long)")
@@ -190,6 +238,28 @@ class DatatypeinfoStatisticsTest {
     }
 
     @Test
+    @DisplayName("Standard Deviation (long)")
+    void testStandardDeviationLong() {
+        vehicleIdDP.addStatistic(new StandardDeviation(vehicleIdDP));
+        vehicleIdDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
+
+        Double standardDeviation = (Double) vehicleIdDP.getStatistic(StatisticTitle.sd).getValue(); // The "Long" in the title refernces the type of the attribute which is used for calculating the standard deviation.
+
+        assertEquals(VEHICLE_ID_STANDARD_DEVIATION, standardDeviation,0.1);
+    }
+
+    @Test
+    @DisplayName("Median Absolute Deviation (long)")
+    void testMedianAbsoluteDeviationLong() {
+        vehicleIdDP.addStatistic(new MedianAbsoluteDeviation(vehicleIdDP));
+        vehicleIdDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
+
+        Long medianAbsoluteDeviation = (Long) vehicleIdDP.getStatistic(StatisticTitle.mad).getValue(); // The "Long" in the title refernces the type of the attribute which is used for calculating the standard deviation.
+
+        assertEquals(VEHICLE_ID_MEDIAN_ABSOLUTE_DEVIATION, medianAbsoluteDeviation);
+    }
+
+    @Test
     @DisplayName("Maximum (double)")
     void testMaximumDouble() {
         vehicleLatitudeDP.addStatistic(new Maximum(vehicleLatitudeDP));
@@ -231,6 +301,28 @@ class DatatypeinfoStatisticsTest {
         Double medianLat = (Double) vehicleLatitudeDP.getStatistic(StatisticTitle.med).getNumericVal();
 
         assertEquals(VEHICLE_LATITUDE_MEDIAN, medianLat, 2.0);
+    }
+
+    @Test
+    @DisplayName("Standard Deviation (double)")
+    void testStandardDeviationDouble() {
+        vehicleLatitudeDP.addStatistic(new StandardDeviation(vehicleLatitudeDP));
+        vehicleLatitudeDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
+
+        Double standardDeviation = (Double) vehicleLatitudeDP.getStatistic(StatisticTitle.sd).getNumericVal();
+
+        assertEquals(VEHICLE_LATITUDE_STANDARD_DEVIATION, standardDeviation, 0.1);
+    }
+
+    @Test
+    @DisplayName("Median Abslolute Deviation (double)")
+    void testMedianAbsoluteDeviationDouble() {
+        vehicleLatitudeDP.addStatistic(new MedianAbsoluteDeviation(vehicleLatitudeDP));
+        vehicleLatitudeDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
+        //vehicleLatitudeDP.getStatistics().forEach(statistic -> statistic.calculationNumeric());
+        Double medianAbsoluteDeviation = (Double) vehicleLatitudeDP.getStatistic(StatisticTitle.mad).getNumericVal();
+
+        assertEquals(VEHICLE_LATITUDE_MEDIAN_ABSOLUTE_DEVIATION, medianAbsoluteDeviation, 0.1);
     }
 
 }

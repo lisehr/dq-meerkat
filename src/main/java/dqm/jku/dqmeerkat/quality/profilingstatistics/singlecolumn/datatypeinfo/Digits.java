@@ -39,6 +39,7 @@ public class Digits extends ProfileStatistic {
     int value = valueStr.indexOf(".");
     if (value == -1) value = valueStr.length();
     if (valueStr.indexOf('-') != -1) value--;
+    if (valueStr.equals("null")) value = 0;
     return value;
   }
 
