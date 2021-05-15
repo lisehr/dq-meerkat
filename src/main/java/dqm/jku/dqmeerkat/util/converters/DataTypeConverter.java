@@ -11,11 +11,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Year;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.jena.rdf.model.RDFNode;
@@ -27,6 +23,8 @@ import com.datastax.driver.core.DataType;
 import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.elements.ForeignKeyRule;
 import dqm.jku.dqmeerkat.util.datastructures.TryParsers;
+import org.bson.Document;
+import org.bson.types.ObjectId;
 
 /**
  * @author lisa Conversion methods in this class have to convert to one of the
@@ -376,6 +374,70 @@ public class DataTypeConverter {
 		default:
 			throw new IllegalArgumentException("No mapping known for this MySQL data type: " + t);
 		}
+	}
+
+	public static void getTypeFromMongoDB(Attribute a, Class clazz) {
+		/* Object - String - Double - Float - Integer -
+		 * Date - Boolean*/
+		if (clazz == ObjectId.class) {
+			a.setDataType(String.class);
+		} else if (clazz == Document.class || clazz == ArrayList.class) {
+			a.setDataType(Object.class);
+		} else if (clazz==String.class || clazz == Double.class || clazz==Integer.class
+				|| clazz == Boolean.class|| clazz==Date.class){
+			a.setDataType(clazz);
+		} else {
+			throw new IllegalArgumentException("No mapping known for this MongoDB data type: " + clazz);
+		}
+
+		//a.setDataType(clazz);
+		// TODO look more into types
+		// or types from org.bson.types.*
+        /*if (clazz == BsonDouble.class) {
+
+        } else if (clazz == BsonString.class) {
+
+        } else if (clazz == BSONObject.class) {
+
+        } else if (clazz == BsonArray.class) {
+
+        } else if (clazz == BsonBinary.class) {
+
+        } else if (clazz == BsonUndefined.class) {
+
+        } else if (clazz == BsonObjectId.class) {
+
+        } else if (clazz == BsonBoolean.class) {
+
+        } else if (clazz == BsonDateTime.class) {
+
+        } else if (clazz == BsonNull.class) {
+
+        } else if (clazz == BsonRegularExpression.class) {
+
+        } else if (clazz == BsonDbPointer.class) {
+
+        } else if (clazz == BsonJavaScript.class) {
+
+        } else if (clazz == BsonSymbol.class) {
+
+        } else if (clazz == BsonJavaScriptWithScope.class) {
+
+        } else if (clazz == BsonInt32.class) {
+
+        } else if (clazz == BsonTimestamp.class) {
+
+        } else if (clazz == BsonInt64.class) {
+
+        } else if (clazz == BsonDecimal128.class) {
+
+        } else if (clazz == BsonMinKey.class) {
+
+        } else if (clazz == BsonMaxKey.class) {
+
+        } else {
+            throw new IllegalArgumentException("No mapping known for this MongoDB data type: " + clazz);
+        }*/
 	}
 	
 	/**
