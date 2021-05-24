@@ -60,6 +60,7 @@ public class Decimals extends ProfileStatistic {
   }
 
   private int getDecimals(int decimals, Number field) {
+    if (field == null) return 0;
     String numStr = field.toString();
     if (StringUtils.isBlank(numStr) || numStr.isEmpty()) return -1;
     int pointPos = numStr.indexOf('.');

@@ -13,3 +13,9 @@
 Grafana/grafana-6.2.5_windows/data/
 /kg-repo/*
 /.idea/*
+trustkg.iml
+kg-repo
+SupplyChain
+testrepo
+.temp*
+kg-repo
