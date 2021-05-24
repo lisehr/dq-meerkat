@@ -187,14 +187,14 @@ public class Datasource extends DSDElement {
 		this.prefix = prefix.replace(":", "");
 		builder.setNamespace(prefix, this.getURI() +"/");
 		builder.setNamespace("dsd", "http://dqm.faw.jku.at/dsd" +"/");
-		builder.setNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns" +"/");
+		builder.setNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns");
 		builder.setNamespace("attribute", "http://dqm.faw.jku.at/dsd/Attribute/");
 		
 		
 		for (Concept c : this.getConcepts()) {
 			builder.namedGraph(prefix +":"+ c.getLabel())
 			.subject(prefix +":"+ c.getLabel())
-			.add("rdf:type", "dsd:DataSource");
+			.add("rdf:#type", "dsd:DataSource");
 			addForeignKeysToModel(c,builder);
 			addPrimaryKeysToModel(c,builder);
 			addFunctionalDependenciesToModel(c,builder);
@@ -224,11 +224,13 @@ public class Datasource extends DSDElement {
 			if(metric.getValue() != null) {
 				builder.namedGraph(prefix +":"+ concept.getLabel())
 				.subject(prefix + ":" + a.getLabel() + "/" + "DataProfile")
+				.add("rdf:#type", "dsd:Dataprofile")
 				.add("metric:hasMetric",prefix + ":" + a.getLabel() + "/" + metric.getTitle().getLabel().replace(" ","").replace("%","Percent"));
 			
 				builder.namedGraph(prefix +":"+ concept.getLabel())
 				.subject(prefix + ":" + a.getLabel() + "/"+ metric.getTitle().getLabel().replace(" ","").replace("%","Percent"))
-				.add("metric:hasValue",metric.getValue());
+				.add("metric:hasValue",metric.getValue())
+				.add("rdf:#type", "dsd:DataProfileMetric");
 			}
 		}
 	}
@@ -237,42 +239,42 @@ public class Datasource extends DSDElement {
 		builder.namedGraph(prefix +":"+ c.getLabel())
 		.subject(prefix + ":" + a.getLabel())
 		.add("attribute:hasAttributeProperty", prefix + ":" + a.getLabel() + "/" + property)
-		.add("rdf:type","dsd:Attribute");
+		.add("rdf:#type","dsd:Attribute");
 
 		switch(property) {
 		case "DataType": 
 			builder.namedGraph(prefix +":"+ c.getLabel())
 			.subject(prefix + ":" + a.getLabel() + "/" + property)
 			.add("attribute" +":" +"hasValue",a.getDataTypeString())
-			.add("rdf" +":" +"type","dsd" +":" +"AttributeProperty");
+			.add("rdf" +":" +"#type","dsd" +":" +"AttributeProperty");
 			break;
 
 		case "Nullable": 
 			builder.namedGraph(prefix +":"+ c.getLabel())
 			.subject(prefix + ":" + a.getLabel() + "/" + property)
 			.add("attribute" +":" +"hasValue",a.isNullable())
-			.add("rdf" +":" +"type","dsd" +":" +"AttributeProperty");
+			.add("rdf" +":" +"#type","dsd" +":" +"AttributeProperty");
 			break;
 
 		case "AutoIncrement": 
 			builder.namedGraph(prefix +":"+ c.getLabel())
 			.subject(prefix + ":" + a.getLabel() + "/" + property)
 			.add("attribute" +":" +"hasValue",a.isAutoIncrement())
-			.add("rdf" +":" +"type","dsd" +":" +"AttributeProperty");
+			.add("rdf" +":" +"#type","dsd" +":" +"AttributeProperty");
 			break;
 
 		case "Unique": 
 			builder.namedGraph(prefix +":"+ c.getLabel())
 			.subject(prefix + ":" + a.getLabel() + "/" + property)
 			.add("attribute" +":" +"hasValue",a.isUnique())
-			.add("rdf" +":" +"type","dsd" +":" +"AttributeProperty");
+			.add("rdf" +":" +"#type","dsd" +":" +"AttributeProperty");
 			break;
 			
 		case "DefaultValue": 
 			builder.namedGraph(prefix +":"+ c.getLabel())
 			.subject(prefix + ":" + a.getLabel() + "/" + property)
 			.add("attribute" +":" +"hasValue",a.getDefaultValue())
-			.add("rdf" +":" +"type","dsd" +":" +"AttributeProperty");
+			.add("rdf" +":" +"#type","dsd" +":" +"AttributeProperty");
 			break;
 		}
 	}
@@ -311,6 +313,7 @@ private void addFunctionalDependenciesToModel(Concept c, ModelBuilder builder) {
 		
 		builder.namedGraph(prefix +":"+ c.getLabel())
 		.subject(prefix +":FunctionalDependency" + index)
+		.add("rdf:#type", "dsd:FunctionalDependency")
 		.add("dsd:" +"RightSide",prefix + dependency.getRightSide().getLabel());
 		for(Attribute at : dependency.getLeftSide().getAttributes()) {
 			builder.namedGraph(prefix +":"+ c.getLabel())
@@ -332,6 +335,7 @@ private void addPrimaryKeysToModel(Concept c, ModelBuilder builder) {
 	for(Attribute at : c.getPrimaryKeySet()) {
 		builder.namedGraph(prefix +":"+ c.getLabel())
 		.subject(prefix +":PrimaryKey")
+		.add("rdf:#type", "dsd:PrimaryKey")
 		.add(prefix +":" +"PrimaryKeyAttribute",prefix + at.getLabel());
 	}
 }
@@ -352,6 +356,7 @@ private void addForeignKeysToModel(Concept c, ModelBuilder builder) {
 		
 		builder.namedGraph(prefix +":"+ c.getLabel())
 		.subject(prefix +":ForeignKey" + index)
+		.add("rdf:#type", "dsd:ForeignKey")
 		.add(prefix +":" +"ReferencedConcept",key.getReferencedConcept().getLabel())
 		.add(prefix +":" +"DeleteRule",key.getDeleteRule().toString())
 		.add(prefix +":" +"UpdateRule",key.getUpdateRule().toString());

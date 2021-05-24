@@ -41,7 +41,8 @@ public class Constants {
 		popularBabyNames("csv/Popular_Baby_Names.csv"),
 		salesRecords("csv/100000 Sales Records.csv"),
 		vehicles("csv/vehicles30000.csv"),
-		vehiclesSmall("csv/vehicles3.csv");
+		vehiclesSmall("csv/vehicles3.csv"),
+		test("csv/Sales_Examples.csv");
 
 
 		private final String relativePath;

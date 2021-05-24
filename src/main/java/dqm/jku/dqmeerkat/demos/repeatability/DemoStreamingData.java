@@ -30,7 +30,7 @@ public class DemoStreamingData {
   public static void main(String args[]) throws IOException, InterruptedException, NoSuchMethodException {
     InfluxDBConnection influx = new InfluxDBConnection();
 
-    ConnectorCSV conn = FileSelectionUtil.getConnectorCSV(Constants.FileName.acceleration.getPath());
+    ConnectorCSV conn = FileSelectionUtil.getConnectorCSV(Constants.FileName.test.getPath());
 
     if (DEBUG) {
       influx.deleteDB();
@@ -43,7 +43,7 @@ public class DemoStreamingData {
 
 
     for (Concept c : ds.getConcepts()) {
-      RecordList rs = conn.getPartialRecordList(c, 0, 5000);
+      RecordList rs = conn.getPartialRecordList(c, 0, 20);
       for (Attribute a : c.getSortedAttributes()) {
         a.annotateProfile(rs);
       }
@@ -51,7 +51,7 @@ public class DemoStreamingData {
     }
 
     ds.addProfileToInflux(influx);
-    RecordList rs = conn.getPartialRecordList(testCon, 5001, Integer.MAX_VALUE);
+    RecordList rs = conn.getPartialRecordList(testCon, 21, Integer.MAX_VALUE);
     boolean fileFinished = false;
     int i = 0;
     Iterator<Record> itR = rs.iterator();
