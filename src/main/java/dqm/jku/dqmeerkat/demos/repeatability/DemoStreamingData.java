@@ -32,10 +32,10 @@ public class DemoStreamingData {
 
     ConnectorCSV conn = FileSelectionUtil.getConnectorCSV(Constants.FileName.acceleration.getPath());
 
-  //  if (DEBUG) {
+    if (DEBUG) {
       influx.deleteDB();
       influx = new InfluxDBConnection();
-   // }
+    }
 
     Concept testCon = null;
 
