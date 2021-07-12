@@ -14,10 +14,11 @@
 Grafana/grafana-7.5.5_windows/data
 /kg-repo/*
 /.idea/*
-trustkg.iml
+*.iml
 kg-repo
 SupplyChain
 testrepo
 .temp*
 kg-repo
+*.lnk
 
