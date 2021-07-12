@@ -16,12 +16,11 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Idea: This demo should update the data profile after every received record.
- * Since these records from Tributech are all received by the time of the
- * implementation, we use a fixed scheduling rate to submit new jobs (i.e. every
- * 20 seconds).
+ * Since these records from the vehicles30000 csv file are all received by the time of the
+ * implementation, we use a scheduling algorithm {@see createTimeout} to submit new jobs.
  * 
  * 
- * @author optimusseptim
+ * @author Rebecca Rachinger (based on the DemoStreamingData byoptimusseptim)
  *
  */
 public class DemoStreamingDataVehicles {
