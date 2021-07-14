@@ -592,7 +592,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Vehicle - fuel",
+      "title": "Vehicle - fuel - String Length",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1189,5 +1189,5 @@
   "timezone": "",
   "title": "Vehicle-streaming-data-dashboard",
   "uid": "EpADHqznk",
-  "version": 7
+  "version": 9
 }
