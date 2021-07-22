@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  * implementation, we use a scheduling algorithm {@see createTimeout} to submit new jobs.
  * 
  * 
- * @author Rebecca Rachinger (based on the DemoStreamingData byoptimusseptim)
+ * @author Rebecca Rachinger (based on the DemoStreamingData by optimusseptim)
  *
  */
 public class DemoStreamingDataVehicles {

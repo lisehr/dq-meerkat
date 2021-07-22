@@ -4,13 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 public class FileReaderUtil {
-    private FileReaderUtil(){};
-
-    private static final String REGEX_CHAR_NO_QOUTATION_MARK = "[^\\\"]";
-    private static final String REGEX_QOUTATION_MARK = "\\\"";
-    private static final String EVEN_NO_OF_QUOTATION_MARK = REGEX_CHAR_NO_QOUTATION_MARK+
-            "*("+REGEX_CHAR_NO_QOUTATION_MARK+"*"+REGEX_QOUTATION_MARK+REGEX_CHAR_NO_QOUTATION_MARK+"*"+REGEX_QOUTATION_MARK+")*"+
-            REGEX_CHAR_NO_QOUTATION_MARK+"*";
+    private FileReaderUtil(){}
 
     public static String readLineEscapingQuotedNewlines(BufferedReader reader, String linebreak) throws IOException {
         String readLine = reader.readLine();
@@ -20,11 +14,18 @@ public class FileReaderUtil {
 
         StringBuilder readLineSb = new StringBuilder();
 
+
         readLineSb.append(readLine);
-        while (!readLineSb.toString().matches(EVEN_NO_OF_QUOTATION_MARK)){
+
+        long noOfQoutationMarks = readLine.chars().filter(c -> c == '"').count(); // get number of " in the String readLine
+
+        while ((noOfQoutationMarks % 2) != 0){
             readLineSb.append(linebreak);
-            readLineSb.append(reader.readLine());
-        }; // if there is not an an even number of " the loop continues
+            readLine = reader.readLine();
+            noOfQoutationMarks += readLine.chars().filter(c -> c == '"').count();
+            readLineSb.append(readLine);
+        } // if there is not an an even number of " the loop continues
+
         return readLineSb.toString();
     }
 }
