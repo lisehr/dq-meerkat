@@ -175,9 +175,9 @@ public class ConnectorCSV extends DSConnector {
 
 	@Override
 	public RecordList getPartialRecordList(Concept concept, int offset, int noRecs) throws IOException {
-	  if (!recordMap.values().isEmpty()) return recordMap.get(concept).splitPartialRecordList(offset, noRecs);
-    RecordList allRecords = getRecordList(concept);
-    return allRecords.splitPartialRecordList(offset, noRecs);
+	  	if (!recordMap.values().isEmpty()) return recordMap.get(concept).splitPartialRecordList(offset, noRecs);
+    		RecordList allRecords = getRecordList(concept);
+    		return allRecords.splitPartialRecordList(offset, noRecs);
 	}
 
 	@Override
@@ -195,7 +195,7 @@ public class ConnectorCSV extends DSConnector {
 		for (String s : attNames) {
 			if (removeQuotes) s = s.replace("\"", "");
 			Attribute a = DSDFactory.makeAttribute(s, c);
-			a.setDataType(String.class);
+			a.setDataType(Object.class);
 			a.setOrdinalPosition(i++);
 			a.setNullable(true);
 			a.setAutoIncrement(false);

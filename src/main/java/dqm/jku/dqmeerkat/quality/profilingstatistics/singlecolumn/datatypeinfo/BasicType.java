@@ -36,8 +36,12 @@ public class BasicType extends ProfileStatistic {
   @Override
   public void calculation(RecordList rs, Object oldVal) {
     if (((Attribute) super.getRefElem()).getDataType().equals(String.class)) super.setValue("String");
-    else if (((Attribute) super.getRefElem()).getDataType().equals(Object.class)) super.setValue("Null");
+    else if (((Attribute) super.getRefElem()).getDataType().equals(Object.class)) super.setValue("Object");
     else super.setValue("Numeric");
+
+
+   // try (((Attribute) super.getRefElem()).getDataType().equals()
+
     this.setNumericVal(this.getValue());
     super.setValueClass(String.class);
   }

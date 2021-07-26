@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * This class tests profile statistics that are in the package {@link dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.datatypeinfo}.
- * The tests are run with the "id", the "region" and/or the "lat" column of the vehicles30000.csv
+ * The tests are run with the "id", the "region" and/or the "lat" column of the vehicles30000.csv and the empty.csv
  * @author Johannes Schrott
  */
 
@@ -31,9 +31,15 @@ class DatatypeInfoStatisticsTest {
     private static DataProfile vehicleLatitudeDP;
     private static RecordList vehicleRecords;
 
+    private static DataProfile emptyDP;
+    private static RecordList emptyRecords;
+
     // The expected results for the tests where calculated using Excel (see the vehicles30000.xlsx, that contains a pivot table of the dataset)
-    static final int NUMBER_OF_RECORDS = 29759;
-    static final int NUMBER_OF_NULL_ID = 0; // Number of null values in "id" column
+    static final int VEHICLE_NUMBER_OF_RECORDS = 29759;
+    static final int VEHICLE_NUMBER_OF_NULL_ID = 0; // Number of null values in "id" column
+
+    static final int EMPTY_NUMBER_OF_RECORDS = 7;
+    static final int EMPTY_NUMBER_OF_NULL = 7;
 
     private final static int VEHICLE_ID_DIGITS = 10;
     private final static int VEHICLE_ID_DECIMALS = 0;
@@ -86,6 +92,21 @@ class DatatypeInfoStatisticsTest {
                 }
             });
 
+            emptyDP = new DataProfile();
+
+            DSConnector csvConnector2 = FileSelectionUtil.getConnectorCSV(Constants.FileName.empty.getPath());
+            Datasource ds2 = csvConnector2.loadSchema();
+            ds2.getConcepts().forEach(concept -> {
+                Attribute attribute = concept.getAttribute("emptycolumn"); // Spaces in names of a column (attribite) get removed...
+                emptyDP.setElem(attribute);
+                emptyDP.setURI(attribute.getURI()+"/profile");
+                try {
+                    emptyRecords = csvConnector2.getRecordList(concept);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -94,6 +115,7 @@ class DatatypeInfoStatisticsTest {
         assertNotNull(vehicleIdDP);
         assertNotNull(vehicleRegionDP);
         assertNotNull(vehicleLatitudeDP);
+        assertNotNull(emptyDP);
 
     }
 
@@ -101,22 +123,33 @@ class DatatypeInfoStatisticsTest {
      * This method tests the {@link dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.datatypeinfo.BasicType} profile statistic.
      * */
     @Test
-    @DisplayName("BasicType (no null values)")
+    @DisplayName("BasicType")
     void testBasicType() {
         vehicleIdDP.addStatistic(new BasicType(vehicleIdDP));
         vehicleRegionDP.addStatistic(new BasicType(vehicleRegionDP));
+
+        emptyDP.addStatistic(new BasicType(emptyDP));
+
+
         vehicleIdDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
         vehicleRegionDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
+
+        emptyDP.getStatistics().forEach(statistic -> statistic.calculation(emptyRecords, null));
 
         // The profilestatistics computed value is a String (this is not the type of the attributes values!)
         assertEquals(String.class, vehicleIdDP.getStatistic(StatisticTitle.bt).getValueClass());
         assertEquals(String.class, vehicleRegionDP.getStatistic(StatisticTitle.bt).getValueClass());
 
+        assertEquals(String.class, emptyDP.getStatistic(StatisticTitle.bt).getValueClass());
+
+
         String countType = (String) vehicleIdDP.getStatistic(StatisticTitle.bt).getValue();
         String nameType = (String) vehicleRegionDP.getStatistic(StatisticTitle.bt).getValue();
+        String emptyType = (String) emptyDP.getStatistic(StatisticTitle.bt).getValue();
 
         assertEquals("Numeric", countType);
         assertEquals("String", nameType);
+        assertEquals("Object", emptyType); // Object is returned for null (--> the type is undefined)
 
     }
 
