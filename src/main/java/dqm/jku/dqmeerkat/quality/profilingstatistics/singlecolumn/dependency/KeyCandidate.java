@@ -43,8 +43,10 @@ public class KeyCandidate extends DependentProfileStatistic {
    */
   private void calculation(RecordList rl, Object oldVal, boolean checked) {
     if (!checked) this.dependencyCalculationWithRecordList(rl);
-    super.setValue(((double) this.getRefProf().getStatistic(unique).getValue()) == (double) 100.0);
-    super.setNumericVal(((double) this.getRefProf().getStatistic(unique).getValue()) == (double) 100.0);
+    boolean isKeyCandidate = ((double) this.getRefProf().getStatistic(unique).getValue()) == (double) 100.0;
+    super.setValue(isKeyCandidate);
+
+    super.setNumericVal(isKeyCandidate ? 1 : 0);
     super.setValueClass(Boolean.class);
   }
 
