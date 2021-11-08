@@ -10,7 +10,9 @@ import dqm.jku.dqmeerkat.dsd.records.RecordList;
 public class TestNeo4j {
 
 	public static void main(String[] args)  {
-		
+
+		// TODO Merge master
+
 		String label = "neo4j";
 		String uri = "bolt://localhost:7687";
 		
@@ -22,23 +24,21 @@ public class TestNeo4j {
 	    	System.out.println("Schema: ");
 	    	ds.printStructure();
 
-	    	/*
-			for (Concept c : ds.getConcepts()) {
-				RecordList rs = conn.getRecordList(c);
-
-				for(Attribute a : c.getSortedAttributes()) {
-					RecordList newList = rs.getValues(c, a.getLabel());
-
-					if(newList.size() > 0) {
-						c.annotateProfile(newList);
-					} else {
-						c.emptyDataProfile();
-					}
-					c.printAnnotatedProfileNeo4J(a);
-
-				}
-			}
-			*/
+//			for (Concept c : ds.getConcepts()) {
+//				RecordList rs = conn.getRecordList(c);
+//
+//				for(Attribute a : c.getSortedAttributes()) {
+//					RecordList newList = rs.getValues(c, a.getLabel());
+//
+//					if(newList.size() > 0) {
+//						c.annotateProfile(newList);
+//					} else {
+//						c.emptyDataProfile();
+//					}
+//					c.printAnnotatedProfileNeo4J(a);
+//
+//				}
+//			}
 
 			for (Concept c : ds.getConcepts()) {
 				RecordList rs = conn.getDegreeDistribution(c);
@@ -55,7 +55,6 @@ public class TestNeo4j {
 					}
 				}
 			}
-
 
 		} catch (NoSuchMethodException e) {
 			e.printStackTrace();

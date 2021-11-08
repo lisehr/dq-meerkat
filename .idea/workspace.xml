@@ -36,40 +36,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b3839f9-04d1-40c4-b6b7-ec83830e76bb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_0_7_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_classification_0_7_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_clustering_0_7_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_core_0_7_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_core_api_0_7_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_core_data_0_7_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_core_dbids_0_7_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_core_dbids_int_0_7_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_core_distance_0_7_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_core_math_0_7_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_core_parallel_0_7_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_core_util_0_7_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_data_generator_0_7_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_database_0_7_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_geo_0_7_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_index_0_7_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_index_lsh_0_7_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_index_mtree_0_7_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_index_preprocessed_0_7_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_index_rtree_0_7_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_index_various_0_7_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_input_0_7_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_itemsets_0_7_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_logging_0_7_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_outlier_0_7_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_persistent_0_7_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_precomputed_0_7_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_lmu_ifi_dbs_elki_elki_timeseries_0_7_5.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__it_unimi_dsi_fastutil_8_5_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_jafama_jafama_2_3_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_jsonld_java_jsonld_java_jsonld_java_0_9_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__it_unimi_dsi_fastutil_8_5_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_core_commands_3_3_0_I20070605_0010.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_core_commands_3_3_0_I20070605_0010.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/block-daq/v16/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/block-daq/v16/.suo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/slnx.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/slnx.sqlite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingmetrics/MetricTitle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingmetrics/MetricTitle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/demos/kathi/TestNeo4j.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/demos/kathi/TestNeo4j.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trustkg.iml" beforeDir="false" afterPath="$PROJECT_DIR$/trustkg.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -108,13 +80,14 @@
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="Debugger_Data_Views_Java" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RunManager">
     <configuration name="TestNeo4j" type="Application" factoryName="Application" nameIsGenerated="true">
@@ -170,8 +143,27 @@
       <workItem from="1615807511314" duration="21825000" />
       <workItem from="1615899198854" duration="7852000" />
       <workItem from="1615985820063" duration="307000" />
+      <workItem from="1634392277701" duration="2249000" />
+      <workItem from="1634395072356" duration="1326000" />
+      <workItem from="1634460853945" duration="2263000" />
+      <workItem from="1634829339547" duration="2675000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/Grafana/grafana-6.2.5/public/app/plugins/panel/graph/graph_tooltip.d.ts" />
+        <option value="$PROJECT_DIR$/Grafana/grafana-6.2.5/public/app/plugins/datasource/opentsdb/datasource.d.ts" />
+        <option value="$PROJECT_DIR$/Grafana/grafana-6.2.5/public/app/plugins/datasource/cloudwatch/datasource.d.ts" />
+        <option value="$PROJECT_DIR$/Grafana/grafana-6.2.5/public/app/plugins/datasource/prometheus/metric_find_query.d.ts" />
+        <option value="$PROJECT_DIR$/Grafana/grafana-6.2.5_windows/public/app/plugins/panel/graph/graph_tooltip.d.ts" />
+        <option value="$PROJECT_DIR$/Grafana/grafana-6.2.5_windows/public/app/plugins/datasource/opentsdb/datasource.d.ts" />
+        <option value="$PROJECT_DIR$/Grafana/grafana-6.2.5_windows/public/app/plugins/datasource/cloudwatch/datasource.d.ts" />
+        <option value="$PROJECT_DIR$/Grafana/grafana-6.2.5_windows/public/app/plugins/datasource/prometheus/metric_find_query.d.ts" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -185,88 +177,6 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="646" y="96" key="#&lt;template&gt;_of_Application" timestamp="1611085289320">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="646" y="96" key="#&lt;template&gt;_of_Application/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1611085289320" />
-    <state x="737" y="138" width="923" height="832" key="#TestNeo4j_(1)" timestamp="1611085443187">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="737" y="138" width="923" height="832" key="#TestNeo4j_(1)/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1611085443187" />
-    <state x="512" y="176" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1611085551188">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="512" y="176" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1611085551188" />
-    <state x="774" y="238" key="#com.intellij.ide.util.MemberChooser" timestamp="1615834636562">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="774" y="238" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1615834636562" />
-    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1615833353165">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1615833353165" />
-    <state x="419" y="289" key="FileChooserDialogImpl" timestamp="1613241945258">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="419" y="289" key="FileChooserDialogImpl/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1613241945258" />
-    <state width="1622" height="330" key="GridCell.Tab.0.bottom" timestamp="1615986127679">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1622" height="330" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1615986127679" />
-    <state width="1677" height="385" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.39.1720.1040@1920.39.1720.1040" timestamp="1615914990340" />
-    <state width="1622" height="330" key="GridCell.Tab.0.center" timestamp="1615986127679">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1622" height="330" key="GridCell.Tab.0.center/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1615986127679" />
-    <state width="1677" height="385" key="GridCell.Tab.0.center/0.0.1920.1040/1920.39.1720.1040@1920.39.1720.1040" timestamp="1615914990340" />
-    <state width="1622" height="330" key="GridCell.Tab.0.left" timestamp="1615986127679">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1622" height="330" key="GridCell.Tab.0.left/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1615986127679" />
-    <state width="1677" height="385" key="GridCell.Tab.0.left/0.0.1920.1040/1920.39.1720.1040@1920.39.1720.1040" timestamp="1615914990340" />
-    <state width="1622" height="330" key="GridCell.Tab.0.right" timestamp="1615986127679">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1622" height="330" key="GridCell.Tab.0.right/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1615986127679" />
-    <state width="1677" height="385" key="GridCell.Tab.0.right/0.0.1920.1040/1920.39.1720.1040@1920.39.1720.1040" timestamp="1615914990340" />
-    <state width="1877" height="467" key="GridCell.Tab.1.bottom" timestamp="1615838155605">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="467" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1615838155605" />
-    <state width="1877" height="467" key="GridCell.Tab.1.center" timestamp="1615838155605">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="467" key="GridCell.Tab.1.center/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1615838155605" />
-    <state width="1877" height="467" key="GridCell.Tab.1.left" timestamp="1615838155605">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="467" key="GridCell.Tab.1.left/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1615838155605" />
-    <state width="1877" height="467" key="GridCell.Tab.1.right" timestamp="1615838155605">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="467" key="GridCell.Tab.1.right/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1615838155605" />
-    <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1611841965927">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="777" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1611841965927" />
-    <state x="523" y="249" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1615832864920">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="523" y="249" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1615832864920" />
-    <state x="690" y="281" key="extract.method.dialog" timestamp="1615833095941">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="690" y="281" key="extract.method.dialog/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1615833095941" />
-    <state x="342" y="140" key="new project wizard" timestamp="1613241964410">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="342" y="140" key="new project wizard/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1613241964410" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1611835391755">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.39.1720.1040@0.0.1920.1040" timestamp="1611835391755" />
-  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -274,6 +184,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingmetrics/graphmetrics/MedianEntry.java</url>
           <line>70</line>
           <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/connectors/ConnectorNeo4J.java</url>
+          <line>129</line>
+          <option name="timeStamp" value="52" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

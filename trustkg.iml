@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration />
+    </facet>
+  </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
@@ -206,7 +211,7 @@
     <orderEntry type="library" name="Maven: com.squareup.okio:okio:1.17.2" level="project" />
     <orderEntry type="library" name="Maven: com.squareup.okhttp3:logging-interceptor:3.13.1" level="project" />
     <orderEntry type="library" name="Maven: com.github.jsonld-java:jsonld-java:0.9.0" level="project" />
-    <orderEntry type="library" name="Maven: com.github.jsonld-java.jsonld-java:jsonld-java:0.9.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore-osgi:4.4.4" level="project" />
     <orderEntry type="library" name="Maven: org.apache.jena:jena-tdb:3.2.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.jena:jena-arq:3.2.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.jena:jena-core:3.2.0" level="project" />
@@ -418,7 +423,7 @@
     <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-core-util:0.7.5" level="project" />
     <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-logging:0.7.5" level="project" />
     <orderEntry type="library" name="Maven: net.jafama:jafama:2.3.2" level="project" />
-    <orderEntry type="library" name="Maven: it.unimi.dsi:fastutil:8.5.2" level="project" />
+    <orderEntry type="library" name="Maven: it.unimi.dsi:fastutil:8.5.6" level="project" />
     <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-geo:0.7.5" level="project" />
     <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-core-dbids-int:0.7.5" level="project" />
     <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-core-dbids:0.7.5" level="project" />
