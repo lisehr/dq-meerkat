@@ -1,20 +1,20 @@
-package dqm.jku.dqmeerkat.quality.profilingmetrics.graphmetrics;
+package dqm.jku.dqmeerkat.quality.profilingstatistics.graphmetrics;
 
 import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingmetrics.ProfileMetric;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.util.AttributeSet;
+
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.*;
 
 import java.util.List;
 import java.util.regex.Pattern;
 
-import static dqm.jku.dqmeerkat.quality.profilingmetrics.MetricCategory.graphCat;
-import static dqm.jku.dqmeerkat.quality.profilingmetrics.MetricTitle.minimum;
-
-public class MinimumEntry extends ProfileMetric {
+public class MinimumEntry extends ProfileStatistic {
 
     private Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
 
@@ -75,7 +75,7 @@ public class MinimumEntry extends ProfileMetric {
     }
 
     @Override
-    public boolean checkConformance(ProfileMetric m, double threshold) {
+    public boolean checkConformance(ProfileStatistic m, double threshold) {
         return false;
     }
 

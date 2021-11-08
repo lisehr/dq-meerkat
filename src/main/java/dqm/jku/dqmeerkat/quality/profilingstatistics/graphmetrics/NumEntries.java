@@ -1,15 +1,15 @@
-package dqm.jku.dqmeerkat.quality.profilingmetrics.graphmetrics;
+package dqm.jku.dqmeerkat.quality.profilingstatistics.graphmetrics;
 
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingmetrics.ProfileMetric;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 
-import static dqm.jku.dqmeerkat.quality.profilingmetrics.MetricCategory.*;
-import static dqm.jku.dqmeerkat.quality.profilingmetrics.MetricTitle.*;
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.*;
 
 import java.util.List;
 
-public class NumEntries extends ProfileMetric {
+public class NumEntries extends ProfileStatistic {
 
     public NumEntries() {
 
@@ -42,7 +42,7 @@ public class NumEntries extends ProfileMetric {
     }
 
     @Override
-    public boolean checkConformance(ProfileMetric m, double threshold) {
+    public boolean checkConformance(ProfileStatistic m, double threshold) {
         // Never evaluates to false, because the reference is here the size of the RDP and should not be compared to the batch size of the DPs
         return true;
     }

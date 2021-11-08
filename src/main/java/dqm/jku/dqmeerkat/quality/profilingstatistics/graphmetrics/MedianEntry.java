@@ -1,11 +1,11 @@
-package dqm.jku.dqmeerkat.quality.profilingmetrics.graphmetrics;
+package dqm.jku.dqmeerkat.quality.profilingstatistics.graphmetrics;
 
 import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingmetrics.ProfileMetric;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.util.AttributeSet;
 import dqm.jku.dqmeerkat.util.numericvals.NumberComparator;
 
@@ -13,10 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import static dqm.jku.dqmeerkat.quality.profilingmetrics.MetricCategory.graphCat;
-import static dqm.jku.dqmeerkat.quality.profilingmetrics.MetricTitle.median;
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.*;
 
-public class MedianEntry extends ProfileMetric {
+public class MedianEntry extends ProfileStatistic {
 
     private Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
 
@@ -130,7 +130,7 @@ public class MedianEntry extends ProfileMetric {
     }
 
     @Override
-    public boolean checkConformance(ProfileMetric m, double threshold) {
+    public boolean checkConformance(ProfileStatistic m, double threshold) {
         return false;
     }
 

@@ -1,4 +1,4 @@
-package dqm.jku.dqmeerkat.quality.profilingmetrics.graphmetrics;
+package dqm.jku.dqmeerkat.quality.profilingstatistics.graphmetrics;
 
 import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.elements.Datasource;
@@ -6,16 +6,15 @@ import dqm.jku.dqmeerkat.dsd.elements.ReferenceAssociation;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingmetrics.MetricTitle;
-import dqm.jku.dqmeerkat.quality.profilingmetrics.ProfileMetric;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 
-import static dqm.jku.dqmeerkat.quality.profilingmetrics.MetricCategory.*;
-import static dqm.jku.dqmeerkat.quality.profilingmetrics.MetricTitle.*;
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.*;
 
 
 import java.util.List;
 
-public class GraphType extends ProfileMetric {
+public class GraphType extends ProfileStatistic {
 
     public GraphType() {
 
@@ -52,7 +51,7 @@ public class GraphType extends ProfileMetric {
     }
 
     @Override
-    public boolean checkConformance(ProfileMetric m, double threshold) {
+    public boolean checkConformance(ProfileStatistic m, double threshold) {
         return false;
     }
 }

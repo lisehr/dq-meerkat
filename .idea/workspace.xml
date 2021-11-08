@@ -36,12 +36,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b3839f9-04d1-40c4-b6b7-ec83830e76bb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_jsonld_java_jsonld_java_jsonld_java_0_9_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__it_unimi_dsi_fastutil_8_5_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_core_commands_3_3_0_I20070605_0010.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_core_commands_3_3_0_I20070605_0010.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_moshi_moshi_1_5_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_okhttp3_logging_interceptor_3_13_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_okhttp3_okhttp_3_13_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_retrofit2_converter_moshi_2_5_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_influxdb_influxdb_java_2_15.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_msgpack_msgpack_core_0_8_16.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/demos/kathi/TestNeo4j.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/demos/kathi/TestNeo4j.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/documentation/DQ-MeeRKat-getting-started.docx" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/DQ-MeeRKat-getting-started.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/DataProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/DataProfile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingstatistics/graphmetrics/DistinctEntries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingstatistics/graphmetrics/DistinctEntries.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingstatistics/graphmetrics/GraphType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingstatistics/graphmetrics/GraphType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingstatistics/graphmetrics/MaximumEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingstatistics/graphmetrics/MaximumEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingstatistics/graphmetrics/MedianEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingstatistics/graphmetrics/MedianEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingstatistics/graphmetrics/MinimumEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingstatistics/graphmetrics/MinimumEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingstatistics/graphmetrics/NumEntries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingstatistics/graphmetrics/NumEntries.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trustkg.iml" beforeDir="false" afterPath="$PROJECT_DIR$/trustkg.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -147,6 +156,7 @@
       <workItem from="1634395072356" duration="1326000" />
       <workItem from="1634460853945" duration="2263000" />
       <workItem from="1634829339547" duration="2675000" />
+      <workItem from="1636378818664" duration="2829000" />
     </task>
     <servers />
   </component>

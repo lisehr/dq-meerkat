@@ -1,13 +1,11 @@
 package dqm.jku.dqmeerkat.quality;
 
-import static dqm.jku.dqmeerkat.quality.profilingmetrics.MetricTitle.*;
-
 import java.sql.Date;
 import java.util.*;
 
 import dqm.jku.dqmeerkat.dsd.elements.*;
-import dqm.jku.dqmeerkat.quality.profilingmetrics.graphmetrics.*;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.graphmetrics.*;
 import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFContainer;
@@ -39,6 +37,8 @@ import org.w3c.dom.Attr;
 import javax.sql.DataSource;
 import javax.swing.text.html.Option;
 import javax.xml.crypto.Data;
+
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
 
 /**
  * Class for creating the data structure of a DataProfile. A DataProfile (DP)
@@ -326,7 +326,7 @@ public class DataProfile {
         mlist.add(this.getStatistic(StatisticTitle.hist));
 
         // Dependencies
-        mlist.add(this.getStatistic(StatisticTitle.keyCand));
+        mlist.add(this.getStatistic(keyCand));
 
         return mlist;
     }
@@ -354,7 +354,7 @@ public class DataProfile {
         }
 
         // Dependencies
-        mlist.add(this.getStatistic(StatisticTitle.keyCand));
+        mlist.add(this.getStatistic(keyCand));
 
         return mlist;
     }
@@ -465,18 +465,18 @@ public class DataProfile {
 			ReferenceAssociation association = (ReferenceAssociation) c.getDatasource().getAssociation("Ref/" + c.getLabelOriginal());
 			String neoType = association.getNeo4JType();
 
-			ProfileMetric size = new NumEntries(this);
-			metrics.add(size);
-			ProfileMetric distinctEntries = new DistinctEntries(this);
-			metrics.add(distinctEntries);
-			ProfileMetric type = new GraphType(this);
-			metrics.add(type);
-			ProfileMetric maximum = new MaximumEntry(this);
-			metrics.add(maximum);
-			ProfileMetric minimum = new MinimumEntry(this);
-			metrics.add(minimum);
-			ProfileMetric median = new MedianEntry(this);
-			metrics.add(median);
+            ProfileStatistic size = new NumEntries(this);
+            statistics.add(size);
+            ProfileStatistic distinctEntries = new DistinctEntries(this);
+            statistics.add(distinctEntries);
+            ProfileStatistic type = new GraphType(this);
+            statistics.add(type);
+            ProfileStatistic maximum = new MaximumEntry(this);
+            statistics.add(maximum);
+            ProfileStatistic minimum = new MinimumEntry(this);
+            statistics.add(minimum);
+            ProfileStatistic median = new MedianEntry(this);
+            statistics.add(median);
 
 		}
 	}
@@ -491,7 +491,7 @@ public class DataProfile {
 	}
 
 	private void calculateSingleColumnNeo4j(RecordList rl) throws  NoSuchMethodException {
-		for (ProfileMetric p : metrics) {
+		for (ProfileStatistic p : statistics) {
 			p.calculation(rl, p.getValue());
 		}
 	}
