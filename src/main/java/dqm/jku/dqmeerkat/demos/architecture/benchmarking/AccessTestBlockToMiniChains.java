@@ -31,7 +31,7 @@ public class AccessTestBlockToMiniChains {
   private static final int SETSOFELEMS = 3;
 
   public static void main(String args[]) throws IOException {
-    DSConnector conn = FileSelectionUtil.connectToCSV(1);
+    DSConnector conn = FileSelectionUtil.getConnectorCSV(1);
 
     if (DEBUG) {
       System.out.println("Connection established!");

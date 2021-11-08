@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FolderPicker should render 1`] = `
+<div
+  aria-label="Folder picker select container"
+>
+  <AsyncSelect
+    allowCustomValue={false}
+    defaultOptions={true}
+    defaultValue={Object {}}
+    loadOptions={[Function]}
+    loadingMessage="Loading folders..."
+    onChange={[Function]}
+    onCreateOption={[Function]}
+    value={Object {}}
+  />
+</div>
+`;

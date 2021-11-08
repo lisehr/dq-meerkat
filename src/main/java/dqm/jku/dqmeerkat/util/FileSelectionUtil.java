@@ -27,13 +27,16 @@ public class FileSelectionUtil {
 
   /**
    * Method for connecting to a specific CSV file in the resource folder
-   * @deprecated As the index of a file may change, please use {@link #connectToCSV(String)} with a path from the getPath method of {@link Constants.FileName}
+   * 
+   * @deprecated As the index of a file may change, please use
+   *             {@link #getConnectorCSV(String)} with a path from the getPath
+   *             method of {@link Constants.FileName}
    * @param index the number of the file, listed alphabetically
    * @return CSVConnector
    * @throws IOException
    */
   @Deprecated
-  public static ConnectorCSV connectToCSV(int index) throws IOException {
+  public static ConnectorCSV getConnectorCSV(int index) throws IOException {
     // walk resources package to make a selection on which csv file should be used
     // for the demo
     Stream<Path> paths = Files.walk(Paths.get(PREFIX + CSV));
@@ -41,20 +44,22 @@ public class FileSelectionUtil {
     files = files.subList(1, files.size());
     paths.close();
 
-    return new ConnectorCSV(files.get(index).toString(), ",", "\n", FilenameUtils.removeExtension(files.get(index).getFileName().toString()), true);
+    return new ConnectorCSV(files.get(index).toString(), ",", "\n",
+        FilenameUtils.removeExtension(files.get(index).getFileName().toString()), true);
 
   }
 
   /**
    * Method for connecting to a specific CSV file specified by its path
+   * 
    * @param path The path to the file, retrieve it from {@link Constants.FileName}
    * @return ConnectorCSV
    * @throws IOException when an error on reading the file occurs
    */
-  public static ConnectorCSV connectToCSV(String path) throws IOException {
+  public static ConnectorCSV getConnectorCSV(String path) throws IOException {
     // Extracts the filename without file suffix, as this is needed for CSVConnector param "label"
     String[] pathParts = path.split("\\\\|\\/");
-    String filename = pathParts[pathParts.length-1];
+    String filename = pathParts[pathParts.length - 1];
     String[] filenameSplitted = filename.split("\\.");
     String filenameWithoutExtension = filenameSplitted[0];
 
@@ -69,7 +74,7 @@ public class FileSelectionUtil {
    * @return CSVConnector
    * @throws IOException
    */
-  public static ConnectorCSV connectToCSV(int index, String name) throws IOException {
+  public static ConnectorCSV getConnectorCSV(int index, String name) throws IOException {
     // walk resources package to make a selection on which csv file should be used
     // for the demo
     Stream<Path> paths = Files.walk(Paths.get(PREFIX + CSV));
@@ -80,11 +85,10 @@ public class FileSelectionUtil {
 
   }
 
-
   /**
    * Method for reading all regex patterns in the respective file
    * 
-   * @param index the file index, sorted alphabetically
+   * @param index   the file index, sorted alphabetically
    * @param pentaho checks if file is accessed from pentaho
    * @return list of strings containing regex patterns
    * @throws IOException
@@ -92,9 +96,11 @@ public class FileSelectionUtil {
   public static List<String> readAllPatternsOfFile(int index, boolean pentaho) throws IOException {
     // walk resources package to make a selection on which pattern file should be
     // used for the demo
-  	Stream<Path> paths;
-  	if (pentaho) paths = Files.walk(Paths.get(Paths.get("").toAbsolutePath().toString() + PENT_PREFIX + PATTERNS));
-  	else paths = Files.walk(Paths.get(PREFIX + PATTERNS));
+    Stream<Path> paths;
+    if (pentaho)
+      paths = Files.walk(Paths.get(Paths.get("").toAbsolutePath().toString() + PENT_PREFIX + PATTERNS));
+    else
+      paths = Files.walk(Paths.get(PREFIX + PATTERNS));
     List<Path> files = paths.collect(Collectors.toList());
     paths.close();
 

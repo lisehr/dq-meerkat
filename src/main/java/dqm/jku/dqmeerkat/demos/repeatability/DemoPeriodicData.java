@@ -35,7 +35,7 @@ public class DemoPeriodicData {
     InfluxDBConnection influx = new InfluxDBConnection();
     int noRecs = 0;
     int offset = 0;
-    ConnectorCSV conn = FileSelectionUtil.connectToCSV(Constants.FileName.dataCoSupplyChainDataset.getPath());
+    ConnectorCSV conn = FileSelectionUtil.getConnectorCSV(Constants.FileName.dataCoSupplyChainDataset.getPath());
 
     if (DELETE_INFLUX) {
       influx.deleteDB();

@@ -1,16 +1,17 @@
 package dqm.jku.dqmeerkat.pentaho.util;
 
-import static dqm.jku.dqmeerkat.quality.profilingmetrics.MetricTitle.bt;
-import static dqm.jku.dqmeerkat.quality.profilingmetrics.MetricTitle.dec;
-import static dqm.jku.dqmeerkat.quality.profilingmetrics.MetricTitle.dig;
-import static dqm.jku.dqmeerkat.quality.profilingmetrics.MetricTitle.dt;
-import static dqm.jku.dqmeerkat.quality.profilingmetrics.MetricTitle.hist;
-import static dqm.jku.dqmeerkat.quality.profilingmetrics.MetricTitle.numrows;
-import static dqm.jku.dqmeerkat.quality.profilingmetrics.MetricTitle.pattern;
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.bt;
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.dec;
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.dig;
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.dt;
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.hist;
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.numrows;
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.pattern;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import org.pentaho.di.core.exception.KettleValueException;
 import org.pentaho.di.core.row.RowMetaInterface;
 import org.pentaho.di.core.row.ValueMetaAndData;
@@ -26,8 +27,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingmetrics.MetricCategory;
-import dqm.jku.dqmeerkat.quality.profilingmetrics.ProfileMetric;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory;
 import dqm.jku.dqmeerkat.util.converters.DataTypeConverter;
 
 public class PentahoRowUtils {
@@ -83,11 +83,11 @@ public class PentahoRowUtils {
 		dp.createDataProfileSkeletonRDB();
 		List<ValueMetaInterface> list = new ArrayList<>();
 		list.add(new ValueMetaString("URI"));
-		for (ProfileMetric m : dp.getMetrics()) {
+		for (ProfileStatistic m : dp.getStatistics()) {
 			if (m.getTitle() != pattern) {
-				if ((m.getCat() == MetricCategory.dti && (m.getTitle() == bt || m.getTitle() == dt)) || m.getTitle() == hist) list.add(new ValueMetaString(m.getLabel()));
-				else if (dp.profileMetricIsNumeric(m)) list.add(new ValueMetaNumber(m.getLabel()));
-				else if (m.getCat() == MetricCategory.depend) list.add(new ValueMetaBoolean(m.getLabel()));
+				if ((m.getCat() == StatisticCategory.dti && (m.getTitle() == bt || m.getTitle() == dt)) || m.getTitle() == hist) list.add(new ValueMetaString(m.getLabel()));
+				else if (dp.profileStatisticIsNumeric(m)) list.add(new ValueMetaNumber(m.getLabel()));
+				else if (m.getCat() == StatisticCategory.depend) list.add(new ValueMetaBoolean(m.getLabel()));
 				else list.add(new ValueMetaInteger(m.getLabel()));
 			}
 		}
@@ -97,7 +97,7 @@ public class PentahoRowUtils {
 	public static Object[] getPentahoOutputRowData(RowMetaInterface rowMeta, DataProfile dp) {
 		Object[] objects = new Object[rowMeta.size()];
 		objects[0] = dp.getURI();
-		for (int i = 1; i < rowMeta.size(); i++) dp.getMetrics().get(i - 1);
+		for (int i = 1; i < rowMeta.size(); i++) dp.getStatistics().get(i - 1);
 		return objects;
 	}
 	
@@ -105,8 +105,8 @@ public class PentahoRowUtils {
 	public static List<ValueMetaAndData> createPentahoOutputRowMeta(DataProfile dp) throws KettleValueException {
 		List<ValueMetaAndData> list = new ArrayList<>();
 		list.add(new ValueMetaAndData("URI", dp.getElem().getURI()));
-		for (ProfileMetric profileMetric : dp.getMetrics()) if (profileMetric.getTitle() != pattern) {
-			if (dp.profileMetricIsNumeric(profileMetric) || profileMetric.getTitle() == dec || profileMetric.getTitle() == dig || profileMetric.getTitle() == numrows) list.add(new ValueMetaAndData(profileMetric.getLabel(), profileMetric.getNumericVal()));
+		for (ProfileStatistic profileMetric : dp.getStatistics()) if (profileMetric.getTitle() != pattern) {
+			if (dp.profileStatisticIsNumeric(profileMetric) || profileMetric.getTitle() == dec || profileMetric.getTitle() == dig || profileMetric.getTitle() == numrows) list.add(new ValueMetaAndData(profileMetric.getLabel(), profileMetric.getNumericVal()));
 			else if (profileMetric.getTitle() == hist) list.add(new ValueMetaAndData(profileMetric.getLabel(), profileMetric.toString().substring(10, profileMetric.toString().length())));
 			else list.add(new ValueMetaAndData(profileMetric.getLabel(), profileMetric.getValue()));			
 		}

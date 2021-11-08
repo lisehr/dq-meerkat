@@ -25,12 +25,12 @@ import dqm.jku.dqmeerkat.util.FileSelectionUtil;
  *
  */
 public class DemoStreamingData {
-  private static final boolean DEBUG = false;
+  private static final boolean DEBUG = true;
 
   public static void main(String args[]) throws IOException, InterruptedException, NoSuchMethodException {
     InfluxDBConnection influx = new InfluxDBConnection();
 
-    ConnectorCSV conn = FileSelectionUtil.connectToCSV(Constants.FileName.acceleration.getPath());
+    ConnectorCSV conn = FileSelectionUtil.getConnectorCSV(Constants.FileName.acceleration.getPath());
 
     if (DEBUG) {
       influx.deleteDB();

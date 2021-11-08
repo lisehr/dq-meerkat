@@ -20,7 +20,7 @@ similarities to our project, whose goal is to create an extensive alarm and cris
 
 
 ## Disclaimer
-The provided frameworks and Bash-script are tested for Linux Mint 19.2 (Tina) and Windows 10 64bit. 
+The provided frameworks and commandline scripts are tested for Windows 10 64bit, earlier versions were also tested for Linux Mint 19.2 (Tina). 
 
 ## Getting Started
 DQ-MeeRKat is a Java maven project and in order to build the sources you need the following requirements:
@@ -30,14 +30,10 @@ DQ-MeeRKat is a Java maven project and in order to build the sources you need th
   <li>GIT</li>
 </ol>
 
-Afterwards, in order to execute the program, you need to start influxDB and Grafana.
+Afterwards, in order to execute the program, you need to start InfluxDB and Grafana.
 
-Run on Linux (Mint): <br/>
-```startLinuxEnv.sh``` (for starting InfluxDB and Grafana in one script)<br/>
-
-On Windows:<br>
+Run on Windows:<br>
 `startWinEnv.bat` (for starting InfluxDB and Grafana in one script)<br/>
-
 
 Alternatively, Windows users as well as Linux users can also start the executables provided in the following sections manually.
 
@@ -49,7 +45,7 @@ Run on Linux: <br/>
 ```InfluxDB\startInfluxConsole.sh``` (for querying InfluxDB using the console)
 
 Run on Windows: <br/>
-```InfluxDB\influxdb-1.7.7-1_windows\influxd.exe```
+```InfluxDB\influxdb-1.8.5-1_windows\influxd.exe```
 
 ### Grafana
 <a href="https://grafana.com" target="_blank">Grafana</a> is a browser-based dashboard for visualization. After the start, a browser window is opened with the dashboard URL (http://localhost:3000 by default).
@@ -58,7 +54,7 @@ Run on Linux:<br/>
 ```Grafana\startGrafana.sh```
 
 Run on Windows: <br/>
-```Grafana\grafana-6.2.5_windows\bin\grafana-server.exe```
+```Grafana\grafana-7.5.5_windows\bin\grafana-server.exe```
 
 Configure Grafana to execute demos:<br/>
 - Provide password for user
