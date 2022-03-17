@@ -1,6 +1,6 @@
 package dqm.jku.dqmeerkat.dsd.elements;
 
-import dqm.jku.dqmeerkat.influxdb.InfluxDBConnection;
+import dqm.jku.dqmeerkat.influxdb.InfluxDBConnectionV1;
 import dqm.jku.dqmeerkat.util.AttributeSet;
 
 public class FunctionalDependency extends DSDElement {
@@ -55,7 +55,7 @@ public class FunctionalDependency extends DSDElement {
   }
 
   @Override
-  public void addProfileToInflux(InfluxDBConnection connection) {
+  public void addProfileToInflux(InfluxDBConnectionV1 connection) {
     super.storeProfile(connection);
   }
 

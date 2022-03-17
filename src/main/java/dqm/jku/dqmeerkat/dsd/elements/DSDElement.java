@@ -14,7 +14,7 @@ import org.influxdb.dto.Point;
 import org.influxdb.dto.Point.Builder;
 
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
-import dqm.jku.dqmeerkat.influxdb.InfluxDBConnection;
+import dqm.jku.dqmeerkat.influxdb.InfluxDBConnectionV1;
 import dqm.jku.dqmeerkat.quality.DataProfile;
 
 @RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
@@ -201,16 +201,16 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
     cache.put(uri, elem);
   }
 
-  public abstract void addProfileToInflux(InfluxDBConnection connection);
+  public abstract void addProfileToInflux(InfluxDBConnectionV1 connection);
 
-  protected void storeProfile(InfluxDBConnection connection) {
+  protected void storeProfile(InfluxDBConnectionV1 connection) {
     if (this.dataProfile == null) return;
     if (this.dataProfile.getStatistics().stream().allMatch(m -> (m.getValue() == null))) return;
     Builder measure = Point.measurement(getURI()).time(System.currentTimeMillis(), TimeUnit.MILLISECONDS);
     connection.write(this.dataProfile.createMeasuringPoint(measure));
   }
   
-  protected void storeProfile(InfluxDBConnection connection, DataProfile profile) {
+  protected void storeProfile(InfluxDBConnectionV1 connection, DataProfile profile) {
     if (profile == null) return;
     if (profile.getStatistics().stream().allMatch(m -> (m.getValue() == null))) return;
     Builder measure = Point.measurement(getURI()).time(System.currentTimeMillis(), TimeUnit.MILLISECONDS);

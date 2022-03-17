@@ -19,7 +19,7 @@ import org.influxdb.dto.Point.Builder;
 import dqm.jku.dqmeerkat.blockchain.blocks.DSDBlock;
 import dqm.jku.dqmeerkat.blockchain.standardchain.BlockChain;
 import dqm.jku.dqmeerkat.dsd.records.Record;
-import dqm.jku.dqmeerkat.influxdb.InfluxDBConnection;
+import dqm.jku.dqmeerkat.influxdb.InfluxDBConnectionV1;
 import dqm.jku.dqmeerkat.util.AttributeSet;
 
 @RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
@@ -223,7 +223,7 @@ public class Concept extends DSDElement {
   }
 
   @Override
-  public void addProfileToInflux(InfluxDBConnection connection) {
+  public void addProfileToInflux(InfluxDBConnectionV1 connection) {
     super.storeProfile(connection);
     for (Attribute a : attributes)
       a.addProfileToInflux(connection);

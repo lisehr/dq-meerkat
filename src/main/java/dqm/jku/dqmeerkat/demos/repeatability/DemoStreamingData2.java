@@ -10,7 +10,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
-import dqm.jku.dqmeerkat.influxdb.InfluxDBConnection;
+import dqm.jku.dqmeerkat.influxdb.InfluxDBConnectionV1;
 import dqm.jku.dqmeerkat.util.Constants;
 import dqm.jku.dqmeerkat.util.FileSelectionUtil;
 
@@ -28,13 +28,13 @@ public class DemoStreamingData2 {
   private static final boolean DEBUG = false;
 
   public static void main(String args[]) throws IOException, InterruptedException, NoSuchMethodException {
-    InfluxDBConnection influx = new InfluxDBConnection();
+    InfluxDBConnectionV1 influx = new InfluxDBConnectionV1();
 
     ConnectorCSV conn = FileSelectionUtil.getConnectorCSV(Constants.FileName.test.getPath());
 
     if (DEBUG) {
       influx.deleteDB();
-      influx = new InfluxDBConnection();
+      influx = new InfluxDBConnectionV1();
     }
 
     Concept testCon = null;
@@ -90,7 +90,7 @@ public class DemoStreamingData2 {
    * @return true if the file is finished, false if not
    * @throws IOException
    */
-  private static boolean addMeasurement(InfluxDBConnection influx, Concept testCon, Iterator<Record> itR) throws IOException {
+  private static boolean addMeasurement(InfluxDBConnectionV1 influx, Concept testCon, Iterator<Record> itR) throws IOException {
     if (!itR.hasNext()) return true;
     influx.storeRecord(itR.next());
     return !itR.hasNext();

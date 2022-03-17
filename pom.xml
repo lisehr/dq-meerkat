@@ -18,6 +18,8 @@
         <pentaho.kettle.version>8.2.0.0-342</pentaho.kettle.version>
         <influxdb-java.version>2.22</influxdb-java.version>
         <lombok.version>1.18.22</lombok.version>
+        <seshat.version>1.1.2</seshat.version>
+        <log4j-core.version>2.17.1</log4j-core.version>
     </properties>
 
     <dependencies>
@@ -27,6 +29,27 @@
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
         </dependency>
+        <dependency>
+            <groupId>science.aist.seshat</groupId>
+            <artifactId>api</artifactId>
+            <version>${seshat.version}</version>
+            <scope>compile</scope> <!-- Note: this is default -->
+        </dependency>
+        <dependency>
+            <groupId>science.aist.seshat</groupId>
+            <artifactId>log4j2</artifactId>
+            <version>${seshat.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j-core.version}</version>
+        </dependency>
+
+
+
         <dependency>
             <groupId>com.appnexus.grafana-client</groupId>
             <artifactId>grafana-api-java-client</artifactId>

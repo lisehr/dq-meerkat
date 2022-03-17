@@ -1,29 +1,21 @@
 package dqm.jku.dqmeerkat.dsd.elements;
 
-import java.io.File;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.function.Predicate;
 
-import org.cyberborean.rdfbeans.RDFBeanManager;
 import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFContainer;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
-import org.cyberborean.rdfbeans.exceptions.RDFBeanException;
 import org.eclipse.rdf4j.model.Model;
-import org.eclipse.rdf4j.model.Resource;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
-import org.eclipse.rdf4j.repository.RepositoryConnection;
-import org.eclipse.rdf4j.repository.RepositoryException;
-import org.eclipse.rdf4j.repository.sail.SailRepository;
-import org.eclipse.rdf4j.sail.nativerdf.NativeStore;
 
 import dqm.jku.dqmeerkat.blockchain.blocks.DSDBlock;
 import dqm.jku.dqmeerkat.blockchain.standardchain.BlockChain;
-import dqm.jku.dqmeerkat.influxdb.InfluxDBConnection;
+import dqm.jku.dqmeerkat.influxdb.InfluxDBConnectionV1;
 import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.util.Constants;
@@ -167,7 +159,7 @@ public class Datasource extends DSDElement {
 
 	}
 
-	public void addProfileToInflux(InfluxDBConnection connection) {
+	public void addProfileToInflux(InfluxDBConnectionV1 connection) {
 		super.storeProfile(connection);
 		for (Concept c : concepts) {
 			c.addProfileToInflux(connection);

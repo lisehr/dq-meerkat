@@ -5,7 +5,7 @@ import java.io.IOException;
 import dqm.jku.dqmeerkat.connectors.ConnectorCSV;
 import dqm.jku.dqmeerkat.dsd.DSDKnowledgeGraph;
 import dqm.jku.dqmeerkat.dsd.elements.Datasource;
-import dqm.jku.dqmeerkat.influxdb.InfluxDBConnection;
+import dqm.jku.dqmeerkat.influxdb.InfluxDBConnectionV1;
 import dqm.jku.dqmeerkat.util.Constants;
 
 /**
@@ -57,7 +57,7 @@ public class GettingStarted {
     kg.exportKGToFile("supplychain");
 
     /** PHASE 2: CONTINUOUS DQ MONITORING *****/
-    InfluxDBConnection influx = new InfluxDBConnection();
+    InfluxDBConnectionV1 influx = new InfluxDBConnectionV1();
     kg.addProfilesToInflux(influx);
 
   }
