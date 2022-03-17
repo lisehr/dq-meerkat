@@ -1,195 +1,202 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>dqm.jku</groupId>
-	<artifactId>dqmeerkat</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+    <groupId>dqm.jku</groupId>
+    <artifactId>dqmeerkat</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
-	<name>dqmeerkat</name>
-	<url>http://maven.apache.org</url>
+    <name>dqmeerkat</name>
+    <url>http://maven.apache.org</url>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>11</maven.compiler.source>
-		<maven.compiler.target>11</maven.compiler.target>
-		<pentaho.kettle.version>8.2.0.0-342</pentaho.kettle.version>
-		<influxdb-java.version>2.22</influxdb-java.version>
-	</properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <pentaho.kettle.version>8.2.0.0-342</pentaho.kettle.version>
+        <influxdb-java.version>2.22</influxdb-java.version>
+        <lombok.version>1.18.22</lombok.version>
+    </properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>com.appnexus.grafana-client</groupId>
-			<artifactId>grafana-api-java-client</artifactId>
-			<version>1.0.5</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.ontotext.graphdb/graphdb-free-runtime -->
-		<dependency>
-			<groupId>com.ontotext.graphdb</groupId>
-			<artifactId>graphdb-free-runtime</artifactId>
-			<version>9.3.2</version>
+    <dependencies>
+        <!--infrastructure dependencies-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.appnexus.grafana-client</groupId>
+            <artifactId>grafana-api-java-client</artifactId>
+            <version>1.0.5</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.ontotext.graphdb/graphdb-free-runtime -->
+        <dependency>
+            <groupId>com.ontotext.graphdb</groupId>
+            <artifactId>graphdb-free-runtime</artifactId>
+            <version>9.3.2</version>
 
-			<exclusions>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-log4j12</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>log4j</groupId>
-					<artifactId>log4j</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.jetbrains.kotlin</groupId>
-					<artifactId>kotlin-stdlib</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.cyberborean</groupId>
-			<artifactId>rdfbeans</artifactId>
-			<version>2.2</version>
-		</dependency>
-		<!-- Postgres -->
-		<!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
-		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>42.2.14</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.marmotta</groupId>
-			<artifactId>kiwi-triplestore</artifactId>
-			<version>3.4.0</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.streampipes/streampipes-empire-pinto -->
-		<dependency>
-			<groupId>org.influxdb</groupId>
-			<artifactId>influxdb-java</artifactId>
-			<version>${influxdb-java.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.github.jsonld-java</groupId>
-			<artifactId>jsonld-java</artifactId>
-			<version>0.9.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.jetbrains.kotlin</groupId>
+                    <artifactId>kotlin-stdlib</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.cyberborean</groupId>
+            <artifactId>rdfbeans</artifactId>
+            <version>2.2</version>
+        </dependency>
+        <!-- Postgres -->
+        <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.14</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.marmotta</groupId>
+            <artifactId>kiwi-triplestore</artifactId>
+            <version>3.4.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.streampipes/streampipes-empire-pinto -->
+        <dependency>
+            <groupId>org.influxdb</groupId>
+            <artifactId>influxdb-java</artifactId>
+            <version>${influxdb-java.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.jsonld-java</groupId>
+            <artifactId>jsonld-java</artifactId>
+            <version>0.9.0</version>
 
-			<exclusions>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-log4j12</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.jena</groupId>
-			<artifactId>apache-jena-libs</artifactId>
-			<type>pom</type>
-			<version>3.2.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.datastax.cassandra</groupId>
-			<artifactId>cassandra-driver-core</artifactId>
-			<version>3.0.1</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.jena</groupId>
+            <artifactId>apache-jena-libs</artifactId>
+            <type>pom</type>
+            <version>3.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.datastax.cassandra</groupId>
+            <artifactId>cassandra-driver-core</artifactId>
+            <version>3.0.1</version>
 
-			<exclusions>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-log4j12</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>log4j</groupId>
-					<artifactId>log4j</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<!-- JUnit 4 -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.13.1</version>
-			<scope>test</scope>
-		</dependency>
-		<!-- JUnit 5 -->
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter</artifactId>
-			<version>5.7.1</version>
-			<scope>test</scope>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>2.8.5</version>
-		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.16</version>
-		</dependency>
-		<dependency>
-			<groupId>org.openjfx</groupId>
-			<artifactId>javafx-base</artifactId>
-			<version>14-ea+1</version>
-		</dependency>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- JUnit 4 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.1</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- JUnit 5 -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.7.1</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.5</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.16</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-base</artifactId>
+            <version>14-ea+1</version>
+        </dependency>
 
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.7</version>
-			<optional>true</optional>
-		</dependency>
-		<!-- Pentaho Plugin Repo -->
-		<!-- kettle interface libs -->
-		<dependency>
-			<groupId>pentaho-kettle</groupId>
-			<artifactId>kettle-core</artifactId>
-			<version>${pentaho.kettle.version}</version>
-		</dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.7</version>
+            <optional>true</optional>
+        </dependency>
+        <!-- Pentaho Plugin Repo -->
+        <!-- kettle interface libs -->
+        <dependency>
+            <groupId>pentaho-kettle</groupId>
+            <artifactId>kettle-core</artifactId>
+            <version>${pentaho.kettle.version}</version>
+        </dependency>
 
-		<dependency>
-			<groupId>pentaho-kettle</groupId>
-			<artifactId>kettle-engine</artifactId>
-			<version>${pentaho.kettle.version}</version>
-		</dependency>
+        <dependency>
+            <groupId>pentaho-kettle</groupId>
+            <artifactId>kettle-engine</artifactId>
+            <version>${pentaho.kettle.version}</version>
+        </dependency>
 
-		<dependency>
-			<groupId>pentaho-kettle</groupId>
-			<artifactId>kettle-ui-swt</artifactId>
-			<version>${pentaho.kettle.version}</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/black.ninia/jep -->
-		<dependency>
-			<groupId>black.ninia</groupId>
-			<artifactId>jep</artifactId>
-			<version>3.9.0</version>
-		</dependency>
+        <dependency>
+            <groupId>pentaho-kettle</groupId>
+            <artifactId>kettle-ui-swt</artifactId>
+            <version>${pentaho.kettle.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/black.ninia/jep -->
+        <dependency>
+            <groupId>black.ninia</groupId>
+            <artifactId>jep</artifactId>
+            <version>3.9.0</version>
+        </dependency>
 
-		<dependency>
-			<groupId>de.lmu.ifi.dbs.elki</groupId>
-			<artifactId>elki</artifactId>
-			<version>0.7.5</version>
-		</dependency>
+        <dependency>
+            <groupId>de.lmu.ifi.dbs.elki</groupId>
+            <artifactId>elki</artifactId>
+            <version>0.7.5</version>
+        </dependency>
 
 
-	</dependencies>
+    </dependencies>
 
-	<build>
-		<resources>
-			<resource>
-				<directory>${basedir}/src/main/java/dqm/jku/dqmeerkat/graphdb</directory>
-				<includes>
-					<include>**/*</include>
-				</includes>
-			</resource>
-		</resources>
-	</build>
+    <build>
+        <resources>
+            <resource>
+                <directory>${basedir}/src/main/java/dqm/jku/dqmeerkat/graphdb</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
 
-	<repositories>
-		<repository>
-			<id>pentaho</id>
-			<url>http://public.nexus.pentaho.org/content/groups/omni</url>
-		</repository>
-	</repositories>
+    <repositories>
+        <repository>
+            <id>pentaho</id>
+            <url>http://public.nexus.pentaho.org/content/groups/omni</url>
+        </repository>
+    </repositories>
 </project>
