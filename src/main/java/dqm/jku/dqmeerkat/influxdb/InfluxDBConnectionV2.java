@@ -120,17 +120,24 @@ public class InfluxDBConnectionV2 implements AutoCloseable {
                 .createAuthorization(orgId, Arrays.asList(read, write));
     }
 
-    public <T> void write(T pojo) {
+    public <T> void write(String bucketname, T pojo) {
         WriteApiBlocking writeApi = influxDB.getWriteApiBlocking();
 
-        writeApi.writeMeasurement(WritePrecision.S, pojo);
+        writeApi.writeMeasurement(bucketname, orgId, WritePrecision.S, pojo);
     }
 
-    public <T> void write(List<T> pojo) {
+    public <T> void write(String bucketname, List<T> pojo) {
         WriteApiBlocking writeApi = influxDB.getWriteApiBlocking();
-        writeApi.writeMeasurements( "testdb", orgId, WritePrecision.S, pojo);
+        writeApi.writeMeasurements(bucketname, orgId, WritePrecision.S, pojo);
     }
 
+
+    public <T> List<T> read(String query, Class<T> pojoClass) {
+        var readApi = influxDB.getQueryApi();
+        var resFlux = readApi.query(query, orgId);
+        var res = readApi.query(query, orgId, pojoClass);
+        return res;
+    }
 
     @Override
     public void close() throws Exception {
