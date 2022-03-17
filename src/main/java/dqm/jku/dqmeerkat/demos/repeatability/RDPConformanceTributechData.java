@@ -8,14 +8,8 @@ import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.RDPConformanceChecker;
 import dqm.jku.dqmeerkat.util.FileSelectionUtil;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.rdf.model.Resource;
-import org.apache.jena.vocabulary.RDFS;
 
 import java.io.IOException;
-
-import static org.apache.jena.vocabulary.RDFSyntax.RDF;
 
 /**
  * This class is to evaluate the extent to which the Tributech data loaded in batches of 1,000 records adheres to the RDP boundaries.
@@ -43,7 +37,6 @@ public class RDPConformanceTributechData {
                 a.annotateProfile(rs);
             }
         }
-
 
 
         // Continuous generation of DPs and conformance checking

@@ -20,12 +20,13 @@ import java.io.PrintWriter;
  */
 public class TTLExporter extends Exporter {
     public TTLExporter(String path) {
-        super(path);
+        super(path, ".ttl");
     }
 
     @Override
-    public void export(DSDKnowledgeGraph knowledgeGraph) {
-        try (PrintWriter out = new PrintWriter(path)) {
+    public void export(DSDKnowledgeGraph knowledgeGraph, String fileName) {
+        ensurePathExists();
+        try (PrintWriter out = new PrintWriter(path + fileName + fileExtension)) {
 
             ModelBuilder builder = new ModelBuilder();
             builder.setNamespace("dsd", "http://dqm.faw.jku.at/dsd" + "/");

@@ -22,7 +22,6 @@ import org.eclipse.rdf4j.rio.RDFParseException;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,10 +40,12 @@ public class DSDKnowledgeGraph {
     private EmbeddedGraphDB kgstore = null;
     private HashMap<String, Datasource> dss = new HashMap<String, Datasource>();
     private HashMap<String, DSConnector> conns = new HashMap<String, DSConnector>();
+    private Exporter exporter;
 
     public DSDKnowledgeGraph(String label) {
         this.label = label;
         kgstore = new EmbeddedGraphDB(label);
+        exporter = new TTLExporter(Paths.get(Constants.RESOURCES_FOLDER + "export/ttl/").toString());
     }
 
     public DSDKnowledgeGraph(String label, boolean graphdb) {
@@ -65,6 +66,14 @@ public class DSDKnowledgeGraph {
     public void addDatasourceAndConnector(Datasource ds, DSConnector conn) {
         dss.put(ds.getLabel(), ds);
         conns.put(ds.getLabel(), conn);
+    }
+
+    public Exporter getExporter() {
+        return exporter;
+    }
+
+    public void setExporter(Exporter exporter) {
+        this.exporter = exporter;
     }
 
     public String getLabel() {
@@ -174,17 +183,7 @@ public class DSDKnowledgeGraph {
      * @param fileName just the name of the file. No path. No file ending
      */
     public void exportKGToFile(String fileName) {
-        Path path = Paths.get(Constants.RESOURCES_FOLDER + "export/ttl/");
-        if (Files.notExists(path)) {
-            try {
-                Files.createDirectory(path);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        Exporter exporter = new TTLExporter(path + fileName + ".ttl");
-        exporter.export(this);
+        exporter.export(this, fileName);
 
     }
 

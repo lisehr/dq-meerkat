@@ -1,7 +1,12 @@
 package dqm.jku.dqmeerkat.resources.export;
 
 import dqm.jku.dqmeerkat.dsd.DSDKnowledgeGraph;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 /**
  * <h2>Exporter</h2>
@@ -12,9 +17,26 @@ import lombok.AllArgsConstructor;
  * @author meindl
  * @since 17.03.2022
  */
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class Exporter {
     protected String path;
+    protected String fileExtension;
 
-    public abstract void export(DSDKnowledgeGraph knowledgeGraph);
+    /**
+     * <p>Checks if the given path exists. If not it is created. Given an error while creating the path false is returned</p>
+     *
+     * @return if the path does not exist and could not be created: false. If the path exists (independent of creation time): true
+     */
+    protected boolean ensurePathExists() {
+        if (Files.notExists(Path.of(path))) {
+            try {
+                Files.createDirectory(Path.of(path));
+            } catch (IOException e) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public abstract void export(DSDKnowledgeGraph knowledgeGraph, String fileName);
 }
