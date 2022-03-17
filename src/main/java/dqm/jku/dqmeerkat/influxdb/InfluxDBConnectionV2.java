@@ -56,21 +56,24 @@ public class InfluxDBConnectionV2 implements AutoCloseable {
     }
 
 
+    /**
+     * <p>
+     * Similar to createDatabaseIfNotExist, this method creates a database/bucket and provides an access token for
+     * read/write access. If a database with the given name already exists the access token is retrieved and returned.
+     * If for some reason no token is found a new one is created.
+     * </p>
+     *
+     * @param databaseName     the unique name for the bucket.
+     * @param retentionSeconds How long data is retained in the bucket (?)
+     * @return Read/Write Access token to the created bucket
+     */
     public String createDatabase(String databaseName, int retentionSeconds) {
         var bucket = influxDB.getBucketsApi().findBucketByName(databaseName);
-
-
         if (bucket == null)
             return createDatabaseIfNotExists(databaseName, retentionSeconds);
-//        var test = influxDB.getAuthorizationsApi().findAuthorizations().stream()
-//                .map(authorization -> authorization.getPermissions()
-//                        .stream()
-//                        .filter(permission -> permission.getResource().getName() != null)
-//                        .filter(permission -> permission.getResource().getName().equalsIgnoreCase(""))
-//                        .findFirst().orElseThrow() // TODO create new token
-//                ).collect(Collectors.toList());
         return influxDB.getAuthorizationsApi().findAuthorizationsByOrgID(orgId).stream()
-                .filter(authorization -> authorization.getDescription() != null && !authorization.getDescription().equalsIgnoreCase("admin's Token"))
+                .filter(authorization -> authorization.getDescription() != null &&
+                        !authorization.getDescription().equalsIgnoreCase("admin's Token"))
                 .findFirst()
                 .orElseGet(() -> createAuthorisationForBucket(bucket)).getToken();
     }

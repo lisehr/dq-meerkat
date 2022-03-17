@@ -22,3 +22,5 @@ testrepo
 kg-repo
 *.lnk
 
+# testdata
+src/main/resource/data
