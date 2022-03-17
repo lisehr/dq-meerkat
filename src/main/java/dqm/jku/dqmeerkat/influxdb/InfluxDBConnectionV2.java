@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import science.aist.seshat.Logger;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * <h2>InfluxDBConnectionV2</h2>
@@ -47,7 +48,6 @@ public class InfluxDBConnectionV2 implements AutoCloseable {
      */
     public void connect() {
         this.influxDB = InfluxDBClientFactory.create(url, token.toCharArray());
-
         if (!influxDB.ping()) {
             LOGGER.error("Error pinging server.");
             return;
@@ -120,12 +120,15 @@ public class InfluxDBConnectionV2 implements AutoCloseable {
                 .createAuthorization(orgId, Arrays.asList(read, write));
     }
 
-    public void write() {
-        String data = "mem,host=host1 used_percent=23.43234543";
-
+    public <T> void write(T pojo) {
         WriteApiBlocking writeApi = influxDB.getWriteApiBlocking();
-        writeApi.writeRecord("testSeries", "testRetention", WritePrecision.NS, data);
 
+        writeApi.writeMeasurement(WritePrecision.S, pojo);
+    }
+
+    public <T> void write(List<T> pojo) {
+        WriteApiBlocking writeApi = influxDB.getWriteApiBlocking();
+        writeApi.writeMeasurements( "testdb", orgId, WritePrecision.S, pojo);
     }
 
 

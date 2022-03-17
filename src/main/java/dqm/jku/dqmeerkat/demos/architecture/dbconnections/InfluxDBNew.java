@@ -50,7 +50,7 @@ public class InfluxDBNew {
             influx.connect();
             var token = influx.createDatabase("testdb", 3600);
             LOGGER.info("token: " + token);
-
+            influx.write(electricData);
 
         } catch (Exception e) {
             LOGGER.error(e);

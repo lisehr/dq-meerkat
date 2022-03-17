@@ -1,5 +1,7 @@
 package dqm.jku.dqmeerkat.domain.influx;
 
+import com.influxdb.annotations.Column;
+import com.influxdb.annotations.Measurement;
 import com.influxdb.client.domain.WritePrecision;
 import com.influxdb.client.write.Point;
 import lombok.Data;
@@ -19,17 +21,25 @@ import java.util.List;
  **/
 @Data
 @NoArgsConstructor
+@Measurement(name = "testdb")
 public class ElectricData {
     private LocalDateTime time;
     /**
      * actually a {@link java.util.UUID}, but not worth parsing now
      */
+    @Column(tag = true)
     private String batteryStorageId;
+    @Column
     private double stateOfCharge;
+    @Column
     private double chargingEnergyWs;
+    @Column
     private String manufacturer;
+    @Column
     private String model;
+    @Column
     private String description;
+    @Column
     private double ratedCapacityWs;
 
     public ElectricData(List<String> csvLine) {
