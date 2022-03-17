@@ -24,6 +24,7 @@ public class InfluxDBNew {
     public static void main(String[] args) {
         try (var influx = InfluxDBConnectionV2.builder()
                 .token(INFLUX_LOGIN_TOKEN)
+                .orgId(INFLUX_ORG_ID)
                 .build()) {
             influx.connect();
             var token = influx.createDatabase("testdb", 3600);

@@ -70,6 +70,7 @@ public class InfluxDBConnectionV2 implements AutoCloseable {
 //                        .findFirst().orElseThrow() // TODO create new token
 //                ).collect(Collectors.toList());
         return influxDB.getAuthorizationsApi().findAuthorizationsByOrgID(orgId).stream()
+                .filter(authorization -> authorization.getDescription() != null && !authorization.getDescription().equalsIgnoreCase("admin's Token"))
                 .findFirst()
                 .orElseGet(() -> createAuthorisationForBucket(bucket)).getToken();
     }
