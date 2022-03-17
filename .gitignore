@@ -24,3 +24,6 @@ kg-repo
 
 # testdata
 src/main/resource/data
+
+# intermediate results (?)
+humidity_5000/

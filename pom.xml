@@ -50,7 +50,6 @@
         </dependency>
 
 
-
         <dependency>
             <groupId>com.appnexus.grafana-client</groupId>
             <artifactId>grafana-api-java-client</artifactId>
@@ -95,7 +94,7 @@
             <version>3.4.0</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.streampipes/streampipes-empire-pinto -->
-    <!--OUTDATED influxdb. Here for legacy reasons-->
+        <!--OUTDATED influxdb. Here for legacy reasons-->
         <dependency>
             <groupId>org.influxdb</groupId>
             <artifactId>influxdb-java</artifactId>
