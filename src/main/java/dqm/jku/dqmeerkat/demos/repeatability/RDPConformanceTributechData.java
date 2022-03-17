@@ -7,6 +7,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.RDPConformanceChecker;
+import dqm.jku.dqmeerkat.resources.export.json.dtdl.DTDLExporter;
 import dqm.jku.dqmeerkat.util.FileSelectionUtil;
 
 import java.io.IOException;
@@ -29,6 +30,7 @@ public class RDPConformanceTributechData {
 
         var dsdKnowledgeGraph = new DSDKnowledgeGraph(ds.getLabel());
         dsdKnowledgeGraph.addDatasource(ds);
+        dsdKnowledgeGraph.setExporter(new DTDLExporter(("")));
         dsdKnowledgeGraph.exportKGToFile("Test");
         // Initialization of RDPs
         for (Concept c : ds.getConcepts()) {
