@@ -20,6 +20,7 @@
         <lombok.version>1.18.22</lombok.version>
         <seshat.version>1.1.2</seshat.version>
         <log4j-core.version>2.17.1</log4j-core.version>
+        <influxdb-client-java.version>4.1.0</influxdb-client-java.version>
     </properties>
 
     <dependencies>
@@ -94,11 +95,19 @@
             <version>3.4.0</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.streampipes/streampipes-empire-pinto -->
+    <!--OUTDATED influxdb. Here for legacy reasons-->
         <dependency>
             <groupId>org.influxdb</groupId>
             <artifactId>influxdb-java</artifactId>
             <version>${influxdb-java.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.influxdb/influxdb-client-java -->
+        <dependency>
+            <groupId>com.influxdb</groupId>
+            <artifactId>influxdb-client-java</artifactId>
+            <version>${influxdb-client-java.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>com.github.jsonld-java</groupId>
             <artifactId>jsonld-java</artifactId>

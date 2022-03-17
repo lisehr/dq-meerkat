@@ -12,11 +12,14 @@ import science.aist.seshat.Logger;
  **/
 public class InfluxDBNew {
     private static final Logger LOGGER = Logger.getInstance();
+    private static final String INFLUX_LOGIN_TOKEN = "12bdc4164c2e8141";
 
     public static void main(String[] args) {
-        try (var influx = InfluxDBConnectionV2.builder().build()) {
+        try (var influx = InfluxDBConnectionV2.builder()
+                .token(INFLUX_LOGIN_TOKEN)
+                .build()) {
             influx.connect();
-            influx.createDatabase("testdb", "testRetention", "1d");
+            influx.createDatabase("testdb", 3600);
         } catch (Exception e) {
             LOGGER.error(e);
         }

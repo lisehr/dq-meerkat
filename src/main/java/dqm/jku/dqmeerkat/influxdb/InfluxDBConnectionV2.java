@@ -1,13 +1,16 @@
 package dqm.jku.dqmeerkat.influxdb;
 
+import com.influxdb.client.InfluxDBClient;
+import com.influxdb.client.InfluxDBClientFactory;
+import com.influxdb.client.WriteApiBlocking;
+import com.influxdb.client.domain.*;
 import dqm.jku.dqmeerkat.util.StringUtil;
 import lombok.Builder;
 import lombok.Getter;
 import org.influxdb.InfluxDB;
-import org.influxdb.InfluxDBFactory;
-import org.influxdb.dto.Pong;
-import org.influxdb.dto.Query;
 import science.aist.seshat.Logger;
+
+import java.util.Arrays;
 
 /**
  * <h2>InfluxDBConnectionV2</h2>
@@ -20,25 +23,22 @@ public class InfluxDBConnectionV2 implements AutoCloseable {
     private static final Logger LOGGER = Logger.getInstance();
 
     private final String url;
-    private final String username;
-    private final String password;
+    private final String token;
 
-    private InfluxDB influxDB;
+    private InfluxDBClient influxDB;
 
     @Getter
     private boolean connected;
 
     @Builder
-    public InfluxDBConnectionV2(String url, String username, String password) {
+    public InfluxDBConnectionV2(String url, String token) {
         if (StringUtil.isNullOrEmpty(url))
             url = "http://localhost:8086";
         this.url = url;
-        if (StringUtil.isNullOrEmpty(username))
-            username = "root";
-        this.username = username;
-        if (StringUtil.isNullOrEmpty(password))
-            password = "root";
-        this.password = password;
+
+        if (StringUtil.isNullOrEmpty(token))
+            token = "root";
+        this.token = token;
     }
 
     /**
@@ -46,9 +46,9 @@ public class InfluxDBConnectionV2 implements AutoCloseable {
      * connection is used!</p>
      */
     public void connect() {
-        this.influxDB = InfluxDBFactory.connect(url, username, password);
-        Pong response = influxDB.ping();
-        if (response.getVersion().equalsIgnoreCase("unknown")) {
+        this.influxDB = InfluxDBClientFactory.create(url, token.toCharArray());
+
+        if (!influxDB.ping()) {
             LOGGER.error("Error pinging server.");
             return;
         }
@@ -59,12 +59,45 @@ public class InfluxDBConnectionV2 implements AutoCloseable {
 
     }
 
-    public void createDatabase(String databaseName, String retentionPolicy, String expirationTime) {
-        influxDB.query(new Query("CREATE DATABASE " + databaseName));
-        influxDB.setDatabase(databaseName);
-        influxDB.query(new Query("CREATE RETENTION POLICY " + retentionPolicy
-                + " ON " + databaseName + " DURATION " + expirationTime + "  REPLICATION 1 DEFAULT"));
-        influxDB.setRetentionPolicy(retentionPolicy);
+    public void createDatabase(String databaseName,  int retentionSeconds) {
+        var retention = new BucketRetentionRules();
+        retention.setEverySeconds(retentionSeconds);
+        Bucket bucket = influxDB.getBucketsApi().createBucket(databaseName, retention, token);
+
+        //
+        // Create access token to "iot_bucket"
+        //
+        PermissionResource resource = new PermissionResource();
+        resource.setId(bucket.getId());
+        resource.setOrgID("12bdc4164c2e8141");
+        resource.setType(PermissionResource.TypeEnum.BUCKETS);
+
+        // Read permission
+        Permission read = new Permission();
+        read.setResource(resource);
+        read.setAction(Permission.ActionEnum.READ);
+
+        // Write permission
+        Permission write = new Permission();
+        write.setResource(resource);
+        write.setAction(Permission.ActionEnum.WRITE);
+
+        Authorization authorization = influxDB.getAuthorizationsApi()
+                .createAuthorization("12bdc4164c2e8141", Arrays.asList(read, write));
+
+        //
+        // Created token that can be use for writes to "iot_bucket"
+        //
+        String token = authorization.getToken();
+        System.out.println("Token: " + token);
+
+    }
+
+    public void write() {
+        String data = "mem,host=host1 used_percent=23.43234543";
+
+        WriteApiBlocking writeApi = influxDB.getWriteApiBlocking();
+        writeApi.writeRecord("testSeries", "testRetention", WritePrecision.NS, data);
 
     }
 
