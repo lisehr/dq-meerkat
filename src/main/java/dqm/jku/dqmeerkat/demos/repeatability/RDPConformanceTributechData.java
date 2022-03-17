@@ -21,11 +21,11 @@ import dqm.jku.dqmeerkat.util.FileSelectionUtil;
 public class RDPConformanceTributechData {
   private static final int FILEINDEX = 8;
   private static final double THRESHOLD = 0.1;		// Threshold indicates allowed deviation from reference value in percent
-  private static final int RDP_SIZE = 1000;
+  private static final int RDP_SIZE = 100;
   private static final int BATCH_SIZE = 1;		// Set to 1 to simulate streaming data
 
   public static void main(String args[]) throws IOException, InterruptedException, NoSuchMethodException {
-    ConnectorCSV conn = FileSelectionUtil.getConnectorCSV(FILEINDEX);
+    ConnectorCSV conn = FileSelectionUtil.getConnectorCSV("src/main/resource/data/humidity_5000.csv");
     Datasource ds = conn.loadSchema();
 
     // Initialization of RDPs    
@@ -41,5 +41,7 @@ public class RDPConformanceTributechData {
     confChecker.run();
     // Finally: print evaluation report
     System.out.println(confChecker.getReport());
+
+
   }
 }

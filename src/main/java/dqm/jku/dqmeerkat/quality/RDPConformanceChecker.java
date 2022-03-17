@@ -81,6 +81,15 @@ public class RDPConformanceChecker {
 	    }
 	}
 
+	/**
+	 * TODO
+	 * <p>Creates conformance report ("How compliant is my data in regards to reference data profile")</p>
+	 * <p>Question is where and how this report is generated and presented. Smack the user in the face with everything
+	 * or a more highlevel approach with not enough data</p>
+	 *
+	 *
+	 * @return non persisted csv string.
+	 */
 	public String getReport() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(ds.getLabel() + "\n");
