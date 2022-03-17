@@ -1,495 +1,1196 @@
-@prefix attribute: <http://dqm.faw.jku.at/dsd/Attribute/> .
-@prefix dsd: <http://dqm.faw.jku.at/dsd/> .
-@prefix ex: <http://example.com/humidity_5000/> .
-@prefix metric: <http://dqm.faw.jku.at/dsd/quality/structures/> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-
-ex:humidity_5000 a dsd:DataSource;
-  dsd:hasAttribute ex:timestamp, ex:valueMetadataId .
-
-ex:valueMetadataId a dsd:Attribute;
-  attribute:hasAttributeProperty <http://example.com/humidity_5000/valueMetadataId/AutoIncrement>,
-    <http://example.com/humidity_5000/valueMetadataId/DataType>, <http://example.com/humidity_5000/valueMetadataId/Nullable>,
-    <http://example.com/humidity_5000/valueMetadataId/Unique>;
-  dsd:hasDataprofile <http://example.com/humidity_5000/valueMetadataId/DataProfile> .
-
-<http://example.com/humidity_5000/valueMetadataId/DataType> a dsd:AttributeProperty;
-  attribute:hasValue "java.lang.String" .
-
-<http://example.com/humidity_5000/valueMetadataId/Nullable> a dsd:AttributeProperty;
-  attribute:hasValue true .
-
-<http://example.com/humidity_5000/valueMetadataId/AutoIncrement> a dsd:AttributeProperty;
-  attribute:hasValue false .
-
-<http://example.com/humidity_5000/valueMetadataId/Unique> a dsd:AttributeProperty;
-  attribute:hasValue false .
-
-<http://example.com/humidity_5000/valueMetadataId/DataProfile> a dsd:Dataprofile;
-  metric:hasMetric <http://example.com/humidity_5000/valueMetadataId/#NullValues>, <http://example.com/humidity_5000/valueMetadataId/Average>,
-    <http://example.com/humidity_5000/valueMetadataId/Basictype>, <http://example.com/humidity_5000/valueMetadataId/Cardinality>,
-    <http://example.com/humidity_5000/valueMetadataId/Datatype>, <http://example.com/humidity_5000/valueMetadataId/Decimals>,
-    <http://example.com/humidity_5000/valueMetadataId/Digits>, <http://example.com/humidity_5000/valueMetadataId/Histogram>,
-    <http://example.com/humidity_5000/valueMetadataId/Maximum>, <http://example.com/humidity_5000/valueMetadataId/MeanAbsoluteDeviation>,
-    <http://example.com/humidity_5000/valueMetadataId/Median>, <http://example.com/humidity_5000/valueMetadataId/Minimum>,
-    <http://example.com/humidity_5000/valueMetadataId/NumberofRows>, <http://example.com/humidity_5000/valueMetadataId/PercentNullValues>,
-    <http://example.com/humidity_5000/valueMetadataId/StandardDeviation>, <http://example.com/humidity_5000/valueMetadataId/Uniqueness>,
-    <http://example.com/humidity_5000/valueMetadataId/isCandidateKey> .
-
-<http://example.com/humidity_5000/valueMetadataId/NumberofRows> a dsd:DataProfileMetric;
-  metric:hasValue "1000"^^xsd:long .
-
-<http://example.com/humidity_5000/valueMetadataId/Minimum> a dsd:DataProfileMetric;
-  metric:hasValue "36"^^xsd:int .
-
-<http://example.com/humidity_5000/valueMetadataId/Maximum> a dsd:DataProfileMetric;
-  metric:hasValue "36"^^xsd:int .
-
-<http://example.com/humidity_5000/valueMetadataId/Average> a dsd:DataProfileMetric;
-  metric:hasValue "36"^^xsd:long .
-
-<http://example.com/humidity_5000/valueMetadataId/Median> a dsd:DataProfileMetric;
-  metric:hasValue "36"^^xsd:int .
-
-<http://example.com/humidity_5000/valueMetadataId/Cardinality> a dsd:DataProfileMetric;
-  metric:hasValue "1"^^xsd:long .
-
-<http://example.com/humidity_5000/valueMetadataId/Uniqueness> a dsd:DataProfileMetric;
-  metric:hasValue 1.0E-1 .
-
-<http://example.com/humidity_5000/valueMetadataId/#NullValues> a dsd:DataProfileMetric;
-  metric:hasValue "0"^^xsd:long .
-
-<http://example.com/humidity_5000/valueMetadataId/PercentNullValues> a dsd:DataProfileMetric;
-  metric:hasValue 0.0E0 .
-
-<http://example.com/humidity_5000/valueMetadataId/Histogram> a dsd:DataProfileMetric;
-  metric:hasValue "dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.histogram.SerializableFrequencyMap@255eaa6b" .
-
-<http://example.com/humidity_5000/valueMetadataId/Digits> a dsd:DataProfileMetric;
-  metric:hasValue "0"^^xsd:int .
-
-<http://example.com/humidity_5000/valueMetadataId/isCandidateKey> a dsd:DataProfileMetric;
-  metric:hasValue false .
-
-<http://example.com/humidity_5000/valueMetadataId/Decimals> a dsd:DataProfileMetric;
-  metric:hasValue "0"^^xsd:int .
-
-<http://example.com/humidity_5000/valueMetadataId/Basictype> a dsd:DataProfileMetric;
-  metric:hasValue "String" .
-
-<http://example.com/humidity_5000/valueMetadataId/Datatype> a dsd:DataProfileMetric;
-  metric:hasValue "String" .
-
-<http://example.com/humidity_5000/valueMetadataId/StandardDeviation> a dsd:DataProfileMetric;
-  metric:hasValue 0.0E0 .
-
-<http://example.com/humidity_5000/valueMetadataId/MeanAbsoluteDeviation> a dsd:DataProfileMetric;
-  metric:hasValue "0" .
-
-ex:timestamp a dsd:Attribute;
-  attribute:hasAttributeProperty <http://example.com/humidity_5000/timestamp/AutoIncrement>,
-    <http://example.com/humidity_5000/timestamp/DataType>, <http://example.com/humidity_5000/timestamp/Nullable>,
-    <http://example.com/humidity_5000/timestamp/Unique>;
-  dsd:hasDataprofile <http://example.com/humidity_5000/timestamp/DataProfile> .
-
-<http://example.com/humidity_5000/timestamp/DataType> a dsd:AttributeProperty;
-  attribute:hasValue "java.lang.String" .
-
-<http://example.com/humidity_5000/timestamp/Nullable> a dsd:AttributeProperty;
-  attribute:hasValue true .
-
-<http://example.com/humidity_5000/timestamp/AutoIncrement> a dsd:AttributeProperty;
-  attribute:hasValue false .
-
-<http://example.com/humidity_5000/timestamp/Unique> a dsd:AttributeProperty;
-  attribute:hasValue false .
-
-<http://example.com/humidity_5000/timestamp/DataProfile> a dsd:Dataprofile;
-  metric:hasMetric <http://example.com/humidity_5000/timestamp/#NullValues>, <http://example.com/humidity_5000/timestamp/Average>,
-    <http://example.com/humidity_5000/timestamp/Basictype>, <http://example.com/humidity_5000/timestamp/Cardinality>,
-    <http://example.com/humidity_5000/timestamp/Datatype>, <http://example.com/humidity_5000/timestamp/Decimals>,
-    <http://example.com/humidity_5000/timestamp/Digits>, <http://example.com/humidity_5000/timestamp/Histogram>,
-    <http://example.com/humidity_5000/timestamp/Maximum>, <http://example.com/humidity_5000/timestamp/MeanAbsoluteDeviation>,
-    <http://example.com/humidity_5000/timestamp/Median>, <http://example.com/humidity_5000/timestamp/Minimum>,
-    <http://example.com/humidity_5000/timestamp/NumberofRows>, <http://example.com/humidity_5000/timestamp/PercentNullValues>,
-    <http://example.com/humidity_5000/timestamp/StandardDeviation>, <http://example.com/humidity_5000/timestamp/Uniqueness>,
-    <http://example.com/humidity_5000/timestamp/isCandidateKey> .
-
-<http://example.com/humidity_5000/timestamp/NumberofRows> a dsd:DataProfileMetric;
-  metric:hasValue "1000"^^xsd:long .
-
-<http://example.com/humidity_5000/timestamp/Minimum> a dsd:DataProfileMetric;
-  metric:hasValue "28"^^xsd:int .
-
-<http://example.com/humidity_5000/timestamp/Maximum> a dsd:DataProfileMetric;
-  metric:hasValue "31"^^xsd:int .
-
-<http://example.com/humidity_5000/timestamp/Average> a dsd:DataProfileMetric;
-  metric:hasValue "30"^^xsd:long .
-
-<http://example.com/humidity_5000/timestamp/Median> a dsd:DataProfileMetric;
-  metric:hasValue "31"^^xsd:int .
-
-<http://example.com/humidity_5000/timestamp/Cardinality> a dsd:DataProfileMetric;
-  metric:hasValue "1000"^^xsd:long .
-
-<http://example.com/humidity_5000/timestamp/Uniqueness> a dsd:DataProfileMetric;
-  metric:hasValue 1.0E2 .
-
-<http://example.com/humidity_5000/timestamp/#NullValues> a dsd:DataProfileMetric;
-  metric:hasValue "0"^^xsd:long .
-
-<http://example.com/humidity_5000/timestamp/PercentNullValues> a dsd:DataProfileMetric;
-  metric:hasValue 0.0E0 .
-
-<http://example.com/humidity_5000/timestamp/Histogram> a dsd:DataProfileMetric;
-  metric:hasValue "dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.histogram.SerializableFrequencyMap@476fe690" .
-
-<http://example.com/humidity_5000/timestamp/Digits> a dsd:DataProfileMetric;
-  metric:hasValue "0"^^xsd:int .
-
-<http://example.com/humidity_5000/timestamp/isCandidateKey> a dsd:DataProfileMetric;
-  metric:hasValue true .
-
-<http://example.com/humidity_5000/timestamp/Decimals> a dsd:DataProfileMetric;
-  metric:hasValue "0"^^xsd:int .
-
-<http://example.com/humidity_5000/timestamp/Basictype> a dsd:DataProfileMetric;
-  metric:hasValue "String" .
-
-<http://example.com/humidity_5000/timestamp/Datatype> a dsd:DataProfileMetric;
-  metric:hasValue "String" .
-
-<http://example.com/humidity_5000/timestamp/StandardDeviation> a dsd:DataProfileMetric;
-  metric:hasValue 0.0E0 .
-
-<http://example.com/humidity_5000/timestamp/MeanAbsoluteDeviation> a dsd:DataProfileMetric;
-  metric:hasValue "0" .
-
-ex:humidity_5000 dsd:hasAttribute ex:createdAt, ex:values .
-
-ex:createdAt a dsd:Attribute;
-  attribute:hasAttributeProperty <http://example.com/humidity_5000/createdAt/AutoIncrement>,
-    <http://example.com/humidity_5000/createdAt/DataType>, <http://example.com/humidity_5000/createdAt/Nullable>,
-    <http://example.com/humidity_5000/createdAt/Unique>;
-  dsd:hasDataprofile <http://example.com/humidity_5000/createdAt/DataProfile> .
-
-<http://example.com/humidity_5000/createdAt/DataType> a dsd:AttributeProperty;
-  attribute:hasValue "java.lang.String" .
-
-<http://example.com/humidity_5000/createdAt/Nullable> a dsd:AttributeProperty;
-  attribute:hasValue true .
-
-<http://example.com/humidity_5000/createdAt/AutoIncrement> a dsd:AttributeProperty;
-  attribute:hasValue false .
-
-<http://example.com/humidity_5000/createdAt/Unique> a dsd:AttributeProperty;
-  attribute:hasValue false .
-
-<http://example.com/humidity_5000/createdAt/DataProfile> a dsd:Dataprofile;
-  metric:hasMetric <http://example.com/humidity_5000/createdAt/#NullValues>, <http://example.com/humidity_5000/createdAt/Average>,
-    <http://example.com/humidity_5000/createdAt/Basictype>, <http://example.com/humidity_5000/createdAt/Cardinality>,
-    <http://example.com/humidity_5000/createdAt/Datatype>, <http://example.com/humidity_5000/createdAt/Decimals>,
-    <http://example.com/humidity_5000/createdAt/Digits>, <http://example.com/humidity_5000/createdAt/Histogram>,
-    <http://example.com/humidity_5000/createdAt/Maximum>, <http://example.com/humidity_5000/createdAt/MeanAbsoluteDeviation>,
-    <http://example.com/humidity_5000/createdAt/Median>, <http://example.com/humidity_5000/createdAt/Minimum>,
-    <http://example.com/humidity_5000/createdAt/NumberofRows>, <http://example.com/humidity_5000/createdAt/PercentNullValues>,
-    <http://example.com/humidity_5000/createdAt/StandardDeviation>, <http://example.com/humidity_5000/createdAt/Uniqueness>,
-    <http://example.com/humidity_5000/createdAt/isCandidateKey> .
-
-<http://example.com/humidity_5000/createdAt/NumberofRows> a dsd:DataProfileMetric;
-  metric:hasValue "1000"^^xsd:long .
-
-<http://example.com/humidity_5000/createdAt/Minimum> a dsd:DataProfileMetric;
-  metric:hasValue "28"^^xsd:int .
-
-<http://example.com/humidity_5000/createdAt/Maximum> a dsd:DataProfileMetric;
-  metric:hasValue "32"^^xsd:int .
-
-<http://example.com/humidity_5000/createdAt/Average> a dsd:DataProfileMetric;
-  metric:hasValue "31"^^xsd:long .
-
-<http://example.com/humidity_5000/createdAt/Median> a dsd:DataProfileMetric;
-  metric:hasValue "32"^^xsd:int .
-
-<http://example.com/humidity_5000/createdAt/Cardinality> a dsd:DataProfileMetric;
-  metric:hasValue "1000"^^xsd:long .
-
-<http://example.com/humidity_5000/createdAt/Uniqueness> a dsd:DataProfileMetric;
-  metric:hasValue 1.0E2 .
-
-<http://example.com/humidity_5000/createdAt/#NullValues> a dsd:DataProfileMetric;
-  metric:hasValue "0"^^xsd:long .
-
-<http://example.com/humidity_5000/createdAt/PercentNullValues> a dsd:DataProfileMetric;
-  metric:hasValue 0.0E0 .
-
-<http://example.com/humidity_5000/createdAt/Histogram> a dsd:DataProfileMetric;
-  metric:hasValue "dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.histogram.SerializableFrequencyMap@7a0e7ecd" .
-
-<http://example.com/humidity_5000/createdAt/Digits> a dsd:DataProfileMetric;
-  metric:hasValue "0"^^xsd:int .
-
-<http://example.com/humidity_5000/createdAt/isCandidateKey> a dsd:DataProfileMetric;
-  metric:hasValue true .
-
-<http://example.com/humidity_5000/createdAt/Decimals> a dsd:DataProfileMetric;
-  metric:hasValue "0"^^xsd:int .
-
-<http://example.com/humidity_5000/createdAt/Basictype> a dsd:DataProfileMetric;
-  metric:hasValue "String" .
-
-<http://example.com/humidity_5000/createdAt/Datatype> a dsd:DataProfileMetric;
-  metric:hasValue "String" .
-
-<http://example.com/humidity_5000/createdAt/StandardDeviation> a dsd:DataProfileMetric;
-  metric:hasValue 0.0E0 .
-
-<http://example.com/humidity_5000/createdAt/MeanAbsoluteDeviation> a dsd:DataProfileMetric;
-  metric:hasValue "0" .
-
-ex:values a dsd:Attribute;
-  attribute:hasAttributeProperty <http://example.com/humidity_5000/values/AutoIncrement>,
-    <http://example.com/humidity_5000/values/DataType>, <http://example.com/humidity_5000/values/Nullable>,
-    <http://example.com/humidity_5000/values/Unique>;
-  dsd:hasDataprofile <http://example.com/humidity_5000/values/DataProfile> .
-
-<http://example.com/humidity_5000/values/DataType> a dsd:AttributeProperty;
-  attribute:hasValue "java.lang.Double" .
-
-<http://example.com/humidity_5000/values/Nullable> a dsd:AttributeProperty;
-  attribute:hasValue true .
-
-<http://example.com/humidity_5000/values/AutoIncrement> a dsd:AttributeProperty;
-  attribute:hasValue false .
-
-<http://example.com/humidity_5000/values/Unique> a dsd:AttributeProperty;
-  attribute:hasValue false .
-
-<http://example.com/humidity_5000/values/DataProfile> a dsd:Dataprofile;
-  metric:hasMetric <http://example.com/humidity_5000/values/#NullValues>, <http://example.com/humidity_5000/values/Average>,
-    <http://example.com/humidity_5000/values/Basictype>, <http://example.com/humidity_5000/values/Cardinality>,
-    <http://example.com/humidity_5000/values/Datatype>, <http://example.com/humidity_5000/values/Decimals>,
-    <http://example.com/humidity_5000/values/Digits>, <http://example.com/humidity_5000/values/Histogram>,
-    <http://example.com/humidity_5000/values/Maximum>, <http://example.com/humidity_5000/values/MeanAbsoluteDeviation>,
-    <http://example.com/humidity_5000/values/Median>, <http://example.com/humidity_5000/values/Minimum>,
-    <http://example.com/humidity_5000/values/NumberofRows>, <http://example.com/humidity_5000/values/PercentNullValues>,
-    <http://example.com/humidity_5000/values/StandardDeviation>, <http://example.com/humidity_5000/values/Uniqueness>,
-    <http://example.com/humidity_5000/values/isCandidateKey> .
-
-<http://example.com/humidity_5000/values/NumberofRows> a dsd:DataProfileMetric;
-  metric:hasValue "1000"^^xsd:long .
-
-<http://example.com/humidity_5000/values/Minimum> a dsd:DataProfileMetric;
-  metric:hasValue 2.0772388E1 .
-
-<http://example.com/humidity_5000/values/Maximum> a dsd:DataProfileMetric;
-  metric:hasValue 2.3151726E1 .
-
-<http://example.com/humidity_5000/values/Average> a dsd:DataProfileMetric;
-  metric:hasValue 2.2662E1 .
-
-<http://example.com/humidity_5000/values/Median> a dsd:DataProfileMetric;
-  metric:hasValue 2.2676308E1 .
-
-<http://example.com/humidity_5000/values/Cardinality> a dsd:DataProfileMetric;
-  metric:hasValue "957"^^xsd:long .
-
-<http://example.com/humidity_5000/values/Uniqueness> a dsd:DataProfileMetric;
-  metric:hasValue 9.57E1 .
-
-<http://example.com/humidity_5000/values/#NullValues> a dsd:DataProfileMetric;
-  metric:hasValue "0"^^xsd:long .
-
-<http://example.com/humidity_5000/values/PercentNullValues> a dsd:DataProfileMetric;
-  metric:hasValue 0.0E0 .
-
-<http://example.com/humidity_5000/values/Histogram> a dsd:DataProfileMetric;
-  metric:hasValue "dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.histogram.SerializableFrequencyMap@54e3658c" .
-
-<http://example.com/humidity_5000/values/Digits> a dsd:DataProfileMetric;
-  metric:hasValue "2"^^xsd:int .
-
-<http://example.com/humidity_5000/values/isCandidateKey> a dsd:DataProfileMetric;
-  metric:hasValue false .
-
-<http://example.com/humidity_5000/values/Decimals> a dsd:DataProfileMetric;
-  metric:hasValue "6"^^xsd:int .
-
-<http://example.com/humidity_5000/values/Basictype> a dsd:DataProfileMetric;
-  metric:hasValue "Numeric" .
-
-<http://example.com/humidity_5000/values/Datatype> a dsd:DataProfileMetric;
-  metric:hasValue "Double" .
-
-<http://example.com/humidity_5000/values/StandardDeviation> a dsd:DataProfileMetric;
-  metric:hasValue 3.337799412623864E-1 .
-
-<http://example.com/humidity_5000/values/MeanAbsoluteDeviation> a dsd:DataProfileMetric;
-  metric:hasValue 1.416700000000013E-1 .
-
-ex:humidity_5000 dsd:hasAttribute ex:size, ex:syncNr .
-
-ex:syncNr a dsd:Attribute;
-  attribute:hasAttributeProperty <http://example.com/humidity_5000/syncNr/AutoIncrement>,
-    <http://example.com/humidity_5000/syncNr/DataType>, <http://example.com/humidity_5000/syncNr/Nullable>,
-    <http://example.com/humidity_5000/syncNr/Unique>;
-  dsd:hasDataprofile <http://example.com/humidity_5000/syncNr/DataProfile> .
-
-<http://example.com/humidity_5000/syncNr/DataType> a dsd:AttributeProperty;
-  attribute:hasValue "java.lang.Integer" .
-
-<http://example.com/humidity_5000/syncNr/Nullable> a dsd:AttributeProperty;
-  attribute:hasValue true .
-
-<http://example.com/humidity_5000/syncNr/AutoIncrement> a dsd:AttributeProperty;
-  attribute:hasValue false .
-
-<http://example.com/humidity_5000/syncNr/Unique> a dsd:AttributeProperty;
-  attribute:hasValue false .
-
-<http://example.com/humidity_5000/syncNr/DataProfile> a dsd:Dataprofile;
-  metric:hasMetric <http://example.com/humidity_5000/syncNr/#NullValues>, <http://example.com/humidity_5000/syncNr/Average>,
-    <http://example.com/humidity_5000/syncNr/Basictype>, <http://example.com/humidity_5000/syncNr/Cardinality>,
-    <http://example.com/humidity_5000/syncNr/Datatype>, <http://example.com/humidity_5000/syncNr/Decimals>,
-    <http://example.com/humidity_5000/syncNr/Digits>, <http://example.com/humidity_5000/syncNr/Histogram>,
-    <http://example.com/humidity_5000/syncNr/Maximum>, <http://example.com/humidity_5000/syncNr/MeanAbsoluteDeviation>,
-    <http://example.com/humidity_5000/syncNr/Median>, <http://example.com/humidity_5000/syncNr/Minimum>,
-    <http://example.com/humidity_5000/syncNr/NumberofRows>, <http://example.com/humidity_5000/syncNr/PercentNullValues>,
-    <http://example.com/humidity_5000/syncNr/StandardDeviation>, <http://example.com/humidity_5000/syncNr/Uniqueness>,
-    <http://example.com/humidity_5000/syncNr/isCandidateKey> .
-
-<http://example.com/humidity_5000/syncNr/NumberofRows> a dsd:DataProfileMetric;
-  metric:hasValue "1000"^^xsd:long .
-
-<http://example.com/humidity_5000/syncNr/Minimum> a dsd:DataProfileMetric;
-  metric:hasValue "60797"^^xsd:int .
-
-<http://example.com/humidity_5000/syncNr/Maximum> a dsd:DataProfileMetric;
-  metric:hasValue "61796"^^xsd:int .
-
-<http://example.com/humidity_5000/syncNr/Average> a dsd:DataProfileMetric;
-  metric:hasValue "61296"^^xsd:long .
-
-<http://example.com/humidity_5000/syncNr/Median> a dsd:DataProfileMetric;
-  metric:hasValue "61297"^^xsd:int .
-
-<http://example.com/humidity_5000/syncNr/Cardinality> a dsd:DataProfileMetric;
-  metric:hasValue "1000"^^xsd:long .
-
-<http://example.com/humidity_5000/syncNr/Uniqueness> a dsd:DataProfileMetric;
-  metric:hasValue 1.0E2 .
-
-<http://example.com/humidity_5000/syncNr/#NullValues> a dsd:DataProfileMetric;
-  metric:hasValue "0"^^xsd:long .
-
-<http://example.com/humidity_5000/syncNr/PercentNullValues> a dsd:DataProfileMetric;
-  metric:hasValue 0.0E0 .
-
-<http://example.com/humidity_5000/syncNr/Histogram> a dsd:DataProfileMetric;
-  metric:hasValue "dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.histogram.SerializableFrequencyMap@43e9089" .
-
-<http://example.com/humidity_5000/syncNr/Digits> a dsd:DataProfileMetric;
-  metric:hasValue "5"^^xsd:int .
-
-<http://example.com/humidity_5000/syncNr/isCandidateKey> a dsd:DataProfileMetric;
-  metric:hasValue true .
-
-<http://example.com/humidity_5000/syncNr/Decimals> a dsd:DataProfileMetric;
-  metric:hasValue "0"^^xsd:int .
-
-<http://example.com/humidity_5000/syncNr/Basictype> a dsd:DataProfileMetric;
-  metric:hasValue "Numeric" .
-
-<http://example.com/humidity_5000/syncNr/Datatype> a dsd:DataProfileMetric;
-  metric:hasValue "Integer" .
-
-<http://example.com/humidity_5000/syncNr/StandardDeviation> a dsd:DataProfileMetric;
-  metric:hasValue 2.888182819698227E2 .
-
-<http://example.com/humidity_5000/syncNr/MeanAbsoluteDeviation> a dsd:DataProfileMetric;
-  metric:hasValue "250" .
-
-ex:size a dsd:Attribute;
-  attribute:hasAttributeProperty <http://example.com/humidity_5000/size/AutoIncrement>,
-    <http://example.com/humidity_5000/size/DataType>, <http://example.com/humidity_5000/size/Nullable>,
-    <http://example.com/humidity_5000/size/Unique>;
-  dsd:hasDataprofile <http://example.com/humidity_5000/size/DataProfile> .
-
-<http://example.com/humidity_5000/size/DataType> a dsd:AttributeProperty;
-  attribute:hasValue "java.lang.Integer" .
-
-<http://example.com/humidity_5000/size/Nullable> a dsd:AttributeProperty;
-  attribute:hasValue true .
-
-<http://example.com/humidity_5000/size/AutoIncrement> a dsd:AttributeProperty;
-  attribute:hasValue false .
-
-<http://example.com/humidity_5000/size/Unique> a dsd:AttributeProperty;
-  attribute:hasValue false .
-
-<http://example.com/humidity_5000/size/DataProfile> a dsd:Dataprofile;
-  metric:hasMetric <http://example.com/humidity_5000/size/#NullValues>, <http://example.com/humidity_5000/size/Average>,
-    <http://example.com/humidity_5000/size/Basictype>, <http://example.com/humidity_5000/size/Cardinality>,
-    <http://example.com/humidity_5000/size/Datatype>, <http://example.com/humidity_5000/size/Decimals>,
-    <http://example.com/humidity_5000/size/Digits>, <http://example.com/humidity_5000/size/Histogram>,
-    <http://example.com/humidity_5000/size/Maximum>, <http://example.com/humidity_5000/size/MeanAbsoluteDeviation>,
-    <http://example.com/humidity_5000/size/Median>, <http://example.com/humidity_5000/size/Minimum>,
-    <http://example.com/humidity_5000/size/NumberofRows>, <http://example.com/humidity_5000/size/PercentNullValues>,
-    <http://example.com/humidity_5000/size/StandardDeviation>, <http://example.com/humidity_5000/size/Uniqueness>,
-    <http://example.com/humidity_5000/size/isCandidateKey> .
-
-<http://example.com/humidity_5000/size/NumberofRows> a dsd:DataProfileMetric;
-  metric:hasValue "1000"^^xsd:long .
-
-<http://example.com/humidity_5000/size/Minimum> a dsd:DataProfileMetric;
-  metric:hasValue "4"^^xsd:int .
-
-<http://example.com/humidity_5000/size/Maximum> a dsd:DataProfileMetric;
-  metric:hasValue "4"^^xsd:int .
-
-<http://example.com/humidity_5000/size/Average> a dsd:DataProfileMetric;
-  metric:hasValue "4"^^xsd:long .
-
-<http://example.com/humidity_5000/size/Median> a dsd:DataProfileMetric;
-  metric:hasValue "4"^^xsd:int .
-
-<http://example.com/humidity_5000/size/Cardinality> a dsd:DataProfileMetric;
-  metric:hasValue "1"^^xsd:long .
-
-<http://example.com/humidity_5000/size/Uniqueness> a dsd:DataProfileMetric;
-  metric:hasValue 1.0E-1 .
-
-<http://example.com/humidity_5000/size/#NullValues> a dsd:DataProfileMetric;
-  metric:hasValue "0"^^xsd:long .
-
-<http://example.com/humidity_5000/size/PercentNullValues> a dsd:DataProfileMetric;
-  metric:hasValue 0.0E0 .
-
-<http://example.com/humidity_5000/size/Histogram> a dsd:DataProfileMetric;
-  metric:hasValue "dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.histogram.SerializableFrequencyMap@3c5dbdf8" .
-
-<http://example.com/humidity_5000/size/Digits> a dsd:DataProfileMetric;
-  metric:hasValue "1"^^xsd:int .
-
-<http://example.com/humidity_5000/size/isCandidateKey> a dsd:DataProfileMetric;
-  metric:hasValue false .
-
-<http://example.com/humidity_5000/size/Decimals> a dsd:DataProfileMetric;
-  metric:hasValue "0"^^xsd:int .
-
-<http://example.com/humidity_5000/size/Basictype> a dsd:DataProfileMetric;
-  metric:hasValue "Numeric" .
-
-<http://example.com/humidity_5000/size/Datatype> a dsd:DataProfileMetric;
-  metric:hasValue "Integer" .
-
-<http://example.com/humidity_5000/size/StandardDeviation> a dsd:DataProfileMetric;
-  metric:hasValue 0.0E0 .
-
-<http://example.com/humidity_5000/size/MeanAbsoluteDeviation> a dsd:DataProfileMetric;
-  metric:hasValue "0" .
-
-dsd:DataSources dsd:hasDataSource ex:humidity_5000 .
+[ {
+  "@graph" : [ {
+    "@id" : "http://dqm.faw.jku.at/dsd/DataSources",
+    "http://dqm.faw.jku.at/dsd/hasDataSource" : [ {
+      "@id" : "http://example.com/humidity_5000/humidity_5000"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/createdAt",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/Attribute" ],
+    "http://dqm.faw.jku.at/dsd/Attribute/hasAttributeProperty" : [ {
+      "@id" : "http://example.com/humidity_5000/createdAt/DataType"
+    }, {
+      "@id" : "http://example.com/humidity_5000/createdAt/Nullable"
+    }, {
+      "@id" : "http://example.com/humidity_5000/createdAt/AutoIncrement"
+    }, {
+      "@id" : "http://example.com/humidity_5000/createdAt/Unique"
+    } ],
+    "http://dqm.faw.jku.at/dsd/hasDataprofile" : [ {
+      "@id" : "http://example.com/humidity_5000/createdAt/DataProfile"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/createdAt/#NullValues",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#long",
+      "@value" : "0"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/createdAt/AutoIncrement",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/AttributeProperty" ],
+    "http://dqm.faw.jku.at/dsd/Attribute/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#boolean",
+      "@value" : "false"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/createdAt/Average",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#long",
+      "@value" : "31"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/createdAt/Basictype",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@value" : "String"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/createdAt/Cardinality",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#long",
+      "@value" : "1000"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/createdAt/DataProfile",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/Dataprofile" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasMetric" : [ {
+      "@id" : "http://example.com/humidity_5000/createdAt/NumberofRows"
+    }, {
+      "@id" : "http://example.com/humidity_5000/createdAt/Minimum"
+    }, {
+      "@id" : "http://example.com/humidity_5000/createdAt/Maximum"
+    }, {
+      "@id" : "http://example.com/humidity_5000/createdAt/Average"
+    }, {
+      "@id" : "http://example.com/humidity_5000/createdAt/Median"
+    }, {
+      "@id" : "http://example.com/humidity_5000/createdAt/Cardinality"
+    }, {
+      "@id" : "http://example.com/humidity_5000/createdAt/Uniqueness"
+    }, {
+      "@id" : "http://example.com/humidity_5000/createdAt/#NullValues"
+    }, {
+      "@id" : "http://example.com/humidity_5000/createdAt/PercentNullValues"
+    }, {
+      "@id" : "http://example.com/humidity_5000/createdAt/Histogram"
+    }, {
+      "@id" : "http://example.com/humidity_5000/createdAt/Digits"
+    }, {
+      "@id" : "http://example.com/humidity_5000/createdAt/isCandidateKey"
+    }, {
+      "@id" : "http://example.com/humidity_5000/createdAt/Decimals"
+    }, {
+      "@id" : "http://example.com/humidity_5000/createdAt/Basictype"
+    }, {
+      "@id" : "http://example.com/humidity_5000/createdAt/Datatype"
+    }, {
+      "@id" : "http://example.com/humidity_5000/createdAt/StandardDeviation"
+    }, {
+      "@id" : "http://example.com/humidity_5000/createdAt/MeanAbsoluteDeviation"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/createdAt/DataType",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/AttributeProperty" ],
+    "http://dqm.faw.jku.at/dsd/Attribute/hasValue" : [ {
+      "@value" : "java.lang.String"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/createdAt/Datatype",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@value" : "String"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/createdAt/Decimals",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#int",
+      "@value" : "0"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/createdAt/Digits",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#int",
+      "@value" : "0"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/createdAt/Histogram",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@value" : "dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.histogram.SerializableFrequencyMap@290d10ef"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/createdAt/Maximum",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#int",
+      "@value" : "32"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/createdAt/MeanAbsoluteDeviation",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@value" : "0"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/createdAt/Median",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#int",
+      "@value" : "32"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/createdAt/Minimum",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#int",
+      "@value" : "28"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/createdAt/Nullable",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/AttributeProperty" ],
+    "http://dqm.faw.jku.at/dsd/Attribute/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#boolean",
+      "@value" : "true"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/createdAt/NumberofRows",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#long",
+      "@value" : "1000"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/createdAt/PercentNullValues",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#double",
+      "@value" : "0.0"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/createdAt/StandardDeviation",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#double",
+      "@value" : "0.0"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/createdAt/Unique",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/AttributeProperty" ],
+    "http://dqm.faw.jku.at/dsd/Attribute/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#boolean",
+      "@value" : "false"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/createdAt/Uniqueness",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#double",
+      "@value" : "100.0"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/createdAt/isCandidateKey",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#boolean",
+      "@value" : "true"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/humidity_5000",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataSource" ],
+    "http://dqm.faw.jku.at/dsd/hasAttribute" : [ {
+      "@id" : "http://example.com/humidity_5000/valueMetadataId"
+    }, {
+      "@id" : "http://example.com/humidity_5000/timestamp"
+    }, {
+      "@id" : "http://example.com/humidity_5000/createdAt"
+    }, {
+      "@id" : "http://example.com/humidity_5000/values"
+    }, {
+      "@id" : "http://example.com/humidity_5000/syncNr"
+    }, {
+      "@id" : "http://example.com/humidity_5000/size"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/size",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/Attribute" ],
+    "http://dqm.faw.jku.at/dsd/Attribute/hasAttributeProperty" : [ {
+      "@id" : "http://example.com/humidity_5000/size/DataType"
+    }, {
+      "@id" : "http://example.com/humidity_5000/size/Nullable"
+    }, {
+      "@id" : "http://example.com/humidity_5000/size/AutoIncrement"
+    }, {
+      "@id" : "http://example.com/humidity_5000/size/Unique"
+    } ],
+    "http://dqm.faw.jku.at/dsd/hasDataprofile" : [ {
+      "@id" : "http://example.com/humidity_5000/size/DataProfile"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/size/#NullValues",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#long",
+      "@value" : "0"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/size/AutoIncrement",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/AttributeProperty" ],
+    "http://dqm.faw.jku.at/dsd/Attribute/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#boolean",
+      "@value" : "false"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/size/Average",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#long",
+      "@value" : "4"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/size/Basictype",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@value" : "Numeric"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/size/Cardinality",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#long",
+      "@value" : "1"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/size/DataProfile",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/Dataprofile" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasMetric" : [ {
+      "@id" : "http://example.com/humidity_5000/size/NumberofRows"
+    }, {
+      "@id" : "http://example.com/humidity_5000/size/Minimum"
+    }, {
+      "@id" : "http://example.com/humidity_5000/size/Maximum"
+    }, {
+      "@id" : "http://example.com/humidity_5000/size/Average"
+    }, {
+      "@id" : "http://example.com/humidity_5000/size/Median"
+    }, {
+      "@id" : "http://example.com/humidity_5000/size/Cardinality"
+    }, {
+      "@id" : "http://example.com/humidity_5000/size/Uniqueness"
+    }, {
+      "@id" : "http://example.com/humidity_5000/size/#NullValues"
+    }, {
+      "@id" : "http://example.com/humidity_5000/size/PercentNullValues"
+    }, {
+      "@id" : "http://example.com/humidity_5000/size/Histogram"
+    }, {
+      "@id" : "http://example.com/humidity_5000/size/Digits"
+    }, {
+      "@id" : "http://example.com/humidity_5000/size/isCandidateKey"
+    }, {
+      "@id" : "http://example.com/humidity_5000/size/Decimals"
+    }, {
+      "@id" : "http://example.com/humidity_5000/size/Basictype"
+    }, {
+      "@id" : "http://example.com/humidity_5000/size/Datatype"
+    }, {
+      "@id" : "http://example.com/humidity_5000/size/StandardDeviation"
+    }, {
+      "@id" : "http://example.com/humidity_5000/size/MeanAbsoluteDeviation"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/size/DataType",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/AttributeProperty" ],
+    "http://dqm.faw.jku.at/dsd/Attribute/hasValue" : [ {
+      "@value" : "java.lang.Integer"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/size/Datatype",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@value" : "Integer"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/size/Decimals",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#int",
+      "@value" : "0"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/size/Digits",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#int",
+      "@value" : "1"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/size/Histogram",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@value" : "dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.histogram.SerializableFrequencyMap@5292ceca"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/size/Maximum",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#int",
+      "@value" : "4"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/size/MeanAbsoluteDeviation",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@value" : "0"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/size/Median",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#int",
+      "@value" : "4"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/size/Minimum",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#int",
+      "@value" : "4"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/size/Nullable",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/AttributeProperty" ],
+    "http://dqm.faw.jku.at/dsd/Attribute/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#boolean",
+      "@value" : "true"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/size/NumberofRows",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#long",
+      "@value" : "1000"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/size/PercentNullValues",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#double",
+      "@value" : "0.0"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/size/StandardDeviation",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#double",
+      "@value" : "0.0"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/size/Unique",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/AttributeProperty" ],
+    "http://dqm.faw.jku.at/dsd/Attribute/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#boolean",
+      "@value" : "false"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/size/Uniqueness",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#double",
+      "@value" : "0.1"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/size/isCandidateKey",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#boolean",
+      "@value" : "false"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/syncNr",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/Attribute" ],
+    "http://dqm.faw.jku.at/dsd/Attribute/hasAttributeProperty" : [ {
+      "@id" : "http://example.com/humidity_5000/syncNr/DataType"
+    }, {
+      "@id" : "http://example.com/humidity_5000/syncNr/Nullable"
+    }, {
+      "@id" : "http://example.com/humidity_5000/syncNr/AutoIncrement"
+    }, {
+      "@id" : "http://example.com/humidity_5000/syncNr/Unique"
+    } ],
+    "http://dqm.faw.jku.at/dsd/hasDataprofile" : [ {
+      "@id" : "http://example.com/humidity_5000/syncNr/DataProfile"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/syncNr/#NullValues",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#long",
+      "@value" : "0"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/syncNr/AutoIncrement",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/AttributeProperty" ],
+    "http://dqm.faw.jku.at/dsd/Attribute/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#boolean",
+      "@value" : "false"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/syncNr/Average",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#long",
+      "@value" : "61296"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/syncNr/Basictype",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@value" : "Numeric"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/syncNr/Cardinality",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#long",
+      "@value" : "1000"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/syncNr/DataProfile",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/Dataprofile" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasMetric" : [ {
+      "@id" : "http://example.com/humidity_5000/syncNr/NumberofRows"
+    }, {
+      "@id" : "http://example.com/humidity_5000/syncNr/Minimum"
+    }, {
+      "@id" : "http://example.com/humidity_5000/syncNr/Maximum"
+    }, {
+      "@id" : "http://example.com/humidity_5000/syncNr/Average"
+    }, {
+      "@id" : "http://example.com/humidity_5000/syncNr/Median"
+    }, {
+      "@id" : "http://example.com/humidity_5000/syncNr/Cardinality"
+    }, {
+      "@id" : "http://example.com/humidity_5000/syncNr/Uniqueness"
+    }, {
+      "@id" : "http://example.com/humidity_5000/syncNr/#NullValues"
+    }, {
+      "@id" : "http://example.com/humidity_5000/syncNr/PercentNullValues"
+    }, {
+      "@id" : "http://example.com/humidity_5000/syncNr/Histogram"
+    }, {
+      "@id" : "http://example.com/humidity_5000/syncNr/Digits"
+    }, {
+      "@id" : "http://example.com/humidity_5000/syncNr/isCandidateKey"
+    }, {
+      "@id" : "http://example.com/humidity_5000/syncNr/Decimals"
+    }, {
+      "@id" : "http://example.com/humidity_5000/syncNr/Basictype"
+    }, {
+      "@id" : "http://example.com/humidity_5000/syncNr/Datatype"
+    }, {
+      "@id" : "http://example.com/humidity_5000/syncNr/StandardDeviation"
+    }, {
+      "@id" : "http://example.com/humidity_5000/syncNr/MeanAbsoluteDeviation"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/syncNr/DataType",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/AttributeProperty" ],
+    "http://dqm.faw.jku.at/dsd/Attribute/hasValue" : [ {
+      "@value" : "java.lang.Integer"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/syncNr/Datatype",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@value" : "Integer"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/syncNr/Decimals",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#int",
+      "@value" : "0"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/syncNr/Digits",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#int",
+      "@value" : "5"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/syncNr/Histogram",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@value" : "dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.histogram.SerializableFrequencyMap@644ded04"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/syncNr/Maximum",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#int",
+      "@value" : "61796"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/syncNr/MeanAbsoluteDeviation",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@value" : "250"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/syncNr/Median",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#int",
+      "@value" : "61297"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/syncNr/Minimum",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#int",
+      "@value" : "60797"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/syncNr/Nullable",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/AttributeProperty" ],
+    "http://dqm.faw.jku.at/dsd/Attribute/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#boolean",
+      "@value" : "true"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/syncNr/NumberofRows",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#long",
+      "@value" : "1000"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/syncNr/PercentNullValues",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#double",
+      "@value" : "0.0"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/syncNr/StandardDeviation",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#double",
+      "@value" : "288.8182819698227"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/syncNr/Unique",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/AttributeProperty" ],
+    "http://dqm.faw.jku.at/dsd/Attribute/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#boolean",
+      "@value" : "false"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/syncNr/Uniqueness",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#double",
+      "@value" : "100.0"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/syncNr/isCandidateKey",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#boolean",
+      "@value" : "true"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/timestamp",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/Attribute" ],
+    "http://dqm.faw.jku.at/dsd/Attribute/hasAttributeProperty" : [ {
+      "@id" : "http://example.com/humidity_5000/timestamp/DataType"
+    }, {
+      "@id" : "http://example.com/humidity_5000/timestamp/Nullable"
+    }, {
+      "@id" : "http://example.com/humidity_5000/timestamp/AutoIncrement"
+    }, {
+      "@id" : "http://example.com/humidity_5000/timestamp/Unique"
+    } ],
+    "http://dqm.faw.jku.at/dsd/hasDataprofile" : [ {
+      "@id" : "http://example.com/humidity_5000/timestamp/DataProfile"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/timestamp/#NullValues",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#long",
+      "@value" : "0"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/timestamp/AutoIncrement",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/AttributeProperty" ],
+    "http://dqm.faw.jku.at/dsd/Attribute/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#boolean",
+      "@value" : "false"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/timestamp/Average",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#long",
+      "@value" : "30"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/timestamp/Basictype",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@value" : "String"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/timestamp/Cardinality",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#long",
+      "@value" : "1000"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/timestamp/DataProfile",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/Dataprofile" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasMetric" : [ {
+      "@id" : "http://example.com/humidity_5000/timestamp/NumberofRows"
+    }, {
+      "@id" : "http://example.com/humidity_5000/timestamp/Minimum"
+    }, {
+      "@id" : "http://example.com/humidity_5000/timestamp/Maximum"
+    }, {
+      "@id" : "http://example.com/humidity_5000/timestamp/Average"
+    }, {
+      "@id" : "http://example.com/humidity_5000/timestamp/Median"
+    }, {
+      "@id" : "http://example.com/humidity_5000/timestamp/Cardinality"
+    }, {
+      "@id" : "http://example.com/humidity_5000/timestamp/Uniqueness"
+    }, {
+      "@id" : "http://example.com/humidity_5000/timestamp/#NullValues"
+    }, {
+      "@id" : "http://example.com/humidity_5000/timestamp/PercentNullValues"
+    }, {
+      "@id" : "http://example.com/humidity_5000/timestamp/Histogram"
+    }, {
+      "@id" : "http://example.com/humidity_5000/timestamp/Digits"
+    }, {
+      "@id" : "http://example.com/humidity_5000/timestamp/isCandidateKey"
+    }, {
+      "@id" : "http://example.com/humidity_5000/timestamp/Decimals"
+    }, {
+      "@id" : "http://example.com/humidity_5000/timestamp/Basictype"
+    }, {
+      "@id" : "http://example.com/humidity_5000/timestamp/Datatype"
+    }, {
+      "@id" : "http://example.com/humidity_5000/timestamp/StandardDeviation"
+    }, {
+      "@id" : "http://example.com/humidity_5000/timestamp/MeanAbsoluteDeviation"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/timestamp/DataType",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/AttributeProperty" ],
+    "http://dqm.faw.jku.at/dsd/Attribute/hasValue" : [ {
+      "@value" : "java.lang.String"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/timestamp/Datatype",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@value" : "String"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/timestamp/Decimals",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#int",
+      "@value" : "0"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/timestamp/Digits",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#int",
+      "@value" : "0"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/timestamp/Histogram",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@value" : "dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.histogram.SerializableFrequencyMap@7899de11"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/timestamp/Maximum",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#int",
+      "@value" : "31"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/timestamp/MeanAbsoluteDeviation",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@value" : "0"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/timestamp/Median",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#int",
+      "@value" : "31"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/timestamp/Minimum",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#int",
+      "@value" : "28"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/timestamp/Nullable",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/AttributeProperty" ],
+    "http://dqm.faw.jku.at/dsd/Attribute/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#boolean",
+      "@value" : "true"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/timestamp/NumberofRows",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#long",
+      "@value" : "1000"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/timestamp/PercentNullValues",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#double",
+      "@value" : "0.0"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/timestamp/StandardDeviation",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#double",
+      "@value" : "0.0"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/timestamp/Unique",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/AttributeProperty" ],
+    "http://dqm.faw.jku.at/dsd/Attribute/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#boolean",
+      "@value" : "false"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/timestamp/Uniqueness",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#double",
+      "@value" : "100.0"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/timestamp/isCandidateKey",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#boolean",
+      "@value" : "true"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/valueMetadataId",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/Attribute" ],
+    "http://dqm.faw.jku.at/dsd/Attribute/hasAttributeProperty" : [ {
+      "@id" : "http://example.com/humidity_5000/valueMetadataId/DataType"
+    }, {
+      "@id" : "http://example.com/humidity_5000/valueMetadataId/Nullable"
+    }, {
+      "@id" : "http://example.com/humidity_5000/valueMetadataId/AutoIncrement"
+    }, {
+      "@id" : "http://example.com/humidity_5000/valueMetadataId/Unique"
+    } ],
+    "http://dqm.faw.jku.at/dsd/hasDataprofile" : [ {
+      "@id" : "http://example.com/humidity_5000/valueMetadataId/DataProfile"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/valueMetadataId/#NullValues",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#long",
+      "@value" : "0"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/valueMetadataId/AutoIncrement",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/AttributeProperty" ],
+    "http://dqm.faw.jku.at/dsd/Attribute/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#boolean",
+      "@value" : "false"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/valueMetadataId/Average",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#long",
+      "@value" : "36"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/valueMetadataId/Basictype",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@value" : "String"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/valueMetadataId/Cardinality",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#long",
+      "@value" : "1"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/valueMetadataId/DataProfile",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/Dataprofile" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasMetric" : [ {
+      "@id" : "http://example.com/humidity_5000/valueMetadataId/NumberofRows"
+    }, {
+      "@id" : "http://example.com/humidity_5000/valueMetadataId/Minimum"
+    }, {
+      "@id" : "http://example.com/humidity_5000/valueMetadataId/Maximum"
+    }, {
+      "@id" : "http://example.com/humidity_5000/valueMetadataId/Average"
+    }, {
+      "@id" : "http://example.com/humidity_5000/valueMetadataId/Median"
+    }, {
+      "@id" : "http://example.com/humidity_5000/valueMetadataId/Cardinality"
+    }, {
+      "@id" : "http://example.com/humidity_5000/valueMetadataId/Uniqueness"
+    }, {
+      "@id" : "http://example.com/humidity_5000/valueMetadataId/#NullValues"
+    }, {
+      "@id" : "http://example.com/humidity_5000/valueMetadataId/PercentNullValues"
+    }, {
+      "@id" : "http://example.com/humidity_5000/valueMetadataId/Histogram"
+    }, {
+      "@id" : "http://example.com/humidity_5000/valueMetadataId/Digits"
+    }, {
+      "@id" : "http://example.com/humidity_5000/valueMetadataId/isCandidateKey"
+    }, {
+      "@id" : "http://example.com/humidity_5000/valueMetadataId/Decimals"
+    }, {
+      "@id" : "http://example.com/humidity_5000/valueMetadataId/Basictype"
+    }, {
+      "@id" : "http://example.com/humidity_5000/valueMetadataId/Datatype"
+    }, {
+      "@id" : "http://example.com/humidity_5000/valueMetadataId/StandardDeviation"
+    }, {
+      "@id" : "http://example.com/humidity_5000/valueMetadataId/MeanAbsoluteDeviation"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/valueMetadataId/DataType",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/AttributeProperty" ],
+    "http://dqm.faw.jku.at/dsd/Attribute/hasValue" : [ {
+      "@value" : "java.lang.String"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/valueMetadataId/Datatype",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@value" : "String"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/valueMetadataId/Decimals",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#int",
+      "@value" : "0"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/valueMetadataId/Digits",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#int",
+      "@value" : "0"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/valueMetadataId/Histogram",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@value" : "dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.histogram.SerializableFrequencyMap@33899f7a"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/valueMetadataId/Maximum",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#int",
+      "@value" : "36"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/valueMetadataId/MeanAbsoluteDeviation",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@value" : "0"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/valueMetadataId/Median",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#int",
+      "@value" : "36"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/valueMetadataId/Minimum",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#int",
+      "@value" : "36"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/valueMetadataId/Nullable",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/AttributeProperty" ],
+    "http://dqm.faw.jku.at/dsd/Attribute/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#boolean",
+      "@value" : "true"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/valueMetadataId/NumberofRows",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#long",
+      "@value" : "1000"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/valueMetadataId/PercentNullValues",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#double",
+      "@value" : "0.0"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/valueMetadataId/StandardDeviation",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#double",
+      "@value" : "0.0"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/valueMetadataId/Unique",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/AttributeProperty" ],
+    "http://dqm.faw.jku.at/dsd/Attribute/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#boolean",
+      "@value" : "false"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/valueMetadataId/Uniqueness",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#double",
+      "@value" : "0.1"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/valueMetadataId/isCandidateKey",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#boolean",
+      "@value" : "false"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/values",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/Attribute" ],
+    "http://dqm.faw.jku.at/dsd/Attribute/hasAttributeProperty" : [ {
+      "@id" : "http://example.com/humidity_5000/values/DataType"
+    }, {
+      "@id" : "http://example.com/humidity_5000/values/Nullable"
+    }, {
+      "@id" : "http://example.com/humidity_5000/values/AutoIncrement"
+    }, {
+      "@id" : "http://example.com/humidity_5000/values/Unique"
+    } ],
+    "http://dqm.faw.jku.at/dsd/hasDataprofile" : [ {
+      "@id" : "http://example.com/humidity_5000/values/DataProfile"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/values/#NullValues",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#long",
+      "@value" : "0"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/values/AutoIncrement",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/AttributeProperty" ],
+    "http://dqm.faw.jku.at/dsd/Attribute/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#boolean",
+      "@value" : "false"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/values/Average",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#double",
+      "@value" : "22.662"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/values/Basictype",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@value" : "Numeric"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/values/Cardinality",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#long",
+      "@value" : "957"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/values/DataProfile",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/Dataprofile" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasMetric" : [ {
+      "@id" : "http://example.com/humidity_5000/values/NumberofRows"
+    }, {
+      "@id" : "http://example.com/humidity_5000/values/Minimum"
+    }, {
+      "@id" : "http://example.com/humidity_5000/values/Maximum"
+    }, {
+      "@id" : "http://example.com/humidity_5000/values/Average"
+    }, {
+      "@id" : "http://example.com/humidity_5000/values/Median"
+    }, {
+      "@id" : "http://example.com/humidity_5000/values/Cardinality"
+    }, {
+      "@id" : "http://example.com/humidity_5000/values/Uniqueness"
+    }, {
+      "@id" : "http://example.com/humidity_5000/values/#NullValues"
+    }, {
+      "@id" : "http://example.com/humidity_5000/values/PercentNullValues"
+    }, {
+      "@id" : "http://example.com/humidity_5000/values/Histogram"
+    }, {
+      "@id" : "http://example.com/humidity_5000/values/Digits"
+    }, {
+      "@id" : "http://example.com/humidity_5000/values/isCandidateKey"
+    }, {
+      "@id" : "http://example.com/humidity_5000/values/Decimals"
+    }, {
+      "@id" : "http://example.com/humidity_5000/values/Basictype"
+    }, {
+      "@id" : "http://example.com/humidity_5000/values/Datatype"
+    }, {
+      "@id" : "http://example.com/humidity_5000/values/StandardDeviation"
+    }, {
+      "@id" : "http://example.com/humidity_5000/values/MeanAbsoluteDeviation"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/values/DataType",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/AttributeProperty" ],
+    "http://dqm.faw.jku.at/dsd/Attribute/hasValue" : [ {
+      "@value" : "java.lang.Double"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/values/Datatype",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@value" : "Double"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/values/Decimals",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#int",
+      "@value" : "6"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/values/Digits",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#int",
+      "@value" : "2"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/values/Histogram",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@value" : "dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.histogram.SerializableFrequencyMap@1bc0d349"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/values/Maximum",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#double",
+      "@value" : "23.151726"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/values/MeanAbsoluteDeviation",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#double",
+      "@value" : "0.1416700000000013"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/values/Median",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#double",
+      "@value" : "22.676308"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/values/Minimum",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#double",
+      "@value" : "20.772388"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/values/Nullable",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/AttributeProperty" ],
+    "http://dqm.faw.jku.at/dsd/Attribute/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#boolean",
+      "@value" : "true"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/values/NumberofRows",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#long",
+      "@value" : "1000"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/values/PercentNullValues",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#double",
+      "@value" : "0.0"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/values/StandardDeviation",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#double",
+      "@value" : "0.3337799412623864"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/values/Unique",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/AttributeProperty" ],
+    "http://dqm.faw.jku.at/dsd/Attribute/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#boolean",
+      "@value" : "false"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/values/Uniqueness",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#double",
+      "@value" : "95.7"
+    } ]
+  }, {
+    "@id" : "http://example.com/humidity_5000/values/isCandidateKey",
+    "@type" : [ "http://dqm.faw.jku.at/dsd/DataProfileMetric" ],
+    "http://dqm.faw.jku.at/dsd/quality/structures/hasValue" : [ {
+      "@type" : "http://www.w3.org/2001/XMLSchema#boolean",
+      "@value" : "false"
+    } ]
+  } ],
+  "@id" : "http://example.com/humidity_5000/humidity_5000"
+} ]

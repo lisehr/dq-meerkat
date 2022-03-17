@@ -1,7 +1,5 @@
 package dqm.jku.dqmeerkat.demos.repeatability;
 
-import java.io.IOException;
-
 import dqm.jku.dqmeerkat.connectors.ConnectorCSV;
 import dqm.jku.dqmeerkat.dsd.DSDKnowledgeGraph;
 import dqm.jku.dqmeerkat.dsd.elements.Attribute;
@@ -13,8 +11,11 @@ import dqm.jku.dqmeerkat.util.FileSelectionUtil;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Resource;
-import org.apache.jena.vocabulary.VCARD;
-import org.cyberborean.rdfbeans.RDFBeanManager;
+import org.apache.jena.vocabulary.RDFS;
+
+import java.io.IOException;
+
+import static org.apache.jena.vocabulary.RDFSyntax.RDF;
 
 /**
  * This class is to evaluate the extent to which the Tributech data loaded in batches of 1,000 records adheres to the RDP boundaries.
@@ -32,6 +33,9 @@ public class RDPConformanceTributechData {
         ConnectorCSV conn = FileSelectionUtil.getConnectorCSV("src/main/resource/data/humidity_5000.csv");
         Datasource ds = conn.loadSchema();
 
+        var dsdKnowledgeGraph = new DSDKnowledgeGraph(ds.getLabel());
+        dsdKnowledgeGraph.addDatasource(ds);
+        dsdKnowledgeGraph.exportKGToFile("Test");
         // Initialization of RDPs
         for (Concept c : ds.getConcepts()) {
             RecordList rs = conn.getPartialRecordList(c, 0, RDP_SIZE);
@@ -39,10 +43,6 @@ public class RDPConformanceTributechData {
                 a.annotateProfile(rs);
             }
         }
-
-        DSDKnowledgeGraph dsdKnowledgeGraph = new DSDKnowledgeGraph(ds.getLabel());
-        dsdKnowledgeGraph.addDatasource(ds);
-        dsdKnowledgeGraph.exportKGToFile("Test.xml");
 
 
 
@@ -58,5 +58,6 @@ public class RDPConformanceTributechData {
                 System.out.println(attribute.getProfileString());
             }
         }
+        System.out.println("Done! Exiting...");
     }
 }
