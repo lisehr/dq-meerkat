@@ -12,18 +12,24 @@ import science.aist.seshat.Logger;
  **/
 public class InfluxDBNew {
     private static final Logger LOGGER = Logger.getInstance();
+    /**
+     * always the same, as defined in docker compose
+     */
     private static final String INFLUX_LOGIN_TOKEN = "12bdc4164c2e8141";
+    /**
+     * This one sadly keeps changing on container creation
+     */
+    private static final String INFLUX_ORG_ID = "851b8416fcb11809";
 
     public static void main(String[] args) {
         try (var influx = InfluxDBConnectionV2.builder()
                 .token(INFLUX_LOGIN_TOKEN)
                 .build()) {
             influx.connect();
-            influx.createDatabase("testdb", 3600);
+            var token = influx.createDatabase("testdb", 3600);
+            LOGGER.info(token);
         } catch (Exception e) {
             LOGGER.error(e);
         }
-
-
     }
 }

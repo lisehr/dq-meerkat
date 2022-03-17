@@ -8,6 +8,7 @@ import dqm.jku.dqmeerkat.util.StringUtil;
 import lombok.Builder;
 import lombok.Getter;
 import org.influxdb.InfluxDB;
+import org.jetbrains.annotations.NotNull;
 import science.aist.seshat.Logger;
 
 import java.util.Arrays;
@@ -24,21 +25,20 @@ public class InfluxDBConnectionV2 implements AutoCloseable {
 
     private final String url;
     private final String token;
-
+    private final String orgId;
     private InfluxDBClient influxDB;
 
     @Getter
     private boolean connected;
 
     @Builder
-    public InfluxDBConnectionV2(String url, String token) {
+    public InfluxDBConnectionV2(String url, String token, String orgId) {
         if (StringUtil.isNullOrEmpty(url))
             url = "http://localhost:8086";
         this.url = url;
-
-        if (StringUtil.isNullOrEmpty(token))
-            token = "root";
         this.token = token;
+        this.orgId = orgId;
+
     }
 
     /**
@@ -55,21 +55,51 @@ public class InfluxDBConnectionV2 implements AutoCloseable {
         connected = true;
     }
 
-    public void createDatabaseIfNotExists() {
+
+    public String createDatabase(String databaseName, int retentionSeconds) {
+        var bucket = influxDB.getBucketsApi().findBucketByName(databaseName);
+
+
+        if (bucket == null)
+            return createDatabaseIfNotExists(databaseName, retentionSeconds);
+//        var test = influxDB.getAuthorizationsApi().findAuthorizations().stream()
+//                .map(authorization -> authorization.getPermissions()
+//                        .stream()
+//                        .filter(permission -> permission.getResource().getName() != null)
+//                        .filter(permission -> permission.getResource().getName().equalsIgnoreCase(""))
+//                        .findFirst().orElseThrow() // TODO create new token
+//                ).collect(Collectors.toList());
+        return influxDB.getAuthorizationsApi().findAuthorizationsByOrgID(orgId).stream()
+                .findFirst()
+                .orElseGet(() -> createAuthorisationForBucket(bucket)).getToken();
+    }
+
+    /**
+     * <p>Creates a new databse/bucket in influxdb. It is part of the organisation defined in this connection.
+     * In order to use the given database, use the r/w token, that is returned by this method. This method throws
+     * an exception if the bucket already exists.</p>
+     *
+     * @param databaseName     the unique name for the bucket.
+     * @param retentionSeconds How long data is retained in the bucket (?)
+     * @return Read/Write Access token to the created bucket
+     */
+    public String createDatabaseIfNotExists(String databaseName, int retentionSeconds) {
+        var retention = new BucketRetentionRules();
+        retention.setEverySeconds(retentionSeconds);
+        Bucket bucket = influxDB.getBucketsApi().createBucket(databaseName, retention, orgId);
+
+        // Create access token to bucket
+        Authorization authorization = createAuthorisationForBucket(bucket);
+
+        return authorization.getToken();
 
     }
 
-    public void createDatabase(String databaseName,  int retentionSeconds) {
-        var retention = new BucketRetentionRules();
-        retention.setEverySeconds(retentionSeconds);
-        Bucket bucket = influxDB.getBucketsApi().createBucket(databaseName, retention, token);
-
-        //
-        // Create access token to "iot_bucket"
-        //
+    @NotNull
+    private Authorization createAuthorisationForBucket(Bucket bucket) {
         PermissionResource resource = new PermissionResource();
         resource.setId(bucket.getId());
-        resource.setOrgID("12bdc4164c2e8141");
+        resource.setOrgID(orgId);
         resource.setType(PermissionResource.TypeEnum.BUCKETS);
 
         // Read permission
@@ -82,15 +112,8 @@ public class InfluxDBConnectionV2 implements AutoCloseable {
         write.setResource(resource);
         write.setAction(Permission.ActionEnum.WRITE);
 
-        Authorization authorization = influxDB.getAuthorizationsApi()
-                .createAuthorization("12bdc4164c2e8141", Arrays.asList(read, write));
-
-        //
-        // Created token that can be use for writes to "iot_bucket"
-        //
-        String token = authorization.getToken();
-        System.out.println("Token: " + token);
-
+        return influxDB.getAuthorizationsApi()
+                .createAuthorization(orgId, Arrays.asList(read, write));
     }
 
     public void write() {
