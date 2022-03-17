@@ -13,7 +13,7 @@ import dqm.jku.dqmeerkat.dsd.records.Record;
 public class InfluxDBConnection {
   private static final String URL = "http://localhost:8086";
   private static final String USER = "root";
-  private static final String PW = "root";
+  private static final String PW = "SecurePassword";
   private static final String DEF_DB = "testSeries";
   private static final String DEF_RET = "testRetention";
 
