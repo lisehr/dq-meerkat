@@ -1,7 +1,9 @@
 package dqm.jku.dqmeerkat.resources.export.json.dtdl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import dqm.jku.dqmeerkat.domain.dtdl.DtdlInterface;
 import dqm.jku.dqmeerkat.dsd.DSDKnowledgeGraph;
-import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.resources.export.Exporter;
 
@@ -17,11 +19,24 @@ public class DTDLExporter extends Exporter {
         super(path, ".json");
     }
 
+    /**
+     * TODO transform knowledgegraph to dtdl objects
+     * @param knowledgeGraph
+     * @param fileName
+     */
     @Override
     public void export(DSDKnowledgeGraph knowledgeGraph, String fileName) {
         for (Datasource ds : knowledgeGraph.getDatasources().values()) {
+            var dtdlInterface = new DtdlInterface("dtmi:scch:at:dsd:Datasource;1");
+            ObjectMapper mapper = new ObjectMapper();
+            try {
+                var ret = mapper.writeValueAsString(dtdlInterface);
+                System.out.println(ret);
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
 
-            System.out.println(ds.getConcepts());
+
         }
     }
 }
