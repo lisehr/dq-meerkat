@@ -8,6 +8,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.RDPConformanceChecker;
 import dqm.jku.dqmeerkat.resources.export.json.dtdl.DTDLExporter;
+import dqm.jku.dqmeerkat.resources.loading.json.dtdl.DTDLImporter;
 import dqm.jku.dqmeerkat.util.FileSelectionUtil;
 
 import java.io.IOException;
@@ -27,6 +28,8 @@ public class RDPConformanceTributechData {
     public static void main(String args[]) throws IOException, InterruptedException, NoSuchMethodException {
         ConnectorCSV conn = FileSelectionUtil.getConnectorCSV("src/main/resource/data/humidity_5000.csv");
         Datasource ds = conn.loadSchema();
+
+        var dtdlInterface = new DTDLImporter().importDataList("src/main/resource/data/dsd.json");
 
         var dsdKnowledgeGraph = new DSDKnowledgeGraph(ds.getLabel());
         dsdKnowledgeGraph.addDatasource(ds);
