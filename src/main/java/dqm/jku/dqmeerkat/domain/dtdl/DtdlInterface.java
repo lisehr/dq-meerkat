@@ -1,6 +1,8 @@
 package dqm.jku.dqmeerkat.domain.dtdl;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -29,6 +31,7 @@ public class DtdlInterface {
     private String context = "dtmi:at:scch:dsd:Concept;1";
 
     @JsonProperty("extends")
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     private List<String> extendz = new ArrayList<>();
 
     private String displayName;
