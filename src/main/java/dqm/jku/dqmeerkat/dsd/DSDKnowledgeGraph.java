@@ -7,6 +7,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.graphdb.EmbeddedGraphDB;
+import dqm.jku.dqmeerkat.influxdb.InfluxDBConnection;
 import dqm.jku.dqmeerkat.influxdb.InfluxDBConnectionV1;
 import dqm.jku.dqmeerkat.resources.export.Exporter;
 import dqm.jku.dqmeerkat.resources.export.ttl.TTLExporter;
@@ -240,7 +241,7 @@ public class DSDKnowledgeGraph {
     /**
      * Method for adding all data profiles for all data sources to influx
      */
-    public void addProfilesToInflux(InfluxDBConnectionV1 influx) {
+    public void addProfilesToInflux(InfluxDBConnection influx) {
         for (Datasource ds : dss.values()) {
             ds.addProfileToInflux(influx);
         }

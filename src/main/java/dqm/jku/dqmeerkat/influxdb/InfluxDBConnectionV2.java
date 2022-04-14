@@ -125,6 +125,7 @@ public class InfluxDBConnectionV2 implements InfluxDBConnection {
         WriteApiBlocking writeApi = influxDB.getWriteApiBlocking();
 
         writeApi.writeMeasurement(bucketname, orgId, WritePrecision.S, pojo);
+
     }
 
     public <T> void write(String bucketname, List<T> pojo) {
@@ -147,7 +148,27 @@ public class InfluxDBConnectionV2 implements InfluxDBConnection {
     }
 
     @Override
+    public void write(String bucketName, Point measurement) {
+        throw new UnsupportedOperationException(
+                String.format("Cannot use wrong Point class {%s} in implementation {%s}",
+                        Point.class, this.getClass()));
+    }
+
+    @Override
     public void write(Point measuringPoint) {
-        throw new RuntimeException("Not Implemented");
+        throw new UnsupportedOperationException(
+                String.format("Cannot use wrong Point class {%s} in implementation {%s}",
+                        Point.class, this.getClass()));
+    }
+
+    @Override
+    public void write(String bucketName, com.influxdb.client.write.Point measurement) {
+        WriteApiBlocking writeApi = influxDB.getWriteApiBlocking();
+        writeApi.writePoint(bucketName, orgId, measurement);
+    }
+
+    @Override
+    public void write(com.influxdb.client.write.Point measuringPoint) {
+        write("default", measuringPoint);
     }
 }
