@@ -1,5 +1,6 @@
 package dqm.jku.dqmeerkat.dsd.elements;
 
+import dqm.jku.dqmeerkat.influxdb.InfluxDBConnection;
 import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
@@ -119,7 +120,7 @@ public class Attribute extends DSDElement {
   }
 
   @Override
-  public void addProfileToInflux(InfluxDBConnectionV1 connection) {
+  public void addProfileToInflux(InfluxDBConnection connection) {
     super.storeProfile(connection);
   }
   

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dqm.jku.dqmeerkat.dsd.records.Record;
+import dqm.jku.dqmeerkat.influxdb.InfluxDBConnection;
 import dqm.jku.dqmeerkat.influxdb.InfluxDBConnectionV1;
 
 public class ForeignKey extends Constraint {
@@ -81,7 +82,7 @@ public class ForeignKey extends Constraint {
 	}
 
   @Override
-  public void addProfileToInflux(InfluxDBConnectionV1 connection) {
+  public void addProfileToInflux(InfluxDBConnection connection) {
     super.storeProfile(connection);
   }
 

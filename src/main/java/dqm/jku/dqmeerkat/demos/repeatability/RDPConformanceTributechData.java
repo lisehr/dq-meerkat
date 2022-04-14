@@ -25,7 +25,7 @@ public class RDPConformanceTributechData {
     private static final int RDP_SIZE = 1000;
     private static final int BATCH_SIZE = 1000;        // Set to 1 to simulate streaming data
 
-    public static void main(String args[]) throws IOException, InterruptedException, NoSuchMethodException {
+    public static void main(String[] args) throws IOException, InterruptedException, NoSuchMethodException {
         ConnectorCSV conn = FileSelectionUtil.getConnectorCSV("src/main/resource/data/humidity_5000.csv");
         Datasource ds = conn.loadSchema();
 

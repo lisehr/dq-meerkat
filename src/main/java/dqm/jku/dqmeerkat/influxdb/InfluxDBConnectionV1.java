@@ -14,7 +14,7 @@ import dqm.jku.dqmeerkat.dsd.records.Record;
  * @deprecated Code uses old dependencies. Use {@link InfluxDBConnectionV2} instead
  */
 @Deprecated
-public class InfluxDBConnectionV1 {
+public class InfluxDBConnectionV1 implements InfluxDBConnection{
   private static final String URL = "http://localhost:8086";
   private static final String USER = "root";
   private static final String PW = "SecurePassword";

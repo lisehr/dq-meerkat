@@ -191,7 +191,7 @@ public class DSDKnowledgeGraph {
      * Method to export data profiles in CSV format to export folder.
      */
     public void exportToCSV() {
-        ExportUtil.exportToCSV(new ArrayList<Datasource>(dss.values()));
+        ExportUtil.exportToCSV(new ArrayList<>(dss.values()));
     }
 
     /**

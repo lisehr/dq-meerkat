@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.function.Predicate;
 
+import dqm.jku.dqmeerkat.influxdb.InfluxDBConnection;
 import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFContainer;
@@ -159,7 +160,7 @@ public class Datasource extends DSDElement {
 
 	}
 
-	public void addProfileToInflux(InfluxDBConnectionV1 connection) {
+	public void addProfileToInflux(InfluxDBConnection connection) {
 		super.storeProfile(connection);
 		for (Concept c : concepts) {
 			c.addProfileToInflux(connection);

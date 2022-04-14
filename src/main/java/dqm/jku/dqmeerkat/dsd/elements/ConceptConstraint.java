@@ -3,6 +3,7 @@ package dqm.jku.dqmeerkat.dsd.elements;
 import java.util.HashSet;
 
 import dqm.jku.dqmeerkat.dsd.records.Record;
+import dqm.jku.dqmeerkat.influxdb.InfluxDBConnection;
 import dqm.jku.dqmeerkat.influxdb.InfluxDBConnectionV1;
 import dqm.jku.dqmeerkat.quality.DataQualityStore;
 import dqm.jku.dqmeerkat.util.Constants;
@@ -47,7 +48,7 @@ public class ConceptConstraint extends Constraint {
 	}
 
   @Override
-  public void addProfileToInflux(InfluxDBConnectionV1 connection) {
+  public void addProfileToInflux(InfluxDBConnection connection) {
     super.storeProfile(connection);
   }
 

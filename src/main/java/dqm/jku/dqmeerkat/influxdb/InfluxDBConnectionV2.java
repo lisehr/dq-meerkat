@@ -8,6 +8,7 @@ import dqm.jku.dqmeerkat.util.StringUtil;
 import lombok.Builder;
 import lombok.Getter;
 import org.influxdb.InfluxDB;
+import org.influxdb.dto.Point;
 import org.jetbrains.annotations.NotNull;
 import science.aist.seshat.Logger;
 
@@ -21,7 +22,7 @@ import java.util.List;
  * @author Rainer Meindl, rainer.meindl@scch.at
  * @since 19.01.2022
  **/
-public class InfluxDBConnectionV2 implements AutoCloseable {
+public class InfluxDBConnectionV2 implements InfluxDBConnection {
     private static final Logger LOGGER = Logger.getInstance();
 
     private final String url;
@@ -134,9 +135,7 @@ public class InfluxDBConnectionV2 implements AutoCloseable {
 
     public <T> List<T> read(String query, Class<T> pojoClass) {
         var readApi = influxDB.getQueryApi();
-        var resFlux = readApi.query(query, orgId);
-        var res = readApi.query(query, orgId, pojoClass);
-        return res;
+        return readApi.query(query, orgId, pojoClass);
     }
 
     @Override
@@ -145,5 +144,10 @@ public class InfluxDBConnectionV2 implements AutoCloseable {
             return;
         influxDB.close();
         influxDB = null;
+    }
+
+    @Override
+    public void write(Point measuringPoint) {
+        throw new RuntimeException("Not Implemented");
     }
 }
