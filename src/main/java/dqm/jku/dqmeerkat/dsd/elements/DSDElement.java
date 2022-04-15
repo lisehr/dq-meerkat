@@ -12,6 +12,7 @@ import org.influxdb.dto.Point;
 import org.influxdb.dto.Point.Builder;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -201,20 +202,26 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
 
     public abstract void addProfileToInflux(InfluxDBConnection connection);
 
+    /**
+     * <p>Stores the {@link DataProfile} into a influxdb instance. This method specifically targets influx db version
+     * >2.x. For other versions use storeProfile({@link InfluxDBConnection}, {@link DataProfile})</p>
+     *
+     * @param connection {@link InfluxDBConnection}, whose implementation uses an database of version 2.x
+     */
     protected void storeProfile(InfluxDBConnection connection) {
         if (this.dataProfile == null)
             return;
         if (this.dataProfile.getStatistics().stream().allMatch(m -> (m.getValue() == null)))
             return;
-//Deprecated version of generating points
-//        Builder measure = Point.measurement(getURI()).time(System.currentTimeMillis(), TimeUnit.MILLISECONDS);
-        connection.write(this.dataProfile.createMeasuringPoint(getURI(), System.currentTimeMillis(), WritePrecision.MS));
+        
+        connection.write(this.dataProfile.createMeasuringPoint(getURI(), Instant.now().toEpochMilli(), WritePrecision.MS));
     }
 
+    @Deprecated
     protected void storeProfile(InfluxDBConnection connection, DataProfile profile) {
         if (profile == null) return;
         if (profile.getStatistics().stream().allMatch(m -> (m.getValue() == null))) return;
-        Builder measure = Point.measurement(getURI()).time(System.currentTimeMillis(), TimeUnit.MILLISECONDS);
+        Builder measure = Point.measurement(getURI()).time(Instant.now().toEpochMilli(), TimeUnit.MILLISECONDS);
         connection.write(profile.createMeasuringPoint(measure));
     }
 }

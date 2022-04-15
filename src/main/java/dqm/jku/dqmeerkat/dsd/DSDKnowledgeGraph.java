@@ -36,7 +36,7 @@ import java.util.List;
  * their connections. Allows to automatically annotate data profiles for
  * multiple data sources, persist, or export the KG.
  */
-public class DSDKnowledgeGraph {
+public class DSDKnowledgeGraph implements AutoCloseable {
     private String label;
     private EmbeddedGraphDB kgstore = null;
     private HashMap<String, Datasource> dss = new HashMap<String, Datasource>();
@@ -247,4 +247,9 @@ public class DSDKnowledgeGraph {
         }
     }
 
+    @Override
+    public void close() throws Exception {
+        if (kgstore != null)
+            kgstore.close();
+    }
 }

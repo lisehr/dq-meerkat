@@ -409,6 +409,15 @@ public class DataProfile {
         return measure.build();
     }
 
+    /**
+     * <p>Transforms the statistics into measuring points for InfluxDB 2.x to be persisted. </p>
+     *
+     * @param measurementDescriptor description or name of the point to create
+     * @param timestampMillis       time, when the data point has been taken
+     * @param writePrecision        Precision of time to be written
+     * @return com.influxdb.client.write.Point that can be persisted using a
+     * {@link dqm.jku.dqmeerkat.influxdb.InfluxDBConnectionV2}
+     */
     public com.influxdb.client.write.Point createMeasuringPoint(String measurementDescriptor, long timestampMillis,
                                                                 WritePrecision writePrecision) {
         SortedSet<ProfileStatistic> metricSorted = new TreeSet<>(statistics);
