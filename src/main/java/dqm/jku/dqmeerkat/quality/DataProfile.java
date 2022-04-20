@@ -399,6 +399,7 @@ public class DataProfile {
      * @param measure the builder for a measurement
      * @return a measuring point for insertion into InfluxDB
      */
+    @Deprecated
     public Point createMeasuringPoint(Builder measure) {
         SortedSet<ProfileStatistic> metricSorted = new TreeSet<>();
         metricSorted.addAll(statistics);

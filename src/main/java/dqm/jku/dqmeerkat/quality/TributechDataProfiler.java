@@ -15,15 +15,15 @@ import lombok.SneakyThrows;
  * @since 20.04.2022
  */
 public class TributechDataProfiler extends DataProfiler {
-    public TributechDataProfiler(Datasource ds, DSConnector conn, int rdpSize, int batchSize) {
-        super(ds, conn, rdpSize, batchSize);
+    public TributechDataProfiler(Datasource ds, DSConnector conn, int batchSize) {
+        super(ds, conn, batchSize);
     }
 
     @SneakyThrows
     @Override
     public DataProfileCollection generateProfileStep(Concept concept, int profileOffset) {
         RecordList rs = conn.getPartialRecordList(concept, profileOffset, batchSize);
-        var dataProfileCollection = new DataProfileCollection();
+        var dataProfileCollection = new DataProfileCollection(this.uri);
         for (Attribute a : concept.getSortedAttributes()) {
             if (a.hasProfile()) {
                 dataProfileCollection.addDataProfile(a.createDataProfile(rs));

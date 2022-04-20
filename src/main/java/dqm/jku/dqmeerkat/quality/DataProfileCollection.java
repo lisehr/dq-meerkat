@@ -1,5 +1,11 @@
 package dqm.jku.dqmeerkat.quality;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +17,24 @@ import java.util.List;
  * @author meindl, rainer.meindl@scch.at
  * @since 20.04.2022
  */
+@Getter
 public class DataProfileCollection {
+
     private final List<DataProfile> profiles = new ArrayList<>();
+
+    @Setter // setter to override for testing
+    private LocalDateTime timestampOfCreation;
+
+    private final String uri;
+
+    public DataProfileCollection(LocalDateTime timestampOfCreation, String uri) {
+        this.timestampOfCreation = timestampOfCreation;
+        this.uri = uri;
+    }
+
+    public DataProfileCollection(String uri) {
+        this(LocalDateTime.ofInstant(Instant.now(), ZoneOffset.UTC), uri);
+    }
 
 
     public void addDataProfile(DataProfile dataProfile) {

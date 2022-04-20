@@ -1,5 +1,6 @@
 package dqm.jku.dqmeerkat.demos.repeatability;
 
+import com.influxdb.client.domain.WritePrecision;
 import dqm.jku.dqmeerkat.connectors.ConnectorCSV;
 import dqm.jku.dqmeerkat.dsd.DSDKnowledgeGraph;
 import dqm.jku.dqmeerkat.dsd.elements.Attribute;
@@ -7,6 +8,9 @@ import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.influxdb.InfluxDBConnectionV2;
+import dqm.jku.dqmeerkat.quality.DataProfile;
+import dqm.jku.dqmeerkat.quality.DataProfiler;
+import dqm.jku.dqmeerkat.quality.TributechDataProfiler;
 import dqm.jku.dqmeerkat.quality.conformance.AllInOneRDPConformanceChecker;
 import dqm.jku.dqmeerkat.resources.export.json.dtdl.DTDLExporter;
 import dqm.jku.dqmeerkat.util.FileSelectionUtil;
@@ -14,6 +18,12 @@ import dqm.jku.dqmeerkat.util.FileSelectionUtil;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
+import java.time.temporal.TemporalUnit;
 import java.util.Properties;
 
 /**
@@ -34,55 +44,68 @@ public class RDPConformanceTributechData {
 
         ConnectorCSV conn = FileSelectionUtil.getConnectorCSV("src/main/resource/data/humidity_5000.csv");
         conn.setLabel("humidity_data");
-        Datasource ds = conn.loadSchema("http:/example.com/humidity_data", "hum");
+        Datasource ds = conn.loadSchema("http:/example.com", "hum");
 
-        for (var i = 0; i < 10; i++) {
 //            var dtdlInterface = new DTDLImporter().importDataList("src/main/resource/data/dsd.json");
 
-            try (var dsdKnowledgeGraph = new DSDKnowledgeGraph(ds.getLabel())) {
-                dsdKnowledgeGraph.addDatasource(ds);
-                dsdKnowledgeGraph.setExporter(new DTDLExporter(("")));
+        try (var dsdKnowledgeGraph = new DSDKnowledgeGraph(ds.getLabel())) {
+            dsdKnowledgeGraph.addDatasource(ds);
+            dsdKnowledgeGraph.setExporter(new DTDLExporter(("")));
 //        dsdKnowledgeGraph.exportKGToFile("Test");
-                // Initialization of RDPs
-                for (Concept c : ds.getConcepts()) {
-                    RecordList rs = conn.getPartialRecordList(c, 0, RDP_SIZE);
-                    for (Attribute a : c.getSortedAttributes()) {
-                        a.annotateProfile(rs);
-                        // also print rdp per column
-                        System.out.println(a.getProfileString());
-                    }
+            // Initialization of RDPs
+            for (Concept c : ds.getConcepts()) {
+                RecordList rs = conn.getPartialRecordList(c, 0, RDP_SIZE);
+                for (Attribute a : c.getSortedAttributes()) {
+                    a.annotateProfile(rs);
+                    // also print rdp per column
+                    System.out.println(a.getProfileString());
                 }
-
-
-                // Continuous generation of DPs and conformance checking
-                AllInOneRDPConformanceChecker confChecker = new AllInOneRDPConformanceChecker(ds, conn, BATCH_SIZE, THRESHOLD);
-                confChecker.runConformanceCheck();
-                // Finally: print evaluation report
-                System.out.println(confChecker.getReport());
-
-
-                try (InputStream input = new FileInputStream("src/main/resource/config.properties")) {
-                    var properties = new Properties();
-                    properties.load(input);
-                    try (var influx = InfluxDBConnectionV2.builder()
-                            .token(properties.getProperty("db.token"))
-                            .orgId(properties.getProperty("db.orgId"))
-                            .build()) {
-                        influx.connect();
-
-                        dsdKnowledgeGraph.addProfilesToInflux(influx);
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-                System.out.println("Done with " + i + " now sleeping");
-//                Thread.sleep(10);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
             }
 
+            DataProfiler profiler = new TributechDataProfiler(ds, conn, BATCH_SIZE);
+            var ret = profiler.generateProfiles();
 
+
+            // Continuous generation of DPs and conformance checking
+//            AllInOneRDPConformanceChecker confChecker = new AllInOneRDPConformanceChecker(ds, conn, BATCH_SIZE, THRESHOLD);
+//            confChecker.runConformanceCheck();
+//            // Finally: print evaluation report
+//            System.out.println(confChecker.getReport());
+
+
+            try (InputStream input = new FileInputStream("src/main/resource/config.properties")) {
+                var properties = new Properties();
+                properties.load(input);
+                try (var influx = InfluxDBConnectionV2.builder()
+                        .token(properties.getProperty("db.token"))
+                        .orgId(properties.getProperty("db.orgId"))
+                        .build()) {
+                    influx.connect();
+                    dsdKnowledgeGraph.addProfilesToInflux(influx);
+                    var i = 0;
+                    for (var collection : ret) {
+                        collection.setTimestampOfCreation(collection.getTimestampOfCreation().minus(i * 10L, ChronoUnit.SECONDS));
+                        i++;
+                        for (DataProfile profile : collection.getProfiles()) {
+                            influx.write("default",
+                                    profile.createMeasuringPoint(profile.getURI(),
+                                            collection.getTimestampOfCreation()
+                                                    .atZone(ZoneOffset.UTC)
+                                                    .toInstant()
+                                                    .toEpochMilli(),
+                                            WritePrecision.MS));
+                        }
+                        System.out.println("wrote " + collection.getUri());
+                        Thread.sleep(2000);
+                    }
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
 
         System.out.println("Done! Exiting...");
