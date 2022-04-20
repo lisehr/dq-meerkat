@@ -49,7 +49,6 @@ public abstract class DataProfiler {
 
     public abstract DataProfileCollection generateProfileStep(Concept concept, int profileOffset);
 
-    // TODO use this method in the main for visualisation
     @SneakyThrows
     public List<DataProfileCollection> generateProfiles() {
         int offset = 0;
