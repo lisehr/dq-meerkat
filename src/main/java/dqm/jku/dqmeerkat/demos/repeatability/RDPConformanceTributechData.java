@@ -12,6 +12,8 @@ import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.DataProfiler;
 import dqm.jku.dqmeerkat.quality.TributechDataProfiler;
 import dqm.jku.dqmeerkat.quality.conformance.AllInOneRDPConformanceChecker;
+import dqm.jku.dqmeerkat.quality.conformance.CompositeRDPConformanceChecker;
+import dqm.jku.dqmeerkat.quality.conformance.RDPConformanceChecker;
 import dqm.jku.dqmeerkat.resources.export.json.dtdl.DTDLExporter;
 import dqm.jku.dqmeerkat.util.FileSelectionUtil;
 
@@ -63,15 +65,16 @@ public class RDPConformanceTributechData {
                 }
             }
 
-            DataProfiler profiler = new TributechDataProfiler(ds, conn, BATCH_SIZE);
+            DataProfiler profiler = new TributechDataProfiler(ds, conn, BATCH_SIZE, conn.getLabel());
             var ret = profiler.generateProfiles();
 
 
             // Continuous generation of DPs and conformance checking
-//            AllInOneRDPConformanceChecker confChecker = new AllInOneRDPConformanceChecker(ds, conn, BATCH_SIZE, THRESHOLD);
-//            confChecker.runConformanceCheck();
+            RDPConformanceChecker confChecker = new CompositeRDPConformanceChecker(THRESHOLD, ds, conn, BATCH_SIZE,
+                    dsdKnowledgeGraph.getLabel());
+            confChecker.runConformanceCheck();
 //            // Finally: print evaluation report
-//            System.out.println(confChecker.getReport());
+            System.out.println(confChecker.getReport());
 
 
             try (InputStream input = new FileInputStream("src/main/resource/config.properties")) {

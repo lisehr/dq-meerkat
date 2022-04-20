@@ -15,8 +15,8 @@ import lombok.SneakyThrows;
  * @since 20.04.2022
  */
 public class TributechDataProfiler extends DataProfiler {
-    public TributechDataProfiler(Datasource ds, DSConnector conn, int batchSize) {
-        super(ds, conn, batchSize);
+    public TributechDataProfiler(Datasource ds, DSConnector conn, int batchSize, String uri) {
+        super(ds, conn, batchSize, uri);
     }
 
     @SneakyThrows
