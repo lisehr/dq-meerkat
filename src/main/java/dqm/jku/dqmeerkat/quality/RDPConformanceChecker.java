@@ -8,6 +8,7 @@ import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,7 @@ public class RDPConformanceChecker {
     private double threshold;
     private Map<String, Integer> totalCounter;        // counts all checked DPs per attribute
     private Map<String, Double> confCounter;        // conts all conforming DPs per attribute
+    private DataProfiler profiler;
 
     public RDPConformanceChecker() {
         this.rdpSize = 0;
@@ -42,6 +44,7 @@ public class RDPConformanceChecker {
         this.threshold = threshold;
         this.totalCounter = new HashMap<String, Integer>();
         this.confCounter = new HashMap<String, Double>();
+        this.profiler = new TributechDataProfiler(ds, conn, rdpSize, batchSize);
     }
 
     /**
@@ -52,8 +55,10 @@ public class RDPConformanceChecker {
      * @throws IOException
      */
     public void run() throws NoSuchMethodException, IOException {
+        var test = profiler.generateProfiles();
         int noRecs = 0;
         int offset = 0;
+        List<DataProfile> dataprofiles = new ArrayList<>();
         for (Concept c : ds.getConcepts()) { // TODO extract this whole loop into the main for visualisation
             noRecs = conn.getNrRecords(c);
             if (noRecs < offset + batchSize)
@@ -65,7 +70,7 @@ public class RDPConformanceChecker {
                     if (a.hasProfile()) {
                         // generate current DP and store to list
                         DataProfile dp = a.createDataProfile(rs); // TODO extract this dp as list of dps
-
+                        dataprofiles.add(dp);
                         String key = a.getURI();
                         Integer cnt = totalCounter.get(key);
                         if (cnt == null) {
