@@ -19,6 +19,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
@@ -81,22 +82,19 @@ public class RDPConformanceTributechData {
                         .orgId(properties.getProperty("db.orgId"))
                         .build()) {
                     influx.connect();
-                    dsdKnowledgeGraph.addProfilesToInflux(influx);
-                    var i = 0;
                     for (var collection : ret) {
-                        collection.setTimestampOfCreation(collection.getTimestampOfCreation().minus(i * 10L, ChronoUnit.SECONDS));
-                        i++;
+                        collection.setTimestampOfCreation(LocalDateTime.ofInstant(Instant.now(), ZoneOffset.UTC));
                         for (DataProfile profile : collection.getProfiles()) {
+                            dsdKnowledgeGraph.addProfilesToInflux(influx);
                             influx.write("default",
                                     profile.createMeasuringPoint(profile.getURI(),
-                                            collection.getTimestampOfCreation()
+                                            collection.getTimestampOfCreation().minus(10, ChronoUnit.SECONDS)
                                                     .atZone(ZoneOffset.UTC)
                                                     .toInstant()
                                                     .toEpochMilli(),
                                             WritePrecision.MS));
                         }
-                        System.out.println("wrote " + collection.getUri());
-                        Thread.sleep(2000);
+                        Thread.sleep(60000);
                     }
 
 
