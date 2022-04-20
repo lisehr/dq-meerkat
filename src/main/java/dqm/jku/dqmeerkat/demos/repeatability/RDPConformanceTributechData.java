@@ -7,7 +7,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.influxdb.InfluxDBConnectionV2;
-import dqm.jku.dqmeerkat.quality.RDPConformanceChecker;
+import dqm.jku.dqmeerkat.quality.conformance.AllInOneRDPConformanceChecker;
 import dqm.jku.dqmeerkat.resources.export.json.dtdl.DTDLExporter;
 import dqm.jku.dqmeerkat.util.FileSelectionUtil;
 
@@ -55,8 +55,8 @@ public class RDPConformanceTributechData {
 
 
                 // Continuous generation of DPs and conformance checking
-                RDPConformanceChecker confChecker = new RDPConformanceChecker(ds, conn, BATCH_SIZE, THRESHOLD);
-                confChecker.run();
+                AllInOneRDPConformanceChecker confChecker = new AllInOneRDPConformanceChecker(ds, conn, BATCH_SIZE, THRESHOLD);
+                confChecker.runConformanceCheck();
                 // Finally: print evaluation report
                 System.out.println(confChecker.getReport());
 
