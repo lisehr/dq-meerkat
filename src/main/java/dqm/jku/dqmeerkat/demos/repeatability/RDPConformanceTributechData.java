@@ -27,18 +27,16 @@ public class RDPConformanceTributechData {
     private static final double THRESHOLD = 0.1;        // Threshold indicates allowed deviation from reference value in percent
     private static final int RDP_SIZE = 500; // IF THIS IS LARGER THAN THE FILE SIZE THERE WILL BE NO DATA IN THE RDPs
     // i wasted way too much time on this...
-    private static final int BATCH_SIZE = 50;        // Set to 1 to simulate streaming data
+    private static final int BATCH_SIZE = 500;        // Set to 1 to simulate streaming data
 
 
     public static void main(String[] args) throws IOException, InterruptedException, NoSuchMethodException {
+
+        ConnectorCSV conn = FileSelectionUtil.getConnectorCSV("src/main/resource/data/humidity_5000.csv");
+        conn.setLabel("humidity_data");
+        Datasource ds = conn.loadSchema("http:/example.com/humidity_data", "hum");
+
         for (var i = 0; i < 10; i++) {
-            ConnectorCSV conn = FileSelectionUtil.getConnectorCSV(
-                    String.format("src/main/resource/data/split_test_data/split_data_%d.csv", i));
-            conn.setLabel("humidity_data");
-            System.out.println("read file " + i);
-            Datasource ds = conn.loadSchema("http:/example.com/humidity_data", "ex");
-
-
 //            var dtdlInterface = new DTDLImporter().importDataList("src/main/resource/data/dsd.json");
 
             try (var dsdKnowledgeGraph = new DSDKnowledgeGraph(ds.getLabel())) {
@@ -50,6 +48,8 @@ public class RDPConformanceTributechData {
                     RecordList rs = conn.getPartialRecordList(c, 0, RDP_SIZE);
                     for (Attribute a : c.getSortedAttributes()) {
                         a.annotateProfile(rs);
+                        // also print rdp per column
+                        System.out.println(a.getProfileString());
                     }
                 }
 
@@ -60,12 +60,7 @@ public class RDPConformanceTributechData {
                 // Finally: print evaluation report
                 System.out.println(confChecker.getReport());
 
-                // also print rdp per column
-                for (var concept : ds.getConcepts()) {
-                    for (var attribute : concept.getSortedAttributes()) {
-                        System.out.println(attribute.getProfileString());
-                    }
-                }
+
                 try (InputStream input = new FileInputStream("src/main/resource/config.properties")) {
                     var properties = new Properties();
                     properties.load(input);
@@ -74,6 +69,7 @@ public class RDPConformanceTributechData {
                             .orgId(properties.getProperty("db.orgId"))
                             .build()) {
                         influx.connect();
+
                         dsdKnowledgeGraph.addProfilesToInflux(influx);
 
                     } catch (Exception e) {
@@ -81,7 +77,7 @@ public class RDPConformanceTributechData {
                     }
                 }
                 System.out.println("Done with " + i + " now sleeping");
-                Thread.sleep(60000);
+//                Thread.sleep(10);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
