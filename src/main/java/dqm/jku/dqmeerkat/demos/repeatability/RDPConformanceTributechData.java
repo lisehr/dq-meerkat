@@ -2,6 +2,7 @@ package dqm.jku.dqmeerkat.demos.repeatability;
 
 import com.influxdb.client.domain.WritePrecision;
 import dqm.jku.dqmeerkat.connectors.ConnectorCSV;
+import dqm.jku.dqmeerkat.domain.dtdl.DtdlRetriever;
 import dqm.jku.dqmeerkat.dsd.DSDKnowledgeGraph;
 import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.elements.Concept;
@@ -44,7 +45,8 @@ public class RDPConformanceTributechData {
 
 
     public static void main(String[] args) throws IOException, InterruptedException, NoSuchMethodException {
-
+        DtdlRetriever retriever = new DtdlRetriever();
+        retriever.retrieve();
         ConnectorCSV conn = FileSelectionUtil.getConnectorCSV("src/main/resource/data/humidity_5000.csv");
         conn.setLabel("humidity_data");
         Datasource ds = conn.loadSchema("http:/example.com", "hum");
