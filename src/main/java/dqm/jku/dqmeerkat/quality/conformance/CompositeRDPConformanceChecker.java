@@ -10,7 +10,8 @@ import dqm.jku.dqmeerkat.quality.TributechDataProfiler;
 
 /**
  * <h2>CompositeRDPConformanceChecker</h2>
- * <summary>TODO Insert do cheader</summary>
+ * <summary>Conformance Checker, that uses a {@link DataProfiler} to generate {@link DataProfile}s and evaluate them
+ * against the (already initialised) RDP of the given {@link Attribute}s.</summary>
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 20.04.2022
@@ -42,7 +43,6 @@ public class CompositeRDPConformanceChecker extends AbstractConformanceChecker {
         });
 
     }
-
 
     @Override
     public String getReport() {

@@ -109,7 +109,8 @@ public class RDPConformanceParameterPlots {
 		double val = Double.NaN;
 		try {
 			confChecker.runConformanceCheck();
-			val = confChecker.getConformanceValue(a);
+			// TODO Fix the missing method below!!!
+//			val = confChecker.getConformanceValue(a);
 		} catch(IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 		}

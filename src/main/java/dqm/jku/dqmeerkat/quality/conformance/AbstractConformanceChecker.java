@@ -10,7 +10,8 @@ import java.util.Map;
 
 /**
  * <h2>AbstractConformanceChecker</h2>
- * <summary>TODO Insert do cheader</summary>
+ * <summary>Abstract Baseclass for ConformanceCheckers. Provides some handling for confidence values and generation,
+ * that can be overridden if necessary</summary>
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 20.04.2022
@@ -19,7 +20,7 @@ public abstract class AbstractConformanceChecker implements RDPConformanceChecke
     protected final double threshold;
     protected final int batchSize;
     protected final Map<String, Integer> totalCounter = new HashMap<>();        // counts all checked DPs per attribute
-    protected final Map<String, Double> confCounter = new HashMap<>();        // conts all conforming DPs per attribute
+    protected final Map<String, Double> confCounter = new HashMap<>();          // counts all conforming DPs per attribute
 
     public AbstractConformanceChecker(double threshold, int batchSize) {
         this.threshold = threshold;
@@ -37,12 +38,11 @@ public abstract class AbstractConformanceChecker implements RDPConformanceChecke
         totalCounter.put(attribute.getURI(), ++cnt);
         double confVal = confCounter.get(key);
         var currentConformance = conformsToRDP(attribute, profile);
-        System.out.println("Conformance= " + currentConformance);
         confVal += currentConformance;
         confCounter.put(attribute.getURI(), confVal);
     }
 
-    private double conformsToRDP(Attribute a, DataProfile dp) {
+    protected double conformsToRDP(Attribute a, DataProfile dp) {
         DataProfile rdp = a.getProfile();
 
         int conf = 0;
