@@ -12,7 +12,7 @@ import science.aist.seshat.Logger;
  */
 public class DtdlRetriever {
     private static final Logger LOGGER = Logger.getInstance();
-    private final WebClient client = WebClient.create("http://https://foass.1001010.com/");
+    private final WebClient client = WebClient.create("https://foass.1001010.com/");
 
     public void retrieve() {
         LOGGER.info(client.get()
