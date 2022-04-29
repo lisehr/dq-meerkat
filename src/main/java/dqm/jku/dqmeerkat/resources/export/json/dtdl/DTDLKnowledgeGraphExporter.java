@@ -6,18 +6,18 @@ import dqm.jku.dqmeerkat.domain.dtdl.DtdlInterface;
 import dqm.jku.dqmeerkat.dsd.DSDKnowledgeGraph;
 import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.elements.Datasource;
-import dqm.jku.dqmeerkat.resources.export.Exporter;
+import dqm.jku.dqmeerkat.resources.export.AbstractKnowledgeGraphExporter;
 
 /**
  * <h2>DTDLExporter</h2>
- * <summary>{@link Exporter} implementation for Digital Twin Definition Language (DTDL)</summary>
+ * <summary>{@link AbstractKnowledgeGraphExporter} implementation for Digital Twin Definition Language (DTDL)</summary>
  *
  * @author meindl
  * @since 17.03.2022
  */
-public class DTDLExporter extends Exporter {
+public class DTDLKnowledgeGraphExporter extends AbstractKnowledgeGraphExporter {
 
-    public DTDLExporter(String path) {
+    public DTDLKnowledgeGraphExporter(String path) {
         super(path, ".json");
     }
 

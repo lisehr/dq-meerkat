@@ -3,7 +3,7 @@ package dqm.jku.dqmeerkat.resources.export.ttl;
 import dqm.jku.dqmeerkat.dsd.DSDKnowledgeGraph;
 import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.elements.Datasource;
-import dqm.jku.dqmeerkat.resources.export.Exporter;
+import dqm.jku.dqmeerkat.resources.export.AbstractKnowledgeGraphExporter;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
@@ -13,13 +13,13 @@ import java.io.PrintWriter;
 
 /**
  * <h2>TTLExporter</h2>
- * <summary>{@link Exporter} implementation for TTL files</summary>
+ * <summary>{@link AbstractKnowledgeGraphExporter} implementation for TTL files</summary>
  *
  * @author meindl
  * @since 17.03.2022
  */
-public class TTLExporter extends Exporter {
-    public TTLExporter(String path) {
+public class TTLAbstractKnowledgeGraphExporter extends AbstractKnowledgeGraphExporter {
+    public TTLAbstractKnowledgeGraphExporter(String path) {
         super(path, ".ttl");
     }
 

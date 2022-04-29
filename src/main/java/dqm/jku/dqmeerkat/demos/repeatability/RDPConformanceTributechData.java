@@ -12,10 +12,10 @@ import dqm.jku.dqmeerkat.influxdb.InfluxDBConnectionV2;
 import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.DataProfiler;
 import dqm.jku.dqmeerkat.quality.TributechDataProfiler;
-import dqm.jku.dqmeerkat.quality.conformance.AllInOneRDPConformanceChecker;
 import dqm.jku.dqmeerkat.quality.conformance.CompositeRDPConformanceChecker;
 import dqm.jku.dqmeerkat.quality.conformance.RDPConformanceChecker;
-import dqm.jku.dqmeerkat.resources.export.json.dtdl.DTDLExporter;
+import dqm.jku.dqmeerkat.resources.export.DataProfileExporter;
+import dqm.jku.dqmeerkat.resources.export.json.dtdl.DTDLKnowledgeGraphExporter;
 import dqm.jku.dqmeerkat.util.FileSelectionUtil;
 
 import java.io.FileInputStream;
@@ -23,11 +23,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.Temporal;
-import java.time.temporal.TemporalUnit;
 import java.util.Properties;
 
 /**
@@ -45,8 +42,14 @@ public class RDPConformanceTributechData {
 
 
     public static void main(String[] args) throws IOException, InterruptedException, NoSuchMethodException {
+
+        // retrieve DTDL stuff
         DtdlRetriever retriever = new DtdlRetriever();
         retriever.retrieve();
+
+
+
+
         ConnectorCSV conn = FileSelectionUtil.getConnectorCSV("src/main/resource/data/humidity_5000.csv");
         conn.setLabel("humidity_data");
         Datasource ds = conn.loadSchema("http:/example.com", "hum");
@@ -55,7 +58,7 @@ public class RDPConformanceTributechData {
 
         try (var dsdKnowledgeGraph = new DSDKnowledgeGraph(ds.getLabel())) {
             dsdKnowledgeGraph.addDatasource(ds);
-            dsdKnowledgeGraph.setExporter(new DTDLExporter(("")));
+            dsdKnowledgeGraph.setExporter(new DTDLKnowledgeGraphExporter(("")));
 //        dsdKnowledgeGraph.exportKGToFile("Test");
             // Initialization of RDPs
             for (Concept c : ds.getConcepts()) {
@@ -66,6 +69,16 @@ public class RDPConformanceTributechData {
                     System.out.println(a.getProfileString());
                 }
             }
+
+            // export data profile DTDL
+            var exporter = new DataProfileExporter();
+            exporter.export(dsdKnowledgeGraph.getDatasources()
+                            .values()
+                            .stream()
+                            .findFirst()
+                            .orElseThrow()
+                            .getProfile(),
+                    "test");
 
             DataProfiler profiler = new TributechDataProfiler(ds, conn, BATCH_SIZE, conn.getLabel());
             var ret = profiler.generateProfiles();

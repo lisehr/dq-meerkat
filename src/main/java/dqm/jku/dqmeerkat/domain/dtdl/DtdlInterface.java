@@ -28,7 +28,7 @@ public class DtdlInterface {
     private List<DtdlObject> contents = new ArrayList<>();
 
     @JsonProperty("@context")
-    private String context = "dtmi:at:scch:dsd:Concept;1";
+    private String context = "dtmi:dtdl:context;2";
 
     @JsonProperty("extends")
     @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)

@@ -18,7 +18,7 @@ import java.nio.file.Path;
  * @since 17.03.2022
  */
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public abstract class Exporter {
+public abstract class AbstractKnowledgeGraphExporter implements AbstractExporter<DSDKnowledgeGraph>{
     protected String path;
     protected String fileExtension;
 

@@ -8,9 +8,8 @@ import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.graphdb.EmbeddedGraphDB;
 import dqm.jku.dqmeerkat.influxdb.InfluxDBConnection;
-import dqm.jku.dqmeerkat.influxdb.InfluxDBConnectionV1;
-import dqm.jku.dqmeerkat.resources.export.Exporter;
-import dqm.jku.dqmeerkat.resources.export.ttl.TTLExporter;
+import dqm.jku.dqmeerkat.resources.export.AbstractKnowledgeGraphExporter;
+import dqm.jku.dqmeerkat.resources.export.ttl.TTLAbstractKnowledgeGraphExporter;
 import dqm.jku.dqmeerkat.util.Constants;
 import dqm.jku.dqmeerkat.util.Miscellaneous.DBType;
 import dqm.jku.dqmeerkat.util.export.ExportUtil;
@@ -22,7 +21,6 @@ import org.eclipse.rdf4j.rio.RDFHandlerException;
 import org.eclipse.rdf4j.rio.RDFParseException;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,12 +39,12 @@ public class DSDKnowledgeGraph implements AutoCloseable {
     private EmbeddedGraphDB kgstore = null;
     private HashMap<String, Datasource> dss = new HashMap<String, Datasource>();
     private HashMap<String, DSConnector> conns = new HashMap<String, DSConnector>();
-    private Exporter exporter;
+    private AbstractKnowledgeGraphExporter exporter;
 
     public DSDKnowledgeGraph(String label) {
         this.label = label;
         kgstore = new EmbeddedGraphDB(label);
-        exporter = new TTLExporter(Paths.get(Constants.RESOURCES_FOLDER + "export/ttl/").toString());
+        exporter = new TTLAbstractKnowledgeGraphExporter(Paths.get(Constants.RESOURCES_FOLDER + "export/ttl/").toString());
     }
 
     public DSDKnowledgeGraph(String label, boolean graphdb) {
@@ -69,11 +67,11 @@ public class DSDKnowledgeGraph implements AutoCloseable {
         conns.put(ds.getLabel(), conn);
     }
 
-    public Exporter getExporter() {
+    public AbstractKnowledgeGraphExporter getExporter() {
         return exporter;
     }
 
-    public void setExporter(Exporter exporter) {
+    public void setExporter(AbstractKnowledgeGraphExporter exporter) {
         this.exporter = exporter;
     }
 

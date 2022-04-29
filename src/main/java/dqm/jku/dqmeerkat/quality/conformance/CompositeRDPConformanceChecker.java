@@ -35,6 +35,7 @@ public class CompositeRDPConformanceChecker extends AbstractConformanceChecker {
     public void runConformanceCheck() {
         var profiles = profiler.generateProfiles();
         var rdp = profiles.stream().findFirst().orElseThrow();
+        // TODO design first version of data profile twin, reference data source and base:data stream
         profiles.stream().skip(1).forEach(dataProfileCollection -> {
             for (DataProfile profile : dataProfileCollection.getProfiles()) {
                 Attribute attribute = (Attribute) profile.getElem();
