@@ -23,7 +23,7 @@ public class DtdlInterface {
     private String id;
 
     @JsonProperty("@type")
-    private String type;
+    private String type = "Interface";
 
     private List<DtdlObject> contents = new ArrayList<>();
 

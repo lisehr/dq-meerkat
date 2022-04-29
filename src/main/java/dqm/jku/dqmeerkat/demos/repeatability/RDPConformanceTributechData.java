@@ -15,6 +15,7 @@ import dqm.jku.dqmeerkat.quality.TributechDataProfiler;
 import dqm.jku.dqmeerkat.quality.conformance.CompositeRDPConformanceChecker;
 import dqm.jku.dqmeerkat.quality.conformance.RDPConformanceChecker;
 import dqm.jku.dqmeerkat.resources.export.DataProfileExporter;
+import dqm.jku.dqmeerkat.resources.export.ProfileStatisticsExporter;
 import dqm.jku.dqmeerkat.resources.export.json.dtdl.DTDLKnowledgeGraphExporter;
 import dqm.jku.dqmeerkat.util.FileSelectionUtil;
 
@@ -44,8 +45,8 @@ public class RDPConformanceTributechData {
     public static void main(String[] args) throws IOException, InterruptedException, NoSuchMethodException {
 
         // retrieve DTDL stuff
-        DtdlRetriever retriever = new DtdlRetriever();
-        retriever.retrieve();
+//        DtdlRetriever retriever = new DtdlRetriever();
+//        retriever.retrieve();
 
 
 
@@ -70,18 +71,18 @@ public class RDPConformanceTributechData {
                 }
             }
 
-            // export data profile DTDL
-            var exporter = new DataProfileExporter();
-            exporter.export(dsdKnowledgeGraph.getDatasources()
-                            .values()
-                            .stream()
-                            .findFirst()
-                            .orElseThrow()
-                            .getProfile(),
-                    "test");
+
 
             DataProfiler profiler = new TributechDataProfiler(ds, conn, BATCH_SIZE, conn.getLabel());
             var ret = profiler.generateProfiles();
+
+            // export data profile DTDL
+            var exporter = new DataProfileExporter();
+            var dsToExport = ret.get(0).getProfiles().get(0);
+            exporter.export(dsToExport,
+                    "test");
+            var statisticExporter = new ProfileStatisticsExporter();
+            statisticExporter.export(dsToExport.getStatistics().stream().findFirst().orElseThrow(), "test");
 
 
             // Continuous generation of DPs and conformance checking

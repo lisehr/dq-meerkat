@@ -20,7 +20,8 @@ public class DataProfileExporter implements AbstractExporter<DataProfile> {
     @SneakyThrows
     @Override
     public void export(DataProfile toExport, String fileName) {
-        var dtdlInterface = new DtdlInterface("dtmi:scch:at:dq:Datasource;1");
+        var dtdlInterface = new DtdlInterface("dtmi:scch:at:dq:Dataprofile;1");
+        dtdlInterface.setDisplayName("Data Profile");
         dtdlInterface.getContents().add(DtdlObject.builder()
                 .name("statistics")
                 .displayName("Profile Statistics")
