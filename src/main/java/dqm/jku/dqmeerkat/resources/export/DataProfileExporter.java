@@ -30,6 +30,7 @@ public class DataProfileExporter implements AbstractExporter<DataProfile> {
                 .build()
         );
         ObjectMapper mapper = new ObjectMapper();
+        // todo write to file
         var ret = mapper.writeValueAsString(dtdlInterface);
         System.out.println(ret);
     }

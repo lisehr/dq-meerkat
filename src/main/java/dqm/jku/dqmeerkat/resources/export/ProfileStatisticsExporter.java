@@ -47,7 +47,6 @@ public class ProfileStatisticsExporter implements AbstractExporter<ProfileStatis
                 )
         );
         // TODO write to file
-        // TODO do not write null values
         ObjectMapper mapper = new ObjectMapper();
         var ret = mapper.writeValueAsString(dtdlInterface);
         System.out.println(ret);

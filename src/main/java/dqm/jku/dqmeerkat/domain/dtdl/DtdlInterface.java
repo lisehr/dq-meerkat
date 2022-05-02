@@ -1,6 +1,7 @@
 package dqm.jku.dqmeerkat.domain.dtdl;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
@@ -18,6 +19,7 @@ import java.util.List;
  */
 @Data
 @NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class DtdlInterface {
     @JsonProperty("@id")
     private String id;
