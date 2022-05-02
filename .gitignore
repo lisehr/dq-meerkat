@@ -1,3 +1,5 @@
+output
+*.swp
 humidity*
 /target/*
 /src/main/java/dqm/jku/dqmeerkat/resources/csv/Telematic*

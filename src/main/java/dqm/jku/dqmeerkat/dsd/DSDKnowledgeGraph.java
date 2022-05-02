@@ -8,7 +8,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.graphdb.EmbeddedGraphDB;
 import dqm.jku.dqmeerkat.influxdb.InfluxDBConnection;
-import dqm.jku.dqmeerkat.resources.export.AbstractKnowledgeGraphExporter;
+import dqm.jku.dqmeerkat.resources.export.json.dtdl.AbstractKnowledgeGraphExporter;
 import dqm.jku.dqmeerkat.resources.export.ttl.TTLAbstractKnowledgeGraphExporter;
 import dqm.jku.dqmeerkat.util.Constants;
 import dqm.jku.dqmeerkat.util.Miscellaneous.DBType;
@@ -182,7 +182,7 @@ public class DSDKnowledgeGraph implements AutoCloseable {
      * @param fileName just the name of the file. No path. No file ending
      */
     public void exportKGToFile(String fileName) {
-        exporter.export(this, fileName);
+        exporter.export(this, "", fileName);
 
     }
 

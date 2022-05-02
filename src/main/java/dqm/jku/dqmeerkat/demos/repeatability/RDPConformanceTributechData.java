@@ -2,7 +2,6 @@ package dqm.jku.dqmeerkat.demos.repeatability;
 
 import com.influxdb.client.domain.WritePrecision;
 import dqm.jku.dqmeerkat.connectors.ConnectorCSV;
-import dqm.jku.dqmeerkat.domain.dtdl.DtdlRetriever;
 import dqm.jku.dqmeerkat.dsd.DSDKnowledgeGraph;
 import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.elements.Concept;
@@ -14,9 +13,8 @@ import dqm.jku.dqmeerkat.quality.DataProfiler;
 import dqm.jku.dqmeerkat.quality.TributechDataProfiler;
 import dqm.jku.dqmeerkat.quality.conformance.CompositeRDPConformanceChecker;
 import dqm.jku.dqmeerkat.quality.conformance.RDPConformanceChecker;
-import dqm.jku.dqmeerkat.resources.export.DataProfileExporter;
-import dqm.jku.dqmeerkat.resources.export.ProfileStatisticsExporter;
-import dqm.jku.dqmeerkat.resources.export.json.dtdl.DTDLKnowledgeGraphExporter;
+import dqm.jku.dqmeerkat.resources.export.json.dtdl.DataProfileExporter;
+import dqm.jku.dqmeerkat.resources.export.json.dtdl.ProfileStatisticsExporter;
 import dqm.jku.dqmeerkat.util.FileSelectionUtil;
 
 import java.io.FileInputStream;
@@ -49,8 +47,6 @@ public class RDPConformanceTributechData {
 //        retriever.retrieve();
 
 
-
-
         ConnectorCSV conn = FileSelectionUtil.getConnectorCSV("src/main/resource/data/humidity_5000.csv");
         conn.setLabel("humidity_data");
         Datasource ds = conn.loadSchema("http:/example.com", "hum");
@@ -59,7 +55,6 @@ public class RDPConformanceTributechData {
 
         try (var dsdKnowledgeGraph = new DSDKnowledgeGraph(ds.getLabel())) {
             dsdKnowledgeGraph.addDatasource(ds);
-            dsdKnowledgeGraph.setExporter(new DTDLKnowledgeGraphExporter(("")));
 //        dsdKnowledgeGraph.exportKGToFile("Test");
             // Initialization of RDPs
             for (Concept c : ds.getConcepts()) {
@@ -72,17 +67,13 @@ public class RDPConformanceTributechData {
             }
 
 
-
             DataProfiler profiler = new TributechDataProfiler(ds, conn, BATCH_SIZE, conn.getLabel());
             var ret = profiler.generateProfiles();
 
             // export data profile DTDL
             var exporter = new DataProfileExporter();
             var dsToExport = ret.get(0).getProfiles().get(0);
-            exporter.export(dsToExport,
-                    "test");
-            var statisticExporter = new ProfileStatisticsExporter();
-            statisticExporter.export(dsToExport.getStatistics().stream().findFirst().orElseThrow(), "test");
+            exporter.export(dsToExport, "output/", "test.json");
 
 
             // Continuous generation of DPs and conformance checking
