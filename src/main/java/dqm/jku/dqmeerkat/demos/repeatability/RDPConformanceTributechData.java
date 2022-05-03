@@ -1,5 +1,6 @@
 package dqm.jku.dqmeerkat.demos.repeatability;
 
+import be.ugent.ledc.pi.property.Property;
 import com.influxdb.client.domain.WritePrecision;
 import dqm.jku.dqmeerkat.connectors.ConnectorCSV;
 import dqm.jku.dqmeerkat.dtdl.DtdlRetriever;
@@ -46,7 +47,7 @@ public class RDPConformanceTributechData {
 
 
     public static void main(String[] args) throws IOException, InterruptedException, NoSuchMethodException {
-
+        Property property = Property.parseProperty("at.fh.scch/identifeir#ssn:BE");
         // retrieve DTDL stuff
 //        DtdlRetriever retriever = new DtdlRetriever();
 //        var statisticDto = ProfileStatisticDto.builder()
