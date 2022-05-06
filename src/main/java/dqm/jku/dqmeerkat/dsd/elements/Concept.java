@@ -34,6 +34,7 @@ public class Concept extends DSDElement {
   private List<FunctionalDependency> functionalDependencies = new ArrayList<FunctionalDependency>();
   protected Set<ForeignKey> foreignKeys = new HashSet<ForeignKey>();
 
+
   public Concept() {
     super();
   }
@@ -61,11 +62,11 @@ public class Concept extends DSDElement {
   private void updateStructure() {
     this.recordStructure = new Attribute[this.attributes.size()];
     for (int i = 0; i < recordStructure.length; i++) {
-			recordStructure[i] = this.getAttributes().getAttributes().get(i);
-		}
-	}
+      recordStructure[i] = this.getAttributes().getAttributes().get(i);
+    }
+  }
 
-	/**
+  /**
    * @param primaryKey the primaryKey to set
    */
   public void setPrimaryKeySet(AttributeSet primaryKey) {
@@ -94,16 +95,16 @@ public class Concept extends DSDElement {
   public AttributeSet getAttributes() {
     return new AttributeSet(attributes);
   }
-  
+
   @RDF("dsd:hasAttribute")
   @RDFContainer
-  public HashSet<Attribute> getAttributeList(){
-	  return attributes;
+  public HashSet<Attribute> getAttributeList() {
+    return attributes;
   }
-  
-  public void setAttributeList(HashSet<Attribute> att){
-	  this.attributes = att;
-	  updateStructure();
+
+  public void setAttributeList(HashSet<Attribute> att) {
+    this.attributes = att;
+    updateStructure();
   }
 
 
@@ -122,10 +123,10 @@ public class Concept extends DSDElement {
 
   @RDF("dsd:hasPrimaryKey")
   @RDFContainer
-  public HashSet<Attribute> getPrimaryKeySet(){
-	return primaryKeys;  
+  public HashSet<Attribute> getPrimaryKeySet() {
+    return primaryKeys;
   }
-  
+
   public AttributeSet getPrimaryKeys() {
     return new AttributeSet(primaryKeys);
   }
@@ -235,7 +236,7 @@ public class Concept extends DSDElement {
 
   /**
    * creates a point of measurements, which can be used for storing in influxDB
-   * 
+   *
    * @param record the record to be stored
    * @return a measurement point or null if the record is null
    */
@@ -253,12 +254,11 @@ public class Concept extends DSDElement {
     return measure.build();
   }
 
-	public Attribute[] getRecordStructure() {
-		return recordStructure;
-	}
+  public Attribute[] getRecordStructure() {
+    return recordStructure;
+  }
 
-	public void setRecordStructure(Attribute[] recordStructure) {
-		this.recordStructure = recordStructure;
-	}
-
+  public void setRecordStructure(Attribute[] recordStructure) {
+    this.recordStructure = recordStructure;
+  }
 }

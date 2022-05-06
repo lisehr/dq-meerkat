@@ -1,14 +1,11 @@
 package dqm.jku.dqmeerkat.quality;
 
-import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
-
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
+import dqm.jku.dqmeerkat.dsd.elements.*;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.graphmetrics.*;
 import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFContainer;
@@ -17,9 +14,6 @@ import org.cyberborean.rdfbeans.annotations.RDFSubject;
 import org.influxdb.dto.Point;
 import org.influxdb.dto.Point.Builder;
 
-import dqm.jku.dqmeerkat.dsd.elements.Attribute;
-import dqm.jku.dqmeerkat.dsd.elements.Concept;
-import dqm.jku.dqmeerkat.dsd.elements.DSDElement;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
@@ -38,6 +32,13 @@ import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.pattern.Patter
 import dqm.jku.dqmeerkat.util.Constants;
 import dqm.jku.dqmeerkat.util.Miscellaneous.DBType;
 import dqm.jku.dqmeerkat.util.numericvals.NumberComparator;
+import org.w3c.dom.Attr;
+
+import javax.sql.DataSource;
+import javax.swing.text.html.Option;
+import javax.xml.crypto.Data;
+
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
 
 /**
  * Class for creating the data structure of a DataProfile. A DataProfile (DP)
@@ -56,13 +57,20 @@ public class DataProfile {
 
     }
 
-    public DataProfile(RecordList rs, DSDElement d) throws NoSuchMethodException {
-        this.elem = d;
-        this.uri = elem.getURI() + "/profile";
-        // TODO: distinguish between Neo4J and relational DB
-        createDataProfileSkeletonRDB();
-        calculateReferenceDataProfile(rs);
-    }
+	public DataProfile(RecordList rs, DSDElement d) throws NoSuchMethodException {
+		this.elem = d;
+		this.uri = elem.getURI() + "/profile";
+
+		Optional<Datasource> ds = DSDElement.getAllDatasources().stream().findFirst();
+
+		if(ds.isPresent() && ds.get().getDBType().equals(DBType.NEO4J)) {
+			createDataProfileSkeletonNeo4j();
+			calculateReferenceDataProfileNeo4j(rs);
+		} else {
+			createDataProfileSkeletonRDB();
+			calculateReferenceDataProfile(rs);
+		}
+	}
 
     public DataProfile(RecordList records, DSDElement d, String filePath) throws NoSuchMethodException {
         this.elem = d;
@@ -318,7 +326,7 @@ public class DataProfile {
         mlist.add(this.getStatistic(StatisticTitle.hist));
 
         // Dependencies
-        mlist.add(this.getStatistic(StatisticTitle.keyCand));
+        mlist.add(this.getStatistic(keyCand));
 
         return mlist;
     }
@@ -346,7 +354,7 @@ public class DataProfile {
         }
 
         // Dependencies
-        mlist.add(this.getStatistic(StatisticTitle.keyCand));
+        mlist.add(this.getStatistic(keyCand));
 
         return mlist;
     }
@@ -445,6 +453,48 @@ public class DataProfile {
         return profileStatistic.getTitle() == avg || profileStatistic.getTitle() == sd || profileStatistic.getTitle() == max || profileStatistic.getTitle() == min || profileStatistic.getTitle() == med
                 || profileStatistic.getTitle() == nullValP || profileStatistic.getTitle() == unique;
 
-    }
+	}
+
+	// ------------------- Graph Data Profiling ------------------------
+
+	public void createDataProfileSkeletonNeo4j() {
+		// distinguish between concept, attribute and datasource??
+		if (elem instanceof Concept) {
+			Concept c = (Concept) elem;
+
+			ReferenceAssociation association = (ReferenceAssociation) c.getDatasource().getAssociation("Ref/" + c.getLabelOriginal());
+			String neoType = association.getNeo4JType();
+
+            ProfileStatistic size = new NumEntries(this);
+            statistics.add(size);
+            ProfileStatistic distinctEntries = new DistinctEntries(this);
+            statistics.add(distinctEntries);
+            ProfileStatistic type = new GraphType(this);
+            statistics.add(type);
+            ProfileStatistic maximum = new MaximumEntry(this);
+            statistics.add(maximum);
+            ProfileStatistic minimum = new MinimumEntry(this);
+            statistics.add(minimum);
+            ProfileStatistic median = new MedianEntry(this);
+            statistics.add(median);
+
+		}
+	}
+
+	private void calculateReferenceDataProfileNeo4j(RecordList rl) throws NoSuchMethodException {
+		// distinguish between multi column and single column profiling
+
+		if(elem instanceof Concept) {
+			Concept c = (Concept) elem;
+			calculateSingleColumnNeo4j(rl);
+		}
+	}
+
+	private void calculateSingleColumnNeo4j(RecordList rl) throws  NoSuchMethodException {
+		for (ProfileStatistic p : statistics) {
+			p.calculation(rl, p.getValue());
+		}
+	}
+
 
 }

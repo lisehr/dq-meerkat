@@ -1,6 +1,7 @@
 package dqm.jku.dqmeerkat.dsd.records;
 
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import dqm.jku.dqmeerkat.dsd.elements.Attribute;
@@ -33,6 +34,10 @@ public class Record implements Comparable<Record> {
 			throw new IllegalArgumentException("Attribute Type " + attribute.getDataType() + " does not allow Value " + o);
 
 		//if (values.containsKey(attribute)) throw new IllegalArgumentException("Override in Record");
+		values.put(attribute, o);
+	}
+	
+	public void addValueNeo4J(Attribute attribute, Object o) {
 		values.put(attribute, o);
 	}
 
@@ -128,5 +133,16 @@ public class Record implements Comparable<Record> {
 
 	public AttributeSet getFields() {
 		return new AttributeSet(values.keySet());
+	}
+
+	public Object getValue(Attribute a) {
+		Object o = values.get(a);
+		int i = 0;
+
+		return o;
+	}
+
+	public int getNumberValues() {
+		return values.getSize();
 	}
 }

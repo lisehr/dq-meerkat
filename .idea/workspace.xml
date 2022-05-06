@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:maven" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6b3839f9-04d1-40c4-b6b7-ec83830e76bb" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_moshi_moshi_1_5_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_okhttp3_logging_interceptor_3_13_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_okhttp3_okhttp_3_13_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_retrofit2_converter_moshi_2_5_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_influxdb_influxdb_java_2_15.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_msgpack_msgpack_core_0_8_16.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/documentation/DQ-MeeRKat-getting-started.docx" beforeDir="false" afterPath="$PROJECT_DIR$/documentation/DQ-MeeRKat-getting-started.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/DataProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/DataProfile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingstatistics/graphmetrics/DistinctEntries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingstatistics/graphmetrics/DistinctEntries.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingstatistics/graphmetrics/GraphType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingstatistics/graphmetrics/GraphType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingstatistics/graphmetrics/MaximumEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingstatistics/graphmetrics/MaximumEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingstatistics/graphmetrics/MedianEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingstatistics/graphmetrics/MedianEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingstatistics/graphmetrics/MinimumEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingstatistics/graphmetrics/MinimumEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingstatistics/graphmetrics/NumEntries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingstatistics/graphmetrics/NumEntries.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trustkg.iml" beforeDir="false" afterPath="$PROJECT_DIR$/trustkg.iml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA 2020.2.3\plugins\maven\lib\maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1jTi4lYtCrxDlEixM74KK5YdrcU" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+  </component>
+  <component name="RunManager">
+    <configuration name="TestNeo4j" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="dqm.jku.dqmeerkat.demos.kathi.TestNeo4j" />
+      <module name="trustkg" />
+      <shortenClasspath name="MANIFEST" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dqm.jku.trustkg.demos.kathi.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6b3839f9-04d1-40c4-b6b7-ec83830e76bb" name="Default Changelist" comment="" />
+      <created>1603834295184</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1603834295184</updated>
+      <workItem from="1603834296503" duration="4413000" />
+      <workItem from="1603967195777" duration="1208000" />
+      <workItem from="1604334336491" duration="23024000" />
+      <workItem from="1604427781281" duration="6942000" />
+      <workItem from="1605627661875" duration="22101000" />
+      <workItem from="1605698835524" duration="4354000" />
+      <workItem from="1605717702548" duration="42000" />
+      <workItem from="1605718135485" duration="1397000" />
+      <workItem from="1605719611642" duration="496000" />
+      <workItem from="1605720119868" duration="749000" />
+      <workItem from="1605880394166" duration="3000000" />
+      <workItem from="1605973421954" duration="8014000" />
+      <workItem from="1606230582867" duration="12378000" />
+      <workItem from="1606309830221" duration="637000" />
+      <workItem from="1606488714788" duration="3975000" />
+      <workItem from="1606841741471" duration="6188000" />
+      <workItem from="1610957509692" duration="3933000" />
+      <workItem from="1610979614597" duration="1873000" />
+      <workItem from="1611080593468" duration="822000" />
+      <workItem from="1611082999710" duration="2250000" />
+      <workItem from="1611085379460" duration="7774000" />
+      <workItem from="1611749051428" duration="2817000" />
+      <workItem from="1611765376945" duration="630000" />
+      <workItem from="1611826632956" duration="23321000" />
+      <workItem from="1611927844729" duration="732000" />
+      <workItem from="1613241901218" duration="65000" />
+      <workItem from="1615546586579" duration="1198000" />
+      <workItem from="1615807511314" duration="21825000" />
+      <workItem from="1615899198854" duration="7852000" />
+      <workItem from="1615985820063" duration="307000" />
+      <workItem from="1634392277701" duration="2249000" />
+      <workItem from="1634395072356" duration="1326000" />
+      <workItem from="1634460853945" duration="2263000" />
+      <workItem from="1634829339547" duration="2675000" />
+      <workItem from="1636378818664" duration="2829000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/Grafana/grafana-6.2.5/public/app/plugins/panel/graph/graph_tooltip.d.ts" />
+        <option value="$PROJECT_DIR$/Grafana/grafana-6.2.5/public/app/plugins/datasource/opentsdb/datasource.d.ts" />
+        <option value="$PROJECT_DIR$/Grafana/grafana-6.2.5/public/app/plugins/datasource/cloudwatch/datasource.d.ts" />
+        <option value="$PROJECT_DIR$/Grafana/grafana-6.2.5/public/app/plugins/datasource/prometheus/metric_find_query.d.ts" />
+        <option value="$PROJECT_DIR$/Grafana/grafana-6.2.5_windows/public/app/plugins/panel/graph/graph_tooltip.d.ts" />
+        <option value="$PROJECT_DIR$/Grafana/grafana-6.2.5_windows/public/app/plugins/datasource/opentsdb/datasource.d.ts" />
+        <option value="$PROJECT_DIR$/Grafana/grafana-6.2.5_windows/public/app/plugins/datasource/cloudwatch/datasource.d.ts" />
+        <option value="$PROJECT_DIR$/Grafana/grafana-6.2.5_windows/public/app/plugins/datasource/prometheus/metric_find_query.d.ts" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/quality/profilingmetrics/graphmetrics/MedianEntry.java</url>
+          <line>70</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/dqm/jku/dqmeerkat/connectors/ConnectorNeo4J.java</url>
+          <line>129</line>
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="dqm.jku.trustkg.dsd.elements.Concept" memberName="attributes" />
+        <PinnedItemInfo parentTag="dqm.jku.dqmeerkat.dsd.elements.Attribute" memberName="concept" />
+        <PinnedItemInfo parentTag="dqm.jku.dqmeerkat.dsd.elements.Concept" memberName="datasource" />
+        <PinnedItemInfo parentTag="dqm.jku.dqmeerkat.dsd.records.Record" memberName="assignedFrom" />
+        <PinnedItemInfo parentTag="dqm.jku.dqmeerkat.dsd.records.Record" memberName="values" />
+        <PinnedItemInfo parentTag="dqm.jku.dqmeerkat.quality.DataProfile" memberName="uri" />
+        <PinnedItemInfo parentTag="dqm.jku.dqmeerkat.dsd.elements.Concept" memberName="dataProfile" />
+      </pinned-members>
+    </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="relSchema" />
+        <watch expression="conn.DBUrl" />
+        <watch expression="((String)keys.toArray()[0]).value" custom="java.lang.String" />
+        <watch expression="att" />
+        <watch expression="c.datasource.dataProfile" />
+        <watch expression="c.datasource.dataProfile" language="JAVA" />
+        <watch expression="((Concept)ds.concepts.toArray()[5]).attributes" custom="dqm.jku.trustkg.dsd.elements.Concept" />
+        <watch expression="a.concept.attributes" />
+        <watch expression="c" />
+        <watch expression="ds" />
+        <watch expression="list.records.get(0)" />
+        <watch expression="a.concept.datasource.concepts.toArray()[3]" />
+        <watch expression="a.concept.datasource" />
+        <watch expression="rs.records" />
+        <watch expression="rec.values" />
+        <watch expression="((String)o).coder" custom="java.lang.String" />
+        <watch expression="o" />
+        <watch expression="newList" />
+        <watch expression="newList.records" />
+        <watch expression="this" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>

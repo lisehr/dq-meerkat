@@ -1,6 +1,7 @@
 package dqm.jku.dqmeerkat.dsd.elements;
 
 import java.io.File;
+import java.lang.ref.Reference;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -189,8 +190,8 @@ public class Datasource extends DSDElement {
 		builder.setNamespace("dsd", "http://dqm.faw.jku.at/dsd" +"/");
 		builder.setNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns");
 		builder.setNamespace("attribute", "http://dqm.faw.jku.at/dsd/Attribute/");
-		
-		
+
+
 		for (Concept c : this.getConcepts()) {
 			builder.namedGraph(prefix +":"+ c.getLabel())
 			.subject(prefix +":"+ c.getLabel())
@@ -226,7 +227,7 @@ public class Datasource extends DSDElement {
 				.subject(prefix + ":" + a.getLabel() + "/" + "DataProfile")
 				.add("rdf:#type", "dsd:Dataprofile")
 				.add("metric:hasMetric",prefix + ":" + a.getLabel() + "/" + metric.getTitle().getLabel().replace(" ","").replace("%","Percent"));
-			
+
 				builder.namedGraph(prefix +":"+ concept.getLabel())
 				.subject(prefix + ":" + a.getLabel() + "/"+ metric.getTitle().getLabel().replace(" ","").replace("%","Percent"))
 				.add("metric:hasValue",metric.getValue())
@@ -242,35 +243,35 @@ public class Datasource extends DSDElement {
 		.add("rdf:#type","dsd:Attribute");
 
 		switch(property) {
-		case "DataType": 
+		case "DataType":
 			builder.namedGraph(prefix +":"+ c.getLabel())
 			.subject(prefix + ":" + a.getLabel() + "/" + property)
 			.add("attribute" +":" +"hasValue",a.getDataTypeString())
 			.add("rdf" +":" +"#type","dsd" +":" +"AttributeProperty");
 			break;
 
-		case "Nullable": 
+		case "Nullable":
 			builder.namedGraph(prefix +":"+ c.getLabel())
 			.subject(prefix + ":" + a.getLabel() + "/" + property)
 			.add("attribute" +":" +"hasValue",a.isNullable())
 			.add("rdf" +":" +"#type","dsd" +":" +"AttributeProperty");
 			break;
 
-		case "AutoIncrement": 
+		case "AutoIncrement":
 			builder.namedGraph(prefix +":"+ c.getLabel())
 			.subject(prefix + ":" + a.getLabel() + "/" + property)
 			.add("attribute" +":" +"hasValue",a.isAutoIncrement())
 			.add("rdf" +":" +"#type","dsd" +":" +"AttributeProperty");
 			break;
 
-		case "Unique": 
+		case "Unique":
 			builder.namedGraph(prefix +":"+ c.getLabel())
 			.subject(prefix + ":" + a.getLabel() + "/" + property)
 			.add("attribute" +":" +"hasValue",a.isUnique())
 			.add("rdf" +":" +"#type","dsd" +":" +"AttributeProperty");
 			break;
-			
-		case "DefaultValue": 
+
+		case "DefaultValue":
 			builder.namedGraph(prefix +":"+ c.getLabel())
 			.subject(prefix + ":" + a.getLabel() + "/" + property)
 			.add("attribute" +":" +"hasValue",a.getDefaultValue())
@@ -303,14 +304,14 @@ private void addFunctionalDependenciesToModel(Concept c, ModelBuilder builder) {
 		.subject(prefix +":"+ c.getLabel())
 		.add("dsd:hasFunctionalDependencies", prefix  + ":FunctionalDependencies");
 	}
-	
+
 	int index = 0;
 	for(FunctionalDependency dependency : c.getFunctionalDependencies()) {
-		
+
 		builder.namedGraph(prefix +":"+ c.getLabel())
 		.subject(prefix +":FunctionalDependencies")
 		.add("dsd:isFunctionalDependency", prefix + ":FunctionalDependency" + index);
-		
+
 		builder.namedGraph(prefix +":"+ c.getLabel())
 		.subject(prefix +":FunctionalDependency" + index)
 		.add("rdf:#type", "dsd:FunctionalDependency")
@@ -325,13 +326,13 @@ private void addFunctionalDependenciesToModel(Concept c, ModelBuilder builder) {
 
 // this method adds primary keys to the modelbuilder
 private void addPrimaryKeysToModel(Concept c, ModelBuilder builder) {
-	
+
 	if(c.getPrimaryKeys().getSize() != 0) {
 		builder.namedGraph(prefix +":"+ c.getLabel())
 		.subject(prefix +":"+ c.getLabel())
 		.add("dsd:hasPrimaryKey", prefix  + ":PrimaryKey");
 	}
-	
+
 	for(Attribute at : c.getPrimaryKeySet()) {
 		builder.namedGraph(prefix +":"+ c.getLabel())
 		.subject(prefix +":PrimaryKey")
@@ -342,7 +343,7 @@ private void addPrimaryKeysToModel(Concept c, ModelBuilder builder) {
 
 // this method adds foreign keys to the modelbuilder
 private void addForeignKeysToModel(Concept c, ModelBuilder builder) {
-	
+
 	if(!c.getForeignKeys().isEmpty()) {
 		builder.namedGraph(prefix +":"+ c.getLabel())
 		.subject(prefix +":"+ c.getLabel())
@@ -353,7 +354,7 @@ private void addForeignKeysToModel(Concept c, ModelBuilder builder) {
 		builder.namedGraph(prefix +":"+ c.getLabel())
 		.subject(prefix +":ForeignKeys")
 		.add("dsd:isForeignKey", prefix + ":foreignKey" + index);
-		
+
 		builder.namedGraph(prefix +":"+ c.getLabel())
 		.subject(prefix +":ForeignKey" + index)
 		.add("rdf:#type", "dsd:ForeignKey")
@@ -403,6 +404,14 @@ public String getStructureString() {
 	return sb.toString();
 }
 
+	public ReferenceAssociation getReferenceAssociations(String name) {
+		for (Association ac : associations) {
+			if (ac.getLabel().contains(name)) {
+				return (ReferenceAssociation) ac;
+			}
+		}
+		return null;
+	}
 public String getPrefix() {
 	return prefix;
 }

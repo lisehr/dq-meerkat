@@ -103,5 +103,4 @@ public class DSDFactory {
 	public static IntegratedDatasource makeIntegratedDatasource(String label) {
 		return DSDElement.get(new IntegratedDatasource(label));
 	}
-
 }

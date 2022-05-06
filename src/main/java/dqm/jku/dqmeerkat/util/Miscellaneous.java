@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Miscellaneous {
 	
-	public enum DBType { UNDEFINED, CSV, MYSQL, ORACLE, CASSANDRA, PENTAHOETL }
+	public enum DBType { UNDEFINED, CSV, MYSQL, ORACLE, CASSANDRA, PENTAHOETL, NEO4J }
 
 	public static String getTimeStatistics(long from) {
 		long to = System.nanoTime();

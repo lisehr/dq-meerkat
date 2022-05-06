@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: pentaho:pentaho-platform-api:8.2.0.0-342">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/pentaho/pentaho-platform-api/8.2.0.0-342/pentaho-platform-api-8.2.0.0-342.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/pentaho/pentaho-platform-api/8.2.0.0-342/pentaho-platform-api-8.2.0.0-342-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/pentaho/pentaho-platform-api/8.2.0.0-342/pentaho-platform-api-8.2.0.0-342-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

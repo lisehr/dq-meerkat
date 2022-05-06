@@ -41,7 +41,16 @@ public enum StatisticTitle {
   histVal("Values"),
   isoF("Isolation Forest"),
   isoFP("Isolation Forest Outlier %"),
-  lof("Local outlier factor");
+  lof("Local outlier factor"),
+
+  // graph metrics
+  numEntries("Number of Entries"),
+  distinctEntries("Number of Distinct Entries"),
+  graphType ("Type of the Graph Element"),
+  maximum ("Maximum Graph Element"),
+  minimum ("Minimum Graph Element"),
+  median ("Median Graph Element");
+
   
   private String label; // the label of the title (string representation)
   @SuppressWarnings("unused")

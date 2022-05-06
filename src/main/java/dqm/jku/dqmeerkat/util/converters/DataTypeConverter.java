@@ -11,12 +11,9 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Year;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
+import dqm.jku.dqmeerkat.dsd.elements.ReferenceAssociation;
 import org.apache.commons.lang.StringUtils;
 import org.apache.jena.rdf.model.RDFNode;
 import org.apache.jena.rdf.model.Resource;
@@ -418,12 +415,46 @@ public class DataTypeConverter {
 	  }
 	}
 
-	/**
-	 * Method for refining a data type when hitting a change in the record set.
-	 * @param a the attribute to be refined
-	 * @param val the string causing the refine
-	 * @return a value parsed with the refined type
-	 */
+	public static void getTypeFromNeo4J(Attribute a, String datatype, String defaultVal) throws ParseException {
+		switch (datatype) {
+			case "String":
+				a.setDataType(String.class);
+				//if (defaultVal != null) {
+				//	a.setDefaultValue(defaultVal);
+				//}
+				break;
+			case "int":
+				a.setDataType(Integer.class);
+				//if (defaultVal != null) {
+				//	a.setDefaultValue(Integer.valueOf(defaultVal));
+				//}
+				break;
+			case "boolean":
+				a.setDataType(Boolean.class);
+				//if (defaultVal != null) {
+				//	a.setDefaultValue(Boolean.valueOf(defaultVal));
+				//}
+				break;
+			default:
+				throw new IllegalArgumentException("No mapping known for this Neo4J data type: " + datatype);
+		}
+	}
+
+	public static Object getNeo4JRecordvalue(Attribute a, Object o) {
+
+		if(String.class.isAssignableFrom(a.getDataType())) {
+			return o.toString().replaceAll("[\\[\\]\"]", "");
+		}
+
+		return null;
+	}
+
+		/**
+         * Method for refining a data type when hitting a change in the record set.
+         * @param a the attribute to be refined
+         * @param val the string causing the refine
+         * @return a value parsed with the refined type
+         */
   private static Object refineCSVDataType(Attribute a, String val) {
     getDataTypeFromCSVRecord(a, val);
     return getDataValueFromCSV(a, val);
