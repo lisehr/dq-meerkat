@@ -23,5 +23,4 @@ import java.util.UUID;
 @SuperBuilder
 public class DatasourceDto extends DtdlDto {
 
-
 }

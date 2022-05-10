@@ -16,6 +16,7 @@ import dqm.jku.dqmeerkat.quality.TributechDataProfiler;
 import dqm.jku.dqmeerkat.quality.conformance.CompositeRDPConformanceChecker;
 import dqm.jku.dqmeerkat.quality.conformance.RDPConformanceChecker;
 import dqm.jku.dqmeerkat.resources.export.json.dtdl.DataProfileExporter;
+import dqm.jku.dqmeerkat.resources.export.json.dtdl.DtdlGraphExporter;
 import dqm.jku.dqmeerkat.resources.export.json.dtdl.ProfileStatisticsExporter;
 import dqm.jku.dqmeerkat.util.FileSelectionUtil;
 
@@ -65,6 +66,7 @@ public class RDPConformanceTributechData {
                 .targetId(statisticDto.getDtId())
                 .build());
         var graphWrapper = new DtdlGraphWrapper(graph);
+//        retriever.retrieve();
         retriever.publish(graphWrapper);
 
         ConnectorCSV conn = FileSelectionUtil.getConnectorCSV("src/main/resource/data/humidity_5000.csv");
@@ -94,6 +96,7 @@ public class RDPConformanceTributechData {
             var exporter = new DataProfileExporter();
             var dsToExport = ret.get(0).getProfiles().get(0);
             exporter.export(dsToExport, "output/", "test.json");
+            var testJson = new DtdlGraphExporter().export(dsToExport);
 
 
             // Continuous generation of DPs and conformance checking
