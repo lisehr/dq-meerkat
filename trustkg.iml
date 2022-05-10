@@ -5,7 +5,7 @@
       <configuration />
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_11">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
@@ -24,6 +24,11 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.18.22" level="project" />
+    <orderEntry type="library" name="Maven: science.aist.seshat:api:1.1.2" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: science.aist.seshat:log4j2:1.1.2" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-api:2.16.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-core:2.17.1" level="project" />
     <orderEntry type="library" name="Maven: com.appnexus.grafana-client:grafana-api-java-client:1.0.5" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.8.8" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.8.8" level="project" />
@@ -150,7 +155,6 @@
     <orderEntry type="library" name="Maven: com.googlecode.concurrentlinkedhashmap:concurrentlinkedhashmap-lru:1.4.2" level="project" />
     <orderEntry type="library" name="Maven: com.github.ben-manes.caffeine:caffeine:2.3.1" level="project" />
     <orderEntry type="library" name="Maven: org.mapdb:mapdb:3.0.8" level="project" />
-    <orderEntry type="library" name="Maven: org.jetbrains.kotlin:kotlin-stdlib:1.2.71" level="project" />
     <orderEntry type="library" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-common:1.3.71" level="project" />
     <orderEntry type="library" name="Maven: org.jetbrains:annotations:13.0" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.collections:eclipse-collections-api:10.3.0.M4" level="project" />
@@ -203,13 +207,25 @@
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.openrdf.sesame:sesame-rio-languages:2.7.16" level="project" />
     <orderEntry type="library" name="Maven: org.openrdf.sesame:sesame-rio-turtle:2.7.16" level="project" />
     <orderEntry type="library" name="Maven: org.apache.marmotta:marmotta-model-vocabs:3.4.0" level="project" />
-    <orderEntry type="library" name="Maven: org.influxdb:influxdb-java:2.17" level="project" />
-    <orderEntry type="library" name="Maven: com.squareup.retrofit2:converter-moshi:2.6.2" level="project" />
+    <orderEntry type="library" name="Maven: org.influxdb:influxdb-java:2.22" level="project" />
+    <orderEntry type="library" name="Maven: com.squareup.retrofit2:converter-moshi:2.9.0" level="project" />
     <orderEntry type="library" name="Maven: com.squareup.moshi:moshi:1.8.0" level="project" />
-    <orderEntry type="library" name="Maven: org.msgpack:msgpack-core:0.8.18" level="project" />
-    <orderEntry type="library" name="Maven: com.squareup.okhttp3:okhttp:3.14.4" level="project" />
-    <orderEntry type="library" name="Maven: com.squareup.okio:okio:1.17.2" level="project" />
-    <orderEntry type="library" name="Maven: com.squareup.okhttp3:logging-interceptor:3.14.4" level="project" />
+    <orderEntry type="library" name="Maven: org.msgpack:msgpack-core:0.9.0" level="project" />
+    <orderEntry type="library" name="Maven: com.squareup.okhttp3:okhttp:4.9.1" level="project" />
+    <orderEntry type="library" name="Maven: com.squareup.okio:okio:2.8.0" level="project" />
+    <orderEntry type="library" name="Maven: org.jetbrains.kotlin:kotlin-stdlib:1.4.10" level="project" />
+    <orderEntry type="library" name="Maven: com.squareup.okhttp3:logging-interceptor:4.9.1" level="project" />
+    <orderEntry type="library" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.10" level="project" />
+    <orderEntry type="library" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.10" level="project" />
+    <orderEntry type="library" name="Maven: com.influxdb:influxdb-client-java:4.1.0" level="project" />
+    <orderEntry type="library" name="Maven: com.influxdb:influxdb-client-core:4.1.0" level="project" />
+    <orderEntry type="library" name="Maven: com.influxdb:influxdb-client-utils:4.1.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.commons:commons-csv:1.8" level="project" />
+    <orderEntry type="library" name="Maven: io.reactivex.rxjava2:rxjava:2.2.19" level="project" />
+    <orderEntry type="library" name="Maven: io.swagger:swagger-annotations:1.6.1" level="project" />
+    <orderEntry type="library" name="Maven: io.gsonfire:gson-fire:1.8.4" level="project" />
+    <orderEntry type="library" name="Maven: com.squareup.retrofit2:converter-scalars:2.9.0" level="project" />
+    <orderEntry type="library" name="Maven: com.squareup.retrofit2:converter-gson:2.9.0" level="project" />
     <orderEntry type="library" name="Maven: com.github.jsonld-java:jsonld-java:0.9.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore-osgi:4.4.4" level="project" />
     <orderEntry type="library" name="Maven: org.apache.jena:jena-tdb:3.2.0" level="project" />
@@ -220,7 +236,6 @@
     <orderEntry type="library" name="Maven: com.github.andrewoma.dexx:collection:0.6" level="project" />
     <orderEntry type="library" name="Maven: org.apache.jena:jena-shaded-guava:3.2.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.thrift:libthrift:0.9.3" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.commons:commons-csv:1.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.jena:jena-rdfconnection:3.2.0" level="project" />
     <orderEntry type="library" name="Maven: com.datastax.cassandra:cassandra-driver-core:3.0.1" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-handler:4.0.33.Final" level="project" />
@@ -389,7 +404,6 @@
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-xml:8.1.15.v20140411" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-webapp:8.1.15.v20140411" level="project" />
     <orderEntry type="library" name="Maven: com.googlecode.log4jdbc:log4jdbc:1.2" level="project" />
-    <orderEntry type="library" name="Maven: io.reactivex.rxjava2:rxjava:2.0.4" level="project" />
     <orderEntry type="library" name="Maven: pentaho-kettle:kettle-ui-swt:8.2.0.0-342" level="project" />
     <orderEntry type="library" name="Maven: pentaho-kettle:kettle-dbdialog:8.2.0.0-342" level="project" />
     <orderEntry type="library" name="Maven: pentaho:pentaho-vfs-browser:8.2.0.0-342" level="project" />
@@ -431,7 +445,7 @@
     <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-core-util:0.7.5" level="project" />
     <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-logging:0.7.5" level="project" />
     <orderEntry type="library" name="Maven: net.jafama:jafama:2.3.2" level="project" />
-    <orderEntry type="library" name="Maven: it.unimi.dsi:fastutil:8.5.6" level="project" />
+    <orderEntry type="library" name="Maven: it.unimi.dsi:fastutil:8.5.8" level="project" />
     <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-geo:0.7.5" level="project" />
     <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-core-dbids-int:0.7.5" level="project" />
     <orderEntry type="library" name="Maven: de.lmu.ifi.dbs.elki:elki-core-dbids:0.7.5" level="project" />

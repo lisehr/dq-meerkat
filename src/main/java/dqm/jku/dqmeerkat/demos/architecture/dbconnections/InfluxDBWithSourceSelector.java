@@ -9,7 +9,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
-import dqm.jku.dqmeerkat.influxdb.InfluxDBConnection;
+import dqm.jku.dqmeerkat.influxdb.InfluxDBConnectionV1;
 import dqm.jku.dqmeerkat.util.FileSelectionUtil;
 
 /**
@@ -22,7 +22,7 @@ public class InfluxDBWithSourceSelector {
   private static final boolean DEBUG = false;
 
   public static void main(String args[]) throws IOException {
-    InfluxDBConnection influxDB = new InfluxDBConnection();
+    InfluxDBConnectionV1 influxDB = new InfluxDBConnectionV1();
     DSConnector conn = FileSelectionUtil.getConnectorCSV(1);
 
     Datasource ds;

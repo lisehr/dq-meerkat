@@ -49,9 +49,11 @@ public class TestNeo4j {
 						if(newList.size() > 0) {
 							c.annotateProfile(newList);
 						} else {
-							c.emptyDataProfile();
+							// TODO: emptyDataProfile is not existing in DSD concept...
+							//c.emptyDataProfile();
 						}
-						c.printAnnotatedProfileNeo4J(a);
+						// TODO: printAnnotatedProfileNeo4J is not existing in DSD concept...
+						//c.printAnnotatedProfileNeo4J(a);
 					}
 				}
 			}

@@ -67,12 +67,12 @@ public class Average extends DependentProfileStatistic {
         int scale = 3; // Nachkommastellen für Dezimal Division
 
         if (a.getDataType().equals(Long.class)) {
-          return BigInteger.valueOf((long) sum).divide(BigInteger.valueOf(numRows)).longValue();
-          //  return (long) sum / (int) super.getRefProf().getMetric(numrows).getValue();
+            return BigInteger.valueOf((long) sum).divide(BigInteger.valueOf(numRows)).longValue();
+            //  return (long) sum / (int) super.getRefProf().getMetric(numrows).getValue();
         } else if (a.getDataType().equals(Double.class)) {
-          return BigDecimal.valueOf((double) sum).divide(BigDecimal.valueOf(numRows),scale, RoundingMode.HALF_UP).doubleValue(); // ab 0.5 aufrunden!
+            return BigDecimal.valueOf((double) sum).divide(BigDecimal.valueOf(numRows), scale, RoundingMode.HALF_UP).doubleValue(); // ab 0.5 aufrunden!
 
-        //  return (double) sum / (int) super.getRefProf().getMetric(numrows).getValue();
+            //  return (double) sum / (int) super.getRefProf().getMetric(numrows).getValue();
         }
         return (int) sum / (long) super.getRefProf().getStatistic(numrows).getValue();
     }
@@ -174,6 +174,8 @@ public class Average extends DependentProfileStatistic {
 
     @Override
     public boolean checkConformance(ProfileStatistic m, double threshold) {
+        if (this.getNumericVal() == null)
+            this.setNumericVal(m.getNumericVal());
         double rdpVal = ((Number) this.getNumericVal()).doubleValue();
         double dpValue = ((Number) m.getValue()).doubleValue();
 
