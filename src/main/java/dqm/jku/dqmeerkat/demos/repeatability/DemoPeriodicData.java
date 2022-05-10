@@ -8,7 +8,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
-import dqm.jku.dqmeerkat.influxdb.InfluxDBConnection;
+import dqm.jku.dqmeerkat.influxdb.InfluxDBConnectionV1;
 import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.util.Constants;
 import dqm.jku.dqmeerkat.util.FileSelectionUtil;
@@ -32,14 +32,14 @@ public class DemoPeriodicData {
   private static final int SLEEP_TIME_MS = 1000;
 
   public static void main(String args[]) throws IOException, InterruptedException, NoSuchMethodException {
-    InfluxDBConnection influx = new InfluxDBConnection();
+    InfluxDBConnectionV1 influx = new InfluxDBConnectionV1();
     int noRecs = 0;
     int offset = 0;
     ConnectorCSV conn = FileSelectionUtil.getConnectorCSV(Constants.FileName.dataCoSupplyChainDataset.getPath());
 
     if (DELETE_INFLUX) {
       influx.deleteDB();
-      influx = new InfluxDBConnection();
+      influx = new InfluxDBConnectionV1();
     }
 
     Concept testCon = null;

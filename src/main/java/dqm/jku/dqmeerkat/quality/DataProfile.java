@@ -1,5 +1,28 @@
 package dqm.jku.dqmeerkat.quality;
 
+import com.influxdb.client.domain.WritePrecision;
+import dqm.jku.dqmeerkat.dsd.elements.Attribute;
+import dqm.jku.dqmeerkat.dsd.elements.Concept;
+import dqm.jku.dqmeerkat.dsd.elements.DSDElement;
+import dqm.jku.dqmeerkat.dsd.records.Record;
+import dqm.jku.dqmeerkat.dsd.records.RecordList;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.multicolumn.outliers.IsolationForest;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.multicolumn.outliers.IsolationForestPercentage;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.multicolumn.outliers.LocalOutlierFactor;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.*;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.datatypeinfo.*;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.dependency.KeyCandidate;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.histogram.Histogram;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.pattern.PatternRecognition;
+import dqm.jku.dqmeerkat.util.Constants;
+import dqm.jku.dqmeerkat.util.Miscellaneous.DBType;
+import dqm.jku.dqmeerkat.util.numericvals.NumberComparator;
+import org.cyberborean.rdfbeans.annotations.*;
+import org.influxdb.dto.Point;
+import org.influxdb.dto.Point.Builder;
+
 import java.sql.Date;
 import java.util.*;
 
@@ -415,13 +438,61 @@ public class DataProfile {
      * @param measure the builder for a measurement
      * @return a measuring point for insertion into InfluxDB
      */
+    @Deprecated
     public Point createMeasuringPoint(Builder measure) {
         SortedSet<ProfileStatistic> metricSorted = new TreeSet<>();
         metricSorted.addAll(statistics);
         for (ProfileStatistic p : metricSorted) {
-            if (!p.getTitle().equals(hist) && !p.getTitle().equals(mad)) addMeasuringValue(p, measure);
+            if (!p.getTitle().equals(hist) && !p.getTitle().equals(mad))
+                addMeasuringValue(p, measure); // TODO abstract point generation
         }
         return measure.build();
+    }
+
+    /**
+     * <p>Transforms the statistics into measuring points for InfluxDB 2.x to be persisted. </p>
+     *
+     * @param measurementDescriptor description or name of the point to create
+     * @param timestampMillis       time, when the data point has been taken
+     * @param writePrecision        Precision of time to be written
+     * @return com.influxdb.client.write.Point that can be persisted using a
+     * {@link dqm.jku.dqmeerkat.influxdb.InfluxDBConnectionV2}
+     */
+    public com.influxdb.client.write.Point createMeasuringPoint(String measurementDescriptor, long timestampMillis,
+                                                                WritePrecision writePrecision) {
+        SortedSet<ProfileStatistic> metricSorted = new TreeSet<>(statistics);
+        com.influxdb.client.write.Point point = new com.influxdb.client.write.Point(measurementDescriptor)
+                .time(timestampMillis, writePrecision);
+        for (ProfileStatistic p : metricSorted) {
+            if (!p.getTitle().equals(hist) && !p.getTitle().equals(mad))
+                addMeasuringValue(p, point);
+        }
+        return point;
+    }
+
+    /**
+     * Helper method for adding the correct measuring value (including its data
+     * type) to the builder
+     *
+     * @param p       the profile metric to add
+     * @param measure the builder for a measurement
+     */
+    private void addMeasuringValue(ProfileStatistic p, com.influxdb.client.write.Point measure) {
+        try {
+            if (p.getValue() == null || p.getLabel().equals(pattern.getLabel()))
+                measure.addField(p.getLabel(), 0); // TODO: replace 0 with NaN, when hitting v2.0 of influxdb
+            else if (p.getValueClass().equals(Long.class))
+                measure.addField(p.getLabel(), ((Number) p.getNumericVal()).longValue());
+            else if (p.getValueClass().equals(Double.class) || p.getLabel().equals(sd.getLabel()))
+                measure.addField(p.getLabel(), ((Number) p.getNumericVal()).doubleValue());
+            else if (p.getValueClass().equals(String.class) && (p.getLabel().equals(bt.getLabel()) || p.getLabel().equals(dt.getLabel())))
+                measure.addField(p.getLabel(), (String) p.getValue());
+            else if (p.getValueClass().equals(Boolean.class)) measure.addField(p.getLabel(), (boolean) p.getValue());
+            else measure.addField(p.getLabel(), ((Number) p.getNumericVal()).intValue());
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
     }
 
     /**

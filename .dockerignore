@@ -1,0 +1,7 @@
+Grafana/
+InfluxDB/
+.vs
+.settings
+doc/
+target/
+.git/

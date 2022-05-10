@@ -8,7 +8,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
-import dqm.jku.dqmeerkat.quality.RDPConformanceChecker;
+import dqm.jku.dqmeerkat.quality.conformance.AllInOneRDPConformanceChecker;
 import dqm.jku.dqmeerkat.util.Constants;
 
 /**
@@ -105,11 +105,12 @@ public class RDPConformanceParameterPlots {
 	}
 
 	private static String checkConformance(Datasource ds, ConnectorCSV conn, Attribute a, int batchSize, double threshold) throws NoSuchMethodException, IOException {
-		RDPConformanceChecker confChecker = new RDPConformanceChecker(ds, conn, batchSize, threshold);
+		AllInOneRDPConformanceChecker confChecker = new AllInOneRDPConformanceChecker(ds, conn, batchSize, threshold);
 		double val = Double.NaN;
 		try {
-			confChecker.run();
-			val = confChecker.getConformanceValue(a);
+			confChecker.runConformanceCheck();
+			// TODO Fix the missing method below!!!
+//			val = confChecker.getConformanceValue(a);
 		} catch(IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 		}

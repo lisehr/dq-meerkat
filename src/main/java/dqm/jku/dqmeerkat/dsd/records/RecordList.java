@@ -43,7 +43,8 @@ public class RecordList implements Iterable<Record> {
   }
   
   public RecordList splitPartialRecordList(int offset, int noRecs) {
-    if (offset < 0 || noRecs < 0 || (offset + noRecs) > size()) return new RecordList();
+    if (offset < 0 || noRecs < 0 || (offset + noRecs) > size())
+      return new RecordList();
     int end = noRecs > size() ? size() : (noRecs + offset);
     return new RecordList(records.subList(offset, end));
   }

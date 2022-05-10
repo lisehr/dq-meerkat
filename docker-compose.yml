@@ -1,0 +1,20 @@
+version: "3"
+services:
+  grafana:
+    image: grafana/grafana:8.3.3
+    container_name: grafana
+    ports:
+      - "3000:3000"
+  influxdb:
+    image: influxdb:2.1.1
+    container_name: influxdb
+    ports:
+      - "8086:8086"
+      - "8088:8088"
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=SecureRootPassword!?
+      - DOCKER_INFLUXDB_INIT_ORG=testRetention
+      - DOCKER_INFLUXDB_INIT_BUCKET=testSeries
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=12bdc4164c2e8141 # random valid token I generated once
