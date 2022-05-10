@@ -7,7 +7,8 @@
 /src/main/java/dqm/jku/dqmeerkat/resources/export/csv/export_Acceleration*
 /src/main/java/dqm/jku/dqmeerkat/resources/csv/1500000 Sales Records.csv
 /Neo4j/*
-/.settings/*
+/.settings/
+/.metadata/
 .classpath
 /target/
 /Grafana/grafana-6.2.5_windows/data/
