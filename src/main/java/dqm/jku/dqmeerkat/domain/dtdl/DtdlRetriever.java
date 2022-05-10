@@ -3,6 +3,7 @@ package dqm.jku.dqmeerkat.domain.dtdl;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dqm.jku.dqmeerkat.domain.dtdl.dto.DtdlDto;
+import dqm.jku.dqmeerkat.domain.dtdl.dto.DtdlGraphWrapper;
 import lombok.SneakyThrows;
 import org.springframework.web.reactive.function.client.WebClient;
 import science.aist.seshat.Logger;
@@ -33,12 +34,12 @@ public class DtdlRetriever {
      * @param dto
      */
     @SneakyThrows
-    public void publish(DtdlDto dto) {
-        // Dummy class, necessary to suppress type info in dtdldtos
+    public void publish(DtdlGraphWrapper dto) {
+        // Dummy class, necessary to suppress type info in dtdldtos.
         @JsonTypeInfo(use = JsonTypeInfo.Id.NONE)
         class NoTypes {
         }
-
+        // without mixin jackson generates a type property for each DtdlDto implementation, causes problems with validity
         ObjectMapper mapper = new ObjectMapper().addMixIn(DtdlDto.class, NoTypes.class);
 
         var testString = mapper.writeValueAsString(dto);

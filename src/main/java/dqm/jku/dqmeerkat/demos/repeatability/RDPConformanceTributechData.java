@@ -3,9 +3,7 @@ package dqm.jku.dqmeerkat.demos.repeatability;
 import com.influxdb.client.domain.WritePrecision;
 import dqm.jku.dqmeerkat.connectors.ConnectorCSV;
 import dqm.jku.dqmeerkat.domain.dtdl.DtdlRetriever;
-import dqm.jku.dqmeerkat.domain.dtdl.dto.DatasourceDto;
-import dqm.jku.dqmeerkat.domain.dtdl.dto.MetaDataDto;
-import dqm.jku.dqmeerkat.domain.dtdl.dto.ProfileStatisticDto;
+import dqm.jku.dqmeerkat.domain.dtdl.dto.*;
 import dqm.jku.dqmeerkat.dsd.DSDKnowledgeGraph;
 import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.elements.Concept;
@@ -48,13 +46,26 @@ public class RDPConformanceTributechData {
 
         // retrieve DTDL stuff
         DtdlRetriever retriever = new DtdlRetriever();
-//        retriever.retrieve();
-        retriever.publish(ProfileStatisticDto.builder()
+
+        var statisticDto = ProfileStatisticDto.builder()
                 .metaData(new MetaDataDto("dtmi:scch:at:dq:ProfileStatistic;1"))
                 .category("the Mightiest of numbers")
                 .title("Seven")
                 .value("7")
+                .build();
+        var profileDto = DatasourceDto.builder()
+                .metaData(new MetaDataDto("dtmi:scch:at:dq:Dataprofile;1"))
+                .build();
+        var graph = new DtdlGraph();
+        graph.addDigitalTwin(profileDto);
+        graph.addDigitalTwin(statisticDto);
+        graph.addRelationship(RelationshipDto.builder()
+                .relationshipName("dataprofile_statistic")
+                .sourceId(profileDto.getDtId())
+                .targetId(statisticDto.getDtId())
                 .build());
+        var graphWrapper = new DtdlGraphWrapper(graph);
+        retriever.publish(graphWrapper);
 
         ConnectorCSV conn = FileSelectionUtil.getConnectorCSV("src/main/resource/data/humidity_5000.csv");
         conn.setLabel("humidity_data");
