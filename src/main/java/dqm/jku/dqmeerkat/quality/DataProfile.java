@@ -1,13 +1,12 @@
 package dqm.jku.dqmeerkat.quality;
 
 import com.influxdb.client.domain.WritePrecision;
-import dqm.jku.dqmeerkat.dsd.elements.Attribute;
-import dqm.jku.dqmeerkat.dsd.elements.Concept;
-import dqm.jku.dqmeerkat.dsd.elements.DSDElement;
+import dqm.jku.dqmeerkat.dsd.elements.*;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.graphmetrics.*;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.multicolumn.outliers.IsolationForest;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.multicolumn.outliers.IsolationForestPercentage;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.multicolumn.outliers.LocalOutlierFactor;
@@ -25,41 +24,6 @@ import org.influxdb.dto.Point.Builder;
 
 import java.sql.Date;
 import java.util.*;
-
-import dqm.jku.dqmeerkat.dsd.elements.*;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.graphmetrics.*;
-import org.cyberborean.rdfbeans.annotations.RDF;
-import org.cyberborean.rdfbeans.annotations.RDFBean;
-import org.cyberborean.rdfbeans.annotations.RDFContainer;
-import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
-import org.cyberborean.rdfbeans.annotations.RDFSubject;
-import org.influxdb.dto.Point;
-import org.influxdb.dto.Point.Builder;
-
-import dqm.jku.dqmeerkat.dsd.records.Record;
-import dqm.jku.dqmeerkat.dsd.records.RecordList;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.multicolumn.outliers.IsolationForest;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.multicolumn.outliers.IsolationForestPercentage;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.multicolumn.outliers.LocalOutlierFactor;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.Cardinality;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.NullValues;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.NullValuesPercentage;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.NumRows;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.Uniqueness;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.datatypeinfo.*;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.dependency.KeyCandidate;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.histogram.*;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.pattern.PatternRecognition;
-import dqm.jku.dqmeerkat.util.Constants;
-import dqm.jku.dqmeerkat.util.Miscellaneous.DBType;
-import dqm.jku.dqmeerkat.util.numericvals.NumberComparator;
-import org.w3c.dom.Attr;
-
-import javax.sql.DataSource;
-import javax.swing.text.html.Option;
-import javax.xml.crypto.Data;
 
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
 
@@ -80,20 +44,20 @@ public class DataProfile {
 
     }
 
-	public DataProfile(RecordList rs, DSDElement d) throws NoSuchMethodException {
-		this.elem = d;
-		this.uri = elem.getURI() + "/profile";
+    public DataProfile(RecordList rs, DSDElement d) throws NoSuchMethodException {
+        this.elem = d;
+        this.uri = elem.getURI() + "/profile";
 
-		Optional<Datasource> ds = DSDElement.getAllDatasources().stream().findFirst();
+        Optional<Datasource> ds = DSDElement.getAllDatasources().stream().findFirst();
 
-		if(ds.isPresent() && ds.get().getDBType().equals(DBType.NEO4J)) {
-			createDataProfileSkeletonNeo4j();
-			calculateReferenceDataProfileNeo4j(rs);
-		} else {
-			createDataProfileSkeletonRDB();
-			calculateReferenceDataProfile(rs);
-		}
-	}
+        if (ds.isPresent() && ds.get().getDBType().equals(DBType.NEO4J)) {
+            createDataProfileSkeletonNeo4j();
+            calculateReferenceDataProfileNeo4j(rs);
+        } else {
+            createDataProfileSkeletonRDB();
+            calculateReferenceDataProfile(rs);
+        }
+    }
 
     public DataProfile(RecordList records, DSDElement d, String filePath) throws NoSuchMethodException {
         this.elem = d;
@@ -524,17 +488,17 @@ public class DataProfile {
         return profileStatistic.getTitle() == avg || profileStatistic.getTitle() == sd || profileStatistic.getTitle() == max || profileStatistic.getTitle() == min || profileStatistic.getTitle() == med
                 || profileStatistic.getTitle() == nullValP || profileStatistic.getTitle() == unique;
 
-	}
+    }
 
-	// ------------------- Graph Data Profiling ------------------------
+    // ------------------- Graph Data Profiling ------------------------
 
-	public void createDataProfileSkeletonNeo4j() {
-		// distinguish between concept, attribute and datasource??
-		if (elem instanceof Concept) {
-			Concept c = (Concept) elem;
+    public void createDataProfileSkeletonNeo4j() {
+        // distinguish between concept, attribute and datasource??
+        if (elem instanceof Concept) {
+            Concept c = (Concept) elem;
 
-			ReferenceAssociation association = (ReferenceAssociation) c.getDatasource().getAssociation("Ref/" + c.getLabelOriginal());
-			String neoType = association.getNeo4JType();
+            ReferenceAssociation association = (ReferenceAssociation) c.getDatasource().getAssociation("Ref/" + c.getLabelOriginal());
+            String neoType = association.getNeo4JType();
 
             ProfileStatistic size = new NumEntries(this);
             statistics.add(size);
@@ -549,23 +513,23 @@ public class DataProfile {
             ProfileStatistic median = new MedianEntry(this);
             statistics.add(median);
 
-		}
-	}
+        }
+    }
 
-	private void calculateReferenceDataProfileNeo4j(RecordList rl) throws NoSuchMethodException {
-		// distinguish between multi column and single column profiling
+    private void calculateReferenceDataProfileNeo4j(RecordList rl) throws NoSuchMethodException {
+        // distinguish between multi column and single column profiling
 
-		if(elem instanceof Concept) {
-			Concept c = (Concept) elem;
-			calculateSingleColumnNeo4j(rl);
-		}
-	}
+        if (elem instanceof Concept) {
+            Concept c = (Concept) elem;
+            calculateSingleColumnNeo4j(rl);
+        }
+    }
 
-	private void calculateSingleColumnNeo4j(RecordList rl) throws  NoSuchMethodException {
-		for (ProfileStatistic p : statistics) {
-			p.calculation(rl, p.getValue());
-		}
-	}
+    private void calculateSingleColumnNeo4j(RecordList rl) throws NoSuchMethodException {
+        for (ProfileStatistic p : statistics) {
+            p.calculation(rl, p.getValue());
+        }
+    }
 
 
 }

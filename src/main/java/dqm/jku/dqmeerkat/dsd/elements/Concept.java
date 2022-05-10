@@ -1,15 +1,10 @@
 package dqm.jku.dqmeerkat.dsd.elements;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
-
+import dqm.jku.dqmeerkat.blockchain.blocks.DSDBlock;
+import dqm.jku.dqmeerkat.blockchain.standardchain.BlockChain;
+import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.influxdb.InfluxDBConnection;
+import dqm.jku.dqmeerkat.util.AttributeSet;
 import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFContainer;
@@ -17,11 +12,9 @@ import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 import org.influxdb.dto.Point;
 import org.influxdb.dto.Point.Builder;
 
-import dqm.jku.dqmeerkat.blockchain.blocks.DSDBlock;
-import dqm.jku.dqmeerkat.blockchain.standardchain.BlockChain;
-import dqm.jku.dqmeerkat.dsd.records.Record;
-import dqm.jku.dqmeerkat.influxdb.InfluxDBConnectionV1;
-import dqm.jku.dqmeerkat.util.AttributeSet;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:Concept")
@@ -36,107 +29,8 @@ public class Concept extends DSDElement {
     protected Set<ForeignKey> foreignKeys = new HashSet<ForeignKey>();
 
 
-  public Concept() {
-    super();
-  }
-
-  public Concept(String label, Datasource datasource) {
-    super(label, datasource.getURI());
-    this.datasource = datasource;
-  }
-
-  /**
-   * @param datasource the datasource to set
-   */
-  public void setDatasource(Datasource datasource) {
-    this.datasource = datasource;
-  }
-
-  /**
-   * @param attributes the attributes to set
-   */
-  public void setAttributes(AttributeSet attributes) {
-    this.attributes = (HashSet<Attribute>) attributes.stream().collect(Collectors.toSet());
-    updateStructure();
-  }
-
-  private void updateStructure() {
-    this.recordStructure = new Attribute[this.attributes.size()];
-    for (int i = 0; i < recordStructure.length; i++) {
-      recordStructure[i] = this.getAttributes().getAttributes().get(i);
-    }
-  }
-
-  /**
-   * @param primaryKey the primaryKey to set
-   */
-  public void setPrimaryKeySet(AttributeSet primaryKey) {
-    this.primaryKeys = (HashSet<Attribute>) primaryKey.stream().collect(Collectors.toSet());
-  }
-
-  /**
-   * @param functionalDependencies the functionalDependencies to set
-   */
-  public void setFunctionalDependencies(List<FunctionalDependency> functionalDependencies) {
-    this.functionalDependencies = functionalDependencies;
-  }
-
-  /**
-   * @param foreignKeys the foreignKeys to set
-   */
-  public void setForeignKeys(Set<ForeignKey> foreignKeys) {
-    this.foreignKeys = foreignKeys;
-  }
-
-  @RDF("dsd:hasDatasource")
-  public Datasource getDatasource() {
-    return datasource;
-  }
-
-  public AttributeSet getAttributes() {
-    return new AttributeSet(attributes);
-  }
-
-  @RDF("dsd:hasAttribute")
-  @RDFContainer
-  public HashSet<Attribute> getAttributeList() {
-    return attributes;
-  }
-
-  public void setAttributeList(HashSet<Attribute> att) {
-    this.attributes = att;
-    updateStructure();
-  }
-
-
-  public void addAttribute(Attribute attribute) {
-    attributes.add(attribute);
-    updateStructure();
-  }
-
-  public boolean containsAttribute(Attribute attribute) {
-    return attributes.contains(attribute) && attribute.getConcept() == this;
-  }
-
-  public boolean containsAttribute(String attribute) {
-    return this.getAttribute(attribute) != null;
-  }
-
-  @RDF("dsd:hasPrimaryKey")
-  @RDFContainer
-  public HashSet<Attribute> getPrimaryKeySet() {
-    return primaryKeys;
-  }
-
-  public AttributeSet getPrimaryKeys() {
-    return new AttributeSet(primaryKeys);
-  }
-
-  public void addPrimaryKeyAttribute(Attribute primaryKey) {
-    if (attributes.contains(primaryKey)) {
-      this.primaryKeys.add(primaryKey);
-    } else {
-      throw new IllegalArgumentException("Primary key is not contained in attributes list of concept.");
+    public Concept() {
+        super();
     }
 
     public Concept(String label, Datasource datasource) {
@@ -150,6 +44,11 @@ public class Concept extends DSDElement {
     public void setDatasource(Datasource datasource) {
         this.datasource = datasource;
     }
+
+
+
+
+
 
     /**
      * @param attributes the attributes to set
@@ -349,7 +248,7 @@ public class Concept extends DSDElement {
                 else if (a.getDataType().equals(Long.class)) measure.addField(a.getLabel(), (long) record.getField(a));
                 else if (a.getDataType().equals(Double.class))
                     measure.addField(a.getLabel(), (double) record.getField(a));
-                else measure.addField(a.getLabel(), (int) ((String) record.getField(a)).length());
+                else measure.addField(a.getLabel(), ((String) record.getField(a)).length());
             }
         }
         return measure.build();

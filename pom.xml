@@ -49,13 +49,6 @@
             <version>${log4j-core.version}</version>
         </dependency>
 
-	<repositories>
-		<repository>
-			<id>pentaho</id>
-			<url>http://public.nexus.pentaho.org/content/groups/omni</url>
-		</repository>
-	</repositories>
-
         <dependency>
             <groupId>com.appnexus.grafana-client</groupId>
             <artifactId>grafana-api-java-client</artifactId>
@@ -216,6 +209,32 @@
             <version>0.7.5</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.neo4j.driver</groupId>
+            <artifactId>neo4j-java-driver</artifactId>
+            <version>4.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j-graphdb-api</artifactId>
+            <version>3.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j</artifactId>
+            <version>3.5.12</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.json/json -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20200518</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
+        </dependency>
 
     </dependencies>
 
@@ -233,7 +252,7 @@
     <repositories>
         <repository>
             <id>pentaho</id>
-            <url>http://public.nexus.pentaho.org/content/groups/omni</url>
+            <url>https://public.nexus.pentaho.org/content/groups/omni</url>
         </repository>
     </repositories>
 </project>
