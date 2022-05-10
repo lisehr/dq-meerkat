@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.util.UUID;
 
@@ -18,18 +20,8 @@ import java.util.UUID;
  * @author meindl, rainer.meindl@scch.at
  * @since 10.05.2022
  */
-@Data
-@Builder
-public class DatasourceDto {
-
-    @Builder.Default
-    @JsonProperty("$dtId")
-    private UUID dtId = UUID.randomUUID();
-    @Builder.Default
-    @JsonProperty("$eTag")
-    private UUID eTag = UUID.randomUUID();
-    @JsonProperty("$metadata")
-    private MetaDataDto metaData;
+@SuperBuilder
+public class DatasourceDto extends DtdlDto {
 
 
 }

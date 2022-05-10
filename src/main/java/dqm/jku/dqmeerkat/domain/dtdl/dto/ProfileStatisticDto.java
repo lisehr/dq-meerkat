@@ -1,5 +1,8 @@
 package dqm.jku.dqmeerkat.domain.dtdl.dto;
 
+import lombok.Data;
+import lombok.experimental.SuperBuilder;
+
 /**
  * <h2>ProfileStatisticDto</h2>
  * <summary>
@@ -9,5 +12,10 @@ package dqm.jku.dqmeerkat.domain.dtdl.dto;
  * @author meindl, rainer.meindl@scch.at
  * @since 10.05.2022
  */
-public class ProfileStatisticDto {
+@SuperBuilder
+@Data
+public class ProfileStatisticDto extends DtdlDto {
+    private String title;
+    private String value;
+    private String category;
 }

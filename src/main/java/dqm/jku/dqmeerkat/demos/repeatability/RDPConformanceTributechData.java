@@ -5,6 +5,7 @@ import dqm.jku.dqmeerkat.connectors.ConnectorCSV;
 import dqm.jku.dqmeerkat.domain.dtdl.DtdlRetriever;
 import dqm.jku.dqmeerkat.domain.dtdl.dto.DatasourceDto;
 import dqm.jku.dqmeerkat.domain.dtdl.dto.MetaDataDto;
+import dqm.jku.dqmeerkat.domain.dtdl.dto.ProfileStatisticDto;
 import dqm.jku.dqmeerkat.dsd.DSDKnowledgeGraph;
 import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.elements.Concept;
@@ -48,8 +49,12 @@ public class RDPConformanceTributechData {
         // retrieve DTDL stuff
         DtdlRetriever retriever = new DtdlRetriever();
 //        retriever.retrieve();
-        retriever.publish(DatasourceDto.builder()
-                .metaData(new MetaDataDto("dtmi:scch:at:dq:Dataprofile;1")).build());
+        retriever.publish(ProfileStatisticDto.builder()
+                .metaData(new MetaDataDto("dtmi:scch:at:dq:ProfileStatistic;1"))
+                .category("the Mightiest of numbers")
+                .title("Seven")
+                .value("7")
+                .build());
 
         ConnectorCSV conn = FileSelectionUtil.getConnectorCSV("src/main/resource/data/humidity_5000.csv");
         conn.setLabel("humidity_data");
