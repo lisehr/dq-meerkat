@@ -15,6 +15,7 @@ Grafana/grafana-7.5.5_windows/data
 /kg-repo/*
 /.vs
 /.idea/*
+.idea/*
 *.iml
 kg-repo
 SupplyChain
