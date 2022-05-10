@@ -12,10 +12,7 @@
 /target/
 /Grafana/grafana-6.2.5_windows/data/
 Grafana/grafana-7.5.5_windows/data
-/kg-repo/*
-/.vs
-/.idea/*
-.idea/*
+.vs
 *.iml
 kg-repo
 SupplyChain
@@ -23,4 +20,4 @@ testrepo
 .temp*
 kg-repo
 *.lnk
-
+.idea
