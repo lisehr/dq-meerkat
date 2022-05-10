@@ -6,7 +6,10 @@ import java.util.UUID;
 
 /**
  * <h2>RelationshipDto</h2>
- * <summary>TODO Insert do cheader</summary>
+ * <summary>
+ * Data Transfer Object for relationships between two Digital twins. For example between {@link DatasourceDto} and
+ * {@link ProfileStatisticDto}.
+ * </summary>
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 10.05.2022
