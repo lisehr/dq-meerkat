@@ -28,6 +28,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 import java.util.Properties;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -94,8 +95,10 @@ public class RDPConformanceTributechData {
             var ret = profiler.generateProfiles();
 
             // export data profile DTDL
+            // streamId currently hardcoded, TODO extracted it from loaded json
+            final var streamdtId = UUID.fromString( "e564d3eb-2729-4ce2-88b9-7ac369f65010");
             var exporter = new DataProfileExporter();
-            var graphExporter = new DtdlGraphExporter();
+            var graphExporter = new DtdlGraphExporter(streamdtId);
 
             var jsonStrings = ret.stream()
                     .map(DataProfileCollection::getProfiles)

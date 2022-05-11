@@ -41,7 +41,8 @@ public class DtdlGraph {
      * <p>
      * Adds the given relationship between two twins to the graph. Constraints ensure consistency of the graph, i.E.
      * the relationship to add must reference twins, that have previously been added to the graph. These twins are
-     * identified by their dtdId, which has to correspond to either the source-, or targetId
+     * identified by their dtdId, which has to correspond to either the sourceId. So <b>relationships must originate
+     * from this graph</b>, but may target twins outside of this graph
      * </p>
      *
      * @param relationship the relationship to add as a dto.
@@ -49,10 +50,7 @@ public class DtdlGraph {
     public boolean addRelationship(RelationshipDto relationship) {
         if (digitalTwins.stream()
                 .map(DtdlDto::getDtId)
-                .anyMatch(uuid -> relationship.getSourceId().equals(uuid)) &&
-                digitalTwins.stream()
-                        .map(DtdlDto::getDtId)
-                        .anyMatch(uuid -> relationship.getTargetId().equals(uuid))) {
+                .anyMatch(uuid -> relationship.getSourceId().equals(uuid))) {
             return relationships.add(relationship);
         }
         return false;
