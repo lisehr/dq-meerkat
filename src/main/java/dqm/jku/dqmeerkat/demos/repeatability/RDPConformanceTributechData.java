@@ -11,13 +11,13 @@ import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.influxdb.InfluxDBConnectionV2;
 import dqm.jku.dqmeerkat.quality.DataProfile;
+import dqm.jku.dqmeerkat.quality.DataProfileCollection;
 import dqm.jku.dqmeerkat.quality.DataProfiler;
 import dqm.jku.dqmeerkat.quality.TributechDataProfiler;
 import dqm.jku.dqmeerkat.quality.conformance.CompositeRDPConformanceChecker;
 import dqm.jku.dqmeerkat.quality.conformance.RDPConformanceChecker;
 import dqm.jku.dqmeerkat.resources.export.json.dtdl.DataProfileExporter;
 import dqm.jku.dqmeerkat.resources.export.json.dtdl.DtdlGraphExporter;
-import dqm.jku.dqmeerkat.resources.export.json.dtdl.ProfileStatisticsExporter;
 import dqm.jku.dqmeerkat.util.FileSelectionUtil;
 
 import java.io.FileInputStream;
@@ -28,6 +28,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 /**
  * This class is to evaluate the extent to which the Tributech data loaded in batches of 1,000 records adheres to the RDP boundaries.
@@ -94,9 +95,16 @@ public class RDPConformanceTributechData {
 
             // export data profile DTDL
             var exporter = new DataProfileExporter();
+            var graphExporter = new DtdlGraphExporter();
+
+            var jsonStrings = ret.stream()
+                    .map(DataProfileCollection::getProfiles)
+                    .map(dataProfiles -> dataProfiles.stream()
+                            .map(graphExporter::export)
+                            .collect(Collectors.toList()))
+                    .collect(Collectors.toList());
             var dsToExport = ret.get(0).getProfiles().get(0);
             exporter.export(dsToExport, "output/", "test.json");
-            var testJson = new DtdlGraphExporter().export(dsToExport);
 
 
             // Continuous generation of DPs and conformance checking

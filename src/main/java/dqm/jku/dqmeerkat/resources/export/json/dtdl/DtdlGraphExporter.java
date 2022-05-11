@@ -28,7 +28,8 @@ public class DtdlGraphExporter implements DataExporter<DataProfile> {
         var profileDto = DatasourceDto.builder()
                 .metaData(new MetaDataDto("dtmi:scch:at:dq:Dataprofile;1"))
                 .build();
-        var profileDtos = toExport.getStatistics().stream().map(profileStatistic -> ProfileStatisticDto.builder()
+        var profileDtos = toExport.getStatistics().stream()
+                .map(profileStatistic -> ProfileStatisticDto.builder()
                         .value(profileStatistic.getValue().toString())
                         .title(profileStatistic.getTitle().toString())
                         .category(profileStatistic.getCat().toString())
@@ -38,7 +39,10 @@ public class DtdlGraphExporter implements DataExporter<DataProfile> {
         var relationships = profileDtos.stream().map(profileStatisticDto -> RelationshipDto.builder()
                         .targetId(profileStatisticDto.getDtId())
                         .sourceId(profileDto.getDtId())
-                        .relationshipName(profileStatisticDto.getTitle())
+                        .relationshipName(profileStatisticDto.getTitle()
+                                .replace(" ", "")
+                                .replace("%", "Percentof")
+                                .replace("#", "NrOf")) // relationship must not have whitespaces, #, % or other special characters!
                         .build())
                 .collect(Collectors.toList());
         var graph = new DtdlGraph();
@@ -46,8 +50,6 @@ public class DtdlGraphExporter implements DataExporter<DataProfile> {
         profileDtos.forEach(graph::addDigitalTwin);
         relationships.forEach(graph::addRelationship);
         var graphWrapper = new DtdlGraphWrapper(graph);
-        // TODO Relationships are still buggy?
-        // i also uploaded a ridiculous number of profilestatistics...
 
         @JsonTypeInfo(use = JsonTypeInfo.Id.NONE)
         class NoTypes {
