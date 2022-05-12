@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * <h2>ProfileStatisticsExporter</h2>
- * <summary>TODO Insert do cheader</summary>
+ * <summary>Exports the schema of the {@link ProfileStatistic} class into DTDL. </summary>
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 29.04.2022

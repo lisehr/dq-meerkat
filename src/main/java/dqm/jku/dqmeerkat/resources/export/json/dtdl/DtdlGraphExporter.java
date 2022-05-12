@@ -14,7 +14,9 @@ import java.util.stream.Collectors;
 
 /**
  * <h2>DtdlGraphExporter</h2>
- * <summary>TODO Insert do cheader</summary>
+ * <summary>
+ * Transforms a whole Dtdl graph as defined in {@link DtdlGraphWrapper} into a json of DTDL and exports it to a file.
+ * </summary>
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 10.05.2022
