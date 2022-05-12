@@ -1,8 +1,8 @@
 package dqm.jku.dqmeerkat.resources.export.json.dtdl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dqm.jku.dqmeerkat.domain.dtdl.DtdlInterface;
-import dqm.jku.dqmeerkat.domain.dtdl.DtdlObject;
+import dqm.jku.dqmeerkat.dtdl.DtdlInterface;
+import dqm.jku.dqmeerkat.dtdl.DtdlObject;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import lombok.SneakyThrows;
 

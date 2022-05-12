@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
  * Demo class for connection with InfluxDB
  *
  * @author optimusseptim
- * @deprecated Uses outedated dependencies. use {@link InfluxDBNew} instead
+ * @deprecated Uses outedated dependencies. see {@link dqm.jku.dqmeerkat.demos.repeatability.RDPConformanceTributechData} for usage of new {@link dqm.jku.dqmeerkat.influxdb.InfluxDBConnection}
  */
 @Deprecated
 public class InfluxDBDemo {

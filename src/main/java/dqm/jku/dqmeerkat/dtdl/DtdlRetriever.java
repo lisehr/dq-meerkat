@@ -1,9 +1,9 @@
-package dqm.jku.dqmeerkat.domain.dtdl;
+package dqm.jku.dqmeerkat.dtdl;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dqm.jku.dqmeerkat.domain.dtdl.dto.DtdlDto;
-import dqm.jku.dqmeerkat.domain.dtdl.dto.DtdlGraphWrapper;
+import dqm.jku.dqmeerkat.dtdl.dto.DtdlDto;
+import dqm.jku.dqmeerkat.dtdl.dto.DtdlGraphWrapper;
 import lombok.SneakyThrows;
 import org.springframework.web.reactive.function.client.WebClient;
 import science.aist.seshat.Logger;

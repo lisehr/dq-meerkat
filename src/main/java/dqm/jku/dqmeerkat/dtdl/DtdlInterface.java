@@ -1,15 +1,13 @@
-package dqm.jku.dqmeerkat.domain.dtdl;
+package dqm.jku.dqmeerkat.dtdl;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
-
 /**
  * <h2>DTDLInterface</h2>
  * <summary>TODO Insert do cheader</summary>

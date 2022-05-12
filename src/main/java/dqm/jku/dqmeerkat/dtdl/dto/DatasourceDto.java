@@ -1,13 +1,6 @@
-package dqm.jku.dqmeerkat.domain.dtdl.dto;
+package dqm.jku.dqmeerkat.dtdl.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-
-import java.util.UUID;
 
 /**
  * <h2>DatasourceDto</h2>

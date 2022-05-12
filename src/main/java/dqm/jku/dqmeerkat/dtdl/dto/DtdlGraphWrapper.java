@@ -1,4 +1,4 @@
-package dqm.jku.dqmeerkat.domain.dtdl.dto;
+package dqm.jku.dqmeerkat.dtdl.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

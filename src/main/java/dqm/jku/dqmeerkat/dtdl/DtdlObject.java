@@ -1,4 +1,4 @@
-package dqm.jku.dqmeerkat.domain.dtdl;
+package dqm.jku.dqmeerkat.dtdl;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -2,13 +2,13 @@ package dqm.jku.dqmeerkat.demos.repeatability;
 
 import com.influxdb.client.domain.WritePrecision;
 import dqm.jku.dqmeerkat.connectors.ConnectorCSV;
-import dqm.jku.dqmeerkat.domain.dtdl.DtdlRetriever;
-import dqm.jku.dqmeerkat.domain.dtdl.dto.*;
+import dqm.jku.dqmeerkat.dtdl.DtdlRetriever;
 import dqm.jku.dqmeerkat.dsd.DSDKnowledgeGraph;
 import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
+import dqm.jku.dqmeerkat.dtdl.dto.*;
 import dqm.jku.dqmeerkat.influxdb.InfluxDBConnectionV2;
 import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.DataProfileCollection;
@@ -118,7 +118,7 @@ public class RDPConformanceTributechData {
             System.out.println(confChecker.getReport());
 
 
-            try (InputStream input = new FileInputStream("src/main/resource/config.properties")) {
+            try (InputStream input = new FileInputStream("src/main/resource/influx.properties")) {
                 var properties = new Properties();
                 properties.load(input);
                 try (var influx = InfluxDBConnectionV2.builder()

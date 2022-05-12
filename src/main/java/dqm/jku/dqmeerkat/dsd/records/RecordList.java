@@ -44,7 +44,7 @@ public class RecordList implements Iterable<Record> {
   
   public RecordList splitPartialRecordList(int offset, int noRecs) {
     if (offset < 0 || noRecs < 0 || (offset + noRecs) > size())
-      return new RecordList();
+      return new RecordList(); // TODO github issue referencing problem with item count being larger than rdp size
     int end = noRecs > size() ? size() : (noRecs + offset);
     return new RecordList(records.subList(offset, end));
   }

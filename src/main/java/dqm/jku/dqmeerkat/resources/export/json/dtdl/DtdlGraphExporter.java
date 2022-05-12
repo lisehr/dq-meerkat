@@ -2,7 +2,7 @@ package dqm.jku.dqmeerkat.resources.export.json.dtdl;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dqm.jku.dqmeerkat.domain.dtdl.dto.*;
+import dqm.jku.dqmeerkat.dtdl.dto.*;
 import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.resources.export.DataExporter;
 import lombok.AllArgsConstructor;
