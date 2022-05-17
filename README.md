@@ -64,7 +64,7 @@ docker compose up -d
 A common choice for storing CDQM results are time-series DBs like InfluxDB, which provides a Java API. DQ-MeeRKat does
 not offer an embedded mode (like Derby or GraphDB), but runs InfluxDB outside the Java runtime to persist CDQM results
 over time. Furthermore, DQ-MeeRKat also supports both versions of InfluxDB, the legacy 1.8 version and the current
-versions >2.0. The docker environment provides the current version of influxdb, while the provided scripts contain the 
+versions >2.0. The docker environment provides the current version of influxdb, while the provided scripts contain the
 legacy version of influxdb.
 
 Run on Linux:  
@@ -81,18 +81,19 @@ docker compose up -d influxdb
 ```
 
 #### Docker Setup
-After starting the docker containers some configuration is necessary. The main difference between the current and the 
-legacy version is the handling of authorisation towards the database. Currently, authorisation uses tokens from 
-the database, that are sometimes regenerated each time the database initializes, i.E. when the container is created. 
-Note the difference between __created__ and __started__! Each time the container of the influx is created a new 
+
+After starting the docker containers some configuration is necessary. The main difference between the current and the
+legacy version is the handling of authorisation towards the database. Currently, authorisation uses tokens from
+the database, that are sometimes regenerated each time the database initializes, i.E. when the container is created.
+Note the difference between __created__ and __started__! Each time the container of the influx is created a new
 organisation token is generated. It is persistent throughout restarts, only during recreation it is regenerated.
 
-This organisation token, as well as the user token, which is found in the `docker-compose.yml` need to be provided to 
-the java environment by a `influx.properties` file in the resource folder. The file is ignored by git to avoid merge 
-conflicts. 
+This organisation token, as well as the user token, which is found in the `docker-compose.yml` need to be provided to
+the java environment by a `influx.properties` file in the resource folder. The file is ignored by git to avoid merge
+conflicts.
 
-InfluxDB also provides a web ui, accessible on port 8086. The login credentials can be extracted from the 
-`docker-compose.yml`. All tokens can be found in the _About_ section, when clicking on the admin icon. 
+InfluxDB also provides a web ui, accessible on port 8086. The login credentials can be extracted from the
+`docker-compose.yml`. All tokens can be found in the _About_ section, when clicking on the admin icon.
 
 ### Grafana
 
@@ -121,6 +122,27 @@ Configure Grafana to execute demos:
 - Import Demo Dashboards from GitHub directory:
     - Import - Upload .json File:
       ```Grafana\Dashboard-Exports\*-dashboard.json```
+
+### Neo4J
+
+Neo4J can be either run inside the docker environment using the `docker-compose.yml`, or locally. For the latter,
+download any version __>3.5__ from the [neo4j website](https://neo4j.com/labs/apoc/4.0/installation/#neo4j-desktop)
+and follow the installation instructions. Then, create a project and database in Neo4j Desktop.
+Install the APOC library, ensure the database itself does not run and follow these steps:
+
+1. Hover over Database which need to intall APOC
+2. Click on the blue button "Open"
+3. Select tab "Plugins"
+4. Expand APOC
+5. Click Install
+
+After starting the database, DQ-MeeRKat should be able to connect to it.
+
+Alternatively, the docker-compose already has a setup defined for neo4j 4.1.x, including apoc installation and database
+generation. `docker compose up -d neo4j` starts the service. Data and plugins of this instance are stored in
+`neo4j/`.   
+After a short startup period the webinterface should be accessible at `localhost:7474` and DQ-MeeRKat can access it
+accordingly.
 
 ### Pentaho Data Integration
 
