@@ -50,6 +50,7 @@ public class DataProfile {
 
         Optional<Datasource> ds = DSDElement.getAllDatasources().stream().findFirst();
 
+        // TODO add neo4j data generator, remove this differentiation
         if (ds.isPresent() && ds.get().getDBType().equals(DBType.NEO4J)) {
             createDataProfileSkeletonNeo4j();
             calculateReferenceDataProfileNeo4j(rs);
