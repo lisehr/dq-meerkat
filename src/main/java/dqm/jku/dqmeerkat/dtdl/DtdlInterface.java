@@ -10,10 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 /**
  * <h2>DTDLInterface</h2>
- * <summary>TODO Insert do cheader</summary>
+ * <summary>Domain class representing a DTDL Interface definition</summary>
  *
  * @author meindl
  * @since 17.03.2022
+ * @see <a href="https://github.com/Azure/opendigitaltwins-dtdl/blob/master/DTDL/v2/dtdlv2.md">DTDL Definition</a>
  */
 @Data
 @NoArgsConstructor

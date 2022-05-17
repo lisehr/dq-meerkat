@@ -13,7 +13,7 @@ import dqm.jku.dqmeerkat.influxdb.InfluxDBConnectionV2;
 import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.DataProfileCollection;
 import dqm.jku.dqmeerkat.quality.DataProfiler;
-import dqm.jku.dqmeerkat.quality.TributechDataProfiler;
+import dqm.jku.dqmeerkat.quality.BatchedDataProfiler;
 import dqm.jku.dqmeerkat.quality.conformance.CompositeRDPConformanceChecker;
 import dqm.jku.dqmeerkat.quality.conformance.RDPConformanceChecker;
 import dqm.jku.dqmeerkat.resources.export.json.dtdl.DataProfileExporter;
@@ -69,7 +69,7 @@ public class RDPConformanceTributechData {
                 .build());
         var graphWrapper = new DtdlGraphWrapper(graph);
 //        retriever.retrieve();
-        retriever.publish(graphWrapper);
+        retriever.post(graphWrapper);
 
         ConnectorCSV conn = FileSelectionUtil.getConnectorCSV("src/main/resource/data/humidity_5000.csv");
         conn.setLabel("humidity_data");
@@ -91,7 +91,7 @@ public class RDPConformanceTributechData {
             }
 
 
-            DataProfiler profiler = new TributechDataProfiler(ds, conn, BATCH_SIZE, conn.getLabel());
+            DataProfiler profiler = new BatchedDataProfiler(ds, conn, BATCH_SIZE, conn.getLabel());
             var ret = profiler.generateProfiles();
 
             // export data profile DTDL

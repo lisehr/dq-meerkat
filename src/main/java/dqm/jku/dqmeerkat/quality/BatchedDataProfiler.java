@@ -9,13 +9,15 @@ import lombok.SneakyThrows;
 
 /**
  * <h2>TributechDataProfiler</h2>
- * <summary>TODO Insert do cheader</summary>
+ * <summary>
+ * Profiler implementation for batched data. Creates a {@link DataProfileCollection} for the given {@link Concept}.
+ * </summary>
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 20.04.2022
  */
-public class TributechDataProfiler extends DataProfiler {
-    public TributechDataProfiler(Datasource ds, DSConnector conn, int batchSize, String uri) {
+public class BatchedDataProfiler extends DataProfiler {
+    public BatchedDataProfiler(Datasource ds, DSConnector conn, int batchSize, String uri) {
         super(ds, conn, batchSize, uri);
     }
 
