@@ -21,7 +21,7 @@ services:
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=12bdc4164c2e8141 # random valid token I generated once
 
   neo4j:
-    image: neo4j:4.0-community
+    image: neo4j:4.1-community
     volumes:
       - ./neo4j/data:/data
       - ./neo4j/plugins:/plugins
