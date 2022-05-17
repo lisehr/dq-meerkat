@@ -216,6 +216,7 @@ reasons why it was chosen instead of the other two libraries. There are mainly f
 
 ## API
 
+* [docker-compose reference](https://docs.docker.com/compose/compose-file/)
 * GraphDB Quick Start Guide: http://graphdb.ontotext.com/documentation/free/quick-start-guide.html
 * InfluxDB: https://docs.influxdata.com/influxdb/v1.7/
 * InfluxDB-Java: https://github.com/influxdata/influxdb-java

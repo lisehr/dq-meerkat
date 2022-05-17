@@ -5,6 +5,7 @@ services:
     container_name: grafana
     ports:
       - "3000:3000"
+
   influxdb:
     image: influxdb:2.1.1
     container_name: influxdb
@@ -18,3 +19,18 @@ services:
       - DOCKER_INFLUXDB_INIT_ORG=testRetention
       - DOCKER_INFLUXDB_INIT_BUCKET=testSeries
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=12bdc4164c2e8141 # random valid token I generated once
+
+  neo4j:
+    image: neo4j:4.0-community
+    volumes:
+      - ./neo4j/data:/data
+      - ./neo4j/plugins:/plugins
+    environment:
+      - NEO4J_apoc_export_file_enabled=true
+      - NEO4J_apoc_import_file_enabled=true
+      - NEO4J_apoc_import_file_use__neo4j__config?true
+      - NEO4JLABS_PLUGINS=["apoc"]
+      - NEO4J_AUTH=neo4j/password # taken from TestNeo4J.java... dont blame me
+    ports:
+      - "7474:7474"
+      - "7687:7687"
