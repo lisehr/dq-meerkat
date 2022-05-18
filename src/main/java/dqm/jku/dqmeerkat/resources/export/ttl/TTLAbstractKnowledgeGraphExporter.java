@@ -3,7 +3,7 @@ package dqm.jku.dqmeerkat.resources.export.ttl;
 import dqm.jku.dqmeerkat.dsd.DSDKnowledgeGraph;
 import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.elements.Datasource;
-import dqm.jku.dqmeerkat.resources.export.Exporter;
+import dqm.jku.dqmeerkat.resources.export.json.dtdl.AbstractKnowledgeGraphExporter;
 import org.eclipse.rdf4j.model.util.ModelBuilder;
 import org.eclipse.rdf4j.rio.RDFFormat;
 import org.eclipse.rdf4j.rio.Rio;
@@ -13,20 +13,21 @@ import java.io.PrintWriter;
 
 /**
  * <h2>TTLExporter</h2>
- * <summary>{@link Exporter} implementation for TTL files</summary>
+ * <summary>{@link AbstractKnowledgeGraphExporter} implementation for TTL files</summary>
  *
  * @author meindl
  * @since 17.03.2022
  */
-public class TTLExporter extends Exporter {
-    public TTLExporter(String path) {
+public class TTLAbstractKnowledgeGraphExporter extends AbstractKnowledgeGraphExporter {
+    public TTLAbstractKnowledgeGraphExporter(String path) {
         super(path, ".ttl");
     }
 
+
     @Override
-    public void export(DSDKnowledgeGraph knowledgeGraph, String fileName) {
+    public void export(DSDKnowledgeGraph knowledgeGraph, String filePath, String fileName) {
         ensurePathExists();
-        try (PrintWriter out = new PrintWriter(path + fileName + fileExtension)) {
+        try (PrintWriter out = new PrintWriter(path + filePath + fileExtension)) {
 
             ModelBuilder builder = new ModelBuilder();
             builder.setNamespace("dsd", "http://dqm.faw.jku.at/dsd" + "/");
@@ -42,5 +43,10 @@ public class TTLExporter extends Exporter {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public String export(DSDKnowledgeGraph toExport) {
+        throw new UnsupportedOperationException("Not implemented yet");
     }
 }

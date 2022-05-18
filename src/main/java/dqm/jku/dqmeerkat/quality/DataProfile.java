@@ -159,6 +159,8 @@ public class DataProfile {
     /**
      * Method to create a reference data profile on which calculations can be
      * made.
+     *
+     * TODO Based on configuration dynamically instantiate ProfileStatistics
      */
     public void createDataProfileSkeletonRDB() {
         if (elem instanceof Attribute) {
@@ -408,7 +410,7 @@ public class DataProfile {
         metricSorted.addAll(statistics);
         for (ProfileStatistic p : metricSorted) {
             if (!p.getTitle().equals(hist) && !p.getTitle().equals(mad))
-                addMeasuringValue(p, measure); // TODO abstract point generation
+                addMeasuringValue(p, measure);
         }
         return measure.build();
     }

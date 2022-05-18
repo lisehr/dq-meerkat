@@ -1,3 +1,5 @@
+output
+*.swp
 humidity*
 /target/*
 /src/main/java/dqm/jku/dqmeerkat/resources/csv/Telematic*
@@ -29,4 +31,9 @@ src/main/resource/data
 # intermediate results (?)
 humidity_5000/
 src/main/java/dqm/jku/dqmeerkat/resources/export/ttl/*.ttl
+
+
 .idea
+
+# possible config overlaps
+**/influx.properties

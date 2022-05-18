@@ -1,6 +1,7 @@
-package dqm.jku.dqmeerkat.resources.export;
+package dqm.jku.dqmeerkat.resources.export.json.dtdl;
 
 import dqm.jku.dqmeerkat.dsd.DSDKnowledgeGraph;
+import dqm.jku.dqmeerkat.resources.export.SchemaExporter;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 
@@ -18,7 +19,7 @@ import java.nio.file.Path;
  * @since 17.03.2022
  */
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public abstract class Exporter {
+public abstract class AbstractKnowledgeGraphExporter implements SchemaExporter<DSDKnowledgeGraph> {
     protected String path;
     protected String fileExtension;
 
@@ -38,5 +39,5 @@ public abstract class Exporter {
         return true;
     }
 
-    public abstract void export(DSDKnowledgeGraph knowledgeGraph, String fileName);
+    public abstract void export(DSDKnowledgeGraph knowledgeGraph, String filePath, String fileName);
 }

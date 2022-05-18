@@ -40,7 +40,6 @@ public class InfluxDBConnectionV2 implements InfluxDBConnection {
         this.url = url;
         this.token = token;
         this.orgId = orgId;
-
     }
 
     /**

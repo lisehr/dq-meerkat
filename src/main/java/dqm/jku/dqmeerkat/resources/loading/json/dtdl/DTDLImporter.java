@@ -2,7 +2,7 @@ package dqm.jku.dqmeerkat.resources.loading.json.dtdl;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dqm.jku.dqmeerkat.domain.dtdl.DtdlInterface;
+import dqm.jku.dqmeerkat.dtdl.DtdlInterface;
 import dqm.jku.dqmeerkat.resources.loading.json.Importer;
 
 import java.io.File;

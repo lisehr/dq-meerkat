@@ -6,7 +6,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.DataProfileCollection;
 import dqm.jku.dqmeerkat.quality.DataProfiler;
-import dqm.jku.dqmeerkat.quality.TributechDataProfiler;
+import dqm.jku.dqmeerkat.quality.BatchedDataProfiler;
 
 /**
  * <h2>CompositeRDPConformanceChecker</h2>
@@ -22,7 +22,7 @@ public class CompositeRDPConformanceChecker extends AbstractConformanceChecker {
 
 
     public CompositeRDPConformanceChecker(double threshold, Datasource ds, DSConnector conn, int batchSize, String uri) {
-        this(threshold, new TributechDataProfiler(ds, conn, batchSize, uri));
+        this(threshold, new BatchedDataProfiler(ds, conn, batchSize, uri));
     }
 
     public CompositeRDPConformanceChecker(double threshold, DataProfiler profiler) {

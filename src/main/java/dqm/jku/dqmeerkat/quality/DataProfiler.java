@@ -11,7 +11,10 @@ import java.util.List;
 
 /**
  * <h2>DataProfiler</h2>
- * <summary>TODO Insert do cheader</summary>
+ * <summary>
+ * Abstract baseclass for generating {@link DataProfile}s based on {@link Datasource}s and their
+ * {@link DSConnector}. Per default, the first data profile is considered to be the reference data profile.
+ * </summary>
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 20.04.2022
@@ -47,8 +50,36 @@ public abstract class DataProfiler {
         this(ds, conn, batchSize, "http:/example.com/");
     }
 
+    /**
+     * <p>
+     * Generate one {@link DataProfileCollection} for the given {@link Concept}. The profileOffset selects the
+     * data batch to use for the {@link DataProfileCollection}. Each {@link dqm.jku.dqmeerkat.dsd.elements.Attribute} of
+     * the {@link Concept} is then used to generate a {@link DataProfile}, which is stored in a {@link DataProfileCollection}
+     * </p>
+     *
+     * @param concept       the {@link Concept}, which contains a number of
+     *                      {@link dqm.jku.dqmeerkat.dsd.elements.Attribute}s, for which the dataProfiles should be
+     *                      generated for
+     * @param profileOffset the offset of the data batch used to generate the dataprofiles. Given a batch size of 10,
+     *                      100 samples, and an offset of 4, {@link DataProfile}s for each
+     *                      {@link dqm.jku.dqmeerkat.dsd.elements.Attribute} of the given {@link Concept} would be
+     *                      generated for the range of [41,50] of the dataset.
+     * @return a {@link DataProfileCollection}, containing {@link DataProfile}s for the given profileOffset
+     */
     public abstract DataProfileCollection generateProfileStep(Concept concept, int profileOffset);
 
+    /**
+     * <p>
+     * Generates {@link DataProfileCollection}s based on the configuration of this instance. The target size
+     * <code>n</code> is defined as <code>n = nr of records / batchSize</code>. The generation of each
+     * {@link DataProfileCollection} is delegated to the generateProfileStep method. The first
+     * {@link DataProfileCollection} always contains the reference dataprofile
+     * </p>
+     *
+     * @return List of {@link DataProfileCollection}, where each contained {@link DataProfileCollection} contains
+     * a list of {@link DataProfile}s describing each {@link dqm.jku.dqmeerkat.dsd.elements.Attribute} of the
+     * {@link Concept} at the current offset, defined by the batchsize.
+     */
     @SneakyThrows
     public List<DataProfileCollection> generateProfiles() {
         int offset = 0;
@@ -58,7 +89,6 @@ public abstract class DataProfiler {
             if (noRecs < offset + batchSize)
                 throw new IllegalArgumentException("Input file " + ds.getLabel() + "  has only " + noRecs + " records, which is too little for batch " + (offset + batchSize));
             for (offset = 1; offset + batchSize < noRecs; offset += batchSize) {
-//	    		if(offset+batchSize > noRecs) batchSize = noRecs-offset;	// currently, the very last batch is not used since it contains less records than the others
                 dataProfiles.add(generateProfileStep(c, offset));
             }
         }
