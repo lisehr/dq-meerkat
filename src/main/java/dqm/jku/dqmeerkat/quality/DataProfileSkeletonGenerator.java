@@ -32,7 +32,9 @@ public abstract class DataProfileSkeletonGenerator {
         if (element instanceof Attribute) {
             Attribute a = (Attribute) element;
             Class<?> clazz = a.getDataType();
-            return String.class.isAssignableFrom(clazz) || Number.class.isAssignableFrom(clazz) || clazz.equals(Object.class);
+            return String.class.isAssignableFrom(clazz) ||
+                    Number.class.isAssignableFrom(clazz) ||
+                    clazz.equals(Object.class);
         }
         return false;
     }
