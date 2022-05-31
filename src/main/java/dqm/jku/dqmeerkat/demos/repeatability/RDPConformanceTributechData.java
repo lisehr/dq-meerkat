@@ -48,28 +48,27 @@ public class RDPConformanceTributechData {
     public static void main(String[] args) throws IOException, InterruptedException, NoSuchMethodException {
 
         // retrieve DTDL stuff
-        DtdlRetriever retriever = new DtdlRetriever();
-
-        var statisticDto = ProfileStatisticDto.builder()
-                .metaData(new MetaDataDto("dtmi:scch:at:dq:ProfileStatistic;1"))
-                .category("the Mightiest of numbers")
-                .title("Seven")
-                .value("7")
-                .build();
-        var profileDto = DatasourceDto.builder()
-                .metaData(new MetaDataDto("dtmi:scch:at:dq:Dataprofile;1"))
-                .build();
-        var graph = new DtdlGraph();
-        graph.addDigitalTwin(profileDto);
-        graph.addDigitalTwin(statisticDto);
-        graph.addRelationship(RelationshipDto.builder()
-                .relationshipName("dataprofile_statistic")
-                .sourceId(profileDto.getDtId())
-                .targetId(statisticDto.getDtId())
-                .build());
-        var graphWrapper = new DtdlGraphWrapper(graph);
-//        retriever.retrieve();
-        retriever.post(graphWrapper);
+//        DtdlRetriever retriever = new DtdlRetriever();
+//        var statisticDto = ProfileStatisticDto.builder()
+//                .metaData(new MetaDataDto("dtmi:scch:at:dq:ProfileStatistic;1"))
+//                .category("the Mightiest of numbers")
+//                .title("Seven")
+//                .value("7")
+//                .build();
+//        var profileDto = DatasourceDto.builder()
+//                .metaData(new MetaDataDto("dtmi:scch:at:dq:Dataprofile;1"))
+//                .build();
+//        var graph = new DtdlGraph();
+//        graph.addDigitalTwin(profileDto);
+//        graph.addDigitalTwin(statisticDto);
+//        graph.addRelationship(RelationshipDto.builder()
+//                .relationshipName("dataprofile_statistic")
+//                .sourceId(profileDto.getDtId())
+//                .targetId(statisticDto.getDtId())
+//                .build());
+//        var graphWrapper = new DtdlGraphWrapper(graph);
+////        retriever.retrieve();
+//        retriever.post(graphWrapper);
 
         ConnectorCSV conn = FileSelectionUtil.getConnectorCSV("src/main/resource/data/humidity_5000.csv");
         conn.setLabel("humidity_data");
@@ -138,7 +137,8 @@ public class RDPConformanceTributechData {
                                                     .toEpochMilli(),
                                             WritePrecision.MS));
                         }
-                        Thread.sleep(60000);
+                        Thread.sleep(5000);
+                        System.out.println("Interval break");
                     }
 
 
@@ -149,6 +149,7 @@ public class RDPConformanceTributechData {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
 
         System.out.println("Done! Exiting...");
     }

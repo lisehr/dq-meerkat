@@ -13,7 +13,9 @@ import java.util.List;
 
 /**
  * <h2>IsolationForestSkeletonGenerator</h2>
- * <summary>TODO Insert do cheader</summary>
+ * <summary>{@link DataProfileSkeletonGenerator} implementation that generates {@link ProfileStatistic}s based on
+ * {@link IsolationForest} and other JEP dependent statistics. Ensure JEP is enabled in {@link Constants}
+ * </summary>
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 30.05.2022
@@ -23,7 +25,7 @@ public class IsolationForestSkeletonGenerator extends DataProfileSkeletonGenerat
         super(element);
     }
 
-    // As Isolation Forest and IsolationForestPercentage are dependant on JEP, only run them when it is enabled!
+    // As Isolation Forest and IsolationForestPercentage are dependent on JEP, only run them when it is enabled!
     @Override
     protected boolean checkValidity() {
         return element instanceof Concept &&
