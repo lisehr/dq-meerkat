@@ -12,10 +12,6 @@ import dqm.jku.dqmeerkat.quality.profilingstatistics.graphmetrics.*;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.multicolumn.outliers.IsolationForest;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.multicolumn.outliers.IsolationForestPercentage;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.multicolumn.outliers.LocalOutlierFactor;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.*;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.datatypeinfo.*;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.dependency.KeyCandidate;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.histogram.Histogram;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.pattern.PatternRecognition;
 import dqm.jku.dqmeerkat.util.Constants;
 import dqm.jku.dqmeerkat.util.Miscellaneous.DBType;
@@ -174,54 +170,11 @@ public class DataProfile {
 
     /**
      * Method to create a reference data profile on which calculations can be
-     * made.
-     * <p>
-     * TODO Based on configuration dynamically instantiate ProfileStatistics
+     * made. The structure is defined by the generator, passed during object instantiation
      */
     public void createDataProfileSkeletonRDB() {
-        if (elem instanceof Attribute) {
-            Attribute a = (Attribute) elem;
-            Class<?> clazz = a.getDataType();
-            if (String.class.isAssignableFrom(clazz) || Number.class.isAssignableFrom(clazz) || clazz.equals(Object.class)) {
-                ProfileStatistic size = new NumRows(this);
-                statistics.add(size);
-                ProfileStatistic min = new Minimum(this);
-                statistics.add(min);
-                ProfileStatistic max = new Maximum(this);
-                statistics.add(max);
-                ProfileStatistic avg = new Average(this);
-                statistics.add(avg);
-                ProfileStatistic med = new Median(this);
-                statistics.add(med);
-                ProfileStatistic card = new Cardinality(this);
-                statistics.add(card);
-                ProfileStatistic uniq = new Uniqueness(this);
-                statistics.add(uniq);
-                ProfileStatistic nullVal = new NullValues(this);
-                statistics.add(nullVal);
-                ProfileStatistic nullValP = new NullValuesPercentage(this);
-                statistics.add(nullValP);
-                ProfileStatistic hist = new Histogram(this);
-                statistics.add(hist);
-                ProfileStatistic digits = new Digits(this);
-                statistics.add(digits);
-                ProfileStatistic isCK = new KeyCandidate(this);
-                statistics.add(isCK);
-                ProfileStatistic decimals = new Decimals(this);
-                statistics.add(decimals);
-                ProfileStatistic basicType = new BasicType(this);
-                statistics.add(basicType);
-                ProfileStatistic dataType = new DataType(this);
-                statistics.add(dataType);
-                // experimental metrics
-                ProfileStatistic standardDev = new StandardDeviation(this);
-                statistics.add(standardDev);
-                ProfileStatistic mediAbsDevMetric = new MedianAbsoluteDeviation(this);
-                statistics.add(mediAbsDevMetric);
-            } else {
-                System.err.println("Attribute '" + a.getLabel() + "' has data type '" + a.getDataTypeString() + "', which is currently not handled. ");
-            }
-        } else if (elem instanceof Concept) {
+        statistics.addAll(generator.generateSkeleton(this));
+        if (elem instanceof Concept) {
             if (Constants.ENABLE_JEP) {
                 // As Isolation Forest and IsolationForestPercentage are dependant on JEP, only run them when it is enabled!
                 ProfileStatistic isoFor = new IsolationForest(this);
