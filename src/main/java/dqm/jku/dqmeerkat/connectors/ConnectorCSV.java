@@ -198,7 +198,8 @@ public class ConnectorCSV extends DSConnector {
         Concept c = DSDFactory.makeConcept(label, ds);
         int i = 0;
         for (String s : attNames) {
-            if (removeQuotes) s = s.replace("\"", "");
+            if (removeQuotes)
+                s = s.replace("\"", "");
             Attribute a = DSDFactory.makeAttribute(s, c);
             a.setDataType(Object.class);
             a.setOrdinalPosition(i++);

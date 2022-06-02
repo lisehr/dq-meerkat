@@ -1,6 +1,7 @@
-package dqm.jku.dqmeerkat.quality;
+package dqm.jku.dqmeerkat.quality.generator;
 
 import dqm.jku.dqmeerkat.dsd.elements.DSDElement;
+import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 
 import java.util.List;

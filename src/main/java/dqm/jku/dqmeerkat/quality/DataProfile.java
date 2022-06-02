@@ -151,7 +151,8 @@ public class DataProfile {
             else if (a.getConcept().getDatasource().getDBType().equals(DBType.MYSQL) || a.getConcept().getDatasource().getDBType().equals(DBType.PENTAHOETL)) {
                 if (Number.class.isAssignableFrom(clazz)) field = (Number) r.getField(a);
             }
-            if (field != null) list.add(field);
+            if (field != null)
+                list.add(field);
         }
         list.sort(new NumberComparator());
         return list;
