@@ -4,6 +4,8 @@ import com.influxdb.client.domain.WritePrecision;
 import dqm.jku.dqmeerkat.dsd.elements.*;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
+import dqm.jku.dqmeerkat.quality.generator.DataProfileSkeletonGenerator;
+import dqm.jku.dqmeerkat.quality.generator.FullSkeletonGenerator;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.graphmetrics.*;
@@ -38,14 +40,16 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
 public class DataProfile {
     private List<ProfileStatistic> statistics = new ArrayList<>(); // a list containing all profile metrics
     private DSDElement elem; // DSDElement, where this DataProfile is annotated to
+    private DataProfileSkeletonGenerator generator;
     private String uri; // uniform resource identifier of this profile
 
     public DataProfile() {
 
     }
 
-    public DataProfile(RecordList rs, DSDElement d) throws NoSuchMethodException {
+    public DataProfile(RecordList rs, DSDElement d, DataProfileSkeletonGenerator generator) throws NoSuchMethodException {
         this.elem = d;
+        this.generator = generator;
         this.uri = elem.getURI() + "/profile";
 
         Optional<Datasource> ds = DSDElement.getAllDatasources().stream().findFirst();
@@ -60,21 +64,31 @@ public class DataProfile {
         }
     }
 
-    public DataProfile(RecordList records, DSDElement d, String filePath) throws NoSuchMethodException {
+    public DataProfile(RecordList rs, DSDElement d) throws NoSuchMethodException {
+        this(rs, d, new FullSkeletonGenerator(d));
+    }
+
+    public DataProfile(RecordList records, DSDElement d, String filePath, DataProfileSkeletonGenerator generator)
+            throws NoSuchMethodException {
         this.elem = d;
+        this.generator = generator;
         this.uri = elem.getURI() + "/profile";
         // TODO: distinguish between Neo4J and relational DB
         createDataProfileSkeletonRDB(filePath);
         calculateReferenceDataProfile(records);
     }
 
+    public DataProfile(RecordList records, DSDElement d, String filePath)
+            throws NoSuchMethodException {
+        this(records, d, filePath, new FullSkeletonGenerator(d));
+    }
+
+
     /**
      * calculates an initial data profile based on the values inserted in the
      * reference profile
      *
      * @param rl the list of records used for calculation
-     * @param d  the dsd element to be annotated (currently only Attribute for
-     *           single column metrics)
      * @throws NoSuchMethodException
      */
     private void calculateReferenceDataProfile(RecordList rl) throws NoSuchMethodException {
@@ -161,7 +175,7 @@ public class DataProfile {
     /**
      * Method to create a reference data profile on which calculations can be
      * made.
-     *
+     * <p>
      * TODO Based on configuration dynamically instantiate ProfileStatistics
      */
     public void createDataProfileSkeletonRDB() {

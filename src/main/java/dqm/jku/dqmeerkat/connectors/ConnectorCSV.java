@@ -1,14 +1,5 @@
 package dqm.jku.dqmeerkat.connectors;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.*;
-
 import dqm.jku.dqmeerkat.dsd.DSDFactory;
 import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.elements.Concept;
@@ -20,6 +11,9 @@ import dqm.jku.dqmeerkat.util.Constants;
 import dqm.jku.dqmeerkat.util.FileReaderUtil;
 import dqm.jku.dqmeerkat.util.Miscellaneous.DBType;
 import dqm.jku.dqmeerkat.util.converters.DataTypeConverter;
+
+import java.io.*;
+import java.util.*;
 
 /**
  * Connector for CSV files
@@ -191,22 +185,24 @@ public class ConnectorCSV extends DSConnector {
     }
 
     @Override
-    public Datasource loadSchema(String uri, String prefix) throws IOException {
+    public Datasource loadSchema(String uri, String prefix) {
         Datasource ds = DSDFactory.makeDatasource(label, DBType.CSV, uri, prefix);
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        String[] attNames = reader.readLine().split(separator);
-        Concept c = DSDFactory.makeConcept(label, ds);
-        int i = 0;
-        for (String s : attNames) {
-            if (removeQuotes)
-                s = s.replace("\"", "");
-            Attribute a = DSDFactory.makeAttribute(s, c);
-            a.setDataType(Object.class);
-            a.setOrdinalPosition(i++);
-            a.setNullable(true);
-            a.setAutoIncrement(false);
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String[] attNames = reader.readLine().split(separator);
+            Concept c = DSDFactory.makeConcept(label, ds);
+            int i = 0;
+            for (String s : attNames) {
+                if (removeQuotes)
+                    s = s.replace("\"", "");
+                Attribute a = DSDFactory.makeAttribute(s, c);
+                a.setDataType(Object.class);
+                a.setOrdinalPosition(i++);
+                a.setNullable(true);
+                a.setAutoIncrement(false);
+            }
+        } catch (IOException exception) {
+            throw new RuntimeException(exception);
         }
-        reader.close();
         return ds;
     }
 
@@ -217,6 +213,7 @@ public class ConnectorCSV extends DSConnector {
 
     private Set<AttributeSet> getFDLeftSides(Concept concept) {
         // TODO extend to powerset + intelligence
+        // story of my life...
         Set<AttributeSet> sets = new HashSet<AttributeSet>();
         for (Attribute a : concept.getAttributes()) {
             sets.add(new AttributeSet(a));
