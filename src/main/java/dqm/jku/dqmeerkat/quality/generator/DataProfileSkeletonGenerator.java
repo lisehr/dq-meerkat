@@ -31,12 +31,14 @@ public abstract class DataProfileSkeletonGenerator {
     }
 
     protected boolean checkValidity() {
-        if (element instanceof Attribute) {
+        if (element != null &&
+                element instanceof Attribute) {
             Attribute a = (Attribute) element;
             Class<?> clazz = a.getDataType();
-            return String.class.isAssignableFrom(clazz) ||
+            return clazz != null &&
+                    (String.class.isAssignableFrom(clazz) ||
                     Number.class.isAssignableFrom(clazz) ||
-                    clazz.equals(Object.class);
+                    clazz.equals(Object.class));
         }
         return false;
     }
