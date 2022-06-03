@@ -5,6 +5,7 @@ import dqm.jku.dqmeerkat.dsd.elements.DSDElement;
 import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,6 +46,8 @@ public abstract class DataProfileSkeletonGenerator {
     public List<ProfileStatistic> generateSkeleton(DataProfile profile) {
         if (checkValidity())
             return generateStatistics(profile);
-        throw new IllegalStateException("Provided element" + element + "does not have measurable data type");
+        // TODO Log error message, dont just return empty list
+//        throw new IllegalStateException("Provided element" + element + "does not have measurable data type");
+        return new ArrayList<>();
     }
 }

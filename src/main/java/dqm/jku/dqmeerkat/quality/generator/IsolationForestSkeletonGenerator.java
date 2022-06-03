@@ -15,7 +15,8 @@ import java.util.List;
 /**
  * <h2>IsolationForestSkeletonGenerator</h2>
  * <summary>{@link DataProfileSkeletonGenerator} implementation that generates {@link ProfileStatistic}s based on
- * {@link IsolationForest} and other JEP dependent statistics. Ensure JEP is enabled in {@link Constants}
+ * {@link IsolationForest} and other JEP dependent statistics. Ensure JEP is enabled in {@link Constants} and the given
+ * {@link DSDElement} is a {@link Concept}
  * </summary>
  *
  * @author meindl, rainer.meindl@scch.at

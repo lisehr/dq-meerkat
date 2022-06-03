@@ -13,7 +13,10 @@ import java.util.List;
 
 /**
  * <h2>FullSkeletonGenerator</h2>
- * <summary>TODO Insert do cheader</summary>
+ * <summary>
+ * Generates all currently defined {@link ProfileStatistic}s for the given {@link DataProfile} and
+ * returns them
+ * </summary>
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 17.05.2022

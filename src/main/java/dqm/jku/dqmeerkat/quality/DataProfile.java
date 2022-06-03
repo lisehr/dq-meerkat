@@ -5,15 +5,13 @@ import dqm.jku.dqmeerkat.dsd.elements.*;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.generator.DataProfileSkeletonGenerator;
+import dqm.jku.dqmeerkat.quality.generator.FilePatternRecognitionGenerator;
 import dqm.jku.dqmeerkat.quality.generator.FullSkeletonGenerator;
+import dqm.jku.dqmeerkat.quality.generator.IsolationForestSkeletonGenerator;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.graphmetrics.*;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.multicolumn.outliers.IsolationForest;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.multicolumn.outliers.IsolationForestPercentage;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.multicolumn.outliers.LocalOutlierFactor;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.pattern.PatternRecognition;
-import dqm.jku.dqmeerkat.util.Constants;
 import dqm.jku.dqmeerkat.util.Miscellaneous.DBType;
 import dqm.jku.dqmeerkat.util.numericvals.NumberComparator;
 import org.cyberborean.rdfbeans.annotations.*;
@@ -22,6 +20,7 @@ import org.influxdb.dto.Point.Builder;
 
 import java.sql.Date;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
 
@@ -36,16 +35,16 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
 public class DataProfile {
     private List<ProfileStatistic> statistics = new ArrayList<>(); // a list containing all profile metrics
     private DSDElement elem; // DSDElement, where this DataProfile is annotated to
-    private DataProfileSkeletonGenerator generator;
+    private List<DataProfileSkeletonGenerator> generators;
     private String uri; // uniform resource identifier of this profile
 
     public DataProfile() {
 
     }
 
-    public DataProfile(RecordList rs, DSDElement d, DataProfileSkeletonGenerator generator) throws NoSuchMethodException {
+    public DataProfile(RecordList rs, DSDElement d, DataProfileSkeletonGenerator... generators) throws NoSuchMethodException {
         this.elem = d;
-        this.generator = generator;
+        this.generators = Arrays.stream(generators).collect(Collectors.toList());
         this.uri = elem.getURI() + "/profile";
 
         Optional<Datasource> ds = DSDElement.getAllDatasources().stream().findFirst();
@@ -61,13 +60,13 @@ public class DataProfile {
     }
 
     public DataProfile(RecordList rs, DSDElement d) throws NoSuchMethodException {
-        this(rs, d, new FullSkeletonGenerator(d));
+        this(rs, d, new FullSkeletonGenerator(d), new IsolationForestSkeletonGenerator(d));
     }
 
-    public DataProfile(RecordList records, DSDElement d, String filePath, DataProfileSkeletonGenerator generator)
+    public DataProfile(RecordList records, DSDElement d, String filePath, DataProfileSkeletonGenerator... generators)
             throws NoSuchMethodException {
         this.elem = d;
-        this.generator = generator;
+        this.generators = Arrays.stream(generators).collect(Collectors.toList());
         this.uri = elem.getURI() + "/profile";
         // TODO: distinguish between Neo4J and relational DB
         createDataProfileSkeletonRDB(filePath);
@@ -76,7 +75,8 @@ public class DataProfile {
 
     public DataProfile(RecordList records, DSDElement d, String filePath)
             throws NoSuchMethodException {
-        this(records, d, filePath, new FullSkeletonGenerator(d));
+        this(records, d, filePath, new FullSkeletonGenerator(d), new IsolationForestSkeletonGenerator(d),
+                new FilePatternRecognitionGenerator(d, filePath));
     }
 
 
@@ -173,29 +173,23 @@ public class DataProfile {
      * made. The structure is defined by the generator, passed during object instantiation
      */
     public void createDataProfileSkeletonRDB() {
-        statistics.addAll(generator.generateSkeleton(this));
-        if (elem instanceof Concept) {
-            if (Constants.ENABLE_JEP) {
-                // As Isolation Forest and IsolationForestPercentage are dependant on JEP, only run them when it is enabled!
-                ProfileStatistic isoFor = new IsolationForest(this);
-                statistics.add(isoFor);
-                ProfileStatistic isoForPer = new IsolationForestPercentage(this);
-                statistics.add(isoForPer);
-            }
-            ProfileStatistic lof = new LocalOutlierFactor(this);
-            statistics.add(lof);
-        }
+        statistics = generators.stream()
+                .flatMap(generator1 -> generator1.generateSkeleton(this).stream())
+                .collect(Collectors.toList());
     }
 
     private void createDataProfileSkeletonRDB(String filePath) {
         createDataProfileSkeletonRDB();
+        // TODO move this into own generator and ditch this method
         if (elem instanceof Attribute) {
             Attribute a = (Attribute) elem;
             Class<?> clazz = a.getDataType();
             if (String.class.isAssignableFrom(clazz) || Number.class.isAssignableFrom(clazz) || clazz.equals(Object.class)) {
                 ProfileStatistic patterns = null;
-                if (filePath == null) patterns = new PatternRecognition(this);
-                else patterns = new PatternRecognition(this, filePath);
+                if (filePath == null)
+                    patterns = new PatternRecognition(this);
+                else
+                    patterns = new PatternRecognition(this, filePath);
                 statistics.add(patterns);
             } else {
                 System.err.println("Attribute '" + a.getLabel() + "' has data type '" + a.getDataTypeString() + "', which is currently not handled. ");
