@@ -44,8 +44,9 @@ public class IsolationForestSkeletonGeneratorTest {
     }
 
     @Test
-    public void testGenerateNull() {
+    public void testGenerateNoJEP() {
         // given
+        Constants.ENABLE_JEP = false;
         var concept = new Concept(); // no data type is set!
         var generator = new IsolationForestSkeletonGenerator(concept);
         var profile = new DataProfile();
