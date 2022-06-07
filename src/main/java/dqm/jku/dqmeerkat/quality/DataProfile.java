@@ -4,18 +4,13 @@ import com.influxdb.client.domain.WritePrecision;
 import dqm.jku.dqmeerkat.dsd.elements.*;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
+import dqm.jku.dqmeerkat.quality.generator.DataProfileSkeletonGenerator;
+import dqm.jku.dqmeerkat.quality.generator.FilePatternRecognitionGenerator;
+import dqm.jku.dqmeerkat.quality.generator.FullSkeletonGenerator;
+import dqm.jku.dqmeerkat.quality.generator.IsolationForestSkeletonGenerator;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.graphmetrics.*;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.multicolumn.outliers.IsolationForest;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.multicolumn.outliers.IsolationForestPercentage;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.multicolumn.outliers.LocalOutlierFactor;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.*;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.datatypeinfo.*;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.dependency.KeyCandidate;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.histogram.Histogram;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.pattern.PatternRecognition;
-import dqm.jku.dqmeerkat.util.Constants;
 import dqm.jku.dqmeerkat.util.Miscellaneous.DBType;
 import dqm.jku.dqmeerkat.util.numericvals.NumberComparator;
 import org.cyberborean.rdfbeans.annotations.*;
@@ -24,6 +19,7 @@ import org.influxdb.dto.Point.Builder;
 
 import java.sql.Date;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
 
@@ -38,18 +34,21 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
 public class DataProfile {
     private List<ProfileStatistic> statistics = new ArrayList<>(); // a list containing all profile metrics
     private DSDElement elem; // DSDElement, where this DataProfile is annotated to
+    private List<DataProfileSkeletonGenerator> generators;
     private String uri; // uniform resource identifier of this profile
 
     public DataProfile() {
 
     }
 
-    public DataProfile(RecordList rs, DSDElement d) throws NoSuchMethodException {
+    public DataProfile(RecordList rs, DSDElement d, DataProfileSkeletonGenerator... generators) throws NoSuchMethodException {
         this.elem = d;
+        this.generators = Arrays.stream(generators).collect(Collectors.toList());
         this.uri = elem.getURI() + "/profile";
 
         Optional<Datasource> ds = DSDElement.getAllDatasources().stream().findFirst();
 
+        // TODO add neo4j data generator, remove this differentiation
         if (ds.isPresent() && ds.get().getDBType().equals(DBType.NEO4J)) {
             createDataProfileSkeletonNeo4j();
             calculateReferenceDataProfileNeo4j(rs);
@@ -59,21 +58,23 @@ public class DataProfile {
         }
     }
 
-    public DataProfile(RecordList records, DSDElement d, String filePath) throws NoSuchMethodException {
-        this.elem = d;
-        this.uri = elem.getURI() + "/profile";
-        // TODO: distinguish between Neo4J and relational DB
-        createDataProfileSkeletonRDB(filePath);
-        calculateReferenceDataProfile(records);
+    public DataProfile(RecordList rs, DSDElement d) throws NoSuchMethodException {
+        this(rs, d, new FullSkeletonGenerator(d), new IsolationForestSkeletonGenerator(d));
     }
+
+
+    public DataProfile(RecordList records, DSDElement d, String filePath)
+            throws NoSuchMethodException {
+        this(records, d, new FullSkeletonGenerator(d), new IsolationForestSkeletonGenerator(d),
+                new FilePatternRecognitionGenerator(d, filePath));
+    }
+
 
     /**
      * calculates an initial data profile based on the values inserted in the
      * reference profile
      *
      * @param rl the list of records used for calculation
-     * @param d  the dsd element to be annotated (currently only Attribute for
-     *           single column metrics)
      * @throws NoSuchMethodException
      */
     private void calculateReferenceDataProfile(RecordList rl) throws NoSuchMethodException {
@@ -150,7 +151,8 @@ public class DataProfile {
             else if (a.getConcept().getDatasource().getDBType().equals(DBType.MYSQL) || a.getConcept().getDatasource().getDBType().equals(DBType.PENTAHOETL)) {
                 if (Number.class.isAssignableFrom(clazz)) field = (Number) r.getField(a);
             }
-            if (field != null) list.add(field);
+            if (field != null)
+                list.add(field);
         }
         list.sort(new NumberComparator());
         return list;
@@ -158,80 +160,12 @@ public class DataProfile {
 
     /**
      * Method to create a reference data profile on which calculations can be
-     * made.
-     *
-     * TODO Based on configuration dynamically instantiate ProfileStatistics
+     * made. The structure is defined by the generator, passed during object instantiation
      */
     public void createDataProfileSkeletonRDB() {
-        if (elem instanceof Attribute) {
-            Attribute a = (Attribute) elem;
-            Class<?> clazz = a.getDataType();
-            if (String.class.isAssignableFrom(clazz) || Number.class.isAssignableFrom(clazz) || clazz.equals(Object.class)) {
-                ProfileStatistic size = new NumRows(this);
-                statistics.add(size);
-                ProfileStatistic min = new Minimum(this);
-                statistics.add(min);
-                ProfileStatistic max = new Maximum(this);
-                statistics.add(max);
-                ProfileStatistic avg = new Average(this);
-                statistics.add(avg);
-                ProfileStatistic med = new Median(this);
-                statistics.add(med);
-                ProfileStatistic card = new Cardinality(this);
-                statistics.add(card);
-                ProfileStatistic uniq = new Uniqueness(this);
-                statistics.add(uniq);
-                ProfileStatistic nullVal = new NullValues(this);
-                statistics.add(nullVal);
-                ProfileStatistic nullValP = new NullValuesPercentage(this);
-                statistics.add(nullValP);
-                ProfileStatistic hist = new Histogram(this);
-                statistics.add(hist);
-                ProfileStatistic digits = new Digits(this);
-                statistics.add(digits);
-                ProfileStatistic isCK = new KeyCandidate(this);
-                statistics.add(isCK);
-                ProfileStatistic decimals = new Decimals(this);
-                statistics.add(decimals);
-                ProfileStatistic basicType = new BasicType(this);
-                statistics.add(basicType);
-                ProfileStatistic dataType = new DataType(this);
-                statistics.add(dataType);
-                // experimental metrics
-                ProfileStatistic standardDev = new StandardDeviation(this);
-                statistics.add(standardDev);
-                ProfileStatistic mediAbsDevMetric = new MedianAbsoluteDeviation(this);
-                statistics.add(mediAbsDevMetric);
-            } else {
-                System.err.println("Attribute '" + a.getLabel() + "' has data type '" + a.getDataTypeString() + "', which is currently not handled. ");
-            }
-        } else if (elem instanceof Concept) {
-            if (Constants.ENABLE_JEP) {
-                // As Isolation Forest and IsolationForestPercentage are dependant on JEP, only run them when it is enabled!
-                ProfileStatistic isoFor = new IsolationForest(this);
-                statistics.add(isoFor);
-                ProfileStatistic isoForPer = new IsolationForestPercentage(this);
-                statistics.add(isoForPer);
-            }
-            ProfileStatistic lof = new LocalOutlierFactor(this);
-            statistics.add(lof);
-        }
-    }
-
-    private void createDataProfileSkeletonRDB(String filePath) {
-        createDataProfileSkeletonRDB();
-        if (elem instanceof Attribute) {
-            Attribute a = (Attribute) elem;
-            Class<?> clazz = a.getDataType();
-            if (String.class.isAssignableFrom(clazz) || Number.class.isAssignableFrom(clazz) || clazz.equals(Object.class)) {
-                ProfileStatistic patterns = null;
-                if (filePath == null) patterns = new PatternRecognition(this);
-                else patterns = new PatternRecognition(this, filePath);
-                statistics.add(patterns);
-            } else {
-                System.err.println("Attribute '" + a.getLabel() + "' has data type '" + a.getDataTypeString() + "', which is currently not handled. ");
-            }
-        }
+        statistics = generators.stream()
+                .flatMap(generator1 -> generator1.generateSkeleton(this).stream())
+                .collect(Collectors.toList());
     }
 
     /**

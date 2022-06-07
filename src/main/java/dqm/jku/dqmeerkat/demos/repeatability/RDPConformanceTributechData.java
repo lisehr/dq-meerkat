@@ -48,31 +48,31 @@ public class RDPConformanceTributechData {
     public static void main(String[] args) throws IOException, InterruptedException, NoSuchMethodException {
 
         // retrieve DTDL stuff
-        DtdlRetriever retriever = new DtdlRetriever();
-
-        var statisticDto = ProfileStatisticDto.builder()
-                .metaData(new MetaDataDto("dtmi:scch:at:dq:ProfileStatistic;1"))
-                .category("the Mightiest of numbers")
-                .title("Seven")
-                .value("7")
-                .build();
-        var profileDto = DatasourceDto.builder()
-                .metaData(new MetaDataDto("dtmi:scch:at:dq:Dataprofile;1"))
-                .build();
-        var graph = new DtdlGraph();
-        graph.addDigitalTwin(profileDto);
-        graph.addDigitalTwin(statisticDto);
-        graph.addRelationship(RelationshipDto.builder()
-                .relationshipName("dataprofile_statistic")
-                .sourceId(profileDto.getDtId())
-                .targetId(statisticDto.getDtId())
-                .build());
-        var graphWrapper = new DtdlGraphWrapper(graph);
-//        retriever.retrieve();
-        retriever.post(graphWrapper);
+//        DtdlRetriever retriever = new DtdlRetriever();
+//        var statisticDto = ProfileStatisticDto.builder()
+//                .metaData(new MetaDataDto("dtmi:scch:at:dq:ProfileStatistic;1"))
+//                .category("the Mightiest of numbers")
+//                .title("Seven")
+//                .value("7")
+//                .build();
+//        var profileDto = DatasourceDto.builder()
+//                .metaData(new MetaDataDto("dtmi:scch:at:dq:Dataprofile;1"))
+//                .build();
+//        var graph = new DtdlGraph();
+//        graph.addDigitalTwin(profileDto);
+//        graph.addDigitalTwin(statisticDto);
+//        graph.addRelationship(RelationshipDto.builder()
+//                .relationshipName("dataprofile_statistic")
+//                .sourceId(profileDto.getDtId())
+//                .targetId(statisticDto.getDtId())
+//                .build());
+//        var graphWrapper = new DtdlGraphWrapper(graph);
+////        retriever.retrieve();
+//        retriever.post(graphWrapper);
 
         ConnectorCSV conn = FileSelectionUtil.getConnectorCSV("src/main/resource/data/humidity_5000.csv");
         conn.setLabel("humidity_data");
+        // TODO Add possibility for config (and generator) to datasource
         Datasource ds = conn.loadSchema("http:/example.com", "hum");
 
 //            var dtdlInterface = new DTDLImporter().importDataList("src/main/resource/data/dsd.json");
@@ -84,6 +84,9 @@ public class RDPConformanceTributechData {
             for (Concept c : ds.getConcepts()) {
                 RecordList rs = conn.getPartialRecordList(c, 0, RDP_SIZE);
                 for (Attribute a : c.getSortedAttributes()) {
+                    /* TODO Refactor the annotateProfile Methods somehow to include configs and corresponding
+                        skeleton generators
+                     */
                     a.annotateProfile(rs);
                     // also print rdp per column
                     System.out.println(a.getProfileString());
@@ -96,7 +99,7 @@ public class RDPConformanceTributechData {
 
             // export data profile DTDL
             // streamId currently hardcoded, TODO extracted it from loaded json
-            final var streamdtId = UUID.fromString( "e564d3eb-2729-4ce2-88b9-7ac369f65010");
+            final var streamdtId = UUID.fromString("e564d3eb-2729-4ce2-88b9-7ac369f65010");
             var exporter = new DataProfileExporter();
             var graphExporter = new DtdlGraphExporter(streamdtId);
 
@@ -132,13 +135,15 @@ public class RDPConformanceTributechData {
                             dsdKnowledgeGraph.addProfilesToInflux(influx);
                             influx.write("default",
                                     profile.createMeasuringPoint(profile.getURI(),
-                                            collection.getTimestampOfCreation().minus(10, ChronoUnit.SECONDS)
+                                            collection.getTimestampOfCreation().minus(10,
+                                                            ChronoUnit.SECONDS)
                                                     .atZone(ZoneOffset.UTC)
                                                     .toInstant()
                                                     .toEpochMilli(),
                                             WritePrecision.MS));
                         }
-                        Thread.sleep(60000);
+                        Thread.sleep(5000);
+                        System.out.println("Interval break");
                     }
 
 
@@ -149,6 +154,7 @@ public class RDPConformanceTributechData {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
 
         System.out.println("Done! Exiting...");
     }
