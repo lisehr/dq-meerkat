@@ -11,7 +11,6 @@ import dqm.jku.dqmeerkat.quality.generator.IsolationForestSkeletonGenerator;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.graphmetrics.*;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.pattern.PatternRecognition;
 import dqm.jku.dqmeerkat.util.Miscellaneous.DBType;
 import dqm.jku.dqmeerkat.util.numericvals.NumberComparator;
 import org.cyberborean.rdfbeans.annotations.*;
@@ -69,7 +68,7 @@ public class DataProfile {
         this.generators = Arrays.stream(generators).collect(Collectors.toList());
         this.uri = elem.getURI() + "/profile";
         // TODO: distinguish between Neo4J and relational DB
-        createDataProfileSkeletonRDB(filePath);
+        createDataProfileSkeletonRDB();
         calculateReferenceDataProfile(records);
     }
 
@@ -176,25 +175,6 @@ public class DataProfile {
         statistics = generators.stream()
                 .flatMap(generator1 -> generator1.generateSkeleton(this).stream())
                 .collect(Collectors.toList());
-    }
-
-    private void createDataProfileSkeletonRDB(String filePath) {
-        createDataProfileSkeletonRDB();
-        // TODO move this into own generator and ditch this method
-        if (elem instanceof Attribute) {
-            Attribute a = (Attribute) elem;
-            Class<?> clazz = a.getDataType();
-            if (String.class.isAssignableFrom(clazz) || Number.class.isAssignableFrom(clazz) || clazz.equals(Object.class)) {
-                ProfileStatistic patterns = null;
-                if (filePath == null)
-                    patterns = new PatternRecognition(this);
-                else
-                    patterns = new PatternRecognition(this, filePath);
-                statistics.add(patterns);
-            } else {
-                System.err.println("Attribute '" + a.getLabel() + "' has data type '" + a.getDataTypeString() + "', which is currently not handled. ");
-            }
-        }
     }
 
     /**

@@ -4,6 +4,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.elements.DSDElement;
 import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
+import science.aist.seshat.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,8 @@ public abstract class DataProfileSkeletonGenerator {
      */
     protected DSDElement element;
 
+    protected static final Logger LOGGER = Logger.getInstance();
+
 
     public DataProfileSkeletonGenerator(DSDElement element) {
         this.element = element;
@@ -37,8 +40,8 @@ public abstract class DataProfileSkeletonGenerator {
             Class<?> clazz = a.getDataType();
             return clazz != null &&
                     (String.class.isAssignableFrom(clazz) ||
-                    Number.class.isAssignableFrom(clazz) ||
-                    clazz.equals(Object.class));
+                            Number.class.isAssignableFrom(clazz) ||
+                            clazz.equals(Object.class));
         }
         return false;
     }
@@ -48,8 +51,7 @@ public abstract class DataProfileSkeletonGenerator {
     public List<ProfileStatistic> generateSkeleton(DataProfile profile) {
         if (checkValidity())
             return generateStatistics(profile);
-        // TODO Log error message, dont just return empty list
-//        throw new IllegalStateException("Provided element" + element + "does not have measurable data type");
+        LOGGER.warn("Provided element" + element + "does not have measurable data type");
         return new ArrayList<>();
     }
 }
