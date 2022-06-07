@@ -42,10 +42,10 @@ public class FileSelectionUtilTests {
             ConnectorCSV csvConnector = FileSelectionUtil.getConnectorCSV(1);
 
             // Index 1 has to point to Acceleration.csv
-            assertTrue(csvConnector.filename.endsWith("Acceleration.csv"),"Connecting to CSV via index works, but in the resources folder there are some files missing or to much files in it. Check what files in your resources folder are, index 1 (= the second file alphabetically should be \"Acceleration.csv\"");
+            assertTrue(csvConnector.filename.endsWith("DataCoSupplyChainDataset.csv"),"Connecting to CSV via index works, but in the resources folder there are some files missing or to much files in it. Check what files in your resources folder are, index 1 (= the second file alphabetically should be \"Acceleration.csv\"");
             assertEquals(",", csvConnector.separator);
             assertEquals("\n", csvConnector.linebreak);
-            assertEquals("Acceleration", csvConnector.getLabel()); // This is important to be correct for the KG!!
+            assertEquals("DataCoSupplyChainDataset", csvConnector.getLabel()); // This is important to be correct for the KG!!
             assertTrue(csvConnector.removeQuotes);
         } catch (IOException e) {
             // It was already checked that for the file which is used for this test no exception is thrown

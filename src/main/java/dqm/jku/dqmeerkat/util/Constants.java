@@ -10,7 +10,7 @@ public class Constants {
 	/**
 	 * if true JEP (Java Embedded Python) is activated (please make sure it is working and installed when setting this to true!)
 	 */
-	public static final boolean ENABLE_JEP = false;
+	public static boolean ENABLE_JEP = false;
 
 	/**
 	 * if true, commas "," between two quotation marks are escaped and trigger no new attribute value when reading a csv.
