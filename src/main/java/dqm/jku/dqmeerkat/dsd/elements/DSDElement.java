@@ -113,7 +113,7 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
      * @throws NoSuchMethodException
      */
     public void annotateProfile(RecordList records, String filePath, DataProfileSkeletonGenerator generator) throws NoSuchMethodException {
-        dataProfile = new DataProfile(records, this, filePath, generator);
+        dataProfile = new DataProfile(records, this, generator);
     }
 
 
