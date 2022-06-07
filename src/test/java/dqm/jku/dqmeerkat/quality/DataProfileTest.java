@@ -118,7 +118,6 @@ public class DataProfileTest {
         // given
         // when
         var dataprofile = new DataProfile(recordList, dsdElement,
-                "src/main/java/dqm/jku/dqmeerkat/resources/patterns/pattern_test.in",
                 new FilePatternRecognitionGenerator(dsdElement,
                         "src/main/java/dqm/jku/dqmeerkat/resources/patterns/pattern_test.in"),
                 new FullSkeletonGenerator(dsdElement));

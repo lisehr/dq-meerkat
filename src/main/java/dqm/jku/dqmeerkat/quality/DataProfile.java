@@ -62,19 +62,10 @@ public class DataProfile {
         this(rs, d, new FullSkeletonGenerator(d), new IsolationForestSkeletonGenerator(d));
     }
 
-    public DataProfile(RecordList records, DSDElement d, String filePath, DataProfileSkeletonGenerator... generators)
-            throws NoSuchMethodException {
-        this.elem = d;
-        this.generators = Arrays.stream(generators).collect(Collectors.toList());
-        this.uri = elem.getURI() + "/profile";
-        // TODO: distinguish between Neo4J and relational DB
-        createDataProfileSkeletonRDB();
-        calculateReferenceDataProfile(records);
-    }
 
     public DataProfile(RecordList records, DSDElement d, String filePath)
             throws NoSuchMethodException {
-        this(records, d, filePath, new FullSkeletonGenerator(d), new IsolationForestSkeletonGenerator(d),
+        this(records, d, new FullSkeletonGenerator(d), new IsolationForestSkeletonGenerator(d),
                 new FilePatternRecognitionGenerator(d, filePath));
     }
 
