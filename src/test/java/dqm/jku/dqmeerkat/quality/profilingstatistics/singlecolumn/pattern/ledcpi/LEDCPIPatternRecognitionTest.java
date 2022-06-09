@@ -2,6 +2,8 @@ package dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.pattern.ledcp
 
 import org.junit.Test;
 
+import static org.junit.Assert.fail;
+
 /**
  * <h2>LEDCPIPatternRecognitionTest</h2>
  * <summary>Test class for {@link LEDCPIPatternRecognition}</summary>
@@ -14,9 +16,10 @@ public class LEDCPIPatternRecognitionTest {
     @Test
     public void test() {
         // given
-        LEDCPIPatternRecognition recognition = new LEDCPIPatternRecognition();
+//        LEDCPIPatternRecognition recognition = new LEDCPIPatternRecognition();
         // when
 
         // then
+        fail("Not implemented");
     }
 }
