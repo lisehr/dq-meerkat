@@ -26,8 +26,7 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 /**
  * <h2>LEDCPIPatternRecognitionTest</h2>
@@ -125,5 +124,41 @@ public class LEDCPIPatternRecognitionTest {
         assertEquals("Pattern recognition", recognition.getLabel());
         assertEquals(StatisticTitle.pattern, recognition.getTitle());
         assertEquals(StatisticCategory.dti, recognition.getCat());
+    }
+
+    @Test
+    public void testCalculation() throws NoSuchMethodException {
+        // given
+        LEDCPIPatternRecognition recognition = new LEDCPIPatternRecognition(new DataProfile(recordList, dsdElement),
+                "at.fh.scch/identifier#humidity:*",
+                Path.of("src/main/resource/data/ledc-pi_definitions.json"));
+
+        // when
+        recognition.calculation(recordList, null);
+        var ret = recognition.getValue();
+
+        // then
+        assertNotNull(ret);
+        assertTrue(ret instanceof Number);
+        assertEquals(1D, ret);
+    }
+
+    @Test
+    public void testCalculationNumeric() throws NoSuchMethodException {
+        // given
+        LEDCPIPatternRecognition recognition = new LEDCPIPatternRecognition(new DataProfile(recordList, dsdElement),
+                "at.fh.scch/identifier#humidity:*",
+                Path.of("src/main/resource/data/ledc-pi_definitions.json"));
+
+        // when
+        recognition.calculationNumeric(recordList.toList().stream()
+                .map(record -> (Number) record.getField(dsdElement))
+                .collect(Collectors.toList()), null);
+        var ret = recognition.getValue();
+
+        // then
+        assertNotNull(ret);
+        assertTrue(ret instanceof Number);
+        assertEquals(1D, ret);
     }
 }

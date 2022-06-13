@@ -13,6 +13,7 @@ import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
+import dqm.jku.dqmeerkat.util.Constants;
 import lombok.SneakyThrows;
 import science.aist.seshat.Logger;
 
@@ -59,7 +60,7 @@ public class LEDCPIPatternRecognition extends ProfileStatistic {
         super(StatisticTitle.pattern, StatisticCategory.dti, referenceProfile);
         JSON.restore(new File(String.valueOf(jsonConfig)));
         var rawMeasure = MeasureRegistry.getInstance()
-                .getMeasureByProperty(Property.parseProperty(propertyName)); // TODO handle canonical name
+                .getMeasureByProperty(Property.parseProperty(propertyName));
 
         // I tried to fix the raw types, but the library just throws them around to liberally
         //noinspection unchecked
@@ -71,29 +72,58 @@ public class LEDCPIPatternRecognition extends ProfileStatistic {
     @Override
     public void calculation(RecordList rs, Object oldVal) {
         Attribute attribute = (Attribute) super.getRefElem();
+        double cnt = 0D;
         for (Record record : rs) {
-            var field = (Number) record.getField(attribute.getLabel());
-            LOGGER.info(field);
+            cnt += checkHit((Number) record.getField(attribute.getLabel()));
         }
+        setValue(cnt / rs.size());
+    }
+
+    /**
+     * Checks if the given record matches the QualityMeasure. Assumes that the record matches all QualityMeasure tests,
+     * i.E. the result of the measurement is equal to the sufficiencyThreshold
+     *
+     * @param record the record, that needs to match the QualityMeasure
+     * @return 1 if the record matches, 0 if it does not match
+     */
+    private double checkHit(Number record) {
+        var result = measure.measure(record.toString());
+        return result >= measure.getSufficiencyThreshold() ? 1 : 0;
     }
 
     @Override
     public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
+        double cnt = 0D;
+        Attribute attribute = (Attribute) super.getRefElem();
 
+        for (Number number : list) {
+            cnt += checkHit(number);
+        }
+        setValue(cnt / list.size());
     }
 
     @Override
     public void update(RecordList rs) {
-
+        calculation(rs, super.getValue());
     }
+
 
     @Override
     protected String getValueString() {
-        return null;
+        return super.getSimpleValueString();
     }
+
 
     @Override
     public boolean checkConformance(ProfileStatistic m, double threshold) {
-        return false;
-    }
+        double rdpVal = ((Number) this.getNumericVal()).doubleValue();
+        double dpValue = ((Number) m.getValue()).doubleValue();
+
+        double lowerBound = rdpVal - (Math.abs(rdpVal) * threshold);
+        double upperBound = rdpVal + (Math.abs(rdpVal) * threshold);
+
+        boolean conf = dpValue >= lowerBound && dpValue <= upperBound;
+        if(!conf && Constants.DEBUG) 
+            System.out.println(this.getTitle() + " exceeded: " + dpValue + " not in [" + lowerBound + ", " + upperBound + "]");
+        return conf;	    }
 }
