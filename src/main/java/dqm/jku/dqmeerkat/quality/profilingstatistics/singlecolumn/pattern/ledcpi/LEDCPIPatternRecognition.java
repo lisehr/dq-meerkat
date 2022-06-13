@@ -4,13 +4,17 @@ import be.ugent.ledc.pi.io.JSON;
 import be.ugent.ledc.pi.measure.QualityMeasure;
 import be.ugent.ledc.pi.measure.predicates.Predicate;
 import be.ugent.ledc.pi.property.Property;
+import be.ugent.ledc.pi.property.PropertyParseException;
 import be.ugent.ledc.pi.registries.MeasureRegistry;
+import dqm.jku.dqmeerkat.dsd.elements.Attribute;
+import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
 import lombok.SneakyThrows;
+import science.aist.seshat.Logger;
 
 import java.io.File;
 import java.net.URI;
@@ -27,12 +31,15 @@ import java.util.List;
  * The {@link ProfileStatistic} needs either a JSON configuration file, the finished QualityMeasure, or a list of
  * {@link be.ugent.ledc.pi.measure.predicates.Predicate}s in order to generate (or use) the QualityMeasure.
  * </summary>
+ * <p>
+ * <b>TODO implement me</b>
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 09.06.2022
  */
 public class LEDCPIPatternRecognition extends ProfileStatistic {
     private final QualityMeasure<String> measure;
+    private static final Logger LOGGER = Logger.getInstance();
 
 
     public LEDCPIPatternRecognition(DataProfile referenceProfile, QualityMeasure<String> measure) {
@@ -40,20 +47,19 @@ public class LEDCPIPatternRecognition extends ProfileStatistic {
         this.measure = measure;
     }
 
-    @SneakyThrows
     public LEDCPIPatternRecognition(DataProfile referenceProfile, List<Predicate<String>> predicates,
-                                    String propertyName, URI propertyUri, LocalDate validAt, int sufficiencyThreshold) {
+                                    String propertyName, URI propertyUri, LocalDate validAt, int sufficiencyThreshold) throws PropertyParseException {
         this(referenceProfile, new QualityMeasure<>(predicates, Property.parseProperty(propertyName), propertyUri,
                 validAt, sufficiencyThreshold));
 
     }
 
     @SneakyThrows
-    public LEDCPIPatternRecognition(DataProfile referenceProfile, Path jsonConfig) {
+    public LEDCPIPatternRecognition(DataProfile referenceProfile, String propertyName, Path jsonConfig) {
         super(StatisticTitle.pattern, StatisticCategory.dti, referenceProfile);
         JSON.restore(new File(String.valueOf(jsonConfig)));
         var rawMeasure = MeasureRegistry.getInstance()
-                .getMeasureByProperty(Property.parseProperty("some"));
+                .getMeasureByProperty(Property.parseProperty(propertyName)); // TODO handle canonical name
 
         // I tried to fix the raw types, but the library just throws them around to liberally
         //noinspection unchecked
@@ -64,7 +70,11 @@ public class LEDCPIPatternRecognition extends ProfileStatistic {
 
     @Override
     public void calculation(RecordList rs, Object oldVal) {
-
+        Attribute attribute = (Attribute) super.getRefElem();
+        for (Record record : rs) {
+            var field = (Number) record.getField(attribute.getLabel());
+            LOGGER.info(field);
+        }
     }
 
     @Override
