@@ -77,6 +77,7 @@ public class LEDCPIPatternRecognition extends ProfileStatistic {
         var numericValue = cnt / rs.size();
         setValue(numericValue);
         setNumericVal(numericValue);
+        this.setValueClass(Double.class);
     }
 
     /**
@@ -100,6 +101,7 @@ public class LEDCPIPatternRecognition extends ProfileStatistic {
         var numericValue = cnt / list.size();
         setValue(numericValue);
         setNumericVal(numericValue);
+        this.setValueClass(Double.class);
     }
 
     /**

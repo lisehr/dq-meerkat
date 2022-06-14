@@ -251,7 +251,9 @@ public class DataProfile {
         // Dependencies
         mlist.add(this.getStatistic(keyCand));
 
-        return mlist;
+        return mlist.stream()
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
     }
 
     /**

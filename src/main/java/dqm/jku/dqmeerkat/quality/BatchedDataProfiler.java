@@ -30,7 +30,7 @@ public class BatchedDataProfiler extends DataProfiler {
         var dataProfileCollection = new DataProfileCollection(this.uri);
         for (Attribute a : concept.getSortedAttributes()) {
             if (a.hasProfile()) {
-                dataProfileCollection.addDataProfile(a.createDataProfile(rs)); // TODO get datasource config in here!
+                dataProfileCollection.addDataProfile(a.createDataProfile(rs, dataprofileConfig));
             }
         }
         return dataProfileCollection;

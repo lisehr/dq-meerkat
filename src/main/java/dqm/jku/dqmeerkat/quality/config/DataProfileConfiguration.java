@@ -1,8 +1,9 @@
 package dqm.jku.dqmeerkat.quality.config;
 
 import dqm.jku.dqmeerkat.quality.generator.DataProfileSkeletonGenerator;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import dqm.jku.dqmeerkat.quality.generator.FullSkeletonGenerator;
+import dqm.jku.dqmeerkat.quality.generator.LEDCPIGenerator;
+import lombok.Getter;
 
 import java.util.List;
 
@@ -15,9 +16,39 @@ import java.util.List;
  * @author meindl, rainer.meindl@scch.at
  * @since 14.06.2022
  */
-@AllArgsConstructor
-@Data
+
+
 public class DataProfileConfiguration {
 
+    private static DataProfileConfiguration instance;
+
+    private DataProfileConfiguration(List<DataProfileSkeletonGenerator> generators) {
+        this.generators = generators;
+    }
+
+
+    public static DataProfileConfiguration getInstance() {
+        if (instance == null) {
+
+            instance = loadConfig();
+        }
+
+        return instance;
+    }
+
+    /**
+     * lodas the external config definition and creates the singleton instance.
+     *
+     * @return the singleton instance of the configuration
+     */
+    private static DataProfileConfiguration loadConfig() {
+        // TODO define json file loading
+        return new DataProfileConfiguration(List.of(
+//                new FullSkeletonGenerator(),
+                new LEDCPIGenerator("at.fh.scch/identifier#humidity:*",
+                        "src/main/resource/data/ledc-pi_definitions.json")));
+    }
+
+    @Getter
     private final List<DataProfileSkeletonGenerator> generators;
 }

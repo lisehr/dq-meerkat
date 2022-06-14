@@ -3,10 +3,10 @@ package dqm.jku.dqmeerkat.quality.conformance;
 import dqm.jku.dqmeerkat.connectors.DSConnector;
 import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.elements.Datasource;
+import dqm.jku.dqmeerkat.quality.BatchedDataProfiler;
 import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.DataProfileCollection;
 import dqm.jku.dqmeerkat.quality.DataProfiler;
-import dqm.jku.dqmeerkat.quality.BatchedDataProfiler;
 import dqm.jku.dqmeerkat.quality.config.DataProfileConfiguration;
 
 /**
@@ -20,8 +20,6 @@ import dqm.jku.dqmeerkat.quality.config.DataProfileConfiguration;
 public class CompositeRDPConformanceChecker extends AbstractConformanceChecker {
 
     private final DataProfiler profiler;
-
-
 
 
     public CompositeRDPConformanceChecker(double threshold, Datasource ds, DSConnector conn, int batchSize, String uri,
@@ -38,7 +36,6 @@ public class CompositeRDPConformanceChecker extends AbstractConformanceChecker {
     @Override
     public void runConformanceCheck() {
         var profiles = profiler.generateProfiles();
-        var rdp = profiles.stream().findFirst().orElseThrow();
         profiles.stream().skip(1).forEach(dataProfileCollection -> {
             for (DataProfile profile : dataProfileCollection.getProfiles()) {
                 Attribute attribute = (Attribute) profile.getElem();

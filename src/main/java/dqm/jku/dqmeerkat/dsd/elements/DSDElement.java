@@ -138,11 +138,11 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
     public String getProfileString() {
         StringBuilder sb = new StringBuilder();
         if (dataProfile != null) {
-            sb.append("Annotated data profile for DSDElement: " + label);
+            sb.append("Annotated data profile for DSDElement: ").append(label);
             sb.append('\n');
             sb.append(dataProfile.getProfileString());
         } else {
-            sb.append("No data profile annotated for DSDElement: " + label);
+            sb.append("No data profile annotated for DSDElement: ").append(label);
             sb.append('\n');
         }
         return sb.toString();
