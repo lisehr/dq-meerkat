@@ -20,8 +20,7 @@ import java.util.List;
 public class FilePatternRecognitionGenerator extends DataProfileSkeletonGenerator {
     private final String filepath;
 
-    public FilePatternRecognitionGenerator(DSDElement element, String filepath) {
-        super(element);
+    public FilePatternRecognitionGenerator( String filepath) {
         this.filepath = filepath;
     }
 

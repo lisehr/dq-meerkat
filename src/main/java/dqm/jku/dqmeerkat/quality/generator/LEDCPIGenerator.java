@@ -19,8 +19,7 @@ public class LEDCPIGenerator extends DataProfileSkeletonGenerator {
     private final String propertyName;
     private final String filepath;
 
-    public LEDCPIGenerator(DSDElement element, String propertyName, String filepath) {
-        super(element);
+    public LEDCPIGenerator(String propertyName, String filepath) {
         this.propertyName = propertyName;
         this.filepath = filepath;
     }

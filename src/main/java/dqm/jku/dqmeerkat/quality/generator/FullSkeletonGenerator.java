@@ -22,10 +22,6 @@ import java.util.List;
  * @since 17.05.2022
  */
 public class FullSkeletonGenerator extends DataProfileSkeletonGenerator {
-    public FullSkeletonGenerator(DSDElement element) {
-        super(element);
-    }
-
     @Override
     protected List<ProfileStatistic> generateStatistics(DataProfile profile) {
         var statistics = new ArrayList<ProfileStatistic>();

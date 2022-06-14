@@ -21,21 +21,20 @@ import java.util.List;
  */
 public abstract class DataProfileSkeletonGenerator {
 
-    /**
-     * where the DataProfile is annotated to
-     */
-    protected DSDElement element;
-
     protected static final Logger LOGGER = Logger.getInstance();
 
 
-    public DataProfileSkeletonGenerator(DSDElement element) {
-        this.element = element;
-    }
-
-    protected boolean checkValidity() {
-        if (element != null &&
-                element instanceof Attribute) {
+    /**
+     * <p>
+     * Checks if the given {@link DSDElement} is eligible for the skeleton generation. It is eligible, if its class
+     * is correct, depending on the implementation of this method.
+     * </p>
+     *
+     * @param element the element, which needs to be annotated by a data profile
+     * @return true if the element is of correct type and structure, otherwise false
+     */
+    protected boolean checkValidity(DSDElement element) {
+        if (element instanceof Attribute) {
             Attribute a = (Attribute) element;
             Class<?> clazz = a.getDataType();
             return clazz != null &&
@@ -49,9 +48,9 @@ public abstract class DataProfileSkeletonGenerator {
     protected abstract List<ProfileStatistic> generateStatistics(DataProfile profile);
 
     public List<ProfileStatistic> generateSkeleton(DataProfile profile) {
-        if (checkValidity())
+        if (checkValidity(profile.getElem()))
             return generateStatistics(profile);
-        LOGGER.warn("Provided element" + element + "does not have measurable data type");
+        LOGGER.warn("Provided element" + profile.getElem() + "does not have measurable data type");
         return new ArrayList<>();
     }
 }

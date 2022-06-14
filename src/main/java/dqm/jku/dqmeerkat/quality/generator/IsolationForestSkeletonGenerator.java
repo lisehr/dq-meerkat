@@ -23,13 +23,10 @@ import java.util.List;
  * @since 30.05.2022
  */
 public class IsolationForestSkeletonGenerator extends DataProfileSkeletonGenerator {
-    public IsolationForestSkeletonGenerator(DSDElement element) {
-        super(element);
-    }
 
     // As Isolation Forest and IsolationForestPercentage are dependent on JEP, only run them when it is enabled!
     @Override
-    protected boolean checkValidity() {
+    protected boolean checkValidity(DSDElement element) {
         return element instanceof Concept &&
                 Constants.ENABLE_JEP;
     }

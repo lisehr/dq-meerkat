@@ -22,9 +22,10 @@ public class FullSkeletonGeneratorTest {
     public void testGenerate() {
         // given
         var attribute = new Attribute();
-        var generator = new FullSkeletonGenerator(attribute);
+        var generator = new FullSkeletonGenerator();
         attribute.setDataType(String.class); // any datatype will do
         var profile = new DataProfile();
+        profile.setElem(attribute);
         // when
         var ret = generator.generateSkeleton(profile);
         // then
@@ -35,8 +36,9 @@ public class FullSkeletonGeneratorTest {
     public void testGenerateNull() {
         // given
         var attribute = new Attribute(); // no data type is set!
-        var generator = new FullSkeletonGenerator(attribute);
+        var generator = new FullSkeletonGenerator();
         var profile = new DataProfile();
+        profile.setElem(attribute);
         // when
         var ret = generator.generateSkeleton(profile);
         // then
@@ -46,8 +48,9 @@ public class FullSkeletonGeneratorTest {
     @Test
     public void testGenerateInvalid() {
         var attribute = new Concept(); // concept is not correct type
-        var generator = new FullSkeletonGenerator(attribute);
+        var generator = new FullSkeletonGenerator();
         var profile = new DataProfile();
+        profile.setElem(attribute);
         // when
         var ret = generator.generateSkeleton(profile);
         // then
@@ -57,7 +60,7 @@ public class FullSkeletonGeneratorTest {
     @Test
     public void testGenerateElementNull() {
         // given
-        var generator = new FullSkeletonGenerator(null);
+        var generator = new FullSkeletonGenerator();
         var profile = new DataProfile();
         // when
         var ret = generator.generateSkeleton(profile);

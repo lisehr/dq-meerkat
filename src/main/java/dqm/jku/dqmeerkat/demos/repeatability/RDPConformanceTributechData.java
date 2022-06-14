@@ -21,6 +21,7 @@ import dqm.jku.dqmeerkat.quality.BatchedDataProfiler;
 import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.DataProfileCollection;
 import dqm.jku.dqmeerkat.quality.DataProfiler;
+import dqm.jku.dqmeerkat.quality.config.DataProfileConfiguration;
 import dqm.jku.dqmeerkat.quality.conformance.CompositeRDPConformanceChecker;
 import dqm.jku.dqmeerkat.quality.conformance.RDPConformanceChecker;
 import dqm.jku.dqmeerkat.quality.generator.FullSkeletonGenerator;
@@ -41,6 +42,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -64,6 +66,8 @@ public class RDPConformanceTributechData {
 
 
     public static void main(String[] args) throws IOException, InterruptedException, NoSuchMethodException, URISyntaxException {
+        DataProfileConfiguration configuration = new DataProfileConfiguration(List.of(new FullSkeletonGenerator()));
+
         Property property = Property.parseProperty("at.fh.scch/identifier#humidity");
         var numberPattern = "(\\d?\\d)\\.(\\d+)";
 
@@ -135,7 +139,7 @@ public class RDPConformanceTributechData {
                     /* TODO Refactor the annotateProfile Methods somehow to include configs and corresponding
                         skeleton generators
                      */
-                    a.annotateProfile(rs, new FullSkeletonGenerator(a), new LEDCPIGenerator(a,
+                    a.annotateProfile(rs, new FullSkeletonGenerator(), new LEDCPIGenerator(
                             "at.fh.scch/identifier#humidity", LEDC_PI_DEFINITIONS));
                     // also print rdp per column
                     System.out.println(a.getProfileString());
@@ -143,7 +147,9 @@ public class RDPConformanceTributechData {
             }
 
 
-            DataProfiler profiler = new BatchedDataProfiler(ds, conn, BATCH_SIZE, conn.getLabel());
+            DataProfiler profiler = new BatchedDataProfiler(ds, conn, BATCH_SIZE, conn.getLabel(),
+                    new DataProfileConfiguration(List.of(new FullSkeletonGenerator(), new LEDCPIGenerator(
+                            "at.fh.scch/identifier#humidity", LEDC_PI_DEFINITIONS))));
             var ret = profiler.generateProfiles();
 
             // export data profile DTDL
@@ -164,7 +170,9 @@ public class RDPConformanceTributechData {
 
             // Continuous generation of DPs and conformance checking
             RDPConformanceChecker confChecker = new CompositeRDPConformanceChecker(THRESHOLD, ds, conn, BATCH_SIZE,
-                    dsdKnowledgeGraph.getLabel());
+                    dsdKnowledgeGraph.getLabel(), new DataProfileConfiguration(
+                    List.of(new FullSkeletonGenerator(), new LEDCPIGenerator(
+                            "at.fh.scch/identifier#humidity", LEDC_PI_DEFINITIONS))));
             confChecker.runConformanceCheck();
 //            // Finally: print evaluation report
             System.out.println(confChecker.getReport());

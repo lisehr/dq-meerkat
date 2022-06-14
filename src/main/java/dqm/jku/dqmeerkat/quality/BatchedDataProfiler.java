@@ -5,6 +5,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
+import dqm.jku.dqmeerkat.quality.config.DataProfileConfiguration;
 import lombok.SneakyThrows;
 
 /**
@@ -17,8 +18,9 @@ import lombok.SneakyThrows;
  * @since 20.04.2022
  */
 public class BatchedDataProfiler extends DataProfiler {
-    public BatchedDataProfiler(Datasource ds, DSConnector conn, int batchSize, String uri) {
-        super(ds, conn, batchSize, uri);
+    public BatchedDataProfiler(Datasource ds, DSConnector conn, int batchSize, String uri,
+                               DataProfileConfiguration configuration) {
+        super(ds, conn, batchSize, uri, configuration);
     }
 
     @SneakyThrows

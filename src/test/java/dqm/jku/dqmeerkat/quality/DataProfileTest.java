@@ -100,9 +100,9 @@ public class DataProfileTest {
         // given
         // when
         var dataprofile = new DataProfile(recordList, dsdElement,
-                new FilePatternRecognitionGenerator(dsdElement,
+                new FilePatternRecognitionGenerator(
                         "src/main/java/dqm/jku/dqmeerkat/resources/patterns/pattern_test.in"),
-                new DataProfileSkeletonGenerator(dsdElement) {
+                new DataProfileSkeletonGenerator() {
                     @Override
                     protected List<ProfileStatistic> generateStatistics(DataProfile profile) {
                         return List.of(new NumRows(profile));
@@ -118,9 +118,9 @@ public class DataProfileTest {
         // given
         // when
         var dataprofile = new DataProfile(recordList, dsdElement,
-                new FilePatternRecognitionGenerator(dsdElement,
+                new FilePatternRecognitionGenerator(
                         "src/main/java/dqm/jku/dqmeerkat/resources/patterns/pattern_test.in"),
-                new FullSkeletonGenerator(dsdElement));
+                new FullSkeletonGenerator());
 
         // then
         assertEquals(18, dataprofile.getStatistics().size());

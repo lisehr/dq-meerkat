@@ -4,6 +4,7 @@ import com.influxdb.client.domain.WritePrecision;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.influxdb.InfluxDBConnection;
 import dqm.jku.dqmeerkat.quality.DataProfile;
+import dqm.jku.dqmeerkat.quality.config.DataProfileConfiguration;
 import dqm.jku.dqmeerkat.quality.generator.DataProfileSkeletonGenerator;
 import dqm.jku.dqmeerkat.quality.generator.FullSkeletonGenerator;
 import org.cyberborean.rdfbeans.annotations.RDF;
@@ -76,7 +77,7 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
      * @throws NoSuchMethodException
      */
     public void annotateProfile(RecordList rs) throws NoSuchMethodException {
-        annotateProfile(rs, new FullSkeletonGenerator(this));
+        annotateProfile(rs, new FullSkeletonGenerator());
     }
 
     /**
@@ -100,7 +101,7 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
      * @throws NoSuchMethodException
      */
     public void annotateProfile(RecordList records, String filePath) throws NoSuchMethodException {
-        annotateProfile(records, filePath, new FullSkeletonGenerator(this));
+        annotateProfile(records, filePath, new FullSkeletonGenerator());
     }
 
     /**
@@ -119,6 +120,10 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
 
     public DataProfile createDataProfile(RecordList rs) throws NoSuchMethodException {
         return new DataProfile(rs, this);
+    }
+
+    public DataProfile createDataProfile(RecordList rs, DataProfileConfiguration configuration) throws NoSuchMethodException {
+        return new DataProfile(rs, this, configuration.getGenerators().toArray(new DataProfileSkeletonGenerator[0]));
     }
 
     public void printAnnotatedProfile() {
