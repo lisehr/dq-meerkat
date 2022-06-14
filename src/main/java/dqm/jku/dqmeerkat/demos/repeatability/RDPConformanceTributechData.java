@@ -23,6 +23,8 @@ import dqm.jku.dqmeerkat.quality.DataProfileCollection;
 import dqm.jku.dqmeerkat.quality.DataProfiler;
 import dqm.jku.dqmeerkat.quality.conformance.CompositeRDPConformanceChecker;
 import dqm.jku.dqmeerkat.quality.conformance.RDPConformanceChecker;
+import dqm.jku.dqmeerkat.quality.generator.FullSkeletonGenerator;
+import dqm.jku.dqmeerkat.quality.generator.LEDCPIGenerator;
 import dqm.jku.dqmeerkat.resources.export.json.dtdl.DataProfileExporter;
 import dqm.jku.dqmeerkat.resources.export.json.dtdl.DtdlGraphExporter;
 import dqm.jku.dqmeerkat.util.FileSelectionUtil;
@@ -57,6 +59,8 @@ public class RDPConformanceTributechData {
     private static final int RDP_SIZE = 500; // IF THIS IS LARGER THAN THE FILE SIZE THERE WILL BE NO DATA IN THE RDPs
     // i wasted way too much time on this...
     private static final int BATCH_SIZE = 500;        // Set to 1 to simulate streaming data
+
+    private static final String LEDC_PI_DEFINITIONS = "src/main/resource/data/ledc-pi_definitions.json";
 
 
     public static void main(String[] args) throws IOException, InterruptedException, NoSuchMethodException, URISyntaxException {
@@ -131,7 +135,8 @@ public class RDPConformanceTributechData {
                     /* TODO Refactor the annotateProfile Methods somehow to include configs and corresponding
                         skeleton generators
                      */
-                    a.annotateProfile(rs);
+                    a.annotateProfile(rs, new FullSkeletonGenerator(a), new LEDCPIGenerator(a,
+                            "at.fh.scch/identifier#humidity", LEDC_PI_DEFINITIONS));
                     // also print rdp per column
                     System.out.println(a.getProfileString());
                 }
