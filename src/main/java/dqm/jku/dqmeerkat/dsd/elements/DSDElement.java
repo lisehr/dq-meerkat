@@ -87,7 +87,7 @@ public abstract class DSDElement implements Serializable, Comparable<DSDElement>
      * @param generator the {@link DataProfileSkeletonGenerator} used to create the {@link DataProfile}s used statistics
      * @throws NoSuchMethodException
      */
-    public void annotateProfile(RecordList rs, DataProfileSkeletonGenerator generator) throws NoSuchMethodException {
+    public void annotateProfile(RecordList rs, DataProfileSkeletonGenerator... generator) throws NoSuchMethodException {
         dataProfile = new DataProfile(rs, this, generator);
     }
 

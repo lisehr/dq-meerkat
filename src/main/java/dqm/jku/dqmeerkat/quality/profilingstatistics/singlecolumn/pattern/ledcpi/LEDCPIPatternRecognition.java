@@ -32,8 +32,6 @@ import java.util.List;
  * The {@link ProfileStatistic} needs either a JSON configuration file, the finished QualityMeasure, or a list of
  * {@link be.ugent.ledc.pi.measure.predicates.Predicate}s in order to generate (or use) the QualityMeasure.
  * </summary>
- * <p>
- * <b>TODO implement me</b>
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 09.06.2022
@@ -76,7 +74,9 @@ public class LEDCPIPatternRecognition extends ProfileStatistic {
         for (Record record : rs) {
             cnt += checkHit((Number) record.getField(attribute.getLabel()));
         }
-        setValue(cnt / rs.size());
+        var numericValue = cnt / rs.size();
+        setValue(numericValue);
+        setNumericVal(numericValue);
     }
 
     /**
@@ -94,14 +94,19 @@ public class LEDCPIPatternRecognition extends ProfileStatistic {
     @Override
     public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
         double cnt = 0D;
-        Attribute attribute = (Attribute) super.getRefElem();
-
         for (Number number : list) {
             cnt += checkHit(number);
         }
-        setValue(cnt / list.size());
+        var numericValue = cnt / list.size();
+        setValue(numericValue);
+        setNumericVal(numericValue);
     }
 
+    /**
+     * Update the {@link ProfileStatistic}s value using the given {@link RecordList}. Delegates to calculation.
+     *
+     * @param rs the recordset used for updating
+     */
     @Override
     public void update(RecordList rs) {
         calculation(rs, super.getValue());
@@ -114,16 +119,27 @@ public class LEDCPIPatternRecognition extends ProfileStatistic {
     }
 
 
+    /**
+     * Calculate the relative difference between this and another {@link ProfileStatistic}. The threshold is used to
+     * determine the lower and upperBound, in which the other {@link ProfileStatistic} should lie in. So <i>this</i>
+     * refers to the reference data profile, while other is the dataprofile.
+     *
+     * @param other     the {@link ProfileStatistic}, whose value needs to be within the defined threshold of this value
+     * @param threshold indicates allowed deviation from reference value in percent.
+     *                  Defines the lower and upperBound for the conformance relative to this value
+     * @return if the other {@link ProfileStatistic} conforms to this one
+     */
     @Override
-    public boolean checkConformance(ProfileStatistic m, double threshold) {
+    public boolean checkConformance(ProfileStatistic other, double threshold) {
         double rdpVal = ((Number) this.getNumericVal()).doubleValue();
-        double dpValue = ((Number) m.getValue()).doubleValue();
+        double dpValue = ((Number) other.getValue()).doubleValue();
 
         double lowerBound = rdpVal - (Math.abs(rdpVal) * threshold);
         double upperBound = rdpVal + (Math.abs(rdpVal) * threshold);
 
         boolean conf = dpValue >= lowerBound && dpValue <= upperBound;
-        if(!conf && Constants.DEBUG) 
-            System.out.println(this.getTitle() + " exceeded: " + dpValue + " not in [" + lowerBound + ", " + upperBound + "]");
-        return conf;	    }
+        if (!conf && Constants.DEBUG)
+            LOGGER.info(this.getTitle() + " exceeded: " + dpValue + " not in [" + lowerBound + ", " + upperBound + "]");
+        return conf;
+    }
 }

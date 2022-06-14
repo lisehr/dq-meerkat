@@ -8,7 +8,7 @@ import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import lombok.SneakyThrows;
 
 /**
- * <h2>TributechDataProfiler</h2>
+ * <h2>BatchedDataProfiler</h2>
  * <summary>
  * Profiler implementation for batched data. Creates a {@link DataProfileCollection} for the given {@link Concept}.
  * </summary>

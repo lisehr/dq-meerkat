@@ -161,4 +161,46 @@ public class LEDCPIPatternRecognitionTest {
         assertTrue(ret instanceof Number);
         assertEquals(1D, ret);
     }
+
+    @Test
+    public void testCheckConformance() throws NoSuchMethodException {
+        // given
+        LEDCPIPatternRecognition recognition = new LEDCPIPatternRecognition(new DataProfile(recordList, dsdElement),
+                "at.fh.scch/identifier#humidity:*",
+                Path.of("src/main/resource/data/ledc-pi_definitions.json"));
+        LEDCPIPatternRecognition other = new LEDCPIPatternRecognition(new DataProfile(recordList, dsdElement),
+                "at.fh.scch/identifier#humidity:*",
+                Path.of("src/main/resource/data/ledc-pi_definitions.json"));
+        recognition.calculation(recordList, null);
+        other.calculation(recordList, null);
+
+        // when
+        var ret = recognition.checkConformance(other, 1D);
+        // then
+        assertTrue(ret); // as ProfileStatistics are equal this should work out with threshold of 1
+    }
+
+    @Test
+    public void testCheckConformanceFail() throws NoSuchMethodException {
+        // given
+        LEDCPIPatternRecognition recognition = new LEDCPIPatternRecognition(new DataProfile(recordList, dsdElement),
+                "at.fh.scch/identifier#humidity:*",
+                Path.of("src/main/resource/data/ledc-pi_definitions.json"));
+        LEDCPIPatternRecognition other = new LEDCPIPatternRecognition(new DataProfile(recordList, dsdElement),
+                "at.fh.scch/identifier#humidity:*",
+                Path.of("src/main/resource/data/ledc-pi_definitions.json"));
+        recognition.calculation(recordList, null);
+        other.calculationNumeric(recordList.toList()
+                .stream()
+                .skip(2000)
+                .map(record -> (Double) record.getField("values"))
+                .map(number -> number - 20D) // introduce some error
+                .collect(Collectors.toList()), null);
+
+        // when
+        var ret = recognition.checkConformance(other, .1D);
+
+        // then
+        assertFalse(ret);
+    }
 }
