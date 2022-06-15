@@ -29,7 +29,6 @@ public class DataProfileConfiguration {
 
     public static DataProfileConfiguration getInstance() {
         if (instance == null) {
-
             instance = loadConfig();
         }
 
@@ -37,14 +36,14 @@ public class DataProfileConfiguration {
     }
 
     /**
-     * lodas the external config definition and creates the singleton instance.
+     * loads the external config definition and creates the singleton instance.
      *
      * @return the singleton instance of the configuration
      */
     private static DataProfileConfiguration loadConfig() {
         // TODO define json file loading
         return new DataProfileConfiguration(List.of(
-//                new FullSkeletonGenerator(),
+                new FullSkeletonGenerator(),
                 new LEDCPIGenerator("at.fh.scch/identifier#humidity:*",
                         "src/main/resource/data/ledc-pi_definitions.json")));
     }

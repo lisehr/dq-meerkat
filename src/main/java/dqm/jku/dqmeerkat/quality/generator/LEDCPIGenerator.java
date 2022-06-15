@@ -1,6 +1,5 @@
 package dqm.jku.dqmeerkat.quality.generator;
 
-import dqm.jku.dqmeerkat.dsd.elements.DSDElement;
 import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.pattern.ledcpi.LEDCPIPatternRecognition;
@@ -10,7 +9,8 @@ import java.util.List;
 
 /**
  * <h2>LEDCPIGenerator</h2>
- * <summary>TODO Insert do cheader</summary>
+ * <summary>Generator for building a single {@link LEDCPIPatternRecognition} instance. Should be combined
+ * with other {@link DataProfileSkeletonGenerator}</summary>
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 14.06.2022

@@ -69,13 +69,14 @@ public class RDPConformanceTributechData {
     public static void main(String[] args) throws IOException, InterruptedException, NoSuchMethodException, URISyntaxException {
         DataProfileConfiguration configuration = DataProfileConfiguration.getInstance();
 
+        // setup Property for LEDC-PI
         Property property = Property.parseProperty("at.fh.scch/identifier#humidity");
-        var numberPattern = "(\\d?\\d)\\.(\\d+)";
+        var numberPattern = "(\\d?\\d)\\.(\\d+)"; // check if it is valid humidity (i.E. 2 numbers front n numbers back)
 
         var predicates = new ArrayList<Predicate<String>>();
         predicates.add(new PatternPredicate(numberPattern, "Not a valid double"));
         predicates.add(new GrexComboPredicate(
-                new GrexFormula(
+                new GrexFormula( // GREX to ensure the numbers are within realistic/acceptable boundaries
                         Stream.of(new Grex("::int @1 branch& 20 > 60 <")).collect(Collectors.toList())
 
                 ),
@@ -84,8 +85,9 @@ public class RDPConformanceTributechData {
         ));
 
         var measure = new QualityMeasure<>(predicates, property, new URI("https://www.scch.at"),
-                LocalDate.now(), 1);
+                LocalDate.now(), 1); // create the mesure
 
+        // test it
         var ret1 = measure.measure("22.33");
         var ret2 = measure.measure("1.3");
         var ret3 = measure.measure("61.3");
@@ -97,7 +99,7 @@ public class RDPConformanceTributechData {
         MeasureRegistry
                 .getInstance()
                 .registerMeasure(measure);
-
+        // dump it into a file, in order to reuse it later
         JSON.dump(new File("src/main/resource/data/ledc-pi_definitions.json"));
         // retrieve DTDL stuff
 //        DtdlRetriever retriever = new DtdlRetriever();
@@ -125,7 +127,6 @@ public class RDPConformanceTributechData {
 
         ConnectorCSV conn = FileSelectionUtil.getConnectorCSV("src/main/resource/data/humidity_5000.csv");
         conn.setLabel("humidity_data");
-        // TODO Add possibility for config (and generator) to datasource
         Datasource ds = conn.loadSchema("http:/example.com", "hum");
 
 //            var dtdlInterface = new DTDLImporter().importDataList("src/main/resource/data/dsd.json");
@@ -137,9 +138,6 @@ public class RDPConformanceTributechData {
             for (Concept c : ds.getConcepts()) {
                 RecordList rs = conn.getPartialRecordList(c, 0, RDP_SIZE);
                 for (Attribute a : c.getSortedAttributes()) {
-                    /* TODO Refactor the annotateProfile Methods somehow to include configs and corresponding
-                        skeleton generators
-                     */
                     a.annotateProfile(rs, configuration.getGenerators().toArray(new DataProfileSkeletonGenerator[0]));
                     // also print rdp per column
                     System.out.println(a.getProfileString());
