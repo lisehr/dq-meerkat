@@ -1,10 +1,14 @@
 package dqm.jku.dqmeerkat.quality.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import dqm.jku.dqmeerkat.quality.generator.DataProfileSkeletonGenerator;
 import dqm.jku.dqmeerkat.quality.generator.FullSkeletonGenerator;
 import dqm.jku.dqmeerkat.quality.generator.LEDCPIGenerator;
 import lombok.Getter;
+import science.aist.seshat.Logger;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -20,12 +24,9 @@ import java.util.List;
 
 public class DataProfileConfiguration {
 
+    private static final Logger LOGGER = Logger.getInstance();
+
     private static DataProfileConfiguration instance;
-
-    private DataProfileConfiguration(List<DataProfileSkeletonGenerator> generators) {
-        this.generators = generators;
-    }
-
 
     public static DataProfileConfiguration getInstance() {
         if (instance == null) {
@@ -42,12 +43,27 @@ public class DataProfileConfiguration {
      */
     private static DataProfileConfiguration loadConfig() {
         // TODO define json file loading
+        var objectMapper = new ObjectMapper();
+        try {
+            List<ConfigComponent> components = objectMapper.readValue(new File("src/main/resource/dqConfig.json"),
+                    objectMapper.getTypeFactory().constructCollectionType(List.class, ConfigComponent.class));
+            LOGGER.info(components);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return new DataProfileConfiguration(List.of(
                 new FullSkeletonGenerator(),
                 new LEDCPIGenerator("at.fh.scch/identifier#humidity:*",
                         "src/main/resource/data/ledc-pi_definitions.json")));
     }
 
+
+    private DataProfileConfiguration(List<DataProfileSkeletonGenerator> generators) {
+        this.generators = generators;
+    }
+
     @Getter
     private final List<DataProfileSkeletonGenerator> generators;
+
+
 }

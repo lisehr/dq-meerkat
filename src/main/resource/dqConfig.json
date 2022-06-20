@@ -1,0 +1,10 @@
+[
+  {
+    "ledcPiId": "humidity",
+    "ledcPiFilePath": "src/main/resource/data/ledc-pi_definitions.json"
+  },
+  {
+    "ledcPiId": "",
+    "ledcPiFilePath": ""
+  }
+]
