@@ -20,8 +20,6 @@ import java.util.List;
  * @author meindl, rainer.meindl@scch.at
  * @since 14.06.2022
  */
-
-
 public class DataProfileConfiguration {
 
     private static final Logger LOGGER = Logger.getInstance();
@@ -42,14 +40,15 @@ public class DataProfileConfiguration {
      * @return the singleton instance of the configuration
      */
     private static DataProfileConfiguration loadConfig() {
-        // TODO define json file loading
         var objectMapper = new ObjectMapper();
         try {
             List<ConfigComponent> components = objectMapper.readValue(new File("src/main/resource/dqConfig.json"),
+                    // fix type for deserialization. Java generics are a bit weird
                     objectMapper.getTypeFactory().constructCollectionType(List.class, ConfigComponent.class));
+            // TODO define subclasses of component that correspond generators
             LOGGER.info(components);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Could not deserialize config. Check location and content of dqConfig", e);
         }
         return new DataProfileConfiguration(List.of(
                 new FullSkeletonGenerator(),
