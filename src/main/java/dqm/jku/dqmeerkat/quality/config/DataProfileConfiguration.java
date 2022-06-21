@@ -46,6 +46,10 @@ public class DataProfileConfiguration {
                     // fix type for deserialization. Java generics are a bit weird
                     objectMapper.getTypeFactory().constructCollectionType(List.class, ConfigComponent.class));
             // TODO define subclasses of component that correspond generators
+            for (ConfigComponent component : components) {
+                if (component instanceof LEDCPIConfigComponent)
+                    LOGGER.info(component);
+            }
             LOGGER.info(components);
         } catch (IOException e) {
             throw new RuntimeException("Could not deserialize config. Check location and content of dqConfig", e);

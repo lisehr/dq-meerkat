@@ -1,10 +1,11 @@
 [
   {
+    "type": "ledcpi",
     "ledcPiId": "at.fh.scch/identifier#humidity:*",
     "ledcPiFilePath": "src/main/resource/data/ledc-pi_definitions.json"
   },
   {
-    "ledcPiId": "",
-    "ledcPiFilePath": ""
+    "type": "full",
+    "someParameter": "test"
   }
 ]
