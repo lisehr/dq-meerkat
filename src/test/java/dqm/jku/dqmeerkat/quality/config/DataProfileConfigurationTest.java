@@ -29,10 +29,16 @@ public class DataProfileConfigurationTest {
     @Test
     public void testLoadConfigCached() {
         // given
+        var config = DataProfileConfiguration.getInstance();
 
         // when
-
+        var configCached = DataProfileConfiguration.getInstance();
+        var generators = config.getGenerators();
         // then
-        fail("not implemented!");
+        assertNotNull(config);
+        assertNotNull(configCached);
+        assertSame(config, configCached);
+        assertNotNull(generators);
+        assertEquals(2, generators.size());
     }
 }

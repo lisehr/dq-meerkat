@@ -21,5 +21,5 @@ import lombok.Data;
         @JsonSubTypes.Type(value = FullProfileConfigComponent.class, name = "full")
 })
 @Data
-class ConfigComponent {
+public class ConfigComponent {
 }

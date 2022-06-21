@@ -3,12 +3,18 @@ package dqm.jku.dqmeerkat.quality.config;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dqm.jku.dqmeerkat.quality.generator.DataProfileSkeletonGenerator;
+import dqm.jku.dqmeerkat.quality.generator.config.DataProfileSkeletonBuilder;
+import dqm.jku.dqmeerkat.quality.generator.config.FullSkeletonGeneratorBuilder;
+import dqm.jku.dqmeerkat.quality.generator.config.LEDCPIGeneratorBuilder;
 import lombok.Getter;
 import science.aist.seshat.Logger;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * <h2>DataProfileConfiguration</h2>
@@ -22,6 +28,15 @@ import java.util.List;
 public class DataProfileConfiguration {
 
     private static final Logger LOGGER = Logger.getInstance();
+
+    /**
+     * TODO document
+     *
+     * @implNote Little hacky to register it manually, but, as {@link DataProfileSkeletonBuilder} is functional, it is safe
+     */
+    private static final List<DataProfileSkeletonBuilder<?>> CONFIG_TO_GENERATOR = List.of(
+            new FullSkeletonGeneratorBuilder(),
+            new LEDCPIGeneratorBuilder());
 
     private static DataProfileConfiguration instance;
 
@@ -68,8 +83,19 @@ public class DataProfileConfiguration {
         }
     }
 
+    /**
+     * TODO document
+     * @param components
+     * @return
+     */
     private static List<DataProfileSkeletonGenerator> buildGenerators(List<ConfigComponent> components) {
-        return null;
+        return CONFIG_TO_GENERATOR.stream()
+                .flatMap(dataProfileSkeletonBuilder ->
+                        components.stream()
+                                .map(dataProfileSkeletonBuilder::fromConfig)
+                                .filter(Optional::isPresent)
+                                .map(Optional::get))
+                .collect(Collectors.toList());
     }
 
     /**
