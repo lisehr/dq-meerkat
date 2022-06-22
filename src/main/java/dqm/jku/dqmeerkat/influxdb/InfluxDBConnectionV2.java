@@ -78,8 +78,11 @@ public class InfluxDBConnectionV2 implements InfluxDBConnection {
                 .orElseGet(() -> createAuthorisationForBucket(bucket)).getToken();
     }
 
-    public void deleteDatabase(String databaseName) {
-        influxDB.getBucketsApi().deleteBucket(databaseName);
+    public void deleteDatabase(String name) {
+        var bucket = influxDB.getBucketsApi().findBucketByName(name);
+        if (bucket != null) {
+            influxDB.getBucketsApi().deleteBucket(bucket.getId());
+        }
     }
 
     /**
