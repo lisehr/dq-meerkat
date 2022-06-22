@@ -115,6 +115,8 @@ public class DataProfileConfiguration {
         }
     }
 
+
+
     /**
      * Loads a configuration encoded in the jsonString. Main focus of this method is testing and debugging.
      *

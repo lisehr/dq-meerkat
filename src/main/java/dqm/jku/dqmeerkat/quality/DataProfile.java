@@ -381,7 +381,7 @@ public class DataProfile {
      */
     private void addMeasuringValue(ProfileStatistic p, com.influxdb.client.write.Point measure) {
         try {
-            if (p.getValue() == null || p.getLabel().equals(pattern.getLabel()))
+            if (p.getValue() == null)
                 measure.addField(p.getLabel(), 0); // TODO: replace 0 with NaN, when hitting v2.0 of influxdb
             else if (p.getValueClass().equals(Long.class))
                 measure.addField(p.getLabel(), ((Number) p.getNumericVal()).longValue());

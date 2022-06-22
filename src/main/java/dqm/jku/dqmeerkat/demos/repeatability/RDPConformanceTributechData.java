@@ -25,8 +25,6 @@ import dqm.jku.dqmeerkat.quality.config.DataProfileConfiguration;
 import dqm.jku.dqmeerkat.quality.conformance.CompositeRDPConformanceChecker;
 import dqm.jku.dqmeerkat.quality.conformance.RDPConformanceChecker;
 import dqm.jku.dqmeerkat.quality.generator.DataProfileSkeletonGenerator;
-import dqm.jku.dqmeerkat.quality.generator.FullSkeletonGenerator;
-import dqm.jku.dqmeerkat.quality.generator.LEDCPIGenerator;
 import dqm.jku.dqmeerkat.resources.export.json.dtdl.DataProfileExporter;
 import dqm.jku.dqmeerkat.resources.export.json.dtdl.DtdlGraphExporter;
 import dqm.jku.dqmeerkat.util.FileSelectionUtil;
@@ -43,7 +41,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -61,14 +58,22 @@ public class RDPConformanceTributechData {
     private static final double THRESHOLD = 0.1;        // Threshold indicates allowed deviation from reference value in percent
     private static final int RDP_SIZE = 500; // IF THIS IS LARGER THAN THE FILE SIZE THERE WILL BE NO DATA IN THE RDPs
     // i wasted way too much time on this...
-    private static final int BATCH_SIZE = 500;        // Set to 1 to simulate streaming data
+    private static final int BATCH_SIZE = 50;        // Set to 1 to simulate streaming data
 
-    private static final String LEDC_PI_DEFINITIONS = "src/main/resource/data/ledc-pi_definitions.json";
-
+    /**
+     * Boolean flag for debugging purposes. If set to true, the program will delete the database after the execution.
+     */
+    private static boolean DELETE_DATABASE = false;
 
     public static void main(String[] args) throws IOException, InterruptedException, NoSuchMethodException, URISyntaxException {
+        // default configuration
         DataProfileConfiguration configuration = DataProfileConfiguration.getInstance();
-
+        // just the ledc pi for debugging
+//        var configuration = DataProfileConfiguration.getInstance("[{\n" +
+//                "    \"type\": \"ledcpi\",\n" +
+//                "    \"ledcPiId\": \"at.fh.scch/identifier#humidity:*\",\n" +
+//                "    \"ledcPiFilePath\": \"src/main/resource/data/ledc-pi_definitions.json\"\n" +
+//                "  }]");
         // setup Property for LEDC-PI
         Property property = Property.parseProperty("at.fh.scch/identifier#humidity");
         var numberPattern = "(\\d?\\d)\\.(\\d+)"; // check if it is valid humidity (i.E. 2 numbers front n numbers back)
@@ -100,7 +105,8 @@ public class RDPConformanceTributechData {
                 .getInstance()
                 .registerMeasure(measure);
         // dump it into a file, in order to reuse it later
-        JSON.dump(new File("src/main/resource/data/ledc-pi_definitions.json"));
+//        JSON.dump(new File("src/main/resource/data/ledc-pi_definitions.json"));
+
         // retrieve DTDL stuff
 //        DtdlRetriever retriever = new DtdlRetriever();
 //        var statisticDto = ProfileStatisticDto.builder()
@@ -181,9 +187,11 @@ public class RDPConformanceTributechData {
                         .orgId(properties.getProperty("db.orgId"))
                         .build()) {
                     influx.connect();
+
                     for (var collection : ret) {
                         collection.setTimestampOfCreation(LocalDateTime.ofInstant(Instant.now(), ZoneOffset.UTC));
                         for (DataProfile profile : collection.getProfiles()) {
+                            var token = influx.createDatabase("default", 0);
                             dsdKnowledgeGraph.addProfilesToInflux(influx);
                             influx.write("default",
                                     profile.createMeasuringPoint(profile.getURI(),
@@ -197,11 +205,12 @@ public class RDPConformanceTributechData {
                         Thread.sleep(5000);
                         System.out.println("Interval break");
                     }
-
-
+                    if (DELETE_DATABASE)
+                        influx.deleteDatabase("default");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
