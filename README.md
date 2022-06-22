@@ -166,6 +166,35 @@ folders can be excluded, since only the src folder matters. For correct inclusio
 - Create subfolders: \output and \patterns
 - Place file for pattern recognition called *.in into the \patterns subfolder
 
+### Configuration
+
+DQ-MeeRKat is configured using a json config file. There is an example in the resource folder called `dqConfig.json`.
+It defines what DataQualityMeasures are used and how they are configured. Each json object defines a Data Quality
+Profile template, which is a set of Data Quality Measures. The sum of the Data Quality Measures defines the overall
+Data Quality Profile. The example `dqConfig.json` shown below defines the following Data Quality Profiles:
+
+```json
+[
+  {
+    "type": "ledcpi",
+    "ledcPiId": "at.fh.scch/identifier#humidity:*",
+    "ledcPiFilePath": "src/main/resource/data/ledc-pi_definitions.json"
+  },
+  {
+    "type": "full"
+  }
+]
+```
+
+* One LEDC-PI Pattern recognition measure, which needs the ledcpi property id and a path to the ledc-pi definition
+* One "_full_" Data Quality Profile, containing a set of predefined data quality metrics, such as Number of Rows, Min,
+  Max, etc.
+
+The `type` defined in the config corresponds to a DataProfileSkeletonBuilder implementation. Each such implementation
+deserializes the config and tries to create a DataProfileSkeleton out of it, using custom generators. In theory, each
+type should correspond to one DataProfileSkeletonBuilder implementation. This allows dynamic creation of data profile
+metrics and easy extension of the data profile config mechanism.
+
 # Blockchain aspect
 
 To generate tamper-free persistance of stored data a blockchain is used. Creating blockchains in Java is a difficult
