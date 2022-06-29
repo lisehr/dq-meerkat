@@ -191,6 +191,7 @@ public class RDPConformanceTributechData {
                         collection.setTimestampOfCreation(LocalDateTime.ofInstant(Instant.now(), ZoneOffset.UTC));
                         for (DataProfile profile : collection.getProfiles()) {
                             dsdKnowledgeGraph.addProfilesToInflux(influx);
+                            // also write the RDP for a "target line" relative to the dps
                             influx.write("default",
                                     profile.createMeasuringPoint(profile.getURI(),
                                             collection.getTimestampOfCreation()
