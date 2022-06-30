@@ -58,7 +58,7 @@ public class DataProfileConfigurationTest {
         // when
         var configJson = DataProfileConfiguration.getInstance("[\n" +
                 "  {\n" +
-                "    \"type\": \"ledcpi\",\n" +
+                "    \"type\": \"domainKnowledge\",\n" +
                 "    \"ledcPiId\": \"at.fh.scch/identifier#humidity:*\",\n" +
                 "    \"ledcPiFilePath\": \"src/main/resource/data/ledc-pi_definitions.json\"\n" +
                 "  }]");
@@ -76,7 +76,7 @@ public class DataProfileConfigurationTest {
         // when
         var configJson = DataProfileConfiguration.getInstance("[\n" +
                 "  {\n" +
-                "    \"type\": \"ledcpi\",\n" +
+                "    \"type\": \"domainKnowledge\",\n" +
                 "    \"ledcPiId\": \"at.fh.scch/identifier#humidity:*\",\n" +
                 "    \"ledcPiFilePath\": \"src/main/resource/data/ledc-pi_definitions.json\"\n" +
                 "  }," +
