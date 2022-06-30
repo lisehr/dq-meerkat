@@ -8,7 +8,11 @@ import java.util.Optional;
 
 /**
  * <h2>FullSkeletonGeneratorBuilder</h2>
- * <summary>TODO Insert do cheader</summary>
+ * <summary>
+ * {@link DataProfileSkeletonBuilder} implementation for {@link FullSkeletonGenerator}s. Creates an instance of
+ * {@link FullSkeletonGenerator} if the given {@link ConfigComponent} is an instance of
+ * {@link FullProfileConfigComponent}
+ * </summary>
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 21.06.2022

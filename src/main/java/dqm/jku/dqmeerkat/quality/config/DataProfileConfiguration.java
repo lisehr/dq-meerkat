@@ -29,7 +29,9 @@ public class DataProfileConfiguration {
     private static final Logger LOGGER = Logger.getInstance();
 
     /**
-     * TODO document
+     * This list contains all {@link DataProfileSkeletonBuilder}s used to prepare {@link DataProfileSkeletonGenerator}s.
+     * Currently, they have to be added manually, depending on what kind of data profile configurations should be
+     * considered.
      *
      * @implNote Little hacky to register it manually, but, as {@link DataProfileSkeletonBuilder} is functional, it is safe
      */
@@ -114,7 +116,6 @@ public class DataProfileConfiguration {
             throw new RuntimeException("Could not deserialize config. Check location and content of dqConfig", e);
         }
     }
-
 
 
     /**

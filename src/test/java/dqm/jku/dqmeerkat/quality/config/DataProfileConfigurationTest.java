@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 /**
  * <h2>DataProfileConfigurationTest</h2>
- * <summary>TODO Insert do cheader</summary>
+ * <summary>{@link DataProfileConfiguration} test class</summary>
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 21.06.2022

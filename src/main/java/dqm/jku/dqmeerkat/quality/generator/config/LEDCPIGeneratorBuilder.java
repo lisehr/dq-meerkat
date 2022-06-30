@@ -8,7 +8,11 @@ import java.util.Optional;
 
 /**
  * <h2>LEDCPIGeneratorBuilder</h2>
- * <summary>TODO Insert do cheader</summary>
+ * <summary>
+ * {@link DataProfileSkeletonBuilder} implementation for {@link LEDCPIGenerator}s. Creates an instance of
+ * {@link LEDCPIGenerator} if the given {@link ConfigComponent} is an instance of {@link LEDCPIConfigComponent}.
+ * It extracts the necessary configuration for the {@link LEDCPIGenerator} fom the given {@link ConfigComponent}.
+ * </summary>
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 21.06.2022
