@@ -12,8 +12,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.fail;
-
 class MGSummaryProfileStatisticTest {
 
 
@@ -71,12 +69,46 @@ class MGSummaryProfileStatisticTest {
     }
 
     @Test
-    void checkConformanceTest() {
+    void checkConformanceSuccessTest() throws NoSuchMethodException {
         // given
+        var statistic = new MGSummaryProfileStatistic(new DataProfile(recordList, dsdElement), 50);
+        var statistic2 = new MGSummaryProfileStatistic(new DataProfile(recordList, dsdElement), 50);
+        statistic.calculation(recordList, null);
+        statistic2.calculation(recordList, null);
 
         // when
+        var ret = statistic.checkConformance(statistic2, 0.9);
+        // then
+        Assertions.assertTrue(ret);
+    }
+
+    @Test
+    void checkConformanceFailTest() throws NoSuchMethodException {
+        // given
+        var statistic = new MGSummaryProfileStatistic(new DataProfile(recordList, dsdElement), 50);
+        var statistic2 = new MGSummaryProfileStatistic(new DataProfile(recordList, dsdElement), 10);
+        statistic.calculation(recordList, null);
+        statistic2.calculation(recordList, null);
+
+        // when
+        var ret = statistic.checkConformance(statistic2, 0.9);
 
         // then
-        fail("Not implemented");
+        Assertions.assertFalse(ret);
+    }
+
+    @Test
+    void checkConformanceBarelyConformingTest() throws NoSuchMethodException {
+        // given
+        var statistic = new MGSummaryProfileStatistic(new DataProfile(recordList, dsdElement), 50);
+        var statistic2 = new MGSummaryProfileStatistic(new DataProfile(recordList, dsdElement), 10);
+        statistic.calculation(recordList, null);
+        statistic2.calculation(recordList, null);
+
+        // when
+        var ret = statistic.checkConformance(statistic2, 0.9);
+
+        // then
+        Assertions.fail("not implemented");
     }
 }
