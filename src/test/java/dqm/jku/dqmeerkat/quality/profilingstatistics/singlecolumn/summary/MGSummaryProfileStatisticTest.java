@@ -77,7 +77,7 @@ class MGSummaryProfileStatisticTest {
         statistic2.calculation(recordList, null);
 
         // when
-        var ret = statistic.checkConformance(statistic2, 0.9);
+        var ret = statistic.checkConformance(statistic2, 0.1);
         // then
         Assertions.assertTrue(ret);
     }
@@ -91,7 +91,7 @@ class MGSummaryProfileStatisticTest {
         statistic2.calculation(recordList, null);
 
         // when
-        var ret = statistic.checkConformance(statistic2, 0.9);
+        var ret = statistic.checkConformance(statistic2, 0.1);
 
         // then
         Assertions.assertFalse(ret);
@@ -100,15 +100,22 @@ class MGSummaryProfileStatisticTest {
     @Test
     void checkConformanceBarelyConformingTest() throws NoSuchMethodException {
         // given
-        var statistic = new MGSummaryProfileStatistic(new DataProfile(recordList, dsdElement), 50);
-        var statistic2 = new MGSummaryProfileStatistic(new DataProfile(recordList, dsdElement), 10);
-        statistic.calculation(recordList, null);
-        statistic2.calculation(recordList, null);
+        List<Number> data = List.of(1, 3, 3, 3, 3,
+                2, 3, 2, 5, 7,
+                8, 1, 2, 3, 6);
+        List<Number> data2 = List.of(1, 3, 1, 3, 3,
+                2, 1, 6, 5, 3,
+                1, 8, 2, 1, 1);
+
+        var statistic = new MGSummaryProfileStatistic(new DataProfile(recordList, dsdElement), 5);
+        var statistic2 = new MGSummaryProfileStatistic(new DataProfile(recordList, dsdElement), 5);
+        statistic.calculationNumeric(data, null);
+        statistic2.calculationNumeric(data2, null);
 
         // when
-        var ret = statistic.checkConformance(statistic2, 0.9);
+        var ret = statistic.checkConformance(statistic2, 0.3);
 
         // then
-        Assertions.fail("not implemented");
+        Assertions.assertTrue(ret);
     }
 }

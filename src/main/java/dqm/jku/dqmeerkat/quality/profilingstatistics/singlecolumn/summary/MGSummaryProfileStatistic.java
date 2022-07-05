@@ -117,8 +117,13 @@ public class MGSummaryProfileStatistic extends ProfileStatistic {
 
     @Override
     public boolean checkConformance(ProfileStatistic m, double threshold) {
-        var rdpVal = this.calculateConformanceValue();
-        var dpValue = this.calculateConformanceValue();
+        var rdpAvg = mkCounter.values().stream().mapToInt(i -> i).average().orElse(0);
+        var rdpVal = mkCounter.size() * 0.1 + rdpAvg;
+
+        var dpMap = ((Map<Object, Integer>) m.getValue());
+        var dpAvg = dpMap.values().stream().mapToInt(i -> i).average().orElse(0);
+        var dpValue = dpMap.size() * 0.1 + dpAvg;
+
 
         double lowerBound = rdpVal - (Math.abs(rdpVal) * threshold);
         double upperBound = rdpVal + (Math.abs(rdpVal) * threshold);
