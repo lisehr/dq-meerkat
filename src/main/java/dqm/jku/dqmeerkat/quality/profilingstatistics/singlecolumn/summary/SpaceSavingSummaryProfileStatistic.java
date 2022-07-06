@@ -10,7 +10,6 @@ import java.text.DecimalFormatSymbols;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * <h2>SpaceSavingSummaryProfileStatistic</h2>
@@ -25,14 +24,18 @@ import java.util.stream.Collectors;
  */
 public class SpaceSavingSummaryProfileStatistic extends SummaryProfileStatistic {
 
-    private Map<Object, Integer> spaceSavingCounter = new HashMap<>();
+    private final Map<Object, Integer> spaceSavingCounter = new HashMap<>();
 
+    /**
+     * TODO documentation
+     */
     private final int k;
 
     public SpaceSavingSummaryProfileStatistic(DataProfile refProf, int k) {
         super(StatisticTitle.hist, StatisticCategory.histCat, refProf);
         this.k = k;
     }
+
 
     @Override
     public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
@@ -50,23 +53,20 @@ public class SpaceSavingSummaryProfileStatistic extends SummaryProfileStatistic 
                 spaceSavingCounter.put(value, spaceSavingCounter.get(value) + 1);
             } else { // otherwise check if the summary is full and if so reduce all counters by one, remove the items with counters lower than 1
                 if (spaceSavingCounter.size() >= k) {
-                    var decrementedMap = spaceSavingCounter.entrySet().stream()
-                            .peek(objectIntegerEntry -> objectIntegerEntry.setValue(objectIntegerEntry.getValue() - 1))
-                            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-                    var entryToRemove = decrementedMap.entrySet()
+                    var entryToRemove = spaceSavingCounter.entrySet()
                             .stream()
-                            .filter(objectIntegerEntry -> objectIntegerEntry.getValue() == 0)
-                            .findAny()
+                            .min(Map.Entry.comparingByValue())
                             .orElseThrow();
-                    decrementedMap.remove(entryToRemove.getKey());
-                    decrementedMap.put(value, 1);
-                    spaceSavingCounter = decrementedMap;
+                    spaceSavingCounter.remove(entryToRemove.getKey());
+                    spaceSavingCounter.put(value, 1);
 
                 } else {
                     spaceSavingCounter.put(value, 1);
                 }
             }
         }
+        setValue(spaceSavingCounter);
+        setValueClass(spaceSavingCounter.getClass());
     }
 
     @Override
