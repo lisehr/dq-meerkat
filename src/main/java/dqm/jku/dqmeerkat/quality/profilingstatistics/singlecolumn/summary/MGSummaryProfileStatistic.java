@@ -1,7 +1,5 @@
 package dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.summary;
 
-import dqm.jku.dqmeerkat.dsd.elements.Attribute;
-import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory;
@@ -25,7 +23,7 @@ import java.util.stream.Collectors;
  * @author meindl, rainer.meindl@scch.at
  * @since 04.07.2022
  */
-public class MGSummaryProfileStatistic extends ProfileStatistic {
+public class MGSummaryProfileStatistic extends SummaryProfileStatistic {
 
     /**
      * Representation of the summary. The key is the item and the value is the number of occurrences in the dataset.
@@ -43,19 +41,6 @@ public class MGSummaryProfileStatistic extends ProfileStatistic {
         this.k = k;
     }
 
-
-    @Override
-    public void calculation(RecordList rs, Object oldVal) {
-        var attribute = (Attribute) getRefElem();
-        List<Number> list = rs.toList().stream()
-                .map(record -> (Number) record.getField(attribute.getLabel()))
-                .collect(Collectors.toList());
-        try {
-            calculationNumeric(list, null);
-        } catch (NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     @Override
     public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
@@ -91,28 +76,6 @@ public class MGSummaryProfileStatistic extends ProfileStatistic {
         }
         setValue(mkCounter);
         setValueClass(mkCounter.getClass());
-    }
-
-
-    @Override
-    public void update(RecordList rs) {
-        calculation(rs, getValue());
-    }
-
-    @Override
-    protected String getValueString() {
-        return super.getSimpleValueString();
-    }
-
-    /**
-     * calculates the conformance metric, which is the size of the summary multiplied by 0.1 and the average value of
-     * all counters in the summary.
-     *
-     * @return the conformance value, which can be used to compare these {@link ProfileStatistic}s.
-     */
-    private double calculateConformanceValue() {
-        var averageCounter = mkCounter.values().stream().mapToInt(i -> i).average().orElse(0);
-        return mkCounter.size() * 0.1 + averageCounter;
     }
 
     @Override
