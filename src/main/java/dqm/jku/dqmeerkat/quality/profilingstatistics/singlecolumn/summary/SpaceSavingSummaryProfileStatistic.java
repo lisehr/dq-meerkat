@@ -5,6 +5,7 @@ import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
 import dqm.jku.dqmeerkat.util.Constants;
+import org.jetbrains.annotations.NotNull;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -25,10 +26,15 @@ import java.util.Map;
  */
 public class SpaceSavingSummaryProfileStatistic extends SummaryProfileStatistic {
 
+    /**
+     * Representation of the summary. The key is the item and the value is the number of occurrences in the dataset.
+     * It is, after execution, always of size k.
+     */
     private final Map<Object, Integer> spaceSavingCounter = new HashMap<>();
 
     /**
-     * TODO documentation
+     * the fixed size of the summary. when ths size is reached, the least frequent items are replaced with more
+     * current items from the dataset.
      */
     private final int k;
 
@@ -52,7 +58,7 @@ public class SpaceSavingSummaryProfileStatistic extends SummaryProfileStatistic 
             // if the item is in the summary, increment it
             if (spaceSavingCounter.containsKey(value)) {
                 spaceSavingCounter.put(value, spaceSavingCounter.get(value) + 1);
-            } else { // otherwise check if the summary is full and if so reduce all counters by one, remove the items with counters lower than 1
+            } else { // otherwise check if the summary is full and if so replace the item with the lowest counter with the current item
                 if (spaceSavingCounter.size() >= k) {
                     var entryToRemove = spaceSavingCounter.entrySet()
                             .stream()
@@ -75,7 +81,7 @@ public class SpaceSavingSummaryProfileStatistic extends SummaryProfileStatistic 
         return spaceSavingCounter.getClass();
     }
 
-    private static double calculateConformance(Map<Object, Integer> summary) {
+    private static double calculateConformance(@NotNull Map<Object, Integer> summary) {
         return summary.size() * .1D + summary.entrySet()
                 .stream()
                 .mapToDouble(value -> ((int) value.getKey()) * value.getValue())
