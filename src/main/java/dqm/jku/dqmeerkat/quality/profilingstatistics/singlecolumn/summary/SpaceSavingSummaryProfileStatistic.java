@@ -5,24 +5,68 @@ import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * <h2>SpaceSavingSummaryProfileStatistic</h2>
- * <summary>TODO Insert do cheader</summary>
+ * <summary>
+ * {@link ProfileStatistic} implementation of the Space Saving Algorithm. It generates a summary of the given
+ * data by counting the occurrences of samples in the data. The summary has a maximum size of k, whenever it reaches this
+ * size it is compressed again.
+ * </summary>
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 06.07.2022
  */
 public class SpaceSavingSummaryProfileStatistic extends SummaryProfileStatistic {
 
-    public SpaceSavingSummaryProfileStatistic(DataProfile refProf) {
+    private Map<Object, Integer> spaceSavingCounter = new HashMap<>();
+
+    private final int k;
+
+    public SpaceSavingSummaryProfileStatistic(DataProfile refProf, int k) {
         super(StatisticTitle.hist, StatisticCategory.histCat, refProf);
+        this.k = k;
     }
 
     @Override
     public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
+        for (Number value : list) {
+            // round doubles to 4 decimals
+            if (value instanceof Double) {
+                var symbols = DecimalFormatSymbols.getInstance();
+                symbols.setDecimalSeparator('.');
+                DecimalFormat df = new DecimalFormat("##.####", symbols);
+                value = Double.parseDouble(df.format(value));
+            }
 
+            // if the item is in the summary, increment it
+            if (spaceSavingCounter.containsKey(value)) {
+                spaceSavingCounter.put(value, spaceSavingCounter.get(value) + 1);
+            } else { // otherwise check if the summary is full and if so reduce all counters by one, remove the items with counters lower than 1
+                if (spaceSavingCounter.size() >= k) {
+                    var decrementedMap = spaceSavingCounter.entrySet().stream()
+                            .peek(objectIntegerEntry -> objectIntegerEntry.setValue(objectIntegerEntry.getValue() - 1))
+                            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+                    var entryToRemove = decrementedMap.entrySet()
+                            .stream()
+                            .filter(objectIntegerEntry -> objectIntegerEntry.getValue() == 0)
+                            .findAny()
+                            .orElseThrow();
+                    decrementedMap.remove(entryToRemove.getKey());
+                    decrementedMap.put(value, 1);
+                    spaceSavingCounter = decrementedMap;
+
+                } else {
+                    spaceSavingCounter.put(value, 1);
+                }
+            }
+        }
     }
 
     @Override
