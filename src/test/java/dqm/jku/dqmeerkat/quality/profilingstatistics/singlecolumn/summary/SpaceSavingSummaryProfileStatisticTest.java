@@ -96,11 +96,11 @@ class SpaceSavingSummaryProfileStatisticTest {
         var spaceSavingSummary = new SpaceSavingSummaryProfileStatistic(new DataProfile(recordList, dsdElement), k);
         List<Number> data = List.of(1, 1, 3, 2, 3, 6, 7, 1, 9, 6);
         var expected = new HashMap<>();
-        expected.put(1,3);
-        expected.put(3,2);
-        expected.put(6,2);
-        expected.put(7,1);
-        expected.put(9,1);
+        expected.put(1, 3);
+        expected.put(3, 2);
+        expected.put(6, 2);
+        expected.put(7, 1);
+        expected.put(9, 1);
         // when
         spaceSavingSummary.calculationNumeric(data, null);
         Map<Object, Integer> ret = (Map<Object, Integer>) spaceSavingSummary.getValue();
@@ -112,12 +112,56 @@ class SpaceSavingSummaryProfileStatisticTest {
     }
 
     @Test
-    void checkConformance() {
+    void checkConformance() throws NoSuchMethodException {
         // given
+        var k = 5;
+        var spaceSavingSummary = new SpaceSavingSummaryProfileStatistic(new DataProfile(recordList, dsdElement), k);
+        var spaceSavingSummary2 = new SpaceSavingSummaryProfileStatistic(new DataProfile(recordList, dsdElement), k);
+        List<Number> data = List.of(1, 1, 3, 2, 3, 6, 7, 1, 9, 6);
+        List<Number> data2 = List.of(1, 1, 1, 2, 3, 6, 7, 1, 9, 6);
+        spaceSavingSummary.calculationNumeric(data, null);
+        spaceSavingSummary2.calculationNumeric(data2, null);
 
         // when
+        var ret = spaceSavingSummary.checkConformance(spaceSavingSummary2, 0.1);
 
         // then
-        Assertions.fail("Not implemented");
+        Assertions.assertTrue(ret);
+    }
+
+    @Test
+    void checkConformanceEqual() throws NoSuchMethodException {
+        // given
+        var k = 5;
+        var spaceSavingSummary = new SpaceSavingSummaryProfileStatistic(new DataProfile(recordList, dsdElement), k);
+        var spaceSavingSummary2 = new SpaceSavingSummaryProfileStatistic(new DataProfile(recordList, dsdElement), k);
+        List<Number> data = List.of(1, 1, 3, 2, 3, 6, 7, 1, 9, 6);
+        List<Number> data2 = List.of(1, 1, 1, 2, 3, 6, 7, 1, 9, 6);
+        spaceSavingSummary.calculationNumeric(data, null);
+        spaceSavingSummary2.calculationNumeric(data2, null);
+
+        // when
+        var ret = spaceSavingSummary.checkConformance(spaceSavingSummary2, 0.1);
+
+        // then
+        Assertions.assertTrue(ret);
+    }
+
+    @Test
+    void checkConformanceFail() throws NoSuchMethodException {
+        // given
+        var k = 5;
+        var spaceSavingSummary = new SpaceSavingSummaryProfileStatistic(new DataProfile(recordList, dsdElement), k);
+        var spaceSavingSummary2 = new SpaceSavingSummaryProfileStatistic(new DataProfile(recordList, dsdElement), k);
+        List<Number> data = List.of(1, 1, 3, 2, 3, 6, 7, 1, 9, 6);
+        List<Number> data2 = List.of(6, 7, 5, 5, 7, 9, 8, 7, 6, 9);
+        spaceSavingSummary.calculationNumeric(data, null);
+        spaceSavingSummary2.calculationNumeric(data2, null);
+
+        // when
+        var ret = spaceSavingSummary.checkConformance(spaceSavingSummary2, 0.1);
+
+        // then
+        Assertions.assertFalse(ret);
     }
 }

@@ -4,6 +4,7 @@ import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
+import dqm.jku.dqmeerkat.util.Constants;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -74,8 +75,26 @@ public class SpaceSavingSummaryProfileStatistic extends SummaryProfileStatistic 
         return spaceSavingCounter.getClass();
     }
 
+    private static double calculateConformance(Map<Object, Integer> summary) {
+        return summary.size() * .1D + summary.entrySet()
+                .stream()
+                .mapToDouble(value -> ((int) value.getKey()) * value.getValue())
+                .average()
+                .orElse(0);
+    }
+
     @Override
     public boolean checkConformance(ProfileStatistic m, double threshold) {
-        return false;
+        var rdpVal = calculateConformance(spaceSavingCounter);
+        var dpValue = calculateConformance((Map<Object, Integer>) m.getValue());
+
+
+        double lowerBound = rdpVal - (Math.abs(rdpVal) * threshold);
+        double upperBound = rdpVal + (Math.abs(rdpVal) * threshold);
+
+        boolean conf = dpValue >= lowerBound && dpValue <= upperBound;
+        if (!conf && Constants.DEBUG)
+            System.out.println(this.getTitle() + " exceeded: " + dpValue + " not in [" + lowerBound + ", " + upperBound + "]");
+        return conf;
     }
 }
