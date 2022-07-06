@@ -3,9 +3,9 @@ package dqm.jku.dqmeerkat.quality.generator;
 import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
 
 /**
  * <h2>FilePatternRecognitionGeneratorTest</h2>
@@ -28,7 +28,7 @@ public class FilePatternRecognitionGeneratorTest {
         // when
         var ret = generator.generateSkeleton(profile);
         // then
-        assertEquals(NR_OF_STATISTICS, ret.size());
+        Assertions.assertEquals(NR_OF_STATISTICS, ret.size());
     }
 
     @Test
@@ -40,7 +40,7 @@ public class FilePatternRecognitionGeneratorTest {
         // when
         var ret = generator.generateSkeleton(profile);
         // then
-        assertEquals(0, ret.size());
+        Assertions.assertEquals(0, ret.size());
     }
 
     @Test
@@ -53,7 +53,7 @@ public class FilePatternRecognitionGeneratorTest {
         // when
         var ret = generator.generateSkeleton(profile);
         // then
-        assertEquals(0, ret.size());
+        Assertions.assertEquals(0, ret.size());
     }
 
     @Test
@@ -64,6 +64,6 @@ public class FilePatternRecognitionGeneratorTest {
         // when
         var ret = generator.generateSkeleton(profile);
         // then
-        assertEquals(0, ret.size());
+        Assertions.assertEquals(0, ret.size());
     }
 }
