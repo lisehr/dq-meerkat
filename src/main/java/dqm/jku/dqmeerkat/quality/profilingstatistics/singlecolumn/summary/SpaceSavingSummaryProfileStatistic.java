@@ -70,6 +70,11 @@ public class SpaceSavingSummaryProfileStatistic extends SummaryProfileStatistic 
     }
 
     @Override
+    public Class<?> getValueClass() {
+        return spaceSavingCounter.getClass();
+    }
+
+    @Override
     public boolean checkConformance(ProfileStatistic m, double threshold) {
         return false;
     }
