@@ -4,11 +4,10 @@ import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.util.Constants;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * <h2>IsolationForestSkeletonGeneratorTest</h2>
@@ -20,12 +19,12 @@ import static org.junit.Assert.assertEquals;
 public class IsolationForestSkeletonGeneratorTest {
     private static final int NR_OF_STATISTICS = 3;
 
-    @Before
+    @BeforeEach
     public void setup() {
         Constants.ENABLE_JEP = true; // temporarily "enable" it
     }
 
-    @After
+    @AfterEach
     public void teardown() {
         Constants.ENABLE_JEP = false;
     }
@@ -41,7 +40,7 @@ public class IsolationForestSkeletonGeneratorTest {
         // when
         var ret = generator.generateSkeleton(profile);
         // then
-        assertEquals(NR_OF_STATISTICS, ret.size());
+        Assertions.assertEquals(NR_OF_STATISTICS, ret.size());
     }
 
     @Test
@@ -54,7 +53,7 @@ public class IsolationForestSkeletonGeneratorTest {
         // when
         var ret = generator.generateSkeleton(profile);
         // then
-        assertEquals(0, ret.size());
+        Assertions.assertEquals(0, ret.size());
     }
 
     @Test
@@ -65,7 +64,7 @@ public class IsolationForestSkeletonGeneratorTest {
         // when
         var ret = generator.generateSkeleton(profile);
         // then
-        assertEquals(0, ret.size());
+        Assertions.assertEquals(0, ret.size());
     }
 
     @Test
@@ -76,6 +75,6 @@ public class IsolationForestSkeletonGeneratorTest {
         // when
         var ret = generator.generateSkeleton(profile);
         // then
-        assertEquals(0, ret.size());
+        Assertions.assertEquals(0, ret.size());
     }
 }

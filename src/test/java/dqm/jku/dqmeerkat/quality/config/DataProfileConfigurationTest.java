@@ -1,11 +1,11 @@
 package dqm.jku.dqmeerkat.quality.config;
 
-import org.junit.After;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
-import static org.junit.Assert.*;
 
 /**
  * <h2>DataProfileConfigurationTest</h2>
@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
  */
 public class DataProfileConfigurationTest {
 
-    @After
+    @AfterEach
     public void tearDown() {
         DataProfileConfiguration.resetInstance();
     }
@@ -29,9 +29,9 @@ public class DataProfileConfigurationTest {
         var config = DataProfileConfiguration.getInstance();
         var generators = config.getGenerators();
         // then
-        assertNotNull(config);
-        assertNotNull(generators);
-        assertEquals(2, generators.size());
+        Assertions.assertNotNull(config);
+        Assertions.assertNotNull(generators);
+        Assertions.assertEquals(2, generators.size());
     }
 
     @Test
@@ -43,11 +43,11 @@ public class DataProfileConfigurationTest {
         var configCached = DataProfileConfiguration.getInstance();
         var generators = config.getGenerators();
         // then
-        assertNotNull(config);
-        assertNotNull(configCached);
-        assertSame(config, configCached);
-        assertNotNull(generators);
-        assertEquals(2, generators.size());
+        Assertions.assertNotNull(config);
+        Assertions.assertNotNull(configCached);
+        Assertions.assertSame(config, configCached);
+        Assertions.assertNotNull(generators);
+        Assertions.assertEquals(2, generators.size());
     }
 
     @Test
@@ -64,8 +64,8 @@ public class DataProfileConfigurationTest {
                 "  }]");
         var generators = configJson.getGenerators();
         // then
-        assertNotNull(configJson);
-        assertEquals(1, generators.size());
+        Assertions.assertNotNull(configJson);
+        Assertions.assertEquals(1, generators.size());
     }
 
     @Test
@@ -90,8 +90,8 @@ public class DataProfileConfigurationTest {
                 "  }]");
         var generators = configJson.getGenerators();
         // then
-        assertNotNull(configJson);
-        assertEquals(3, generators.size());
+        Assertions.assertNotNull(configJson);
+        Assertions.assertEquals(3, generators.size());
     }
 
     @Test
@@ -104,9 +104,9 @@ public class DataProfileConfigurationTest {
         var generators = config.getGenerators();
 
         // then
-        assertNotNull(config);
-        assertNotNull(generators);
-        assertEquals(4, generators.size());
+        Assertions.assertNotNull(config);
+        Assertions.assertNotNull(generators);
+        Assertions.assertEquals(4, generators.size());
     }
 
 }

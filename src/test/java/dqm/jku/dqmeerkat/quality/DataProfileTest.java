@@ -10,14 +10,13 @@ import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.NumRows;
 import dqm.jku.dqmeerkat.util.Constants;
 import dqm.jku.dqmeerkat.util.FileSelectionUtil;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * <h2>DataProfileTest</h2>
@@ -31,7 +30,7 @@ public class DataProfileTest {
     private RecordList recordList;
     private Concept concept;
 
-    @Before
+    @BeforeEach
     public void setup() throws IOException {
         var conn = FileSelectionUtil.getConnectorCSV("src/main/resource/data/humidity_5000.csv");
         var ds = conn.loadSchema("http:/example.com", "hum");
@@ -40,7 +39,7 @@ public class DataProfileTest {
         recordList = conn.getRecordList(concept);
     }
 
-    @After
+    @AfterEach
     public void tearDown() {
         // ensure jep is always off unless specifically stated in test
         Constants.ENABLE_JEP = false;
@@ -56,9 +55,9 @@ public class DataProfileTest {
         var element = dataprofile.getElem();
 
         // then
-        assertNull(element);
-        assertEquals(0, statistics.size());
-        assertNull(uri);
+        Assertions.assertNull(element);
+        Assertions.assertEquals(0, statistics.size());
+        Assertions.assertNull(uri);
     }
 
     @Test
@@ -69,19 +68,19 @@ public class DataProfileTest {
                 "src/main/java/dqm/jku/dqmeerkat/resources/patterns/pattern_test.in");
         var statistics = dataprofile.getStatistics();
         // then
-        assertEquals(18, statistics.size());
+        Assertions.assertEquals(18, statistics.size());
 
     }
 
     @Test
-    public void testDefaultSkeletonJEPCtor() throws NoSuchMethodException {
+    public void testDefaultSkeletonJEPCtor() {
         // given
         Constants.ENABLE_JEP = true;
         // when/then
         /* as JEP is not linked and only tested, it is good enough for now to see if the exceptions triggers
         as that states that it tried to instantiate the JEP components
          */
-        assertThrows(UnsatisfiedLinkError.class, () -> new DataProfile(recordList, concept));
+        Assertions.assertThrows(UnsatisfiedLinkError.class, () -> new DataProfile(recordList, concept));
 
     }
 
@@ -92,7 +91,7 @@ public class DataProfileTest {
         var dataprofile = new DataProfile(recordList, dsdElement);
 
         // then
-        assertEquals(17, dataprofile.getStatistics().size());
+        Assertions.assertEquals(17, dataprofile.getStatistics().size());
     }
 
     @Test
@@ -110,7 +109,7 @@ public class DataProfileTest {
                 });
 
         // then
-        assertEquals(2, dataprofile.getStatistics().size());
+        Assertions.assertEquals(2, dataprofile.getStatistics().size());
     }
 
     @Test
@@ -123,7 +122,7 @@ public class DataProfileTest {
                 new FullSkeletonGenerator());
 
         // then
-        assertEquals(18, dataprofile.getStatistics().size());
+        Assertions.assertEquals(18, dataprofile.getStatistics().size());
     }
 
 }

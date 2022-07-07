@@ -14,8 +14,9 @@ import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
 import dqm.jku.dqmeerkat.util.FileSelectionUtil;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.net.URI;
@@ -26,7 +27,6 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.junit.Assert.*;
 
 /**
  * <h2>LEDCPIPatternRecognitionTest</h2>
@@ -41,7 +41,7 @@ public class LEDCPIPatternRecognitionTest {
     private Attribute dsdElement;
     private RecordList recordList;
 
-    @Before
+    @BeforeEach
     public void setup() throws IOException {
         var conn = FileSelectionUtil.getConnectorCSV("src/main/resource/data/humidity_5000.csv");
         var ds = conn.loadSchema("http:/example.com", "hum");
@@ -61,10 +61,10 @@ public class LEDCPIPatternRecognitionTest {
                 Path.of("src/main/resource/data/ledc-pi_definitions.json"));
 
         // then
-        assertNotNull(recognition);
-        assertEquals("Pattern recognition", recognition.getLabel());
-        assertEquals(StatisticTitle.pattern, recognition.getTitle());
-        assertEquals(StatisticCategory.dti, recognition.getCat());
+        Assertions.assertNotNull(recognition);
+        Assertions.assertEquals("Pattern recognition", recognition.getLabel());
+        Assertions.assertEquals(StatisticTitle.pattern, recognition.getTitle());
+        Assertions.assertEquals(StatisticCategory.dti, recognition.getCat());
     }
 
     @Test
@@ -92,10 +92,10 @@ public class LEDCPIPatternRecognitionTest {
                 measure);
 
         // then
-        assertNotNull(recognition);
-        assertEquals("Pattern recognition", recognition.getLabel());
-        assertEquals(StatisticTitle.pattern, recognition.getTitle());
-        assertEquals(StatisticCategory.dti, recognition.getCat());
+        Assertions.assertNotNull(recognition);
+        Assertions.assertEquals("Pattern recognition", recognition.getLabel());
+        Assertions.assertEquals(StatisticTitle.pattern, recognition.getTitle());
+        Assertions.assertEquals(StatisticCategory.dti, recognition.getCat());
     }
 
     @Test
@@ -120,10 +120,10 @@ public class LEDCPIPatternRecognitionTest {
                 predicates, "at.fh.scch/identifier#humidity", uri, LocalDate.now(), 1);
 
         // then
-        assertNotNull(recognition);
-        assertEquals("Pattern recognition", recognition.getLabel());
-        assertEquals(StatisticTitle.pattern, recognition.getTitle());
-        assertEquals(StatisticCategory.dti, recognition.getCat());
+       Assertions. assertNotNull(recognition);
+       Assertions. assertEquals("Pattern recognition", recognition.getLabel());
+       Assertions. assertEquals(StatisticTitle.pattern, recognition.getTitle());
+       Assertions. assertEquals(StatisticCategory.dti, recognition.getCat());
     }
 
     @Test
@@ -138,9 +138,9 @@ public class LEDCPIPatternRecognitionTest {
         var ret = recognition.getValue();
 
         // then
-        assertNotNull(ret);
-        assertTrue(ret instanceof Number);
-        assertEquals(.8598D, ret);
+       Assertions. assertNotNull(ret);
+       Assertions. assertTrue(ret instanceof Number);
+       Assertions. assertEquals(.8598D, ret);
     }
 
     @Test
@@ -157,9 +157,9 @@ public class LEDCPIPatternRecognitionTest {
         var ret = recognition.getValue();
 
         // then
-        assertNotNull(ret);
-        assertTrue(ret instanceof Number);
-        assertEquals(.8598D, ret);
+        Assertions.assertNotNull(ret);
+        Assertions.assertTrue(ret instanceof Number);
+        Assertions.assertEquals(.8598D, ret);
     }
 
     @Test
@@ -177,7 +177,7 @@ public class LEDCPIPatternRecognitionTest {
         // when
         var ret = recognition.checkConformance(other, 1D);
         // then
-        assertTrue(ret); // as ProfileStatistics are equal this should work out with threshold of 1
+        Assertions.assertTrue(ret); // as ProfileStatistics are equal this should work out with threshold of 1
     }
 
     @Test
@@ -201,6 +201,6 @@ public class LEDCPIPatternRecognitionTest {
         var ret = recognition.checkConformance(other, .1D);
 
         // then
-        assertFalse(ret);
+        Assertions.assertFalse(ret);
     }
 }
