@@ -34,9 +34,10 @@ public class IsolationForestSkeletonGeneratorTest {
     public void testGenerate() {
         // given
         var concept = new Concept();
-        var generator = new IsolationForestSkeletonGenerator(concept);
+        var generator = new IsolationForestSkeletonGenerator();
 
         var profile = new DataProfile();
+        profile.setElem(concept);
         // when
         var ret = generator.generateSkeleton(profile);
         // then
@@ -48,7 +49,7 @@ public class IsolationForestSkeletonGeneratorTest {
         // given
         Constants.ENABLE_JEP = false;
         var concept = new Concept(); // no data type is set!
-        var generator = new IsolationForestSkeletonGenerator(concept);
+        var generator = new IsolationForestSkeletonGenerator();
         var profile = new DataProfile();
         // when
         var ret = generator.generateSkeleton(profile);
@@ -59,7 +60,7 @@ public class IsolationForestSkeletonGeneratorTest {
     @Test
     public void testGenerateInvalid() {
         var attribute = new Attribute(); // concept is not correct type
-        var generator = new IsolationForestSkeletonGenerator(attribute);
+        var generator = new IsolationForestSkeletonGenerator();
         var profile = new DataProfile();
         // when
         var ret = generator.generateSkeleton(profile);
@@ -70,7 +71,7 @@ public class IsolationForestSkeletonGeneratorTest {
     @Test
     public void testGenerateElementNull() {
         // given
-        var generator = new IsolationForestSkeletonGenerator(null);
+        var generator = new IsolationForestSkeletonGenerator();
         var profile = new DataProfile();
         // when
         var ret = generator.generateSkeleton(profile);

@@ -59,14 +59,14 @@ public class DataProfile {
     }
 
     public DataProfile(RecordList rs, DSDElement d) throws NoSuchMethodException {
-        this(rs, d, new FullSkeletonGenerator(d), new IsolationForestSkeletonGenerator(d));
+        this(rs, d, new FullSkeletonGenerator(), new IsolationForestSkeletonGenerator());
     }
 
 
     public DataProfile(RecordList records, DSDElement d, String filePath)
             throws NoSuchMethodException {
-        this(records, d, new FullSkeletonGenerator(d), new IsolationForestSkeletonGenerator(d),
-                new FilePatternRecognitionGenerator(d, filePath));
+        this(records, d, new FullSkeletonGenerator(), new IsolationForestSkeletonGenerator(),
+                new FilePatternRecognitionGenerator(filePath));
     }
 
 
@@ -251,7 +251,9 @@ public class DataProfile {
         // Dependencies
         mlist.add(this.getStatistic(keyCand));
 
-        return mlist;
+        return mlist.stream()
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
     }
 
     /**

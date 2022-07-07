@@ -1,41 +1,60 @@
 package dqm.jku.dqmeerkat.demos.repeatability;
 
+import be.ugent.ledc.pi.grex.Grex;
+import be.ugent.ledc.pi.io.JSON;
+import be.ugent.ledc.pi.measure.QualityMeasure;
+import be.ugent.ledc.pi.measure.predicates.GrexComboPredicate;
+import be.ugent.ledc.pi.measure.predicates.GrexFormula;
+import be.ugent.ledc.pi.measure.predicates.PatternPredicate;
+import be.ugent.ledc.pi.measure.predicates.Predicate;
+import be.ugent.ledc.pi.property.Property;
+import be.ugent.ledc.pi.registries.MeasureRegistry;
 import com.influxdb.client.domain.WritePrecision;
 import dqm.jku.dqmeerkat.connectors.ConnectorCSV;
-import dqm.jku.dqmeerkat.dtdl.DtdlRetriever;
 import dqm.jku.dqmeerkat.dsd.DSDKnowledgeGraph;
 import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
-import dqm.jku.dqmeerkat.dtdl.dto.*;
 import dqm.jku.dqmeerkat.influxdb.InfluxDBConnectionV2;
+import dqm.jku.dqmeerkat.quality.BatchedDataProfiler;
 import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.DataProfileCollection;
 import dqm.jku.dqmeerkat.quality.DataProfiler;
-import dqm.jku.dqmeerkat.quality.BatchedDataProfiler;
+import dqm.jku.dqmeerkat.quality.config.DataProfileConfiguration;
 import dqm.jku.dqmeerkat.quality.conformance.CompositeRDPConformanceChecker;
 import dqm.jku.dqmeerkat.quality.conformance.RDPConformanceChecker;
+import dqm.jku.dqmeerkat.quality.generator.DataProfileSkeletonGenerator;
+import dqm.jku.dqmeerkat.quality.generator.FullSkeletonGenerator;
+import dqm.jku.dqmeerkat.quality.generator.LEDCPIGenerator;
 import dqm.jku.dqmeerkat.resources.export.json.dtdl.DataProfileExporter;
 import dqm.jku.dqmeerkat.resources.export.json.dtdl.DtdlGraphExporter;
 import dqm.jku.dqmeerkat.util.FileSelectionUtil;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * This class is to evaluate the extent to which the Tributech data loaded in batches of 1,000 records adheres to the RDP boundaries.
  * Threshold: 95 % (0.95)
  *
  * @author lisa
+ * @author meindl rainer.meindl@scch.at
  */
 public class RDPConformanceTributechData {
     private static final int FILEINDEX = 8;
@@ -44,9 +63,44 @@ public class RDPConformanceTributechData {
     // i wasted way too much time on this...
     private static final int BATCH_SIZE = 500;        // Set to 1 to simulate streaming data
 
+    private static final String LEDC_PI_DEFINITIONS = "src/main/resource/data/ledc-pi_definitions.json";
 
-    public static void main(String[] args) throws IOException, InterruptedException, NoSuchMethodException {
 
+    public static void main(String[] args) throws IOException, InterruptedException, NoSuchMethodException, URISyntaxException {
+        DataProfileConfiguration configuration = DataProfileConfiguration.getInstance();
+
+        // setup Property for LEDC-PI
+        Property property = Property.parseProperty("at.fh.scch/identifier#humidity");
+        var numberPattern = "(\\d?\\d)\\.(\\d+)"; // check if it is valid humidity (i.E. 2 numbers front n numbers back)
+
+        var predicates = new ArrayList<Predicate<String>>();
+        predicates.add(new PatternPredicate(numberPattern, "Not a valid double"));
+        predicates.add(new GrexComboPredicate(
+                new GrexFormula( // GREX to ensure the numbers are within realistic/acceptable boundaries
+                        Stream.of(new Grex("::int @1 branch& 20 > 60 <")).collect(Collectors.toList())
+
+                ),
+                numberPattern,
+                "Invalid Min/Max values"
+        ));
+
+        var measure = new QualityMeasure<>(predicates, property, new URI("https://www.scch.at"),
+                LocalDate.now(), 1); // create the mesure
+
+        // test it
+        var ret1 = measure.measure("22.33");
+        var ret2 = measure.measure("1.3");
+        var ret3 = measure.measure("61.3");
+        var ret4 = measure.measure("1.");
+        var ret5 = measure.measure("1213");
+        var ret6 = measure.measure("ß1.33434");
+
+        // Register in order to be able to dump it as JSON
+        MeasureRegistry
+                .getInstance()
+                .registerMeasure(measure);
+        // dump it into a file, in order to reuse it later
+        JSON.dump(new File("src/main/resource/data/ledc-pi_definitions.json"));
         // retrieve DTDL stuff
 //        DtdlRetriever retriever = new DtdlRetriever();
 //        var statisticDto = ProfileStatisticDto.builder()
@@ -70,9 +124,9 @@ public class RDPConformanceTributechData {
 ////        retriever.retrieve();
 //        retriever.post(graphWrapper);
 
+
         ConnectorCSV conn = FileSelectionUtil.getConnectorCSV("src/main/resource/data/humidity_5000.csv");
         conn.setLabel("humidity_data");
-        // TODO Add possibility for config (and generator) to datasource
         Datasource ds = conn.loadSchema("http:/example.com", "hum");
 
 //            var dtdlInterface = new DTDLImporter().importDataList("src/main/resource/data/dsd.json");
@@ -84,17 +138,15 @@ public class RDPConformanceTributechData {
             for (Concept c : ds.getConcepts()) {
                 RecordList rs = conn.getPartialRecordList(c, 0, RDP_SIZE);
                 for (Attribute a : c.getSortedAttributes()) {
-                    /* TODO Refactor the annotateProfile Methods somehow to include configs and corresponding
-                        skeleton generators
-                     */
-                    a.annotateProfile(rs);
+                    a.annotateProfile(rs, configuration.getGenerators().toArray(new DataProfileSkeletonGenerator[0]));
                     // also print rdp per column
                     System.out.println(a.getProfileString());
                 }
             }
 
 
-            DataProfiler profiler = new BatchedDataProfiler(ds, conn, BATCH_SIZE, conn.getLabel());
+            DataProfiler profiler = new BatchedDataProfiler(ds, conn, BATCH_SIZE, conn.getLabel(),
+                    DataProfileConfiguration.getInstance());
             var ret = profiler.generateProfiles();
 
             // export data profile DTDL
@@ -115,7 +167,7 @@ public class RDPConformanceTributechData {
 
             // Continuous generation of DPs and conformance checking
             RDPConformanceChecker confChecker = new CompositeRDPConformanceChecker(THRESHOLD, ds, conn, BATCH_SIZE,
-                    dsdKnowledgeGraph.getLabel());
+                    dsdKnowledgeGraph.getLabel(), DataProfileConfiguration.getInstance());
             confChecker.runConformanceCheck();
 //            // Finally: print evaluation report
             System.out.println(confChecker.getReport());

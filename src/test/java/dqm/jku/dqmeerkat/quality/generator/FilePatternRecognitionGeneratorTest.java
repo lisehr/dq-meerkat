@@ -21,9 +21,10 @@ public class FilePatternRecognitionGeneratorTest {
     public void testGenerate() {
         // given
         var attribute = new Attribute();
-        var generator = new FilePatternRecognitionGenerator(attribute, "");
+        var generator = new FilePatternRecognitionGenerator("");
         attribute.setDataType(String.class); // any datatype will do
         var profile = new DataProfile();
+        profile.setElem(attribute);
         // when
         var ret = generator.generateSkeleton(profile);
         // then
@@ -33,8 +34,8 @@ public class FilePatternRecognitionGeneratorTest {
     @Test
     public void testGenerateNull() {
         // given
-        var attribute = new Attribute(); // no data type is set!
-        var generator = new FilePatternRecognitionGenerator(attribute, "");
+        // no data type is set!
+        var generator = new FilePatternRecognitionGenerator("");
         var profile = new DataProfile();
         // when
         var ret = generator.generateSkeleton(profile);
@@ -45,9 +46,10 @@ public class FilePatternRecognitionGeneratorTest {
     @Test
     public void testGenerateInvalid() {
         // given
-        var attribute = new Concept(); // concept is not correct type
-        var generator = new FilePatternRecognitionGenerator(attribute, "");
+        Concept concept = new Concept();
+        var generator = new FilePatternRecognitionGenerator("");
         var profile = new DataProfile();
+        profile.setElem(concept);
         // when
         var ret = generator.generateSkeleton(profile);
         // then
@@ -57,7 +59,7 @@ public class FilePatternRecognitionGeneratorTest {
     @Test
     public void testGenerateElementNull() {
         // given
-        var generator = new FilePatternRecognitionGenerator(null, "");
+        var generator = new FilePatternRecognitionGenerator("");
         var profile = new DataProfile();
         // when
         var ret = generator.generateSkeleton(profile);

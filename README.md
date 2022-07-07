@@ -59,6 +59,14 @@ the provided docker environment with the following command:
 docker compose up -d
 ```
 
+### LEDC-PI
+
+DQ-MeeRKat uses [LEDC-PI](https://gitlab.com/ledc/ledc-pi) for encoding domain knowledge in form of (G)RegEx.
+It is defined as a dependency in maven, but the remote repository is not accessible (as of right now). Hence, it is
+necessary to clone and install both [LEDC-PI](https://gitlab.com/ledc/ledc-pi)
+and [LEDC-Core](https://gitlab.com/ledc/ledc-core) in the local .m2 repository. Simply clone the repositories and
+run `mvn clean install` in the root directory of each project.
+
 ### InfluxDB
 
 A common choice for storing CDQM results are time-series DBs like InfluxDB, which provides a Java API. DQ-MeeRKat does
