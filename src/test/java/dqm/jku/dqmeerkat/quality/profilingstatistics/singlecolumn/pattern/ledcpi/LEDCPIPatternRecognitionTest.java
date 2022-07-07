@@ -140,7 +140,7 @@ public class LEDCPIPatternRecognitionTest {
         // then
         assertNotNull(ret);
         assertTrue(ret instanceof Number);
-        assertEquals(1D, ret);
+        assertEquals(.8598D, ret);
     }
 
     @Test
@@ -159,7 +159,7 @@ public class LEDCPIPatternRecognitionTest {
         // then
         assertNotNull(ret);
         assertTrue(ret instanceof Number);
-        assertEquals(1D, ret);
+        assertEquals(.8598D, ret);
     }
 
     @Test

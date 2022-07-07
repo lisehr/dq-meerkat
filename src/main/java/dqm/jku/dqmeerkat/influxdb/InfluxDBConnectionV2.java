@@ -78,6 +78,13 @@ public class InfluxDBConnectionV2 implements InfluxDBConnection {
                 .orElseGet(() -> createAuthorisationForBucket(bucket)).getToken();
     }
 
+    public void deleteDatabase(String name) {
+        var bucket = influxDB.getBucketsApi().findBucketByName(name);
+        if (bucket != null) {
+            influxDB.getBucketsApi().deleteBucket(bucket.getId());
+        }
+    }
+
     /**
      * <p>Creates a new databse/bucket in influxdb. It is part of the organisation defined in this connection.
      * In order to use the given database, use the r/w token, that is returned by this method. This method throws

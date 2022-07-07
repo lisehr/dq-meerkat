@@ -1,7 +1,9 @@
 package dqm.jku.dqmeerkat.quality.generator;
 
-import dqm.jku.dqmeerkat.dsd.elements.DSDElement;
 import dqm.jku.dqmeerkat.quality.DataProfile;
+import dqm.jku.dqmeerkat.quality.config.ConfigComponent;
+import dqm.jku.dqmeerkat.quality.config.FullProfileConfigComponent;
+import dqm.jku.dqmeerkat.quality.generator.config.DataProfileSkeletonBuilder;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.*;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.datatypeinfo.*;
@@ -10,6 +12,7 @@ import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.histogram.Hist
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * <h2>FullSkeletonGenerator</h2>
@@ -21,7 +24,7 @@ import java.util.List;
  * @author meindl, rainer.meindl@scch.at
  * @since 17.05.2022
  */
-public class FullSkeletonGenerator extends DataProfileSkeletonGenerator {
+public class FullSkeletonGenerator extends DataProfileSkeletonGenerator{
     @Override
     protected List<ProfileStatistic> generateStatistics(DataProfile profile) {
         var statistics = new ArrayList<ProfileStatistic>();
