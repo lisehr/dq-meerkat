@@ -8,7 +8,9 @@ import java.util.List;
 
 /**
  * <h2>DataSummarySkeletonGenerator</h2>
- * <summary>TODO Insert do cheader</summary>
+ * <summary>
+ * {@link DataSummarySkeletonGenerator} implementation for {@link MGSummaryProfileStatistic}s.
+ * </summary>
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 06.07.2022

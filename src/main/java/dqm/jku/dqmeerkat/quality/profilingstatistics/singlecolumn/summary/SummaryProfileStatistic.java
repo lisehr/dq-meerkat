@@ -12,7 +12,9 @@ import java.util.stream.Collectors;
 
 /**
  * <h2>SummaryProfileStatistic</h2>
- * <summary>TODO Insert do cheader</summary>
+ * <summary>
+ * Base class for summarization algorithms using {@link Attribute} elements.
+ * </summary>
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 06.07.2022
