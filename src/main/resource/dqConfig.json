@@ -7,5 +7,10 @@
   {
     "type": "full",
     "someParameter": "test"
+  },
+  {
+    "type": "summary",
+    "summaryType": "SPACE_SAVING_SUMMARY",
+    "k": 50
   }
 ]

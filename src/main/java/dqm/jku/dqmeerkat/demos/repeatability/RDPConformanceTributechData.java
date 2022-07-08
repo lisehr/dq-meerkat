@@ -66,12 +66,8 @@ public class RDPConformanceTributechData {
     public static void main(String[] args) throws IOException, InterruptedException, NoSuchMethodException, URISyntaxException {
         // default configuration
         DataProfileConfiguration configuration = DataProfileConfiguration.getInstance();
-        // just the ledc pi for debugging
-//        var configuration = DataProfileConfiguration.getInstance("[{\n" +
-//                "    \"type\": \"ledcpi\",\n" +
-//                "    \"ledcPiId\": \"at.fh.scch/identifier#humidity:*\",\n" +
-//                "    \"ledcPiFilePath\": \"src/main/resource/data/ledc-pi_definitions.json\"\n" +
-//                "  }]");
+
+
         // setup Property for LEDC-PI
         Property property = Property.parseProperty("at.fh.scch/identifier#humidity");
         var numberPattern = "(\\d?\\d)\\.(\\d+)"; // check if it is valid humidity (i.E. 2 numbers front >0 numbers back)

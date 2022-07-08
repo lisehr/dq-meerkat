@@ -18,7 +18,8 @@ import lombok.Data;
         property = "type")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = LEDCPIConfigComponent.class, name = "domainKnowledge"),
-        @JsonSubTypes.Type(value = FullProfileConfigComponent.class, name = "full")
+        @JsonSubTypes.Type(value = FullProfileConfigComponent.class, name = "full"),
+        @JsonSubTypes.Type(value = DataSummaryConfigComponent.class, name = "summary")
 })
 @Data
 public class ConfigComponent {

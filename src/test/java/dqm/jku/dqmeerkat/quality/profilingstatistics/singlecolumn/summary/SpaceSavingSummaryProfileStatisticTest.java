@@ -46,6 +46,28 @@ class SpaceSavingSummaryProfileStatisticTest {
     }
 
     @Test
+    void calculationString() throws NoSuchMethodException, IOException {
+        // given
+        var conn = FileSelectionUtil.getConnectorCSV("src/test/resources/testRecordList.csv");
+        var ds = conn.loadSchema("http:/example.com", "hum");
+        var concept = ds.getConcepts().stream().findFirst().orElseThrow();
+        var stringDsdElement = concept.getAttribute("valueMetadataId");
+        var stringRecordList = conn.getRecordList(concept);
+        var k = 10;
+        var spaceSavingSummary = new SpaceSavingSummaryProfileStatistic(new DataProfile(stringRecordList, stringDsdElement), k);
+
+        // when
+        spaceSavingSummary.calculation(stringRecordList, null);
+        var ret = (Map<Object, Integer>) spaceSavingSummary.getValue();
+
+        // then
+        Assertions.assertNotNull(ret);
+        Assertions.assertNotNull(spaceSavingSummary.getValueClass());
+        Assertions.assertEquals(HashMap.class, spaceSavingSummary.getValueClass());
+        Assertions.assertEquals(k, ret.size());
+    }
+
+    @Test
     void getValueUninitialized() throws NoSuchMethodException {
         // given
         var k = 10;
