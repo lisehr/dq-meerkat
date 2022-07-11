@@ -36,7 +36,7 @@ class MGSummaryProfileStatisticTest {
         statistic.calculation(recordList, null);
         // then
         Map<Object, Integer> ret = (Map<Object, Integer>) statistic.getValue();
-        Assertions.assertEquals(32, ret.size());
+        Assertions.assertEquals(40, ret.size());
         Assertions.assertEquals(4, ret.get(22));
     }
 
@@ -49,7 +49,7 @@ class MGSummaryProfileStatisticTest {
         statistic.calculation(recordList, null);
         // then
         Map<Object, Integer> ret = (Map<Object, Integer>) statistic.getValue();
-        Assertions.assertEquals(32, ret.size());
+        Assertions.assertEquals(40, ret.size());
         Assertions.assertEquals(4, ret.get(22));
     }
 

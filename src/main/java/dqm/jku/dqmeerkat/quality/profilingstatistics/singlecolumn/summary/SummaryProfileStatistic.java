@@ -7,8 +7,8 @@ import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <h2>SummaryProfileStatistic</h2>
@@ -21,22 +21,26 @@ import java.util.stream.Collectors;
  */
 public abstract class SummaryProfileStatistic extends ProfileStatistic {
 
+    /**
+     * Representation of the summary. The key is the item and the value is the number of occurrences in the dataset.
+     */
+    protected Map<Object, Integer> summary = new HashMap<>();
+
     protected SummaryProfileStatistic(StatisticTitle title, StatisticCategory cat, DataProfile refProf) {
         super(title, cat, refProf);
     }
 
     @Override
     public void calculation(RecordList rs, Object oldVal) {
-        var attribute = (Attribute) getRefElem();
-        List<Number> list = rs.toList().stream()
-                .map(record -> (Number) record.getField(attribute.getLabel()))
-                .collect(Collectors.toList());
-        try {
-            calculationNumeric(list, null);
-        } catch (NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        }
+        rs.toList().stream()
+                .map(record -> record.getField(getRefElem().getLabel()))
+                .forEach(this::handleCounter);
+        setValue(summary);
+        setValueClass(summary.getClass());
+
     }
+
+    protected abstract void handleCounter(Object value);
 
     @Override
     public void update(RecordList rs) {

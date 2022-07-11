@@ -9,7 +9,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,11 +25,6 @@ import java.util.Map;
  */
 public class SpaceSavingSummaryProfileStatistic extends SummaryProfileStatistic {
 
-    /**
-     * Representation of the summary. The key is the item and the value is the number of occurrences in the dataset.
-     * It is, after execution, always of size k.
-     */
-    private final Map<Object, Integer> spaceSavingCounter = new HashMap<>();
 
     /**
      * the fixed size of the summary. when ths size is reached, the least frequent items are replaced with more
@@ -54,31 +48,35 @@ public class SpaceSavingSummaryProfileStatistic extends SummaryProfileStatistic 
                 DecimalFormat df = new DecimalFormat("##.####", symbols);
                 value = Double.parseDouble(df.format(value));
             }
+            handleCounter(value);
+        }
+        setValue(summary);
+        setValueClass(summary.getClass());
+    }
 
-            // if the item is in the summary, increment it
-            if (spaceSavingCounter.containsKey(value)) {
-                spaceSavingCounter.put(value, spaceSavingCounter.get(value) + 1);
-            } else { // otherwise check if the summary is full and if so replace the item with the lowest counter with the current item
-                if (spaceSavingCounter.size() >= k) {
-                    var entryToRemove = spaceSavingCounter.entrySet()
-                            .stream()
-                            .min(Map.Entry.comparingByValue())
-                            .orElseThrow();
-                    spaceSavingCounter.remove(entryToRemove.getKey());
-                    spaceSavingCounter.put(value, 1);
+    @Override
+    protected void handleCounter(Object value) {
+        // if the item is in the summary, increment it
+        if (summary.containsKey(value)) {
+            summary.put(value, summary.get(value) + 1);
+        } else { // otherwise check if the summary is full and if so replace the item with the lowest counter with the current item
+            if (summary.size() >= k) {
+                var entryToRemove = summary.entrySet()
+                        .stream()
+                        .min(Map.Entry.comparingByValue())
+                        .orElseThrow();
+                summary.remove(entryToRemove.getKey());
+                summary.put(value, 1);
 
-                } else {
-                    spaceSavingCounter.put(value, 1);
-                }
+            } else {
+                summary.put(value, 1);
             }
         }
-        setValue(spaceSavingCounter);
-        setValueClass(spaceSavingCounter.getClass());
     }
 
     @Override
     public Class<?> getValueClass() {
-        return spaceSavingCounter.getClass();
+        return summary.getClass();
     }
 
     private static double calculateConformance(@NotNull Map<Object, Integer> summary) {
@@ -91,7 +89,7 @@ public class SpaceSavingSummaryProfileStatistic extends SummaryProfileStatistic 
 
     @Override
     public boolean checkConformance(ProfileStatistic m, double threshold) {
-        var rdpVal = calculateConformance(spaceSavingCounter);
+        var rdpVal = calculateConformance(summary);
         var dpValue = calculateConformance((Map<Object, Integer>) m.getValue());
 
 
