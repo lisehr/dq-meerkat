@@ -33,7 +33,7 @@ public class MGSummaryProfileStatistic extends SummaryProfileStatistic {
     private final int k;
 
     public MGSummaryProfileStatistic(DataProfile refProf, int k) {
-        super(StatisticTitle.hist, StatisticCategory.histCat, refProf);
+        super(StatisticTitle.summary, StatisticCategory.summaryCategory, refProf);
         this.k = k;
     }
 
@@ -57,12 +57,8 @@ public class MGSummaryProfileStatistic extends SummaryProfileStatistic {
 
     @Override
     public boolean checkConformance(ProfileStatistic m, double threshold) {
-        var rdpAvg = summary.values().stream().mapToInt(i -> i).average().orElse(0);
-        var rdpVal = summary.size() * 0.1 + rdpAvg;
-
-        var dpMap = ((Map<Object, Integer>) m.getValue());
-        var dpAvg = dpMap.values().stream().mapToInt(i -> i).average().orElse(0);
-        var dpValue = dpMap.size() * 0.1 + dpAvg;
+        var rdpVal = calculateConformance();
+        var dpValue = ((SummaryProfileStatistic) m).calculateConformance();
 
 
         double lowerBound = rdpVal - (Math.abs(rdpVal) * threshold);
@@ -104,5 +100,14 @@ public class MGSummaryProfileStatistic extends SummaryProfileStatistic {
                 summary.put(value, 1);
             }
         }
+    }
+
+    @Override
+    public double calculateConformance() {
+        return summary.size() * .1D + summary.entrySet()
+                .stream()
+                .mapToDouble(value -> ((int) value.getKey()) * value.getValue())
+                .average()
+                .orElse(0);
     }
 }

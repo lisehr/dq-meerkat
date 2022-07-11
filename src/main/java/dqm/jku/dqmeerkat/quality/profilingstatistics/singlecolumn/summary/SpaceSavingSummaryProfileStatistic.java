@@ -5,7 +5,6 @@ import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
 import dqm.jku.dqmeerkat.util.Constants;
-import org.jetbrains.annotations.NotNull;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -33,7 +32,7 @@ public class SpaceSavingSummaryProfileStatistic extends SummaryProfileStatistic 
     private final int k;
 
     public SpaceSavingSummaryProfileStatistic(DataProfile refProf, int k) {
-        super(StatisticTitle.hist, StatisticCategory.histCat, refProf);
+        super(StatisticTitle.summary, StatisticCategory.summaryCategory, refProf);
         this.k = k;
     }
 
@@ -89,18 +88,16 @@ public class SpaceSavingSummaryProfileStatistic extends SummaryProfileStatistic 
         return summary.getClass();
     }
 
-    private static double calculateConformance(@NotNull Map<Object, Integer> summary) {
-        return summary.size() * .1D + summary.entrySet()
-                .stream()
-                .mapToDouble(value -> ((int) value.getKey()) * value.getValue())
-                .average()
-                .orElse(0);
+    public double calculateConformance() {
+        // TODO fixup when using generics -> use key values as well
+        var avgCounters = summary.values().stream().mapToInt(i -> i).average().orElse(0);
+        return (double) summary.size() / k + avgCounters / k;
     }
 
     @Override
     public boolean checkConformance(ProfileStatistic m, double threshold) {
-        var rdpVal = calculateConformance(summary);
-        var dpValue = calculateConformance((Map<Object, Integer>) m.getValue());
+        var rdpVal = calculateConformance();
+        var dpValue = ((SummaryProfileStatistic) m).calculateConformance();
 
 
         double lowerBound = rdpVal - (Math.abs(rdpVal) * threshold);

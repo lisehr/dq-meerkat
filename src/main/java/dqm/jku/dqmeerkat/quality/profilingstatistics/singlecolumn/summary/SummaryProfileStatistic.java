@@ -49,6 +49,18 @@ public abstract class SummaryProfileStatistic extends ProfileStatistic {
      */
     protected abstract void handleCounter(Object value);
 
+    /**
+     * Calculates a value used to determine conformance of this {@link ProfileStatistic} to another
+     *
+     * @return the conformance value as double
+     */
+    public abstract double calculateConformance();
+
+    @Override
+    public Object getNumericVal() {
+        return calculateConformance();
+    }
+
     @Override
     public void update(RecordList rs) {
         calculation(rs, getValue());

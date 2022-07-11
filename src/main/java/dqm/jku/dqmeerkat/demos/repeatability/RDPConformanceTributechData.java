@@ -59,7 +59,8 @@ public class RDPConformanceTributechData {
     private static final int BATCH_SIZE = 10;        // Set to 1 to simulate streaming data
 
     /**
-     * Boolean flag for debugging purposes. If set to true, the program will delete the database after the execution.
+     * Boolean flag for debugging purposes. If set to true, the program will delete the database before and after
+     * the execution.
      */
     private static final boolean DELETE_DATABASE = false;
 
@@ -181,6 +182,8 @@ public class RDPConformanceTributechData {
                         .orgId(properties.getProperty("db.orgId"))
                         .build()) {
                     influx.connect();
+                    if (DELETE_DATABASE)
+                        influx.deleteDatabase("default");
                     var token = influx.createDatabase("default", 0);
 
                     for (var collection : ret) {
