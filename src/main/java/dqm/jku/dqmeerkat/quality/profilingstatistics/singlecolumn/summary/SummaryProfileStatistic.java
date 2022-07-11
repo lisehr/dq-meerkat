@@ -40,6 +40,13 @@ public abstract class SummaryProfileStatistic extends ProfileStatistic {
 
     }
 
+    /**
+     * Handles the counter for the given value. Should be called by the calculation methods. The actual handling of
+     * the counter is done by the concrete implementations.
+     *
+     * @param value the value to handle, i.E. either add it to the summary, increment the counter of the value or
+     *              compress the summary.
+     */
     protected abstract void handleCounter(Object value);
 
     @Override

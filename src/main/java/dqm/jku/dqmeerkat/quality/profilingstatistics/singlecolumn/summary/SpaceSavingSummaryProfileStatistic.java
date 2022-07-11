@@ -54,6 +54,16 @@ public class SpaceSavingSummaryProfileStatistic extends SummaryProfileStatistic 
         setValueClass(summary.getClass());
     }
 
+    /**
+     * Handles the summary by applying the space saving algorithm. The algorithm is as follows:
+     * If the current value is not in the summary, it is added to the summary if the size of the summary is below k.
+     * If the size of the summary is above k, the least frequent item is removed from the summary and the current item is
+     * added in place of said item.
+     * If the item is already in the summary, the counter is incremented.
+     *
+     * @param value the value to handle, i.E. either add it to the summary, increment the counter of the value or
+     *              compress the summary.
+     */
     @Override
     protected void handleCounter(Object value) {
         // if the item is in the summary, increment it

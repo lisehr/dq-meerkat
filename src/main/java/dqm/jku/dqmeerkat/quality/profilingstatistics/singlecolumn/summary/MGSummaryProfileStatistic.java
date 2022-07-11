@@ -26,7 +26,6 @@ import java.util.stream.Collectors;
 public class MGSummaryProfileStatistic extends SummaryProfileStatistic {
 
 
-
     /**
      * parameter defining the maximum possible size of the summary. If the size of the summary exceeds this value, all
      * counters in the summary are decremented and any, that are below 1 are removed.
@@ -75,6 +74,14 @@ public class MGSummaryProfileStatistic extends SummaryProfileStatistic {
         return conf;
     }
 
+    /**
+     * Handles the counter for the given value. The counter is handled according to the MG Summary algorithm,
+     * which tries to maintain a summary of size k. Each new element is added to the summary with a counter of 1
+     * if the size k has not been reached. Otherwise, each counter is decremented and any, that are below 1 are removed.
+     *
+     * @param value the value to handle, i.E. either add it to the summary, increment the counter of the value or
+     *              compress the summary.
+     */
     @Override
     protected void handleCounter(Object value) {
         // if the item is in the summary, increment it
