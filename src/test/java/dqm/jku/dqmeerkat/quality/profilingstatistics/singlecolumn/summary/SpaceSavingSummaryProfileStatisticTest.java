@@ -5,7 +5,7 @@ import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.util.FileSelectionUtil;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -19,8 +19,8 @@ class SpaceSavingSummaryProfileStatisticTest {
     private static Attribute dsdElement;
     private static RecordList recordList;
 
-    @BeforeAll
-    static void setup() throws IOException {
+    @BeforeEach
+    void setup() throws IOException {
         var conn = FileSelectionUtil.getConnectorCSV("src/test/resources/testRecordList.csv");
         var ds = conn.loadSchema("http:/example.com", "hum");
         var concept = ds.getConcepts().stream().findFirst().orElseThrow();
