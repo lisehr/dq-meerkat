@@ -4,7 +4,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentNumberProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.NumRows;
 import dqm.jku.dqmeerkat.util.Constants;
@@ -22,7 +22,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
 
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/StandardDeviation")
-public class StandardDeviation extends DependentProfileStatistic<Double> {
+public class StandardDeviation extends DependentNumberProfileStatistic<Double> {
     public StandardDeviation(DataProfile d) {
         super(sd, dti, d);
     }
@@ -54,11 +54,9 @@ public class StandardDeviation extends DependentProfileStatistic<Double> {
     private Double addValue(Double current, Double toAdd, Double avg) {
         if (toAdd == null)
             return current;
-        Attribute a = (Attribute) super.getRefElem();
-
 //        if (a.getClass().equals(String.class)) // TODO move to string implementation
 //            return (int) current + (int) Math.pow(((String) toAdd).length() - ((String) avg).length(), 2);
-        return (double) current + Math.pow((((Number) toAdd).doubleValue() - ((Number) avg).doubleValue()), 2);
+        return current + Math.pow((((Number) toAdd).doubleValue() - ((Number) avg).doubleValue()), 2);
     }
 
     /**
@@ -70,7 +68,6 @@ public class StandardDeviation extends DependentProfileStatistic<Double> {
     private Double performAveraging(Double sum) {
         if (((long) super.getRefProf().getStatistic(numrows).getValue()) == 1)
             return sum;
-        Attribute a = (Attribute) super.getRefElem();
         return Math.sqrt((sum / ((long) super.getRefProf().getStatistic(numrows).getValue() - 1)));
     }
 
@@ -126,14 +123,8 @@ public class StandardDeviation extends DependentProfileStatistic<Double> {
      *
      * @return the reference value
      */
-    private Object getBasicInstance() {
-        Attribute a = (Attribute)
-                super.getRefElem();
-        if (a.getDataType().equals(Long.class))
-            return Long.valueOf(0);
-        else if (a.getDataType().equals(Double.class))
-            return Double.valueOf(0);
-        else return Integer.valueOf(0);
+    protected Double getBasicInstance() {
+        return 0D;
     }
 
     @Override
