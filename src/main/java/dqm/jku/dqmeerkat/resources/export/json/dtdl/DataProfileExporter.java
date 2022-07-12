@@ -5,6 +5,7 @@ import dqm.jku.dqmeerkat.dtdl.DtdlInterface;
 import dqm.jku.dqmeerkat.dtdl.DtdlObject;
 import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.resources.export.SchemaExporter;
 import lombok.SneakyThrows;
 
@@ -19,7 +20,7 @@ import java.util.List;
  * @since 29.04.2022
  */
 public class DataProfileExporter extends AbstractSchemaExporter<DataProfile> {
-    private final SchemaExporter<AbstractProfileStatistic> profileStatisticSchemaExporter = new ProfileStatisticsExporter();
+    private final SchemaExporter<ProfileStatistic<?>> profileStatisticSchemaExporter = new ProfileStatisticsExporter();
 
     @SneakyThrows
     @Override

@@ -88,12 +88,12 @@ public class NullValuesPercentage extends DependentProfileStatistic {
 
     @Override
     protected void dependencyCheck() {
-        AbstractProfileStatistic sizeM = super.getRefProf().getStatistic(numrows);
+        var sizeM = super.getRefProf().getStatistic(numrows);
         if (sizeM == null) {
             sizeM = new NumRows(super.getRefProf());
             super.getRefProf().addStatistic(sizeM);
         }
-        AbstractProfileStatistic nullV = super.getRefProf().getStatistic(nullVal);
+        var nullV = super.getRefProf().getStatistic(nullVal);
         if (nullV == null) {
             nullV = new NullValues(super.getRefProf());
             super.getRefProf().addStatistic(nullV);

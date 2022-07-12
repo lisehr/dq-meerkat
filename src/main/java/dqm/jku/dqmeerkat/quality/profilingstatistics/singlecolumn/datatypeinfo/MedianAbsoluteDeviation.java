@@ -123,12 +123,12 @@ public class MedianAbsoluteDeviation extends DependentProfileStatistic {
 
     @Override
     protected void dependencyCheck() {
-        AbstractProfileStatistic numrowM = super.getRefProf().getStatistic(numrows);
+        var numrowM = super.getRefProf().getStatistic(numrows);
         if (numrowM == null) {
             numrowM = new NumRows(super.getRefProf());
             super.getRefProf().addStatistic(numrowM);
         }
-        AbstractProfileStatistic medM = super.getRefProf().getStatistic(med);
+        var medM = super.getRefProf().getStatistic(med);
         if (medM == null) {
             medM = new Median(super.getRefProf());
             super.getRefProf().addStatistic(medM);

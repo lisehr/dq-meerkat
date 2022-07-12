@@ -4,6 +4,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.elements.DSDElement;
 import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.multicolumn.outliers.IsolationForest;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.multicolumn.outliers.IsolationForestPercentage;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.multicolumn.outliers.LocalOutlierFactor;
@@ -32,8 +33,8 @@ public class IsolationForestSkeletonGenerator extends DataProfileSkeletonGenerat
     }
 
     @Override
-    protected List<AbstractProfileStatistic> generateStatistics(DataProfile profile) {
-        List<AbstractProfileStatistic> statistics = new ArrayList<>();
+    protected List<ProfileStatistic<?>> generateStatistics(DataProfile profile) {
+        List<ProfileStatistic<?>> statistics = new ArrayList<>();
         AbstractProfileStatistic isoFor = new IsolationForest(profile);
         statistics.add(isoFor);
         AbstractProfileStatistic isoForPer = new IsolationForestPercentage(profile);

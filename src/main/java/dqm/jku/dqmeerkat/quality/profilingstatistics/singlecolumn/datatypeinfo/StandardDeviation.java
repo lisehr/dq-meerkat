@@ -157,12 +157,12 @@ public class StandardDeviation extends DependentProfileStatistic {
 
     @Override
     protected void dependencyCheck() {
-        AbstractProfileStatistic numrowM = super.getRefProf().getStatistic(numrows);
+        var numrowM = super.getRefProf().getStatistic(numrows);
         if (numrowM == null) {
             numrowM = new NumRows(super.getRefProf());
             super.getRefProf().addStatistic(numrowM);
         }
-        AbstractProfileStatistic avgM = super.getRefProf().getStatistic(avg);
+        var avgM = super.getRefProf().getStatistic(avg);
         if (avgM == null) {
             avgM = new Average(super.getRefProf());
             super.getRefProf().addStatistic(avgM);

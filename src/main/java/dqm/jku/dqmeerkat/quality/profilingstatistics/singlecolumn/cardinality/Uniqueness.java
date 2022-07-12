@@ -89,12 +89,12 @@ public class Uniqueness extends DependentProfileStatistic {
 
     @Override
     protected void dependencyCheck() {
-        AbstractProfileStatistic sizeM = super.getRefProf().getStatistic(numrows);
+        ProfileStatistic<?> sizeM = super.getRefProf().getStatistic(numrows);
         if (sizeM == null) {
             sizeM = new NumRows(super.getRefProf());
             super.getRefProf().addStatistic(sizeM);
         }
-        AbstractProfileStatistic cardM = super.getRefProf().getStatistic(card);
+        var cardM = super.getRefProf().getStatistic(card);
         if (cardM == null) {
             cardM = new Cardinality(super.getRefProf());
             super.getRefProf().addStatistic(cardM);

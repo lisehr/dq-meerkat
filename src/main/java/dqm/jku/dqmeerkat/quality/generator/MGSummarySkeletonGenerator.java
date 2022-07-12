@@ -1,7 +1,7 @@
 package dqm.jku.dqmeerkat.quality.generator;
 
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.summary.MGSummaryProfileStatistic;
 
 import java.util.List;
@@ -23,7 +23,7 @@ public class MGSummarySkeletonGenerator extends DataSummarySkeletonGenerator {
     }
 
     @Override
-    protected List<AbstractProfileStatistic> generateStatistics(DataProfile profile) {
+    protected List<ProfileStatistic<?>> generateStatistics(DataProfile profile) {
         return List.of(new MGSummaryProfileStatistic(profile, k));
     }
 }

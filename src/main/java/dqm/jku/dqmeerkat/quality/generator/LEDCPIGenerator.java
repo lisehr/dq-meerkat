@@ -1,7 +1,7 @@
 package dqm.jku.dqmeerkat.quality.generator;
 
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.pattern.ledcpi.LEDCPIPatternRecognition;
 
 import java.nio.file.Path;
@@ -25,7 +25,7 @@ public class LEDCPIGenerator extends DataProfileSkeletonGenerator {
     }
 
     @Override
-    protected List<AbstractProfileStatistic> generateStatistics(DataProfile profile) {
+    protected List<ProfileStatistic<?>> generateStatistics(DataProfile profile) {
         return List.of(new LEDCPIPatternRecognition(profile, propertyName, Path.of(filepath)));
 
     }

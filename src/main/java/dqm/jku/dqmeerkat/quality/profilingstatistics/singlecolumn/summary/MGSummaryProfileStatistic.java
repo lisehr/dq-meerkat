@@ -57,7 +57,8 @@ public class MGSummaryProfileStatistic extends SummaryProfileStatistic {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {        var rdpVal = calculateConformance();
+    public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {
+        var rdpVal = calculateConformance();
         var dpValue = ((SummaryProfileStatistic) m).calculateConformance();
 
 

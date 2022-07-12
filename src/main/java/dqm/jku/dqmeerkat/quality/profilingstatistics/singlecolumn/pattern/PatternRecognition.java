@@ -122,7 +122,7 @@ public class PatternRecognition extends DependentProfileStatistic {
 
     @Override
     protected void dependencyCheck() {
-        AbstractProfileStatistic sizeM = super.getRefProf().getStatistic(numrows);
+        var sizeM = super.getRefProf().getStatistic(numrows);
         if (sizeM == null) {
             sizeM = new NumRows(super.getRefProf());
             super.getRefProf().addStatistic(sizeM);

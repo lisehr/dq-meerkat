@@ -183,7 +183,7 @@ public abstract class ProfileStatistic<T> implements Comparable<ProfileStatistic
      * @return position if found, -1 otherwise
      */
     public int getMetricPos(StatisticTitle t) {
-        List<AbstractProfileStatistic> metrics = this.getRefProf().getStatistics();
+        List<ProfileStatistic<?>> metrics = this.getRefProf().getStatistics();
         for (int i = 0; i < metrics.size(); i++) if (metrics.get(i).getLabel().equals(t.getLabel())) return i;
         return -1;
     }
@@ -219,5 +219,5 @@ public abstract class ProfileStatistic<T> implements Comparable<ProfileStatistic
      * @throws NoSuchMethodException in cases like null values, since here records
      *                               are not allowed for processing
      */
-    public abstract void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException;
+    public abstract void calculationNumeric(List<Number> list, T oldVal) throws NoSuchMethodException;
 }

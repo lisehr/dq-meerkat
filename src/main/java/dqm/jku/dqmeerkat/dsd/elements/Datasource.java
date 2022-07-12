@@ -7,6 +7,7 @@ import java.util.TreeSet;
 import java.util.function.Predicate;
 
 import dqm.jku.dqmeerkat.influxdb.InfluxDBConnection;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFContainer;
@@ -211,7 +212,7 @@ public class Datasource extends DSDElement {
 		builder.namedGraph(prefix +":"+ concept.getLabel())
 		.subject(prefix+ ":"+ a.getLabel())
 		.add("dsd:hasDataprofile" ,prefix + ":" + a.getLabel() + "/" + "DataProfile");
-		for(AbstractProfileStatistic metric : profile.getStatistics()) {
+		for(ProfileStatistic<?> metric : profile.getStatistics()) {
 
 			if(metric.getValue() != null) {
 				builder.namedGraph(prefix +":"+ concept.getLabel())

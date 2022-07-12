@@ -2,11 +2,13 @@ package dqm.jku.dqmeerkat.quality.conformance;
 
 import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static dqm.jku.dqmeerkat.util.GenericsUtil.cast;
 
 /**
  * <h2>AbstractConformanceChecker</h2>
@@ -47,15 +49,16 @@ public abstract class AbstractConformanceChecker implements RDPConformanceChecke
 
         int conf = 0;
 
-        List<AbstractProfileStatistic> profileStatistics;
+        List<ProfileStatistic<?>> profileStatistics;
         if (batchSize != 1) {
             profileStatistics = rdp.getNonDependentStatistics();
         } else {
             profileStatistics = rdp.getNonAggregateStatistics();
         }
 
-        for (AbstractProfileStatistic rdpMetric : profileStatistics) {
-            if (rdpMetric.checkConformance(dp.getStatistic(rdpMetric.getTitle()), threshold))
+        for (var rdpMetric : profileStatistics) {
+            // TODO test this cast
+            if (rdpMetric.checkConformance(cast(dp.getStatistic(rdpMetric.getTitle())), threshold))
                 conf++;
         }
 

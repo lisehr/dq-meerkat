@@ -2,6 +2,7 @@ package dqm.jku.dqmeerkat.quality.generator;
 
 import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.*;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.datatypeinfo.*;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.dependency.KeyCandidate;
@@ -22,9 +23,9 @@ import java.util.List;
  */
 public class FullSkeletonGenerator extends DataProfileSkeletonGenerator{
     @Override
-    protected List<AbstractProfileStatistic> generateStatistics(DataProfile profile) {
-        var statistics = new ArrayList<AbstractProfileStatistic>();
-        AbstractProfileStatistic size = new NumRows(profile);
+    protected List<ProfileStatistic<?>> generateStatistics(DataProfile profile) {
+        List<ProfileStatistic<?>> statistics = new ArrayList<>();
+        ProfileStatistic<?> size = new NumRows(profile);
         statistics.add(size);
         AbstractProfileStatistic min = new Minimum(profile);
         statistics.add(min);
@@ -34,7 +35,7 @@ public class FullSkeletonGenerator extends DataProfileSkeletonGenerator{
         statistics.add(avg);
         AbstractProfileStatistic med = new Median(profile);
         statistics.add(med);
-        AbstractProfileStatistic card = new Cardinality(profile);
+        var card = new Cardinality(profile);
         statistics.add(card);
         AbstractProfileStatistic uniq = new Uniqueness(profile);
         statistics.add(uniq);

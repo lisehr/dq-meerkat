@@ -5,6 +5,7 @@ import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.NumberProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.util.Constants;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
@@ -26,14 +27,14 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.card;
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/cardinality/Cardinality")
-public class Cardinality extends AbstractProfileStatistic {
+public class Cardinality extends NumberProfileStatistic<Long> {
 
     public Cardinality(DataProfile d) {
         super(card, cardCat, d);
     }
 
     @Override
-    public void calculation(RecordList rs, Object oldVal) {
+    public void calculation(RecordList rs, Long oldVal) {
         Attribute a = (Attribute) super.getRefElem();
         Set<Number> set = new HashSet<Number>();
         Set<String> strSet = new HashSet<String>();
@@ -56,7 +57,7 @@ public class Cardinality extends AbstractProfileStatistic {
     }
 
     @Override
-    public void calculationNumeric(List<Number> list, Object oldVal) {
+    public void calculationNumeric(List<Number> list, Long oldVal) {
         Set<Number> set = new HashSet<Number>();
         set.addAll(list);
         this.setValue((long) set.size());
@@ -74,7 +75,7 @@ public class Cardinality extends AbstractProfileStatistic {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<Long> m, double threshold) {
         double rdpVal = ((Number) this.getNumericVal()).doubleValue();
         double dpValue = ((Number) m.getValue()).doubleValue();
 

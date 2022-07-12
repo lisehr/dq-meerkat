@@ -8,7 +8,7 @@ import dqm.jku.dqmeerkat.quality.generator.DataProfileSkeletonGenerator;
 import dqm.jku.dqmeerkat.quality.generator.FilePatternRecognitionGenerator;
 import dqm.jku.dqmeerkat.quality.generator.FullSkeletonGenerator;
 import dqm.jku.dqmeerkat.quality.generator.IsolationForestSkeletonGenerator;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.graphmetrics.*;
 import dqm.jku.dqmeerkat.util.Miscellaneous.DBType;
@@ -22,6 +22,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
+import static dqm.jku.dqmeerkat.util.GenericsUtil.cast;
 
 /**
  * Class for creating the data structure of a DataProfile. A DataProfile (DP)
@@ -32,7 +33,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/DataProfile")
 public class DataProfile {
-    private List<AbstractProfileStatistic> statistics = new ArrayList<>(); // a list containing all profile metrics
+    private List<ProfileStatistic<?>> statistics = new ArrayList<>(); // a list containing all profile metrics
     private DSDElement elem; // DSDElement, where this DataProfile is annotated to
     private List<DataProfileSkeletonGenerator> generators;
     private String uri; // uniform resource identifier of this profile
@@ -109,15 +110,15 @@ public class DataProfile {
      */
     private void calculateSingleColumn(RecordList rl) throws NoSuchMethodException {
         List<Number> l = createValueList(rl);
-        for (AbstractProfileStatistic p : statistics) {
-            if (needsRecordListCalc(p)) p.calculation(rl, p.getValue());
-            else p.calculationNumeric(l, p.getValue());
+        for (ProfileStatistic<?> p : statistics) {
+            if (needsRecordListCalc(p)) p.calculation(rl, cast(p.getValue()));
+            else p.calculationNumeric(l, cast(p.getValue()));
         }
     }
 
     private void calculateMultiColumn(RecordList rl) {
-        for (AbstractProfileStatistic p : statistics) {
-            p.calculation(rl, p.getValue());
+        for (ProfileStatistic<?> p : statistics) {
+            p.calculation(rl, cast(p.getValue()));
         }
     }
 
@@ -129,7 +130,7 @@ public class DataProfile {
      * @return true, if the profile metric needs to be calculated with a record
      * list, false if not
      */
-    private boolean needsRecordListCalc(AbstractProfileStatistic p) {
+    private boolean needsRecordListCalc(ProfileStatistic<?> p) {
         return p.getTitle().equals(unique) || p.getTitle().equals(keyCand) || p.getTitle().equals(nullValP) || p.getTitle().equals(nullVal) || p.getTitle().equals(numrows) || p.getTitle().equals(card) || p.getTitle().equals(hist);
     }
 
@@ -178,8 +179,8 @@ public class DataProfile {
 
         // TODO: Check if only printing the outlier indices makes sense --> therefore the following line is temporarily commented out
         //if (metrics.stream().anyMatch(p -> p.getCat().equals(MetricCategory.out))) System.out.println("Outlier Detection shows all record numbers that contain outliers!");
-        SortedSet<AbstractProfileStatistic> metricSorted = new TreeSet<>(statistics);
-        for (AbstractProfileStatistic p : metricSorted) {
+        SortedSet<ProfileStatistic<?>> metricSorted = new TreeSet<>(statistics);
+        for (ProfileStatistic<?> p : metricSorted) {
             System.out.println(p.toString());
         }
         System.out.println();
@@ -197,9 +198,9 @@ public class DataProfile {
             sb.append("Strings use String length for value length metrics!");
             sb.append('\n');
         }
-        SortedSet<AbstractProfileStatistic> metricSorted = new TreeSet<>();
+        SortedSet<ProfileStatistic<?>> metricSorted = new TreeSet<>();
         metricSorted.addAll(statistics);
-        for (AbstractProfileStatistic p : metricSorted) {
+        for (ProfileStatistic<?> p : metricSorted) {
             sb.append(p.toString());
             sb.append('\n');
         }
@@ -214,8 +215,17 @@ public class DataProfile {
      */
     @RDF("dsd:includesMetric")
     @RDFContainer
-    public List<AbstractProfileStatistic> getStatistics() {
+    public List<ProfileStatistic<?>> getStatistics() {
         return statistics;
+    }
+
+    /**
+     * Sets the metrics (security threat but used by rdfbeans)
+     *
+     * @param statistics the metrics to set
+     */
+    public void setStatistics(List<ProfileStatistic<?>> statistics) {
+        this.statistics = statistics;
     }
 
     /**
@@ -223,8 +233,8 @@ public class DataProfile {
      *
      * @return set of selected metrics
      */
-    public List<AbstractProfileStatistic> getNonDependentStatistics() {
-        List<AbstractProfileStatistic> mlist = new ArrayList<AbstractProfileStatistic>();
+    public List<ProfileStatistic<?>> getNonDependentStatistics() {
+        List<ProfileStatistic<?>> mlist = new ArrayList<ProfileStatistic<?>>();
         // Cardinalities
         // No number of rows and metrics that depend on the num rows (RDP size != DP size)
         mlist.add(this.getStatistic(StatisticTitle.card));
@@ -261,8 +271,8 @@ public class DataProfile {
      *
      * @return set of selected metrics
      */
-    public List<AbstractProfileStatistic> getNonAggregateStatistics() {
-        List<AbstractProfileStatistic> mlist = new ArrayList<AbstractProfileStatistic>();
+    public List<ProfileStatistic<?>> getNonAggregateStatistics() {
+        List<ProfileStatistic<?>> mlist = new ArrayList<ProfileStatistic<?>>();
         // Cardinalities
         // No number of rows and metrics that depend on the num rows (RDP size != DP size)
         mlist.add(this.getStatistic(StatisticTitle.nullVal));
@@ -285,20 +295,11 @@ public class DataProfile {
     }
 
     /**
-     * Sets the metrics (security threat but used by rdfbeans)
-     *
-     * @param statistics the metrics to set
-     */
-    public void setStatistics(List<AbstractProfileStatistic> statistics) {
-        this.statistics = statistics;
-    }
-
-    /**
      * Method for adding a metric via a data profile object
      *
      * @param m the metric to be added
      */
-    public void addStatistic(AbstractProfileStatistic m) {
+    public void addStatistic(ProfileStatistic<?> m) {
         this.statistics.add(m);
     }
 
@@ -308,20 +309,11 @@ public class DataProfile {
      * @param title the label to compare with the profile metrics
      * @return ProfileMetric if found, null otherwise
      */
-    public AbstractProfileStatistic getStatistic(StatisticTitle title) {
-        for (AbstractProfileStatistic m : statistics) {
+    public ProfileStatistic<?> getStatistic(StatisticTitle title) {
+        for (ProfileStatistic<?> m : statistics) {
             if (m.getTitle().equals(title)) return m;
         }
         return null;
-    }
-
-    /**
-     * Sets the dsd element (security threat but used by rdfbeans)
-     *
-     * @param elem the elem to set
-     */
-    public void setElem(DSDElement elem) {
-        this.elem = elem;
     }
 
     /**
@@ -335,6 +327,15 @@ public class DataProfile {
     }
 
     /**
+     * Sets the dsd element (security threat but used by rdfbeans)
+     *
+     * @param elem the elem to set
+     */
+    public void setElem(DSDElement elem) {
+        this.elem = elem;
+    }
+
+    /**
      * Method for creating a point of measure for InfluxDB.
      *
      * @param measure the builder for a measurement
@@ -342,9 +343,9 @@ public class DataProfile {
      */
     @Deprecated
     public Point createMeasuringPoint(Builder measure) {
-        SortedSet<AbstractProfileStatistic> metricSorted = new TreeSet<>();
+        SortedSet<ProfileStatistic<?>> metricSorted = new TreeSet<>();
         metricSorted.addAll(statistics);
-        for (AbstractProfileStatistic p : metricSorted) {
+        for (ProfileStatistic<?> p : metricSorted) {
             if (!p.getTitle().equals(hist) && !p.getTitle().equals(mad))
                 addMeasuringValue(p, measure);
         }
@@ -362,10 +363,10 @@ public class DataProfile {
      */
     public com.influxdb.client.write.Point createMeasuringPoint(String measurementDescriptor, long timestampMillis,
                                                                 WritePrecision writePrecision) {
-        SortedSet<AbstractProfileStatistic> metricSorted = new TreeSet<>(statistics);
+        SortedSet<ProfileStatistic<?>> metricSorted = new TreeSet<>(statistics);
         com.influxdb.client.write.Point point = new com.influxdb.client.write.Point(measurementDescriptor)
                 .time(timestampMillis, writePrecision);
-        for (AbstractProfileStatistic p : metricSorted) {
+        for (ProfileStatistic<?> p : metricSorted) {
             if (!p.getTitle().equals(hist) && !p.getTitle().equals(mad))
                 addMeasuringValue(p, point);
         }
@@ -379,7 +380,7 @@ public class DataProfile {
      * @param p       the profile metric to add
      * @param measure the builder for a measurement
      */
-    private void addMeasuringValue(AbstractProfileStatistic p, com.influxdb.client.write.Point measure) {
+    private void addMeasuringValue(ProfileStatistic<?> p, com.influxdb.client.write.Point measure) {
         try {
             // TODO refactor for readability and extensability when using generics in ProfileStatistics
             if (p.getValue() == null)
@@ -406,7 +407,7 @@ public class DataProfile {
      * @param p       the profile metric to add
      * @param measure the builder for a measurement
      */
-    private void addMeasuringValue(AbstractProfileStatistic p, Builder measure) {
+    private void addMeasuringValue(ProfileStatistic<?> p, Builder measure) {
         try {
             if (p.getValue() == null || p.getLabel().equals(pattern.getLabel()))
                 measure.addField(p.getLabel(), 0); // TODO: replace 0 with NaN, when hitting v2.0 of influxdb
@@ -424,7 +425,7 @@ public class DataProfile {
         }
     }
 
-    public boolean profileStatisticIsNumeric(AbstractProfileStatistic profileStatistic) {
+    public boolean profileStatisticIsNumeric(ProfileStatistic<?> profileStatistic) {
         return profileStatistic.getTitle() == avg || profileStatistic.getTitle() == sd || profileStatistic.getTitle() == max || profileStatistic.getTitle() == min || profileStatistic.getTitle() == med
                 || profileStatistic.getTitle() == nullValP || profileStatistic.getTitle() == unique;
 
@@ -440,17 +441,17 @@ public class DataProfile {
             ReferenceAssociation association = (ReferenceAssociation) c.getDatasource().getAssociation("Ref/" + c.getLabelOriginal());
             String neoType = association.getNeo4JType();
 
-            AbstractProfileStatistic size = new NumEntries(this);
+            ProfileStatistic<?> size = new NumEntries(this);
             statistics.add(size);
-            AbstractProfileStatistic distinctEntries = new DistinctEntries(this);
+            ProfileStatistic<?> distinctEntries = new DistinctEntries(this);
             statistics.add(distinctEntries);
-            AbstractProfileStatistic type = new GraphType(this);
+            ProfileStatistic<?> type = new GraphType(this);
             statistics.add(type);
-            AbstractProfileStatistic maximum = new MaximumEntry(this);
+            ProfileStatistic<?> maximum = new MaximumEntry(this);
             statistics.add(maximum);
-            AbstractProfileStatistic minimum = new MinimumEntry(this);
+            ProfileStatistic<?> minimum = new MinimumEntry(this);
             statistics.add(minimum);
-            AbstractProfileStatistic median = new MedianEntry(this);
+            ProfileStatistic<?> median = new MedianEntry(this);
             statistics.add(median);
 
         }
@@ -465,9 +466,9 @@ public class DataProfile {
         }
     }
 
-    private void calculateSingleColumnNeo4j(RecordList rl) throws NoSuchMethodException {
-        for (AbstractProfileStatistic p : statistics) {
-            p.calculation(rl, p.getValue());
+    private void calculateSingleColumnNeo4j(RecordList rl) {
+        for (ProfileStatistic<?> p : statistics) {
+            p.calculation(rl, cast(p.getValue()));
         }
     }
 

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import dqm.jku.dqmeerkat.dtdl.DtdlInterface;
 import dqm.jku.dqmeerkat.dtdl.DtdlObject;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import lombok.SneakyThrows;
 
 import java.util.List;
@@ -15,12 +16,12 @@ import java.util.List;
  * @author meindl, rainer.meindl@scch.at
  * @since 29.04.2022
  */
-public class ProfileStatisticsExporter extends AbstractSchemaExporter<AbstractProfileStatistic> {
+public class ProfileStatisticsExporter extends AbstractSchemaExporter<ProfileStatistic<?>> {
     private final ObjectMapper mapper = new ObjectMapper();
 
     @SneakyThrows
     @Override
-    public String export(AbstractProfileStatistic toExport) {
+    public String export(ProfileStatistic<?> toExport) {
         var dtdlInterface = new DtdlInterface("dtmi:scch:at:dq:ProfileStatistic;1");
         dtdlInterface.setDisplayName("Profile Statistic");
         dtdlInterface.getContents().addAll(List.of(DtdlObject.builder()

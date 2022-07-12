@@ -6,7 +6,7 @@ import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.generator.DataProfileSkeletonGenerator;
 import dqm.jku.dqmeerkat.quality.generator.FilePatternRecognitionGenerator;
 import dqm.jku.dqmeerkat.quality.generator.FullSkeletonGenerator;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.NumRows;
 import dqm.jku.dqmeerkat.util.Constants;
 import dqm.jku.dqmeerkat.util.FileSelectionUtil;
@@ -103,7 +103,7 @@ public class DataProfileTest {
                         "src/main/java/dqm/jku/dqmeerkat/resources/patterns/pattern_test.in"),
                 new DataProfileSkeletonGenerator() {
                     @Override
-                    protected List<AbstractProfileStatistic> generateStatistics(DataProfile profile) {
+                    protected List<ProfileStatistic<?>> generateStatistics(DataProfile profile) {
                         return List.of(new NumRows(profile));
                     }
                 });

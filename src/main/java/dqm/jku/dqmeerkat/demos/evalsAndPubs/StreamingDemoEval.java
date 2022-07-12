@@ -87,8 +87,8 @@ public class StreamingDemoEval {
   //TODO: move to Record class if development finished
   public static boolean strictlyAdheresToRDP(Record r, Attribute a) {
 	  DataProfile profile = a.getProfile();
-	  AbstractProfileStatistic min = profile.getStatistic(StatisticTitle.min);
-	  AbstractProfileStatistic max = profile.getStatistic(StatisticTitle.max);
+	  var min = profile.getStatistic(StatisticTitle.min);
+	  var max = profile.getStatistic(StatisticTitle.max);
 
 	  Double val = (double) r.getField(a);
 	  Double minVal = (double) min.getValue();

@@ -1,7 +1,7 @@
 package dqm.jku.dqmeerkat.quality.generator;
 
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.summary.SpaceSavingSummaryProfileStatistic;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public class SpaceSavingSummarySkeletonGenerator extends DataSummarySkeletonGene
     }
 
     @Override
-    protected List<AbstractProfileStatistic> generateStatistics(DataProfile profile) {
+    protected List<ProfileStatistic<?>> generateStatistics(DataProfile profile) {
         return List.of(new SpaceSavingSummaryProfileStatistic(profile, k));
     }
 }
