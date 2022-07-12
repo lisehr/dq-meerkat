@@ -26,15 +26,18 @@ public class MedianAbsoluteDeviation extends DependentNumberProfileStatistic<Dou
     private void calculation(RecordList rl, Double oldVal, boolean checked) {
         if (!checked)
             this.dependencyCalculationWithRecordList(rl);
+
         double medVal = (double) super.getRefProf().getStatistic(med).getValue();
-        List<Double> medians = new ArrayList<>();
+        List<Number> medians = new ArrayList<>();
         for (Record r : rl) {
             double field = (double) r.getField((Attribute) super.getRefElem());
             medians.add(field - medVal);
         }
+
+
         Median medM = new Median(this.getRefProf());
         // TODO implement list to recordlist conversion
-        medM.calculation(medians, null);
+        medM.calculation(new RecordList(medians, "dummy"), null);
         var med = medM.getValue();
         this.setValue(med);
         this.setValueClass(Double.class);
