@@ -1,10 +1,11 @@
 package dqm.jku.dqmeerkat.quality.profilingstatistics.graphmetrics;
 
-import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 
 import java.util.HashSet;
 import java.util.List;
@@ -14,11 +15,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.*;
 
 
-public class DistinctEntries extends ProfileStatistic {
-
-    public DistinctEntries() {
-
-    }
+public class DistinctEntries extends AbstractProfileStatistic {
 
     public DistinctEntries(DataProfile d) {
         super(distinctEntries, graphCat, d);
@@ -50,7 +47,6 @@ public class DistinctEntries extends ProfileStatistic {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic m, double threshold) {
-        return false;
+    public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {        return false;
     }
 }

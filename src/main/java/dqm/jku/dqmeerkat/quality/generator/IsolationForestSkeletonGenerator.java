@@ -3,7 +3,7 @@ package dqm.jku.dqmeerkat.quality.generator;
 import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.elements.DSDElement;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.multicolumn.outliers.IsolationForest;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.multicolumn.outliers.IsolationForestPercentage;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.multicolumn.outliers.LocalOutlierFactor;
@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * <h2>IsolationForestSkeletonGenerator</h2>
- * <summary>{@link DataProfileSkeletonGenerator} implementation that generates {@link ProfileStatistic}s based on
+ * <summary>{@link DataProfileSkeletonGenerator} implementation that generates {@link AbstractProfileStatistic}s based on
  * {@link IsolationForest} and other JEP dependent statistics. Ensure JEP is enabled in {@link Constants} and the given
  * {@link DSDElement} is a {@link Concept}
  * </summary>
@@ -32,13 +32,13 @@ public class IsolationForestSkeletonGenerator extends DataProfileSkeletonGenerat
     }
 
     @Override
-    protected List<ProfileStatistic> generateStatistics(DataProfile profile) {
-        List<ProfileStatistic> statistics = new ArrayList<>();
-        ProfileStatistic isoFor = new IsolationForest(profile);
+    protected List<AbstractProfileStatistic> generateStatistics(DataProfile profile) {
+        List<AbstractProfileStatistic> statistics = new ArrayList<>();
+        AbstractProfileStatistic isoFor = new IsolationForest(profile);
         statistics.add(isoFor);
-        ProfileStatistic isoForPer = new IsolationForestPercentage(profile);
+        AbstractProfileStatistic isoForPer = new IsolationForestPercentage(profile);
         statistics.add(isoForPer);
-        ProfileStatistic lof = new LocalOutlierFactor(profile);
+        AbstractProfileStatistic lof = new LocalOutlierFactor(profile);
         statistics.add(lof);
         return statistics;
     }

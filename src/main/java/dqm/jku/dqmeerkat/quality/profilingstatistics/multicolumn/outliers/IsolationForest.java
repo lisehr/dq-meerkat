@@ -8,6 +8,7 @@ import java.util.List;
 
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.util.converters.NDArrayConverter;
 import dqm.jku.dqmeerkat.util.python.JepInterpreter;
@@ -15,11 +16,8 @@ import jep.Interpreter;
 import jep.JepException;
 import jep.NDArray;
 
-public class IsolationForest extends ProfileStatistic {
-	
-	public IsolationForest() {
-		
-	}
+public class IsolationForest extends AbstractProfileStatistic {
+
 	
 	public IsolationForest(DataProfile dp) {
 		super(isoF, out, dp);
@@ -76,8 +74,7 @@ public class IsolationForest extends ProfileStatistic {
 	}
 
 	@Override
-	public boolean checkConformance(ProfileStatistic m, double threshold) {
-		// TODO Auto-generated method stub
+	public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {		// TODO Auto-generated method stub
 		return false;
 	}
 

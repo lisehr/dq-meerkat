@@ -7,6 +7,7 @@ import dqm.jku.dqmeerkat.quality.generator.config.DataProfileSkeletonBuilder;
 import dqm.jku.dqmeerkat.quality.generator.config.FullSkeletonGeneratorBuilder;
 import dqm.jku.dqmeerkat.quality.generator.config.LEDCPIGeneratorBuilder;
 import dqm.jku.dqmeerkat.quality.generator.config.SummaryGeneratorBuilder;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import lombok.Getter;
 import science.aist.seshat.Logger;
 
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
  * <h2>DataProfileConfiguration</h2>
  * <summary>Configuration class for {@link dqm.jku.dqmeerkat.quality.DataProfile}. Contains necessary
  * information such as how they look like in terms of selected
- * {@link dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic}s</summary>
+ * {@link AbstractProfileStatistic}s</summary>
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 14.06.2022

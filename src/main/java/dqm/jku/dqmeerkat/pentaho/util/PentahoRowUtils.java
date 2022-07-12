@@ -11,7 +11,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.patte
 import java.util.ArrayList;
 import java.util.List;
 
-import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import org.pentaho.di.core.exception.KettleValueException;
 import org.pentaho.di.core.row.RowMetaInterface;
 import org.pentaho.di.core.row.ValueMetaAndData;
@@ -83,7 +83,7 @@ public class PentahoRowUtils {
 		dp.createDataProfileSkeletonRDB();
 		List<ValueMetaInterface> list = new ArrayList<>();
 		list.add(new ValueMetaString("URI"));
-		for (ProfileStatistic m : dp.getStatistics()) {
+		for (AbstractProfileStatistic m : dp.getStatistics()) {
 			if (m.getTitle() != pattern) {
 				if ((m.getCat() == StatisticCategory.dti && (m.getTitle() == bt || m.getTitle() == dt)) || m.getTitle() == hist) list.add(new ValueMetaString(m.getLabel()));
 				else if (dp.profileStatisticIsNumeric(m)) list.add(new ValueMetaNumber(m.getLabel()));
@@ -105,7 +105,7 @@ public class PentahoRowUtils {
 	public static List<ValueMetaAndData> createPentahoOutputRowMeta(DataProfile dp) throws KettleValueException {
 		List<ValueMetaAndData> list = new ArrayList<>();
 		list.add(new ValueMetaAndData("URI", dp.getElem().getURI()));
-		for (ProfileStatistic profileMetric : dp.getStatistics()) if (profileMetric.getTitle() != pattern) {
+		for (AbstractProfileStatistic profileMetric : dp.getStatistics()) if (profileMetric.getTitle() != pattern) {
 			if (dp.profileStatisticIsNumeric(profileMetric) || profileMetric.getTitle() == dec || profileMetric.getTitle() == dig || profileMetric.getTitle() == numrows) list.add(new ValueMetaAndData(profileMetric.getLabel(), profileMetric.getNumericVal()));
 			else if (profileMetric.getTitle() == hist) list.add(new ValueMetaAndData(profileMetric.getLabel(), profileMetric.toString().substring(10, profileMetric.toString().length())));
 			else list.add(new ValueMetaAndData(profileMetric.getLabel(), profileMetric.getValue()));			

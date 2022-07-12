@@ -1,21 +1,21 @@
 package dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.datatypeinfo;
 
-import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.*;
-import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
-
-import java.util.List;
-
-import org.cyberborean.rdfbeans.annotations.RDFBean;
-import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
-
 import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
 import dqm.jku.dqmeerkat.util.Constants;
 import dqm.jku.dqmeerkat.util.numericvals.NumberComparator;
+import org.cyberborean.rdfbeans.annotations.RDFBean;
+import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
+
+import java.util.List;
+
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.dti;
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.min;
 
 
 /**
@@ -26,10 +26,8 @@ import dqm.jku.dqmeerkat.util.numericvals.NumberComparator;
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/Minimum")
-public class Minimum extends ProfileStatistic {
-    public Minimum() {
+public class Minimum extends AbstractProfileStatistic {
 
-    }
 
     public Minimum(DataProfile d) {
         super(min, dti, d);
@@ -111,7 +109,7 @@ public class Minimum extends ProfileStatistic {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {
         double rdpVal;
         if (this.getNumericVal() == null)
             rdpVal = 0;

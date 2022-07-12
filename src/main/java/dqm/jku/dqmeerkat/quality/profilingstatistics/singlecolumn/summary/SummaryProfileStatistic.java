@@ -3,7 +3,7 @@ package dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.summary;
 import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
 
@@ -19,7 +19,7 @@ import java.util.Map;
  * @author meindl, rainer.meindl@scch.at
  * @since 06.07.2022
  */
-public abstract class SummaryProfileStatistic extends ProfileStatistic {
+public abstract class SummaryProfileStatistic extends AbstractProfileStatistic {
 
     /**
      * Representation of the summary. The key is the item and the value is the number of occurrences in the dataset.
@@ -50,7 +50,7 @@ public abstract class SummaryProfileStatistic extends ProfileStatistic {
     protected abstract void handleCounter(Object value);
 
     /**
-     * Calculates a value used to determine conformance of this {@link ProfileStatistic} to another
+     * Calculates a value used to determine conformance of this {@link AbstractProfileStatistic} to another
      *
      * @return the conformance value as double
      */

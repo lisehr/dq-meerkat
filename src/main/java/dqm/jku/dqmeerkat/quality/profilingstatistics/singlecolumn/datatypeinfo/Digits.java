@@ -5,6 +5,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
 
 import java.util.List;
 
+import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
@@ -25,11 +26,7 @@ import dqm.jku.dqmeerkat.util.Constants;
  */
 @RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/Digits")
-public class Digits extends ProfileStatistic {
-  public Digits() {
-
-  }
-
+public class Digits extends AbstractProfileStatistic {
   public Digits(DataProfile d) {
     super(dig, dti, d);
   }
@@ -92,8 +89,7 @@ public class Digits extends ProfileStatistic {
   }
 
 	@Override
-	public boolean checkConformance(ProfileStatistic m, double threshold) {
-		double rdpVal = ((Number) this.getNumericVal()).doubleValue();
+	public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {		double rdpVal = ((Number) this.getNumericVal()).doubleValue();
 		double dpValue = ((Number) m.getValue()).doubleValue();
 		
 		double lowerBound = rdpVal - (Math.abs(rdpVal) * threshold);

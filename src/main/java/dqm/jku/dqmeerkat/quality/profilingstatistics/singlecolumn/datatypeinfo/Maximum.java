@@ -4,6 +4,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
 import dqm.jku.dqmeerkat.util.Constants;
@@ -25,11 +26,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.max;
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/Maximum")
-public class Maximum extends ProfileStatistic {
-    public Maximum() {
-
-    }
-
+public class Maximum extends AbstractProfileStatistic {
     public Maximum(DataProfile d) {
         super(max, dti, d);
     }
@@ -112,7 +109,7 @@ public class Maximum extends ProfileStatistic {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {
         double rdpVal;
         if (getNumericVal() == null)
             rdpVal = 0;

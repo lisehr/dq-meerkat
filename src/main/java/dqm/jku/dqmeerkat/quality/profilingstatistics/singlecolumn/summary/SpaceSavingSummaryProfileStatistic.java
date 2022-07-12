@@ -1,6 +1,7 @@
 package dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.summary;
 
 import dqm.jku.dqmeerkat.quality.DataProfile;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
@@ -14,7 +15,7 @@ import java.util.Map;
 /**
  * <h2>SpaceSavingSummaryProfileStatistic</h2>
  * <summary>
- * {@link ProfileStatistic} implementation of the Space Saving Algorithm. It generates a summary of the given
+ * {@link AbstractProfileStatistic} implementation of the Space Saving Algorithm. It generates a summary of the given
  * data by counting the occurrences of samples in the data. The summary has a maximum size of k, whenever it reaches this
  * size it is compressed again.
  * </summary>
@@ -95,7 +96,7 @@ public class SpaceSavingSummaryProfileStatistic extends SummaryProfileStatistic 
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {
         var rdpVal = calculateConformance();
         var dpValue = ((SummaryProfileStatistic) m).calculateConformance();
 

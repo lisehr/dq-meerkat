@@ -5,22 +5,19 @@ import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.util.AttributeSet;
 
 import java.util.List;
 import java.util.regex.Pattern;
 
-import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
-import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.*;
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.graphCat;
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.maximum;
 
-public class MaximumEntry extends ProfileStatistic {
+public class MaximumEntry extends AbstractProfileStatistic {
 
     private Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
-
-    public MaximumEntry() {
-
-    }
 
     public MaximumEntry(DataProfile d) {
         super(maximum, graphCat, d);
@@ -43,12 +40,12 @@ public class MaximumEntry extends ProfileStatistic {
             clazz = String.class;
         }
 
-        if(oldVal == null) {
+        if (oldVal == null) {
             val = getBasicInstance(clazz);
         } else {
             val = oldVal;
         }
-        for(Record r : rs) {
+        for (Record r : rs) {
             Object field = r.getField(a);
             val = getMaximum(val, field, isNumeric, clazz);
         }
@@ -74,7 +71,7 @@ public class MaximumEntry extends ProfileStatistic {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {
         return false;
     }
 
@@ -86,11 +83,9 @@ public class MaximumEntry extends ProfileStatistic {
     private Object getBasicInstance(Class clazz) {
         if (clazz.equals(Long.class)) {
             return Long.valueOf(Long.MIN_VALUE);
-        }
-        else if (clazz.equals(Double.class)) {
+        } else if (clazz.equals(Double.class)) {
             return Double.valueOf(Double.MIN_VALUE);
-        }
-        else {
+        } else {
             return Integer.MIN_VALUE;
         }
     }
@@ -103,14 +98,11 @@ public class MaximumEntry extends ProfileStatistic {
         if (clazz.equals(Long.class)) {
 
             return Long.max((long) current, ((Number) Long.parseLong(toComp.toString())).longValue());
-        }
-        else if (clazz.equals(Double.class)) {
+        } else if (clazz.equals(Double.class)) {
             return Double.max((double) current, ((Number) Double.parseDouble(toComp.toString())).doubleValue());
-        }
-        else if (clazz.equals(String.class)) {
+        } else if (clazz.equals(String.class)) {
             return Integer.max((int) current, ((String) toComp).length());
-        }
-        else {
+        } else {
             return Integer.max((int) current, ((Number) Integer.parseInt(toComp.toString())).intValue());
         }
     }
@@ -121,10 +113,10 @@ public class MaximumEntry extends ProfileStatistic {
 
         Record r = rl.toList().get(0);
 
-        for(Attribute a : as) {
+        for (Attribute a : as) {
             Object val = r.getField(a);
 
-            if(val != null) {
+            if (val != null) {
                 return a;
             }
         }
@@ -135,10 +127,10 @@ public class MaximumEntry extends ProfileStatistic {
 
         boolean isNumeric = true;
 
-        for(Record r : rl) {
+        for (Record r : rl) {
             String field = r.getField(a).toString();
 
-            if(field != null && !pattern.matcher(field).matches()) {
+            if (field != null && !pattern.matcher(field).matches()) {
                 isNumeric = false;
             }
         }
@@ -150,7 +142,7 @@ public class MaximumEntry extends ProfileStatistic {
 
         Class clazz = Integer.class;
 
-        for(Record r : rl) {
+        for (Record r : rl) {
             String field = r.getField(a).toString();
 
             try {

@@ -23,7 +23,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.histogram.Histogram;
 
 public class ExportUtil {
@@ -77,8 +77,8 @@ public class ExportUtil {
 					elementLabels.add(a.getLabel());
 					if (a.getProfile() != null) {
 						DataProfile dp = a.getProfile();
-						List<ProfileStatistic> metrics = dp.getStatistics();
-						for (ProfileStatistic m : metrics) {
+						List<AbstractProfileStatistic> metrics = dp.getStatistics();
+						for (AbstractProfileStatistic m : metrics) {
 							String key = m.getLabel();
 							if (!key.contains("Histogram")) {
 								ArrayList<Object> list = new ArrayList<Object>();
@@ -172,7 +172,7 @@ public class ExportUtil {
 					elementLabels.add(a.getLabel());
 					if (a.getProfile() != null) {
 						DataProfile dp = a.getProfile();
-						List<ProfileStatistic> metrics = dp.getStatistics();
+						List<AbstractProfileStatistic> metrics = dp.getStatistics();
 						if (metrics.size() == 0) {
 							Set<String> metricStringSet = metricValues.keySet();
 							for (String key : metricStringSet) {
@@ -182,7 +182,7 @@ public class ExportUtil {
 								metricValues.put(key, list);
 							}
 						}
-						for (ProfileStatistic m : metrics) {
+						for (AbstractProfileStatistic m : metrics) {
 							String key = m.getLabel();
 							if (!key.contains("Histogram")) {
 								ArrayList<Object> list = new ArrayList<Object>();

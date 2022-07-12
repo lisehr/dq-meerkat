@@ -6,6 +6,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
@@ -26,10 +27,7 @@ import dqm.jku.dqmeerkat.util.numericvals.NumberComparator;
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/Median")
-public class Median extends ProfileStatistic {
-    public Median() {
-
-    }
+public class Median extends AbstractProfileStatistic {
 
     public Median(DataProfile d) {
         super(med, dti, d);
@@ -116,8 +114,7 @@ public class Median extends ProfileStatistic {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic m, double threshold) {
-        if (this.getNumericVal() == null)
+    public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {        if (this.getNumericVal() == null)
             setNumericVal(m.getNumericVal());
         double rdpVal = ((Number) this.getNumericVal()).doubleValue();
         double dpValue = ((Number) m.getValue()).doubleValue();

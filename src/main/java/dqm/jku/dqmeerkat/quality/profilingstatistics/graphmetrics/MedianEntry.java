@@ -5,6 +5,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.util.AttributeSet;
 import dqm.jku.dqmeerkat.util.numericvals.NumberComparator;
@@ -16,13 +17,10 @@ import java.util.regex.Pattern;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.*;
 
-public class MedianEntry extends ProfileStatistic {
+public class MedianEntry extends AbstractProfileStatistic {
 
     private Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
 
-    public MedianEntry() {
-
-    }
 
     public MedianEntry(DataProfile d) {
         super(median, graphCat, d);
@@ -130,8 +128,7 @@ public class MedianEntry extends ProfileStatistic {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic m, double threshold) {
-        return false;
+    public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {        return false;
     }
 
     private Attribute getAttribute(RecordList rl, Concept c) {

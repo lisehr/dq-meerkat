@@ -5,6 +5,7 @@ import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.NumRows;
 import dqm.jku.dqmeerkat.util.Constants;
@@ -25,10 +26,6 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/StandardDeviation")
 public class StandardDeviation extends DependentProfileStatistic {
-    public StandardDeviation() {
-
-    }
-
     public StandardDeviation(DataProfile d) {
         super(sd, dti, d);
     }
@@ -160,12 +157,12 @@ public class StandardDeviation extends DependentProfileStatistic {
 
     @Override
     protected void dependencyCheck() {
-        ProfileStatistic numrowM = super.getRefProf().getStatistic(numrows);
+        AbstractProfileStatistic numrowM = super.getRefProf().getStatistic(numrows);
         if (numrowM == null) {
             numrowM = new NumRows(super.getRefProf());
             super.getRefProf().addStatistic(numrowM);
         }
-        ProfileStatistic avgM = super.getRefProf().getStatistic(avg);
+        AbstractProfileStatistic avgM = super.getRefProf().getStatistic(avg);
         if (avgM == null) {
             avgM = new Average(super.getRefProf());
             super.getRefProf().addStatistic(avgM);
@@ -186,8 +183,7 @@ public class StandardDeviation extends DependentProfileStatistic {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic m, double threshold) {
-        if (getNumericVal() == null)
+    public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {        if (getNumericVal() == null)
             setNumericVal(m.getNumericVal());
         double rdpVal = ((Number) this.getNumericVal()).doubleValue();
         double dpValue = ((Number) m.getValue()).doubleValue();

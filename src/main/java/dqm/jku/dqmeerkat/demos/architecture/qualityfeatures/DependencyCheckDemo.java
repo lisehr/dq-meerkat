@@ -8,7 +8,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.NullValuesPercentage;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.datatypeinfo.Digits;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.dependency.KeyCandidate;
@@ -40,7 +40,7 @@ public class DependencyCheckDemo {
           dp.addStatistic(new NullValuesPercentage(dp));
           dp.addStatistic(new Digits(dp));
           dp.addStatistic(new KeyCandidate(dp));
-          for (ProfileStatistic m : dp.getStatistics()) m.calculation(rs, null);
+          for (AbstractProfileStatistic m : dp.getStatistics()) m.calculation(rs, null);
           dp.printProfile();
         }
         System.out.println();

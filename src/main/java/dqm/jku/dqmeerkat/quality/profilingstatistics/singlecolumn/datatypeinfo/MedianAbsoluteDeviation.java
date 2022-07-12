@@ -4,6 +4,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.NumRows;
@@ -23,9 +24,6 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/MedianAbsoluteDeviation")
 public class MedianAbsoluteDeviation extends DependentProfileStatistic {
-    public MedianAbsoluteDeviation() {
-
-    }
 
     public MedianAbsoluteDeviation(DataProfile d) {
         super(mad, dti, d);
@@ -50,9 +48,7 @@ public class MedianAbsoluteDeviation extends DependentProfileStatistic {
     /**
      * Adds a value to the sum of squared differences
      *
-     * @param current the current sum of values
      * @param toAdd   the value to be added
-     * @param avg     the average value to substract
      * @return the new sum of values
      */
     private Object subValue(Object toAdd, Object med) {
@@ -127,12 +123,12 @@ public class MedianAbsoluteDeviation extends DependentProfileStatistic {
 
     @Override
     protected void dependencyCheck() {
-        ProfileStatistic numrowM = super.getRefProf().getStatistic(numrows);
+        AbstractProfileStatistic numrowM = super.getRefProf().getStatistic(numrows);
         if (numrowM == null) {
             numrowM = new NumRows(super.getRefProf());
             super.getRefProf().addStatistic(numrowM);
         }
-        ProfileStatistic medM = super.getRefProf().getStatistic(med);
+        AbstractProfileStatistic medM = super.getRefProf().getStatistic(med);
         if (medM == null) {
             medM = new Median(super.getRefProf());
             super.getRefProf().addStatistic(medM);
@@ -141,7 +137,7 @@ public class MedianAbsoluteDeviation extends DependentProfileStatistic {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {
         if (getNumericVal() == null)
             setNumericVal(m.getNumericVal());
         double rdpVal = ((Number) this.getNumericVal()).doubleValue();

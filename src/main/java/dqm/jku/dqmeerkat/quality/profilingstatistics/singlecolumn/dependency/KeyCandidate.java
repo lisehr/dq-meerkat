@@ -5,6 +5,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
 
 import java.util.List;
 
+import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
@@ -26,9 +27,6 @@ import dqm.jku.dqmeerkat.util.Constants;
 @RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
 @RDFBean("dsd:quality/structures/metrics/dependency/KeyCandidate")
 public class KeyCandidate extends DependentProfileStatistic {
-  public KeyCandidate() {
-
-  }
 
   public KeyCandidate(DataProfile d) {
     super(keyCand, depend, d);
@@ -83,7 +81,7 @@ public class KeyCandidate extends DependentProfileStatistic {
 
   @Override
   protected void dependencyCheck() {
-    ProfileStatistic uniqueM = super.getRefProf().getStatistic(unique);
+    AbstractProfileStatistic uniqueM = super.getRefProf().getStatistic(unique);
     if (uniqueM == null) {
       uniqueM = new Uniqueness(super.getRefProf());
       super.getRefProf().addStatistic(uniqueM);
@@ -91,8 +89,7 @@ public class KeyCandidate extends DependentProfileStatistic {
   }
 
 @Override
-public boolean checkConformance(ProfileStatistic m, double threshold) {
-	String rdpVal = this.getSimpleValueString();
+public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {	String rdpVal = this.getSimpleValueString();
 	String dpValue = this.getSimpleValueString();
 	
 	boolean conf = rdpVal.equals(dpValue);

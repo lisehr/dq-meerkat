@@ -10,15 +10,12 @@ import java.util.List;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentProfileStatistic;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 
 public class IsolationForestPercentage extends DependentProfileStatistic {
 
-	public IsolationForestPercentage() {
-		
-	}
-	
 	public IsolationForestPercentage(DataProfile dp) {
 		super(isoFP, out, dp);
 	}
@@ -68,7 +65,7 @@ public class IsolationForestPercentage extends DependentProfileStatistic {
 
 	@Override
 	protected void dependencyCheck() {
-    ProfileStatistic isoM = super.getRefProf().getStatistic(isoF);
+    AbstractProfileStatistic isoM = super.getRefProf().getStatistic(isoF);
     if (isoM == null || (isoM != null && isoM.getValue() == null)) {
     	isoM = new IsolationForest(super.getRefProf());
       super.getRefProf().addStatistic(isoM);
@@ -76,8 +73,7 @@ public class IsolationForestPercentage extends DependentProfileStatistic {
 	}
 
 	@Override
-	public boolean checkConformance(ProfileStatistic m, double threshold) {
-		// TODO Auto-generated method stub
+	public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {		// TODO Auto-generated method stub
 		return false;
 	}
 

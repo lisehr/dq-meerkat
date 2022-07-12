@@ -1,21 +1,7 @@
 package dqm.jku.dqmeerkat.quality.profilingstatistics.multicolumn.outliers;
 
-import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.*;
-import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-import dqm.jku.dqmeerkat.dsd.records.RecordList;
-import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
-import dqm.jku.dqmeerkat.util.converters.DoubleArrayConverter;
-
-import de.lmu.ifi.dbs.elki.algorithm.outlier.lof.LOF;
 import de.lmu.ifi.dbs.elki.algorithm.Algorithm;
+import de.lmu.ifi.dbs.elki.algorithm.outlier.lof.LOF;
 import de.lmu.ifi.dbs.elki.database.Database;
 import de.lmu.ifi.dbs.elki.database.StaticArrayDatabase;
 import de.lmu.ifi.dbs.elki.datasource.ArrayAdapterDatabaseConnection;
@@ -23,6 +9,20 @@ import de.lmu.ifi.dbs.elki.datasource.DatabaseConnection;
 import de.lmu.ifi.dbs.elki.result.outlier.OutlierResult;
 import de.lmu.ifi.dbs.elki.utilities.ClassGenericsUtil;
 import de.lmu.ifi.dbs.elki.utilities.optionhandling.parameterization.ListParameterization;
+import dqm.jku.dqmeerkat.dsd.records.RecordList;
+import dqm.jku.dqmeerkat.quality.DataProfile;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
+import dqm.jku.dqmeerkat.util.converters.DoubleArrayConverter;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.out;
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.lof;
 
 
 /**
@@ -34,14 +34,11 @@ import de.lmu.ifi.dbs.elki.utilities.optionhandling.parameterization.ListParamet
  * @author Johannes Schrott
  */
 
-public class LocalOutlierFactor extends ProfileStatistic {
+public class LocalOutlierFactor extends AbstractProfileStatistic {
 
     final private static float FACTOR_FOR_K = 0.1F; // Must be between 0 and 1
     final private static double OUTLIER_THRESHOLD = 1.1;
 
-    public LocalOutlierFactor() {
-
-    }
 
     public LocalOutlierFactor(DataProfile dp) {
         super(lof, out, dp);
@@ -132,8 +129,7 @@ public class LocalOutlierFactor extends ProfileStatistic {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic m, double threshold) {
-        // TODO Auto-generated method stub
+    public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {        // TODO Auto-generated method stub
 
         //
         return false;

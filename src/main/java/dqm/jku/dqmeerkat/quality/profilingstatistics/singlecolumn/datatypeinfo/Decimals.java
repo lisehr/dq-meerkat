@@ -4,6 +4,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.util.Constants;
 import org.apache.commons.lang.StringUtils;
@@ -23,10 +24,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.dec;
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/Decimals")
-public class Decimals extends ProfileStatistic {
-    public Decimals() {
-
-    }
+public class Decimals extends AbstractProfileStatistic {
 
     public Decimals(DataProfile d) {
         super(dec, dti, d);
@@ -103,8 +101,7 @@ public class Decimals extends ProfileStatistic {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic m, double threshold) {
-        if (getNumericVal() == null)
+    public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {        if (getNumericVal() == null)
             setNumericVal(m.getNumericVal());
         double rdpVal = ((Number) this.getNumericVal()).doubleValue();
         double dpValue = ((Number) m.getValue()).doubleValue();

@@ -1,6 +1,7 @@
 package dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.summary;
 
 import dqm.jku.dqmeerkat.quality.DataProfile;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 /**
  * <h2>MKSummaryProfileStatistic</h2>
  * <summary>
- * {@link ProfileStatistic} implementation for the Misra- and Gries summarization algorithm. It counts the number of
+ * {@link AbstractProfileStatistic} implementation for the Misra- and Gries summarization algorithm. It counts the number of
  * records and, depending on the summary size k, removes the least frequent ones from the summary.
  * </summary>
  *
@@ -56,8 +57,7 @@ public class MGSummaryProfileStatistic extends SummaryProfileStatistic {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic m, double threshold) {
-        var rdpVal = calculateConformance();
+    public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {        var rdpVal = calculateConformance();
         var dpValue = ((SummaryProfileStatistic) m).calculateConformance();
 
 

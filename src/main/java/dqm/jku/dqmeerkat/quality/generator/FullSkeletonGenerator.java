@@ -1,10 +1,7 @@
 package dqm.jku.dqmeerkat.quality.generator;
 
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.config.ConfigComponent;
-import dqm.jku.dqmeerkat.quality.config.FullProfileConfigComponent;
-import dqm.jku.dqmeerkat.quality.generator.config.DataProfileSkeletonBuilder;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.*;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.datatypeinfo.*;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.dependency.KeyCandidate;
@@ -12,12 +9,11 @@ import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.histogram.Hist
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * <h2>FullSkeletonGenerator</h2>
  * <summary>
- * Generates all currently defined {@link ProfileStatistic}s for the given {@link DataProfile} and
+ * Generates all currently defined {@link AbstractProfileStatistic}s for the given {@link DataProfile} and
  * returns them
  * </summary>
  *
@@ -26,42 +22,42 @@ import java.util.Optional;
  */
 public class FullSkeletonGenerator extends DataProfileSkeletonGenerator{
     @Override
-    protected List<ProfileStatistic> generateStatistics(DataProfile profile) {
-        var statistics = new ArrayList<ProfileStatistic>();
-        ProfileStatistic size = new NumRows(profile);
+    protected List<AbstractProfileStatistic> generateStatistics(DataProfile profile) {
+        var statistics = new ArrayList<AbstractProfileStatistic>();
+        AbstractProfileStatistic size = new NumRows(profile);
         statistics.add(size);
-        ProfileStatistic min = new Minimum(profile);
+        AbstractProfileStatistic min = new Minimum(profile);
         statistics.add(min);
-        ProfileStatistic max = new Maximum(profile);
+        AbstractProfileStatistic max = new Maximum(profile);
         statistics.add(max);
-        ProfileStatistic avg = new Average(profile);
+        AbstractProfileStatistic avg = new Average(profile);
         statistics.add(avg);
-        ProfileStatistic med = new Median(profile);
+        AbstractProfileStatistic med = new Median(profile);
         statistics.add(med);
-        ProfileStatistic card = new Cardinality(profile);
+        AbstractProfileStatistic card = new Cardinality(profile);
         statistics.add(card);
-        ProfileStatistic uniq = new Uniqueness(profile);
+        AbstractProfileStatistic uniq = new Uniqueness(profile);
         statistics.add(uniq);
-        ProfileStatistic nullVal = new NullValues(profile);
+        AbstractProfileStatistic nullVal = new NullValues(profile);
         statistics.add(nullVal);
-        ProfileStatistic nullValP = new NullValuesPercentage(profile);
+        AbstractProfileStatistic nullValP = new NullValuesPercentage(profile);
         statistics.add(nullValP);
-        ProfileStatistic hist = new Histogram(profile);
+        AbstractProfileStatistic hist = new Histogram(profile);
         statistics.add(hist);
-        ProfileStatistic digits = new Digits(profile);
+        AbstractProfileStatistic digits = new Digits(profile);
         statistics.add(digits);
-        ProfileStatistic isCK = new KeyCandidate(profile);
+        AbstractProfileStatistic isCK = new KeyCandidate(profile);
         statistics.add(isCK);
-        ProfileStatistic decimals = new Decimals(profile);
+        AbstractProfileStatistic decimals = new Decimals(profile);
         statistics.add(decimals);
-        ProfileStatistic basicType = new BasicType(profile);
+        AbstractProfileStatistic basicType = new BasicType(profile);
         statistics.add(basicType);
-        ProfileStatistic dataType = new DataType(profile);
+        AbstractProfileStatistic dataType = new DataType(profile);
         statistics.add(dataType);
         // experimental metrics
-        ProfileStatistic standardDev = new StandardDeviation(profile);
+        AbstractProfileStatistic standardDev = new StandardDeviation(profile);
         statistics.add(standardDev);
-        ProfileStatistic mediAbsDevMetric = new MedianAbsoluteDeviation(profile);
+        AbstractProfileStatistic mediAbsDevMetric = new MedianAbsoluteDeviation(profile);
         statistics.add(mediAbsDevMetric);
         return statistics;
     }

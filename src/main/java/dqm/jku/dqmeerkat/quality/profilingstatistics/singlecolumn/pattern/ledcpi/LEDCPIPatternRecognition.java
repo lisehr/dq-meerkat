@@ -10,6 +10,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
@@ -26,17 +27,17 @@ import java.util.List;
 /**
  * <h2>LEDCPIPatternRecognition</h2>
  * <summary>
- * {@link ProfileStatistic} implementation for recognizing patterns in the records. Uses LEDC-PI QualityMeasure
+ * {@link AbstractProfileStatistic} implementation for recognizing patterns in the records. Uses LEDC-PI QualityMeasure
  * to generate a stack of rules based on RegEx and Grex patterns, that need to match the given data samples.
  * <p>
- * The {@link ProfileStatistic} needs either a JSON configuration file, the finished QualityMeasure, or a list of
+ * The {@link AbstractProfileStatistic} needs either a JSON configuration file, the finished QualityMeasure, or a list of
  * {@link be.ugent.ledc.pi.measure.predicates.Predicate}s in order to generate (or use) the QualityMeasure.
  * </summary>
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 09.06.2022
  */
-public class LEDCPIPatternRecognition extends ProfileStatistic {
+public class LEDCPIPatternRecognition extends AbstractProfileStatistic {
     private final QualityMeasure<String> measure;
     private static final Logger LOGGER = Logger.getInstance();
 
@@ -105,7 +106,7 @@ public class LEDCPIPatternRecognition extends ProfileStatistic {
     }
 
     /**
-     * Update the {@link ProfileStatistic}s value using the given {@link RecordList}. Delegates to calculation.
+     * Update the {@link AbstractProfileStatistic}s value using the given {@link RecordList}. Delegates to calculation.
      *
      * @param rs the recordset used for updating
      */
@@ -122,17 +123,17 @@ public class LEDCPIPatternRecognition extends ProfileStatistic {
 
 
     /**
-     * Calculate the relative difference between this and another {@link ProfileStatistic}. The threshold is used to
-     * determine the lower and upperBound, in which the other {@link ProfileStatistic} should lie in. So <i>this</i>
+     * Calculate the relative difference between this and another {@link AbstractProfileStatistic}. The threshold is used to
+     * determine the lower and upperBound, in which the other {@link AbstractProfileStatistic} should lie in. So <i>this</i>
      * refers to the reference data profile, while other is the dataprofile.
      *
-     * @param other     the {@link ProfileStatistic}, whose value needs to be within the defined threshold of this value
+     * @param other     the {@link AbstractProfileStatistic}, whose value needs to be within the defined threshold of this value
      * @param threshold indicates allowed deviation from reference value in percent.
      *                  Defines the lower and upperBound for the conformance relative to this value
-     * @return if the other {@link ProfileStatistic} conforms to this one
+     * @return if the other {@link AbstractProfileStatistic} conforms to this one
      */
     @Override
-    public boolean checkConformance(ProfileStatistic other, double threshold) {
+    public boolean checkConformance(ProfileStatistic<Object> other, double threshold) {
         double rdpVal = ((Number) this.getNumericVal()).doubleValue();
         double dpValue = ((Number) other.getValue()).doubleValue();
 

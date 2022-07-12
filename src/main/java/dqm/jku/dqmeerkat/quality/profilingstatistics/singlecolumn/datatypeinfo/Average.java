@@ -1,25 +1,26 @@
 package dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.datatypeinfo;
 
-import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.*;
-import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
+import dqm.jku.dqmeerkat.dsd.elements.Attribute;
+import dqm.jku.dqmeerkat.dsd.records.Record;
+import dqm.jku.dqmeerkat.dsd.records.RecordList;
+import dqm.jku.dqmeerkat.quality.DataProfile;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.NumRows;
+import dqm.jku.dqmeerkat.util.Constants;
+import dqm.jku.dqmeerkat.util.numericvals.NumberComparator;
+import org.cyberborean.rdfbeans.annotations.RDFBean;
+import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.util.List;
 
-import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentProfileStatistic;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
-import org.cyberborean.rdfbeans.annotations.RDFBean;
-import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
-
-import dqm.jku.dqmeerkat.dsd.elements.Attribute;
-import dqm.jku.dqmeerkat.dsd.records.Record;
-import dqm.jku.dqmeerkat.dsd.records.RecordList;
-import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.NumRows;
-import dqm.jku.dqmeerkat.util.Constants;
-import dqm.jku.dqmeerkat.util.numericvals.NumberComparator;
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.dti;
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.avg;
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.numrows;
 
 
 /**
@@ -31,9 +32,7 @@ import dqm.jku.dqmeerkat.util.numericvals.NumberComparator;
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/Average")
 public class Average extends DependentProfileStatistic {
-    public Average() {
 
-    }
 
     public Average(DataProfile d) {
         super(avg, dti, d);
@@ -165,7 +164,7 @@ public class Average extends DependentProfileStatistic {
 
     @Override
     protected void dependencyCheck() {
-        ProfileStatistic sizeM = super.getRefProf().getStatistic(numrows);
+        AbstractProfileStatistic sizeM = super.getRefProf().getStatistic(numrows);
         if (sizeM == null) {
             sizeM = new NumRows(super.getRefProf());
             super.getRefProf().addStatistic(sizeM);
@@ -173,7 +172,7 @@ public class Average extends DependentProfileStatistic {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {
         if (this.getNumericVal() == null)
             this.setNumericVal(m.getNumericVal());
         double rdpVal = ((Number) this.getNumericVal()).doubleValue();
