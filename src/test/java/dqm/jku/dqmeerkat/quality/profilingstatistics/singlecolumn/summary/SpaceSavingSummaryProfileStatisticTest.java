@@ -198,7 +198,7 @@ class SpaceSavingSummaryProfileStatisticTest {
         var spaceSavingSummary = new SpaceSavingSummaryProfileStatistic(new DataProfile(recordList, dsdElement), k);
         var spaceSavingSummary2 = new SpaceSavingSummaryProfileStatistic(new DataProfile(recordList, dsdElement), k);
         List<Number> data = List.of(1, 1, 3, 2, 3, 6, 7, 1, 9, 6);
-        List<Number> data2 = List.of(6, 7, 5, 5, 7, 9, 8, 7, 6, 9);
+        List<Number> data2 = List.of(6, 7, 5, 5, 7, 6, 7, 7, 6, 9, 9, 9, 9, 9, 9);
         spaceSavingSummary.calculationNumeric(data, null);
         spaceSavingSummary2.calculationNumeric(data2, null);
 
