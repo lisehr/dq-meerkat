@@ -104,10 +104,8 @@ public class MGSummaryProfileStatistic extends SummaryProfileStatistic {
 
     @Override
     public double calculateConformance() {
-        return summary.size() * .1D + summary.entrySet()
-                .stream()
-                .mapToDouble(value -> ((int) value.getKey()) * value.getValue())
-                .average()
-                .orElse(0);
+        // TODO fixup after generic implementation is done
+        var avgCounters = summary.values().stream().mapToInt(i -> i).average().orElse(0);
+        return (double) summary.size() / k + avgCounters / k;
     }
 }
