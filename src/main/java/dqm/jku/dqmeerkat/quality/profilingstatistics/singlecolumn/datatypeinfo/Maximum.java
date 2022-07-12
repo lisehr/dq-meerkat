@@ -4,15 +4,14 @@ import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.NumberProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
 import dqm.jku.dqmeerkat.util.Constants;
-import dqm.jku.dqmeerkat.util.numericvals.NumberComparator;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 
-import java.util.List;
+import java.util.Objects;
 
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.dti;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.max;
@@ -26,23 +25,20 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.max;
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/Maximum")
-public class Maximum extends AbstractProfileStatistic {
+public class Maximum extends NumberProfileStatistic<Double> {
     public Maximum(DataProfile d) {
         super(max, dti, d);
     }
 
     @Override
-    public void calculation(RecordList rs, Object oldVal) {
+    public void calculation(RecordList rs, Double oldVal) {
         Attribute a = (Attribute) super.getRefElem();
-        Object val = null;
-        if (oldVal == null) val = getBasicInstance();
-        else val = oldVal;
+        double val = Objects.requireNonNullElse(oldVal, getBasicInstance());
         for (Record r : rs) {
-            Object field = r.getField(a);
-            val = getMaximum(val, field, false);
+            var field = (double) r.getField(a);
+            val = getMaximum(val, field);
         }
         this.setValue(val);
-        this.setNumericVal(((Number) val).doubleValue());
         this.setValueClass(a.getDataType());
     }
 
@@ -51,34 +47,28 @@ public class Maximum extends AbstractProfileStatistic {
      *
      * @return the reference value
      */
-    private Object getBasicInstance() {
-        Attribute a = (Attribute) super.getRefElem();
-        if (a.getDataType().equals(Long.class)) return Long.valueOf(Long.MIN_VALUE);
-        else if (a.getDataType().equals(Double.class)) return Double.valueOf(Double.MIN_VALUE);
-        else return Integer.MIN_VALUE;
+    protected Double getBasicInstance() {
+        return Double.MIN_VALUE;
     }
 
     /**
      * Checks the maximum value of two objects
      *
-     * @param current       the current maximum value
-     * @param toComp        the new value to compare
-     * @param isNumericList check, if calculation is performed with numeric list
+     * @param current the current maximum value
+     * @param toComp  the new value to compare
      * @return the new maximum value
      */
-    private Object getMaximum(Object current, Object toComp, boolean isNumericList) {
+    private Double getMaximum(Double current, Double toComp) {
         if (toComp == null)
             return current; // if the maximum of the former processed records is null, this record is the maximum
         Attribute a = (Attribute) super.getRefElem();
-        if (a.getDataType().equals(Long.class)) {
-            return Long.max((long) current, ((Number) toComp).longValue());
-        } else if (a.getDataType().equals(Double.class)) {
-            return Double.max((double) current, ((Number) toComp).doubleValue());
-        } else if (a.getDataType().equals(String.class) && !isNumericList) {
-            return Integer.max((int) current, ((String) toComp).length());
-        } else {
-            return Integer.max((int) current, ((Number) toComp).intValue());
-        }
+        // TODO move to string implementation
+//        if (a.getDataType().equals(String.class) && !isNumericList) {
+//            return Integer.max((int) current, ((String) toComp).length());
+
+        return Double.max(current, ((Number) toComp).doubleValue());
+
+
     }
 
     @Override
@@ -87,40 +77,23 @@ public class Maximum extends AbstractProfileStatistic {
     }
 
     @Override
-    public void calculationNumeric(List<Number> list, Object oldVal) {
-        if (list == null || list.isEmpty()) {
-            if (oldVal != null) return;
-            else this.setValue(null);
-        } else {
-            list.sort(new NumberComparator());
-            Object val = null;
-            if (oldVal == null) val = getMaximum(list.get(list.size() - 1), getBasicInstance(), true);
-            else val = getMaximum(list.get(list.size() - 1), oldVal, true);
-            this.setValue(val);
-            this.setNumericVal(((Number) val).doubleValue());
-        }
-        Attribute a = (Attribute) super.getRefElem();
-        this.setValueClass(a.getDataType());
-    }
-
-    @Override
     protected String getValueString() {
         return super.getSimpleValueString();
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<Double> m, double threshold) {
         double rdpVal;
-        if (getNumericVal() == null)
+        if (getValue() == null)
             rdpVal = 0;
         else
-            rdpVal = ((Number) this.getNumericVal()).doubleValue();
+            rdpVal = ((Number) this.getValue()).doubleValue();
         double dpValue = ((Number) m.getValue()).doubleValue();
 
         rdpVal = rdpVal + (Math.abs(rdpVal) * threshold);    // shift by threshold
         boolean conf = dpValue <= rdpVal;
         if (!conf && Constants.DEBUG)
-            System.out.println(StatisticTitle.max + " exceeded: " + dpValue + " > " + rdpVal + " (originally: " + this.getNumericVal() + ")");
+            System.out.println(StatisticTitle.max + " exceeded: " + dpValue + " > " + rdpVal + " (originally: " + this.getValue() + ")");
         return conf;
 
     }

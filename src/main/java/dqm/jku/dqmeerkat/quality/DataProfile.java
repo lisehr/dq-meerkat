@@ -106,13 +106,13 @@ public class DataProfile {
      * Helper method for calculating the single column values for the profile
      *
      * @param rl the recordlist for measuring
-     * @throws NoSuchMethodException
      */
-    private void calculateSingleColumn(RecordList rl) throws NoSuchMethodException {
+    private void calculateSingleColumn(RecordList rl) {
         List<Number> l = createValueList(rl);
         for (ProfileStatistic<?> p : statistics) {
-            if (needsRecordListCalc(p)) p.calculation(rl, cast(p.getValue()));
-            else p.calculationNumeric(l, cast(p.getValue()));
+//            if (needsRecordListCalc(p))
+            p.calculation(rl, cast(p.getValue()));
+//            else p.calculationNumeric(l, cast(p.getValue()));
         }
     }
 
@@ -311,7 +311,8 @@ public class DataProfile {
      */
     public ProfileStatistic<?> getStatistic(StatisticTitle title) {
         for (ProfileStatistic<?> m : statistics) {
-            if (m.getTitle().equals(title)) return m;
+            if (m.getTitle().equals(title)) // TODO title to data type mapping if possible
+                return m;
         }
         return null;
     }
@@ -386,14 +387,14 @@ public class DataProfile {
             if (p.getValue() == null)
                 measure.addField(p.getLabel(), 0); // TODO: replace 0 with NaN, when hitting v2.0 of influxdb
             else if (p.getValueClass().equals(Long.class))
-                measure.addField(p.getLabel(), ((Number) p.getNumericVal()).longValue());
+                measure.addField(p.getLabel(), ((Number) p.getValue()).longValue());
             else if (p.getValueClass().equals(Double.class) || p.getLabel().equals(sd.getLabel()) ||
                     p.getLabel().equals(summary.getLabel()))
-                measure.addField(p.getLabel(), ((Number) p.getNumericVal()).doubleValue());
+                measure.addField(p.getLabel(), ((Number) p.getValue()).doubleValue());
             else if (p.getValueClass().equals(String.class) && (p.getLabel().equals(bt.getLabel()) || p.getLabel().equals(dt.getLabel())))
                 measure.addField(p.getLabel(), (String) p.getValue());
             else if (p.getValueClass().equals(Boolean.class)) measure.addField(p.getLabel(), (boolean) p.getValue());
-            else measure.addField(p.getLabel(), ((Number) p.getNumericVal()).intValue());
+            else measure.addField(p.getLabel(), ((Number) p.getValue()).intValue());
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
@@ -412,13 +413,13 @@ public class DataProfile {
             if (p.getValue() == null || p.getLabel().equals(pattern.getLabel()))
                 measure.addField(p.getLabel(), 0); // TODO: replace 0 with NaN, when hitting v2.0 of influxdb
             else if (p.getValueClass().equals(Long.class))
-                measure.addField(p.getLabel(), ((Number) p.getNumericVal()).longValue());
+                measure.addField(p.getLabel(), ((Number) p.getValue()).longValue());
             else if (p.getValueClass().equals(Double.class) || p.getLabel().equals(sd.getLabel()))
-                measure.addField(p.getLabel(), ((Number) p.getNumericVal()).doubleValue());
+                measure.addField(p.getLabel(), ((Number) p.getValue()).doubleValue());
             else if (p.getValueClass().equals(String.class) && (p.getLabel().equals(bt.getLabel()) || p.getLabel().equals(dt.getLabel())))
                 measure.addField(p.getLabel(), (String) p.getValue());
             else if (p.getValueClass().equals(Boolean.class)) measure.addField(p.getLabel(), (boolean) p.getValue());
-            else measure.addField(p.getLabel(), ((Number) p.getNumericVal()).intValue());
+            else measure.addField(p.getLabel(), ((Number) p.getValue()).intValue());
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();

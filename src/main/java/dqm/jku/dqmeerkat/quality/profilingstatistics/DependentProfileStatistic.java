@@ -11,22 +11,13 @@ import java.util.List;
  *
  * @author optimusseptim
  */
-public abstract class DependentProfileStatistic extends AbstractProfileStatistic {
+public abstract class DependentProfileStatistic<T> extends ProfileStatistic<T> {
 
 
     public DependentProfileStatistic(StatisticTitle title, StatisticCategory cat, DataProfile refProf) {
         super(title, cat, refProf);
         this.dependencyCheck();
     }
-
-    @Override
-    public abstract void calculation(RecordList rs, Object oldVal);
-
-    @Override
-    public abstract void update(RecordList rs);
-
-    @Override
-    protected abstract String getValueString();
 
     /**
      * Helper method to calculate missing dependencies in calculation with a list of
@@ -35,7 +26,7 @@ public abstract class DependentProfileStatistic extends AbstractProfileStatistic
      * @param list the numeric value list
      * @throws NoSuchMethodException
      */
-    protected abstract void dependencyCalculationWithNumericList(List<Number> list) throws NoSuchMethodException;
+//    protected abstract void dependencyCalculationWithNumericList(List<Number> list) throws NoSuchMethodException;
 
     /**
      * Helper method to calculate missing dependencies in calculation with a

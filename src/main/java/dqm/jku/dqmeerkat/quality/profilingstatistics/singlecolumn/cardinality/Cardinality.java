@@ -4,7 +4,6 @@ import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.NumberProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.util.Constants;
@@ -12,7 +11,6 @@ import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.cardCat;
@@ -39,7 +37,7 @@ public class Cardinality extends NumberProfileStatistic<Long> {
         Set<Number> set = new HashSet<Number>();
         Set<String> strSet = new HashSet<String>();
         for (Record r : rs) {
-            Number field = null;
+            Number field;
             if (a.getDataType().equals(String.class) && r.getField(a) != null) strSet.add(r.getField(a).toString());
             else {
                 field = (Number) r.getField(a);
@@ -48,19 +46,9 @@ public class Cardinality extends NumberProfileStatistic<Long> {
         }
         if (a.getDataType().equals(String.class)) {
             this.setValue((long) strSet.size());
-            this.setNumericVal((Number) strSet.size());
         } else {
             this.setValue((long) set.size());
-            this.setNumericVal((Number) set.size());
         }
-        this.setValueClass(Long.class);
-    }
-
-    @Override
-    public void calculationNumeric(List<Number> list, Long oldVal) {
-        Set<Number> set = new HashSet<Number>();
-        set.addAll(list);
-        this.setValue((long) set.size());
         this.setValueClass(Long.class);
     }
 
@@ -76,7 +64,7 @@ public class Cardinality extends NumberProfileStatistic<Long> {
 
     @Override
     public boolean checkConformance(ProfileStatistic<Long> m, double threshold) {
-        double rdpVal = ((Number) this.getNumericVal()).doubleValue();
+        double rdpVal = ((Number) this.getValue()).doubleValue();
         double dpValue = ((Number) m.getValue()).doubleValue();
 
         double lowerBound = rdpVal - (Math.abs(rdpVal) * threshold);

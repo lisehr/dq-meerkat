@@ -13,4 +13,6 @@ public abstract class NumberProfileStatistic<T extends Number> extends ProfileSt
     public NumberProfileStatistic(StatisticTitle title, StatisticCategory cat, DataProfile refProf) {
         super(title, cat, refProf);
     }
+
+    protected abstract T getBasicInstance();
 }

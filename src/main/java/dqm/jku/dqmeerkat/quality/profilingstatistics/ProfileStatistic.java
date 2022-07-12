@@ -33,9 +33,6 @@ public abstract class ProfileStatistic<T> implements Comparable<ProfileStatistic
     @Getter
     @Setter
     protected T value; // the value itself
-    // TODO move it to own subclass? (e.g. ProfileStatisticNumeric<T extends Number>)
-    @Setter
-    protected Object numericVal; // numeric representation (e.g. double for values that can be integer as well), also string for unified and recognizable formats for RDFBeans for ex.
     @Setter
     protected DataProfile refProf; // reference profile for calculations
 
@@ -48,7 +45,6 @@ public abstract class ProfileStatistic<T> implements Comparable<ProfileStatistic
         this.cat = cat;
         this.uri = refProf.getURI() + '/' + this.title.getLabel().replaceAll("\\s+", "");
         value = null;
-        numericVal = null;
     }
 
 
@@ -108,11 +104,6 @@ public abstract class ProfileStatistic<T> implements Comparable<ProfileStatistic
      */
     public String getLabel() {
         return title.getLabel();
-    }
-
-    @RDF("dsd:hasValue")
-    public Object getNumericVal() {
-        return numericVal;
     }
 
     /**
@@ -210,14 +201,5 @@ public abstract class ProfileStatistic<T> implements Comparable<ProfileStatistic
         return getLabel().compareTo(o.getLabel());
     }
 
-    /**
-     * Method for calculating the profile metric, overridden by each metric.
-     * TODO possibly handle by implementation like NumberProfileStatistic?
-     *
-     * @param oldVal a oldValue to be updated, null for initial calculation
-     * @param list   a sorted list, containing all values
-     * @throws NoSuchMethodException in cases like null values, since here records
-     *                               are not allowed for processing
-     */
-    public abstract void calculationNumeric(List<Number> list, T oldVal) throws NoSuchMethodException;
+
 }
