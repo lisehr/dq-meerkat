@@ -102,19 +102,6 @@ public abstract class ProfileStatistic<T> implements Comparable<ProfileStatistic
     }
 
     /**
-     * Sets the value Class via the class string, passed as parameter
-     *
-     * @param valClass the string representation of the class
-     */
-    public void setValueClassString(String valClass) {
-        try {
-            this.valueClass = Class.forName(valClass);
-        } catch (ClassNotFoundException e) {
-            System.err.println("Class not found!");
-        }
-    }
-
-    /**
      * Directly gets the text of the title
      *
      * @return label of title
@@ -158,6 +145,18 @@ public abstract class ProfileStatistic<T> implements Comparable<ProfileStatistic
         return this.valueClass.getName();
     }
 
+    /**
+     * Sets the value Class via the class string, passed as parameter
+     *
+     * @param valClass the string representation of the class
+     */
+    public void setValueClassString(String valClass) {
+        try {
+            this.valueClass = Class.forName(valClass);
+        } catch (ClassNotFoundException e) {
+            System.err.println("Class not found!");
+        }
+    }
 
     /**
      * Gets the reference DataProfile
@@ -210,4 +209,15 @@ public abstract class ProfileStatistic<T> implements Comparable<ProfileStatistic
     public int compareTo(@NotNull ProfileStatistic<T> o) {
         return getLabel().compareTo(o.getLabel());
     }
+
+    /**
+     * Method for calculating the profile metric, overridden by each metric.
+     * TODO possibly handle by implementation like NumberProfileStatistic?
+     *
+     * @param oldVal a oldValue to be updated, null for initial calculation
+     * @param list   a sorted list, containing all values
+     * @throws NoSuchMethodException in cases like null values, since here records
+     *                               are not allowed for processing
+     */
+    public abstract void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException;
 }

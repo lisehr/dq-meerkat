@@ -21,20 +21,6 @@ public abstract class AbstractProfileStatistic extends ProfileStatistic<Object> 
     }
 
 
-
-
-    /**
-     * Method for calculating the profile metric, overridden by each metric
-     *
-     * @param oldVal a oldValue to be updated, null for initial calculation
-     * @param list   a sorted list, containing all values
-     * @throws NoSuchMethodException in cases like null values, since here records
-     *                               are not allowed for processing
-     */
-    public abstract void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException;
-
-
-
     @Override
     public int hashCode() {
         return Objects.hash(title, valueClass, value);

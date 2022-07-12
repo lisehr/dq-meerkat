@@ -23,9 +23,6 @@ public abstract class DependentProfileStatistic extends AbstractProfileStatistic
     public abstract void calculation(RecordList rs, Object oldVal);
 
     @Override
-    public abstract void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException;
-
-    @Override
     public abstract void update(RecordList rs);
 
     @Override
