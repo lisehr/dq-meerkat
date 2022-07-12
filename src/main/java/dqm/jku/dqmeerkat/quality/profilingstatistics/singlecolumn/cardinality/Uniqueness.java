@@ -1,18 +1,16 @@
 package dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality;
 
-import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.*;
-import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
-
-import java.util.List;
-
-import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
+import dqm.jku.dqmeerkat.dsd.records.RecordList;
+import dqm.jku.dqmeerkat.quality.DataProfile;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentNumberProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 
-import dqm.jku.dqmeerkat.dsd.records.RecordList;
-import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentProfileStatistic;
+import java.util.List;
+
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.cardCat;
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
 
 
 /**
@@ -24,7 +22,7 @@ import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentProfileStatistic;
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/cardinality/Uniqueness")
-public class Uniqueness extends DependentProfileStatistic {
+public class Uniqueness extends DependentNumberProfileStatistic<Double> {
 
     public Uniqueness(DataProfile d) {
         super(unique, cardCat, d);
@@ -37,31 +35,25 @@ public class Uniqueness extends DependentProfileStatistic {
      * @param oldVal  old value of metric
      * @param checked flag for dependency check
      */
-    private void calculation(RecordList rl, Object oldVal, boolean checked) {
+    private void calculation(RecordList rl, Double oldVal, boolean checked) {
         if (!checked) dependencyCalculationWithRecordList(rl);
         long cardinality = (long) (super.getRefProf().getStatistic(card).getValue());
         long numRecs = (long) super.getRefProf().getStatistic(numrows).getValue();
         double result = cardinality * 100.0 / numRecs;
         this.setValue(result);
-        this.setNumericVal((Number) result);
         this.setValueClass(Double.class);
 
     }
 
     @Override
-    public void calculation(RecordList rs, Object oldVal) {
+    public void calculation(RecordList rs, Double oldVal) {
         calculation(rs, null, false);
     }
 
-    @Override
-    public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
-        this.dependencyCalculationWithNumericList(list);
-        calculation(null, null, true); // in this case, no record set is needed, therefore null for rs is allowed
-    }
 
     @Override
     public void update(RecordList rs) {
-        calculation(rs, super.getValueClass());
+        calculation(rs, super.getValue());
     }
 
     @Override
@@ -80,14 +72,6 @@ public class Uniqueness extends DependentProfileStatistic {
     }
 
     @Override
-    protected void dependencyCalculationWithNumericList(List<Number> list) throws NoSuchMethodException {
-        if (super.getMetricPos(unique) - 2 <= super.getMetricPos(numrows))
-            super.getRefProf().getStatistic(numrows).calculationNumeric(list, null);
-        if (super.getMetricPos(unique) - 1 <= super.getMetricPos(card))
-            super.getRefProf().getStatistic(card).calculationNumeric(list, null);
-    }
-
-    @Override
     protected void dependencyCheck() {
         ProfileStatistic<?> sizeM = super.getRefProf().getStatistic(numrows);
         if (sizeM == null) {
@@ -101,8 +85,14 @@ public class Uniqueness extends DependentProfileStatistic {
         }
     }
 
+    // TODO is this really correct?
     @Override
-    public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {        // Excluded: depends on cardinality & num rows (RDP size != DP size)
+    public boolean checkConformance(ProfileStatistic<Double> m, double threshold) {        // Excluded: depends on cardinality & num rows (RDP size != DP size)
         return true;
+    }
+
+    @Override
+    protected Double getBasicInstance() {
+        return 0D;
     }
 }

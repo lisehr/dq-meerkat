@@ -1,22 +1,21 @@
 package dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.datatypeinfo;
 
-import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.*;
-import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
-import org.cyberborean.rdfbeans.annotations.RDFBean;
-import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
-
 import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.NumberProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.util.Constants;
 import dqm.jku.dqmeerkat.util.numericvals.NumberComparator;
+import org.cyberborean.rdfbeans.annotations.RDFBean;
+import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.dti;
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.med;
 
 
 /**
@@ -27,27 +26,28 @@ import dqm.jku.dqmeerkat.util.numericvals.NumberComparator;
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/Median")
-public class Median extends AbstractProfileStatistic {
+public class Median extends NumberProfileStatistic<Double> {
 
     public Median(DataProfile d) {
         super(med, dti, d);
     }
 
     @Override
-    public void calculation(RecordList rs, Object oldVal) {
+    public void calculation(RecordList rs, Double oldVal) {
         Attribute a = (Attribute) super.getRefElem();
         List<Number> list = new ArrayList<Number>();
         for (Record r : rs) {
-            Number field = null;
-            if (a.getDataType().equals(String.class) && r.getField(a) != null)
-                field = ((String) r.getField(a)).length();
-            else field = (Number) r.getField(a);
-            if (field != null) list.add(field);
+            Number field;
+            // TODO implement for Strings
+//            if (a.getDataType().equals(String.class) && r.getField(a) != null)
+//                field = ((String) r.getField(a)).length();
+            field = (Number) r.getField(a);
+            if (field != null)
+                list.add(field);
         }
         list.sort(new NumberComparator());
-        Object val = getMedian(list, list.size());
+        var val = getMedian(list, list.size());
         this.setValue(val);
-        this.setNumericVal(((Number) val).doubleValue());
         this.setValueClass(a.getDataType());
     }
 
@@ -58,19 +58,21 @@ public class Median extends AbstractProfileStatistic {
      * @param size the size of records
      * @return the median of the list
      */
-    private Object getMedian(List<Number> list, int size) {
+    private double getMedian(List<Number> list, int size) {
         boolean isEven = false;
-        if (list.size() < size) return null;
-        if (size % 2 == 0) isEven = true;
+        if (list.size() < size)
+            return Double.MIN_VALUE;
+        if (size % 2 == 0)
+            isEven = true;
         size /= 2;
         Number val = list.get(size);
         if (isEven) {
-            if (size == 1) val = averageResult(val, list.get(0));
-            else val = averageResult(val, list.get(size + 1));
+            if (size == 1)
+                val = averageResult(val, list.get(0));
+            else
+                val = averageResult(val, list.get(size + 1));
         }
-        if (((Attribute) super.getRefElem()).getDataType().equals(Long.class)) return val.longValue();
-        else if (((Attribute) super.getRefElem()).getDataType().equals(Double.class)) return val.doubleValue();
-        return val;
+        return val.doubleValue();
     }
 
     /**
@@ -82,10 +84,7 @@ public class Median extends AbstractProfileStatistic {
      * @return the weighted median
      */
     private Number averageResult(Number oddMedian, Number next) {
-        Attribute a = (Attribute) super.getRefElem();
-        if (a.getDataType().equals(Long.class)) return ((oddMedian.longValue() + oddMedian.longValue()) / 2);
-        else if (a.getDataType().equals(Double.class)) return ((oddMedian.doubleValue() + oddMedian.doubleValue()) / 2);
-        return oddMedian;
+        return ((oddMedian.doubleValue() + next.doubleValue()) / 2);
     }
 
     @Override
@@ -93,20 +92,6 @@ public class Median extends AbstractProfileStatistic {
         calculation(rs, super.getValue());
     }
 
-    @Override
-    public void calculationNumeric(List<Number> list, Object oldVal) {
-        if (list == null || list.isEmpty()) {
-            if (oldVal != null) return;
-            else this.setValue(null);
-        } else {
-            list.sort(new NumberComparator());
-            Object val = getMedian(list, list.size());
-            this.setValue(val);
-            this.setNumericVal(((Number) val).doubleValue());
-        }
-        Attribute a = (Attribute) super.getRefElem();
-        this.setValueClass(a.getDataType());
-    }
 
     @Override
     protected String getValueString() {
@@ -114,9 +99,10 @@ public class Median extends AbstractProfileStatistic {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {        if (this.getNumericVal() == null)
-            setNumericVal(m.getNumericVal());
-        double rdpVal = ((Number) this.getNumericVal()).doubleValue();
+    public boolean checkConformance(ProfileStatistic<Double> m, double threshold) {
+        if (this.getValue() == null)
+            setValue(m.getValue());
+        double rdpVal = ((Number) this.getValue()).doubleValue();
         double dpValue = ((Number) m.getValue()).doubleValue();
 
         double lowerBound = rdpVal - (Math.abs(rdpVal) * threshold);

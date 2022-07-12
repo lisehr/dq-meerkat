@@ -3,6 +3,7 @@ package dqm.jku.dqmeerkat.quality.profilingstatistics;
 import dqm.jku.dqmeerkat.dsd.elements.DSDElement;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
+import dqm.jku.dqmeerkat.util.Constants;
 import lombok.Getter;
 import lombok.Setter;
 import org.cyberborean.rdfbeans.annotations.RDF;
@@ -86,7 +87,20 @@ public abstract class ProfileStatistic<T> implements Comparable<ProfileStatistic
      *
      * @return boolean conformance to RDP value
      */
-    public abstract boolean checkConformance(ProfileStatistic<T> m, double threshold);
+    public boolean checkConformance(ProfileStatistic<T> m, double threshold) {
+        if (getValue() == null)
+            setValue(m.getValue());
+        double rdpVal = ((Number) this.getValue()).doubleValue();
+        double dpValue = ((Number) m.getValue()).doubleValue();
+
+        double lowerBound = rdpVal - (Math.abs(rdpVal) * threshold);
+        double upperBound = rdpVal + (Math.abs(rdpVal) * threshold);
+
+        boolean conf = dpValue >= lowerBound && dpValue <= upperBound;
+        if (!conf && Constants.DEBUG)
+            System.out.println(this.getTitle() + " exceeded: " + dpValue + " not in [" + lowerBound + ", " + upperBound + "]");
+        return conf;
+    }
 
     /**
      * Gets the reference dsd element, used for calculation
