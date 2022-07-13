@@ -79,8 +79,9 @@ public class DataProfile {
      * @throws NoSuchMethodException
      */
     private void calculateReferenceDataProfile(RecordList rl) throws NoSuchMethodException {
-        if (elem instanceof Attribute) calculateSingleColumn(rl);
-        else if (elem instanceof Concept) calculateMultiColumn(rl);
+        if (elem instanceof Attribute) {
+            calculateSingleColumn(rl);
+        } else if (elem instanceof Concept) calculateMultiColumn(rl);
     }
 
     /**
@@ -111,6 +112,7 @@ public class DataProfile {
         List<Number> l = createValueList(rl);
         for (ProfileStatistic<?> p : statistics) {
 //            if (needsRecordListCalc(p))
+            // TODO bugfix here?
             p.calculation(rl, cast(p.getValue()));
 //            else p.calculationNumeric(l, cast(p.getValue()));
         }
@@ -146,14 +148,16 @@ public class DataProfile {
         for (Record r : rl) {
             Number field = null;
             Class<?> clazz = a.getDataType();
-            if ((String.class.isAssignableFrom(clazz) || Date.class.isAssignableFrom(clazz)) && r.getField(a) != null)
+            if ((String.class.isAssignableFrom(clazz) || Date.class.isAssignableFrom(clazz)) && r.getField(a) != null) {
                 field = r.getField(a).toString().length();
-            else if (a.getConcept().getDatasource().getDBType().equals(DBType.CSV)) field = (Number) r.getField(a);
-            else if (a.getConcept().getDatasource().getDBType().equals(DBType.MYSQL) || a.getConcept().getDatasource().getDBType().equals(DBType.PENTAHOETL)) {
+            } else if (a.getConcept().getDatasource().getDBType().equals(DBType.CSV)) {
+                field = (Number) r.getField(a);
+            } else if (a.getConcept().getDatasource().getDBType().equals(DBType.MYSQL) || a.getConcept().getDatasource().getDBType().equals(DBType.PENTAHOETL)) {
                 if (Number.class.isAssignableFrom(clazz)) field = (Number) r.getField(a);
             }
-            if (field != null)
+            if (field != null) {
                 list.add(field);
+            }
         }
         list.sort(new NumberComparator());
         return list;
@@ -174,8 +178,9 @@ public class DataProfile {
      */
     public void printProfile() {
         System.out.println("Data Profile:");
-        if (statistics.stream().anyMatch(p -> p.getValueClass().equals(String.class)))
+        if (statistics.stream().anyMatch(p -> p.getValueClass().equals(String.class))) {
             System.out.println("Strings use String length for value length metrics!");
+        }
 
         // TODO: Check if only printing the outlier indices makes sense --> therefore the following line is temporarily commented out
         //if (metrics.stream().anyMatch(p -> p.getCat().equals(MetricCategory.out))) System.out.println("Outlier Detection shows all record numbers that contain outliers!");
@@ -312,7 +317,9 @@ public class DataProfile {
     public ProfileStatistic<?> getStatistic(StatisticTitle title) {
         for (ProfileStatistic<?> m : statistics) {
             if (m.getTitle().equals(title)) // TODO title to data type mapping if possible
+            {
                 return m;
+            }
         }
         return null;
     }
@@ -347,8 +354,9 @@ public class DataProfile {
         SortedSet<ProfileStatistic<?>> metricSorted = new TreeSet<>();
         metricSorted.addAll(statistics);
         for (ProfileStatistic<?> p : metricSorted) {
-            if (!p.getTitle().equals(hist) && !p.getTitle().equals(mad))
+            if (!p.getTitle().equals(hist) && !p.getTitle().equals(mad)) {
                 addMeasuringValue(p, measure);
+            }
         }
         return measure.build();
     }
@@ -368,8 +376,9 @@ public class DataProfile {
         com.influxdb.client.write.Point point = new com.influxdb.client.write.Point(measurementDescriptor)
                 .time(timestampMillis, writePrecision);
         for (ProfileStatistic<?> p : metricSorted) {
-            if (!p.getTitle().equals(hist) && !p.getTitle().equals(mad))
+            if (!p.getTitle().equals(hist) && !p.getTitle().equals(mad)) {
                 addMeasuringValue(p, point);
+            }
         }
         return point;
     }
@@ -384,17 +393,20 @@ public class DataProfile {
     private void addMeasuringValue(ProfileStatistic<?> p, com.influxdb.client.write.Point measure) {
         try {
             // TODO refactor for readability and extensability when using generics in ProfileStatistics
-            if (p.getValue() == null)
+            if (p.getValue() == null) {
                 measure.addField(p.getLabel(), 0); // TODO: replace 0 with NaN, when hitting v2.0 of influxdb
-            else if (p.getValueClass().equals(Long.class))
+            } else if (p.getValueClass().equals(Long.class)) {
                 measure.addField(p.getLabel(), ((Number) p.getValue()).longValue());
-            else if (p.getValueClass().equals(Double.class) || p.getLabel().equals(sd.getLabel()) ||
-                    p.getLabel().equals(summary.getLabel()))
+            } else if (p.getValueClass().equals(Double.class) || p.getLabel().equals(sd.getLabel()) ||
+                    p.getLabel().equals(summary.getLabel())) {
                 measure.addField(p.getLabel(), ((Number) p.getValue()).doubleValue());
-            else if (p.getValueClass().equals(String.class) && (p.getLabel().equals(bt.getLabel()) || p.getLabel().equals(dt.getLabel())))
+            } else if (p.getValueClass().equals(String.class) && (p.getLabel().equals(bt.getLabel()) || p.getLabel().equals(dt.getLabel()))) {
                 measure.addField(p.getLabel(), (String) p.getValue());
-            else if (p.getValueClass().equals(Boolean.class)) measure.addField(p.getLabel(), (boolean) p.getValue());
-            else measure.addField(p.getLabel(), ((Number) p.getValue()).intValue());
+            } else if (p.getValueClass().equals(Boolean.class)) {
+                measure.addField(p.getLabel(), (boolean) p.getValue());
+            } else {
+                measure.addField(p.getLabel(), ((Number) p.getValue()).intValue());
+            }
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();
@@ -410,16 +422,19 @@ public class DataProfile {
      */
     private void addMeasuringValue(ProfileStatistic<?> p, Builder measure) {
         try {
-            if (p.getValue() == null || p.getLabel().equals(pattern.getLabel()))
+            if (p.getValue() == null || p.getLabel().equals(pattern.getLabel())) {
                 measure.addField(p.getLabel(), 0); // TODO: replace 0 with NaN, when hitting v2.0 of influxdb
-            else if (p.getValueClass().equals(Long.class))
+            } else if (p.getValueClass().equals(Long.class)) {
                 measure.addField(p.getLabel(), ((Number) p.getValue()).longValue());
-            else if (p.getValueClass().equals(Double.class) || p.getLabel().equals(sd.getLabel()))
+            } else if (p.getValueClass().equals(Double.class) || p.getLabel().equals(sd.getLabel())) {
                 measure.addField(p.getLabel(), ((Number) p.getValue()).doubleValue());
-            else if (p.getValueClass().equals(String.class) && (p.getLabel().equals(bt.getLabel()) || p.getLabel().equals(dt.getLabel())))
+            } else if (p.getValueClass().equals(String.class) && (p.getLabel().equals(bt.getLabel()) || p.getLabel().equals(dt.getLabel()))) {
                 measure.addField(p.getLabel(), (String) p.getValue());
-            else if (p.getValueClass().equals(Boolean.class)) measure.addField(p.getLabel(), (boolean) p.getValue());
-            else measure.addField(p.getLabel(), ((Number) p.getValue()).intValue());
+            } else if (p.getValueClass().equals(Boolean.class)) {
+                measure.addField(p.getLabel(), (boolean) p.getValue());
+            } else {
+                measure.addField(p.getLabel(), ((Number) p.getValue()).intValue());
+            }
         } catch (Exception e) {
             // TODO: handle exception
             e.printStackTrace();

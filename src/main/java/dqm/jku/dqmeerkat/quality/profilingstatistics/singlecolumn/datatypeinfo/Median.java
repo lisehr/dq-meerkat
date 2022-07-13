@@ -60,7 +60,7 @@ public class Median extends NumberProfileStatistic<Double> {
      */
     private double getMedian(List<Number> list, int size) {
         boolean isEven = false;
-        if (list.size() < size)
+        if (list.size() < size || list.isEmpty())
             return Double.MIN_VALUE;
         if (size % 2 == 0)
             isEven = true;
