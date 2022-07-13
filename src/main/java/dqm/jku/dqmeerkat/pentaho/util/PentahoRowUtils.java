@@ -105,7 +105,8 @@ public class PentahoRowUtils {
                     list.add(new ValueMetaAndData(profileMetric.getLabel(), profileMetric.getValue()));
                 else if (profileMetric.getTitle() == hist)
                     list.add(new ValueMetaAndData(profileMetric.getLabel(), profileMetric.toString().substring(10)));
-                else list.add(new ValueMetaAndData(profileMetric.getLabel(), profileMetric.getValue()));
+                else
+					list.add(new ValueMetaAndData(profileMetric.getLabel(), profileMetric.getValue()));
             }
         return list;
     }

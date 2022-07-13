@@ -10,10 +10,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.*;
 import dqm.jku.dqmeerkat.util.Constants;
 import lombok.SneakyThrows;
 import science.aist.seshat.Logger;
@@ -37,9 +34,9 @@ import java.util.List;
  * @author meindl, rainer.meindl@scch.at
  * @since 09.06.2022
  */
-public class LEDCPIPatternRecognition extends AbstractProfileStatistic {
-    private final QualityMeasure<String> measure;
+public class LEDCPIPatternRecognition extends NumberProfileStatistic<Double> {
     private static final Logger LOGGER = Logger.getInstance();
+    private final QualityMeasure<String> measure;
 
 
     public LEDCPIPatternRecognition(DataProfile referenceProfile, QualityMeasure<String> measure) {
@@ -69,7 +66,7 @@ public class LEDCPIPatternRecognition extends AbstractProfileStatistic {
     }
 
     @Override
-    public void calculation(RecordList rs, Object oldVal) {
+    public void calculation(RecordList rs, Double oldVal) {
         Attribute attribute = (Attribute) super.getRefElem();
         double cnt = 0D;
         for (Record record : rs) {
@@ -77,7 +74,6 @@ public class LEDCPIPatternRecognition extends AbstractProfileStatistic {
         }
         var numericValue = cnt / rs.size();
         setValue(numericValue);
-        setNumericVal(numericValue);
         this.setValueClass(Double.class);
     }
 
@@ -93,17 +89,6 @@ public class LEDCPIPatternRecognition extends AbstractProfileStatistic {
         return result >= measure.getSufficiencyThreshold() ? 1 : 0;
     }
 
-    @Override
-    public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
-        double cnt = 0D;
-        for (Number number : list) {
-            cnt += checkHit(number);
-        }
-        var numericValue = cnt / list.size();
-        setValue(numericValue);
-        setNumericVal(numericValue);
-        this.setValueClass(Double.class);
-    }
 
     /**
      * Update the {@link AbstractProfileStatistic}s value using the given {@link RecordList}. Delegates to calculation.
@@ -133,16 +118,17 @@ public class LEDCPIPatternRecognition extends AbstractProfileStatistic {
      * @return if the other {@link AbstractProfileStatistic} conforms to this one
      */
     @Override
-    public boolean checkConformance(ProfileStatistic<Object> other, double threshold) {
-        double rdpVal = ((Number) this.getNumericVal()).doubleValue();
-        double dpValue = ((Number) other.getValue()).doubleValue();
+    public boolean checkConformance(ProfileStatistic<Double> other, double threshold) {
+        double rdpVal = getValue();
+        double dpValue = other.getValue();
 
         double lowerBound = rdpVal - (Math.abs(rdpVal) * threshold);
         double upperBound = rdpVal + (Math.abs(rdpVal) * threshold);
 
         boolean conf = dpValue >= lowerBound && dpValue <= upperBound;
-        if (!conf && Constants.DEBUG)
+        if (!conf && Constants.DEBUG) {
             LOGGER.info(this.getTitle() + " exceeded: " + dpValue + " not in [" + lowerBound + ", " + upperBound + "]");
+        }
         return conf;
     }
 }

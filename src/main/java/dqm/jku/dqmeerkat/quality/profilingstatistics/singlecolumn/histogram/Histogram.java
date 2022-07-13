@@ -29,7 +29,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.numro
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/histogram/Histogram")
-public class Histogram extends DependentProfileStatistic {
+public class Histogram extends DependentProfileStatistic<SerializableFrequencyMap> {
     private Number min; // minimum value
     private Number max; // maximum value
     private Number classrange; // range of equi-width classes
@@ -40,29 +40,22 @@ public class Histogram extends DependentProfileStatistic {
     }
 
     @Override
-    public void calculation(RecordList rs, Object oldVal) {
+    public void calculation(RecordList rs, SerializableFrequencyMap oldVal) {
         this.dependencyCalculationWithRecordList(rs);
         Attribute a = (Attribute) super.getRefElem();
         List<Number> list = new ArrayList<Number>();
         for (Record r : rs) {
-            Number field = null;
-            if (a.getDataType().equals(String.class) && r.getField(a) != null)
+            Number field;
+            if (a.getDataType().equals(String.class) && r.getField(a) != null) {
                 field = r.getField(a).toString().length();
-            else field = (Number) r.getField(a);
-            if (field != null) list.add(field);
+            } else {
+                field = (Number) r.getField(a);
+            }
+            if (field != null) {
+                list.add(field);
+            }
         }
         processList(list, null);
-        this.setValueClass(a.getDataType());
-    }
-
-    @Override
-    public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
-        this.dependencyCalculationWithNumericList(list);
-        if (list == null || list.isEmpty()) {
-            if (oldVal != null) return;
-            else this.setValue(null);
-        } else processList(list, null);
-        Attribute a = (Attribute) super.getRefElem();
         this.setValueClass(a.getDataType());
     }
 
@@ -94,9 +87,12 @@ public class Histogram extends DependentProfileStatistic {
 
         classrange = (max.doubleValue() - min.doubleValue()) / k;
 
-        int classVals[];
-        if (vals == null) classVals = new int[k];
-        else classVals = constructArray();
+        int[] classVals;
+        if (vals == null) {
+            classVals = new int[k];
+        } else {
+            classVals = constructArray();
+        }
         for (Number n : list) {
             if (n.doubleValue() == max.doubleValue()) {
                 classVals[k - 1]++;
@@ -107,7 +103,6 @@ public class Histogram extends DependentProfileStatistic {
         SerializableFrequencyMap classes = new SerializableFrequencyMap(this.getUri());
         for (int i = 0; i < k; i++) classes.put(i, classVals[i]);
         this.setValue(classes);
-        this.setNumericVal(classes);
     }
 
     @Override
@@ -115,13 +110,15 @@ public class Histogram extends DependentProfileStatistic {
         Attribute a = (Attribute) super.getRefElem();
         List<Number> list = new ArrayList<Number>();
         for (Record r : rs) {
-            Number field = null;
-            if (a.getDataType().equals(String.class) && r.getField(a) != null)
+            Number field;
+            if (a.getDataType().equals(String.class) && r.getField(a) != null) {
                 field = ((String) r.getField(a)).length();
-            else field = (Number) r.getField(a);
+            } else {
+                field = (Number) r.getField(a);
+            }
             if (field != null) list.add(field);
         }
-        processList(list, (SerializableFrequencyMap) super.getValue());
+        processList(list, super.getValue());
     }
 
     /**
@@ -132,9 +129,9 @@ public class Histogram extends DependentProfileStatistic {
     private int[] constructArray() {
         if (super.getValue() == null) throw new IllegalStateException("Map has to exist here!");
         int k = getNumberOfClasses();
-        int classes[] = new int[k];
+        int[] classes = new int[k];
         int j = 0;
-        for (Integer i : ((SerializableFrequencyMap) super.getValue()).values()) {
+        for (Integer i : super.getValue().values()) {
             classes[j] = i;
             j++;
         }
@@ -228,7 +225,7 @@ public class Histogram extends DependentProfileStatistic {
      */
     public String getClassValues() {
         StringBuilder sb = new StringBuilder();
-        for (Integer i : ((SerializableFrequencyMap) super.getValue()).values()) {
+        for (Integer i : super.getValue().values()) {
             sb.append(i);
             sb.append("-");
         }
@@ -244,7 +241,7 @@ public class Histogram extends DependentProfileStatistic {
         if (super.getValue() == null) return "";
         StringBuilder sb = new StringBuilder();
         sb.append("[");
-        for (Integer i : ((SerializableFrequencyMap) super.getValue()).values()) {
+        for (Integer i : super.getValue().values()) {
             sb.append(i);
             sb.append(", ");
         }
@@ -254,15 +251,10 @@ public class Histogram extends DependentProfileStatistic {
     }
 
     @Override
-    protected void dependencyCalculationWithNumericList(List<Number> list) throws NoSuchMethodException {
-        if (super.getMetricPos(hist) - 1 <= super.getMetricPos(numrows))
-            super.getRefProf().getStatistic(numrows).calculationNumeric(list, null);
-    }
-
-    @Override
     protected void dependencyCalculationWithRecordList(RecordList rl) {
-        if (super.getMetricPos(hist) - 2 <= super.getMetricPos(numrows))
+        if (super.getMetricPos(hist) - 2 <= super.getMetricPos(numrows)) {
             super.getRefProf().getStatistic(numrows).calculation(rl, null);
+        }
     }
 
     @Override
@@ -275,7 +267,7 @@ public class Histogram extends DependentProfileStatistic {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<SerializableFrequencyMap> m, double threshold) {
         int rdpVal = this.getNumberOfClasses();
         int dpValue = this.getNumberOfClasses();
 
@@ -283,8 +275,9 @@ public class Histogram extends DependentProfileStatistic {
         double upperBound = rdpVal + (Math.abs(rdpVal) * threshold);
 
         boolean conf = dpValue >= lowerBound && dpValue <= upperBound;
-        if (!conf && Constants.DEBUG)
+        if (!conf && Constants.DEBUG) {
             System.out.println(this.getTitle() + " exceeded: " + dpValue + " not in [" + lowerBound + ", " + upperBound + "]");
+        }
         return conf;
     }
 

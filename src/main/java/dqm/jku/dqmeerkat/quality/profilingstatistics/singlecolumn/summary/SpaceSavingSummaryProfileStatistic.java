@@ -2,14 +2,9 @@ package dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.summary;
 
 import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
-import dqm.jku.dqmeerkat.util.Constants;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,7 +18,7 @@ import java.util.Map;
  * @author meindl, rainer.meindl@scch.at
  * @since 06.07.2022
  */
-public class SpaceSavingSummaryProfileStatistic extends SummaryProfileStatistic {
+public class SpaceSavingSummaryProfileStatistic extends SummaryProfileStatistic<Double> {
 
 
     /**
@@ -37,23 +32,6 @@ public class SpaceSavingSummaryProfileStatistic extends SummaryProfileStatistic 
         this.k = k;
     }
 
-
-    @Override
-    public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
-        for (Number value : list) {
-            // round doubles to 4 decimals
-            if (value instanceof Double) {
-                var symbols = DecimalFormatSymbols.getInstance();
-                symbols.setDecimalSeparator('.');
-                DecimalFormat df = new DecimalFormat("##.####", symbols);
-                value = Double.parseDouble(df.format(value));
-            }
-            handleCounter(value);
-        }
-        setValue(summary);
-        setValueClass(summary.getClass());
-    }
-
     /**
      * Handles the summary by applying the space saving algorithm. The algorithm is as follows:
      * If the current value is not in the summary, it is added to the summary if the size of the summary is below k.
@@ -65,7 +43,7 @@ public class SpaceSavingSummaryProfileStatistic extends SummaryProfileStatistic 
      *              compress the summary.
      */
     @Override
-    protected void handleCounter(Object value) {
+    protected void handleCounter(Double value) {
         // if the item is in the summary, increment it
         if (summary.containsKey(value)) {
             summary.put(value, summary.get(value) + 1);
@@ -95,18 +73,4 @@ public class SpaceSavingSummaryProfileStatistic extends SummaryProfileStatistic 
         return (double) summary.size() / k + avgCounters / k;
     }
 
-    @Override
-    public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {
-        var rdpVal = calculateConformance();
-        var dpValue = ((SummaryProfileStatistic) m).calculateConformance();
-
-
-        double lowerBound = rdpVal - (Math.abs(rdpVal) * threshold);
-        double upperBound = rdpVal + (Math.abs(rdpVal) * threshold);
-
-        boolean conf = dpValue >= lowerBound && dpValue <= upperBound;
-        if (!conf && Constants.DEBUG)
-            System.out.println(this.getTitle() + " exceeded: " + dpValue + " not in [" + lowerBound + ", " + upperBound + "]");
-        return conf;
-    }
 }

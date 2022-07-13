@@ -4,8 +4,10 @@ import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
+import dqm.jku.dqmeerkat.util.Constants;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,21 +21,21 @@ import java.util.Map;
  * @author meindl, rainer.meindl@scch.at
  * @since 06.07.2022
  */
-public abstract class SummaryProfileStatistic extends AbstractProfileStatistic {
+public abstract class SummaryProfileStatistic<T> extends ProfileStatistic<Map<T, Integer>> {
 
     /**
      * Representation of the summary. The key is the item and the value is the number of occurrences in the dataset.
      */
-    protected Map<Object, Integer> summary = new HashMap<>();
+    protected Map<T, Integer> summary = new HashMap<>();
 
     protected SummaryProfileStatistic(StatisticTitle title, StatisticCategory cat, DataProfile refProf) {
         super(title, cat, refProf);
     }
 
     @Override
-    public void calculation(RecordList rs, Object oldVal) {
+    public void calculation(RecordList rs, Map<T, Integer> oldVal) {
         rs.toList().stream()
-                .map(record -> record.getField(getRefElem().getLabel()))
+                .map(record -> (T)record.getField(getRefElem().getLabel()))
                 .forEach(this::handleCounter);
         setValue(summary);
         setValueClass(summary.getClass());
@@ -47,7 +49,7 @@ public abstract class SummaryProfileStatistic extends AbstractProfileStatistic {
      * @param value the value to handle, i.E. either add it to the summary, increment the counter of the value or
      *              compress the summary.
      */
-    protected abstract void handleCounter(Object value);
+    protected abstract void handleCounter(T value);
 
     /**
      * Calculates a value used to determine conformance of this {@link AbstractProfileStatistic} to another
@@ -57,8 +59,19 @@ public abstract class SummaryProfileStatistic extends AbstractProfileStatistic {
     public abstract double calculateConformance();
 
     @Override
-    public Object getNumericVal() {
-        return calculateConformance();
+    public boolean checkConformance(ProfileStatistic<Map<T, Integer>> m, double threshold) {
+        var rdpVal = calculateConformance();
+        var dpValue = ((SummaryProfileStatistic<T>) m).calculateConformance();
+
+
+        double lowerBound = rdpVal - (Math.abs(rdpVal) * threshold);
+        double upperBound = rdpVal + (Math.abs(rdpVal) * threshold);
+
+        boolean conf = dpValue >= lowerBound && dpValue <= upperBound;
+        if (!conf && Constants.DEBUG) {
+            System.out.println(this.getTitle() + " exceeded: " + dpValue + " not in [" + lowerBound + ", " + upperBound + "]");
+        }
+        return conf;
     }
 
     @Override
