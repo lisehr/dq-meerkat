@@ -31,9 +31,12 @@ public class RecordList implements Iterable<Record> {
      */
     public RecordList(List<Number> medians, String attributeName) {
         var concept = new Concept();
+        var attribute = new Attribute(attributeName, concept);
+        attribute.setDataType(double.class);
+        concept.addAttribute(attribute);
         records = medians.stream().map(number -> {
             var record = new Record(concept);
-            record.addValue(new Attribute(attributeName, concept), number);
+            record.addValue(attribute, number);
             return record;
         }).collect(Collectors.toList());
 
