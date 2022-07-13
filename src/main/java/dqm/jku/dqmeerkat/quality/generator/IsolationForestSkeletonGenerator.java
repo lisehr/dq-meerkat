@@ -35,11 +35,11 @@ public class IsolationForestSkeletonGenerator extends DataProfileSkeletonGenerat
     @Override
     protected List<ProfileStatistic<?>> generateStatistics(DataProfile profile) {
         List<ProfileStatistic<?>> statistics = new ArrayList<>();
-        AbstractProfileStatistic isoFor = new IsolationForest(profile);
+        var isoFor = new IsolationForest(profile);
         statistics.add(isoFor);
-        AbstractProfileStatistic isoForPer = new IsolationForestPercentage(profile);
+        var isoForPer = new IsolationForestPercentage(profile);
         statistics.add(isoForPer);
-        AbstractProfileStatistic lof = new LocalOutlierFactor(profile);
+        var lof = new LocalOutlierFactor(profile);
         statistics.add(lof);
         return statistics;
     }

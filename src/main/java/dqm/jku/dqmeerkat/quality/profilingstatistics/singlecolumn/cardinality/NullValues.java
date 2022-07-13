@@ -4,13 +4,10 @@ import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.util.Constants;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
-
-import java.util.List;
 
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.cardCat;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.nullVal;
@@ -23,27 +20,21 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.nullV
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/cardinality/NullValues")
-public class NullValues extends AbstractProfileStatistic {
+public class NullValues extends ProfileStatistic<Long> {
 
     public NullValues(DataProfile d) {
         super(nullVal, cardCat, d);
     }
 
     @Override
-    public void calculation(RecordList rs, Object oldVal) {
+    public void calculation(RecordList rs, Long oldVal) {
         Attribute a = (Attribute) super.getRefElem();
         long nullVals = 0;
         for (Record r : rs) {
             if (r.getField(a) == null) nullVals++;
         }
         this.setValue(nullVals);
-        this.setNumericVal((Number) nullVals);
         this.setValueClass(Long.class);
-    }
-
-    @Override
-    public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
-        throw new NoSuchMethodException("Method not allowed for numeric lists!");
     }
 
     @Override
@@ -58,9 +49,9 @@ public class NullValues extends AbstractProfileStatistic {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {
-        double rdpVal = ((Number) this.getNumericVal()).doubleValue();
-        double dpValue = ((Number) m.getValue()).doubleValue();
+    public boolean checkConformance(ProfileStatistic<Long> m, double threshold) {
+        double rdpVal = this.getValue();
+        double dpValue = m.getValue();
 
         double lowerBound = rdpVal - (Math.abs(rdpVal) * threshold);
         double upperBound = rdpVal + (Math.abs(rdpVal) * threshold);

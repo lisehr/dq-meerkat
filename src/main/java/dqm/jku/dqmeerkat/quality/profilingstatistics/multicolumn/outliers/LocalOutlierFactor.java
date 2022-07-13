@@ -11,7 +11,6 @@ import de.lmu.ifi.dbs.elki.utilities.ClassGenericsUtil;
 import de.lmu.ifi.dbs.elki.utilities.optionhandling.parameterization.ListParameterization;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.util.converters.DoubleArrayConverter;
 
@@ -34,7 +33,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.lof;
  * @author Johannes Schrott
  */
 
-public class LocalOutlierFactor extends AbstractProfileStatistic {
+public class LocalOutlierFactor extends ProfileStatistic<List<Double>> {
 
     final private static float FACTOR_FOR_K = 0.1F; // Must be between 0 and 1
     final private static double OUTLIER_THRESHOLD = 1.1;
@@ -45,7 +44,7 @@ public class LocalOutlierFactor extends AbstractProfileStatistic {
     }
 
     @Override
-    public void calculation(RecordList rs, Object oldVal) {
+    public void calculation(RecordList rs, List<Double> oldVal) {
         if (rs.size() == 0)
             throw new IllegalArgumentException("An empty RecordList was passed as an argument. For a calculation, the RecordList must contain elements.");
 
@@ -101,12 +100,6 @@ public class LocalOutlierFactor extends AbstractProfileStatistic {
     }
 
     @Override
-    public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
-        throw new NoSuchMethodException("calculationNumeric does not work for multicolumn metrics, as a list of values cannot be represented by a single number.");
-    }
-
-
-    @Override
     public void update(RecordList rs) {
         this.calculation(rs, null);
     }
@@ -129,9 +122,7 @@ public class LocalOutlierFactor extends AbstractProfileStatistic {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {        // TODO Auto-generated method stub
-
-        //
+    public boolean checkConformance(ProfileStatistic<List<Double>> m, double threshold) {        // TODO Auto-generated method stub
         return false;
     }
 

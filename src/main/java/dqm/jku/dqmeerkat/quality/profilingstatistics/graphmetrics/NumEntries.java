@@ -2,15 +2,13 @@ package dqm.jku.dqmeerkat.quality.profilingstatistics.graphmetrics;
 
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.NumberProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
-
-import java.util.List;
 
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.graphCat;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.numEntries;
 
-public class NumEntries extends AbstractProfileStatistic {
+public class NumEntries extends NumberProfileStatistic<Integer> {
 
 
     public NumEntries(DataProfile d) {
@@ -18,20 +16,15 @@ public class NumEntries extends AbstractProfileStatistic {
     }
 
     @Override
-    public void calculation(RecordList rs, Object oldVal) {
+    public void calculation(RecordList rs, Integer oldVal) {
         super.setValue(rs.size());
-        super.setNumericVal(((Number) rs.size()).longValue());
         super.setValueClass(Integer.class);
     }
 
-    @Override
-    public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
-
-    }
 
     @Override
     public void update(RecordList rs) {
-
+        calculation(rs, value);
     }
 
     @Override
@@ -40,7 +33,7 @@ public class NumEntries extends AbstractProfileStatistic {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {        // Never evaluates to false, because the reference is here the size of the RDP and should not be compared to the batch size of the DPs
+    public boolean checkConformance(ProfileStatistic<Integer> m, double threshold) {        // Never evaluates to false, because the reference is here the size of the RDP and should not be compared to the batch size of the DPs
         return true;
     }
 }

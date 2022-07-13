@@ -5,64 +5,47 @@ import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.NumberProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.util.AttributeSet;
 
-import java.util.List;
 import java.util.regex.Pattern;
 
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.graphCat;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.maximum;
 
-public class MaximumEntry extends AbstractProfileStatistic {
+public class MaximumEntry extends NumberProfileStatistic<Double> {
 
-    private Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
+    private final Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
 
     public MaximumEntry(DataProfile d) {
         super(maximum, graphCat, d);
     }
 
     @Override
-    public void calculation(RecordList rs, Object oldVal) {
+    public void calculation(RecordList rs, Double oldVal) {
         Concept c = (Concept) super.getRefElem();
-        Object val = null;
+        double val;
 
         Attribute a = getAttribute(rs, c);
 
-        boolean isNumeric = checkNumeric(rs, a);
-        Class clazz = null;
-
-        if (isNumeric) {
-            clazz = getNumericClass(rs, a);
-
-        } else {
-            clazz = String.class;
-        }
-
         if (oldVal == null) {
-            val = getBasicInstance(clazz);
+            val = getBasicInstance();
         } else {
             val = oldVal;
         }
         for (Record r : rs) {
-            Object field = r.getField(a);
-            val = getMaximum(val, field, isNumeric, clazz);
+            var field = (double) r.getField(a);
+            val = getMaximum(val, field);
         }
 
         this.setValue(val);
-        this.setNumericVal(((Number) val).doubleValue());
-        this.setValueClass(clazz);
-    }
-
-    @Override
-    public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
-
+        this.setValueClass(Double.class);
     }
 
     @Override
     public void update(RecordList rs) {
-
+        calculation(rs, value);
     }
 
     @Override
@@ -71,7 +54,7 @@ public class MaximumEntry extends AbstractProfileStatistic {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<Double> m, double threshold) {
         return false;
     }
 
@@ -80,31 +63,12 @@ public class MaximumEntry extends AbstractProfileStatistic {
      *
      * @return the reference value
      */
-    private Object getBasicInstance(Class clazz) {
-        if (clazz.equals(Long.class)) {
-            return Long.valueOf(Long.MIN_VALUE);
-        } else if (clazz.equals(Double.class)) {
-            return Double.valueOf(Double.MIN_VALUE);
-        } else {
-            return Integer.MIN_VALUE;
-        }
+    private Double getBasicInstance() {
+        return Double.MIN_VALUE;
     }
 
-    private Object getMaximum(Object current, Object toComp, boolean isNumeric, Class clazz) {
-        if (toComp == null) {
-            return current;
-        }
-
-        if (clazz.equals(Long.class)) {
-
-            return Long.max((long) current, ((Number) Long.parseLong(toComp.toString())).longValue());
-        } else if (clazz.equals(Double.class)) {
-            return Double.max((double) current, ((Number) Double.parseDouble(toComp.toString())).doubleValue());
-        } else if (clazz.equals(String.class)) {
-            return Integer.max((int) current, ((String) toComp).length());
-        } else {
-            return Integer.max((int) current, ((Number) Integer.parseInt(toComp.toString())).intValue());
-        }
+    private double getMaximum(double current, double toComp) {
+        return Double.max(current, toComp);
     }
 
     private Attribute getAttribute(RecordList rl, Concept c) {

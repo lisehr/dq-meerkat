@@ -5,19 +5,18 @@ import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.NumberProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.util.AttributeSet;
 
-import java.util.List;
 import java.util.regex.Pattern;
 
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.graphCat;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.minimum;
 
-public class MinimumEntry extends AbstractProfileStatistic {
+public class MinimumEntry extends NumberProfileStatistic<Double> {
 
-    private Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
+    private final Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
 
 
     public MinimumEntry(DataProfile d) {
@@ -25,46 +24,21 @@ public class MinimumEntry extends AbstractProfileStatistic {
     }
 
     @Override
-    public void calculation(RecordList rs, Object oldVal) {
+    public void calculation(RecordList rs, Double oldVal) {
         Concept c = (Concept) super.getRefElem();
-        Object val = null;
-
         Attribute a = getAttribute(rs, c);
 
-        boolean isNumeric = checkNumeric(rs, a);
-        Class clazz = null;
-
-        if (isNumeric) {
-            clazz = getNumericClass(rs, a);
-
-        } else {
-            clazz = String.class;
-        }
-
-        if (oldVal == null) {
-            val = getBasicInstance(clazz);
-        } else {
-            val = oldVal;
-        }
-
-        for (Record r : rs) {
-            Object field = r.getField(a);
-            val = getMinimum(val, field, isNumeric, clazz);
-        }
+        double val = rs.toList().stream()
+                .mapToDouble(value1 -> (double) value1.getField(a)).min()
+                .orElseThrow();
 
         this.setValue(val);
-        this.setNumericVal(((Number) val).doubleValue());
-        this.setValueClass(clazz);
-    }
-
-    @Override
-    public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
-
+        this.setValueClass(Double.class);
     }
 
     @Override
     public void update(RecordList rs) {
-
+        calculation(rs, value);
     }
 
     @Override
@@ -73,35 +47,12 @@ public class MinimumEntry extends AbstractProfileStatistic {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<Double> m, double threshold) {
         return false;
     }
 
-    private Object getBasicInstance(Class clazz) {
-        if (clazz.equals(Long.class)) {
-            return Long.valueOf(Long.MAX_VALUE);
-        } else if (clazz.equals(Double.class)) {
-            return Double.valueOf(Double.MAX_VALUE);
-        } else {
-            return Integer.MAX_VALUE;
-        }
-    }
-
-    private Object getMinimum(Object current, Object toComp, boolean isNumeric, Class clazz) {
-        if (toComp == null) {
-            return current;
-        }
-
-        if (clazz.equals(Long.class)) {
-
-            return Long.min((long) current, ((Number) Long.parseLong(toComp.toString())).longValue());
-        } else if (clazz.equals(Double.class)) {
-            return Double.min((double) current, ((Number) Double.parseDouble(toComp.toString())).doubleValue());
-        } else if (clazz.equals(String.class)) {
-            return Integer.min((int) current, ((String) toComp).length());
-        } else {
-            return Integer.min((int) current, ((Number) Integer.parseInt(toComp.toString())).intValue());
-        }
+    private Double getBasicInstance() {
+        return Double.MAX_VALUE;
     }
 
     private Attribute getAttribute(RecordList rl, Concept c) {

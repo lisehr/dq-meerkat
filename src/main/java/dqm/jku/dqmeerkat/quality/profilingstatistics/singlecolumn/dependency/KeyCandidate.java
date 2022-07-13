@@ -9,8 +9,6 @@ import dqm.jku.dqmeerkat.util.Constants;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 
-import java.util.List;
-
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.depend;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.keyCand;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.unique;
@@ -24,7 +22,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.uniqu
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/dependency/KeyCandidate")
-public class KeyCandidate extends DependentProfileStatistic {
+public class KeyCandidate extends DependentProfileStatistic<Boolean> {
 
     public KeyCandidate(DataProfile d) {
         super(keyCand, depend, d);
@@ -34,28 +32,21 @@ public class KeyCandidate extends DependentProfileStatistic {
      * Local variant of calculation to prevent a double check for dependent metrics
      *
      * @param rl      the recordlist
-     * @param oldVal  old value of metric
      * @param checked flag for dependency check
      */
-    private void calculation(RecordList rl, Object oldVal, boolean checked) {
+    private void calculation(RecordList rl, boolean checked) {
         if (!checked) this.dependencyCalculationWithRecordList(rl);
         boolean isKeyCandidate = ((double) this.getRefProf().getStatistic(unique).getValue()) == (double) 100.0;
         super.setValue(isKeyCandidate);
 
-        super.setNumericVal(isKeyCandidate ? 1 : 0);
         super.setValueClass(Boolean.class);
     }
 
     @Override
-    public void calculation(RecordList rs, Object oldVal) {
-        calculation(rs, null, false);
+    public void calculation(RecordList rs, Boolean oldVal) {
+        calculation(rs, false);
     }
 
-    @Override
-    public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
-        this.dependencyCalculationWithNumericList(list);
-        calculation(null, null, true);
-    }
 
     @Override
     public void update(RecordList rs) {
@@ -74,12 +65,6 @@ public class KeyCandidate extends DependentProfileStatistic {
     }
 
     @Override
-    protected void dependencyCalculationWithNumericList(List<Number> list) throws NoSuchMethodException {
-        if (super.getMetricPos(keyCand) - 1 <= super.getMetricPos(unique))
-            super.getRefProf().getStatistic(unique).calculationNumeric(list, null);
-    }
-
-    @Override
     protected void dependencyCheck() {
         var uniqueM = super.getRefProf().getStatistic(unique);
         if (uniqueM == null) {
@@ -89,7 +74,7 @@ public class KeyCandidate extends DependentProfileStatistic {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<Boolean> m, double threshold) {
         String rdpVal = this.getSimpleValueString();
         String dpValue = this.getSimpleValueString();
 

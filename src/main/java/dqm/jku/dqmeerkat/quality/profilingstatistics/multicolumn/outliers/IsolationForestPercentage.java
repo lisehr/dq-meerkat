@@ -2,18 +2,17 @@ package dqm.jku.dqmeerkat.quality.profilingstatistics.multicolumn.outliers;
 
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentNumberProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.out;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.isoF;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.isoFP;
 
-public class IsolationForestPercentage extends DependentProfileStatistic {
+public class IsolationForestPercentage extends DependentNumberProfileStatistic<Double> {
 
     public IsolationForestPercentage(DataProfile dp) {
         super(isoFP, out, dp);
@@ -21,7 +20,7 @@ public class IsolationForestPercentage extends DependentProfileStatistic {
 
 
     @Override
-    public void calculation(RecordList rs, Object oldVal) {
+    public void calculation(RecordList rs, Double oldVal) {
         calculation(rs, oldVal, false);
     }
 
@@ -31,15 +30,10 @@ public class IsolationForestPercentage extends DependentProfileStatistic {
         int numRecs = rl.size();
         double result = size * 100.0 / numRecs;
         this.setValue(result);
-        this.setNumericVal((Number) result);
         this.setValueClass(Double.class);
 
     }
 
-    @Override
-    public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
-        throw new NoSuchMethodException("IsolationForests only work with record lists");
-    }
 
     @Override
     public void update(RecordList rs) {
@@ -50,11 +44,6 @@ public class IsolationForestPercentage extends DependentProfileStatistic {
     protected String getValueString() {
         if (getValue() == null) return "\tnull";
         else return "\t" + getValue().toString() + "%";
-    }
-
-    @Override
-    protected void dependencyCalculationWithNumericList(List<Number> list) throws NoSuchMethodException {
-        throw new NoSuchMethodException("IsolationForests only work with record lists");
     }
 
     @Override
@@ -73,8 +62,12 @@ public class IsolationForestPercentage extends DependentProfileStatistic {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {        // TODO Auto-generated method stub
+    public boolean checkConformance(ProfileStatistic<Double> m, double threshold) {        // TODO Auto-generated method stub
         return false;
     }
 
+    @Override
+    protected Double getBasicInstance() {
+        return 0D;
+    }
 }

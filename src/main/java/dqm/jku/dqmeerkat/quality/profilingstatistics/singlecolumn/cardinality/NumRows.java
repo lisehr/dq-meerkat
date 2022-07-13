@@ -45,9 +45,4 @@ public class NumRows extends NumberProfileStatistic<Long> {
     public boolean checkConformance(ProfileStatistic<Long> m, double threshold) {        // Never evaluates to false, because the reference is here the size of the RDP and should not be compared to the batch size of the DPs
         return true;
     }
-
-    @Override
-    protected Long getBasicInstance() {
-        return 0L;
-    }
 }

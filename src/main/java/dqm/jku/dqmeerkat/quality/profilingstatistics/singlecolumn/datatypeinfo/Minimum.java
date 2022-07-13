@@ -4,15 +4,13 @@ import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
 import dqm.jku.dqmeerkat.util.Constants;
-import dqm.jku.dqmeerkat.util.numericvals.NumberComparator;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 
-import java.util.List;
+import java.util.Objects;
 
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.dti;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.min;
@@ -26,7 +24,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.min;
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/Minimum")
-public class Minimum extends AbstractProfileStatistic {
+public class Minimum extends ProfileStatistic<Double> {
 
 
     public Minimum(DataProfile d) {
@@ -34,17 +32,14 @@ public class Minimum extends AbstractProfileStatistic {
     }
 
     @Override
-    public void calculation(RecordList rs, Object oldVal) {
+    public void calculation(RecordList rs, Double oldVal) {
         Attribute a = (Attribute) super.getRefElem();
-        Object val = null;
-        if (oldVal == null) val = getBasicInstance();
-        else val = oldVal;
+        var val = Objects.requireNonNullElse(oldVal, getBasicInstance());
         for (Record r : rs) {
-            Object field = r.getField(a);
-            val = getMinimum(val, field, false);
+            double field = (double) r.getField(a);
+            val = getMinimum(val, field);
         }
         this.setValue(val);
-        this.setNumericVal(((Number) val).doubleValue());
         this.setValueClass(a.getDataType());
     }
 
@@ -53,31 +48,26 @@ public class Minimum extends AbstractProfileStatistic {
      *
      * @return the reference value
      */
-    private Object getBasicInstance() {
-        Attribute a = (Attribute) super.getRefElem();
-        if (a.getDataType().equals(Long.class)) return Long.valueOf(Long.MAX_VALUE);
-        else if (a.getDataType().equals(Double.class)) return Double.valueOf(Double.MAX_VALUE);
-        else return Integer.MAX_VALUE;
+    private Double getBasicInstance() {
+        return Double.MAX_VALUE;
     }
 
     /**
      * Checks the minimum value of two objects
      *
-     * @param current       the current minimum value
-     * @param toComp        the new value to compare
-     * @param isNumericList check, if calculation happens with numeric list
+     * @param current the current minimum value
+     * @param toComp  the new value to compare
      * @return the new minimum value
      */
-    private Object getMinimum(Object current, Object toComp, boolean isNumericList) {
-        if (toComp == null) return current;
-        Attribute a = (Attribute) super.getRefElem();
-        if (a.getDataType().equals(Long.class))
-            return Long.min(((Number) current).longValue(), ((Number) toComp).longValue());
-        else if (a.getDataType().equals(Double.class))
-            return Double.min(((Number) current).doubleValue(), ((Number) toComp).doubleValue());
-        else if (a.getDataType().equals(String.class) && !isNumericList)
-            return Integer.min((int) current, ((String) toComp).length());
-        else return Integer.min(((Number) current).intValue(), ((Number) toComp).intValue());
+    private Double getMinimum(Double current, Double toComp) {
+        if (toComp == null)
+            return current;
+
+        return Double.min(current, toComp);
+
+        // TODO string implementation
+//        if (a.getDataType().equals(String.class) && !isNumericList)
+//            return Integer.min((int) current, ((String) toComp).length());
 
     }
 
@@ -86,22 +76,6 @@ public class Minimum extends AbstractProfileStatistic {
         calculation(rs, super.getValue());
     }
 
-    @Override
-    public void calculationNumeric(List<Number> list, Object oldVal) {
-        if (list == null || list.isEmpty()) {
-            if (oldVal != null) return;
-            else this.setValue(null);
-        } else {
-            list.sort(new NumberComparator());
-            Object val = null;
-            if (oldVal == null) val = getMinimum(list.get(0), getBasicInstance(), true);
-            else val = getMinimum(list.get(0), oldVal, true);
-            this.setValue(val);
-            this.setNumericVal(((Number) val).doubleValue());
-        }
-        Attribute a = (Attribute) super.getRefElem();
-        this.setValueClass(a.getDataType());
-    }
 
     @Override
     protected String getValueString() {
@@ -109,19 +83,20 @@ public class Minimum extends AbstractProfileStatistic {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<Double> m, double threshold) {
         double rdpVal;
-        if (this.getNumericVal() == null)
+        if (this.getValue() == null)
             rdpVal = 0;
         else
-            rdpVal = ((Number) this.getNumericVal()).doubleValue();
+            rdpVal = this.getValue();
 
         double dpValue = ((Number) m.getValue()).doubleValue();
 
         rdpVal = rdpVal - (Math.abs(rdpVal) * threshold);    // shift by threshold
         boolean conf = dpValue >= rdpVal;
         if (!conf && Constants.DEBUG)
-            System.out.println(StatisticTitle.min + " exceeded: " + dpValue + " < " + rdpVal + " (originally: " + this.getNumericVal() + ")");
+            System.out.println(StatisticTitle.min + " exceeded: " + dpValue + " < " + rdpVal + " (originally: " +
+                    this.getValue() + ")");
         return conf;
     }
 }

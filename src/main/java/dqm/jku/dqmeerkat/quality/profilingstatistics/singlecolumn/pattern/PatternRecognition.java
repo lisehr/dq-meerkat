@@ -4,7 +4,6 @@ import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.NumRows;
@@ -30,7 +29,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.patte
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/PatternRecognition")
-public class PatternRecognition extends DependentProfileStatistic {
+public class PatternRecognition extends DependentProfileStatistic<PatternCounterList> {
 
     private String filePathString;
 
@@ -45,19 +44,18 @@ public class PatternRecognition extends DependentProfileStatistic {
     }
 
     @Override
-    public void calculation(RecordList rs, Object oldVal) {
+    public void calculation(RecordList rs, PatternCounterList oldVal) {
         this.dependencyCalculationWithRecordList(rs);
         Attribute a = (Attribute) super.getRefElem();
         this.setValueClass(PatternCounterList.class);
         PatternCounterList patterns = null;
         if (oldVal == null) patterns = initPatterns();
-        else patterns = (PatternCounterList) oldVal;
+        else patterns = oldVal;
         for (Record r : rs) {
             Object field = r.getField(a);
             patterns.checkPatterns((String) field);
         }
         this.setValue(patterns);
-        this.setNumericVal(patterns);
     }
 
     private PatternCounterList initPatterns() {
@@ -75,27 +73,14 @@ public class PatternRecognition extends DependentProfileStatistic {
     }
 
     @Override
-    public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
-        this.dependencyCalculationWithNumericList(list);
-        this.setValueClass(PatternCounterList.class);
-        PatternCounterList patterns = null;
-        if (oldVal == null) patterns = initPatterns();
-        else patterns = (PatternCounterList) oldVal;
-        for (Number n : list) patterns.checkPatterns(n.toString());
-        this.setValue(patterns);
-        this.setNumericVal(patterns);
-    }
-
-    @Override
     public void update(RecordList rs) {
         Attribute a = (Attribute) super.getRefElem();
-        PatternCounterList patterns = (PatternCounterList) getValue();
+        PatternCounterList patterns = getValue();
         for (Record r : rs) {
             Object field = r.getField(a);
             patterns.checkPatterns((String) field);
         }
         this.setValue(patterns);
-        this.setNumericVal(patterns);
     }
 
     @Override
@@ -103,15 +88,7 @@ public class PatternRecognition extends DependentProfileStatistic {
         if (getValue() == null) return "\tnull";
         long denominator = (long) super.getRefProf().getStatistic(numrows).getValue();
         if (denominator == 0) return "\tnull";
-        StringBuilder sb = new StringBuilder().append("\n");
-        sb.append(((PatternCounterList) getValue()).getValueStrings(denominator));
-        return sb.toString();
-    }
-
-    @Override
-    protected void dependencyCalculationWithNumericList(List<Number> list) throws NoSuchMethodException {
-        if (super.getMetricPos(pattern) - 1 <= super.getMetricPos(numrows))
-            super.getRefProf().getStatistic(numrows).calculationNumeric(list, null);
+        return "\n" + getValue().getValueStrings(denominator);
     }
 
     @Override
@@ -129,16 +106,12 @@ public class PatternRecognition extends DependentProfileStatistic {
         }
     }
 
-    public String getFilePathString() {
-        return filePathString;
-    }
-
     public void setFilePathString(String filePathString) {
         this.filePathString = filePathString;
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<Object> m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<PatternCounterList> m, double threshold) {
         if (filePathString == null)
             return true;
 
