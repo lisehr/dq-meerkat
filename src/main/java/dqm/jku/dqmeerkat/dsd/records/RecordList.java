@@ -35,7 +35,7 @@ public class RecordList implements Iterable<Record> {
             var record = new Record(concept);
             record.addValue(new Attribute(attributeName, concept), number);
             return record;
-        }).collect(Collectors.toList())
+        }).collect(Collectors.toList());
 
     }
 

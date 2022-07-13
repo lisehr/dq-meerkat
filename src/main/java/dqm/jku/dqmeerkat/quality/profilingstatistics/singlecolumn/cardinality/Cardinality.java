@@ -75,9 +75,4 @@ public class Cardinality extends NumberProfileStatistic<Long> {
             System.out.println(this.getTitle() + " exceeded: " + dpValue + " not in [" + lowerBound + ", " + upperBound + "]");
         return conf;
     }
-
-    @Override
-    protected Long getBasicInstance() {
-        return Long.MIN_VALUE;
-    }
 }
