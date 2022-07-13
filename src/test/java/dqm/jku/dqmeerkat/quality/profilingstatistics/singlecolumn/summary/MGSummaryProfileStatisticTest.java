@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 class MGSummaryProfileStatisticTest {
 
@@ -35,9 +34,9 @@ class MGSummaryProfileStatisticTest {
         // when
         statistic.calculation(recordList, null);
         // then
-        Map<Object, Integer> ret = (Map<Object, Integer>) statistic.getValue();
+        var ret = statistic.getValue();
         Assertions.assertEquals(40, ret.size());
-        Assertions.assertEquals(4, ret.get(22));
+        Assertions.assertEquals(4, ret.get(22D));
     }
 
     @Test
@@ -48,24 +47,9 @@ class MGSummaryProfileStatisticTest {
         // when
         statistic.calculation(recordList, null);
         // then
-        Map<Object, Integer> ret = (Map<Object, Integer>) statistic.getValue();
+        var ret = statistic.getValue();
         Assertions.assertEquals(40, ret.size());
-        Assertions.assertEquals(4, ret.get(22));
-    }
-
-    @Test
-    void calculationNumericSmallTest() throws NoSuchMethodException {
-        // given
-        List<Number> data = List.of(1, 3, 3, 3, 3, 2, 1, 2, 5, 7, 8, 1, 2, 69);
-        var statistic = new MGSummaryProfileStatistic(new DataProfile(recordList, dsdElement), 5);
-
-        // when
-        statistic.calculationNumeric(data, null);
-        // then
-        Map<Object, Integer> ret = (Map<Object, Integer>) statistic.getValue();
-        Assertions.assertEquals(4, ret.size());
-        Assertions.assertEquals(3, ret.get(3));
-        Assertions.assertEquals(2, ret.get(1));
+        Assertions.assertEquals(4, ret.get(22D));
     }
 
     @Test
@@ -100,17 +84,17 @@ class MGSummaryProfileStatisticTest {
     @Test
     void checkConformanceBarelyConformingTest() throws NoSuchMethodException {
         // given
-        List<Number> data = List.of(1, 3, 3, 3, 3,
+        var data = new RecordList(List.of(1, 3, 3, 3, 3,
                 2, 3, 2, 5, 7,
-                8, 1, 2, 3, 6);
-        List<Number> data2 = List.of(1, 3, 1, 3, 3,
+                8, 1, 2, 3, 6), "data");
+        var data2 = new RecordList(List.of(1, 3, 1, 3, 3,
                 2, 1, 6, 5, 3,
-                1, 8, 2, 1, 1);
+                1, 8, 2, 1, 1), "data2");
 
         var statistic = new MGSummaryProfileStatistic(new DataProfile(recordList, dsdElement), 5);
         var statistic2 = new MGSummaryProfileStatistic(new DataProfile(recordList, dsdElement), 5);
-        statistic.calculationNumeric(data, null);
-        statistic2.calculationNumeric(data2, null);
+        statistic.calculation(data, null);
+        statistic2.calculation(data2, null);
 
         // when
         var ret = statistic.checkConformance(statistic2, 0.3);

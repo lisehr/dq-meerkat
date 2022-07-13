@@ -144,25 +144,6 @@ public class LEDCPIPatternRecognitionTest {
     }
 
     @Test
-    public void testCalculationNumeric() throws NoSuchMethodException {
-        // given
-        LEDCPIPatternRecognition recognition = new LEDCPIPatternRecognition(new DataProfile(recordList, dsdElement),
-                "at.fh.scch/identifier#humidity:*",
-                Path.of("src/main/resource/data/ledc-pi_definitions.json"));
-
-        // when
-        recognition.calculationNumeric(recordList.toList().stream()
-                .map(record -> (Number) record.getField(dsdElement))
-                .collect(Collectors.toList()), null);
-        var ret = recognition.getValue();
-
-        // then
-        Assertions.assertNotNull(ret);
-        Assertions.assertTrue(ret instanceof Number);
-        Assertions.assertEquals(.8598D, ret);
-    }
-
-    @Test
     public void testCheckConformance() throws NoSuchMethodException {
         // given
         LEDCPIPatternRecognition recognition = new LEDCPIPatternRecognition(new DataProfile(recordList, dsdElement),
@@ -190,12 +171,12 @@ public class LEDCPIPatternRecognitionTest {
                 "at.fh.scch/identifier#humidity:*",
                 Path.of("src/main/resource/data/ledc-pi_definitions.json"));
         recognition.calculation(recordList, null);
-        other.calculationNumeric(recordList.toList()
+        other.calculation(new RecordList(recordList.toList()
                 .stream()
                 .skip(2000)
                 .map(record -> (Double) record.getField("values"))
                 .map(number -> number - 20D) // introduce some error
-                .collect(Collectors.toList()), null);
+                .collect(Collectors.toList()), "dummy"), null);
 
         // when
         var ret = recognition.checkConformance(other, .1D);

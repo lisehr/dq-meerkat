@@ -298,7 +298,7 @@ class DatatypeInfoStatisticsTest {
         vehicleLatitudeDP.addStatistic(new Maximum(vehicleLatitudeDP));
         vehicleLatitudeDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
 
-        Double maxLat = (Double) vehicleLatitudeDP.getStatistic(StatisticTitle.max).getNumericVal();
+        Double maxLat = (Double) vehicleLatitudeDP.getStatistic(StatisticTitle.max).getValue();
 
         assertEquals(VEHICLE_LATITUDE_MAXIMUM, maxLat);
     }
@@ -309,7 +309,7 @@ class DatatypeInfoStatisticsTest {
         vehicleLatitudeDP.addStatistic(new Average(vehicleLatitudeDP));
         vehicleLatitudeDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
 
-        Double averageLat = (Double) vehicleLatitudeDP.getStatistic(StatisticTitle.avg).getNumericVal();
+        Double averageLat = (Double) vehicleLatitudeDP.getStatistic(StatisticTitle.avg).getValue();
 
         assertEquals(VEHICLE_LATITUDE_AVERAGE, averageLat, 2.0);
     }
@@ -320,7 +320,7 @@ class DatatypeInfoStatisticsTest {
         vehicleLatitudeDP.addStatistic(new Minimum(vehicleLatitudeDP));
         vehicleLatitudeDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
 
-        Double minLat = (Double) vehicleLatitudeDP.getStatistic(StatisticTitle.min).getNumericVal();
+        Double minLat = (Double) vehicleLatitudeDP.getStatistic(StatisticTitle.min).getValue();
 
         assertEquals(VEHICLE_LATITUDE_MINIMUM, minLat);
     }
@@ -331,7 +331,7 @@ class DatatypeInfoStatisticsTest {
         vehicleLatitudeDP.addStatistic(new Median(vehicleLatitudeDP));
         vehicleLatitudeDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
 
-        Double medianLat = (Double) vehicleLatitudeDP.getStatistic(StatisticTitle.med).getNumericVal();
+        Double medianLat = (Double) vehicleLatitudeDP.getStatistic(StatisticTitle.med).getValue();
 
         assertEquals(VEHICLE_LATITUDE_MEDIAN, medianLat, 2.0);
     }
@@ -342,7 +342,7 @@ class DatatypeInfoStatisticsTest {
         vehicleLatitudeDP.addStatistic(new StandardDeviation(vehicleLatitudeDP));
         vehicleLatitudeDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
 
-        Double standardDeviation = (Double) vehicleLatitudeDP.getStatistic(StatisticTitle.sd).getNumericVal();
+        Double standardDeviation = (Double) vehicleLatitudeDP.getStatistic(StatisticTitle.sd).getValue();
 
         assertEquals(VEHICLE_LATITUDE_STANDARD_DEVIATION, standardDeviation, 0.1);
     }
@@ -353,7 +353,7 @@ class DatatypeInfoStatisticsTest {
         vehicleLatitudeDP.addStatistic(new MedianAbsoluteDeviation(vehicleLatitudeDP));
         vehicleLatitudeDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
         //vehicleLatitudeDP.getStatistics().forEach(statistic -> statistic.calculationNumeric());
-        Double medianAbsoluteDeviation = (Double) vehicleLatitudeDP.getStatistic(StatisticTitle.mad).getNumericVal();
+        Double medianAbsoluteDeviation = (Double) vehicleLatitudeDP.getStatistic(StatisticTitle.mad).getValue();
 
         assertEquals(VEHICLE_LATITUDE_MEDIAN_ABSOLUTE_DEVIATION, medianAbsoluteDeviation, 0.1);
     }

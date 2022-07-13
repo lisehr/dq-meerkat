@@ -104,7 +104,7 @@ class DependencyStatisticsTest {
         vehicleLatitudeDP.addStatistic(new KeyCandidate(vehicleLatitudeDP));
         vehicleLatitudeDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
 
-        Number latitudeKeyCandidate = (Number) vehicleLatitudeDP.getStatistic(StatisticTitle.keyCand).getNumericVal();
+        Number latitudeKeyCandidate = (Number) vehicleLatitudeDP.getStatistic(StatisticTitle.keyCand).getValue();
 
         assertEquals(0, latitudeKeyCandidate);
 
@@ -112,7 +112,7 @@ class DependencyStatisticsTest {
         vehicleRegionDP.addStatistic(new KeyCandidate(vehicleRegionDP));
         vehicleRegionDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
 
-        Number regionKeyCandidate = (Number) vehicleRegionDP.getStatistic(StatisticTitle.keyCand).getNumericVal();
+        Number regionKeyCandidate = (Number) vehicleRegionDP.getStatistic(StatisticTitle.keyCand).getValue();
 
         assertEquals(0, regionKeyCandidate);
 
@@ -122,7 +122,7 @@ class DependencyStatisticsTest {
         vehicleIdDP.addStatistic(new KeyCandidate(vehicleIdDP));
         vehicleIdDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
 
-        Number idKeyCandidate = (Number) vehicleIdDP.getStatistic(StatisticTitle.keyCand).getNumericVal();
+        Number idKeyCandidate = (Number) vehicleIdDP.getStatistic(StatisticTitle.keyCand).getValue();
 
         assertEquals(1, idKeyCandidate);
     }
