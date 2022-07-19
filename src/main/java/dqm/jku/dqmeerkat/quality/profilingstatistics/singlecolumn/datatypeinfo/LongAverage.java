@@ -5,49 +5,42 @@ import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentNumberProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.NumRows;
-import org.cyberborean.rdfbeans.annotations.RDFBean;
-import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Objects;
 
-import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.dti;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.avg;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.numrows;
 
-
 /**
- * Describes the metric Average, where the average of all values in an Attribute
- * is taken.
+ * <h2>LongAverage</h2>
+ * <summary>TODO Insert do cheader</summary>
  *
- * @author optimusseptim
+ * @author meindl, rainer.meindl@scch.at
+ * @since 19.07.2022
  */
-@RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
-@RDFBean("dsd:quality/structures/metrics/dataTypeInfo/Average")
-public class Average extends DependentNumberProfileStatistic<Double, Double> {
-
-
-    public Average(DataProfile d) {
-        super(avg, dti, d, Double.class);
+public class LongAverage extends DependentNumberProfileStatistic<Long, Double> {
+    public LongAverage(DataProfile refProf) {
+        super(avg, StatisticCategory.dti, refProf, Long.class);
     }
 
     @Override
-    public void calculation(RecordList rs, Double oldVal) {
+    public void calculation(RecordList rs, Long oldVal) {
         this.dependencyCalculationWithRecordList(rs);
-        double val = Objects.requireNonNullElse(oldVal, getBasicInstance());
+        long val = Objects.requireNonNullElse(oldVal, getBasicInstance());
         if (ensureDataTypeCorrect(((Attribute) (getRefElem())).getDataType())) {
             for (Record r : rs) {
-                var castedDouble = (Double) r.getField((Attribute) super.getRefElem());
-                if (castedDouble != null) {
-                    val += castedDouble;
+                var castedLong = (Long) r.getField((Attribute) super.getRefElem());
+                if (castedLong != null) {
+                    val += castedLong;
                 }
             }
         }
-        val = performAveraging(val);
-        this.setValue(val);
-        this.setInputValueClass(Double.class);
+
+        this.setValue(performAveraging(val));
+        this.setOutputValueClass(Double.class);
+        this.setInputValueClass(Long.class);
     }
 
     /**
@@ -56,11 +49,10 @@ public class Average extends DependentNumberProfileStatistic<Double, Double> {
      * @param sum the sum of values
      * @return the average value
      */
-    private Double performAveraging(Double sum) {
+    private Double performAveraging(Long sum) {
         // TODO deduct type of value from statistics
         long numRows = (long) super.getRefProf().getStatistic(numrows).getValue();
-        int scale = 3; // Nachkommastellen für Dezimal Division
-        return BigDecimal.valueOf(sum).divide(BigDecimal.valueOf(numRows), scale, RoundingMode.HALF_UP).doubleValue(); // ab 0.5 aufrunden!
+        return ((double) sum / numRows);
     }
 
     /**
@@ -68,8 +60,8 @@ public class Average extends DependentNumberProfileStatistic<Double, Double> {
      *
      * @return the reference value
      */
-    protected Double getBasicInstance() {
-        return 0D;
+    protected Long getBasicInstance() {
+        return 0L;
     }
 
 
@@ -83,8 +75,8 @@ public class Average extends DependentNumberProfileStatistic<Double, Double> {
      *
      * @return the sum before weighting with the amount of values
      */
-    private Double getOriginalSum() {
-        return ((Number) super.getValue()).doubleValue() * (long) super.getRefProf().getStatistic(numrows).getValue();
+    private Long getOriginalSum() {
+        return ((Number) super.getValue()).longValue() * (long) super.getRefProf().getStatistic(numrows).getValue();
     }
 
     @Override
@@ -107,5 +99,4 @@ public class Average extends DependentNumberProfileStatistic<Double, Double> {
             super.getRefProf().addStatistic(sizeM);
         }
     }
-
 }

@@ -37,7 +37,7 @@ public abstract class ProfileStatistic<TIn, TOut> implements Comparable<ProfileS
     protected Class<TIn> inputValueClass;
     @Getter
     @Setter
-    protected Class<TIn> outputValueClass;
+    protected Class<TOut> outputValueClass;
     @Getter
     @Setter
     protected TOut value; // the value itself

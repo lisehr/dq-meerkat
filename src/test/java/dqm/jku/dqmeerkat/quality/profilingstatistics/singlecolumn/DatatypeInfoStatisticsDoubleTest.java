@@ -120,7 +120,7 @@ class DatatypeInfoStatisticsDoubleTest {
     @Test
     @DisplayName("Average (double)")
     void testAverageDouble() {
-        vehicleLatitudeDP.addStatistic(new Average(vehicleLatitudeDP));
+        vehicleLatitudeDP.addStatistic(new DoubleAverage(vehicleLatitudeDP));
         vehicleLatitudeDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
 
         Double averageLat = (Double) vehicleLatitudeDP.getStatistic(StatisticTitle.avg).getValue();

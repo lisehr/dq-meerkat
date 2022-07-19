@@ -31,7 +31,7 @@ public class FullSkeletonGenerator extends DataProfileSkeletonGenerator{
         statistics.add(min);
         var max = new Maximum(profile);
         statistics.add(max);
-        var avg = new Average(profile);
+        var avg = new DoubleAverage(profile);
         statistics.add(avg);
         var med = new Median(profile);
         statistics.add(med);

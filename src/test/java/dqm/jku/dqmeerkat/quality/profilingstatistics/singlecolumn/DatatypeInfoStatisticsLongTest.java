@@ -87,6 +87,11 @@ public class DatatypeInfoStatisticsLongTest {
 
     }
 
+    @BeforeEach
+    public void beforeEach() {
+        vehicleIdDP.getStatistics().clear();
+    }
+
     @Test
     @DisplayName("Maximum")
     void testMaximumLong() {
@@ -101,12 +106,12 @@ public class DatatypeInfoStatisticsLongTest {
     @Test
     @DisplayName("Average")
     void testAverageLong() {
-        vehicleIdDP.addStatistic(new Average(vehicleIdDP));
+        vehicleIdDP.addStatistic(new LongAverage(vehicleIdDP));
         vehicleIdDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
 
-        Long averageId = (Long) vehicleIdDP.getStatistic(StatisticTitle.avg).getValue();
+        var averageId = (double) vehicleIdDP.getStatistic(StatisticTitle.avg).getValue();
 
-        assertEquals(VEHICLE_ID_AVERAGE, averageId);
+        assertEquals(VEHICLE_ID_AVERAGE, averageId, 2D);
     }
 
     @Test

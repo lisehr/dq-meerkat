@@ -121,7 +121,7 @@ public class DoubleStandardDeviation extends DependentNumberProfileStatistic<Dou
         }
         var avgM = super.getRefProf().getStatistic(avg);
         if (avgM == null) {
-            avgM = new Average(super.getRefProf());
+            avgM = new DoubleAverage(super.getRefProf());
             super.getRefProf().addStatistic(avgM);
         }
 
