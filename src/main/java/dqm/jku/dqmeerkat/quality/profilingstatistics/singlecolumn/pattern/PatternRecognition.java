@@ -29,7 +29,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.patte
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/PatternRecognition")
-public class PatternRecognition extends DependentProfileStatistic<PatternCounterList> {
+public class PatternRecognition extends DependentProfileStatistic<PatternCounterList, PatternCounterList> {
 
     private String filePathString;
 
@@ -47,7 +47,7 @@ public class PatternRecognition extends DependentProfileStatistic<PatternCounter
     public void calculation(RecordList rs, PatternCounterList oldVal) {
         this.dependencyCalculationWithRecordList(rs);
         Attribute a = (Attribute) super.getRefElem();
-        this.setValueClass(PatternCounterList.class);
+        this.setInputValueClass(PatternCounterList.class);
         PatternCounterList patterns = null;
         if (oldVal == null) patterns = initPatterns();
         else patterns = oldVal;
@@ -111,7 +111,7 @@ public class PatternRecognition extends DependentProfileStatistic<PatternCounter
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<PatternCounterList> m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<PatternCounterList, PatternCounterList> m, double threshold) {
         if (filePathString == null)
             return true;
 

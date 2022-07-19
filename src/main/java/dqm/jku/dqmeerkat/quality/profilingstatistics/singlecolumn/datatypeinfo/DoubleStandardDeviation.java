@@ -22,8 +22,8 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
 
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/StandardDeviation")
-public class StandardDeviation extends DependentNumberProfileStatistic<Double> {
-    public StandardDeviation(DataProfile d) {
+public class DoubleStandardDeviation extends DependentNumberProfileStatistic<Double, Double> {
+    public DoubleStandardDeviation(DataProfile d) {
         super(sd, dti, d, Double.class);
     }
 
@@ -45,7 +45,7 @@ public class StandardDeviation extends DependentNumberProfileStatistic<Double> {
             val = performAveraging(val);
         }
         this.setValue(val);
-        this.setValueClass(Double.class);
+        this.setInputValueClass(Double.class);
     }
 
     /**
@@ -137,7 +137,7 @@ public class StandardDeviation extends DependentNumberProfileStatistic<Double> {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<Double> m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<Double, Double> m, double threshold) {
         if (getValue() == null) {
             setValue(m.getValue());
         }

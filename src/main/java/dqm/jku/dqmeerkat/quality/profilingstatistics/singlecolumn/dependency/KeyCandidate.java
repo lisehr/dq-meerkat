@@ -22,7 +22,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.uniqu
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/dependency/KeyCandidate")
-public class KeyCandidate extends DependentProfileStatistic<Boolean> {
+public class KeyCandidate extends DependentProfileStatistic<Boolean, Boolean> {
 
     public KeyCandidate(DataProfile d) {
         super(keyCand, depend, d);
@@ -39,7 +39,7 @@ public class KeyCandidate extends DependentProfileStatistic<Boolean> {
         boolean isKeyCandidate = ((double) this.getRefProf().getStatistic(unique).getValue()) == (double) 100.0;
         super.setValue(isKeyCandidate);
 
-        super.setValueClass(Boolean.class);
+        super.setInputValueClass(Boolean.class);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class KeyCandidate extends DependentProfileStatistic<Boolean> {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<Boolean> m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<Boolean, Boolean> m, double threshold) {
         String rdpVal = this.getSimpleValueString();
         String dpValue = this.getSimpleValueString();
 

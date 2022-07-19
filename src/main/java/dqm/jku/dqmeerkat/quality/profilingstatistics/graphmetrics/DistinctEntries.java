@@ -13,7 +13,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.gr
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.distinctEntries;
 
 
-public class DistinctEntries extends NumberProfileStatistic<Integer> {
+public class DistinctEntries extends NumberProfileStatistic<Integer, Integer> {
 
     public DistinctEntries(DataProfile d) {
         super(distinctEntries, graphCat, d, Integer.class);
@@ -25,7 +25,7 @@ public class DistinctEntries extends NumberProfileStatistic<Integer> {
         Set<Record> distinctEntries = new HashSet<>(rs.toList());
 
         super.setValue(distinctEntries.size());
-        super.setValueClass(Integer.class);
+        super.setInputValueClass(Integer.class);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class DistinctEntries extends NumberProfileStatistic<Integer> {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<Integer> m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<Integer, Integer> m, double threshold) {
         return false;
     }
 }

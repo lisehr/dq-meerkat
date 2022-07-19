@@ -39,8 +39,8 @@ class SpaceSavingSummaryProfileStatisticTest {
 
         // then
         Assertions.assertNotNull(ret);
-        Assertions.assertNotNull(spaceSavingSummary.getValueClass());
-        Assertions.assertEquals(HashMap.class, spaceSavingSummary.getValueClass());
+        Assertions.assertNotNull(spaceSavingSummary.getInputValueClass());
+        Assertions.assertEquals(HashMap.class, spaceSavingSummary.getInputValueClass());
         Assertions.assertEquals(k, ret.size());
     }
 
@@ -62,7 +62,7 @@ class SpaceSavingSummaryProfileStatisticTest {
         var k = 10;
         var spaceSavingSummary = new SpaceSavingSummaryProfileStatistic(new DataProfile(recordList, dsdElement), k);
         // when
-        var ret = spaceSavingSummary.getValueClass();
+        var ret = spaceSavingSummary.getInputValueClass();
 
         // then
         Assertions.assertNotNull(ret);

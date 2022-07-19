@@ -65,7 +65,7 @@ public class SpaceSavingSummaryProfileStatistic extends SummaryProfileStatistic<
     }
 
     @Override
-    public Class<Map<Double, Integer>> getValueClass() {
+    public Class<Map<Double, Integer>> getInputValueClass() {
         return cast(summary.getClass());
     }
 

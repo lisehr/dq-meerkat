@@ -73,11 +73,6 @@ public class DatatypeInfoStatisticsLongTest {
                 Attribute attribute = concept.getAttribute("emptycolumn"); // Spaces in names of a column (attribite) get removed...
                 emptyDP.setElem(attribute);
                 emptyDP.setURI(attribute.getURI() + "/profile");
-                try {
-                    emptyRecords = csvConnector2.getRecordList(concept);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             });
 
         } catch (IOException e) {
@@ -139,7 +134,7 @@ public class DatatypeInfoStatisticsLongTest {
     @Test
     @DisplayName("Standard Deviation")
     void testStandardDeviationLong() {
-        vehicleIdDP.addStatistic(new StandardDeviation(vehicleIdDP));
+        vehicleIdDP.addStatistic(new DoubleStandardDeviation(vehicleIdDP));
         vehicleIdDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
 
         Double standardDeviation = (Double) vehicleIdDP.getStatistic(StatisticTitle.sd).getValue(); // The "Long" in the title refernces the type of the attribute which is used for calculating the standard deviation.

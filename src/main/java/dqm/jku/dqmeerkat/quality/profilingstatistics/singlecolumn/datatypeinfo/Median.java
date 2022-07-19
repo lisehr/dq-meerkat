@@ -26,7 +26,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.med;
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/Median")
-public class Median extends NumberProfileStatistic<Double> {
+public class Median extends NumberProfileStatistic<Double, Double> {
 
     public Median(DataProfile d) {
         super(med, dti, d, Double.class);
@@ -104,7 +104,7 @@ public class Median extends NumberProfileStatistic<Double> {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<Double> m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<Double, Double> m, double threshold) {
         if (this.getValue() == null) {
             setValue(m.getValue());
         }

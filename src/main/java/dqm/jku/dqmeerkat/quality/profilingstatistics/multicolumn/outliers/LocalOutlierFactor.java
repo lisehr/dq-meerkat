@@ -34,7 +34,7 @@ import static dqm.jku.dqmeerkat.util.GenericsUtil.cast;
  * @author Johannes Schrott
  */
 
-public class LocalOutlierFactor extends ProfileStatistic<List<Double>> {
+public class LocalOutlierFactor extends ProfileStatistic<List<Double>, List<Double>> {
 
     final private static float FACTOR_FOR_K = 0.1F; // Must be between 0 and 1
     final private static double OUTLIER_THRESHOLD = 1.1;
@@ -46,8 +46,9 @@ public class LocalOutlierFactor extends ProfileStatistic<List<Double>> {
 
     @Override
     public void calculation(RecordList rs, List<Double> oldVal) {
-        if (rs.size() == 0)
+        if (rs.size() == 0) {
             throw new IllegalArgumentException("An empty RecordList was passed as an argument. For a calculation, the RecordList must contain elements.");
+        }
 
         double[][] data = DoubleArrayConverter.extractNumericAttributesToDoubleArray(rs);
 
@@ -94,7 +95,7 @@ public class LocalOutlierFactor extends ProfileStatistic<List<Double>> {
             });
         });
 
-        this.setValueClass(cast(ArrayList.class));
+        this.setInputValueClass(cast(ArrayList.class));
         this.setValue(resultList);
 
 
@@ -123,7 +124,7 @@ public class LocalOutlierFactor extends ProfileStatistic<List<Double>> {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<List<Double>> m, double threshold) {        // TODO Auto-generated method stub
+    public boolean checkConformance(ProfileStatistic<List<Double>, List<Double>> m, double threshold) {        // TODO Auto-generated method stub
         return false;
     }
 

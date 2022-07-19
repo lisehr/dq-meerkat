@@ -25,7 +25,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.min;
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/Minimum")
-public class Minimum extends NumberProfileStatistic<Double> {
+public class Minimum extends NumberProfileStatistic<Double, Double> {
 
 
     public Minimum(DataProfile d) {
@@ -92,7 +92,7 @@ public class Minimum extends NumberProfileStatistic<Double> {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<Double> m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<Double, Double> m, double threshold) {
         double rdpVal;
         if (this.getValue() == null) {
             rdpVal = 0;

@@ -3,12 +3,10 @@ package dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.datatypeinfo;
 import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.util.Constants;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
-import org.ini4j.Profile;
 
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.dti;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.dt;
@@ -22,7 +20,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.dt;
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/DataType")
-public class DataType extends ProfileStatistic<String> {
+public class DataType extends ProfileStatistic<String, String> {
 
     public DataType(DataProfile d) {
         super(dt, dti, d);
@@ -31,7 +29,7 @@ public class DataType extends ProfileStatistic<String> {
     @Override
     public void calculation(RecordList rs, String oldVal) {
         super.setValue(((Attribute) super.getRefElem()).getDataType().getSimpleName());
-        super.setValueClass(String.class);
+        super.setInputValueClass(String.class);
     }
 
     @Override
@@ -45,7 +43,7 @@ public class DataType extends ProfileStatistic<String> {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<String> m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<String, String> m, double threshold) {
         String rdpVal = this.getSimpleValueString();
         String dpValue = this.getSimpleValueString();
 

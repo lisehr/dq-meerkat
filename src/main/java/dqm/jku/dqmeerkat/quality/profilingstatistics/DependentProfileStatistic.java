@@ -3,15 +3,13 @@ package dqm.jku.dqmeerkat.quality.profilingstatistics;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
 
-import java.util.List;
-
 /**
  * Second hierarchy level of abstract base class for profile statistics, its main
  * use is to provide methods for including dependent statistics.
  *
  * @author optimusseptim
  */
-public abstract class DependentProfileStatistic<T> extends ProfileStatistic<T> {
+public abstract class DependentProfileStatistic<TIn, TOut> extends ProfileStatistic<TIn, TOut> {
 
 
     public DependentProfileStatistic(StatisticTitle title, StatisticCategory cat, DataProfile refProf) {

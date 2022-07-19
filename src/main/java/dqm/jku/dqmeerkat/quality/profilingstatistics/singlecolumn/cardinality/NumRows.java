@@ -18,7 +18,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.numro
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/cardinality/Cardinality")
-public class NumRows extends NumberProfileStatistic<Long> {
+public class NumRows extends NumberProfileStatistic<Long, Long> {
 
     public NumRows(DataProfile d) {
         super(numrows, cardCat, d, Long.class);
@@ -27,7 +27,7 @@ public class NumRows extends NumberProfileStatistic<Long> {
     @Override
     public void calculation(RecordList rs, Long oldVal) {
         super.setValue((long) rs.size());
-        super.setValueClass(Long.class); // This was Integer and is now set to Long - if errors occur change it back!
+        super.setInputValueClass(Long.class); // This was Integer and is now set to Long - if errors occur change it back!
     }
 
     @Override
@@ -42,7 +42,7 @@ public class NumRows extends NumberProfileStatistic<Long> {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<Long> m, double threshold) {        // Never evaluates to false, because the reference is here the size of the RDP and should not be compared to the batch size of the DPs
+    public boolean checkConformance(ProfileStatistic<Long, Long> m, double threshold) {        // Never evaluates to false, because the reference is here the size of the RDP and should not be compared to the batch size of the DPs
         return true;
     }
 }

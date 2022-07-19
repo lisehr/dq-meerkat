@@ -23,9 +23,9 @@ import java.util.List;
  */
 public class FullSkeletonGenerator extends DataProfileSkeletonGenerator{
     @Override
-    protected List<ProfileStatistic<?>> generateStatistics(DataProfile profile) {
-        List<ProfileStatistic<?>> statistics = new ArrayList<>();
-        ProfileStatistic<?> size = new NumRows(profile);
+    protected List<ProfileStatistic<?, ?>> generateStatistics(DataProfile profile) {
+        List<ProfileStatistic<?, ?>> statistics = new ArrayList<>();
+        ProfileStatistic<?, ?> size = new NumRows(profile);
         statistics.add(size);
         var min = new Minimum(profile);
         statistics.add(min);
@@ -56,7 +56,7 @@ public class FullSkeletonGenerator extends DataProfileSkeletonGenerator{
         var dataType = new DataType(profile);
         statistics.add(dataType);
         // experimental metrics
-        var standardDev = new StandardDeviation(profile);
+        var standardDev = new DoubleStandardDeviation(profile);
         statistics.add(standardDev);
         var mediAbsDevMetric = new MedianAbsoluteDeviation(profile);
         statistics.add(mediAbsDevMetric);

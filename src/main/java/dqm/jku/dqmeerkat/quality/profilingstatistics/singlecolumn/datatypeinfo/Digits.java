@@ -22,7 +22,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.dig;
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/Digits")
-public class Digits extends NumberProfileStatistic<Long> {
+public class Digits extends NumberProfileStatistic<Long, Long> {
     public Digits(DataProfile d) {
         super(dig, dti, d, Long.class);
     }
@@ -42,7 +42,7 @@ public class Digits extends NumberProfileStatistic<Long> {
     @Override
     public void calculation(RecordList rs, Long oldVal) {
         Attribute a = (Attribute) super.getRefElem();
-        super.setValueClass(Long.class);
+        super.setInputValueClass(Long.class);
         if (a.getDataType() == Object.class) return;
         if (a.getDataType() == String.class) {
             super.setValue(0L);
@@ -69,7 +69,7 @@ public class Digits extends NumberProfileStatistic<Long> {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<Long> m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<Long, Long> m, double threshold) {
         double rdpVal = ((Number) this.getValue()).doubleValue();
         double dpValue = ((Number) m.getValue()).doubleValue();
 

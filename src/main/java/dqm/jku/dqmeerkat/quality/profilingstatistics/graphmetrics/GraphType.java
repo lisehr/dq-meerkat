@@ -9,7 +9,7 @@ import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.graphCat;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.graphType;
 
-public class GraphType extends ProfileStatistic<String> {
+public class GraphType extends ProfileStatistic<String, String> {
 
 
     public GraphType(DataProfile d) {
@@ -23,7 +23,7 @@ public class GraphType extends ProfileStatistic<String> {
         String neoType = association.getNeo4JType();
 
         super.setValue(neoType);
-        super.setValueClass(String.class);
+        super.setInputValueClass(String.class);
     }
 
     @Override

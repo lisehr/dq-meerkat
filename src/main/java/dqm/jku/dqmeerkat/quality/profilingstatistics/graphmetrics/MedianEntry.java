@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.graphCat;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.median;
 
-public class MedianEntry extends NumberProfileStatistic<Double> {
+public class MedianEntry extends NumberProfileStatistic<Double, Double> {
 
     private final Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
 
@@ -80,7 +80,7 @@ public class MedianEntry extends NumberProfileStatistic<Double> {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<Double> m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<Double, Double> m, double threshold) {
         return false;
     }
 

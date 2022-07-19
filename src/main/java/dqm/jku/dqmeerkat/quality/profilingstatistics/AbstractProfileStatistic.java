@@ -1,11 +1,7 @@
 package dqm.jku.dqmeerkat.quality.profilingstatistics;
 
-import dqm.jku.dqmeerkat.dsd.elements.DSDElement;
-import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import org.cyberborean.rdfbeans.annotations.RDF;
 
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -13,7 +9,7 @@ import java.util.Objects;
  *
  * @author optimusseptim
  */
-public abstract class AbstractProfileStatistic extends ProfileStatistic<Object> {
+public abstract class AbstractProfileStatistic extends ProfileStatistic<Object, Object> {
 
 
     public AbstractProfileStatistic(StatisticTitle title, StatisticCategory cat, DataProfile refProf) {
@@ -23,7 +19,7 @@ public abstract class AbstractProfileStatistic extends ProfileStatistic<Object> 
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, valueClass, value);
+        return Objects.hash(title, inputValueClass, value);
     }
 
     @Override
@@ -32,9 +28,8 @@ public abstract class AbstractProfileStatistic extends ProfileStatistic<Object> 
         if (obj == null) return false;
         if (!(obj instanceof AbstractProfileStatistic)) return false;
         AbstractProfileStatistic other = (AbstractProfileStatistic) obj;
-        return Objects.equals(title, other.title) && Objects.equals(valueClass, other.valueClass) && Objects.equals(value, other.value);
+        return Objects.equals(title, other.title) && Objects.equals(inputValueClass, other.inputValueClass) && Objects.equals(value, other.value);
     }
-
 
 
 }

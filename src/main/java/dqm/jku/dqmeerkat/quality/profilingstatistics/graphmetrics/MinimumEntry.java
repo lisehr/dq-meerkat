@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.graphCat;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.minimum;
 
-public class MinimumEntry extends NumberProfileStatistic<Double> {
+public class MinimumEntry extends NumberProfileStatistic<Double,Double> {
 
     private final Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
 
@@ -33,7 +33,7 @@ public class MinimumEntry extends NumberProfileStatistic<Double> {
                 .orElseThrow();
 
         this.setValue(val);
-        this.setValueClass(Double.class);
+        this.setInputValueClass(Double.class);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class MinimumEntry extends NumberProfileStatistic<Double> {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<Double> m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<Double, Double> m, double threshold) {
         return false;
     }
 

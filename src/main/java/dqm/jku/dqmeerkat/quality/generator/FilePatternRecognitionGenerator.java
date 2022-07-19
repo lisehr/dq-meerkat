@@ -24,7 +24,7 @@ public class FilePatternRecognitionGenerator extends DataProfileSkeletonGenerato
     }
 
     @Override
-    protected List<ProfileStatistic<?>> generateStatistics(DataProfile profile) {
+    protected List<ProfileStatistic<?, ?>> generateStatistics(DataProfile profile) {
         return List.of(new PatternRecognition(profile, filepath));
     }
 }

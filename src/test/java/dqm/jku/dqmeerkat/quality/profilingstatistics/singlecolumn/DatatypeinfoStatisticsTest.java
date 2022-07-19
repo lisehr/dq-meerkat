@@ -115,10 +115,10 @@ public class DatatypeInfoStatisticsTest {
         emptyDP.getStatistics().forEach(statistic -> statistic.calculation(emptyRecords, null));
 
         // The profilestatistics computed value is a String (this is not the type of the attributes values!)
-        assertEquals(String.class, vehicleIdDP.getStatistic(StatisticTitle.bt).getValueClass());
-        assertEquals(String.class, vehicleRegionDP.getStatistic(StatisticTitle.bt).getValueClass());
+        assertEquals(String.class, vehicleIdDP.getStatistic(StatisticTitle.bt).getInputValueClass());
+        assertEquals(String.class, vehicleRegionDP.getStatistic(StatisticTitle.bt).getInputValueClass());
 
-        assertEquals(String.class, emptyDP.getStatistic(StatisticTitle.bt).getValueClass());
+        assertEquals(String.class, emptyDP.getStatistic(StatisticTitle.bt).getInputValueClass());
 
 
         String countType = (String) vehicleIdDP.getStatistic(StatisticTitle.bt).getValue();
@@ -143,8 +143,8 @@ public class DatatypeInfoStatisticsTest {
         vehicleRegionDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
 
         // The profilestatistics computed value is a String (this is not the type of the attributes values!)
-        assertEquals(String.class, vehicleIdDP.getStatistic(StatisticTitle.dt).getValueClass());
-        assertEquals(String.class, vehicleRegionDP.getStatistic(StatisticTitle.dt).getValueClass());
+        assertEquals(String.class, vehicleIdDP.getStatistic(StatisticTitle.dt).getInputValueClass());
+        assertEquals(String.class, vehicleRegionDP.getStatistic(StatisticTitle.dt).getInputValueClass());
 
         String countType = (String) vehicleIdDP.getStatistic(StatisticTitle.dt).getValue();
         String nameType = (String) vehicleRegionDP.getStatistic(StatisticTitle.dt).getValue();

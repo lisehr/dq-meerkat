@@ -9,14 +9,14 @@ import dqm.jku.dqmeerkat.quality.DataProfile;
  * @author meindl, rainer.meindl@scch.at
  * @since 12.07.2022
  */
-public abstract class NumberProfileStatistic<T extends Number> extends ProfileStatistic<T> {
+public abstract class NumberProfileStatistic<TIn extends Number, TOut extends Number> extends ProfileStatistic<TIn, TOut> {
 
-    protected NumberProfileStatistic(StatisticTitle title, StatisticCategory cat, DataProfile refProf, Class<T> genericType) {
+    protected NumberProfileStatistic(StatisticTitle title, StatisticCategory cat, DataProfile refProf, Class<TIn> genericType) {
         super(title, cat, refProf);
-        this.valueClass = genericType;
+        this.inputValueClass = genericType;
     }
 
     protected boolean ensureDataTypeCorrect(Class<?> type) {
-        return type.isAssignableFrom(valueClass);
+        return type.isAssignableFrom(inputValueClass);
     }
 }

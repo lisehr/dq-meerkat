@@ -5,9 +5,7 @@ import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentNumberProfileStatistic;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.NumRows;
-import dqm.jku.dqmeerkat.util.Constants;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 
@@ -28,7 +26,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.numro
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/Average")
-public class Average extends DependentNumberProfileStatistic<Double> {
+public class Average extends DependentNumberProfileStatistic<Double, Double> {
 
 
     public Average(DataProfile d) {
@@ -49,7 +47,7 @@ public class Average extends DependentNumberProfileStatistic<Double> {
         }
         val = performAveraging(val);
         this.setValue(val);
-        this.setValueClass(Double.class);
+        this.setInputValueClass(Double.class);
     }
 
     /**
@@ -110,21 +108,4 @@ public class Average extends DependentNumberProfileStatistic<Double> {
         }
     }
 
-    @Override
-    public boolean checkConformance(ProfileStatistic<Double> m, double threshold) {
-        if (this.getValue() == null) {
-            this.setValue(m.getValue());
-        }
-        double rdpVal = ((Number) this.getValue()).doubleValue();
-        double dpValue = ((Number) m.getValue()).doubleValue();
-
-        double lowerBound = rdpVal - (Math.abs(rdpVal) * threshold);
-        double upperBound = rdpVal + (Math.abs(rdpVal) * threshold);
-
-        boolean conf = dpValue >= lowerBound && dpValue <= upperBound;
-        if (!conf && Constants.DEBUG) {
-            System.out.println(this.getTitle() + " exceeded: " + dpValue + " not in [" + lowerBound + ", " + upperBound + "]");
-        }
-        return conf;
-    }
 }

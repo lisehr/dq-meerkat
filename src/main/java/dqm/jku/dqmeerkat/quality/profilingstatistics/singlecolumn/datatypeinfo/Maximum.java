@@ -25,7 +25,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.max;
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/Maximum")
-public class Maximum extends NumberProfileStatistic<Double> {
+public class Maximum extends NumberProfileStatistic<Double, Double> {
     public Maximum(DataProfile d) {
         super(max, dti, d, Double.class);
     }
@@ -44,7 +44,7 @@ public class Maximum extends NumberProfileStatistic<Double> {
             }
         } else {
             LOGGER.warn("Attribute {} has wrong data type {} for {}: {}. Skipping calculation.", a.getLabel(), a.getDataType(),
-                    getClass().getSimpleName(), valueClass.getSimpleName());
+                    getClass().getSimpleName(), inputValueClass.getSimpleName());
         }
         this.setValue(val);
     }
@@ -90,7 +90,7 @@ public class Maximum extends NumberProfileStatistic<Double> {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<Double> m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<Double, Double> m, double threshold) {
         double rdpVal;
         if (getValue() == null) {
             rdpVal = 0;

@@ -49,7 +49,7 @@ public abstract class AbstractConformanceChecker implements RDPConformanceChecke
 
         int conf = 0;
 
-        List<ProfileStatistic<?>> profileStatistics;
+        List<ProfileStatistic<?, ?>> profileStatistics;
         if (batchSize != 1) {
             profileStatistics = rdp.getNonDependentStatistics();
         } else {

@@ -23,24 +23,24 @@ import static dqm.jku.dqmeerkat.util.GenericsUtil.cast;
  * @author meindl, rainer.meindl@scch.at
  * @since 06.07.2022
  */
-public abstract class SummaryProfileStatistic<T> extends ProfileStatistic<Map<T, Integer>> {
+public abstract class SummaryProfileStatistic<TIn> extends ProfileStatistic<Map<TIn, Integer>, Map<TIn, Integer>> {
 
     /**
      * Representation of the summary. The key is the item and the value is the number of occurrences in the dataset.
      */
-    protected Map<T, Integer> summary = new HashMap<>();
+    protected Map<TIn, Integer> summary = new HashMap<>();
 
     protected SummaryProfileStatistic(StatisticTitle title, StatisticCategory cat, DataProfile refProf) {
         super(title, cat, refProf);
     }
 
     @Override
-    public void calculation(RecordList rs, Map<T, Integer> oldVal) {
+    public void calculation(RecordList rs, Map<TIn, Integer> oldVal) {
         rs.toList().stream()
-                .map(record -> (T) record.getField(getRefElem().getLabel()))
+                .map(record -> (TIn) record.getField(getRefElem().getLabel()))
                 .forEach(this::handleCounter);
         setValue(summary);
-        setValueClass(cast(summary.getClass()));
+        setInputValueClass(cast(summary.getClass()));
 
     }
 
@@ -51,7 +51,7 @@ public abstract class SummaryProfileStatistic<T> extends ProfileStatistic<Map<T,
      * @param value the value to handle, i.E. either add it to the summary, increment the counter of the value or
      *              compress the summary.
      */
-    protected abstract void handleCounter(T value);
+    protected abstract void handleCounter(TIn value);
 
     /**
      * Calculates a value used to determine conformance of this {@link AbstractProfileStatistic} to another
@@ -61,9 +61,9 @@ public abstract class SummaryProfileStatistic<T> extends ProfileStatistic<Map<T,
     public abstract double calculateConformance();
 
     @Override
-    public boolean checkConformance(ProfileStatistic<Map<T, Integer>> m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<Map<TIn, Integer>, Map<TIn, Integer>> m, double threshold) {
         var rdpVal = calculateConformance();
-        var dpValue = ((SummaryProfileStatistic<T>) m).calculateConformance();
+        var dpValue = ((SummaryProfileStatistic<TIn>) m).calculateConformance();
 
 
         double lowerBound = rdpVal - (Math.abs(rdpVal) * threshold);

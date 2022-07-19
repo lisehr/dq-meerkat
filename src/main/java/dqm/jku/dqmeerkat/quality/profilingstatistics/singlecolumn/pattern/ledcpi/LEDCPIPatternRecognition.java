@@ -34,7 +34,7 @@ import java.util.List;
  * @author meindl, rainer.meindl@scch.at
  * @since 09.06.2022
  */
-public class LEDCPIPatternRecognition extends NumberProfileStatistic<Double> {
+public class LEDCPIPatternRecognition extends NumberProfileStatistic<Double, Double> {
     // the generic type is double as we return a metric based on a relative value, not the ledc pi hits
     private static final Logger LOGGER = Logger.getInstance();
     private final QualityMeasure<String> measure;
@@ -75,7 +75,7 @@ public class LEDCPIPatternRecognition extends NumberProfileStatistic<Double> {
         }
         var numericValue = cnt / rs.size();
         setValue(numericValue);
-        this.setValueClass(Double.class);
+        this.setInputValueClass(Double.class);
     }
 
     /**
@@ -120,7 +120,7 @@ public class LEDCPIPatternRecognition extends NumberProfileStatistic<Double> {
      * @return if the other {@link AbstractProfileStatistic} conforms to this one
      */
     @Override
-    public boolean checkConformance(ProfileStatistic<Double> other, double threshold) {
+    public boolean checkConformance(ProfileStatistic<Double, Double> other, double threshold) {
         double rdpVal = getValue();
         double dpValue = other.getValue();
 

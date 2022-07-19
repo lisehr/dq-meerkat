@@ -153,7 +153,7 @@ class DatatypeInfoStatisticsDoubleTest {
     @Test
     @DisplayName("Standard Deviation (double)")
     void testStandardDeviationDouble() {
-        vehicleLatitudeDP.addStatistic(new StandardDeviation(vehicleLatitudeDP));
+        vehicleLatitudeDP.addStatistic(new DoubleStandardDeviation(vehicleLatitudeDP));
         vehicleLatitudeDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
 
         Double standardDeviation = (Double) vehicleLatitudeDP.getStatistic(StatisticTitle.sd).getValue();

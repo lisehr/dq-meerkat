@@ -20,7 +20,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/cardinality/Uniqueness")
-public class Uniqueness extends DependentNumberProfileStatistic<Double> {
+public class Uniqueness extends DependentNumberProfileStatistic<Double, Double> {
 
     public Uniqueness(DataProfile d) {
         super(unique, cardCat, d, Double.class);
@@ -39,7 +39,7 @@ public class Uniqueness extends DependentNumberProfileStatistic<Double> {
         long numRecs = (long) super.getRefProf().getStatistic(numrows).getValue();
         double result = cardinality * 100.0 / numRecs;
         this.setValue(result);
-        this.setValueClass(Double.class);
+        this.setInputValueClass(Double.class);
 
     }
 
@@ -76,7 +76,7 @@ public class Uniqueness extends DependentNumberProfileStatistic<Double> {
 
     @Override
     protected void dependencyCheck() {
-        ProfileStatistic<?> sizeM = super.getRefProf().getStatistic(numrows);
+        var sizeM = super.getRefProf().getStatistic(numrows);
         if (sizeM == null) {
             sizeM = new NumRows(super.getRefProf());
             super.getRefProf().addStatistic(sizeM);
@@ -90,7 +90,7 @@ public class Uniqueness extends DependentNumberProfileStatistic<Double> {
 
     // TODO is this really correct?
     @Override
-    public boolean checkConformance(ProfileStatistic<Double> m, double threshold) {        // Excluded: depends on cardinality & num rows (RDP size != DP size)
+    public boolean checkConformance(ProfileStatistic<Double, Double> m, double threshold) {        // Excluded: depends on cardinality & num rows (RDP size != DP size)
         return true;
     }
 

@@ -8,7 +8,7 @@ import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.graphCat;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.numEntries;
 
-public class NumEntries extends NumberProfileStatistic<Integer> {
+public class NumEntries extends NumberProfileStatistic<Integer, Integer> {
 
 
     public NumEntries(DataProfile d) {
@@ -18,7 +18,7 @@ public class NumEntries extends NumberProfileStatistic<Integer> {
     @Override
     public void calculation(RecordList rs, Integer oldVal) {
         super.setValue(rs.size());
-        super.setValueClass(Integer.class);
+        super.setInputValueClass(Integer.class);
     }
 
 
@@ -33,7 +33,7 @@ public class NumEntries extends NumberProfileStatistic<Integer> {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<Integer> m, double threshold) {        // Never evaluates to false, because the reference is here the size of the RDP and should not be compared to the batch size of the DPs
+    public boolean checkConformance(ProfileStatistic<Integer, Integer> m, double threshold) {        // Never evaluates to false, because the reference is here the size of the RDP and should not be compared to the batch size of the DPs
         return true;
     }
 }

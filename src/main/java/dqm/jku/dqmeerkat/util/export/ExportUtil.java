@@ -78,7 +78,7 @@ public class ExportUtil {
 					elementLabels.add(a.getLabel());
 					if (a.getProfile() != null) {
 						DataProfile dp = a.getProfile();
-						List<ProfileStatistic<?>> metrics = dp.getStatistics();
+						List<ProfileStatistic<?, ?>> metrics = dp.getStatistics();
 						for (var m : metrics) {
 							String key = m.getLabel();
 							if (!key.contains("Histogram")) {
@@ -173,7 +173,7 @@ public class ExportUtil {
 					elementLabels.add(a.getLabel());
 					if (a.getProfile() != null) {
 						DataProfile dp = a.getProfile();
-						List<ProfileStatistic<?>> metrics = dp.getStatistics();
+						List<ProfileStatistic<?, ?>> metrics = dp.getStatistics();
 						if (metrics.size() == 0) {
 							Set<String> metricStringSet = metricValues.keySet();
 							for (String key : metricStringSet) {

@@ -28,16 +28,19 @@ import static dqm.jku.dqmeerkat.util.GenericsUtil.cast;
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/ProfileMetric")
-public abstract class ProfileStatistic<T> implements Comparable<ProfileStatistic<T>> {
+public abstract class ProfileStatistic<TIn, TOut> implements Comparable<ProfileStatistic<TIn, TOut>> {
     protected final Logger LOGGER = Logger.getInstance();
     protected StatisticTitle title; // the naming of the metric
     protected StatisticCategory cat; // name of metric category
     @Getter
     @Setter
-    protected Class<T> valueClass; // the class of the value
+    protected Class<TIn> inputValueClass;
     @Getter
     @Setter
-    protected T value; // the value itself
+    protected Class<TIn> outputValueClass;
+    @Getter
+    @Setter
+    protected TOut value; // the value itself
     @Setter
     protected DataProfile refProf; // reference profile for calculations
 
@@ -59,7 +62,7 @@ public abstract class ProfileStatistic<T> implements Comparable<ProfileStatistic
      * @param oldVal a oldValue to be updated, null for initial calculation
      * @param rs     the recordset used for calculation
      */
-    public abstract void calculation(RecordList rs, T oldVal);
+    public abstract void calculation(RecordList rs, TIn oldVal);
 
     /**
      * Method for updating the metric value, overriden by each metric
@@ -81,8 +84,11 @@ public abstract class ProfileStatistic<T> implements Comparable<ProfileStatistic
      * @return string repr of value
      */
     protected String getSimpleValueString() {
-        if (getValue() == null) return "\tnull";
-        else return "\t" + getValue().toString();
+        if (getValue() == null) {
+            return "\tnull";
+        } else {
+            return "\t" + getValue().toString();
+        }
     }
 
 
@@ -91,9 +97,10 @@ public abstract class ProfileStatistic<T> implements Comparable<ProfileStatistic
      *
      * @return boolean conformance to RDP value
      */
-    public boolean checkConformance(ProfileStatistic<T> m, double threshold) {
-        if (getValue() == null)
+    public boolean checkConformance(ProfileStatistic<TIn, TOut> m, double threshold) {
+        if (getValue() == null) {
             setValue(m.getValue());
+        }
         double rdpVal = ((Number) this.getValue()).doubleValue();
         double dpValue = ((Number) m.getValue()).doubleValue();
 
@@ -101,8 +108,9 @@ public abstract class ProfileStatistic<T> implements Comparable<ProfileStatistic
         double upperBound = rdpVal + (Math.abs(rdpVal) * threshold);
 
         boolean conf = dpValue >= lowerBound && dpValue <= upperBound;
-        if (!conf && Constants.DEBUG)
+        if (!conf && Constants.DEBUG) {
             System.out.println(this.getTitle() + " exceeded: " + dpValue + " not in [" + lowerBound + ", " + upperBound + "]");
+        }
         return conf;
     }
 
@@ -151,7 +159,7 @@ public abstract class ProfileStatistic<T> implements Comparable<ProfileStatistic
      */
     @RDF("dsd:isInValueClass")
     public String getValueClassString() {
-        return this.valueClass.getName();
+        return this.inputValueClass.getName();
     }
 
     /**
@@ -161,7 +169,7 @@ public abstract class ProfileStatistic<T> implements Comparable<ProfileStatistic
      */
     public void setValueClassString(String valClass) {
         try {
-            this.valueClass = cast(Class.forName(valClass));
+            this.inputValueClass = cast(Class.forName(valClass));
         } catch (ClassNotFoundException e) {
             System.err.println("Class not found!");
         } catch (ClassCastException e) {
@@ -181,9 +189,13 @@ public abstract class ProfileStatistic<T> implements Comparable<ProfileStatistic
 
     @Override
     public String toString() {
-        if (value == null) return String.format("%s\tnull", title);
-        else if (title.getLabel().length() < 8) return String.format("%s\t%s", title, getValueString());
-        else return String.format("%s%s", title, getValueString());
+        if (value == null) {
+            return String.format("%s\tnull", title);
+        } else if (title.getLabel().length() < 8) {
+            return String.format("%s\t%s", title, getValueString());
+        } else {
+            return String.format("%s%s", title, getValueString());
+        }
     }
 
     /**
@@ -194,7 +206,7 @@ public abstract class ProfileStatistic<T> implements Comparable<ProfileStatistic
      * @return position if found, -1 otherwise
      */
     public int getMetricPos(StatisticTitle t) {
-        List<ProfileStatistic<?>> metrics = this.getRefProf().getStatistics();
+        List<ProfileStatistic<?, ?>> metrics = this.getRefProf().getStatistics();
         for (int i = 0; i < metrics.size(); i++) if (metrics.get(i).getLabel().equals(t.getLabel())) return i;
         return -1;
     }
@@ -204,20 +216,20 @@ public abstract class ProfileStatistic<T> implements Comparable<ProfileStatistic
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof ProfileStatistic)) return false;
-        ProfileStatistic<?> that = (ProfileStatistic<?>) o;
+        ProfileStatistic<?, ?> that = (ProfileStatistic<?, ?>) o;
         return title == that.title &&
-                valueClass.equals(that.valueClass) &&
+                inputValueClass.equals(that.inputValueClass) &&
                 Objects.equals(value, that.value) &&
                 uri.equals(that.uri);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, valueClass, value, uri);
+        return Objects.hash(title, inputValueClass, value, uri);
     }
 
     @Override
-    public int compareTo(@NotNull ProfileStatistic<T> o) {
+    public int compareTo(@NotNull ProfileStatistic<TIn, TOut> o) {
         return getLabel().compareTo(o.getLabel());
     }
 

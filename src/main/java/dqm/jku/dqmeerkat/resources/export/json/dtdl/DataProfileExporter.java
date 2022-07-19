@@ -20,7 +20,7 @@ import java.util.List;
  * @since 29.04.2022
  */
 public class DataProfileExporter extends AbstractSchemaExporter<DataProfile> {
-    private final SchemaExporter<ProfileStatistic<?>> profileStatisticSchemaExporter = new ProfileStatisticsExporter();
+    private final SchemaExporter<ProfileStatistic<?, ?>> profileStatisticSchemaExporter = new ProfileStatisticsExporter();
 
     @SneakyThrows
     @Override

@@ -12,7 +12,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.ou
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.isoF;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.isoFP;
 
-public class IsolationForestPercentage extends DependentNumberProfileStatistic<Double> {
+public class IsolationForestPercentage extends DependentNumberProfileStatistic<Double,Double> {
 
     public IsolationForestPercentage(DataProfile dp) {
         super(isoFP, out, dp, Double.class);
@@ -30,7 +30,7 @@ public class IsolationForestPercentage extends DependentNumberProfileStatistic<D
         int numRecs = rl.size();
         double result = size * 100.0 / numRecs;
         this.setValue(result);
-        this.setValueClass(Double.class);
+        this.setInputValueClass(Double.class);
 
     }
 
@@ -62,7 +62,7 @@ public class IsolationForestPercentage extends DependentNumberProfileStatistic<D
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<Double> m, double threshold) {        // TODO Auto-generated method stub
+    public boolean checkConformance(ProfileStatistic<Double, Double> m, double threshold) {        // TODO Auto-generated method stub
         return false;
     }
 

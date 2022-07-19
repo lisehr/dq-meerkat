@@ -25,7 +25,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.card;
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/cardinality/Cardinality")
-public class Cardinality extends NumberProfileStatistic<Long> {
+public class Cardinality extends NumberProfileStatistic<Long, Long> {
 
     public Cardinality(DataProfile d) {
         super(card, cardCat, d, Long.class);
@@ -49,7 +49,7 @@ public class Cardinality extends NumberProfileStatistic<Long> {
         } else {
             this.setValue((long) set.size());
         }
-        this.setValueClass(Long.class);
+        this.setInputValueClass(Long.class);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class Cardinality extends NumberProfileStatistic<Long> {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<Long> m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<Long, Long> m, double threshold) {
         double rdpVal = ((Number) this.getValue()).doubleValue();
         double dpValue = ((Number) m.getValue()).doubleValue();
 

@@ -13,6 +13,7 @@ import dqm.jku.dqmeerkat.util.numericvals.ValueDistributionUtils;
 import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
+import org.mapdb.elsa.ElsaSerializerBase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.numro
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/histogram/Histogram")
-public class Histogram extends DependentProfileStatistic<SerializableFrequencyMap> {
+public class Histogram extends DependentProfileStatistic<SerializableFrequencyMap, SerializableFrequencyMap> {
     private Number min; // minimum value
     private Number max; // maximum value
     private Number classrange; // range of equi-width classes
@@ -56,7 +57,7 @@ public class Histogram extends DependentProfileStatistic<SerializableFrequencyMa
             }
         }
         processList(list, null);
-        this.setValueClass(SerializableFrequencyMap.class);
+        this.setInputValueClass(SerializableFrequencyMap.class);
     }
 
     /**
@@ -267,7 +268,7 @@ public class Histogram extends DependentProfileStatistic<SerializableFrequencyMa
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<SerializableFrequencyMap> m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<SerializableFrequencyMap, SerializableFrequencyMap> m, double threshold) {
         int rdpVal = this.getNumberOfClasses();
         int dpValue = this.getNumberOfClasses();
 

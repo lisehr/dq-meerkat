@@ -17,7 +17,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
 
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/MedianAbsoluteDeviation")
-public class MedianAbsoluteDeviation extends DependentNumberProfileStatistic<Double> {
+public class MedianAbsoluteDeviation extends DependentNumberProfileStatistic<Double, Double> {
 
     public MedianAbsoluteDeviation(DataProfile d) {
         super(mad, dti, d, Double.class);
@@ -45,7 +45,7 @@ public class MedianAbsoluteDeviation extends DependentNumberProfileStatistic<Dou
         medM.calculation(new RecordList(medians, "dummy"), null);
         var med = medM.getValue();
         this.setValue(med);
-        this.setValueClass(Double.class);
+        this.setInputValueClass(Double.class);
     }
 
     @Override

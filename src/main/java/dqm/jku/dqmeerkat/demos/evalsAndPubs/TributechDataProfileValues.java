@@ -82,7 +82,7 @@ public class TributechDataProfileValues {
 
 				if(a.getProfile() != null) {
 					DataProfile dp = a.getProfile();
-					List<ProfileStatistic<?>> metrics = dp.getStatistics();
+					List<ProfileStatistic<?, ?>> metrics = dp.getStatistics();
 					for(var m : metrics) {
 						String key = m.getLabel();
 						if(!key.contains("Histogram")) {

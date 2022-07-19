@@ -16,12 +16,12 @@ import java.util.List;
  * @author meindl, rainer.meindl@scch.at
  * @since 29.04.2022
  */
-public class ProfileStatisticsExporter extends AbstractSchemaExporter<ProfileStatistic<?>> {
+public class ProfileStatisticsExporter extends AbstractSchemaExporter<ProfileStatistic<?, ?>> {
     private final ObjectMapper mapper = new ObjectMapper();
 
     @SneakyThrows
     @Override
-    public String export(ProfileStatistic<?> toExport) {
+    public String export(ProfileStatistic<?, ?> toExport) {
         var dtdlInterface = new DtdlInterface("dtmi:scch:at:dq:ProfileStatistic;1");
         dtdlInterface.setDisplayName("Profile Statistic");
         dtdlInterface.getContents().addAll(List.of(DtdlObject.builder()

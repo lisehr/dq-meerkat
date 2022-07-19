@@ -19,7 +19,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/cardinality/NullValuesPercentage")
-public class NullValuesPercentage extends DependentNumberProfileStatistic<Double> {
+public class NullValuesPercentage extends DependentNumberProfileStatistic<Double, Double> {
 
     public NullValuesPercentage(DataProfile d) {
         super(nullValP, cardCat, d, Double.class);
@@ -49,7 +49,7 @@ public class NullValuesPercentage extends DependentNumberProfileStatistic<Double
         }
 
         super.setValue(result);
-        this.setValueClass(Double.class);
+        this.setInputValueClass(Double.class);
     }
 
 
@@ -93,7 +93,7 @@ public class NullValuesPercentage extends DependentNumberProfileStatistic<Double
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<Double> m, double threshold) {        // Excluded: depends on cardinality & num rows (RDP size != DP size)
+    public boolean checkConformance(ProfileStatistic<Double, Double> m, double threshold) {        // Excluded: depends on cardinality & num rows (RDP size != DP size)
         return true;
     }
 

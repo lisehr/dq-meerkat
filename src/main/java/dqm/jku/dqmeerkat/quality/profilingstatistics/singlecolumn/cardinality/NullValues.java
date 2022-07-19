@@ -20,7 +20,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.nullV
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/cardinality/NullValues")
-public class NullValues extends ProfileStatistic<Long> {
+public class NullValues extends ProfileStatistic<Long, Long> {
 
     public NullValues(DataProfile d) {
         super(nullVal, cardCat, d);
@@ -34,7 +34,7 @@ public class NullValues extends ProfileStatistic<Long> {
             if (r.getField(a) == null) nullVals++;
         }
         this.setValue(nullVals);
-        this.setValueClass(Long.class);
+        this.setInputValueClass(Long.class);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class NullValues extends ProfileStatistic<Long> {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<Long> m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<Long, Long> m, double threshold) {
         double rdpVal = this.getValue();
         double dpValue = m.getValue();
 
@@ -57,8 +57,9 @@ public class NullValues extends ProfileStatistic<Long> {
         double upperBound = rdpVal + (Math.abs(rdpVal) * threshold);
 
         boolean conf = dpValue >= lowerBound && dpValue <= upperBound;
-        if (!conf && Constants.DEBUG)
+        if (!conf && Constants.DEBUG) {
             System.out.println(this.getTitle() + " exceeded: " + dpValue + " not in [" + lowerBound + ", " + upperBound + "]");
+        }
         return conf;
     }
 }

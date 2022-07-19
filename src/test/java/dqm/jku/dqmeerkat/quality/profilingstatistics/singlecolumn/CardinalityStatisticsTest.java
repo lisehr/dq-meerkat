@@ -146,7 +146,7 @@ class CardinalityStatisticsTest {
         vehicleIdDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
 
         // The profile statistics computed value is a Double
-        assertEquals(Double.class, vehicleIdDP.getStatistic(StatisticTitle.nullValP).getValueClass());
+        assertEquals(Double.class, vehicleIdDP.getStatistic(StatisticTitle.nullValP).getInputValueClass());
 
         Double percentageOfNullValuesVehicle = (Double) vehicleIdDP.getStatistic(StatisticTitle.nullValP).getValue();
 
@@ -159,7 +159,7 @@ class CardinalityStatisticsTest {
         vehicleConditionDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
 
         // The profile statistics computed value is a Double
-        assertEquals(Double.class, vehicleConditionDP.getStatistic(StatisticTitle.nullValP).getValueClass());
+        assertEquals(Double.class, vehicleConditionDP.getStatistic(StatisticTitle.nullValP).getInputValueClass());
 
         Double percentageOfNullValuesCondition = (Double) vehicleConditionDP.getStatistic(StatisticTitle.nullValP).getValue();
 
@@ -171,7 +171,7 @@ class CardinalityStatisticsTest {
         emptyDP.getStatistics().forEach(statistic -> statistic.calculation(emptyRecords, null));
 
         // The profile statistics computed value is a Double
-        assertEquals(Double.class, emptyDP.getStatistic(StatisticTitle.nullValP).getValueClass());
+        assertEquals(Double.class, emptyDP.getStatistic(StatisticTitle.nullValP).getInputValueClass());
 
         Double percentageOfNullValuesEmpty = (Double) emptyDP.getStatistic(StatisticTitle.nullValP).getValue();
 
@@ -188,7 +188,7 @@ class CardinalityStatisticsTest {
         vehicleIdDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
 
         // The profilemetrics computed value is a Long
-        assertEquals(Long.class, vehicleIdDP.getStatistic(StatisticTitle.card).getValueClass());
+        assertEquals(Long.class, vehicleIdDP.getStatistic(StatisticTitle.card).getInputValueClass());
 
         Long uniqueValues = (Long) vehicleIdDP.getStatistic(StatisticTitle.card).getValue();
 
@@ -206,7 +206,7 @@ class CardinalityStatisticsTest {
         vehicleIdDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
 
         // The profilemetrics computed value is a Double
-        assertEquals(Double.class, vehicleIdDP.getStatistic(StatisticTitle.unique).getValueClass());
+        assertEquals(Double.class, vehicleIdDP.getStatistic(StatisticTitle.unique).getInputValueClass());
 
         Double uniquenessPercentage = (Double) vehicleIdDP.getStatistic(StatisticTitle.unique).getValue();
 

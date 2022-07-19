@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.graphCat;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.maximum;
 
-public class MaximumEntry extends NumberProfileStatistic<Double> {
+public class MaximumEntry extends NumberProfileStatistic<Double, Double> {
 
     private final Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
 
@@ -40,7 +40,7 @@ public class MaximumEntry extends NumberProfileStatistic<Double> {
         }
 
         this.setValue(val);
-        this.setValueClass(Double.class);
+        this.setInputValueClass(Double.class);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class MaximumEntry extends NumberProfileStatistic<Double> {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<Double> m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<Double, Double> m, double threshold) {
         return false;
     }
 

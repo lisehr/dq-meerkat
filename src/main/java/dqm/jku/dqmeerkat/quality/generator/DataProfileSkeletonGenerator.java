@@ -45,9 +45,9 @@ public abstract class DataProfileSkeletonGenerator {
         return false;
     }
 
-    protected abstract List<ProfileStatistic<?>> generateStatistics(DataProfile profile);
+    protected abstract List<ProfileStatistic<?, ?>> generateStatistics(DataProfile profile);
 
-    public List<ProfileStatistic<?>> generateSkeleton(DataProfile profile) {
+    public List<ProfileStatistic<?, ?>> generateSkeleton(DataProfile profile) {
         if (checkValidity(profile.getElem()))
             return generateStatistics(profile);
         LOGGER.warn("Provided element" + profile.getElem() + "does not have measurable data type");

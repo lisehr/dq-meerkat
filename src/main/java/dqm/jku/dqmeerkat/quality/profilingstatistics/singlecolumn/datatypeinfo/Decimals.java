@@ -23,7 +23,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.dec;
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/Decimals")
-public class Decimals extends ProfileStatistic<Integer> {
+public class Decimals extends ProfileStatistic<Integer, Integer> {
 
     public Decimals(DataProfile d) {
         super(dec, dti, d);
@@ -32,7 +32,7 @@ public class Decimals extends ProfileStatistic<Integer> {
     @Override
     public void calculation(RecordList rs, Integer oldVal) {
         Attribute a = (Attribute) super.getRefElem();
-        this.setValueClass(Integer.class);
+        this.setInputValueClass(Integer.class);
         if (a.getDataType() == Object.class) return;
         if (a.getDataType() == Integer.class || a.getDataType() == Long.class || a.getDataType() == String.class) {
             this.setValue(0);
@@ -75,7 +75,7 @@ public class Decimals extends ProfileStatistic<Integer> {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<Integer> m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<Integer, Integer> m, double threshold) {
         if (getValue() == null)
             setValue(m.getValue());
         double rdpVal = ((Number) this.getValue()).doubleValue();

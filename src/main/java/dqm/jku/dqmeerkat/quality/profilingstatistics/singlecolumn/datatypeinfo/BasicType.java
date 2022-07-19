@@ -20,20 +20,21 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.bt;
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/BasicType")
-public class BasicType extends ProfileStatistic<String> {
+public class BasicType extends ProfileStatistic<String, String> {
     public BasicType(DataProfile d) {
         super(bt, dti, d);
     }
 
     @Override
     public void calculation(RecordList rs, String oldVal) {
-        if (((Attribute) super.getRefElem()).getDataType().equals(String.class))
+        if (((Attribute) super.getRefElem()).getDataType().equals(String.class)) {
             super.setValue("String");
-        else if (((Attribute) super.getRefElem()).getDataType().equals(Object.class))
+        } else if (((Attribute) super.getRefElem()).getDataType().equals(Object.class)) {
             super.setValue("Object");
-        else
+        } else {
             super.setValue("Numeric");
-        super.setValueClass(String.class);
+        }
+        super.setInputValueClass(String.class);
     }
 
 
@@ -48,7 +49,7 @@ public class BasicType extends ProfileStatistic<String> {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<String> m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<String, String> m, double threshold) {
         String rdpVal = this.getSimpleValueString();
         String dpValue = this.getSimpleValueString();
 

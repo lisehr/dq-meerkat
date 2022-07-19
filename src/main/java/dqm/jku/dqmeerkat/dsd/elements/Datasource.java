@@ -212,7 +212,7 @@ public class Datasource extends DSDElement {
 		builder.namedGraph(prefix +":"+ concept.getLabel())
 		.subject(prefix+ ":"+ a.getLabel())
 		.add("dsd:hasDataprofile" ,prefix + ":" + a.getLabel() + "/" + "DataProfile");
-		for(ProfileStatistic<?> metric : profile.getStatistics()) {
+		for(ProfileStatistic<?, ?> metric : profile.getStatistics()) {
 
 			if(metric.getValue() != null) {
 				builder.namedGraph(prefix +":"+ concept.getLabel())
