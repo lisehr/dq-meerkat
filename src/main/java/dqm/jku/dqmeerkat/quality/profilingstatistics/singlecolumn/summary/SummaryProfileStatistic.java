@@ -12,6 +12,8 @@ import dqm.jku.dqmeerkat.util.Constants;
 import java.util.HashMap;
 import java.util.Map;
 
+import static dqm.jku.dqmeerkat.util.GenericsUtil.cast;
+
 /**
  * <h2>SummaryProfileStatistic</h2>
  * <summary>
@@ -35,10 +37,10 @@ public abstract class SummaryProfileStatistic<T> extends ProfileStatistic<Map<T,
     @Override
     public void calculation(RecordList rs, Map<T, Integer> oldVal) {
         rs.toList().stream()
-                .map(record -> (T)record.getField(getRefElem().getLabel()))
+                .map(record -> (T) record.getField(getRefElem().getLabel()))
                 .forEach(this::handleCounter);
         setValue(summary);
-        setValueClass(summary.getClass());
+        setValueClass(cast(summary.getClass()));
 
     }
 

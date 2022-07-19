@@ -22,6 +22,7 @@ import java.util.stream.IntStream;
 
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.out;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.lof;
+import static dqm.jku.dqmeerkat.util.GenericsUtil.cast;
 
 
 /**
@@ -93,7 +94,7 @@ public class LocalOutlierFactor extends ProfileStatistic<List<Double>> {
             });
         });
 
-        this.setValueClass(ArrayList.class);
+        this.setValueClass(cast(ArrayList.class));
         this.setValue(resultList);
 
 

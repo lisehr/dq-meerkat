@@ -32,22 +32,24 @@ public class Average extends DependentNumberProfileStatistic<Double> {
 
 
     public Average(DataProfile d) {
-        super(avg, dti, d);
+        super(avg, dti, d, Double.class);
     }
 
     @Override
     public void calculation(RecordList rs, Double oldVal) {
         this.dependencyCalculationWithRecordList(rs);
         double val = Objects.requireNonNullElse(oldVal, getBasicInstance());
-        for (Record r : rs) {
-            var castedDouble = (Double) r.getField((Attribute) super.getRefElem());
-            if (castedDouble != null) {
-                val += castedDouble;
+        if (ensureDataTypeCorrect(((Attribute) (getRefElem())).getDataType())) {
+            for (Record r : rs) {
+                var castedDouble = (Double) r.getField((Attribute) super.getRefElem());
+                if (castedDouble != null) {
+                    val += castedDouble;
+                }
             }
         }
         val = performAveraging(val);
         this.setValue(val);
-        this.setValueClass(((Attribute) super.getRefElem()).getDataType());
+        this.setValueClass(Double.class);
     }
 
     /**

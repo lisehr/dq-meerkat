@@ -19,7 +19,7 @@ public class MaximumEntry extends NumberProfileStatistic<Double> {
     private final Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
 
     public MaximumEntry(DataProfile d) {
-        super(maximum, graphCat, d);
+        super(maximum, graphCat, d, Double.class);
     }
 
     @Override

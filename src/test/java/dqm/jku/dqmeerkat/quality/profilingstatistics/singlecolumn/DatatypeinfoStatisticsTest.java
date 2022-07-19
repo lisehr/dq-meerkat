@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @DisplayName("ProfileStatistics: SingleColumn: Datatypeinfo")
 @TestMethodOrder(MethodOrderer.DisplayName.class)
 class DatatypeInfoStatisticsTest {
-
+    // TODO split this test class into multiple smaller ones. each one tackling a profile statistic. Should also fix test dependencies
     private final static int VEHICLE_ID_DIGITS = 10;
     private final static int VEHICLE_ID_DECIMALS = 0;
     private final static long VEHICLE_ID_MINIMUM = 7218891961L;

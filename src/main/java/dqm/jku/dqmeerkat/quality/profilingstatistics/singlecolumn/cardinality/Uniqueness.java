@@ -7,8 +7,6 @@ import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 
-import java.util.List;
-
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.cardCat;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
 
@@ -25,7 +23,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
 public class Uniqueness extends DependentNumberProfileStatistic<Double> {
 
     public Uniqueness(DataProfile d) {
-        super(unique, cardCat, d);
+        super(unique, cardCat, d, Double.class);
     }
 
     /**
@@ -58,16 +56,21 @@ public class Uniqueness extends DependentNumberProfileStatistic<Double> {
 
     @Override
     protected String getValueString() {
-        if (getValue() == null) return "\tnull";
-        else return "\t" + getValue().toString() + "%";
+        if (getValue() == null) {
+            return "\tnull";
+        } else {
+            return "\t" + getValue().toString() + "%";
+        }
     }
 
     @Override
     protected void dependencyCalculationWithRecordList(RecordList rl) {
-        if (super.getMetricPos(unique) - 2 <= super.getMetricPos(numrows))
+        if (super.getMetricPos(unique) - 2 <= super.getMetricPos(numrows)) {
             super.getRefProf().getStatistic(numrows).calculation(rl, null);
-        if (super.getMetricPos(unique) - 1 <= super.getMetricPos(card))
+        }
+        if (super.getMetricPos(unique) - 1 <= super.getMetricPos(card)) {
             super.getRefProf().getStatistic(card).calculation(rl, null);
+        }
 
     }
 

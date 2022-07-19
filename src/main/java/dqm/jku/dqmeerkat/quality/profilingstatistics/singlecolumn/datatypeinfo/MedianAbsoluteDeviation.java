@@ -20,20 +20,25 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
 public class MedianAbsoluteDeviation extends DependentNumberProfileStatistic<Double> {
 
     public MedianAbsoluteDeviation(DataProfile d) {
-        super(mad, dti, d);
+        super(mad, dti, d, Double.class);
     }
 
     private void calculation(RecordList rl, Double oldVal, boolean checked) {
-        if (!checked)
+        if (!checked) {
             this.dependencyCalculationWithRecordList(rl);
+        }
 
         double medVal = (double) super.getRefProf().getStatistic(med).getValue();
         List<Number> medians = new ArrayList<>();
-        for (Record r : rl) {
-            double field = (double) r.getField((Attribute) super.getRefElem());
-            medians.add(field - medVal);
+        if (ensureDataTypeCorrect(((Attribute) super.getRefElem()).getDataType())) {
+            for (Record r : rl) {
+                var field = r.getField((Attribute) super.getRefElem());
+                if (field == null) {
+                    continue;
+                }
+                medians.add((double) field - medVal);
+            }
         }
-
 
         Median medM = new Median(this.getRefProf());
         // TODO implement list to recordlist conversion
@@ -62,10 +67,12 @@ public class MedianAbsoluteDeviation extends DependentNumberProfileStatistic<Dou
 
     @Override
     protected void dependencyCalculationWithRecordList(RecordList rl) {
-        if (super.getMetricPos(sd) - 1 <= super.getMetricPos(numrows))
+        if (super.getMetricPos(sd) - 1 <= super.getMetricPos(numrows)) {
             super.getRefProf().getStatistic(numrows).calculation(rl, null);
-        if (super.getMetricPos(sd) - 1 <= super.getMetricPos(med))
+        }
+        if (super.getMetricPos(sd) - 1 <= super.getMetricPos(med)) {
             super.getRefProf().getStatistic(med).calculation(rl, null);
+        }
     }
 
     @Override

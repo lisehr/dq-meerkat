@@ -12,7 +12,7 @@ public class NumEntries extends NumberProfileStatistic<Integer> {
 
 
     public NumEntries(DataProfile d) {
-        super(numEntries, graphCat, d);
+        super(numEntries, graphCat, d, Integer.class);
     }
 
     @Override

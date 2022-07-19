@@ -16,7 +16,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.disti
 public class DistinctEntries extends NumberProfileStatistic<Integer> {
 
     public DistinctEntries(DataProfile d) {
-        super(distinctEntries, graphCat, d);
+        super(distinctEntries, graphCat, d, Integer.class);
     }
 
 

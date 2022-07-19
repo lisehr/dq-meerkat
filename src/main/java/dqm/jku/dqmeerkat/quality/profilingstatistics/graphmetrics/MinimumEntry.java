@@ -20,7 +20,7 @@ public class MinimumEntry extends NumberProfileStatistic<Double> {
 
 
     public MinimumEntry(DataProfile d) {
-        super(minimum, graphCat, d);
+        super(minimum, graphCat, d, Double.class);
     }
 
     @Override

@@ -56,7 +56,7 @@ public class Histogram extends DependentProfileStatistic<SerializableFrequencyMa
             }
         }
         processList(list, null);
-        this.setValueClass(a.getDataType());
+        this.setValueClass(SerializableFrequencyMap.class);
     }
 
     /**

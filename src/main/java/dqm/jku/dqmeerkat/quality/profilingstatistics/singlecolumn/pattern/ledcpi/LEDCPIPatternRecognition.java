@@ -35,12 +35,13 @@ import java.util.List;
  * @since 09.06.2022
  */
 public class LEDCPIPatternRecognition extends NumberProfileStatistic<Double> {
+    // the generic type is double as we return a metric based on a relative value, not the ledc pi hits
     private static final Logger LOGGER = Logger.getInstance();
     private final QualityMeasure<String> measure;
 
 
     public LEDCPIPatternRecognition(DataProfile referenceProfile, QualityMeasure<String> measure) {
-        super(StatisticTitle.pattern, StatisticCategory.dti, referenceProfile);
+        super(StatisticTitle.pattern, StatisticCategory.dti, referenceProfile, Double.class);
         this.measure = measure;
     }
 
@@ -53,7 +54,7 @@ public class LEDCPIPatternRecognition extends NumberProfileStatistic<Double> {
 
     @SneakyThrows
     public LEDCPIPatternRecognition(DataProfile referenceProfile, String propertyName, Path jsonConfig) {
-        super(StatisticTitle.pattern, StatisticCategory.dti, referenceProfile);
+        super(StatisticTitle.pattern, StatisticCategory.dti, referenceProfile, Double.class);
         JSON.restore(new File(String.valueOf(jsonConfig)));
         var rawMeasure = MeasureRegistry.getInstance()
                 .getMeasureByProperty(Property.parseProperty(propertyName));
@@ -85,7 +86,8 @@ public class LEDCPIPatternRecognition extends NumberProfileStatistic<Double> {
      * @return 1 if the record matches, 0 if it does not match
      */
     private double checkHit(Number record) {
-        var result = measure.measure(record.toString());
+        var measureInput = record == null ? null : record.toString();
+        var result = measure.measure(measureInput);
         return result >= measure.getSufficiencyThreshold() ? 1 : 0;
     }
 

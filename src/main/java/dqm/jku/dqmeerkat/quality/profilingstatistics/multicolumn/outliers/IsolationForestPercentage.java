@@ -15,7 +15,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.isoFP
 public class IsolationForestPercentage extends DependentNumberProfileStatistic<Double> {
 
     public IsolationForestPercentage(DataProfile dp) {
-        super(isoFP, out, dp);
+        super(isoFP, out, dp, Double.class);
     }
 
 

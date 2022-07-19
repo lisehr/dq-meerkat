@@ -14,6 +14,7 @@ import java.util.List;
 
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.out;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.isoF;
+import static dqm.jku.dqmeerkat.util.GenericsUtil.cast;
 
 public class IsolationForest extends ProfileStatistic<List<?>> {
 
@@ -54,7 +55,7 @@ public class IsolationForest extends ProfileStatistic<List<?>> {
                 recordNos.add(i + 1); // +1 for alignment (arrays start with 0, so record 1 is index 0)
             // do not simply insert record numbers, store model (serialization?)
         }
-        this.setValueClass(ArrayList.class);
+        this.setValueClass(cast(ArrayList.class));
         this.setValue(recordNos);
     }
 

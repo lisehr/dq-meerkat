@@ -27,19 +27,26 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.max;
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/Maximum")
 public class Maximum extends NumberProfileStatistic<Double> {
     public Maximum(DataProfile d) {
-        super(max, dti, d);
+        super(max, dti, d, Double.class);
     }
 
     @Override
     public void calculation(RecordList rs, Double oldVal) {
         Attribute a = (Attribute) super.getRefElem();
         double val = Objects.requireNonNullElse(oldVal, getBasicInstance());
-        for (Record r : rs) {
-            var field = (double) r.getField(a);
-            val = getMaximum(val, field);
+        if (ensureDataTypeCorrect(a.getDataType())) {
+            for (Record r : rs) {
+                var field = r.getField(a);
+                if (field == null) {
+                    continue;
+                }
+                val = getMaximum(val, (double) field);
+            }
+        } else {
+            LOGGER.warn("Attribute {} has wrong data type {} for {}: {}. Skipping calculation.", a.getLabel(), a.getDataType(),
+                    getClass().getSimpleName(), valueClass.getSimpleName());
         }
         this.setValue(val);
-        this.setValueClass(a.getDataType());
     }
 
     /**
@@ -59,8 +66,9 @@ public class Maximum extends NumberProfileStatistic<Double> {
      * @return the new maximum value
      */
     private Double getMaximum(Double current, Double toComp) {
-        if (toComp == null)
+        if (toComp == null) {
             return current; // if the maximum of the former processed records is null, this record is the maximum
+        }
         Attribute a = (Attribute) super.getRefElem();
         // TODO move to string implementation
 //        if (a.getDataType().equals(String.class) && !isNumericList) {
@@ -84,16 +92,18 @@ public class Maximum extends NumberProfileStatistic<Double> {
     @Override
     public boolean checkConformance(ProfileStatistic<Double> m, double threshold) {
         double rdpVal;
-        if (getValue() == null)
+        if (getValue() == null) {
             rdpVal = 0;
-        else
+        } else {
             rdpVal = ((Number) this.getValue()).doubleValue();
+        }
         double dpValue = ((Number) m.getValue()).doubleValue();
 
         rdpVal = rdpVal + (Math.abs(rdpVal) * threshold);    // shift by threshold
         boolean conf = dpValue <= rdpVal;
-        if (!conf && Constants.DEBUG)
+        if (!conf && Constants.DEBUG) {
             System.out.println(StatisticTitle.max + " exceeded: " + dpValue + " > " + rdpVal + " (originally: " + this.getValue() + ")");
+        }
         return conf;
 
     }

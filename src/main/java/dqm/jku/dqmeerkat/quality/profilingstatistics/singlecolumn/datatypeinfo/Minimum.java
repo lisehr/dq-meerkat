@@ -4,6 +4,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.NumberProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
 import dqm.jku.dqmeerkat.util.Constants;
@@ -24,23 +25,30 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.min;
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/Minimum")
-public class Minimum extends ProfileStatistic<Double> {
+public class Minimum extends NumberProfileStatistic<Double> {
 
 
     public Minimum(DataProfile d) {
-        super(min, dti, d);
+        super(min, dti, d, Double.class);
     }
 
     @Override
     public void calculation(RecordList rs, Double oldVal) {
         Attribute a = (Attribute) super.getRefElem();
         var val = Objects.requireNonNullElse(oldVal, getBasicInstance());
-        for (Record r : rs) {
-            double field = (double) r.getField(a);
-            val = getMinimum(val, field);
+        if (ensureDataTypeCorrect(a.getDataType())) {
+            for (Record r : rs) {
+                var field = r.getField(a);
+                if (field == null) {
+                    continue;
+                }
+                val = getMinimum(val, (double) r.getField(a));
+            }
+        } else {
+            LOGGER.warn("Field {} is not of type Double for {}, skipping it...", a.getLabel(),
+                    this.getClass().getSimpleName());
         }
         this.setValue(val);
-        this.setValueClass(a.getDataType());
     }
 
     /**
@@ -60,8 +68,9 @@ public class Minimum extends ProfileStatistic<Double> {
      * @return the new minimum value
      */
     private Double getMinimum(Double current, Double toComp) {
-        if (toComp == null)
+        if (toComp == null) {
             return current;
+        }
 
         return Double.min(current, toComp);
 
@@ -85,18 +94,20 @@ public class Minimum extends ProfileStatistic<Double> {
     @Override
     public boolean checkConformance(ProfileStatistic<Double> m, double threshold) {
         double rdpVal;
-        if (this.getValue() == null)
+        if (this.getValue() == null) {
             rdpVal = 0;
-        else
+        } else {
             rdpVal = this.getValue();
+        }
 
         double dpValue = ((Number) m.getValue()).doubleValue();
 
         rdpVal = rdpVal - (Math.abs(rdpVal) * threshold);    // shift by threshold
         boolean conf = dpValue >= rdpVal;
-        if (!conf && Constants.DEBUG)
+        if (!conf && Constants.DEBUG) {
             System.out.println(StatisticTitle.min + " exceeded: " + dpValue + " < " + rdpVal + " (originally: " +
                     this.getValue() + ")");
+        }
         return conf;
     }
 }

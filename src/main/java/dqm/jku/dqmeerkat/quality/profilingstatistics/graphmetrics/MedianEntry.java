@@ -23,7 +23,7 @@ public class MedianEntry extends NumberProfileStatistic<Double> {
 
 
     public MedianEntry(DataProfile d) {
-        super(median, graphCat, d);
+        super(median, graphCat, d, Double.class);
     }
 
     @Override
@@ -41,7 +41,6 @@ public class MedianEntry extends NumberProfileStatistic<Double> {
 
         double val = getMedian(list, rs.size());
         this.setValue(val);
-        this.setValueClass(a.getDataType());
     }
 
     private double getMedian(List<Number> list, int size) {

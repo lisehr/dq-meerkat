@@ -28,7 +28,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.card;
 public class Cardinality extends NumberProfileStatistic<Long> {
 
     public Cardinality(DataProfile d) {
-        super(card, cardCat, d);
+        super(card, cardCat, d, Long.class);
     }
 
     @Override

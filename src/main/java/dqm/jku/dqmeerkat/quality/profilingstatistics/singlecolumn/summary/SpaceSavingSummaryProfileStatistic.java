@@ -7,6 +7,8 @@ import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
 
 import java.util.Map;
 
+import static dqm.jku.dqmeerkat.util.GenericsUtil.cast;
+
 /**
  * <h2>SpaceSavingSummaryProfileStatistic</h2>
  * <summary>
@@ -63,8 +65,8 @@ public class SpaceSavingSummaryProfileStatistic extends SummaryProfileStatistic<
     }
 
     @Override
-    public Class<?> getValueClass() {
-        return summary.getClass();
+    public Class<Map<Double, Integer>> getValueClass() {
+        return cast(summary.getClass());
     }
 
     public double calculateConformance() {

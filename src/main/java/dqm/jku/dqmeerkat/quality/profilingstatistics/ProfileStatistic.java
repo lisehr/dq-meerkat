@@ -11,9 +11,12 @@ import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 import org.cyberborean.rdfbeans.annotations.RDFSubject;
 import org.jetbrains.annotations.NotNull;
+import science.aist.seshat.Logger;
 
 import java.util.List;
 import java.util.Objects;
+
+import static dqm.jku.dqmeerkat.util.GenericsUtil.cast;
 
 /**
  * <h2>ProfileStatistics</h2>
@@ -26,11 +29,12 @@ import java.util.Objects;
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/ProfileMetric")
 public abstract class ProfileStatistic<T> implements Comparable<ProfileStatistic<T>> {
+    protected final Logger LOGGER = Logger.getInstance();
     protected StatisticTitle title; // the naming of the metric
     protected StatisticCategory cat; // name of metric category
     @Getter
     @Setter
-    protected Class<?> valueClass; // the class of the value
+    protected Class<T> valueClass; // the class of the value
     @Getter
     @Setter
     protected T value; // the value itself
@@ -157,9 +161,11 @@ public abstract class ProfileStatistic<T> implements Comparable<ProfileStatistic
      */
     public void setValueClassString(String valClass) {
         try {
-            this.valueClass = Class.forName(valClass);
+            this.valueClass = cast(Class.forName(valClass));
         } catch (ClassNotFoundException e) {
             System.err.println("Class not found!");
+        } catch (ClassCastException e) {
+            System.err.println("Class not castable!");
         }
     }
 

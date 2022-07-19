@@ -24,21 +24,26 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/StandardDeviation")
 public class StandardDeviation extends DependentNumberProfileStatistic<Double> {
     public StandardDeviation(DataProfile d) {
-        super(sd, dti, d);
+        super(sd, dti, d, Double.class);
     }
 
     private void calculation(RecordList rl, Double oldVal, boolean checked) {
-        if (!checked)
+        if (!checked) {
             this.dependencyCalculationWithRecordList(rl);
+        }
         var avgVal = (double) super.getRefProf().getStatistic(avg).getValue();
         var val = 0D;
         val = Objects.requireNonNullElse(oldVal, 0D);
-
-        for (Record r : rl) {
-            var field = (double) (r.getField((Attribute) super.getRefElem()));
-            val = addValue(val, field, avgVal);
+        if (ensureDataTypeCorrect(((Attribute) super.getRefElem()).getDataType())) {
+            for (Record r : rl) {
+                var field = (r.getField((Attribute) super.getRefElem()));
+                if (field == null) {
+                    continue;
+                }
+                val = addValue(val, (double) field, avgVal);
+            }
+            val = performAveraging(val);
         }
-        val = performAveraging(val);
         this.setValue(val);
         this.setValueClass(Double.class);
     }
@@ -52,8 +57,9 @@ public class StandardDeviation extends DependentNumberProfileStatistic<Double> {
      * @return the new sum of values
      */
     private Double addValue(Double current, Double toAdd, Double avg) {
-        if (toAdd == null)
+        if (toAdd == null) {
             return current;
+        }
 //        if (a.getClass().equals(String.class)) // TODO move to string implementation
 //            return (int) current + (int) Math.pow(((String) toAdd).length() - ((String) avg).length(), 2);
         return current + Math.pow((((Number) toAdd).doubleValue() - ((Number) avg).doubleValue()), 2);
@@ -66,8 +72,9 @@ public class StandardDeviation extends DependentNumberProfileStatistic<Double> {
      * @return the square root of the average value
      */
     private Double performAveraging(Double sum) {
-        if (((long) super.getRefProf().getStatistic(numrows).getValue()) == 1)
+        if (((long) super.getRefProf().getStatistic(numrows).getValue()) == 1) {
             return sum;
+        }
         return Math.sqrt((sum / ((long) super.getRefProf().getStatistic(numrows).getValue() - 1)));
     }
 
@@ -97,10 +104,12 @@ public class StandardDeviation extends DependentNumberProfileStatistic<Double> {
 
     @Override
     protected void dependencyCalculationWithRecordList(RecordList rl) {
-        if (super.getMetricPos(sd) - 1 <= super.getMetricPos(numrows))
+        if (super.getMetricPos(sd) - 1 <= super.getMetricPos(numrows)) {
             super.getRefProf().getStatistic(numrows).calculation(rl, null);
-        if (super.getMetricPos(sd) - 1 <= super.getMetricPos(avg))
+        }
+        if (super.getMetricPos(sd) - 1 <= super.getMetricPos(avg)) {
             super.getRefProf().getStatistic(avg).calculation(rl, null);
+        }
     }
 
     @Override
@@ -129,8 +138,9 @@ public class StandardDeviation extends DependentNumberProfileStatistic<Double> {
 
     @Override
     public boolean checkConformance(ProfileStatistic<Double> m, double threshold) {
-        if (getValue() == null)
+        if (getValue() == null) {
             setValue(m.getValue());
+        }
         double rdpVal = ((Number) this.getValue()).doubleValue();
         double dpValue = ((Number) m.getValue()).doubleValue();
 
@@ -138,8 +148,9 @@ public class StandardDeviation extends DependentNumberProfileStatistic<Double> {
         double upperBound = rdpVal + (Math.abs(rdpVal) * threshold);
 
         boolean conf = dpValue >= lowerBound && dpValue <= upperBound;
-        if (!conf && Constants.DEBUG)
+        if (!conf && Constants.DEBUG) {
             System.out.println(this.getTitle() + " exceeded: " + dpValue + " not in [" + lowerBound + ", " + upperBound + "]");
+        }
         return conf;
     }
 }

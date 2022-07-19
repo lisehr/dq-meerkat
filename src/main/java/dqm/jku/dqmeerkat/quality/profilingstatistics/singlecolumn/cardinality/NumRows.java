@@ -21,7 +21,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.numro
 public class NumRows extends NumberProfileStatistic<Long> {
 
     public NumRows(DataProfile d) {
-        super(numrows, cardCat, d);
+        super(numrows, cardCat, d, Long.class);
     }
 
     @Override

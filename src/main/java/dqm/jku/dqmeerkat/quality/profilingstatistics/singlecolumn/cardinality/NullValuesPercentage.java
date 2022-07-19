@@ -22,7 +22,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
 public class NullValuesPercentage extends DependentNumberProfileStatistic<Double> {
 
     public NullValuesPercentage(DataProfile d) {
-        super(nullValP, cardCat, d);
+        super(nullValP, cardCat, d, Double.class);
     }
 
     @Override
@@ -42,10 +42,11 @@ public class NullValuesPercentage extends DependentNumberProfileStatistic<Double
         long nominator = (long) super.getRefProf().getStatistic(nullVal).getValue();
         long denominator = (long) super.getRefProf().getStatistic(numrows).getValue();
         double result;
-        if (denominator == 0)
+        if (denominator == 0) {
             result = 0D;
-        else
+        } else {
             result = (double) nominator * 100.0 / (double) denominator;
+        }
 
         super.setValue(result);
         this.setValueClass(Double.class);
@@ -59,16 +60,21 @@ public class NullValuesPercentage extends DependentNumberProfileStatistic<Double
 
     @Override
     protected String getValueString() {
-        if (getValue() == null) return "\tnull";
-        else return "\t" + getValue().toString() + "%";
+        if (getValue() == null) {
+            return "\tnull";
+        } else {
+            return "\t" + getValue().toString() + "%";
+        }
     }
 
     @Override
     protected void dependencyCalculationWithRecordList(RecordList rl) {
-        if (super.getMetricPos(nullValP) - 2 <= super.getMetricPos(numrows))
+        if (super.getMetricPos(nullValP) - 2 <= super.getMetricPos(numrows)) {
             super.getRefProf().getStatistic(numrows).calculation(rl, null);
-        if (super.getMetricPos(nullValP) - 1 <= super.getMetricPos(nullVal))
+        }
+        if (super.getMetricPos(nullValP) - 1 <= super.getMetricPos(nullVal)) {
             super.getRefProf().getStatistic(nullVal).calculation(rl, null);
+        }
 
     }
 
