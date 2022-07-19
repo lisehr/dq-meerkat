@@ -40,8 +40,10 @@ public class Average extends DependentNumberProfileStatistic<Double> {
         this.dependencyCalculationWithRecordList(rs);
         double val = Objects.requireNonNullElse(oldVal, getBasicInstance());
         for (Record r : rs) {
-            var field = (Number) r.getField((Attribute) super.getRefElem());
-            val += field.doubleValue();
+            var castedDouble = (Double) r.getField((Attribute) super.getRefElem());
+            if (castedDouble != null) {
+                val += castedDouble;
+            }
         }
         val = performAveraging(val);
         this.setValue(val);
@@ -92,8 +94,9 @@ public class Average extends DependentNumberProfileStatistic<Double> {
 
     @Override
     protected void dependencyCalculationWithRecordList(RecordList rl) {
-        if (super.getMetricPos(avg) - 2 <= super.getMetricPos(numrows))
+        if (super.getMetricPos(avg) - 2 <= super.getMetricPos(numrows)) {
             super.getRefProf().getStatistic(numrows).calculation(rl, null);
+        }
     }
 
     @Override
@@ -107,8 +110,9 @@ public class Average extends DependentNumberProfileStatistic<Double> {
 
     @Override
     public boolean checkConformance(ProfileStatistic<Double> m, double threshold) {
-        if (this.getValue() == null)
+        if (this.getValue() == null) {
             this.setValue(m.getValue());
+        }
         double rdpVal = ((Number) this.getValue()).doubleValue();
         double dpValue = ((Number) m.getValue()).doubleValue();
 
@@ -116,8 +120,9 @@ public class Average extends DependentNumberProfileStatistic<Double> {
         double upperBound = rdpVal + (Math.abs(rdpVal) * threshold);
 
         boolean conf = dpValue >= lowerBound && dpValue <= upperBound;
-        if (!conf && Constants.DEBUG)
+        if (!conf && Constants.DEBUG) {
             System.out.println(this.getTitle() + " exceeded: " + dpValue + " not in [" + lowerBound + ", " + upperBound + "]");
+        }
         return conf;
     }
 }

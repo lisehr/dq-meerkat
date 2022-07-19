@@ -19,27 +19,13 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 /**
  * This class tests profile statistics that are in the package {@link dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.datatypeinfo}.
  * The tests are run with the "id", the "region" and/or the "lat" column of the vehicles30000.csv and the empty.csv
+ *
  * @author Johannes Schrott
  */
 
 @DisplayName("ProfileStatistics: SingleColumn: Datatypeinfo")
 @TestMethodOrder(MethodOrderer.DisplayName.class)
 class DatatypeInfoStatisticsTest {
-
-    private static DataProfile vehicleIdDP;
-    private static DataProfile vehicleRegionDP;
-    private static DataProfile vehicleLatitudeDP;
-    private static RecordList vehicleRecords;
-
-    private static DataProfile emptyDP;
-    private static RecordList emptyRecords;
-
-    // The expected results for the tests where calculated using Excel (see the vehicles30000.xlsx, that contains a pivot table of the dataset)
-    static final int VEHICLE_NUMBER_OF_RECORDS = 29759;
-    static final int VEHICLE_NUMBER_OF_NULL_ID = 0; // Number of null values in "id" column
-
-    static final int EMPTY_NUMBER_OF_RECORDS = 7;
-    static final int EMPTY_NUMBER_OF_NULL = 7;
 
     private final static int VEHICLE_ID_DIGITS = 10;
     private final static int VEHICLE_ID_DECIMALS = 0;
@@ -49,7 +35,6 @@ class DatatypeInfoStatisticsTest {
     private final static long VEHICLE_ID_MEDIAN = 7235754660L;
     private final static double VEHICLE_ID_STANDARD_DEVIATION = 4602599.10;
     private final static long VEHICLE_ID_MEDIAN_ABSOLUTE_DEVIATION = 0;
-
     private final static int VEHICLE_LATITUDE_DIGITS = 2;
     private final static int VEHICLE_LATITUDE_DECIMALS = 15; // visible in csv text file; excel truncates decimals to 6
     private final static double VEHICLE_LATITUDE_MAXIMUM = 64.993698;
@@ -58,12 +43,14 @@ class DatatypeInfoStatisticsTest {
     private final static double VEHICLE_LATITUDE_MEDIAN = 34.668793;
     private final static double VEHICLE_LATITUDE_STANDARD_DEVIATION = 9.07;
     private final static double VEHICLE_LATITUDE_MEDIAN_ABSOLUTE_DEVIATION = 0.022574;
-
     private final static int VEHICLE_REGION_DIGITS = 0;
     private final static int VEHICLE_REGION_DECIMALS = 0;
-
-
-
+    private static DataProfile vehicleIdDP;
+    private static DataProfile vehicleRegionDP;
+    private static DataProfile vehicleLatitudeDP;
+    private static RecordList vehicleRecords;
+    private static DataProfile emptyDP;
+    private static RecordList emptyRecords;
 
     @BeforeAll
     @DisplayName("Create a data profiles for the vehicles30000.csv column \"id\", \"lat\", and \"region\"")
@@ -99,7 +86,7 @@ class DatatypeInfoStatisticsTest {
             ds2.getConcepts().forEach(concept -> {
                 Attribute attribute = concept.getAttribute("emptycolumn"); // Spaces in names of a column (attribite) get removed...
                 emptyDP.setElem(attribute);
-                emptyDP.setURI(attribute.getURI()+"/profile");
+                emptyDP.setURI(attribute.getURI() + "/profile");
                 try {
                     emptyRecords = csvConnector2.getRecordList(concept);
                 } catch (IOException e) {
@@ -121,7 +108,7 @@ class DatatypeInfoStatisticsTest {
 
     /**
      * This method tests the {@link dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.datatypeinfo.BasicType} profile statistic.
-     * */
+     */
     @Test
     @DisplayName("BasicType")
     void testBasicType() {
@@ -155,7 +142,7 @@ class DatatypeInfoStatisticsTest {
 
     /**
      * This method tests the {@link dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.datatypeinfo.DataType} profile statistic.
-     * */
+     */
     @Test
     @DisplayName("DataType (no null values)")
     void testDataType() {
@@ -278,7 +265,7 @@ class DatatypeInfoStatisticsTest {
 
         Double standardDeviation = (Double) vehicleIdDP.getStatistic(StatisticTitle.sd).getValue(); // The "Long" in the title refernces the type of the attribute which is used for calculating the standard deviation.
 
-        assertEquals(VEHICLE_ID_STANDARD_DEVIATION, standardDeviation,0.1);
+        assertEquals(VEHICLE_ID_STANDARD_DEVIATION, standardDeviation, 0.1);
     }
 
     @Test

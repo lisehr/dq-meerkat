@@ -35,21 +35,8 @@ class MGSummaryProfileStatisticTest {
         statistic.calculation(recordList, null);
         // then
         var ret = statistic.getValue();
-        Assertions.assertEquals(40, ret.size());
-        Assertions.assertEquals(4, ret.get(22D));
-    }
-
-    @Test
-    void calculationNumericTest() throws NoSuchMethodException {
-        // given
-        var statistic = new MGSummaryProfileStatistic(new DataProfile(recordList, dsdElement), 50);
-
-        // when
-        statistic.calculation(recordList, null);
-        // then
-        var ret = statistic.getValue();
-        Assertions.assertEquals(40, ret.size());
-        Assertions.assertEquals(4, ret.get(22D));
+        Assertions.assertEquals(37, ret.size());
+        Assertions.assertEquals(8, ret.get(22D));
     }
 
     @Test
