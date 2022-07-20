@@ -4,7 +4,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentNumberProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentDoubleResultProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.NumRows;
 
@@ -20,7 +20,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.numro
  * @author meindl, rainer.meindl@scch.at
  * @since 19.07.2022
  */
-public class LongAverage extends DependentNumberProfileStatistic<Long, Double> {
+public class LongAverage extends DependentDoubleResultProfileStatistic<Long> {
     public LongAverage(DataProfile refProf) {
         super(avg, StatisticCategory.dti, refProf, Long.class);
     }

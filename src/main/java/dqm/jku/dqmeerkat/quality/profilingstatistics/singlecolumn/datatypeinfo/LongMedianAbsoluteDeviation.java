@@ -4,7 +4,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentNumberProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentLongResultProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.NumRows;
 
 import java.util.ArrayList;
@@ -12,7 +12,6 @@ import java.util.List;
 
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.dti;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
-import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.med;
 
 /**
  * <h2>LongMedianAbsoluteDeviation</h2>
@@ -21,7 +20,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.med;
  * @author meindl, rainer.meindl@scch.at
  * @since 20.07.2022
  */
-public class LongMedianAbsoluteDeviation  extends DependentNumberProfileStatistic<Long, Double> {
+public class LongMedianAbsoluteDeviation extends DependentLongResultProfileStatistic<Long> {
 
     public LongMedianAbsoluteDeviation(DataProfile d) {
         super(sd, dti, d, Long.class);
@@ -32,7 +31,8 @@ public class LongMedianAbsoluteDeviation  extends DependentNumberProfileStatisti
             this.dependencyCalculationWithRecordList(rl);
         }
 
-        double medVal = (double) super.getRefProf().getStatistic(med).getValue();
+        long medVal = super.getRefProf().getStatistic(med).getValue() == null ? 0L :
+                (long) super.getRefProf().getStatistic(med).getValue();
         List<Number> medians = new ArrayList<>();
         if (ensureDataTypeCorrect(((Attribute) super.getRefElem()).getDataType())) {
             for (Record r : rl) {
@@ -44,9 +44,9 @@ public class LongMedianAbsoluteDeviation  extends DependentNumberProfileStatisti
             }
         }
 
-        DoubleMedian medM = new DoubleMedian(this.getRefProf());
-        // TODO implement list to recordlist conversion
-        medM.calculation(new RecordList(medians, "dummy"), null);
+        LongMedian medM = new LongMedian(this.getRefProf());
+        // replace is a dirty hotfix for the creation of the recordlist
+        medM.calculation(new RecordList(medians, super.getRefElem().getURI().replace("null/", "")), null);
         var med = medM.getValue();
         this.setValue(med);
         this.setInputValueClass(Long.class);
@@ -88,7 +88,7 @@ public class LongMedianAbsoluteDeviation  extends DependentNumberProfileStatisti
         }
         var medM = super.getRefProf().getStatistic(med);
         if (medM == null) {
-            medM = new DoubleMedian(super.getRefProf());
+            medM = new LongMedian(super.getRefProf());
             super.getRefProf().addStatistic(medM);
         }
 

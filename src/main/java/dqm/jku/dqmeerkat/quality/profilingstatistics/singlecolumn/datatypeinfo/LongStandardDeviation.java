@@ -4,7 +4,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentNumberProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentDoubleResultProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.NumRows;
 import dqm.jku.dqmeerkat.util.Constants;
@@ -21,7 +21,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
  * @author meindl, rainer.meindl@scch.at
  * @since 20.07.2022
  */
-public class LongStandardDeviation extends DependentNumberProfileStatistic<Long, Double> {
+public class LongStandardDeviation extends DependentDoubleResultProfileStatistic<Long> {
     public LongStandardDeviation(DataProfile d) {
         super(sd, dti, d, Long.class);
     }
@@ -127,22 +127,5 @@ public class LongStandardDeviation extends DependentNumberProfileStatistic<Long,
     protected Long getBasicInstance() {
         return 0L;
     }
-
-    @Override
-    public boolean checkConformance(ProfileStatistic<Long, Double> m, double threshold) {
-        if (getValue() == null) {
-            setValue(m.getValue());
-        }
-        double rdpVal = ((Number) this.getValue()).doubleValue();
-        double dpValue = ((Number) m.getValue()).doubleValue();
-
-        double lowerBound = rdpVal - (Math.abs(rdpVal) * threshold);
-        double upperBound = rdpVal + (Math.abs(rdpVal) * threshold);
-
-        boolean conf = dpValue >= lowerBound && dpValue <= upperBound;
-        if (!conf && Constants.DEBUG) {
-            System.out.println(this.getTitle() + " exceeded: " + dpValue + " not in [" + lowerBound + ", " + upperBound + "]");
-        }
-        return conf;
-    }
 }
+

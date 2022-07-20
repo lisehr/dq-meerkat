@@ -2,7 +2,7 @@ package dqm.jku.dqmeerkat.quality.profilingstatistics.multicolumn.outliers;
 
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentNumberProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentDoubleResultProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
 
@@ -12,7 +12,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.ou
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.isoF;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.isoFP;
 
-public class IsolationForestPercentage extends DependentNumberProfileStatistic<Double,Double> {
+public class IsolationForestPercentage extends DependentDoubleResultProfileStatistic<Double> {
 
     public IsolationForestPercentage(DataProfile dp) {
         super(isoFP, out, dp, Double.class);
@@ -42,14 +42,18 @@ public class IsolationForestPercentage extends DependentNumberProfileStatistic<D
 
     @Override
     protected String getValueString() {
-        if (getValue() == null) return "\tnull";
-        else return "\t" + getValue().toString() + "%";
+        if (getValue() == null) {
+            return "\tnull";
+        } else {
+            return "\t" + getValue().toString() + "%";
+        }
     }
 
     @Override
     protected void dependencyCalculationWithRecordList(RecordList rl) {
-        if (super.getMetricPos(StatisticTitle.isoFP) - 1 <= super.getMetricPos(isoF))
+        if (super.getMetricPos(StatisticTitle.isoFP) - 1 <= super.getMetricPos(isoF)) {
             super.getRefProf().getStatistic(isoF).calculation(rl, null);
+        }
     }
 
     @Override

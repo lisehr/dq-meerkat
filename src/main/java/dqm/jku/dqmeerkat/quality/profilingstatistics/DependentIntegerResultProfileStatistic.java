@@ -6,14 +6,14 @@ import dqm.jku.dqmeerkat.util.Constants;
 import java.util.Objects;
 
 /**
- * <h2>IntegerMetricProfileStatistic</h2>
+ * <h2>DependentIntegerResultProfileStatistic</h2>
  * <summary>TODO Insert do cheader</summary>
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 20.07.2022
  */
-public abstract class IntegerResultProfileStatistic<TIn extends Number> extends NumberProfileStatistic<TIn, Integer> {
-    protected IntegerResultProfileStatistic(StatisticTitle title, StatisticCategory cat, DataProfile refProf, Class<TIn> genericType) {
+public abstract class DependentIntegerResultProfileStatistic<TIn extends Number> extends DependentNumberProfileStatistic<TIn, Integer> {
+    protected DependentIntegerResultProfileStatistic(StatisticTitle title, StatisticCategory cat, DataProfile refProf, Class<TIn> genericType) {
         super(title, cat, refProf, genericType);
     }
 
@@ -21,6 +21,7 @@ public abstract class IntegerResultProfileStatistic<TIn extends Number> extends 
     protected Integer getDefaultRDPVal() {
         return 0;
     }
+
 
     @Override
     public boolean checkConformance(ProfileStatistic<TIn, Integer> m, double threshold) {

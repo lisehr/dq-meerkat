@@ -41,6 +41,10 @@ public class LongMedian extends LongResultProfileStatistic<Long> {
                     list.add(field);
                 }
             }
+        } else {
+            LOGGER.warn("Field {} is not of type Long for {}, skipping it...", getRefElem().getLabel(),
+                    this.getClass().getSimpleName());
+            return;
         }
         list.sort(new NumberComparator());
         var val = getMedian(list, list.size());

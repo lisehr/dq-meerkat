@@ -36,5 +36,10 @@ public class GraphType extends ProfileStatistic<String, String> {
         return super.getSimpleValueString();
     }
 
+    @Override
+    public boolean checkConformance(ProfileStatistic<String, String> m, double threshold) {
+        return false;
+    }
+
 
 }

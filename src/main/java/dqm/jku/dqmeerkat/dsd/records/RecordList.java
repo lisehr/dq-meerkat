@@ -25,6 +25,10 @@ public class RecordList implements Iterable<Record> {
 
 
     /**
+     * <p>
+     * DIRTY HACK to get a recordlist without too much of a hassle. Note that the url of the attribute
+     * is prefixed with "null/"
+     * </p>
      *
      * @param medians
      * @param attributeName Dummyname, necessary because of type erasure
@@ -34,6 +38,7 @@ public class RecordList implements Iterable<Record> {
         var attribute = new Attribute(attributeName, concept);
         attribute.setDataType(double.class);
         concept.addAttribute(attribute);
+        attribute.setURI(attributeName);
         records = medians.stream().map(number -> {
             var record = new Record(concept);
             record.addValue(attribute, number);
@@ -63,8 +68,9 @@ public class RecordList implements Iterable<Record> {
     }
 
     public RecordList splitPartialRecordList(int offset, int noRecs) {
-        if (offset < 0 || noRecs < 0 || (offset + noRecs) > size())
+        if (offset < 0 || noRecs < 0 || (offset + noRecs) > size()) {
             return new RecordList();
+        }
         int end = noRecs > size() ? size() : (noRecs + offset);
         return new RecordList(records.subList(offset, end));
     }

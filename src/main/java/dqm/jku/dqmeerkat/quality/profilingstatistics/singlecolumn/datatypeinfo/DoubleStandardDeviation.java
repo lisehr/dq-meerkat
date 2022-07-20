@@ -4,10 +4,8 @@ import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentNumberProfileStatistic;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentDoubleResultProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.NumRows;
-import dqm.jku.dqmeerkat.util.Constants;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 
@@ -22,7 +20,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
 
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/StandardDeviation")
-public class DoubleStandardDeviation extends DependentNumberProfileStatistic<Double, Double> {
+public class DoubleStandardDeviation extends DependentDoubleResultProfileStatistic<Double> {
     public DoubleStandardDeviation(DataProfile d) {
         super(sd, dti, d, Double.class);
     }
@@ -33,7 +31,8 @@ public class DoubleStandardDeviation extends DependentNumberProfileStatistic<Dou
         }
         var avgVal = super.getRefProf().getStatistic(avg).getValue() == null ?
                 0D : (double) super.getRefProf().getStatistic(avg).getValue();
-        var val =  Objects.requireNonNullElse(oldVal, 0D);;
+        var val = Objects.requireNonNullElse(oldVal, 0D);
+        ;
         if (ensureDataTypeCorrect(((Attribute) super.getRefElem()).getDataType())) {
             for (Record r : rl) {
                 var field = (r.getField((Attribute) super.getRefElem()));
@@ -133,21 +132,4 @@ public class DoubleStandardDeviation extends DependentNumberProfileStatistic<Dou
         return 0D;
     }
 
-    @Override
-    public boolean checkConformance(ProfileStatistic<Double, Double> m, double threshold) {
-        if (getValue() == null) {
-            setValue(m.getValue());
-        }
-        double rdpVal = ((Number) this.getValue()).doubleValue();
-        double dpValue = ((Number) m.getValue()).doubleValue();
-
-        double lowerBound = rdpVal - (Math.abs(rdpVal) * threshold);
-        double upperBound = rdpVal + (Math.abs(rdpVal) * threshold);
-
-        boolean conf = dpValue >= lowerBound && dpValue <= upperBound;
-        if (!conf && Constants.DEBUG) {
-            System.out.println(this.getTitle() + " exceeded: " + dpValue + " not in [" + lowerBound + ", " + upperBound + "]");
-        }
-        return conf;
-    }
 }

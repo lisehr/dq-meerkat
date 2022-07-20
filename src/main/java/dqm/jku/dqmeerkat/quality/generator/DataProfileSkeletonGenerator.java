@@ -50,7 +50,7 @@ public abstract class DataProfileSkeletonGenerator {
     public List<ProfileStatistic<?, ?>> generateSkeleton(DataProfile profile) {
         if (checkValidity(profile.getElem()))
             return generateStatistics(profile);
-        LOGGER.warn("Provided element" + profile.getElem() + "does not have measurable data type");
+        LOGGER.warn("Provided element" + profile.getElem() + " does not have measurable data type");
         return new ArrayList<>();
     }
 }

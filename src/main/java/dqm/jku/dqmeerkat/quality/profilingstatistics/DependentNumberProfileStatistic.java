@@ -20,4 +20,7 @@ public abstract class DependentNumberProfileStatistic<TIn extends Number, TOut e
 
     protected abstract TIn getBasicInstance();
 
+    protected abstract TOut getDefaultRDPVal();
+
+
 }

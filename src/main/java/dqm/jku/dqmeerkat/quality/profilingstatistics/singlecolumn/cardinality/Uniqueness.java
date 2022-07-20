@@ -2,7 +2,7 @@ package dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality;
 
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentNumberProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentDoubleResultProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
@@ -20,7 +20,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/cardinality/Uniqueness")
-public class Uniqueness extends DependentNumberProfileStatistic<Double, Double> {
+public class Uniqueness extends DependentDoubleResultProfileStatistic<Double> {
 
     public Uniqueness(DataProfile d) {
         super(unique, cardCat, d, Double.class);

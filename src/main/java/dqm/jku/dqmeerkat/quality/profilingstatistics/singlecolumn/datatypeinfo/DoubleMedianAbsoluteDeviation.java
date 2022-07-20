@@ -4,7 +4,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentNumberProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentDoubleResultProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.NumRows;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
@@ -17,7 +17,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
 
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/MedianAbsoluteDeviation")
-public class DoubleMedianAbsoluteDeviation extends DependentNumberProfileStatistic<Double, Double> {
+public class DoubleMedianAbsoluteDeviation extends DependentDoubleResultProfileStatistic<Double> {
 
     public DoubleMedianAbsoluteDeviation(DataProfile d) {
         super(mad, dti, d, Double.class);
@@ -28,7 +28,7 @@ public class DoubleMedianAbsoluteDeviation extends DependentNumberProfileStatist
             this.dependencyCalculationWithRecordList(rl);
         }
 
-        double medVal =  super.getRefProf().getStatistic(avg).getValue() == null ?
+        double medVal = super.getRefProf().getStatistic(avg).getValue() == null ?
                 0D : (double) super.getRefProf().getStatistic(avg).getValue();
         List<Number> medians = new ArrayList<>();
         if (ensureDataTypeCorrect(((Attribute) super.getRefElem()).getDataType())) {

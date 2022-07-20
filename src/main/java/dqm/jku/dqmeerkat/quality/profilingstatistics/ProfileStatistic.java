@@ -95,28 +95,29 @@ public abstract class ProfileStatistic<TIn, TOut> implements Comparable<ProfileS
         }
     }
 
+    public abstract boolean checkConformance(ProfileStatistic<TIn, TOut> m, double threshold);
 
-    /**
-     * Returns true or false, depending on whether the metric of a current DP conforms to the value in the RDP
-     *
-     * @return boolean conformance to RDP value
-     */
-    public boolean checkConformance(ProfileStatistic<TIn, TOut> m, double threshold) {
-        if (getValue() == null) {
-            setValue(m.getValue());
-        }
-        double rdpVal = ((Number) this.getValue()).doubleValue();
-        double dpValue = ((Number) m.getValue()).doubleValue();
-
-        double lowerBound = rdpVal - (Math.abs(rdpVal) * threshold);
-        double upperBound = rdpVal + (Math.abs(rdpVal) * threshold);
-
-        boolean conf = dpValue >= lowerBound && dpValue <= upperBound;
-        if (!conf && Constants.DEBUG) {
-            System.out.println(this.getTitle() + " exceeded: " + dpValue + " not in [" + lowerBound + ", " + upperBound + "]");
-        }
-        return conf;
-    }
+//    /**
+//     * Returns true or false, depending on whether the metric of a current DP conforms to the value in the RDP
+//     *
+//     * @return boolean conformance to RDP value
+//     */
+//    public boolean checkConformance(ProfileStatistic<TIn, TOut> m, double threshold) {
+//        if (getValue() == null) {
+//            setValue(m.getValue());
+//        }
+//        double rdpVal = ((Number) this.getValue()).doubleValue();
+//        double dpValue = ((Number) m.getValue()).doubleValue();
+//
+//        double lowerBound = rdpVal - (Math.abs(rdpVal) * threshold);
+//        double upperBound = rdpVal + (Math.abs(rdpVal) * threshold);
+//
+//        boolean conf = dpValue >= lowerBound && dpValue <= upperBound;
+//        if (!conf && Constants.DEBUG) {
+//            System.out.println(this.getTitle() + " exceeded: " + dpValue + " not in [" + lowerBound + ", " + upperBound + "]");
+//        }
+//        return conf;
+//    }
 
     /**
      * Gets the reference dsd element, used for calculation

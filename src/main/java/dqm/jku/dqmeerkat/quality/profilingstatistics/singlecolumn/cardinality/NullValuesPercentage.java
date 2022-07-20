@@ -2,7 +2,7 @@ package dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality;
 
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentNumberProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentDoubleResultProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
@@ -19,7 +19,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/cardinality/NullValuesPercentage")
-public class NullValuesPercentage extends DependentNumberProfileStatistic<Double, Double> {
+public class NullValuesPercentage extends DependentDoubleResultProfileStatistic<Double> {
 
     public NullValuesPercentage(DataProfile d) {
         super(nullValP, cardCat, d, Double.class);
