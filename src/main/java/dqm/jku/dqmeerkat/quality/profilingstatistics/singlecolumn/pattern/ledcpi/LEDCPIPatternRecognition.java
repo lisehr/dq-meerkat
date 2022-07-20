@@ -125,6 +125,9 @@ public class LEDCPIPatternRecognition<T > extends ProfileStatistic<T, Double> {
      */
     @Override
     public boolean checkConformance(ProfileStatistic<T, Double> other, double threshold) {
+        if (getValue() == null || other.getValue() == null) {
+            return false;
+        }
         double rdpVal = getValue();
         double dpValue = other.getValue();
 

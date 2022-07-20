@@ -19,29 +19,35 @@ import static dqm.jku.dqmeerkat.util.GenericsUtil.cast;
  * <summary>
  * Base class for summarization algorithms using {@link Attribute} elements.
  * </summary>
+ * Be sure to override the ensureDataTypeCorrect method in subclasses!
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 06.07.2022
  */
 public abstract class SummaryProfileStatistic<TIn> extends ProfileStatistic<Map<TIn, Integer>, Map<TIn, Integer>> {
-
     /**
      * Representation of the summary. The key is the item and the value is the number of occurrences in the dataset.
      */
     protected Map<TIn, Integer> summary = new HashMap<>();
 
-    protected SummaryProfileStatistic(StatisticTitle title, StatisticCategory cat, DataProfile refProf,
-                                      Class<Map<TIn, Integer>> genericType) {
-        super(title, cat, refProf, genericType);
+    protected SummaryProfileStatistic(StatisticTitle title, StatisticCategory cat, DataProfile refProf) {
+        super(title, cat, refProf, cast(Map.class));
+    }
+
+    @Override
+    protected boolean ensureDataTypeCorrect(Class<?> type) {
+        throw new UnsupportedOperationException("This class needs to be overridden in the subclass!");
     }
 
     @Override
     public void calculation(RecordList rs, Map<TIn, Integer> oldVal) {
-        rs.toList().stream()
-                .map(record -> (TIn) record.getField(getRefElem().getLabel()))
-                .forEach(this::handleCounter);
-        setValue(summary);
-        setInputValueClass(cast(summary.getClass()));
+        if (ensureDataTypeCorrect(((Attribute) super.getRefElem()).getDataType())) {
+            rs.toList().stream()
+                    .map(record -> (TIn) record.getField(getRefElem().getLabel()))
+                    .forEach(this::handleCounter);
+            setValue(summary);
+            setInputValueClass(cast(summary.getClass()));
+        }
 
     }
 

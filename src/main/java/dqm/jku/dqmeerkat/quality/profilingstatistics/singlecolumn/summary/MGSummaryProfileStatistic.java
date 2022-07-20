@@ -9,8 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static dqm.jku.dqmeerkat.util.GenericsUtil.cast;
-
 /**
  * <h2>MKSummaryProfileStatistic</h2>
  * <summary>
@@ -31,10 +29,14 @@ public class MGSummaryProfileStatistic extends SummaryProfileStatistic<Double> {
     private final int k;
 
     public MGSummaryProfileStatistic(DataProfile refProf, int k) {
-        super(StatisticTitle.summary, StatisticCategory.summaryCategory, refProf, cast(Map.class));
+        super(StatisticTitle.summary, StatisticCategory.summaryCategory, refProf);
         this.k = k;
     }
 
+    @Override
+    protected boolean ensureDataTypeCorrect(Class<?> type) {
+        return type.isAssignableFrom(Double.class);
+    }
 
     /**
      * Handles the counter for the given value. The counter is handled according to the MG Summary algorithm,

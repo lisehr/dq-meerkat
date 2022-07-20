@@ -30,8 +30,13 @@ public class SpaceSavingSummaryProfileStatistic extends SummaryProfileStatistic<
     private final int k;
 
     public SpaceSavingSummaryProfileStatistic(DataProfile refProf, int k) {
-        super(StatisticTitle.summary, StatisticCategory.summaryCategory, refProf, cast(Map.class));
+        super(StatisticTitle.summary, StatisticCategory.summaryCategory, refProf);
         this.k = k;
+    }
+
+    @Override
+    protected boolean ensureDataTypeCorrect(Class<?> type) {
+        return type.isAssignableFrom(Double.class);
     }
 
     /**
