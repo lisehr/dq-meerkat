@@ -24,7 +24,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.med;
 public class LongMedianAbsoluteDeviation  extends DependentNumberProfileStatistic<Long, Double> {
 
     public LongMedianAbsoluteDeviation(DataProfile d) {
-        super(mad, dti, d, Long.class);
+        super(sd, dti, d, Long.class);
     }
 
     private void calculation(RecordList rl, Long oldVal, boolean checked) {
@@ -40,7 +40,7 @@ public class LongMedianAbsoluteDeviation  extends DependentNumberProfileStatisti
                 if (field == null) {
                     continue;
                 }
-                medians.add((double) field - medVal);
+                medians.add((long) field - medVal);
             }
         }
 

@@ -140,6 +140,7 @@ public class DatatypeInfoStatisticsLongTest {
     @DisplayName("Standard Deviation")
     void testStandardDeviationLong() {
         vehicleIdDP.addStatistic(new LongStandardDeviation(vehicleIdDP));
+        vehicleIdDP.addStatistic(new LongAverage(vehicleIdDP));
         vehicleIdDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
 
         Double standardDeviation = (Double) vehicleIdDP.getStatistic(StatisticTitle.sd).getValue(); // The "Long" in the title refernces the type of the attribute which is used for calculating the standard deviation.
@@ -150,7 +151,8 @@ public class DatatypeInfoStatisticsLongTest {
     @Test
     @DisplayName("Median Absolute Deviation")
     void testMedianAbsoluteDeviationLong() {
-        vehicleIdDP.addStatistic(new LongStandardDeviation(vehicleIdDP));
+        vehicleIdDP.addStatistic(new LongMedianAbsoluteDeviation(vehicleIdDP));
+        vehicleIdDP.addStatistic(new LongAverage(vehicleIdDP));
         vehicleIdDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
 
         double medianAbsoluteDeviation = (double) vehicleIdDP.getStatistic(StatisticTitle.sd).getValue(); // The "Long" in the title refernces the type of the attribute which is used for calculating the standard deviation.

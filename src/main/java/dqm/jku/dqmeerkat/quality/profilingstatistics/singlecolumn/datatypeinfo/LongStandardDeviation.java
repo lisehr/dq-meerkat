@@ -93,15 +93,6 @@ public class LongStandardDeviation extends DependentNumberProfileStatistic<Long,
     protected String getValueString() {
         return super.getSimpleValueString();
     }
-
-//    @Override
-//    protected void dependencyCalculationWithNumericList(List<Number> list) throws NoSuchMethodException {
-//        if (super.getMetricPos(sd) - 1 <= super.getMetricPos(numrows))
-//            super.getRefProf().getStatistic(numrows).calculationNumeric(list, null);
-//        if (super.getMetricPos(sd) - 1 <= super.getMetricPos(avg))
-//            super.getRefProf().getStatistic(avg).calculationNumeric(list, null);
-//    }
-
     @Override
     protected void dependencyCalculationWithRecordList(RecordList rl) {
         if (super.getMetricPos(sd) - 1 <= super.getMetricPos(numrows)) {
@@ -121,7 +112,7 @@ public class LongStandardDeviation extends DependentNumberProfileStatistic<Long,
         }
         var avgM = super.getRefProf().getStatistic(avg);
         if (avgM == null) {
-            avgM = new DoubleAverage(super.getRefProf());
+            avgM = new LongAverage(super.getRefProf());
             super.getRefProf().addStatistic(avgM);
         }
 
