@@ -109,7 +109,7 @@ class DatatypeInfoStatisticsDoubleTest {
     @Test
     @DisplayName("Maximum (double)")
     void testMaximumDouble() {
-        vehicleLatitudeDP.addStatistic(new Maximum(vehicleLatitudeDP));
+        vehicleLatitudeDP.addStatistic(new DoubleMaximum(vehicleLatitudeDP));
         vehicleLatitudeDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
 
         Double maxLat = (Double) vehicleLatitudeDP.getStatistic(StatisticTitle.max).getValue();
@@ -131,7 +131,7 @@ class DatatypeInfoStatisticsDoubleTest {
     @Test
     @DisplayName("Minimum (double)")
     void testMinimumDouble() {
-        vehicleLatitudeDP.addStatistic(new Minimum(vehicleLatitudeDP));
+        vehicleLatitudeDP.addStatistic(new DoubleMinimum(vehicleLatitudeDP));
         vehicleLatitudeDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
 
         Double minLat = (Double) vehicleLatitudeDP.getStatistic(StatisticTitle.min).getValue();
@@ -142,7 +142,7 @@ class DatatypeInfoStatisticsDoubleTest {
     @Test
     @DisplayName("Median (double)")
     void testMedianDouble() {
-        vehicleLatitudeDP.addStatistic(new Median(vehicleLatitudeDP));
+        vehicleLatitudeDP.addStatistic(new DoubleMedian(vehicleLatitudeDP));
         vehicleLatitudeDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
 
         Double medianLat = (Double) vehicleLatitudeDP.getStatistic(StatisticTitle.med).getValue();
@@ -164,7 +164,7 @@ class DatatypeInfoStatisticsDoubleTest {
     @Test
     @DisplayName("Median Abslolute Deviation (double)")
     void testMedianAbsoluteDeviationDouble() {
-        vehicleLatitudeDP.addStatistic(new MedianAbsoluteDeviation(vehicleLatitudeDP));
+        vehicleLatitudeDP.addStatistic(new DoubleMedianAbsoluteDeviation(vehicleLatitudeDP));
         vehicleLatitudeDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
         //vehicleLatitudeDP.getStatistics().forEach(statistic -> statistic.calculationNumeric());
         Double medianAbsoluteDeviation = (Double) vehicleLatitudeDP.getStatistic(StatisticTitle.mad).getValue();

@@ -25,8 +25,8 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.max;
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/Maximum")
-public class Maximum extends NumberProfileStatistic<Double, Double> {
-    public Maximum(DataProfile d) {
+public class DoubleMaximum extends NumberProfileStatistic<Double, Double> {
+    public DoubleMaximum(DataProfile d) {
         super(max, dti, d, Double.class);
     }
 

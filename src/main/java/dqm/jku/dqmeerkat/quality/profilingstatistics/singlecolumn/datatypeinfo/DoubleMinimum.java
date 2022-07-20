@@ -25,10 +25,10 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.min;
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/Minimum")
-public class Minimum extends NumberProfileStatistic<Double, Double> {
+public class DoubleMinimum extends NumberProfileStatistic<Double, Double> {
 
 
-    public Minimum(DataProfile d) {
+    public DoubleMinimum(DataProfile d) {
         super(min, dti, d, Double.class);
     }
 

@@ -27,13 +27,13 @@ public class FullSkeletonGenerator extends DataProfileSkeletonGenerator{
         List<ProfileStatistic<?, ?>> statistics = new ArrayList<>();
         ProfileStatistic<?, ?> size = new NumRows(profile);
         statistics.add(size);
-        var min = new Minimum(profile);
+        var min = new DoubleMinimum(profile);
         statistics.add(min);
-        var max = new Maximum(profile);
+        var max = new DoubleMaximum(profile);
         statistics.add(max);
         var avg = new DoubleAverage(profile);
         statistics.add(avg);
-        var med = new Median(profile);
+        var med = new DoubleMedian(profile);
         statistics.add(med);
         var card = new Cardinality(profile);
         statistics.add(card);
@@ -58,7 +58,7 @@ public class FullSkeletonGenerator extends DataProfileSkeletonGenerator{
         // experimental metrics
         var standardDev = new DoubleStandardDeviation(profile);
         statistics.add(standardDev);
-        var mediAbsDevMetric = new MedianAbsoluteDeviation(profile);
+        var mediAbsDevMetric = new DoubleMedianAbsoluteDeviation(profile);
         statistics.add(mediAbsDevMetric);
         return statistics;
     }
