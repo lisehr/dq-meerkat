@@ -2,8 +2,8 @@ package dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality;
 
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.NumberProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.LongResultProfileStatistic;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 
@@ -18,7 +18,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.numro
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/cardinality/Cardinality")
-public class NumRows extends NumberProfileStatistic<Long, Long> {
+public class NumRows extends LongResultProfileStatistic<Long> {
 
     public NumRows(DataProfile d) {
         super(numrows, cardCat, d, Long.class);

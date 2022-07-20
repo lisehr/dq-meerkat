@@ -3,7 +3,7 @@ package dqm.jku.dqmeerkat.quality.profilingstatistics.graphmetrics;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.NumberProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.IntegerResultProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 
 import java.util.HashSet;
@@ -13,7 +13,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.gr
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.distinctEntries;
 
 
-public class DistinctEntries extends NumberProfileStatistic<Integer, Integer> {
+public class DistinctEntries extends IntegerResultProfileStatistic<Integer> {
 
     public DistinctEntries(DataProfile d) {
         super(distinctEntries, graphCat, d, Integer.class);

@@ -1,6 +1,9 @@
 package dqm.jku.dqmeerkat.quality.profilingstatistics;
 
 import dqm.jku.dqmeerkat.quality.DataProfile;
+import dqm.jku.dqmeerkat.util.Constants;
+
+import java.util.Objects;
 
 /**
  * <h2>NumberProfileStatistic</h2>
@@ -14,6 +17,13 @@ public abstract class NumberProfileStatistic<TIn extends Number, TOut extends Nu
     protected NumberProfileStatistic(StatisticTitle title, StatisticCategory cat, DataProfile refProf, Class<TIn> genericType) {
         super(title, cat, refProf, genericType);
     }
+
+    /**
+     * TODO
+     * @return
+     */
+    protected abstract TOut getDefaultRDPVal();
+
 
 
 }

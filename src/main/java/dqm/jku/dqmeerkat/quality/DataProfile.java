@@ -112,10 +112,9 @@ public class DataProfile {
     private void calculateSingleColumn(RecordList rl) {
         List<Number> l = createValueList(rl);
         for (ProfileStatistic<?, ?> p : statistics) {
-//            if (needsRecordListCalc(p))
             // TODO bugfix here?
             p.calculation(rl, cast(p.getValue()));
-//            else p.calculationNumeric(l, cast(p.getValue()));
+            p.getValue();
         }
     }
 

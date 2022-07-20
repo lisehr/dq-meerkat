@@ -4,9 +4,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.NumberProfileStatistic;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
-import dqm.jku.dqmeerkat.util.Constants;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.DoubleResultProfileStatistic;
 import dqm.jku.dqmeerkat.util.numericvals.NumberComparator;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
@@ -26,7 +24,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.med;
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/Median")
-public class DoubleMedian extends NumberProfileStatistic<Double, Double> {
+public class DoubleMedian extends DoubleResultProfileStatistic< Double> {
 
     public DoubleMedian(DataProfile d) {
         super(med, dti, d, Double.class);
@@ -47,6 +45,10 @@ public class DoubleMedian extends NumberProfileStatistic<Double, Double> {
                     list.add(field);
                 }
             }
+        } else {
+            LOGGER.warn("Field {} is not of type Double for {}, skipping it...", a.getLabel(),
+                    this.getClass().getSimpleName());
+            return;
         }
         list.sort(new NumberComparator());
         var val = getMedian(list, list.size());
@@ -101,23 +103,5 @@ public class DoubleMedian extends NumberProfileStatistic<Double, Double> {
     @Override
     protected String getValueString() {
         return super.getSimpleValueString();
-    }
-
-    @Override
-    public boolean checkConformance(ProfileStatistic<Double, Double> m, double threshold) {
-        if (this.getValue() == null) {
-            setValue(m.getValue());
-        }
-        double rdpVal = ((Number) this.getValue()).doubleValue();
-        double dpValue = ((Number) m.getValue()).doubleValue();
-
-        double lowerBound = rdpVal - (Math.abs(rdpVal) * threshold);
-        double upperBound = rdpVal + (Math.abs(rdpVal) * threshold);
-
-        boolean conf = dpValue >= lowerBound && dpValue <= upperBound;
-        if (!conf && Constants.DEBUG) {
-            System.out.println(this.getTitle() + " exceeded: " + dpValue + " not in [" + lowerBound + ", " + upperBound + "]");
-        }
-        return conf;
     }
 }

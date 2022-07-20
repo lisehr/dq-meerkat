@@ -5,8 +5,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.NumberProfileStatistic;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.DoubleResultProfileStatistic;
 import dqm.jku.dqmeerkat.util.AttributeSet;
 
 import java.util.regex.Pattern;
@@ -14,7 +13,7 @@ import java.util.regex.Pattern;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.graphCat;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.maximum;
 
-public class MaximumEntry extends NumberProfileStatistic<Double, Double> {
+public class MaximumEntry extends DoubleResultProfileStatistic<Double> {
 
     private final Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
 
@@ -53,10 +52,6 @@ public class MaximumEntry extends NumberProfileStatistic<Double, Double> {
         return super.getSimpleValueString();
     }
 
-    @Override
-    public boolean checkConformance(ProfileStatistic<Double, Double> m, double threshold) {
-        return false;
-    }
 
     /**
      * Creates a basic instance used as a reference (in this case the minimum value)

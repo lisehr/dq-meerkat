@@ -4,10 +4,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.NumberProfileStatistic;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
-import dqm.jku.dqmeerkat.util.Constants;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.DoubleResultProfileStatistic;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 
@@ -25,7 +22,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.max;
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/Maximum")
-public class DoubleMaximum extends NumberProfileStatistic<Double, Double> {
+public class DoubleMaximum extends DoubleResultProfileStatistic<Double> {
     public DoubleMaximum(DataProfile d) {
         super(max, dti, d, Double.class);
     }
@@ -45,6 +42,7 @@ public class DoubleMaximum extends NumberProfileStatistic<Double, Double> {
         } else {
             LOGGER.warn("Attribute {} has wrong data type {} for {}: {}. Skipping calculation.", a.getLabel(), a.getDataType(),
                     getClass().getSimpleName(), inputValueClass.getSimpleName());
+            return;
         }
         this.setValue(val);
     }
@@ -89,22 +87,4 @@ public class DoubleMaximum extends NumberProfileStatistic<Double, Double> {
         return super.getSimpleValueString();
     }
 
-    @Override
-    public boolean checkConformance(ProfileStatistic<Double, Double> m, double threshold) {
-        double rdpVal;
-        if (getValue() == null) {
-            rdpVal = 0;
-        } else {
-            rdpVal = ((Number) this.getValue()).doubleValue();
-        }
-        double dpValue = ((Number) m.getValue()).doubleValue();
-
-        rdpVal = rdpVal + (Math.abs(rdpVal) * threshold);    // shift by threshold
-        boolean conf = dpValue <= rdpVal;
-        if (!conf && Constants.DEBUG) {
-            System.out.println(StatisticTitle.max + " exceeded: " + dpValue + " > " + rdpVal + " (originally: " + this.getValue() + ")");
-        }
-        return conf;
-
-    }
 }

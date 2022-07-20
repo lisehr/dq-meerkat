@@ -44,6 +44,10 @@ public class DoubleAverage extends DependentNumberProfileStatistic<Double, Doubl
                     val += castedDouble;
                 }
             }
+        } else {
+            LOGGER.warn("Field {} is not of type Double for {}, skipping it...", getRefElem().getLabel(),
+                    this.getClass().getSimpleName());
+            return;
         }
         val = performAveraging(val);
         this.setValue(val);

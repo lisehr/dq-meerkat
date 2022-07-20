@@ -93,6 +93,7 @@ public class LongStandardDeviation extends DependentNumberProfileStatistic<Long,
     protected String getValueString() {
         return super.getSimpleValueString();
     }
+
     @Override
     protected void dependencyCalculationWithRecordList(RecordList rl) {
         if (super.getMetricPos(sd) - 1 <= super.getMetricPos(numrows)) {

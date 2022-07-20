@@ -31,9 +31,9 @@ public class DoubleStandardDeviation extends DependentNumberProfileStatistic<Dou
         if (!checked) {
             this.dependencyCalculationWithRecordList(rl);
         }
-        var avgVal = (double) super.getRefProf().getStatistic(avg).getValue();
-        var val = 0D;
-        val = Objects.requireNonNullElse(oldVal, 0D);
+        var avgVal = super.getRefProf().getStatistic(avg).getValue() == null ?
+                0D : (double) super.getRefProf().getStatistic(avg).getValue();
+        var val =  Objects.requireNonNullElse(oldVal, 0D);;
         if (ensureDataTypeCorrect(((Attribute) super.getRefElem()).getDataType())) {
             for (Record r : rl) {
                 var field = (r.getField((Attribute) super.getRefElem()));
@@ -43,6 +43,10 @@ public class DoubleStandardDeviation extends DependentNumberProfileStatistic<Dou
                 val = addValue(val, (double) field, avgVal);
             }
             val = performAveraging(val);
+        } else {
+            LOGGER.warn("Field {} is not of type Double for {}, skipping it...", getRefElem().getLabel(),
+                    this.getClass().getSimpleName());
+            return;
         }
         this.setValue(val);
         this.setInputValueClass(Double.class);
@@ -94,13 +98,6 @@ public class DoubleStandardDeviation extends DependentNumberProfileStatistic<Dou
         return super.getSimpleValueString();
     }
 
-//    @Override
-//    protected void dependencyCalculationWithNumericList(List<Number> list) throws NoSuchMethodException {
-//        if (super.getMetricPos(sd) - 1 <= super.getMetricPos(numrows))
-//            super.getRefProf().getStatistic(numrows).calculationNumeric(list, null);
-//        if (super.getMetricPos(sd) - 1 <= super.getMetricPos(avg))
-//            super.getRefProf().getStatistic(avg).calculationNumeric(list, null);
-//    }
 
     @Override
     protected void dependencyCalculationWithRecordList(RecordList rl) {

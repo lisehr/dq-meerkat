@@ -81,4 +81,9 @@ public class Digits extends NumberProfileStatistic<Long, Long> {
             System.out.println(this.getTitle() + " exceeded: " + dpValue + " not in [" + lowerBound + ", " + upperBound + "]");
         return conf;
     }
+
+    @Override
+    protected Long getDefaultRDPVal() {
+        return null;
+    }
 }

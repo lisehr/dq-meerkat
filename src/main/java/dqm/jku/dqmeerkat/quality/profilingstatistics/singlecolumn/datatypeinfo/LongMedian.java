@@ -4,9 +4,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.NumberProfileStatistic;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
-import dqm.jku.dqmeerkat.util.Constants;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.LongResultProfileStatistic;
 import dqm.jku.dqmeerkat.util.numericvals.NumberComparator;
 
 import java.util.ArrayList;
@@ -22,7 +20,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.med;
  * @author meindl, rainer.meindl@scch.at
  * @since 20.07.2022
  */
-public class LongMedian extends NumberProfileStatistic<Long, Long> {
+public class LongMedian extends LongResultProfileStatistic<Long> {
 
     public LongMedian(DataProfile d) {
         super(med, dti, d, Long.class);
@@ -97,23 +95,5 @@ public class LongMedian extends NumberProfileStatistic<Long, Long> {
     @Override
     protected String getValueString() {
         return super.getSimpleValueString();
-    }
-
-    @Override
-    public boolean checkConformance(ProfileStatistic<Long,Long> m, double threshold) {
-        if (this.getValue() == null) {
-            setValue(m.getValue());
-        }
-        double rdpVal = ((Number) this.getValue()).doubleValue();
-        double dpValue = ((Number) m.getValue()).doubleValue();
-
-        double lowerBound = rdpVal - (Math.abs(rdpVal) * threshold);
-        double upperBound = rdpVal + (Math.abs(rdpVal) * threshold);
-
-        boolean conf = dpValue >= lowerBound && dpValue <= upperBound;
-        if (!conf && Constants.DEBUG) {
-            System.out.println(this.getTitle() + " exceeded: " + dpValue + " not in [" + lowerBound + ", " + upperBound + "]");
-        }
-        return conf;
     }
 }

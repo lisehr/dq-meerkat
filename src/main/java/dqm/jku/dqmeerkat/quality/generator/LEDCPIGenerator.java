@@ -27,8 +27,9 @@ public class LEDCPIGenerator extends DataProfileSkeletonGenerator {
     @Override
     protected List<ProfileStatistic<?, ?>> generateStatistics(DataProfile profile) {
         Path path = Path.of(filepath);
-        return List.of(new LEDCPIPatternRecognition<>(profile, propertyName, path, Double.class),
-                new LEDCPIPatternRecognition<>(profile, propertyName, path, String.class));
+        return List.of(new LEDCPIPatternRecognition<>(profile, propertyName, path, Double.class)
+//                ,new LEDCPIPatternRecognition<>(profile, propertyName, path, String.class)
+        );
 
     }
 }

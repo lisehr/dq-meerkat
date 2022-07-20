@@ -28,7 +28,8 @@ public class DoubleMedianAbsoluteDeviation extends DependentNumberProfileStatist
             this.dependencyCalculationWithRecordList(rl);
         }
 
-        double medVal = (double) super.getRefProf().getStatistic(med).getValue();
+        double medVal =  super.getRefProf().getStatistic(avg).getValue() == null ?
+                0D : (double) super.getRefProf().getStatistic(avg).getValue();
         List<Number> medians = new ArrayList<>();
         if (ensureDataTypeCorrect(((Attribute) super.getRefElem()).getDataType())) {
             for (Record r : rl) {

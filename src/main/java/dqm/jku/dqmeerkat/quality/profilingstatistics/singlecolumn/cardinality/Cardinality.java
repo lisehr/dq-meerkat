@@ -4,9 +4,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.NumberProfileStatistic;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
-import dqm.jku.dqmeerkat.util.Constants;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.LongResultProfileStatistic;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 
@@ -25,7 +23,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.card;
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/metrics/cardinality/Cardinality")
-public class Cardinality extends NumberProfileStatistic<Long, Long> {
+public class Cardinality extends LongResultProfileStatistic<Long> {
 
     public Cardinality(DataProfile d) {
         super(card, cardCat, d, Long.class);
@@ -38,8 +36,9 @@ public class Cardinality extends NumberProfileStatistic<Long, Long> {
         Set<String> strSet = new HashSet<String>();
         for (Record r : rs) {
             Number field;
-            if (a.getDataType().equals(String.class) && r.getField(a) != null) strSet.add(r.getField(a).toString());
-            else {
+            if (a.getDataType().equals(String.class) && r.getField(a) != null) {
+                strSet.add(r.getField(a).toString());
+            } else {
                 field = (Number) r.getField(a);
                 if (field != null) set.add(field);
             }
@@ -62,17 +61,4 @@ public class Cardinality extends NumberProfileStatistic<Long, Long> {
         return super.getSimpleValueString();
     }
 
-    @Override
-    public boolean checkConformance(ProfileStatistic<Long, Long> m, double threshold) {
-        double rdpVal = ((Number) this.getValue()).doubleValue();
-        double dpValue = ((Number) m.getValue()).doubleValue();
-
-        double lowerBound = rdpVal - (Math.abs(rdpVal) * threshold);
-        double upperBound = rdpVal + (Math.abs(rdpVal) * threshold);
-
-        boolean conf = dpValue >= lowerBound && dpValue <= upperBound;
-        if (!conf && Constants.DEBUG)
-            System.out.println(this.getTitle() + " exceeded: " + dpValue + " not in [" + lowerBound + ", " + upperBound + "]");
-        return conf;
-    }
 }

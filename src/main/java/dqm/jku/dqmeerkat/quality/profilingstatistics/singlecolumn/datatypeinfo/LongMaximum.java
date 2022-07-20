@@ -4,10 +4,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.NumberProfileStatistic;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
-import dqm.jku.dqmeerkat.util.Constants;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.LongResultProfileStatistic;
 
 import java.util.Objects;
 
@@ -21,7 +18,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.max;
  * @author meindl, rainer.meindl@scch.at
  * @since 19.07.2022
  */
-public class LongMaximum extends NumberProfileStatistic<Long, Long> {
+public class LongMaximum extends LongResultProfileStatistic<Long> {
     public LongMaximum(DataProfile d) {
         super(max, dti, d, Long.class);
     }
@@ -82,25 +79,6 @@ public class LongMaximum extends NumberProfileStatistic<Long, Long> {
     @Override
     protected String getValueString() {
         return super.getSimpleValueString();
-    }
-
-    @Override
-    public boolean checkConformance(ProfileStatistic<Long, Long> m, double threshold) {
-        double rdpVal;
-        if (getValue() == null) {
-            rdpVal = 0;
-        } else {
-            rdpVal = ((Number) this.getValue()).doubleValue();
-        }
-        double dpValue = ((Number) m.getValue()).doubleValue();
-
-        rdpVal = rdpVal + (Math.abs(rdpVal) * threshold);    // shift by threshold
-        boolean conf = dpValue <= rdpVal;
-        if (!conf && Constants.DEBUG) {
-            System.out.println(StatisticTitle.max + " exceeded: " + dpValue + " > " + rdpVal + " (originally: " + this.getValue() + ")");
-        }
-        return conf;
-
     }
 
 }
