@@ -39,7 +39,7 @@ public class DataProfileConfiguration {
      */
     private static final List<DataProfileSkeletonBuilder<?>> CONFIG_TO_GENERATOR = List.of(
             new FullSkeletonGeneratorBuilder(),
-            new LEDCPIGeneratorBuilder(),
+//            new LEDCPIGeneratorBuilder(),
             new SummaryGeneratorBuilder());
 
     private static DataProfileConfiguration instance;

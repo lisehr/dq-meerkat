@@ -57,7 +57,7 @@ public abstract class AbstractConformanceChecker implements RDPConformanceChecke
         }
 
         for (var rdpMetric : profileStatistics) {
-            // TODO test this cast
+            // TODO
             if (rdpMetric.checkConformance(cast(dp.getStatistic(rdpMetric.getTitle())), threshold))
                 conf++;
         }
