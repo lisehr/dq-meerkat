@@ -30,8 +30,9 @@ public abstract class SummaryProfileStatistic<TIn> extends ProfileStatistic<Map<
      */
     protected Map<TIn, Integer> summary = new HashMap<>();
 
-    protected SummaryProfileStatistic(StatisticTitle title, StatisticCategory cat, DataProfile refProf) {
-        super(title, cat, refProf);
+    protected SummaryProfileStatistic(StatisticTitle title, StatisticCategory cat, DataProfile refProf,
+                                      Class<Map<TIn, Integer>> genericType) {
+        super(title, cat, refProf, genericType);
     }
 
     @Override

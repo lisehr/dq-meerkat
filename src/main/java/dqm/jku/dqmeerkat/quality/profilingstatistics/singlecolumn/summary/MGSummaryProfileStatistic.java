@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static dqm.jku.dqmeerkat.util.GenericsUtil.cast;
+
 /**
  * <h2>MKSummaryProfileStatistic</h2>
  * <summary>
@@ -29,7 +31,7 @@ public class MGSummaryProfileStatistic extends SummaryProfileStatistic<Double> {
     private final int k;
 
     public MGSummaryProfileStatistic(DataProfile refProf, int k) {
-        super(StatisticTitle.summary, StatisticCategory.summaryCategory, refProf);
+        super(StatisticTitle.summary, StatisticCategory.summaryCategory, refProf, cast(Map.class));
         this.k = k;
     }
 

@@ -13,7 +13,7 @@ public abstract class AbstractProfileStatistic extends ProfileStatistic<Object, 
 
 
     public AbstractProfileStatistic(StatisticTitle title, StatisticCategory cat, DataProfile refProf) {
-        super(title, cat, refProf);
+        super(title, cat, refProf, Object.class);
     }
 
 

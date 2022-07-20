@@ -21,6 +21,8 @@ import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.List;
 
+import static dqm.jku.dqmeerkat.util.GenericsUtil.cast;
+
 /**
  * <h2>LEDCPIPatternRecognition</h2>
  * <summary>
@@ -34,27 +36,28 @@ import java.util.List;
  * @author meindl, rainer.meindl@scch.at
  * @since 09.06.2022
  */
-public class LEDCPIPatternRecognition extends NumberProfileStatistic<Double, Double> {
+public class LEDCPIPatternRecognition<T > extends ProfileStatistic<T, Double> {
     // the generic type is double as we return a metric based on a relative value, not the ledc pi hits
     private static final Logger LOGGER = Logger.getInstance();
     private final QualityMeasure<String> measure;
 
 
-    public LEDCPIPatternRecognition(DataProfile referenceProfile, QualityMeasure<String> measure) {
-        super(StatisticTitle.pattern, StatisticCategory.dti, referenceProfile, Double.class);
+    protected LEDCPIPatternRecognition(DataProfile referenceProfile, QualityMeasure<String> measure, Class<T> type) {
+        super(StatisticTitle.pattern, StatisticCategory.dti, referenceProfile, type);
         this.measure = measure;
     }
 
     public LEDCPIPatternRecognition(DataProfile referenceProfile, List<Predicate<String>> predicates,
-                                    String propertyName, URI propertyUri, LocalDate validAt, int sufficiencyThreshold) throws PropertyParseException {
+                                    String propertyName, URI propertyUri, LocalDate validAt, int sufficiencyThreshold,
+                                    Class<T> type) throws PropertyParseException {
         this(referenceProfile, new QualityMeasure<>(predicates, Property.parseProperty(propertyName), propertyUri,
-                validAt, sufficiencyThreshold));
+                validAt, sufficiencyThreshold), type);
 
     }
 
     @SneakyThrows
-    public LEDCPIPatternRecognition(DataProfile referenceProfile, String propertyName, Path jsonConfig) {
-        super(StatisticTitle.pattern, StatisticCategory.dti, referenceProfile, Double.class);
+    public LEDCPIPatternRecognition(DataProfile referenceProfile, String propertyName, Path jsonConfig, Class<T> type) {
+        super(StatisticTitle.pattern, StatisticCategory.dti, referenceProfile, type);
         JSON.restore(new File(String.valueOf(jsonConfig)));
         var rawMeasure = MeasureRegistry.getInstance()
                 .getMeasureByProperty(Property.parseProperty(propertyName));
@@ -67,15 +70,16 @@ public class LEDCPIPatternRecognition extends NumberProfileStatistic<Double, Dou
     }
 
     @Override
-    public void calculation(RecordList rs, Double oldVal) {
+    public void calculation(RecordList rs, T oldVal) {
         Attribute attribute = (Attribute) super.getRefElem();
         double cnt = 0D;
-        for (Record record : rs) {
-            cnt += checkHit((Number) record.getField(attribute.getLabel()));
+        if (ensureDataTypeCorrect(attribute.getDataType())) {
+            for (Record record : rs) {
+                cnt += checkHit(cast(record.getField(attribute.getLabel())));
+            }
+            var numericValue = cnt / rs.size();
+            setValue(numericValue);
         }
-        var numericValue = cnt / rs.size();
-        setValue(numericValue);
-        this.setInputValueClass(Double.class);
     }
 
     /**
@@ -85,7 +89,7 @@ public class LEDCPIPatternRecognition extends NumberProfileStatistic<Double, Dou
      * @param record the record, that needs to match the QualityMeasure
      * @return 1 if the record matches, 0 if it does not match
      */
-    private double checkHit(Number record) {
+    private double checkHit(T record) {
         var measureInput = record == null ? null : record.toString();
         var result = measure.measure(measureInput);
         return result >= measure.getSufficiencyThreshold() ? 1 : 0;
@@ -99,7 +103,7 @@ public class LEDCPIPatternRecognition extends NumberProfileStatistic<Double, Dou
      */
     @Override
     public void update(RecordList rs) {
-        calculation(rs, super.getValue());
+        calculation(rs, null);
     }
 
 
@@ -120,7 +124,7 @@ public class LEDCPIPatternRecognition extends NumberProfileStatistic<Double, Dou
      * @return if the other {@link AbstractProfileStatistic} conforms to this one
      */
     @Override
-    public boolean checkConformance(ProfileStatistic<Double, Double> other, double threshold) {
+    public boolean checkConformance(ProfileStatistic<T, Double> other, double threshold) {
         double rdpVal = getValue();
         double dpValue = other.getValue();
 

@@ -13,7 +13,7 @@ public class GraphType extends ProfileStatistic<String, String> {
 
 
     public GraphType(DataProfile d) {
-        super(graphType, graphCat, d);
+        super(graphType, graphCat, d, String.class);
     }
 
     @Override

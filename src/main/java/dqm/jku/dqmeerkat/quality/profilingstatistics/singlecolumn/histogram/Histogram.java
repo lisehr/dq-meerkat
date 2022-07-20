@@ -37,7 +37,7 @@ public class Histogram extends DependentProfileStatistic<SerializableFrequencyMa
 
 
     public Histogram(DataProfile d) {
-        super(hist, histCat, d);
+        super(hist, histCat, d, SerializableFrequencyMap.class);
     }
 
     @Override

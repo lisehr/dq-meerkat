@@ -26,7 +26,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.dec;
 public class Decimals extends ProfileStatistic<Integer, Integer> {
 
     public Decimals(DataProfile d) {
-        super(dec, dti, d);
+        super(dec, dti, d, Integer.class);
     }
 
     @Override

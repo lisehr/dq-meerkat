@@ -22,7 +22,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.bt;
 @RDFBean("dsd:quality/structures/metrics/dataTypeInfo/BasicType")
 public class BasicType extends ProfileStatistic<String, String> {
     public BasicType(DataProfile d) {
-        super(bt, dti, d);
+        super(bt, dti, d, String.class);
     }
 
     @Override

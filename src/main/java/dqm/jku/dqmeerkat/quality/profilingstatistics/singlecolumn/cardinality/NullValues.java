@@ -23,7 +23,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.nullV
 public class NullValues extends ProfileStatistic<Long, Long> {
 
     public NullValues(DataProfile d) {
-        super(nullVal, cardCat, d);
+        super(nullVal, cardCat, d, Long.class);
     }
 
     @Override

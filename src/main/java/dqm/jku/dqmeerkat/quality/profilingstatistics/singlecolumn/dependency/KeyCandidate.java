@@ -25,7 +25,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.uniqu
 public class KeyCandidate extends DependentProfileStatistic<Boolean, Boolean> {
 
     public KeyCandidate(DataProfile d) {
-        super(keyCand, depend, d);
+        super(keyCand, depend, d, Boolean.class);
     }
 
     /**

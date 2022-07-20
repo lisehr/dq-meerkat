@@ -34,12 +34,12 @@ public class PatternRecognition extends DependentProfileStatistic<PatternCounter
     private String filePathString;
 
     public PatternRecognition(DataProfile d) {
-        super(pattern, dti, d);
+        super(pattern, dti, d, PatternCounterList.class);
         setFilePathString(null);
     }
 
     public PatternRecognition(DataProfile d, String path) {
-        super(pattern, dti, d);
+        super(pattern, dti, d, PatternCounterList.class);
         setFilePathString(path);
     }
 

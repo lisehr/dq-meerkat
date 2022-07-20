@@ -12,11 +12,8 @@ import dqm.jku.dqmeerkat.quality.DataProfile;
 public abstract class NumberProfileStatistic<TIn extends Number, TOut extends Number> extends ProfileStatistic<TIn, TOut> {
 
     protected NumberProfileStatistic(StatisticTitle title, StatisticCategory cat, DataProfile refProf, Class<TIn> genericType) {
-        super(title, cat, refProf);
-        this.inputValueClass = genericType;
+        super(title, cat, refProf, genericType);
     }
 
-    protected boolean ensureDataTypeCorrect(Class<?> type) {
-        return type.isAssignableFrom(inputValueClass);
-    }
+
 }

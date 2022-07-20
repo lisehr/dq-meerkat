@@ -46,15 +46,19 @@ public abstract class ProfileStatistic<TIn, TOut> implements Comparable<ProfileS
 
     protected String uri; // uri of the metric
 
-    public ProfileStatistic(StatisticTitle title, StatisticCategory cat, DataProfile refProf) {
+    public ProfileStatistic(StatisticTitle title, StatisticCategory cat, DataProfile refProf, Class<TIn> inputValueClass) {
         if (title == null || refProf == null) throw new IllegalArgumentException("Parameters cannot be null!");
         this.title = title;
         this.refProf = refProf;
         this.cat = cat;
         this.uri = refProf.getURI() + '/' + this.title.getLabel().replaceAll("\\s+", "");
         value = null;
+        this.inputValueClass = inputValueClass;
     }
 
+    protected boolean ensureDataTypeCorrect(Class<?> type) {
+        return type.isAssignableFrom(inputValueClass);
+    }
 
     /**
      * Method for calculating the profile metric, overridden by each metric

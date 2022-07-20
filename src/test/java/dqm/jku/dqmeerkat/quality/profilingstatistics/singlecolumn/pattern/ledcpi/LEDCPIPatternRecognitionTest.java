@@ -56,9 +56,9 @@ public class LEDCPIPatternRecognitionTest {
 
 
         // when
-        LEDCPIPatternRecognition recognition = new LEDCPIPatternRecognition(new DataProfile(recordList, dsdElement),
+        LEDCPIPatternRecognition<Double> recognition = new LEDCPIPatternRecognition<>(new DataProfile(recordList, dsdElement),
                 "at.fh.scch/identifier#humidity:*",
-                Path.of("src/main/resource/data/ledc-pi_definitions.json"));
+                Path.of("src/main/resource/data/ledc-pi_definitions.json"), Double.class);
 
         // then
         Assertions.assertNotNull(recognition);
@@ -88,8 +88,8 @@ public class LEDCPIPatternRecognitionTest {
                 LocalDate.now(), 1);
 
         // when
-        LEDCPIPatternRecognition recognition = new LEDCPIPatternRecognition(new DataProfile(recordList, dsdElement),
-                measure);
+        LEDCPIPatternRecognition<Double> recognition = new LEDCPIPatternRecognition<>(new DataProfile(recordList, dsdElement),
+                measure, Double.class);
 
         // then
         Assertions.assertNotNull(recognition);
@@ -116,42 +116,41 @@ public class LEDCPIPatternRecognitionTest {
         var uri = new URI("https://www.scch.at");
 
         // when
-        LEDCPIPatternRecognition recognition = new LEDCPIPatternRecognition(new DataProfile(recordList, dsdElement),
-                predicates, "at.fh.scch/identifier#humidity", uri, LocalDate.now(), 1);
+        LEDCPIPatternRecognition<Double> recognition = new LEDCPIPatternRecognition<>(new DataProfile(recordList, dsdElement),
+                predicates, "at.fh.scch/identifier#humidity", uri, LocalDate.now(), 1, Double.class);
 
         // then
-       Assertions. assertNotNull(recognition);
-       Assertions. assertEquals("Pattern recognition", recognition.getLabel());
-       Assertions. assertEquals(StatisticTitle.pattern, recognition.getTitle());
-       Assertions. assertEquals(StatisticCategory.dti, recognition.getCat());
+        Assertions.assertNotNull(recognition);
+        Assertions.assertEquals("Pattern recognition", recognition.getLabel());
+        Assertions.assertEquals(StatisticTitle.pattern, recognition.getTitle());
+        Assertions.assertEquals(StatisticCategory.dti, recognition.getCat());
     }
 
     @Test
     public void testCalculation() throws NoSuchMethodException {
         // given
-        LEDCPIPatternRecognition recognition = new LEDCPIPatternRecognition(new DataProfile(recordList, dsdElement),
+        LEDCPIPatternRecognition<Double> recognition = new LEDCPIPatternRecognition<>(new DataProfile(recordList, dsdElement),
                 "at.fh.scch/identifier#humidity:*",
-                Path.of("src/main/resource/data/ledc-pi_definitions.json"));
+                Path.of("src/main/resource/data/ledc-pi_definitions.json"), Double.class);
 
         // when
         recognition.calculation(recordList, null);
         var ret = recognition.getValue();
 
         // then
-       Assertions. assertNotNull(ret);
-       Assertions. assertTrue(ret instanceof Number);
-       Assertions. assertEquals(.8598D, ret);
+        Assertions.assertNotNull(ret);
+        Assertions.assertEquals(.8598D, ret);
     }
 
     @Test
     public void testCheckConformance() throws NoSuchMethodException {
         // given
-        LEDCPIPatternRecognition recognition = new LEDCPIPatternRecognition(new DataProfile(recordList, dsdElement),
+        LEDCPIPatternRecognition<Double> recognition = new LEDCPIPatternRecognition<>(new DataProfile(recordList, dsdElement),
                 "at.fh.scch/identifier#humidity:*",
-                Path.of("src/main/resource/data/ledc-pi_definitions.json"));
-        LEDCPIPatternRecognition other = new LEDCPIPatternRecognition(new DataProfile(recordList, dsdElement),
+                Path.of("src/main/resource/data/ledc-pi_definitions.json"), Double.class);
+        LEDCPIPatternRecognition<Double> other = new LEDCPIPatternRecognition<>(new DataProfile(recordList, dsdElement),
                 "at.fh.scch/identifier#humidity:*",
-                Path.of("src/main/resource/data/ledc-pi_definitions.json"));
+                Path.of("src/main/resource/data/ledc-pi_definitions.json"), Double.class);
         recognition.calculation(recordList, null);
         other.calculation(recordList, null);
 
@@ -164,12 +163,12 @@ public class LEDCPIPatternRecognitionTest {
     @Test
     public void testCheckConformanceFail() throws NoSuchMethodException {
         // given
-        LEDCPIPatternRecognition recognition = new LEDCPIPatternRecognition(new DataProfile(recordList, dsdElement),
+        LEDCPIPatternRecognition<Double> recognition = new LEDCPIPatternRecognition<>(new DataProfile(recordList, dsdElement),
                 "at.fh.scch/identifier#humidity:*",
-                Path.of("src/main/resource/data/ledc-pi_definitions.json"));
-        LEDCPIPatternRecognition other = new LEDCPIPatternRecognition(new DataProfile(recordList, dsdElement),
+                Path.of("src/main/resource/data/ledc-pi_definitions.json"), Double.class);
+        LEDCPIPatternRecognition<Double> other = new LEDCPIPatternRecognition<>(new DataProfile(recordList, dsdElement),
                 "at.fh.scch/identifier#humidity:*",
-                Path.of("src/main/resource/data/ledc-pi_definitions.json"));
+                Path.of("src/main/resource/data/ledc-pi_definitions.json"), Double.class);
         recognition.calculation(recordList, null);
         other.calculation(new RecordList(recordList.toList()
                 .stream()
@@ -183,5 +182,46 @@ public class LEDCPIPatternRecognitionTest {
 
         // then
         Assertions.assertFalse(ret);
+    }
+
+    @Test
+    public void testCalculationInvalidType() throws NoSuchMethodException, IOException {
+        // given
+        var conn = FileSelectionUtil.getConnectorCSV("src/main/resource/data/humidity_5000.csv");
+        var ds = conn.loadSchema("http:/example.com", "hum");
+        var concept = ds.getConcepts().stream().findFirst().orElseThrow();
+        var dsdElement = concept.getAttribute("valueMetadataId");
+        var recordList = conn.getRecordList(concept);
+        LEDCPIPatternRecognition<Double> recognition = new LEDCPIPatternRecognition<>(new DataProfile(recordList, dsdElement),
+                "at.fh.scch/identifier#humidity:*",
+                Path.of("src/main/resource/data/ledc-pi_definitions.json"), Double.class);
+
+        // when
+        recognition.calculation(recordList, null);
+        var ret = recognition.getValue();
+
+        // then
+        Assertions.assertNull(ret); // null as the type is not a Double
+    }
+
+    @Test
+    public void testCalculationString() throws NoSuchMethodException, IOException {
+        // given
+        var conn = FileSelectionUtil.getConnectorCSV("src/main/resource/data/humidity_5000.csv");
+        var ds = conn.loadSchema("http:/example.com", "hum");
+        var concept = ds.getConcepts().stream().findFirst().orElseThrow();
+        var dsdElement = concept.getAttribute("valueMetadataId");
+        var recordList = conn.getRecordList(concept);
+        LEDCPIPatternRecognition<String> recognition = new LEDCPIPatternRecognition<>(new DataProfile(recordList, dsdElement),
+                "at.fh.scch/identifier#humidity:*",
+                Path.of("src/main/resource/data/ledc-pi_definitions.json"), String.class);
+
+        // when
+        recognition.calculation(recordList, null);
+        var ret = recognition.getValue();
+
+        // then
+        Assertions.assertNotNull(ret);
+        Assertions.assertEquals(0D, ret); // 0 as no value is remotely similar to a double
     }
 }

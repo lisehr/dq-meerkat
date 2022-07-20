@@ -41,7 +41,7 @@ public class LocalOutlierFactor extends ProfileStatistic<List<Double>, List<Doub
 
 
     public LocalOutlierFactor(DataProfile dp) {
-        super(lof, out, dp);
+        super(lof, out, dp, cast(List.class));
     }
 
     @Override

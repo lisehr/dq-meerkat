@@ -30,7 +30,7 @@ public class SpaceSavingSummaryProfileStatistic extends SummaryProfileStatistic<
     private final int k;
 
     public SpaceSavingSummaryProfileStatistic(DataProfile refProf, int k) {
-        super(StatisticTitle.summary, StatisticCategory.summaryCategory, refProf);
+        super(StatisticTitle.summary, StatisticCategory.summaryCategory, refProf, cast(Map.class));
         this.k = k;
     }
 

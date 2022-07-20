@@ -23,7 +23,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.dt;
 public class DataType extends ProfileStatistic<String, String> {
 
     public DataType(DataProfile d) {
-        super(dt, dti, d);
+        super(dt, dti, d, String.class);
     }
 
     @Override

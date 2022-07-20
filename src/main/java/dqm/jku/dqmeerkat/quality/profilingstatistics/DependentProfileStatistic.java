@@ -12,8 +12,8 @@ import dqm.jku.dqmeerkat.quality.DataProfile;
 public abstract class DependentProfileStatistic<TIn, TOut> extends ProfileStatistic<TIn, TOut> {
 
 
-    public DependentProfileStatistic(StatisticTitle title, StatisticCategory cat, DataProfile refProf) {
-        super(title, cat, refProf);
+    public DependentProfileStatistic(StatisticTitle title, StatisticCategory cat, DataProfile refProf, Class<TIn> inputValueClass) {
+        super(title, cat, refProf, inputValueClass);
         this.dependencyCheck();
     }
 

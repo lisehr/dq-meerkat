@@ -10,21 +10,20 @@ import jep.JepException;
 import jep.NDArray;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.out;
 import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.isoF;
 import static dqm.jku.dqmeerkat.util.GenericsUtil.cast;
 
-public class IsolationForest extends ProfileStatistic<List<?>, List<?>> {
+public class IsolationForest extends ProfileStatistic<ArrayList<Integer>, ArrayList<Integer>> {
 
 
     public IsolationForest(DataProfile dp) {
-        super(isoF, out, dp);
+        super(isoF, out, dp, cast(ArrayList.class));
     }
 
     @Override
-    public void calculation(RecordList rs, List<?> oldVal) {
+    public void calculation(RecordList rs, ArrayList<Integer> oldVal) {
         NDArray<?> resultingRecords = null;
         try (Interpreter py = JepInterpreter.getInterpreter()) {
             JepInterpreter.initFunctionsAndLibs(py);
@@ -51,8 +50,9 @@ public class IsolationForest extends ProfileStatistic<List<?>, List<?>> {
         int[] results = (int[]) resultingRecords.getData();
         ArrayList<Integer> recordNos = new ArrayList<>();
         for (int i = 0; i < results.length; i++) {
-            if (results[i] == -1)
+            if (results[i] == -1) {
                 recordNos.add(i + 1); // +1 for alignment (arrays start with 0, so record 1 is index 0)
+            }
             // do not simply insert record numbers, store model (serialization?)
         }
         this.setInputValueClass(cast(ArrayList.class));
@@ -70,7 +70,7 @@ public class IsolationForest extends ProfileStatistic<List<?>, List<?>> {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic<List<?>, List<?>> m, double threshold) {        // TODO Auto-generated method stub
+    public boolean checkConformance(ProfileStatistic<ArrayList<Integer>, ArrayList<Integer>> m, double threshold) {        // TODO Auto-generated method stub
         return false;
     }
 
