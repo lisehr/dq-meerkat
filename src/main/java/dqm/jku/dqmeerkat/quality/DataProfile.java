@@ -376,7 +376,8 @@ public class DataProfile {
         com.influxdb.client.write.Point point = new com.influxdb.client.write.Point(measurementDescriptor)
                 .time(timestampMillis, writePrecision);
         for (ProfileStatistic<?, ?> p : metricSorted) {
-            if (!p.getTitle().equals(hist) && !p.getTitle().equals(mad)) {
+            // temporarily disable summary
+            if (!p.getTitle().equals(hist) && !p.getTitle().equals(mad) && !p.getTitle().equals(summary)) {
                 addMeasuringValue(p, point);
             }
         }
@@ -397,8 +398,7 @@ public class DataProfile {
                 measure.addField(p.getLabel(), 0); // TODO: replace 0 with NaN, when hitting v2.0 of influxdb
             } else if (p.getInputValueClass().equals(Long.class)) {
                 measure.addField(p.getLabel(), ((Number) p.getValue()).longValue());
-            } else if (p.getInputValueClass().equals(Double.class) || p.getLabel().equals(sd.getLabel()) ||
-                    p.getLabel().equals(summary.getLabel())) {
+            } else if (p.getInputValueClass().equals(Double.class) || p.getLabel().equals(sd.getLabel())) {
                 measure.addField(p.getLabel(), ((Number) p.getValue()).doubleValue());
             } else if (p.getInputValueClass().equals(String.class) && (p.getLabel().equals(bt.getLabel()) || p.getLabel().equals(dt.getLabel()))) {
                 measure.addField(p.getLabel(), (String) p.getValue());
