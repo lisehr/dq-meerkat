@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import dqm.jku.dqmeerkat.dtdl.dto.DtdlDto;
 import dqm.jku.dqmeerkat.dtdl.dto.DtdlGraphWrapper;
 import lombok.SneakyThrows;
+import org.springframework.security.oauth2.client.web.reactive.function.client.ServerOAuth2AuthorizedClientExchangeFilterFunction;
 import org.springframework.web.reactive.function.client.WebClient;
 import science.aist.seshat.Logger;
 
@@ -24,6 +25,8 @@ public class DtdlRetriever {
     }
 
     public DtdlRetriever(String url) {
+//        ServerOAuth2AuthorizedClientExchangeFilterFunction oauth =
+//                new ServerOAuth2AuthorizedClientExchangeFilterFunction();
         client = WebClient.create(url);
     }
 
