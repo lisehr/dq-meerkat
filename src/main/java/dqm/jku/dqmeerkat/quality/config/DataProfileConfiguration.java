@@ -6,6 +6,7 @@ import dqm.jku.dqmeerkat.quality.generator.DataProfileSkeletonGenerator;
 import dqm.jku.dqmeerkat.quality.generator.config.DataProfileSkeletonBuilder;
 import dqm.jku.dqmeerkat.quality.generator.config.FullSkeletonGeneratorBuilder;
 import dqm.jku.dqmeerkat.quality.generator.config.LEDCPIGeneratorBuilder;
+import dqm.jku.dqmeerkat.quality.generator.config.SummaryGeneratorBuilder;
 import lombok.Getter;
 import science.aist.seshat.Logger;
 
@@ -37,7 +38,8 @@ public class DataProfileConfiguration {
      */
     private static final List<DataProfileSkeletonBuilder<?>> CONFIG_TO_GENERATOR = List.of(
             new FullSkeletonGeneratorBuilder(),
-            new LEDCPIGeneratorBuilder());
+            new LEDCPIGeneratorBuilder(),
+            new SummaryGeneratorBuilder());
 
     private static DataProfileConfiguration instance;
 

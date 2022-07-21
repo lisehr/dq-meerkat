@@ -49,7 +49,8 @@ public enum StatisticTitle {
   graphType ("Type of the Graph Element"),
   maximum ("Maximum Graph Element"),
   minimum ("Minimum Graph Element"),
-  median ("Median Graph Element");
+  median ("Median Graph Element"),
+  summary("Data Summary");
 
   
   private String label; // the label of the title (string representation)

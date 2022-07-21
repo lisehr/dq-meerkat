@@ -381,11 +381,13 @@ public class DataProfile {
      */
     private void addMeasuringValue(ProfileStatistic p, com.influxdb.client.write.Point measure) {
         try {
+            // TODO refactor for readability and extensability when using generics in ProfileStatistics
             if (p.getValue() == null)
                 measure.addField(p.getLabel(), 0); // TODO: replace 0 with NaN, when hitting v2.0 of influxdb
             else if (p.getValueClass().equals(Long.class))
                 measure.addField(p.getLabel(), ((Number) p.getNumericVal()).longValue());
-            else if (p.getValueClass().equals(Double.class) || p.getLabel().equals(sd.getLabel()))
+            else if (p.getValueClass().equals(Double.class) || p.getLabel().equals(sd.getLabel()) ||
+                    p.getLabel().equals(summary.getLabel()))
                 measure.addField(p.getLabel(), ((Number) p.getNumericVal()).doubleValue());
             else if (p.getValueClass().equals(String.class) && (p.getLabel().equals(bt.getLabel()) || p.getLabel().equals(dt.getLabel())))
                 measure.addField(p.getLabel(), (String) p.getValue());

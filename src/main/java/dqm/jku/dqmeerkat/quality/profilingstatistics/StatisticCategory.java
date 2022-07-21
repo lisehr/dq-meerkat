@@ -19,7 +19,8 @@ public enum StatisticCategory {
   histCat("Histogram"), 
   depend("Dependencies"),
   out("Outliers"),
-  graphCat("Graph Categroy");
+  graphCat("Graph Categroy"),
+  summaryCategory("Data Summary Category");
 
   private String label; // the label of the category (string representation)
   @SuppressWarnings("unused")

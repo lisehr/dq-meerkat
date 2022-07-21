@@ -59,19 +59,16 @@ public class RDPConformanceTributechData {
     private static final int BATCH_SIZE = 10;        // Set to 1 to simulate streaming data
 
     /**
-     * Boolean flag for debugging purposes. If set to true, the program will delete the database after the execution.
+     * Boolean flag for debugging purposes. If set to true, the program will delete the database before and after
+     * the execution.
      */
     private static final boolean DELETE_DATABASE = false;
 
     public static void main(String[] args) throws IOException, InterruptedException, NoSuchMethodException, URISyntaxException {
         // default configuration
         DataProfileConfiguration configuration = DataProfileConfiguration.getInstance();
-        // just the ledc pi for debugging
-//        var configuration = DataProfileConfiguration.getInstance("[{\n" +
-//                "    \"type\": \"ledcpi\",\n" +
-//                "    \"ledcPiId\": \"at.fh.scch/identifier#humidity:*\",\n" +
-//                "    \"ledcPiFilePath\": \"src/main/resource/data/ledc-pi_definitions.json\"\n" +
-//                "  }]");
+
+
         // setup Property for LEDC-PI
         Property property = Property.parseProperty("at.fh.scch/identifier#humidity");
         var numberPattern = "(\\d?\\d)\\.(\\d+)"; // check if it is valid humidity (i.E. 2 numbers front >0 numbers back)
@@ -185,6 +182,8 @@ public class RDPConformanceTributechData {
                         .orgId(properties.getProperty("db.orgId"))
                         .build()) {
                     influx.connect();
+                    if (DELETE_DATABASE)
+                        influx.deleteDatabase("default");
                     var token = influx.createDatabase("default", 0);
 
                     for (var collection : ret) {

@@ -31,7 +31,7 @@ public class DataProfileConfigurationTest {
         // then
         Assertions.assertNotNull(config);
         Assertions.assertNotNull(generators);
-        Assertions.assertEquals(2, generators.size());
+        Assertions.assertEquals(3, generators.size());
     }
 
     @Test
@@ -47,7 +47,7 @@ public class DataProfileConfigurationTest {
         Assertions.assertNotNull(configCached);
         Assertions.assertSame(config, configCached);
         Assertions.assertNotNull(generators);
-        Assertions.assertEquals(2, generators.size());
+        Assertions.assertEquals(3, generators.size());
     }
 
     @Test
