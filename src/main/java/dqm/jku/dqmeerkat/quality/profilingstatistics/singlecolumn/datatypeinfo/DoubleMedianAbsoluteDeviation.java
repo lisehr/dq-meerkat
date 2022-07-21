@@ -42,7 +42,6 @@ public class DoubleMedianAbsoluteDeviation extends DependentDoubleResultProfileS
         }
 
         DoubleMedian medM = new DoubleMedian(this.getRefProf());
-        // TODO implement list to recordlist conversion
         medM.calculation(new RecordList(medians, "dummy"), null);
         var med = medM.getValue();
         this.setValue(med);

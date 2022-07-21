@@ -7,8 +7,12 @@ import java.util.Objects;
 
 /**
  * <h2>DependentIntegerResultProfileStatistic</h2>
- * <summary>TODO Insert do cheader</summary>
+ * <summary>
+ * {@link DependentNumberProfileStatistic} implementation fixing the output type to {@link Integer}. This allows
+ * reduction of code duplication and makes it easier to extend the class.
+ * </summary>
  *
+ * @param <TIn> The input type of the ProfileStatistic, i.E. what can be handled by this class
  * @author meindl, rainer.meindl@scch.at
  * @since 20.07.2022
  */

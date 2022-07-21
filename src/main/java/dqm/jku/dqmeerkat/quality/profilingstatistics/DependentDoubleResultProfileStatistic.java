@@ -7,13 +7,17 @@ import java.util.Objects;
 
 /**
  * <h2>DependentIntegerResultProfileStatistic</h2>
- * <summary>TODO Insert do cheader</summary>
+ * <summary>{@link DependentProfileStatistic} subclass, that fixes the output type to double, making implementing
+ * such statistics easier and reducing code duplication.
+ * </summary>
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 20.07.2022
  */
-public abstract class DependentDoubleResultProfileStatistic<TIn extends Number> extends DependentNumberProfileStatistic<TIn, Double> {
-    protected DependentDoubleResultProfileStatistic(StatisticTitle title, StatisticCategory cat, DataProfile refProf, Class<TIn> genericType) {
+public abstract class DependentDoubleResultProfileStatistic<TIn extends Number> extends
+        DependentNumberProfileStatistic<TIn, Double> {
+    protected DependentDoubleResultProfileStatistic(StatisticTitle title, StatisticCategory cat, DataProfile refProf,
+                                                    Class<TIn> genericType) {
         super(title, cat, refProf, genericType);
     }
 

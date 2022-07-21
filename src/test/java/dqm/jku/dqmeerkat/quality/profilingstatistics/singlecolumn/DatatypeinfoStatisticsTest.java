@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * <h2>DatatypeInfoStatisticsTest</h2>
- * <summary>TODO Insert do cheader</summary>
+ * <summary>ProfileStatistic test class for generic statistics</summary>
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 19.07.2022

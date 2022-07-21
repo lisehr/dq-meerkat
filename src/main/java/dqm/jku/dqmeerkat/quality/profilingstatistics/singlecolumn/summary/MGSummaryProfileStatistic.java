@@ -72,7 +72,6 @@ public class MGSummaryProfileStatistic extends SummaryProfileStatistic<Double> {
 
     @Override
     public double calculateConformance() {
-        // TODO fixup after generic implementation is done
         var avgCounters = summary.values().stream().mapToInt(i -> i).average().orElse(0);
         return (double) summary.size() / k + avgCounters / k;
     }

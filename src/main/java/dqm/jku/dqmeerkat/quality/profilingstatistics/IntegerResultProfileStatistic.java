@@ -6,9 +6,13 @@ import dqm.jku.dqmeerkat.util.Constants;
 import java.util.Objects;
 
 /**
- * <h2>IntegerMetricProfileStatistic</h2>
- * <summary>TODO Insert do cheader</summary>
+ * <h2>IntegerResultProfileStatistic</h2>
+ * <summary>
+ * {@link NumberProfileStatistic} implementation, fixing the output type to {@link Integer}. This allows easier
+ * implementations for subclasses and reduces code duplication.
+ * </summary>
  *
+ * @param <TIn> The input type of the ProfileStatistic, i.E. what can be handled by this class
  * @author meindl, rainer.meindl@scch.at
  * @since 20.07.2022
  */

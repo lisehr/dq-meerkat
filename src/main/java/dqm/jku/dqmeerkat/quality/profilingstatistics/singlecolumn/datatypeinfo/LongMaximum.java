@@ -13,7 +13,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.max;
 
 /**
  * <h2>LongMaximum</h2>
- * <summary>TODO Insert do cheader</summary>
+ * <summary>Implementation of the Maximum statistic for Long values.</summary>
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 19.07.2022

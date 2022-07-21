@@ -13,7 +13,10 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.min;
 
 /**
  * <h2>LongMinimum</h2>
- * <summary>TODO Insert do cheader</summary>
+ * <summary>
+ * Minimum {@link dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic} implementation for {@link Long}
+ * values
+ * </summary>
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 20.07.2022

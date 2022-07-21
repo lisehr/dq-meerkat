@@ -15,7 +15,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.numro
 
 /**
  * <h2>LongAverage</h2>
- * <summary>TODO Insert do cheader</summary>
+ * <summary>Average statistic implementation for Long data types. </summary>
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 19.07.2022

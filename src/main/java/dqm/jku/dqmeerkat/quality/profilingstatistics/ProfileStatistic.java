@@ -3,7 +3,6 @@ package dqm.jku.dqmeerkat.quality.profilingstatistics;
 import dqm.jku.dqmeerkat.dsd.elements.DSDElement;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.util.Constants;
 import lombok.Getter;
 import lombok.Setter;
 import org.cyberborean.rdfbeans.annotations.RDF;
@@ -20,11 +19,18 @@ import static dqm.jku.dqmeerkat.util.GenericsUtil.cast;
 
 /**
  * <h2>ProfileStatistics</h2>
- * <summary>TODO Insert do cheader</summary>
+ * <summary>
+ * Calculator for generic profile statistics. These calculations make the base of the {@link DataProfile} class. Each
+ * profile statistic has a title and a category. The category is used to group the statistics. The title is used to
+ * identify the statistic. The input type defines what data the statistic can handle. The output type defines how
+ * the resulting statistic is represented.
+ * </summary>
  *
- * @author meindl, rainer.meindl@scch.at,
- * optimusseptim
- * @since 12.07.2022
+ * @param <TIn>  The input type of the ProfileStatistic, i.E. what can be handled by this class
+ * @param <TOut> The output type of the ProfileStatistic, i.E. what type is produced by this class and provided by value
+ * @author meindl rainer.meindl@scch.at
+ * @author optimusseptim
+ * @since ???, generic since 12.07.2022
  */
 @RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/ProfileMetric")

@@ -18,7 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * <h2>DatatypeInfoStatisticsLongTest</h2>
- * <summary>TODO Insert do cheader</summary>
+ * <summary>Testclass for {@link dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic} implementations
+ * using {@link Long} values</summary>
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 19.07.2022

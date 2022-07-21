@@ -75,7 +75,7 @@ public class SpaceSavingSummaryProfileStatistic extends SummaryProfileStatistic<
     }
 
     public double calculateConformance() {
-        // TODO fixup when using generics -> use key values as well
+        // TODO use key values as well
         var avgCounters = summary.values().stream().mapToInt(i -> i).average().orElse(0);
         return (double) summary.size() / k + avgCounters / k;
     }

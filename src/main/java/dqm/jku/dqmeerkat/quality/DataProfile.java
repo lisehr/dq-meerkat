@@ -112,9 +112,7 @@ public class DataProfile {
     private void calculateSingleColumn(RecordList rl) {
         List<Number> l = createValueList(rl);
         for (ProfileStatistic<?, ?> p : statistics) {
-            // TODO bugfix here?
             p.calculation(rl, cast(p.getValue()));
-            p.getValue();
         }
     }
 
@@ -393,7 +391,7 @@ public class DataProfile {
      */
     private void addMeasuringValue(ProfileStatistic<?, ?> p, com.influxdb.client.write.Point measure) {
         try {
-            // TODO refactor for readability and extensability when using generics in ProfileStatistics
+            // TODO refactor for readability and extensibility
             if (p.getValue() == null) {
                 measure.addField(p.getLabel(), 0); // TODO: replace 0 with NaN, when hitting v2.0 of influxdb
             } else if (p.getInputValueClass().equals(Long.class)) {

@@ -15,7 +15,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
 
 /**
  * <h2>LongMedianAbsoluteDeviation</h2>
- * <summary>TODO Insert do cheader</summary>
+ * <summary>Median Absolute Deviation for {@link Long} values</summary>
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 20.07.2022

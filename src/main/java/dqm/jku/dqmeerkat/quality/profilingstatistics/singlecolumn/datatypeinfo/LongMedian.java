@@ -15,7 +15,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.med;
 
 /**
  * <h2>LongMedian</h2>
- * <summary>TODO Insert do cheader</summary>
+ * <summary>implementation of the Median statistic for Long values</summary>
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 20.07.2022

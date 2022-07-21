@@ -5,9 +5,7 @@ import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.DependentDoubleResultProfileStatistic;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.NumRows;
-import dqm.jku.dqmeerkat.util.Constants;
 
 import java.util.Objects;
 
@@ -16,7 +14,7 @@ import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
 
 /**
  * <h2>LongStandardDeviation</h2>
- * <summary>TODO Insert do cheader</summary>
+ * <summary>Standard deviation profilestatistic implementation for {@link Long} values</summary>
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 20.07.2022

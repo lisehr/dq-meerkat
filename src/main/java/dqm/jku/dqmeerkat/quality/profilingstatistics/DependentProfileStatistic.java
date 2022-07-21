@@ -12,19 +12,12 @@ import dqm.jku.dqmeerkat.quality.DataProfile;
 public abstract class DependentProfileStatistic<TIn, TOut> extends ProfileStatistic<TIn, TOut> {
 
 
-    public DependentProfileStatistic(StatisticTitle title, StatisticCategory cat, DataProfile refProf, Class<TIn> inputValueClass) {
+    
+    public DependentProfileStatistic(StatisticTitle title, StatisticCategory cat, DataProfile refProf,
+                                     Class<TIn> inputValueClass) {
         super(title, cat, refProf, inputValueClass);
         this.dependencyCheck();
     }
-
-    /**
-     * Helper method to calculate missing dependencies in calculation with a list of
-     * numbers as base. Can be empty in Metrics without a dependency.
-     *
-     * @param list the numeric value list
-     * @throws NoSuchMethodException
-     */
-//    protected abstract void dependencyCalculationWithNumericList(List<Number> list) throws NoSuchMethodException;
 
     /**
      * Helper method to calculate missing dependencies in calculation with a
