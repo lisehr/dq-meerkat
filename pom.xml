@@ -42,6 +42,27 @@
             <version>${seshat.version}</version>
             <scope>runtime</scope>
         </dependency>
+        <!--google webclient  + oauh2-->
+        <dependency>
+            <groupId>com.google.oauth-client</groupId>
+            <artifactId>google-oauth-client</artifactId>
+            <version>1.34.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.oauth-client</groupId>
+            <artifactId>google-oauth-client-java6</artifactId>
+            <version>1.34.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.http-client</groupId>
+            <artifactId>google-http-client</artifactId>
+            <version>1.42.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.oauth-client</groupId>
+            <artifactId>google-oauth-client-jetty</artifactId>
+            <version>1.34.1</version>
+        </dependency>
         <!--oauth2-->
         <dependency>
             <groupId>org.springframework.security</groupId>
@@ -287,10 +308,10 @@
     </build>
 
     <repositories>
-        <repository>
-            <id>pentaho</id>
-            <url>https://public.nexus.pentaho.org/content/groups/omni</url>
-        </repository>
+<!--        <repository>-->
+<!--            <id>pentaho</id>-->
+<!--            <url>https://public.nexus.pentaho.org/content/groups/omni</url>-->
+<!--        </repository>-->
         <!--        ledc-pi-->
         <repository>
             <id>gitlab-maven</id>

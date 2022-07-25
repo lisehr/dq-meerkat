@@ -15,6 +15,7 @@ import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
+import dqm.jku.dqmeerkat.dtdl.DtdlRetriever;
 import dqm.jku.dqmeerkat.influxdb.InfluxDBConnectionV2;
 import dqm.jku.dqmeerkat.quality.BatchedDataProfiler;
 import dqm.jku.dqmeerkat.quality.DataProfile;
@@ -103,7 +104,7 @@ public class RDPConformanceTributechData {
 //        JSON.dump(new File("src/main/resource/data/ledc-pi_definitions.json"));
 
         // retrieve DTDL stuff
-//        DtdlRetriever retriever = new DtdlRetriever();
+        DtdlRetriever retriever = new DtdlRetriever();
 //        var statisticDto = ProfileStatisticDto.builder()
 //                .metaData(new MetaDataDto("dtmi:scch:at:dq:ProfileStatistic;1"))
 //                .category("the Mightiest of numbers")
@@ -122,7 +123,7 @@ public class RDPConformanceTributechData {
 //                .targetId(statisticDto.getDtId())
 //                .build());
 //        var graphWrapper = new DtdlGraphWrapper(graph);
-////        retriever.retrieve();
+        var response = retriever.get();
 //        retriever.post(graphWrapper);
 
 
