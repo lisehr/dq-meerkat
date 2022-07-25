@@ -1,18 +1,8 @@
 package dqm.jku.dqmeerkat.api.rest.client.oauth2;
 
-import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
-import com.google.api.client.auth.oauth2.BearerToken;
-import com.google.api.client.auth.oauth2.ClientParametersAuthentication;
 import com.google.api.client.auth.oauth2.Credential;
-import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
-import com.google.api.client.http.GenericUrl;
-import com.google.api.client.http.javanet.NetHttpTransport;
-import com.google.api.client.json.gson.GsonFactory;
-import com.google.api.client.util.store.FileDataStoreFactory;
 import dqm.jku.dqmeerkat.api.rest.client.AbstractRestClient;
-import lombok.SneakyThrows;
 
-import java.io.File;
 import java.util.List;
 
 /**
@@ -41,22 +31,5 @@ public abstract class AbstractOauth2RestClient<T> extends AbstractRestClient<T> 
 
     }
 
-    @SneakyThrows
-    protected Credential authorize(List<String> scopes) {
-        FileDataStoreFactory dataStoreFactory = new FileDataStoreFactory(new File("./tmp/tokens"));
-        AuthorizationCodeFlow flow = new AuthorizationCodeFlow.Builder(BearerToken
-                .authorizationHeaderAccessMethod(),
-                new NetHttpTransport(),
-                new GsonFactory(),
-                new GenericUrl(tokenServerUrl),
-                new ClientParametersAuthentication(clientId, clientSecret),
-                clientId,
-                authorizationServerUrl)
-                .setScopes(scopes)
-                .setDataStoreFactory(dataStoreFactory)
-                .build();
-
-        var receiver = new ConfigurableVerificationReceiver(redirectUri);
-        return new AuthorizationCodeInstalledApp(flow, receiver).authorize(null);
-    }
+    protected abstract Credential authorize(List<String> scopes);
 }

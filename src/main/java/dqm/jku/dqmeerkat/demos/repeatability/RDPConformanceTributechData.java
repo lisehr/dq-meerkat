@@ -72,11 +72,11 @@ public class RDPConformanceTributechData {
 
         // oauth2 tests
         var client  = new DataApiTestClient("https://auth.int.dataspace-hub.com/auth/realms/int-node-b/protocol/openid-connect/token",
-                null, "data-api", "", "https://data-api.int-node-b.dataspace-node.com/",
+                null, "data-api", "b3d1c827-1008-4436-97c2-68398f6143a4", "https://data-api.int-node-b.dataspace-node.com/",
                 "");
 
         var response = client.get("values/double/58645c10-d751-4c79-beb1-5f641deea2de");
-
+        System.out.println(response);
 
         // setup Property for LEDC-PI
         Property property = Property.parseProperty("at.fh.scch/identifier#humidity");

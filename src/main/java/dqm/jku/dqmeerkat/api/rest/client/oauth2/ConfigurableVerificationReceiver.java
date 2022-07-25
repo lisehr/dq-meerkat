@@ -16,9 +16,15 @@ import java.util.concurrent.Semaphore;
 
 /**
  * <h2>ConfigurableVerificationReceiver</h2>
- * <summary>TODO Insert do cheader</summary>
+ * <summary>
+ * {@link VerificationCodeReceiver} implementation for OAuth 2.0 AuthorizationCodeFlow implementations. Hosts a
+ * simple HTTP server that listens on a random port and waits for a verification code from the Authorization Server.
+ * The RestClient can then use the verification code to obtain an access token. An example implementation is shown in
+ * {@link AbstractOauth2RestClient}.
+ * </summary>
  *
  * @author meindl, rainer.meindl@scch.at
+ * @see <a href="https://datatracker.ietf.org/doc/html/rfc6749#section-4.1"> OAuth 2.0 Authorization Code Grant</a>
  * @since 25.07.2022
  */
 public class ConfigurableVerificationReceiver implements VerificationCodeReceiver {

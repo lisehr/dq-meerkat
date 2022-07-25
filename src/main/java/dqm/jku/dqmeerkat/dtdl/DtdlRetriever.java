@@ -3,7 +3,7 @@ package dqm.jku.dqmeerkat.dtdl;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.api.client.auth.oauth2.Credential;
-import dqm.jku.dqmeerkat.api.rest.client.oauth2.AbstractOauth2RestClient;
+import dqm.jku.dqmeerkat.api.rest.client.oauth2.AuthorizationFlowAbstractRestClient;
 import dqm.jku.dqmeerkat.dtdl.dto.DtdlDto;
 import dqm.jku.dqmeerkat.dtdl.dto.DtdlGraphWrapper;
 import lombok.SneakyThrows;
@@ -18,7 +18,7 @@ import java.util.List;
  * @author meindl, rainer.meindl@scch.at
  * @since 27.04.2022
  */
-public class DtdlRetriever extends AbstractOauth2RestClient<DtdlGraphWrapper> {
+public class DtdlRetriever extends AuthorizationFlowAbstractRestClient<DtdlGraphWrapper> {
     private static final String TOKEN_SERVER_URL = "https://auth.int.dataspace-hub.com/auth/realms/int-node-b/protocol/openid-connect/token";
     private static final String AUTHORIZATION_SERVER_URL =
             "https://auth.int.dataspace-hub.com/auth/realms/int-node-b/protocol/openid-connect/auth";
