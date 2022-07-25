@@ -23,4 +23,8 @@ public abstract class AbstractRestClient<T> {
 
     public abstract T get();
 
+    public abstract void post(String url, T body);
+
+    public abstract void post(T body);
+
 }

@@ -2,34 +2,14 @@ package dqm.jku.dqmeerkat.dtdl;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
-import com.google.api.client.auth.oauth2.BearerToken;
-import com.google.api.client.auth.oauth2.ClientParametersAuthentication;
 import com.google.api.client.auth.oauth2.Credential;
-import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
-import com.google.api.client.extensions.java6.auth.oauth2.VerificationCodeReceiver;
-import com.google.api.client.http.GenericUrl;
-import com.google.api.client.http.javanet.NetHttpTransport;
-import com.google.api.client.json.gson.GsonFactory;
-import com.google.api.client.util.Throwables;
-import com.google.api.client.util.store.FileDataStoreFactory;
-import com.sun.net.httpserver.HttpContext;
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
-import com.sun.net.httpserver.HttpServer;
+import dqm.jku.dqmeerkat.api.rest.client.oauth2.AbstractOauth2RestClient;
 import dqm.jku.dqmeerkat.dtdl.dto.DtdlDto;
 import dqm.jku.dqmeerkat.dtdl.dto.DtdlGraphWrapper;
 import lombok.SneakyThrows;
 import org.springframework.web.reactive.function.client.WebClient;
-import science.aist.seshat.Logger;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.Semaphore;
 
 /**
  * <h2>DtdlRetriever</h2>
@@ -38,15 +18,13 @@ import java.util.concurrent.Semaphore;
  * @author meindl, rainer.meindl@scch.at
  * @since 27.04.2022
  */
-public class DtdlRetriever {
-    private static final Logger LOGGER = Logger.getInstance();
+public class DtdlRetriever extends AbstractOauth2RestClient<DtdlGraphWrapper> {
     private static final String TOKEN_SERVER_URL = "https://auth.int.dataspace-hub.com/auth/realms/int-node-b/protocol/openid-connect/token";
     private static final String AUTHORIZATION_SERVER_URL =
             "https://auth.int.dataspace-hub.com/auth/realms/int-node-b/protocol/openid-connect/auth";
+    private static final String clientId = "twin-api";
+    private static final String clientSecret = "8a823e8a-e993-4bdd-9ffd-3794ddecaeec";
     private final WebClient client;
-    private final String clientId = "twin-api";
-    private final String clientSecret = "8a823e8a-e993-4bdd-9ffd-3794ddecaeec";
-    private Credential oauth2Credential;
 
 
     public DtdlRetriever() {
@@ -54,102 +32,8 @@ public class DtdlRetriever {
     }
 
     public DtdlRetriever(String url) {
-        try {
-            FileDataStoreFactory dataStoreFactory = new FileDataStoreFactory(new File("./tmp/tokens"));
-//            // set up authorization code flow
-//            AuthorizationCodeFlow flow = new AuthorizationCodeFlow.Builder(BearerToken
-//                    .authorizationHeaderAccessMethod(),
-//                    new NetHttpTransport(),
-//                    new GsonFactory(),
-//                    new GenericUrl(TOKEN_SERVER_URL),
-//                    new ClientParametersAuthentication(
-//                            clientId, clientSecret),
-//                    clientId,
-//                    AUTHORIZATION_SERVER_URL).setScopes(List.of("profile", "email", "twin-api", "catalog-api"))
-//                    .setDataStoreFactory(dataStoreFactory).build();
-//            // authorize
-//            var receiver = new VerificationCodeReceiver() {
-//                final Semaphore waitUnlessSignaled = new Semaphore(0 /* initially zero permit */);
-//                String code;
-//                String error;
-//                private HttpServer server;
-//
-//                @Override
-//                public String getRedirectUri() throws IOException {
-//                    server = HttpServer.create(new InetSocketAddress(8080), 0);
-//                    HttpContext context = server.createContext("/", new CallbackHandler());
-//                    server.setExecutor(null);
-//
-//                    try {
-//                        server.start();
-//                    } catch (Exception e) {
-//                        Throwables.propagateIfPossible(e);
-//                        throw new IOException(e);
-//                    }
-//                    // TODO this callback dies with swagger error in the browser console
-//                    return "https://twin-api.int-node-b.dataspace-node.com/oauth2-redirect.html";
-//                }
-//
-//                @Override
-//                public String waitForCode() throws IOException {
-//                    waitUnlessSignaled.acquireUninterruptibly();
-//                    if (error != null) {
-//                        throw new IOException("User authorization failed (" + error + ")");
-//                    }
-//                    return code;
-//                }
-//
-//                @Override
-//                public void stop() throws IOException {
-//                    waitUnlessSignaled.release();
-//                    if (server != null) {
-//                        try {
-//                            server.stop(0);
-//                        } catch (Exception e) {
-//                            Throwables.propagateIfPossible(e);
-//                            throw new IOException(e);
-//                        }
-//                        server = null;
-//                    }
-//                }
-//
-//                class CallbackHandler implements HttpHandler {
-//                    @Override
-//                    public void handle(HttpExchange httpExchange) throws IOException {
-//                        try {
-//                            Map<String, String> parms = this.queryToMap(httpExchange.getRequestURI().getQuery());
-//                            error = parms.get("error");
-//                            code = parms.get("code");
-//
-//                            httpExchange.close();
-//                        } finally {
-//                            waitUnlessSignaled.release();
-//                        }
-//                    }
-//
-//                    private Map<String, String> queryToMap(String query) {
-//                        Map<String, String> result = new HashMap<String, String>();
-//                        if (query != null) {
-//                            for (String param : query.split("&")) {
-//                                String[] pair = param.split("=");
-//                                if (pair.length > 1) {
-//                                    result.put(pair[0], pair[1]);
-//                                } else {
-//                                    result.put(pair[0], "");
-//                                }
-//                            }
-//                        }
-//                        return result;
-//                    }
-//                }
-//            };
-//            oauth2Credential = new AuthorizationCodeInstalledApp(flow, receiver).authorize(null);
-
-        } catch (IOException e) {
-            // TODO do not continue if authorization fails
-            LOGGER.error("Could not create authorization flow. Continuing for now...", e);
-
-        }
+        super(TOKEN_SERVER_URL, AUTHORIZATION_SERVER_URL, clientId, clientSecret, url);
+        Credential oauth2Credential = authorize(List.of("profile", "email", "twin-api", "catalog-api"));
         if (oauth2Credential == null) {
 //            throw new IllegalStateException("Could not create authorization flow");
             client = WebClient.builder()
@@ -164,10 +48,37 @@ public class DtdlRetriever {
         }
     }
 
+    @Override
+    public DtdlGraphWrapper get(String url) {
+        return client.get()
+                .uri(baseUrl + url)
+                .retrieve()
+                .bodyToMono(DtdlGraphWrapper.class)
+                .block();
+    }
+
     public DtdlGraphWrapper get() {
         return client.get()
                 .retrieve()
                 .bodyToMono(DtdlGraphWrapper.class)
+                .block();
+    }
+
+    @SneakyThrows
+    @Override
+    public void post(String url, DtdlGraphWrapper body) {
+        // Dummy class, necessary to suppress type info in dtdldtos.
+        @JsonTypeInfo(use = JsonTypeInfo.Id.NONE)
+        class NoTypes {
+        }
+        // without mixin jackson generates a type property for each DtdlDto implementation, causes problems with validity
+        ObjectMapper mapper = new ObjectMapper().addMixIn(DtdlDto.class, NoTypes.class);
+
+        client.post()
+                .uri(baseUrl + url)
+                .bodyValue(mapper.writeValueAsString(body))
+                .retrieve()
+                .toBodilessEntity() // ignore the response
                 .block();
     }
 
