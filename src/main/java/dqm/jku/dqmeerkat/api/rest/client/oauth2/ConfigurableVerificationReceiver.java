@@ -1,0 +1,108 @@
+package dqm.jku.dqmeerkat.api.rest.client.oauth2;
+
+import com.google.api.client.extensions.java6.auth.oauth2.VerificationCodeReceiver;
+import com.google.api.client.util.Throwables;
+import com.sun.net.httpserver.HttpContext;
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpServer;
+
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.Semaphore;
+
+/**
+ * <h2>ConfigurableVerificationReceiver</h2>
+ * <summary>TODO Insert do cheader</summary>
+ *
+ * @author meindl, rainer.meindl@scch.at
+ * @since 25.07.2022
+ */
+public class ConfigurableVerificationReceiver implements VerificationCodeReceiver {
+    final Semaphore waitUnlessSignaled = new Semaphore(0 /* initially zero permit */);
+    private final String redirectUri;
+    String code;
+    String error;
+    private HttpServer server;
+
+    public ConfigurableVerificationReceiver() {
+        this("https://twin-api.int-node-b.dataspace-node.com/oauth2-redirect.html");
+    }
+
+    public ConfigurableVerificationReceiver(String redirectUri) {
+        this.redirectUri = redirectUri;
+    }
+
+
+    @Override
+    public String getRedirectUri() throws IOException {
+        server = HttpServer.create(new InetSocketAddress(8080), 0);
+        HttpContext context = server.createContext("/", new CallbackHandler());
+        server.setExecutor(null);
+
+        try {
+            server.start();
+        } catch (Exception e) {
+            Throwables.propagateIfPossible(e);
+            throw new IOException(e);
+        }
+        // TODO this callback dies with swagger error in the browser console
+        return redirectUri;
+    }
+
+    @Override
+    public String waitForCode() throws IOException {
+        waitUnlessSignaled.acquireUninterruptibly();
+        if (error != null) {
+            throw new IOException("User authorization failed (" + error + ")");
+        }
+        return code;
+    }
+
+    @Override
+    public void stop() throws IOException {
+        waitUnlessSignaled.release();
+        if (server != null) {
+            try {
+                server.stop(0);
+            } catch (Exception e) {
+                Throwables.propagateIfPossible(e);
+                throw new IOException(e);
+            }
+            server = null;
+        }
+    }
+
+    class CallbackHandler implements HttpHandler {
+        @Override
+        public void handle(HttpExchange httpExchange) throws IOException {
+            try {
+                Map<String, String> parms = this.queryToMap(httpExchange.getRequestURI().getQuery());
+                error = parms.get("error");
+                code = parms.get("code");
+
+                httpExchange.close();
+            } finally {
+                waitUnlessSignaled.release();
+            }
+        }
+
+        private Map<String, String> queryToMap(String query) {
+            Map<String, String> result = new HashMap<>();
+            if (query != null) {
+                for (String param : query.split("&")) {
+                    String[] pair = param.split("=");
+                    if (pair.length > 1) {
+                        result.put(pair[0], pair[1]);
+                    } else {
+                        result.put(pair[0], "");
+                    }
+                }
+            }
+            return result;
+        }
+    }
+}
+
