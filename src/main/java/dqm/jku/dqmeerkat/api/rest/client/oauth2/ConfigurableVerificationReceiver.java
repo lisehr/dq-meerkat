@@ -6,6 +6,7 @@ import com.sun.net.httpserver.HttpContext;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
+import lombok.Getter;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -22,23 +23,27 @@ import java.util.concurrent.Semaphore;
  */
 public class ConfigurableVerificationReceiver implements VerificationCodeReceiver {
     final Semaphore waitUnlessSignaled = new Semaphore(0 /* initially zero permit */);
+    @Getter
     private final String redirectUri;
+    @Getter
+    private final int port;
     String code;
     String error;
     private HttpServer server;
 
-    public ConfigurableVerificationReceiver() {
-        this("https://twin-api.int-node-b.dataspace-node.com/oauth2-redirect.html");
+    public ConfigurableVerificationReceiver(String redirectUri) {
+        this(redirectUri, 8080);
     }
 
-    public ConfigurableVerificationReceiver(String redirectUri) {
+    public ConfigurableVerificationReceiver(String redirectUri, int port) {
         this.redirectUri = redirectUri;
+        this.port = port;
     }
 
 
     @Override
     public String getRedirectUri() throws IOException {
-        server = HttpServer.create(new InetSocketAddress(8080), 0);
+        server = HttpServer.create(new InetSocketAddress(port), 0);
         HttpContext context = server.createContext("/", new CallbackHandler());
         server.setExecutor(null);
 

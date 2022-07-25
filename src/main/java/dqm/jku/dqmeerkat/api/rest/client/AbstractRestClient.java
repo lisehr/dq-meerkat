@@ -2,6 +2,8 @@ package dqm.jku.dqmeerkat.api.rest.client;
 
 import science.aist.seshat.Logger;
 
+import java.io.Serializable;
+
 /**
  * <h2>AbstratRestClient</h2>
  * <summary>TODO Insert do cheader</summary>

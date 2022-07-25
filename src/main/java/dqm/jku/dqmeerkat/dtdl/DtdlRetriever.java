@@ -32,10 +32,11 @@ public class DtdlRetriever extends AbstractOauth2RestClient<DtdlGraphWrapper> {
     }
 
     public DtdlRetriever(String url) {
-        super(TOKEN_SERVER_URL, AUTHORIZATION_SERVER_URL, clientId, clientSecret, url);
+        super(TOKEN_SERVER_URL, AUTHORIZATION_SERVER_URL, clientId, clientSecret, url, "");
         Credential oauth2Credential = authorize(List.of("profile", "email", "twin-api", "catalog-api"));
         if (oauth2Credential == null) {
 //            throw new IllegalStateException("Could not create authorization flow");
+            // temporary workaround until we know the redirect url of the authorization server
             client = WebClient.builder()
                     .baseUrl(url)
                     .defaultHeader("Authorization", "Bearer " + "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJOQUJRUF93VXRtdmQ4ZS1KMmZyRkdPd25wQTNLSDJfSG5PQ1d3ZzVuQ3RjIn0.eyJleHAiOjE2NTg3NDE5MzAsImlhdCI6MTY1ODc0MTYzMCwiYXV0aF90aW1lIjoxNjU4NzM5MzM3LCJqdGkiOiI4NjM3ZGM5Yi02ODc0LTQ5MmUtOWE2MS1lZDlkNjMyMTI4OTgiLCJpc3MiOiJodHRwczovL2F1dGguaW50LmRhdGFzcGFjZS1odWIuY29tL2F1dGgvcmVhbG1zL2ludC1ub2RlLWIiLCJhdWQiOlsidHdpbi1hcGkiLCJjYXRhbG9nLWFwaSIsInJlYWxtLW1hbmFnZW1lbnQiXSwic3ViIjoiN2VjYzRlOWMtM2VlNy00NGFhLWI2YjUtODQ0YzdiOTVjZDA2IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoidHdpbi1hcGkiLCJzZXNzaW9uX3N0YXRlIjoiZjhhMDNhNWYtNjkwNC00YWJmLThiMTEtZGJjNDU0YzQ0OTFmIiwiYWNyIjoiMCIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwczovL3R3aW4tYXBpLmludC1ub2RlLWIuZGF0YXNwYWNlLW5vZGUuY29tIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsImFkbWluIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJyZWFsbS1tYW5hZ2VtZW50Ijp7InJvbGVzIjpbIm1hbmFnZS11c2VycyIsInZpZXctdXNlcnMiLCJxdWVyeS1ncm91cHMiLCJxdWVyeS11c2VycyJdfX0sInNjb3BlIjoicHJvZmlsZSBjYXRhbG9nLWFwaSBlbWFpbCBub2RlLWlkIHR3aW4tYXBpIiwibm9kZS1pZCI6IjgyMDcwMzA5LWEyMDEtNGU3Ni04NjcwLTI1MWFiZTkxZjhhZSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJub2RlLW5hbWUiOiJpbnQtbm9kZS1iIiwibmFtZSI6IlJhaW5lciBNZWluZGwiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJyYWluZXIubWVpbmRsQHNjY2guYXQiLCJnaXZlbl9uYW1lIjoiUmFpbmVyIiwiZmFtaWx5X25hbWUiOiJNZWluZGwiLCJlbWFpbCI6InJhaW5lci5tZWluZGxAc2NjaC5hdCJ9.j49wmP8mjP-sWIGxpra1ISw7_o3fS4tFiGJZfkvMpLtGicHYAJMFh_q3VC6e8Ehk7YrHYaIcxkaYV-VO1KlhuZYbBxUCUHwtjrYngHILZ6wS4AI0ilfrP7HNqOTbN7hNxEdrNWeq4YoPyr5XBEhSKc2nljn_hBHToxX-g5GuME4Ft-zUUxaHoqSKyKKYknfCsjTu_HPmj88nngQ0EuelS8OKN6McNwENdek7dDWDwD_uJCiHx21y3hW2fsQrpAYMQI9-gs4BWxAWlh5CRepVNdL_7IpWOulL-16VsW7bfvqOsgS6DzXMUbboEUaCjFOljlgqAi8uoKeSnM_VXNpWMA")

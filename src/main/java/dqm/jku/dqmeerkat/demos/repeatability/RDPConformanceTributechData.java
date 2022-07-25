@@ -9,6 +9,7 @@ import be.ugent.ledc.pi.measure.predicates.Predicate;
 import be.ugent.ledc.pi.property.Property;
 import be.ugent.ledc.pi.registries.MeasureRegistry;
 import com.influxdb.client.domain.WritePrecision;
+import dqm.jku.dqmeerkat.api.rest.client.DataApiTestClient;
 import dqm.jku.dqmeerkat.connectors.ConnectorCSV;
 import dqm.jku.dqmeerkat.dsd.DSDKnowledgeGraph;
 import dqm.jku.dqmeerkat.dsd.elements.Attribute;
@@ -69,6 +70,13 @@ public class RDPConformanceTributechData {
         // default configuration
         DataProfileConfiguration configuration = DataProfileConfiguration.getInstance();
 
+        // oauth2 tests
+        var client  = new DataApiTestClient("https://auth.int.dataspace-hub.com/auth/realms/int-node-b/protocol/openid-connect/token",
+                null, "data-api", "", "https://data-api.int-node-b.dataspace-node.com/",
+                "");
+
+        var response = client.get("values/double/58645c10-d751-4c79-beb1-5f641deea2de");
+
 
         // setup Property for LEDC-PI
         Property property = Property.parseProperty("at.fh.scch/identifier#humidity");
@@ -104,7 +112,7 @@ public class RDPConformanceTributechData {
 //        JSON.dump(new File("src/main/resource/data/ledc-pi_definitions.json"));
 
         // retrieve DTDL stuff
-        DtdlRetriever retriever = new DtdlRetriever();
+//        DtdlRetriever retriever = new DtdlRetriever();
 //        var statisticDto = ProfileStatisticDto.builder()
 //                .metaData(new MetaDataDto("dtmi:scch:at:dq:ProfileStatistic;1"))
 //                .category("the Mightiest of numbers")
@@ -123,7 +131,7 @@ public class RDPConformanceTributechData {
 //                .targetId(statisticDto.getDtId())
 //                .build());
 //        var graphWrapper = new DtdlGraphWrapper(graph);
-        var response = retriever.get();
+//        var response = retriever.get();
 //        retriever.post(graphWrapper);
 
 

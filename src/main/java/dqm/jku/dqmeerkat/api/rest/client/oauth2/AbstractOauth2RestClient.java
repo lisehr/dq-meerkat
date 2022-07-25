@@ -27,15 +27,18 @@ public abstract class AbstractOauth2RestClient<T> extends AbstractRestClient<T> 
     protected final String authorizationServerUrl;
     protected final String clientId;
     protected final String clientSecret;
+    protected final String redirectUri;
 
 
     protected AbstractOauth2RestClient(String tokenServerUrl, String authorizationServerUrl, String clientId,
-                                       String clientSecret, String baseUrl) {
+                                       String clientSecret, String baseUrl, String redirectUri) {
         super(baseUrl);
         this.tokenServerUrl = tokenServerUrl;
         this.authorizationServerUrl = authorizationServerUrl;
         this.clientId = clientId;
         this.clientSecret = clientSecret;
+        this.redirectUri = redirectUri;
+
     }
 
     @SneakyThrows
@@ -53,7 +56,7 @@ public abstract class AbstractOauth2RestClient<T> extends AbstractRestClient<T> 
                 .setDataStoreFactory(dataStoreFactory)
                 .build();
 
-        var receiver = new ConfigurableVerificationReceiver();
+        var receiver = new ConfigurableVerificationReceiver(redirectUri);
         return new AuthorizationCodeInstalledApp(flow, receiver).authorize(null);
     }
 }
