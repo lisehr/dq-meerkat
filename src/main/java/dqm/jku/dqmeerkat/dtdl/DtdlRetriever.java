@@ -65,6 +65,17 @@ public class DtdlRetriever extends AuthorizationFlowAbstractRestClient<DtdlGraph
                 .block();
     }
 
+    // TODO implement this
+    @Override
+    public List<DtdlGraphWrapper> getMultiple() {
+        return null;
+    }
+
+    @Override
+    public List<DtdlGraphWrapper> getMultiple(String url) {
+        return null;
+    }
+
     @SneakyThrows
     @Override
     public void post(String url, DtdlGraphWrapper body) {

@@ -3,6 +3,7 @@ package dqm.jku.dqmeerkat.api.rest.client;
 import science.aist.seshat.Logger;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * <h2>AbstratRestClient</h2>
@@ -24,6 +25,10 @@ public abstract class AbstractRestClient<T> {
     public abstract T get(String url);
 
     public abstract T get();
+
+    public abstract List<T> getMultiple();
+
+    public abstract List<T> getMultiple(String url);
 
     public abstract void post(String url, T body);
 

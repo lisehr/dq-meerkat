@@ -23,8 +23,8 @@ import java.util.List;
  */
 public abstract class ClientCredentialsRestClient<T> extends AbstractOauth2RestClient<T> {
     public ClientCredentialsRestClient(String tokenServerUrl, String authorizationServerUrl, String clientId,
-                                       String clientSecret, String baseUrl, String redirectUri) {
-        super(tokenServerUrl, authorizationServerUrl, clientId, clientSecret, baseUrl, redirectUri);
+                                       String clientSecret, String baseUrl) {
+        super(tokenServerUrl, authorizationServerUrl, clientId, clientSecret, baseUrl);
     }
 
     /**

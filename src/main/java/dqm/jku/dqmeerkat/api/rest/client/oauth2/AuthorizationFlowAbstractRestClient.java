@@ -16,17 +16,27 @@ import java.util.List;
 
 /**
  * <h2>AuthorizationFlowAbstractRestClient</h2>
- * <summary>TODO Insert do cheader</summary>
+ * <summary>
+ * {@link AbstractOauth2RestClient} subclass for clients authorising with the Authorization Flow method.
+ * Implementation of this class gain functionality to authenticate against an API using this method, implemented in the
+ * authorize method.
+ *
+ * </summary>
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 25.07.2022
  */
 public abstract class AuthorizationFlowAbstractRestClient<T> extends AbstractOauth2RestClient<T> {
+
+    protected final String redirectUri;
+
     protected AuthorizationFlowAbstractRestClient(String tokenServerUrl, String authorizationServerUrl, String clientId,
                                                   String clientSecret, String baseUrl, String redirectUri) {
-        super(tokenServerUrl, authorizationServerUrl, clientId, clientSecret, baseUrl, redirectUri);
+        super(tokenServerUrl, authorizationServerUrl, clientId, clientSecret, baseUrl);
+        this.redirectUri = redirectUri;
     }
 
+    // TODO figure out how to handle redirectUri
     @SneakyThrows
     protected Credential authorize(List<String> scopes) {
         FileDataStoreFactory dataStoreFactory = new FileDataStoreFactory(new File("./tmp/tokens"));

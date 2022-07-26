@@ -9,14 +9,13 @@ import be.ugent.ledc.pi.measure.predicates.Predicate;
 import be.ugent.ledc.pi.property.Property;
 import be.ugent.ledc.pi.registries.MeasureRegistry;
 import com.influxdb.client.domain.WritePrecision;
-import dqm.jku.dqmeerkat.api.rest.client.DataApiTestClient;
+import dqm.jku.dqmeerkat.api.rest.client.tributech.DataApiTestClient;
 import dqm.jku.dqmeerkat.connectors.ConnectorCSV;
 import dqm.jku.dqmeerkat.dsd.DSDKnowledgeGraph;
 import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
-import dqm.jku.dqmeerkat.dtdl.DtdlRetriever;
 import dqm.jku.dqmeerkat.influxdb.InfluxDBConnectionV2;
 import dqm.jku.dqmeerkat.quality.BatchedDataProfiler;
 import dqm.jku.dqmeerkat.quality.DataProfile;
@@ -39,7 +38,6 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.UUID;
@@ -71,13 +69,12 @@ public class RDPConformanceTributechData {
         DataProfileConfiguration configuration = DataProfileConfiguration.getInstance();
 
         // oauth2 tests
-        var client  = new DataApiTestClient("https://auth.int.dataspace-hub.com/auth/realms/int-node-b/protocol/openid-connect/token",
-                null, "data-api", "b3d1c827-1008-4436-97c2-68398f6143a4", "https://data-api.int-node-b.dataspace-node.com/",
-                "");
+        var client = new DataApiTestClient("https://auth.int.dataspace-hub.com/auth/realms/int-node-b/protocol/openid-connect/token",
+                null, "data-api", "b3d1c827-1008-4436-97c2-68398f6143a4", "https://data-api.int-node-b.dataspace-node.com/"
+        );
 
-        var response = client.get("values/double/58645c10-d751-4c79-beb1-5f641deea2de");
+        var response = client.getMultiple("values/double/58645c10-d751-4c79-beb1-5f641deea2de");
         System.out.println(response);
-
         // setup Property for LEDC-PI
         Property property = Property.parseProperty("at.fh.scch/identifier#humidity");
         var numberPattern = "(\\d?\\d)\\.(\\d+)"; // check if it is valid humidity (i.E. 2 numbers front >0 numbers back)
@@ -192,8 +189,9 @@ public class RDPConformanceTributechData {
                         .orgId(properties.getProperty("db.orgId"))
                         .build()) {
                     influx.connect();
-                    if (DELETE_DATABASE)
+                    if (DELETE_DATABASE) {
                         influx.deleteDatabase("default");
+                    }
                     var token = influx.createDatabase("default", 0);
 
                     for (var collection : ret) {
@@ -212,8 +210,9 @@ public class RDPConformanceTributechData {
                         Thread.sleep(3000);
                         System.out.println("Interval break");
                     }
-                    if (DELETE_DATABASE)
+                    if (DELETE_DATABASE) {
                         influx.deleteDatabase("default");
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
