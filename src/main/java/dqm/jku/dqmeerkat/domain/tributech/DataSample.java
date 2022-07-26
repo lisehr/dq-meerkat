@@ -26,5 +26,5 @@ public abstract class DataSample<T> {
     private LocalDateTime createdAt;
     private int syncNr;
     private int size;
-    private List<T> value;
+    private List<T> values;
 }
