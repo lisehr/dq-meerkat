@@ -103,7 +103,7 @@ public class DataProfileTest {
                         "src/main/java/dqm/jku/dqmeerkat/resources/patterns/pattern_test.in"),
                 new DataProfileSkeletonGenerator() {
                     @Override
-                    protected List<ProfileStatistic> generateStatistics(DataProfile profile) {
+                    protected List<ProfileStatistic<?, ?>> generateStatistics(DataProfile profile) {
                         return List.of(new NumRows(profile));
                     }
                 });

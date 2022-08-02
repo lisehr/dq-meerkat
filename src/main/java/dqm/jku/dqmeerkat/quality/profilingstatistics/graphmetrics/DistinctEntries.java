@@ -1,42 +1,31 @@
 package dqm.jku.dqmeerkat.quality.profilingstatistics.graphmetrics;
 
-import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
-
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.IntegerResultProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
-import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.*;
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.graphCat;
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.distinctEntries;
 
 
-public class DistinctEntries extends ProfileStatistic {
-
-    public DistinctEntries() {
-
-    }
+public class DistinctEntries extends IntegerResultProfileStatistic<Integer> {
 
     public DistinctEntries(DataProfile d) {
-        super(distinctEntries, graphCat, d);
+        super(distinctEntries, graphCat, d, Integer.class);
     }
 
 
     @Override
-    public void calculation(RecordList rs, Object oldVal) {
-        Set<Record> distinctEntries = new HashSet<Record>(rs.toList());
+    public void calculation(RecordList rs, Integer oldVal) {
+        Set<Record> distinctEntries = new HashSet<>(rs.toList());
 
         super.setValue(distinctEntries.size());
-        super.setNumericVal(((Number) distinctEntries.size()).longValue());
-        super.setValueClass(Integer.class);
-    }
-
-    @Override
-    public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
-
+        super.setInputValueClass(Integer.class);
     }
 
     @Override
@@ -50,7 +39,7 @@ public class DistinctEntries extends ProfileStatistic {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic m, double threshold) {
+    public boolean checkConformance(ProfileStatistic<Integer, Integer> m, double threshold) {
         return false;
     }
 }

@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static dqm.jku.dqmeerkat.util.GenericsUtil.cast;
+
 /**
  * <h2>AbstractConformanceChecker</h2>
  * <summary>Abstract Baseclass for ConformanceCheckers. Provides some handling for confidence values and generation,
@@ -47,15 +49,16 @@ public abstract class AbstractConformanceChecker implements RDPConformanceChecke
 
         int conf = 0;
 
-        List<ProfileStatistic> profileStatistics;
+        List<ProfileStatistic<?, ?>> profileStatistics;
         if (batchSize != 1) {
             profileStatistics = rdp.getNonDependentStatistics();
         } else {
             profileStatistics = rdp.getNonAggregateStatistics();
         }
 
-        for (ProfileStatistic rdpMetric : profileStatistics) {
-            if (rdpMetric.checkConformance(dp.getStatistic(rdpMetric.getTitle()), threshold))
+        for (var rdpMetric : profileStatistics) {
+            // TODO
+            if (rdpMetric.checkConformance(cast(dp.getStatistic(rdpMetric.getTitle())), threshold))
                 conf++;
         }
 

@@ -1,7 +1,5 @@
 package dqm.jku.dqmeerkat.dsd.elements;
 
-import java.io.File;
-import java.lang.ref.Reference;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +7,7 @@ import java.util.TreeSet;
 import java.util.function.Predicate;
 
 import dqm.jku.dqmeerkat.influxdb.InfluxDBConnection;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFContainer;
@@ -18,9 +17,8 @@ import org.eclipse.rdf4j.model.util.ModelBuilder;
 
 import dqm.jku.dqmeerkat.blockchain.blocks.DSDBlock;
 import dqm.jku.dqmeerkat.blockchain.standardchain.BlockChain;
-import dqm.jku.dqmeerkat.influxdb.InfluxDBConnectionV1;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import dqm.jku.dqmeerkat.util.Constants;
 import dqm.jku.dqmeerkat.util.Miscellaneous.DBType;
 
@@ -214,7 +212,7 @@ public class Datasource extends DSDElement {
 		builder.namedGraph(prefix +":"+ concept.getLabel())
 		.subject(prefix+ ":"+ a.getLabel())
 		.add("dsd:hasDataprofile" ,prefix + ":" + a.getLabel() + "/" + "DataProfile");
-		for(ProfileStatistic metric : profile.getStatistics()) {
+		for(ProfileStatistic<?, ?> metric : profile.getStatistics()) {
 
 			if(metric.getValue() != null) {
 				builder.namedGraph(prefix +":"+ concept.getLabel())

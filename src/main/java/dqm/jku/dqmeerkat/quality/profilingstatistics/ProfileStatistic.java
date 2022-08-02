@@ -1,276 +1,248 @@
 package dqm.jku.dqmeerkat.quality.profilingstatistics;
 
-import java.util.List;
-import java.util.Objects;
-
-import dqm.jku.dqmeerkat.dsd.elements.Attribute;
+import dqm.jku.dqmeerkat.dsd.elements.DSDElement;
+import dqm.jku.dqmeerkat.dsd.records.RecordList;
+import dqm.jku.dqmeerkat.quality.DataProfile;
+import lombok.Getter;
+import lombok.Setter;
 import org.cyberborean.rdfbeans.annotations.RDF;
 import org.cyberborean.rdfbeans.annotations.RDFBean;
 import org.cyberborean.rdfbeans.annotations.RDFNamespaces;
 import org.cyberborean.rdfbeans.annotations.RDFSubject;
+import org.jetbrains.annotations.NotNull;
+import science.aist.seshat.Logger;
 
-import dqm.jku.dqmeerkat.dsd.elements.DSDElement;
-import dqm.jku.dqmeerkat.dsd.records.RecordList;
-import dqm.jku.dqmeerkat.quality.DataProfile;
+import java.util.List;
+import java.util.Objects;
+
+import static dqm.jku.dqmeerkat.util.GenericsUtil.cast;
 
 /**
- * Abstract class describing the basic structure for a profilestatistic
- * 
- * @author optimusseptim
+ * <h2>ProfileStatistics</h2>
+ * <summary>
+ * Calculator for generic profile statistics. These calculations make the base of the {@link DataProfile} class. Each
+ * profile statistic has a title and a category. The category is used to group the statistics. The title is used to
+ * identify the statistic. The input type defines what data the statistic can handle. The output type defines how
+ * the resulting statistic is represented.
+ * </summary>
  *
+ * @param <TIn>  The input type of the ProfileStatistic, i.E. what can be handled by this class
+ * @param <TOut> The output type of the ProfileStatistic, i.E. what type is produced by this class and provided by value
+ * @author meindl rainer.meindl@scch.at
+ * @author optimusseptim
+ * @since ???, generic since 12.07.2022
  */
-@RDFNamespaces({ "dsd = http://dqm.faw.jku.at/dsd#" })
+@RDFNamespaces({"dsd = http://dqm.faw.jku.at/dsd#"})
 @RDFBean("dsd:quality/structures/ProfileMetric")
-public abstract class ProfileStatistic implements Comparable<ProfileStatistic> {
-  private StatisticTitle title; // the naming of the metric
-  private StatisticCategory cat; // name of metric category
-  private Class<?> valClass; // the class of the value
-  private Object value; // the value itself
-  private Object numericVal; // numeric representation (e.g. double for values that can be integer as well), also string for unified and recognizable formats for RDFBeans for ex.
-  private DataProfile refProf; // reference profile for calculations
-  private String uri; // uri of the metric
+public abstract class ProfileStatistic<TIn, TOut> implements Comparable<ProfileStatistic<TIn, TOut>> {
+    protected final Logger LOGGER = Logger.getInstance();
+    protected StatisticTitle title; // the naming of the metric
+    protected StatisticCategory cat; // name of metric category
+    @Getter
+    @Setter
+    protected Class<TIn> inputValueClass;
+    @Getter
+    @Setter
+    protected Class<TOut> outputValueClass;
+    @Getter
+    @Setter
+    protected TOut value; // the value itself
+    @Setter
+    protected DataProfile refProf; // reference profile for calculations
 
-  public ProfileStatistic() {
+    protected String uri; // uri of the metric
 
-  }
-
-  public ProfileStatistic(StatisticTitle title, StatisticCategory cat, DataProfile refProf) {
-    if (title == null || refProf == null) throw new IllegalArgumentException("Parameters cannot be null!");
-    this.title = title;
-    this.refProf = refProf;
-    this.cat = cat;
-    this.uri = refProf.getURI() + '/' + this.title.getLabel().replaceAll("\\s+", "");
-    value = null;
-    numericVal = null;
-  }
-  
-  @RDFSubject
-  public String getUri() {
-	  return uri;
-  }
-  
-  public void setUri(String uri) {
-	  this.uri = uri;
-  }
-
-  /**
-   * Gets the title
-   * 
-   * @return title of metric
-   */
-  @RDF("dsd:hasTitle")
-  public StatisticTitle getTitle() {
-    return title;
-  }
-
-  /**
-   * Directly gets the text of the title
-   * 
-   * @return label of title
-   */
-  public String getLabel() {
-    return title.getLabel();
-  }
-  
-  @RDF("dsd:isInCategory")
-  public StatisticCategory getCat() {
-	return cat;
-  }
-
-  public void setCat(StatisticCategory cat) {
-	this.cat = cat;
-  }
-
-  /**
-   * Sets the title (security threat but needed by rdfbeans)
-   * 
-   * @param title the title to set
-   */
-  public void setTitle(StatisticTitle title) {
-    this.title = title;
-  }
-
-  /**
-   * Sets the reference profile (security threat but needed by rdfbeans)
-   * 
-   * @param refProf the refProf to set
-   */
-  public void setRefProf(DataProfile refProf) {
-    this.refProf = refProf;
-  }
-
-  /**
-   * Gets the value
-   * 
-   * @return value of metric
-   */
-  public Object getValue() {
-    return value;
-  }
-
-  /**
-   * Gets the class object of a value
-   * 
-   * @return class of value
-   */
-  public Class<?> getValueClass() {
-    return valClass;
-  }
-
-  /**
-   * Sets the class of the value
-   * 
-   * @param cls the new value class to be set
-   */
-  protected void setValueClass(Class<?> cls) {
-    this.valClass = cls;
-  }
-
-  /**
-   * Gets a String representation of the value class, used for rdf transformation
-   * 
-   * @return string of value class
-   */
-  @RDF("dsd:isInValueClass")
-  public String getValueClassString() {
-    return this.valClass.getName();
-  }
-
-  /**
-   * Sets the value Class via the class string, passed as parameter
-   * 
-   * @param valClass the string representation of the class
-   */
-  public void setValueClassString(String valClass) {
-    try {
-      this.valClass = Class.forName(valClass);
-    } catch (ClassNotFoundException e) {
-      System.err.println("Class not found!");
+    public ProfileStatistic(StatisticTitle title, StatisticCategory cat, DataProfile refProf, Class<TIn> inputValueClass) {
+        if (title == null || refProf == null) throw new IllegalArgumentException("Parameters cannot be null!");
+        this.title = title;
+        this.refProf = refProf;
+        this.cat = cat;
+        this.uri = refProf.getURI() + '/' + this.title.getLabel().replaceAll("\\s+", "");
+        value = null;
+        this.inputValueClass = inputValueClass;
     }
-  }
 
-  /**
-   * Sets the value of the metric
-   * 
-   * @param value the new value to be set
-   */
-  public void setValue(Object value) {
-    this.value = value;
-  }
+    protected boolean ensureDataTypeCorrect(Class<?> type) {
+        return type.isAssignableFrom(inputValueClass);
+    }
 
-  /**
-   * Gets the reference DataProfile
-   * 
-   * @return the reference profile
-   */
-  @RDF("dsd:isIncludedIn")
-  public DataProfile getRefProf() {
-    return refProf;
-  }
+    /**
+     * Method for calculating the profile metric, overridden by each metric
+     *
+     * @param oldVal a oldValue to be updated, null for initial calculation
+     * @param rs     the recordset used for calculation
+     */
+    public abstract void calculation(RecordList rs, TIn oldVal);
 
-  /**
-   * Gets the reference dsd element, used for calculation
-   * 
-   * @return the reference element
-   */
-  public DSDElement getRefElem() {
-    return refProf.getElem();
-  }
+    /**
+     * Method for updating the metric value, overriden by each metric
+     *
+     * @param rs the recordset used for updating
+     */
+    public abstract void update(RecordList rs);
 
-  /**
-   * Method for calculating the profile metric, overridden by each metric
-   * 
-   * @param oldVal a oldValue to be updated, null for initial calculation
-   * @param rs     the recordset used for calculation
-   */
-  public abstract void calculation(RecordList rs, Object oldVal);
+    /**
+     * Returns a string representation of the metric value
+     *
+     * @return string repr of value
+     */
+    protected abstract String getValueString();
 
-  /**
-   * Method for calculating the profile metric, overridden by each metric
-   * 
-   * @param oldVal a oldValue to be updated, null for initial calculation
-   * @param list   a sorted list, containing all values
-   * @throws NoSuchMethodException in cases like null values, since here records
-   *                               are not allowed for processing
-   */
-  public abstract void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException;
+    /**
+     * Method for creating a simple string representation of the metric value
+     *
+     * @return string repr of value
+     */
+    protected String getSimpleValueString() {
+        if (getValue() == null) {
+            return "\tnull";
+        } else {
+            return "\t" + getValue().toString();
+        }
+    }
 
-  /**
-   * Method for updating the metric value, overriden by each metric
-   * 
-   * @param rs the recordset used for updating
-   */
-  public abstract void update(RecordList rs);
+    public abstract boolean checkConformance(ProfileStatistic<TIn, TOut> m, double threshold);
 
-  /**
-   * Returns a string representation of the metric value
-   * 
-   * @return string repr of value
-   */
-  protected abstract String getValueString();
-  
-  /**
-   * Returns true or false, depending on whether the metric of a current DP conforms to the value in the RDP
-   * 
-   * @return boolean conformance to RDP value 
-   */
-  public abstract boolean checkConformance(ProfileStatistic m, double threshold);
+//    /**
+//     * Returns true or false, depending on whether the metric of a current DP conforms to the value in the RDP
+//     *
+//     * @return boolean conformance to RDP value
+//     */
+//    public boolean checkConformance(ProfileStatistic<TIn, TOut> m, double threshold) {
+//        if (getValue() == null) {
+//            setValue(m.getValue());
+//        }
+//        double rdpVal = ((Number) this.getValue()).doubleValue();
+//        double dpValue = ((Number) m.getValue()).doubleValue();
+//
+//        double lowerBound = rdpVal - (Math.abs(rdpVal) * threshold);
+//        double upperBound = rdpVal + (Math.abs(rdpVal) * threshold);
+//
+//        boolean conf = dpValue >= lowerBound && dpValue <= upperBound;
+//        if (!conf && Constants.DEBUG) {
+//            System.out.println(this.getTitle() + " exceeded: " + dpValue + " not in [" + lowerBound + ", " + upperBound + "]");
+//        }
+//        return conf;
+//    }
 
-  /**
-   * Method for creating a simple string representation of the metric value
-   * 
-   * @return string repr of value
-   */
-  protected String getSimpleValueString() {
-    if (getValue() == null) return "\tnull";
-    else return "\t" + getValue().toString();
-  }
+    /**
+     * Gets the reference dsd element, used for calculation
+     *
+     * @return the reference element
+     */
+    public DSDElement getRefElem() {
+        return refProf.getElem();
+    }
 
-  @Override
-  public String toString() {
-    if (value == null) return String.format("%s\tnull", title);
-    else if (title.getLabel().length() < 8) return String.format("%s\t%s", title, getValueString());
-    else return String.format("%s%s", title, getValueString());
-  }
+    /**
+     * Directly gets the text of the title
+     *
+     * @return label of title
+     */
+    public String getLabel() {
+        return title.getLabel();
+    }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(title, valClass, value);
-  }
+    /**
+     * Gets the title
+     *
+     * @return title of metric
+     */
+    @RDF("dsd:hasTitle")
+    public StatisticTitle getTitle() {
+        return title;
+    }
 
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj) return true;
-    if (obj == null) return false;
-    if (!(obj instanceof ProfileStatistic)) return false;
-    ProfileStatistic other = (ProfileStatistic) obj;
-    return Objects.equals(title, other.title) && Objects.equals(valClass, other.valClass) && Objects.equals(value, other.value);
-  }
+    @RDF("dsd:isInCategory")
+    public StatisticCategory getCat() {
+        return cat;
+    }
 
-  public int compareTo(ProfileStatistic other) {
-    return this.title.getLabel().compareTo(other.title.getLabel());
-  }
+    @RDFSubject
+    public String getUri() {
+        return uri;
+    }
 
-  /**
-   * Method for returning the position of a Profilemetric in the collection of
-   * this profile
-   * 
-   * @param t the title of the metric
-   * @return position if found, -1 otherwise
-   */
-  public int getMetricPos(StatisticTitle t) {
-    List<ProfileStatistic> metrics = this.getRefProf().getStatistics();
-    for (int i = 0; i < metrics.size(); i++) if (metrics.get(i).getLabel().equals(t.getLabel())) return i;
-    return -1;
-  }
+    /**
+     * Gets a String representation of the value class, used for rdf transformation
+     *
+     * @return string of value class
+     */
+    @RDF("dsd:isInValueClass")
+    public String getValueClassString() {
+        return this.inputValueClass.getName();
+    }
 
-  @RDF("dsd:hasValue")
-	public Object getNumericVal() {
-		return numericVal;
-	}
+    /**
+     * Sets the value Class via the class string, passed as parameter
+     *
+     * @param valClass the string representation of the class
+     */
+    public void setValueClassString(String valClass) {
+        try {
+            this.inputValueClass = cast(Class.forName(valClass));
+        } catch (ClassNotFoundException e) {
+            System.err.println("Class not found!");
+        } catch (ClassCastException e) {
+            System.err.println("Class not castable!");
+        }
+    }
 
-	public void setNumericVal(Object numericVal) {
-		this.numericVal = numericVal;
-	}
+    /**
+     * Gets the reference DataProfile
+     *
+     * @return the reference profile
+     */
+    @RDF("dsd:isIncludedIn")
+    public DataProfile getRefProf() {
+        return refProf;
+    }
+
+    @Override
+    public String toString() {
+        if (value == null) {
+            return String.format("%s\tnull", title);
+        } else if (title.getLabel().length() < 8) {
+            return String.format("%s\t%s", title, getValueString());
+        } else {
+            return String.format("%s%s", title, getValueString());
+        }
+    }
+
+    /**
+     * Method for returning the position of a Profilemetric in the collection of
+     * this profile
+     *
+     * @param t the title of the metric
+     * @return position if found, -1 otherwise
+     */
+    public int getMetricPos(StatisticTitle t) {
+        List<ProfileStatistic<?, ?>> metrics = this.getRefProf().getStatistics();
+        for (int i = 0; i < metrics.size(); i++) if (metrics.get(i).getLabel().equals(t.getLabel())) return i;
+        return -1;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ProfileStatistic)) return false;
+        ProfileStatistic<?, ?> that = (ProfileStatistic<?, ?>) o;
+        return title == that.title &&
+                inputValueClass.equals(that.inputValueClass) &&
+                Objects.equals(value, that.value) &&
+                uri.equals(that.uri);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, inputValueClass, value, uri);
+    }
+
+    @Override
+    public int compareTo(@NotNull ProfileStatistic<TIn, TOut> o) {
+        return getLabel().compareTo(o.getLabel());
+    }
+
 
 }

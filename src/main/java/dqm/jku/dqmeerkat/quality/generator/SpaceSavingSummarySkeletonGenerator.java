@@ -21,7 +21,7 @@ public class SpaceSavingSummarySkeletonGenerator extends DataSummarySkeletonGene
     }
 
     @Override
-    protected List<ProfileStatistic> generateStatistics(DataProfile profile) {
+    protected List<ProfileStatistic<?, ?>> generateStatistics(DataProfile profile) {
         return List.of(new SpaceSavingSummaryProfileStatistic(profile, k));
     }
 }

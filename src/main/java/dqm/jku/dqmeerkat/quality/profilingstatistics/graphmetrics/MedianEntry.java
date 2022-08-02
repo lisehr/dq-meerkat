@@ -5,79 +5,47 @@ import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.DoubleResultProfileStatistic;
 import dqm.jku.dqmeerkat.util.AttributeSet;
 import dqm.jku.dqmeerkat.util.numericvals.NumberComparator;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
-import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
-import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.*;
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.graphCat;
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.median;
 
-public class MedianEntry extends ProfileStatistic {
+public class MedianEntry extends DoubleResultProfileStatistic<Double> {
 
-    private Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
+    private final Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
 
-    public MedianEntry() {
-
-    }
 
     public MedianEntry(DataProfile d) {
-        super(median, graphCat, d);
+        super(median, graphCat, d, Double.class);
     }
 
     @Override
-    public void calculation(RecordList rs, Object oldVal) {
+    public void calculation(RecordList rs, Double oldVal) {
         Concept c = (Concept) super.getRefElem();
 
         Attribute a = getAttribute(rs, c);
 
-        boolean isNumeric = checkNumeric(rs, a);
-        Class clazz = null;
+        // TODO string implementation
+        List<Number> list = rs.toList().stream()
+                .map(record -> (double) record.getField(a))
+                .sorted(new NumberComparator())
+                .collect(Collectors.toList());
 
-        if (isNumeric) {
-            clazz = getNumericClass(rs, a);
 
-        } else {
-            clazz = String.class;
-        }
-
-        List<Number> list = new ArrayList<Number>();
-
-        for (Record r : rs) {
-            Number field = null;
-            if (clazz.equals(String.class) && r.getField(a) != null) {
-                field = ((String) r.getField(a)).length();
-            }
-            else {
-
-                if(clazz.equals(Integer.class)) {
-                    int num = Integer.parseInt(r.getField(a).toString());
-                    field = (Number) num;
-                } else if(clazz.equals(Long.class)) {
-                    long num = Long.parseLong(r.getField(a).toString());
-                    field = (Number) num;
-                }
-            }
-
-            if (field != null) {
-                list.add(field);
-            }
-        }
-
-        list.sort(new NumberComparator());
-        Object val = getMedian(list, rs.size(), clazz);
+        double val = getMedian(list, rs.size());
         this.setValue(val);
-        this.setNumericVal(((Number) val).doubleValue());
-        this.setValueClass(a.getDataType());
     }
 
-    private Object getMedian(List<Number> list, int size, Class clazz) {
+    private double getMedian(List<Number> list, int size) {
         boolean isEven = false;
         if (list.size() < size) {
-            return null;
+            return -1;
         }
 
         if (size % 2 == 0) {
@@ -87,41 +55,22 @@ public class MedianEntry extends ProfileStatistic {
         Number val = list.get(size);
         if (isEven) {
             if (size == 1) {
-                val = averageResult(val, list.get(0), clazz);
+                val = averageResult(val, list.get(0));
             } else {
-                val = averageResult(val, list.get(size + 1), clazz);
+                val = averageResult(val, list.get(size + 1));
             }
         }
-        //if (((Attribute) super.getRefElem()).getDataType().equals(Long.class)) {
-        if (clazz.equals(Long.class)) {
-            return val.longValue();
-        }
-        else if (clazz.equals(Double.class)) {
-            return val.doubleValue();
-        }
-        return val;
+
+        return val.doubleValue();
     }
 
-    private Number averageResult(Number oddMedian, Number next, Class clazz) {
-        //Attribute a = (Attribute) super.getRefElem();
-        if (clazz.equals(Long.class)) {
-            return ((oddMedian.longValue() + oddMedian.longValue()) / 2);
-        }
-        else if (clazz.equals(Double.class)) {
-            return ((oddMedian.doubleValue() + oddMedian.doubleValue()) / 2);
-        }
-        return oddMedian;
-    }
-
-
-    @Override
-    public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
-
+    private Number averageResult(Number oddMedian, Number next) {
+        return ((oddMedian.doubleValue() + next.doubleValue()) / 2);
     }
 
     @Override
     public void update(RecordList rs) {
-
+        calculation(rs, value);
     }
 
     @Override
@@ -129,10 +78,6 @@ public class MedianEntry extends ProfileStatistic {
         return super.getSimpleValueString();
     }
 
-    @Override
-    public boolean checkConformance(ProfileStatistic m, double threshold) {
-        return false;
-    }
 
     private Attribute getAttribute(RecordList rl, Concept c) {
 
@@ -140,10 +85,10 @@ public class MedianEntry extends ProfileStatistic {
 
         Record r = rl.toList().get(0);
 
-        for(Attribute a : as) {
+        for (Attribute a : as) {
             Object val = r.getField(a);
 
-            if(val != null) {
+            if (val != null) {
                 return a;
             }
         }
@@ -154,10 +99,10 @@ public class MedianEntry extends ProfileStatistic {
 
         boolean isNumeric = true;
 
-        for(Record r : rl) {
+        for (Record r : rl) {
             String field = r.getField(a).toString();
 
-            if(field != null && !pattern.matcher(field).matches()) {
+            if (field != null && !pattern.matcher(field).matches()) {
                 isNumeric = false;
             }
         }
@@ -169,7 +114,7 @@ public class MedianEntry extends ProfileStatistic {
 
         Class clazz = Integer.class;
 
-        for(Record r : rl) {
+        for (Record r : rl) {
             String field = r.getField(a).toString();
 
             try {

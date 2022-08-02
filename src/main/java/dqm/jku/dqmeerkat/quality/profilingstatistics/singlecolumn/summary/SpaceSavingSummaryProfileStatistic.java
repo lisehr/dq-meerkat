@@ -1,20 +1,18 @@
 package dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.summary;
 
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
-import dqm.jku.dqmeerkat.util.Constants;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.util.List;
 import java.util.Map;
+
+import static dqm.jku.dqmeerkat.util.GenericsUtil.cast;
 
 /**
  * <h2>SpaceSavingSummaryProfileStatistic</h2>
  * <summary>
- * {@link ProfileStatistic} implementation of the Space Saving Algorithm. It generates a summary of the given
+ * {@link AbstractProfileStatistic} implementation of the Space Saving Algorithm. It generates a summary of the given
  * data by counting the occurrences of samples in the data. The summary has a maximum size of k, whenever it reaches this
  * size it is compressed again.
  * </summary>
@@ -22,7 +20,7 @@ import java.util.Map;
  * @author meindl, rainer.meindl@scch.at
  * @since 06.07.2022
  */
-public class SpaceSavingSummaryProfileStatistic extends SummaryProfileStatistic {
+public class SpaceSavingSummaryProfileStatistic extends SummaryProfileStatistic<Double> {
 
 
     /**
@@ -36,21 +34,9 @@ public class SpaceSavingSummaryProfileStatistic extends SummaryProfileStatistic 
         this.k = k;
     }
 
-
     @Override
-    public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
-        for (Number value : list) {
-            // round doubles to 4 decimals
-            if (value instanceof Double) {
-                var symbols = DecimalFormatSymbols.getInstance();
-                symbols.setDecimalSeparator('.');
-                DecimalFormat df = new DecimalFormat("##.####", symbols);
-                value = Double.parseDouble(df.format(value));
-            }
-            handleCounter(value);
-        }
-        setValue(summary);
-        setValueClass(summary.getClass());
+    protected boolean ensureDataTypeCorrect(Class<?> type) {
+        return type.isAssignableFrom(Double.class);
     }
 
     /**
@@ -64,7 +50,7 @@ public class SpaceSavingSummaryProfileStatistic extends SummaryProfileStatistic 
      *              compress the summary.
      */
     @Override
-    protected void handleCounter(Object value) {
+    protected void handleCounter(Double value) {
         // if the item is in the summary, increment it
         if (summary.containsKey(value)) {
             summary.put(value, summary.get(value) + 1);
@@ -84,28 +70,14 @@ public class SpaceSavingSummaryProfileStatistic extends SummaryProfileStatistic 
     }
 
     @Override
-    public Class<?> getValueClass() {
-        return summary.getClass();
+    public Class<Map<Double, Integer>> getInputValueClass() {
+        return cast(summary.getClass());
     }
 
     public double calculateConformance() {
-        // TODO fixup when using generics -> use key values as well
+        // TODO use key values as well
         var avgCounters = summary.values().stream().mapToInt(i -> i).average().orElse(0);
         return (double) summary.size() / k + avgCounters / k;
     }
 
-    @Override
-    public boolean checkConformance(ProfileStatistic m, double threshold) {
-        var rdpVal = calculateConformance();
-        var dpValue = ((SummaryProfileStatistic) m).calculateConformance();
-
-
-        double lowerBound = rdpVal - (Math.abs(rdpVal) * threshold);
-        double upperBound = rdpVal + (Math.abs(rdpVal) * threshold);
-
-        boolean conf = dpValue >= lowerBound && dpValue <= upperBound;
-        if (!conf && Constants.DEBUG)
-            System.out.println(this.getTitle() + " exceeded: " + dpValue + " not in [" + lowerBound + ", " + upperBound + "]");
-        return conf;
-    }
 }

@@ -23,7 +23,7 @@ public class MGSummarySkeletonGenerator extends DataSummarySkeletonGenerator {
     }
 
     @Override
-    protected List<ProfileStatistic> generateStatistics(DataProfile profile) {
+    protected List<ProfileStatistic<?, ?>> generateStatistics(DataProfile profile) {
         return List.of(new MGSummaryProfileStatistic(profile, k));
     }
 }

@@ -42,6 +42,13 @@
             <version>${seshat.version}</version>
             <scope>runtime</scope>
         </dependency>
+        <!--oauth2-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-client</artifactId>
+            <version>5.7.2</version>
+        </dependency>
+
         <!--        web client-->
         <dependency>
             <groupId>org.springframework</groupId>

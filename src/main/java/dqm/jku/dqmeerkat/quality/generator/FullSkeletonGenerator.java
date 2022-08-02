@@ -1,9 +1,7 @@
 package dqm.jku.dqmeerkat.quality.generator;
 
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.config.ConfigComponent;
-import dqm.jku.dqmeerkat.quality.config.FullProfileConfigComponent;
-import dqm.jku.dqmeerkat.quality.generator.config.DataProfileSkeletonBuilder;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.cardinality.*;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.datatypeinfo.*;
@@ -12,12 +10,11 @@ import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.histogram.Hist
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * <h2>FullSkeletonGenerator</h2>
  * <summary>
- * Generates all currently defined {@link ProfileStatistic}s for the given {@link DataProfile} and
+ * Generates all currently defined {@link AbstractProfileStatistic}s for the given {@link DataProfile} and
  * returns them
  * </summary>
  *
@@ -26,42 +23,42 @@ import java.util.Optional;
  */
 public class FullSkeletonGenerator extends DataProfileSkeletonGenerator{
     @Override
-    protected List<ProfileStatistic> generateStatistics(DataProfile profile) {
-        var statistics = new ArrayList<ProfileStatistic>();
-        ProfileStatistic size = new NumRows(profile);
+    protected List<ProfileStatistic<?, ?>> generateStatistics(DataProfile profile) {
+        List<ProfileStatistic<?, ?>> statistics = new ArrayList<>();
+        ProfileStatistic<?, ?> size = new NumRows(profile);
         statistics.add(size);
-        ProfileStatistic min = new Minimum(profile);
+        var min = new DoubleMinimum(profile);
         statistics.add(min);
-        ProfileStatistic max = new Maximum(profile);
+        var max = new DoubleMaximum(profile);
         statistics.add(max);
-        ProfileStatistic avg = new Average(profile);
+        var avg = new DoubleAverage(profile);
         statistics.add(avg);
-        ProfileStatistic med = new Median(profile);
+        var med = new DoubleMedian(profile);
         statistics.add(med);
-        ProfileStatistic card = new Cardinality(profile);
+        var card = new Cardinality(profile);
         statistics.add(card);
-        ProfileStatistic uniq = new Uniqueness(profile);
+        var uniq = new Uniqueness(profile);
         statistics.add(uniq);
-        ProfileStatistic nullVal = new NullValues(profile);
+        var nullVal = new NullValues(profile);
         statistics.add(nullVal);
-        ProfileStatistic nullValP = new NullValuesPercentage(profile);
+        var nullValP = new NullValuesPercentage(profile);
         statistics.add(nullValP);
-        ProfileStatistic hist = new Histogram(profile);
+        var hist = new Histogram(profile);
         statistics.add(hist);
-        ProfileStatistic digits = new Digits(profile);
+        var digits = new Digits(profile);
         statistics.add(digits);
-        ProfileStatistic isCK = new KeyCandidate(profile);
+        var isCK = new KeyCandidate(profile);
         statistics.add(isCK);
-        ProfileStatistic decimals = new Decimals(profile);
+        var decimals = new Decimals(profile);
         statistics.add(decimals);
-        ProfileStatistic basicType = new BasicType(profile);
+        var basicType = new BasicType(profile);
         statistics.add(basicType);
-        ProfileStatistic dataType = new DataType(profile);
+        var dataType = new DataType(profile);
         statistics.add(dataType);
         // experimental metrics
-        ProfileStatistic standardDev = new StandardDeviation(profile);
+        var standardDev = new DoubleStandardDeviation(profile);
         statistics.add(standardDev);
-        ProfileStatistic mediAbsDevMetric = new MedianAbsoluteDeviation(profile);
+        var mediAbsDevMetric = new DoubleMedianAbsoluteDeviation(profile);
         statistics.add(mediAbsDevMetric);
         return statistics;
     }

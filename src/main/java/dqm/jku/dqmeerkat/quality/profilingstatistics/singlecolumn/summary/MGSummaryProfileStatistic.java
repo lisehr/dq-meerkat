@@ -1,29 +1,25 @@
 package dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.summary;
 
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
-import dqm.jku.dqmeerkat.util.Constants;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
  * <h2>MKSummaryProfileStatistic</h2>
  * <summary>
- * {@link ProfileStatistic} implementation for the Misra- and Gries summarization algorithm. It counts the number of
+ * {@link AbstractProfileStatistic} implementation for the Misra- and Gries summarization algorithm. It counts the number of
  * records and, depending on the summary size k, removes the least frequent ones from the summary.
  * </summary>
  *
  * @author meindl, rainer.meindl@scch.at
  * @since 04.07.2022
  */
-public class MGSummaryProfileStatistic extends SummaryProfileStatistic {
+public class MGSummaryProfileStatistic extends SummaryProfileStatistic<Double> {
 
 
     /**
@@ -37,37 +33,9 @@ public class MGSummaryProfileStatistic extends SummaryProfileStatistic {
         this.k = k;
     }
 
-
     @Override
-    public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
-        for (Number value : list) {
-            // round doubles to 4 decimals
-            if (value instanceof Double) {
-                var symbols = DecimalFormatSymbols.getInstance();
-                symbols.setDecimalSeparator('.');
-                DecimalFormat df = new DecimalFormat("##.####", symbols);
-                value = Double.parseDouble(df.format(value));
-            }
-
-            handleCounter(value);
-        }
-        setValue(summary);
-        setValueClass(summary.getClass());
-    }
-
-    @Override
-    public boolean checkConformance(ProfileStatistic m, double threshold) {
-        var rdpVal = calculateConformance();
-        var dpValue = ((SummaryProfileStatistic) m).calculateConformance();
-
-
-        double lowerBound = rdpVal - (Math.abs(rdpVal) * threshold);
-        double upperBound = rdpVal + (Math.abs(rdpVal) * threshold);
-
-        boolean conf = dpValue >= lowerBound && dpValue <= upperBound;
-        if (!conf && Constants.DEBUG)
-            System.out.println(this.getTitle() + " exceeded: " + dpValue + " not in [" + lowerBound + ", " + upperBound + "]");
-        return conf;
+    protected boolean ensureDataTypeCorrect(Class<?> type) {
+        return type.isAssignableFrom(Double.class);
     }
 
     /**
@@ -79,13 +47,13 @@ public class MGSummaryProfileStatistic extends SummaryProfileStatistic {
      *              compress the summary.
      */
     @Override
-    protected void handleCounter(Object value) {
+    protected void handleCounter(Double value) {
         // if the item is in the summary, increment it
         if (summary.containsKey(value)) {
             summary.put(value, summary.get(value) + 1);
         } else { // otherwise check if the summary is full and if so reduce all counters by one, remove the items with counters lower than 1
             if (summary.size() >= k) {
-                var tmpMap = new HashMap<Object, Integer>();
+                var tmpMap = new HashMap<Double, Integer>();
                 summary = summary.entrySet().stream()
                         .peek(objectIntegerEntry -> objectIntegerEntry.setValue(objectIntegerEntry.getValue() - 1))
                         .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
@@ -104,7 +72,6 @@ public class MGSummaryProfileStatistic extends SummaryProfileStatistic {
 
     @Override
     public double calculateConformance() {
-        // TODO fixup after generic implementation is done
         var avgCounters = summary.values().stream().mapToInt(i -> i).average().orElse(0);
         return (double) summary.size() / k + avgCounters / k;
     }

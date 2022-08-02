@@ -39,6 +39,7 @@ public class DtdlGraphExporter implements DataExporter<DataProfile> {
                 .metaData(new MetaDataDto("dtmi:scch:at:dq:Dataprofile;2"))
                 .build();
         var profileDtos = toExport.getStatistics().stream()
+                .filter(statistic -> statistic.getValue() != null)
                 .map(profileStatistic -> ProfileStatisticDto.builder()
                         .value(profileStatistic.getValue().toString())
                         .title(profileStatistic.getTitle().toString())

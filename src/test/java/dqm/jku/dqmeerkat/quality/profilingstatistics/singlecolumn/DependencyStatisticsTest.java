@@ -6,19 +6,21 @@ import dqm.jku.dqmeerkat.dsd.elements.Datasource;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.dependency.*;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.dependency.KeyCandidate;
 import dqm.jku.dqmeerkat.util.Constants;
 import dqm.jku.dqmeerkat.util.FileSelectionUtil;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * This class tests profile statistics that are in the package {@link dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.dependency}.
  * The tests are run with the "id", the "region" and/or the "lat" column of the vehicles30000.csv
+ *
  * @author Johannes Schrott
  */
 
@@ -28,7 +30,6 @@ class DependencyStatisticsTest {
     private static DataProfile vehicleRegionDP;
     private static DataProfile vehicleLatitudeDP;
     private static RecordList vehicleRecords;
-
 
 
     @BeforeAll
@@ -104,17 +105,17 @@ class DependencyStatisticsTest {
         vehicleLatitudeDP.addStatistic(new KeyCandidate(vehicleLatitudeDP));
         vehicleLatitudeDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
 
-        Number latitudeKeyCandidate = (Number) vehicleLatitudeDP.getStatistic(StatisticTitle.keyCand).getNumericVal();
+        var latitudeKeyCandidate = (boolean) vehicleLatitudeDP.getStatistic(StatisticTitle.keyCand).getValue();
 
-        assertEquals(0, latitudeKeyCandidate);
+        assertFalse(latitudeKeyCandidate);
 
 
         vehicleRegionDP.addStatistic(new KeyCandidate(vehicleRegionDP));
         vehicleRegionDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
 
-        Number regionKeyCandidate = (Number) vehicleRegionDP.getStatistic(StatisticTitle.keyCand).getNumericVal();
+        var regionKeyCandidate = (boolean) vehicleRegionDP.getStatistic(StatisticTitle.keyCand).getValue();
 
-        assertEquals(0, regionKeyCandidate);
+        assertFalse(regionKeyCandidate);
 
 
         // The id column is a primary key, therefore it is a key candidate
@@ -122,8 +123,8 @@ class DependencyStatisticsTest {
         vehicleIdDP.addStatistic(new KeyCandidate(vehicleIdDP));
         vehicleIdDP.getStatistics().forEach(statistic -> statistic.calculation(vehicleRecords, null));
 
-        Number idKeyCandidate = (Number) vehicleIdDP.getStatistic(StatisticTitle.keyCand).getNumericVal();
+        var idKeyCandidate = (boolean) vehicleIdDP.getStatistic(StatisticTitle.keyCand).getValue();
 
-        assertEquals(1, idKeyCandidate);
+        assertTrue(idKeyCandidate);
     }
 }

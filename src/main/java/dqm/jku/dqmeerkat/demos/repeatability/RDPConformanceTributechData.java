@@ -171,6 +171,7 @@ public class RDPConformanceTributechData {
                     dsdKnowledgeGraph.getLabel(), DataProfileConfiguration.getInstance());
             confChecker.runConformanceCheck();
 //            // Finally: print evaluation report
+            // note that depending if the ledc pi is active or not, the evaluation report might not reach 1.0
             System.out.println(confChecker.getReport());
 
 

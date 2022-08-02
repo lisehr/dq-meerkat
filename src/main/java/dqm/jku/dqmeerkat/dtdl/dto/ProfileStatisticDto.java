@@ -1,5 +1,6 @@
 package dqm.jku.dqmeerkat.dtdl.dto;
 
+import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
@@ -7,7 +8,7 @@ import lombok.experimental.SuperBuilder;
 /**
  * <h2>ProfileStatisticDto</h2>
  * <summary>
- * Data Transfer Object for {@link dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic}s. All data is
+ * Data Transfer Object for {@link AbstractProfileStatistic}s. All data is
  * encoded in strings
  * </summary>
  *

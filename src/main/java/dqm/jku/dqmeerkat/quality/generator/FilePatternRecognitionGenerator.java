@@ -1,6 +1,5 @@
 package dqm.jku.dqmeerkat.quality.generator;
 
-import dqm.jku.dqmeerkat.dsd.elements.DSDElement;
 import dqm.jku.dqmeerkat.quality.DataProfile;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.singlecolumn.pattern.PatternRecognition;
@@ -25,7 +24,7 @@ public class FilePatternRecognitionGenerator extends DataProfileSkeletonGenerato
     }
 
     @Override
-    protected List<ProfileStatistic> generateStatistics(DataProfile profile) {
+    protected List<ProfileStatistic<?, ?>> generateStatistics(DataProfile profile) {
         return List.of(new PatternRecognition(profile, filepath));
     }
 }

@@ -5,67 +5,46 @@ import dqm.jku.dqmeerkat.dsd.elements.Concept;
 import dqm.jku.dqmeerkat.dsd.records.Record;
 import dqm.jku.dqmeerkat.dsd.records.RecordList;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.DoubleResultProfileStatistic;
 import dqm.jku.dqmeerkat.util.AttributeSet;
 
-import java.util.List;
 import java.util.regex.Pattern;
 
-import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
-import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.*;
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.graphCat;
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.maximum;
 
-public class MaximumEntry extends ProfileStatistic {
+public class MaximumEntry extends DoubleResultProfileStatistic<Double> {
 
-    private Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
-
-    public MaximumEntry() {
-
-    }
+    private final Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
 
     public MaximumEntry(DataProfile d) {
-        super(maximum, graphCat, d);
+        super(maximum, graphCat, d, Double.class);
     }
 
     @Override
-    public void calculation(RecordList rs, Object oldVal) {
+    public void calculation(RecordList rs, Double oldVal) {
         Concept c = (Concept) super.getRefElem();
-        Object val = null;
+        double val;
 
         Attribute a = getAttribute(rs, c);
 
-        boolean isNumeric = checkNumeric(rs, a);
-        Class clazz = null;
-
-        if (isNumeric) {
-            clazz = getNumericClass(rs, a);
-
-        } else {
-            clazz = String.class;
-        }
-
-        if(oldVal == null) {
-            val = getBasicInstance(clazz);
+        if (oldVal == null) {
+            val = getBasicInstance();
         } else {
             val = oldVal;
         }
-        for(Record r : rs) {
-            Object field = r.getField(a);
-            val = getMaximum(val, field, isNumeric, clazz);
+        for (Record r : rs) {
+            var field = (double) r.getField(a);
+            val = getMaximum(val, field);
         }
 
         this.setValue(val);
-        this.setNumericVal(((Number) val).doubleValue());
-        this.setValueClass(clazz);
-    }
-
-    @Override
-    public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
-
+        this.setInputValueClass(Double.class);
     }
 
     @Override
     public void update(RecordList rs) {
-
+        calculation(rs, value);
     }
 
     @Override
@@ -73,46 +52,18 @@ public class MaximumEntry extends ProfileStatistic {
         return super.getSimpleValueString();
     }
 
-    @Override
-    public boolean checkConformance(ProfileStatistic m, double threshold) {
-        return false;
-    }
 
     /**
      * Creates a basic instance used as a reference (in this case the minimum value)
      *
      * @return the reference value
      */
-    private Object getBasicInstance(Class clazz) {
-        if (clazz.equals(Long.class)) {
-            return Long.valueOf(Long.MIN_VALUE);
-        }
-        else if (clazz.equals(Double.class)) {
-            return Double.valueOf(Double.MIN_VALUE);
-        }
-        else {
-            return Integer.MIN_VALUE;
-        }
+    private Double getBasicInstance() {
+        return Double.MIN_VALUE;
     }
 
-    private Object getMaximum(Object current, Object toComp, boolean isNumeric, Class clazz) {
-        if (toComp == null) {
-            return current;
-        }
-
-        if (clazz.equals(Long.class)) {
-
-            return Long.max((long) current, ((Number) Long.parseLong(toComp.toString())).longValue());
-        }
-        else if (clazz.equals(Double.class)) {
-            return Double.max((double) current, ((Number) Double.parseDouble(toComp.toString())).doubleValue());
-        }
-        else if (clazz.equals(String.class)) {
-            return Integer.max((int) current, ((String) toComp).length());
-        }
-        else {
-            return Integer.max((int) current, ((Number) Integer.parseInt(toComp.toString())).intValue());
-        }
+    private double getMaximum(double current, double toComp) {
+        return Double.max(current, toComp);
     }
 
     private Attribute getAttribute(RecordList rl, Concept c) {
@@ -121,10 +72,10 @@ public class MaximumEntry extends ProfileStatistic {
 
         Record r = rl.toList().get(0);
 
-        for(Attribute a : as) {
+        for (Attribute a : as) {
             Object val = r.getField(a);
 
-            if(val != null) {
+            if (val != null) {
                 return a;
             }
         }
@@ -135,10 +86,10 @@ public class MaximumEntry extends ProfileStatistic {
 
         boolean isNumeric = true;
 
-        for(Record r : rl) {
+        for (Record r : rl) {
             String field = r.getField(a).toString();
 
-            if(field != null && !pattern.matcher(field).matches()) {
+            if (field != null && !pattern.matcher(field).matches()) {
                 isNumeric = false;
             }
         }
@@ -150,7 +101,7 @@ public class MaximumEntry extends ProfileStatistic {
 
         Class clazz = Integer.class;
 
-        for(Record r : rl) {
+        for (Record r : rl) {
             String field = r.getField(a).toString();
 
             try {

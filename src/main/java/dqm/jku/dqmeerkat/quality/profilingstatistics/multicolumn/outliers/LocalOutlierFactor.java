@@ -1,21 +1,7 @@
 package dqm.jku.dqmeerkat.quality.profilingstatistics.multicolumn.outliers;
 
-import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.*;
-import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.*;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-import dqm.jku.dqmeerkat.dsd.records.RecordList;
-import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
-import dqm.jku.dqmeerkat.util.converters.DoubleArrayConverter;
-
-import de.lmu.ifi.dbs.elki.algorithm.outlier.lof.LOF;
 import de.lmu.ifi.dbs.elki.algorithm.Algorithm;
+import de.lmu.ifi.dbs.elki.algorithm.outlier.lof.LOF;
 import de.lmu.ifi.dbs.elki.database.Database;
 import de.lmu.ifi.dbs.elki.database.StaticArrayDatabase;
 import de.lmu.ifi.dbs.elki.datasource.ArrayAdapterDatabaseConnection;
@@ -23,6 +9,20 @@ import de.lmu.ifi.dbs.elki.datasource.DatabaseConnection;
 import de.lmu.ifi.dbs.elki.result.outlier.OutlierResult;
 import de.lmu.ifi.dbs.elki.utilities.ClassGenericsUtil;
 import de.lmu.ifi.dbs.elki.utilities.optionhandling.parameterization.ListParameterization;
+import dqm.jku.dqmeerkat.dsd.records.RecordList;
+import dqm.jku.dqmeerkat.quality.DataProfile;
+import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
+import dqm.jku.dqmeerkat.util.converters.DoubleArrayConverter;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticCategory.out;
+import static dqm.jku.dqmeerkat.quality.profilingstatistics.StatisticTitle.lof;
+import static dqm.jku.dqmeerkat.util.GenericsUtil.cast;
 
 
 /**
@@ -34,23 +34,21 @@ import de.lmu.ifi.dbs.elki.utilities.optionhandling.parameterization.ListParamet
  * @author Johannes Schrott
  */
 
-public class LocalOutlierFactor extends ProfileStatistic {
+public class LocalOutlierFactor extends ProfileStatistic<List<Double>, List<Double>> {
 
     final private static float FACTOR_FOR_K = 0.1F; // Must be between 0 and 1
     final private static double OUTLIER_THRESHOLD = 1.1;
 
-    public LocalOutlierFactor() {
-
-    }
 
     public LocalOutlierFactor(DataProfile dp) {
-        super(lof, out, dp);
+        super(lof, out, dp, cast(List.class));
     }
 
     @Override
-    public void calculation(RecordList rs, Object oldVal) {
-        if (rs.size() == 0)
+    public void calculation(RecordList rs, List<Double> oldVal) {
+        if (rs.size() == 0) {
             throw new IllegalArgumentException("An empty RecordList was passed as an argument. For a calculation, the RecordList must contain elements.");
+        }
 
         double[][] data = DoubleArrayConverter.extractNumericAttributesToDoubleArray(rs);
 
@@ -97,17 +95,11 @@ public class LocalOutlierFactor extends ProfileStatistic {
             });
         });
 
-        this.setValueClass(ArrayList.class);
+        this.setInputValueClass(cast(ArrayList.class));
         this.setValue(resultList);
 
 
     }
-
-    @Override
-    public void calculationNumeric(List<Number> list, Object oldVal) throws NoSuchMethodException {
-        throw new NoSuchMethodException("calculationNumeric does not work for multicolumn metrics, as a list of values cannot be represented by a single number.");
-    }
-
 
     @Override
     public void update(RecordList rs) {
@@ -132,10 +124,7 @@ public class LocalOutlierFactor extends ProfileStatistic {
     }
 
     @Override
-    public boolean checkConformance(ProfileStatistic m, double threshold) {
-        // TODO Auto-generated method stub
-
-        //
+    public boolean checkConformance(ProfileStatistic<List<Double>, List<Double>> m, double threshold) {        // TODO Auto-generated method stub
         return false;
     }
 

@@ -3,14 +3,11 @@ package dqm.jku.dqmeerkat.quality.generator;
 import dqm.jku.dqmeerkat.dsd.elements.Attribute;
 import dqm.jku.dqmeerkat.dsd.elements.DSDElement;
 import dqm.jku.dqmeerkat.quality.DataProfile;
-import dqm.jku.dqmeerkat.quality.config.ConfigComponent;
-import dqm.jku.dqmeerkat.quality.config.FullProfileConfigComponent;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.ProfileStatistic;
 import science.aist.seshat.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * <h2>DataProfileSkeletonGenerator</h2>
@@ -48,12 +45,12 @@ public abstract class DataProfileSkeletonGenerator {
         return false;
     }
 
-    protected abstract List<ProfileStatistic> generateStatistics(DataProfile profile);
+    protected abstract List<ProfileStatistic<?, ?>> generateStatistics(DataProfile profile);
 
-    public List<ProfileStatistic> generateSkeleton(DataProfile profile) {
+    public List<ProfileStatistic<?, ?>> generateSkeleton(DataProfile profile) {
         if (checkValidity(profile.getElem()))
             return generateStatistics(profile);
-        LOGGER.warn("Provided element" + profile.getElem() + "does not have measurable data type");
+        LOGGER.warn("Provided element" + profile.getElem() + " does not have measurable data type");
         return new ArrayList<>();
     }
 }
