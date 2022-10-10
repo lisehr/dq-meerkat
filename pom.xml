@@ -313,10 +313,10 @@
     </build>
 
     <repositories>
-<!--        <repository>-->
-<!--            <id>pentaho</id>-->
-<!--            <url>https://public.nexus.pentaho.org/content/groups/omni</url>-->
-<!--        </repository>-->
+        <repository>
+            <id>pentaho</id>
+            <url>https://public.nexus.pentaho.org/content/groups/omni</url>
+        </repository>
         <!--        ledc-pi-->
         <repository>
             <id>gitlab-maven</id>

@@ -28,12 +28,19 @@ public class DataApiTestClient extends ClientCredentialsRestClient<IntDataSample
 
     @Override
     public IntDataSample get(String url) {
-        return client.get().uri(baseUrl + url).retrieve().bodyToMono(IntDataSample.class).block();
+        return client.get()
+                .uri(baseUrl + url)
+                .retrieve()
+                .bodyToMono(IntDataSample.class)
+                .block();
     }
 
     @Override
     public IntDataSample get() {
-        return null;
+        return client.get()
+                .retrieve()
+                .bodyToMono(IntDataSample.class)
+                .block();
     }
 
     @Override
@@ -57,11 +64,11 @@ public class DataApiTestClient extends ClientCredentialsRestClient<IntDataSample
 
     @Override
     public void post(String url, IntDataSample body) {
-
+        throw new UnsupportedOperationException("Not implemented yet");
     }
 
     @Override
     public void post(IntDataSample body) {
-
+        throw new UnsupportedOperationException("Not implemented yet");
     }
 }
