@@ -42,7 +42,6 @@ public class CompositeRDPConformanceChecker extends AbstractConformanceChecker {
                 updateCounters(profile, attribute);
             }
         });
-
     }
 
     @Override
@@ -67,6 +66,4 @@ public class CompositeRDPConformanceChecker extends AbstractConformanceChecker {
 
         return sb.toString();
     }
-
-
 }
