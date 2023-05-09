@@ -78,11 +78,6 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.appnexus.grafana-client</groupId>
-            <artifactId>grafana-api-java-client</artifactId>
-            <version>1.0.5</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/com.ontotext.graphdb/graphdb-free-runtime -->
         <dependency>
             <groupId>com.ontotext.graphdb</groupId>
@@ -258,7 +253,7 @@
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20200518</version>
+            <version>20230227</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
