@@ -5,11 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import dqm.jku.dqmeerkat.quality.generator.DataProfileSkeletonGenerator;
 import dqm.jku.dqmeerkat.quality.generator.config.DataProfileSkeletonBuilder;
 import dqm.jku.dqmeerkat.quality.generator.config.FullSkeletonGeneratorBuilder;
-import dqm.jku.dqmeerkat.quality.generator.config.LEDCPIGeneratorBuilder;
 import dqm.jku.dqmeerkat.quality.generator.config.SummaryGeneratorBuilder;
 import dqm.jku.dqmeerkat.quality.profilingstatistics.AbstractProfileStatistic;
 import lombok.Getter;
-import science.aist.seshat.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +26,6 @@ import java.util.stream.Collectors;
  */
 public class DataProfileConfiguration {
 
-    private static final Logger LOGGER = Logger.getInstance();
 
     /**
      * This list contains all {@link DataProfileSkeletonBuilder}s used to prepare {@link DataProfileSkeletonGenerator}s.
@@ -39,7 +36,6 @@ public class DataProfileConfiguration {
      */
     private static final List<DataProfileSkeletonBuilder<?>> CONFIG_TO_GENERATOR = List.of(
             new FullSkeletonGeneratorBuilder(),
-            new LEDCPIGeneratorBuilder(),
             new SummaryGeneratorBuilder());
 
     private static DataProfileConfiguration instance;

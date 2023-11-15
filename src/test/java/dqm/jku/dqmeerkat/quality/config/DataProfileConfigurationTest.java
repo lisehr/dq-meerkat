@@ -31,7 +31,7 @@ public class DataProfileConfigurationTest {
         // then
         Assertions.assertNotNull(config);
         Assertions.assertNotNull(generators);
-        Assertions.assertEquals(3, generators.size());
+        Assertions.assertEquals(2, generators.size());
     }
 
     @Test
@@ -47,25 +47,7 @@ public class DataProfileConfigurationTest {
         Assertions.assertNotNull(configCached);
         Assertions.assertSame(config, configCached);
         Assertions.assertNotNull(generators);
-        Assertions.assertEquals(3, generators.size());
-    }
-
-    @Test
-    public void testLoadConfigJson() {
-        // given
-
-
-        // when
-        var configJson = DataProfileConfiguration.getInstance("[\n" +
-                "  {\n" +
-                "    \"type\": \"domainKnowledge\",\n" +
-                "    \"ledcPiId\": \"at.fh.scch/identifier#humidity:*\",\n" +
-                "    \"ledcPiFilePath\": \"src/main/resource/data/ledc-pi_definitions.json\"\n" +
-                "  }]");
-        var generators = configJson.getGenerators();
-        // then
-        Assertions.assertNotNull(configJson);
-        Assertions.assertEquals(1, generators.size());
+        Assertions.assertEquals(2, generators.size());
     }
 
     @Test
@@ -75,11 +57,6 @@ public class DataProfileConfigurationTest {
 
         // when
         var configJson = DataProfileConfiguration.getInstance("[\n" +
-                "  {\n" +
-                "    \"type\": \"domainKnowledge\",\n" +
-                "    \"ledcPiId\": \"at.fh.scch/identifier#humidity:*\",\n" +
-                "    \"ledcPiFilePath\": \"src/main/resource/data/ledc-pi_definitions.json\"\n" +
-                "  }," +
                 "  {\n" +
                 "    \"type\": \"full\",\n" +
                 "    \"someParameter\": \"test\"\n" +
@@ -91,7 +68,7 @@ public class DataProfileConfigurationTest {
         var generators = configJson.getGenerators();
         // then
         Assertions.assertNotNull(configJson);
-        Assertions.assertEquals(3, generators.size());
+        Assertions.assertEquals(2, generators.size());
     }
 
     @Test
@@ -106,7 +83,7 @@ public class DataProfileConfigurationTest {
         // then
         Assertions.assertNotNull(config);
         Assertions.assertNotNull(generators);
-        Assertions.assertEquals(4, generators.size());
+        Assertions.assertEquals(3, generators.size());
     }
 
 }

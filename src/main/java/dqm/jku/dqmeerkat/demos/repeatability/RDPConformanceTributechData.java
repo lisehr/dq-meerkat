@@ -1,13 +1,5 @@
 package dqm.jku.dqmeerkat.demos.repeatability;
 
-import be.ugent.ledc.pi.grex.Grex;
-import be.ugent.ledc.pi.measure.QualityMeasure;
-import be.ugent.ledc.pi.measure.predicates.GrexComboPredicate;
-import be.ugent.ledc.pi.measure.predicates.GrexFormula;
-import be.ugent.ledc.pi.measure.predicates.PatternPredicate;
-import be.ugent.ledc.pi.measure.predicates.Predicate;
-import be.ugent.ledc.pi.property.Property;
-import be.ugent.ledc.pi.registries.MeasureRegistry;
 import com.influxdb.client.domain.WritePrecision;
 import dqm.jku.dqmeerkat.connectors.ConnectorCSV;
 import dqm.jku.dqmeerkat.dsd.DSDKnowledgeGraph;
@@ -68,37 +60,6 @@ public class RDPConformanceTributechData {
         // default configuration
         DataProfileConfiguration configuration = DataProfileConfiguration.getInstance();
 
-
-        // setup Property for LEDC-PI
-        Property property = Property.parseProperty("at.fh.scch/identifier#humidity");
-        var numberPattern = "(\\d?\\d)\\.(\\d+)"; // check if it is valid humidity (i.E. 2 numbers front >0 numbers back)
-
-        var predicates = new ArrayList<Predicate<String>>();
-        predicates.add(new PatternPredicate(numberPattern, "Not a valid double"));
-        predicates.add(new GrexComboPredicate(
-                new GrexFormula( // GREX to ensure the numbers are within realistic/acceptable boundaries
-                        Stream.of(new Grex("::int @1 branch& 20 > 60 <")).collect(Collectors.toList())
-
-                ),
-                numberPattern,
-                "Invalid Min/Max values"
-        ));
-
-        var measure = new QualityMeasure<>(predicates, property, new URI("https://www.scch.at"),
-                LocalDate.now(), 1); // create the mesure
-
-        // test it
-        var ret1 = measure.measure("22.33");
-        var ret2 = measure.measure("1.3");
-        var ret3 = measure.measure("61.3");
-        var ret4 = measure.measure("1.");
-        var ret5 = measure.measure("1213");
-        var ret6 = measure.measure("ß1.33434");
-
-        // Register in order to be able to dump it as JSON
-        MeasureRegistry
-                .getInstance()
-                .registerMeasure(measure);
         // dump it into a file, in order to reuse it later
 //        JSON.dump(new File("src/main/resource/data/ledc-pi_definitions.json"));
 
